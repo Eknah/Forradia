@@ -5,16 +5,27 @@
 #include "Implementation/Scenes/CSceneMainMenu.h"
 #include "Implementation/Scenes/CScenePrimary.h"
 #include "Implementation/Content/CDefaultMapGenerator.h"
+
 namespace Forradia
 {
 
+/**
+ * @brief Prepares game content and runs engine with it.
+ *
+ * Randomizes for the purpose of map generation and mobs movement.
+ * Prepares custom object descriptions for some objects.
+ * Prepares scenes.
+ * Generates world map.
+ * Prepares player starting inventory.
+ * Runs engine with all the preparation data.
+ */
 void CGameInstance::StartGame()
 {
     using std::move;
 
     Randomize();
 
-    auto MapAreaSize = 150;
+    const auto MapAreaSize = 150;
 
     CEngine Engine;
     CObjectsContent ObjectsContent;

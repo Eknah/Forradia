@@ -1,5 +1,4 @@
 #pragma once
-#define Randomize() srand(time(NULL))
 #define MakeUPtr std::make_unique
 
 namespace Forradia
@@ -26,5 +25,7 @@ using SPtr = std::shared_ptr<T>;
 
 template <typename T>
 using List = std::vector<T>;
+
+inline void Randomize() {srand(time(NULL));}
 
 }
