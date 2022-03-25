@@ -1,5 +1,4 @@
 #pragma once
-#define MakeUPtr std::make_unique
 
 namespace Forradia
 {
@@ -25,6 +24,12 @@ using SPtr = std::shared_ptr<T>;
 
 template <typename T>
 using List = std::vector<T>;
+
+template <typename T, typename... Args>
+inline std::unique_ptr<T> MakeUPtr(Args && ... args)
+{
+    return std::make_unique<T>(std::forward<Args>(args)...);
+}
 
 inline void Randomize() {srand(time(NULL));}
 
