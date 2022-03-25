@@ -5,11 +5,15 @@ namespace Forradia
 
 class CScenesCollection
 {
-public:
-    void Add(String sceneName, UPtr<CSceneBase> scene);
-    int GetSceneId(String sceneName);
 
+public:
+
+    // Collection operations
+    void Add(String sceneName, UPtr<CSceneBase> scene);
+
+    // Collection structure
     UMap<int, UPtr<CSceneBase>> Scenes;
+
 };
 
 }
