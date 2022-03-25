@@ -10,6 +10,10 @@
 #include "Common.h"
 #include "Implementation/CGameInstance.h"
 
+/**
+ * @brief Creates game instance and runs it.
+ * @return Success result.
+ */
 int main()
 {
     Forradia::CGameInstance GameInstance;

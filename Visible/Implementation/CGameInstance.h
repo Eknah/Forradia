@@ -2,9 +2,6 @@
 namespace Forradia
 {
 
-/**
-     * @brief Game instance runner.
-    */
 class CGameInstance
 {
 
