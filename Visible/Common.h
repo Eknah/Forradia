@@ -35,6 +35,7 @@
 #include "Framework/CInventory.h"
 #include "Framework/CObjectDescription.h"
 #include "Framework/CObjectsContent.h"
+#include "Framework/CScenesCollection.h"
 #include "../Hidden/CVector2.h"
 #include "../Hidden/CVector3.h"
 #include "../Hidden/CVertex.h"

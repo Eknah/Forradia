@@ -27,7 +27,7 @@ namespace Forradia
 	          public:
 		          CEngine() : GameLoop(*this), ModelGraphics(*this), TextGraphics(*this), FpsCounter(*this), CustomCursor(*this), ImageGraphics(*this), PaintGraphics(*this), FullscreenController(*this), KeyboardHandler(*this), Player(*this) {}
 
-		          inline void Run(UMap<int, UPtr<CSceneBase>> scenes, int startScene, UPtr<CWorldMap> worldMap, CInventory startingInventory, CObjectsContent objectsContent)
+                          inline void Run(CScenesCollection scenes, int startScene, UPtr<CWorldMap> worldMap, CInventory startingInventory, CObjectsContent objectsContent)
 		          {
 			          SceneManager.InitializeEngine(std::move(scenes), startScene);
 			          WorldMap = std::move(worldMap);

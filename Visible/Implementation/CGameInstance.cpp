@@ -15,17 +15,17 @@ namespace Forradia
         auto MapAreaSize = 150;
 
         CEngine Engine;
-        UMap<int, UPtr<CSceneBase>> Scenes;
         CObjectsContent ObjectsContent;
+        CScenesCollection Scenes;
 
         ObjectsContent.Add("ObjectTree1", {False, True, True} );
         ObjectsContent.Add("ObjectTree2", {False, True, True}  );
         ObjectsContent.Add("ObjectBoulder", {False, True, True}  );
         ObjectsContent.Add("ObjectCaveWallBlock", {False, True, False} );
 
-        Scenes.insert({ Hash("SceneGameStart"), MakeUPtr<CSceneGameStart>(Engine) });
-        Scenes.insert({ Hash("SceneMainMenu"), MakeUPtr<CSceneMainMenu>(Engine) });
-        Scenes.insert({ Hash("ScenePrimary"),  MakeUPtr<CScenePrimary>(Engine) });
+        Scenes.Add("SceneGameStart", MakeUPtr<CSceneGameStart>(Engine));
+        Scenes.Add("SceneMainMenu", MakeUPtr<CSceneMainMenu>(Engine));
+        Scenes.Add("ScenePrimary", MakeUPtr<CScenePrimary>(Engine));
 
         auto WorldMap = MakeUPtr<CWorldMap>(MapAreaSize );
 
