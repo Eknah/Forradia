@@ -2,18 +2,18 @@
 #include "../Hidden/CUtilities.h"
 namespace Forradia
 {
-	class CGuiMinimap
-	{
-	public:
-		CGuiMinimap(CEngine& engine) : Engine(engine) {}
+class CGuiMinimap
+{
+public:
+    CGuiMinimap(CEngine& engine) : Engine(engine) {}
 
-		void Render();
+    void Render();
 
-	private:
-		CEngine& Engine;
+private:
+    CEngine& Engine;
 
-		const int MinimapSize = 250;
-		CPalette Palette;
-		CUtilities Utilities;
-	};
+    const int MinimapSize = 250;
+    CPalette Palette;
+    CUtilities Utilities;
+};
 }

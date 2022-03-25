@@ -6,26 +6,26 @@
 namespace Forradia
 {
 
-	class CScenePrimary : public CSceneBase
-	{
+class CScenePrimary : public CSceneBase
+{
 
-	public:
+public:
 
-		CScenePrimary(CEngine& engine) : CSceneBase(engine), Gui(engine), Camera(engine), MobsEngine(engine), GameWorldRenderer(engine, Camera) {}
+    CScenePrimary(CEngine& engine) : CSceneBase(engine), Gui(engine), Camera(engine), MobsEngine(engine), GameWorldRenderer(engine, Camera) {}
 
-		void Enter() override;
-		void Update() override;
-		void Render() override;
-		void DoMouseDown(Uint8 mouseButton) override;
-		void DoMouseUp(Uint8 mouseButton) override;
+    void Enter() override;
+    void Update() override;
+    void Render() override;
+    void DoMouseDown(Uint8 mouseButton) override;
+    void DoMouseUp(Uint8 mouseButton) override;
 
-	private:
+private:
 
-		CCamera Camera;
-		CGui Gui;
-		CUtilities Utilities;
-		CMobsEngine MobsEngine;
-		CGameWorldRenderer GameWorldRenderer;
-	};
+    CCamera Camera;
+    CGui Gui;
+    CUtilities Utilities;
+    CMobsEngine MobsEngine;
+    CGameWorldRenderer GameWorldRenderer;
+};
 
 }

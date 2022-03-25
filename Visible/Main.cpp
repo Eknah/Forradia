@@ -14,5 +14,5 @@ int main()
 {
     Forradia::CGameInstance GameInstance;
     GameInstance.StartGame();
-	return 0;
+    return 0;
 }

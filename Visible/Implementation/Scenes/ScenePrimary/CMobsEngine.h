@@ -2,19 +2,19 @@
 namespace Forradia
 {
 
-	class CEngine;
+class CEngine;
 
-	class CMobsEngine
-	{
+class CMobsEngine
+{
 
-	public:
-		CMobsEngine(CEngine& engine) : Engine(engine) {}
+public:
+    CMobsEngine(CEngine& engine) : Engine(engine) {}
 
-		void Update();
+    void Update();
 
-	private:
-		CEngine& Engine;
+private:
+    CEngine& Engine;
 
-	};
+};
 
 }

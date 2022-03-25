@@ -2,18 +2,18 @@
 namespace Forradia
 {
 
-	class CObjectsContent
-	{
+class CObjectsContent
+{
 
-	public:
+public:
 
-        void Add(String objectName, CObjectDescription description);
-		bool IsMovable(int objectType);
-		bool BlocksMovement(int objectType);
-		bool BlocksSight(int objectType);
+    void Add(String objectName, CObjectDescription description);
+    bool IsMovable(int objectType);
+    bool BlocksMovement(int objectType);
+    bool BlocksSight(int objectType);
 
-		UMap<int, CObjectDescription> ObjectDescriptions;
+    UMap<int, CObjectDescription> ObjectDescriptions;
 
-	};
+};
 
 }

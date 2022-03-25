@@ -2,16 +2,16 @@
 namespace Forradia
 {
 
-	class CMouseHandler
-	{
+class CMouseHandler
+{
 
-	public:
-		void ResetForNewFrame();
+public:
+    void ResetForNewFrame();
 
-		float WheelAmount = 0;
-		bool LeftButtonDown = False;
-		bool RightButtonDown = False;
+    float WheelAmount = 0;
+    bool LeftButtonDown = False;
+    bool RightButtonDown = False;
 
-	};
+};
 
 }

@@ -3,21 +3,21 @@
 namespace Forradia
 {
 
-	class CSceneGameStart : public CSceneBase
-	{
+class CSceneGameStart : public CSceneBase
+{
 
-	public:
-		using CSceneBase::CSceneBase;
+public:
+    using CSceneBase::CSceneBase;
 
-		void Enter() override {}
-		void Update() override;
-		void Render() override;
-		void DoMouseDown(Uint8 mouseButton) override;
-		void DoMouseUp(Uint8 mouseButton) override {}
+    void Enter() override {}
+    void Update() override;
+    void Render() override;
+    void DoMouseDown(Uint8 mouseButton) override;
+    void DoMouseUp(Uint8 mouseButton) override {}
 
-	private:
-		CUtilities Utilities;
+private:
+    CUtilities Utilities;
 
-	};
+};
 
 }

@@ -2,21 +2,21 @@
 namespace Forradia
 {
 
-    class CObject
-	{
+class CObject
+{
 
-	public:
-        CObject(std::string objectTypeName, bool randomScaling = True);
+public:
+    CObject(std::string objectTypeName, bool randomScaling = True);
 
-        void UseOn(std::unique_ptr<CObject>& other);
+    void UseOn(std::unique_ptr<CObject>& other);
 
-		int ObjectType = 0;
-		float Rotation = 0.0f;
-		float Scaling = 1.0f;
+    int ObjectType = 0;
+    float Rotation = 0.0f;
+    float Scaling = 1.0f;
 
-	private:
-		void TransformInto(String objectName);
+private:
+    void TransformInto(String objectName);
 
-	};
+};
 
 }

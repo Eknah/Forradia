@@ -2,27 +2,27 @@
 namespace Forradia
 {
 
-	class CEngine;
-    class CObject;
+class CEngine;
+class CObject;
 
-	class CTile
-	{
+class CTile
+{
 
-	public:
-		CTile(CEngine& engine) : Engine(engine) {}
+public:
+    CTile(CEngine& engine) : Engine(engine) {}
 
-		bool MovementBlocked();
-		bool HasObjectOfType(String objectName);
+    bool MovementBlocked();
+    bool HasObjectOfType(String objectName);
 
-		int GroundType = 0;
-        List<UPtr<CObject>> Objects;
-		int Elevation = 0;
-		UPtr<CMob> mob = nullptr;
-		int WarpToMap = -1;
+    int GroundType = 0;
+    List<UPtr<CObject>> Objects;
+    int Elevation = 0;
+    UPtr<CMob> mob = nullptr;
+    int WarpToMap = -1;
 
-	private:
-		CEngine& Engine;
+private:
+    CEngine& Engine;
 
-	};
+};
 
 }

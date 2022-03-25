@@ -2,16 +2,16 @@
 namespace Forradia
 {
 
-	
 
-	class CPlanetTransformator
-	{
-	public:
-		CPlanetTransformator(CEngine& engine) : Engine(engine) {}
 
-		float GetNewY(float tiley, float mapx, float mapy);
+class CPlanetTransformator
+{
+public:
+    CPlanetTransformator(CEngine& engine) : Engine(engine) {}
 
-	private:
-		CEngine& Engine;
-	};
+    float GetNewY(float tiley, float mapx, float mapy);
+
+private:
+    CEngine& Engine;
+};
 }

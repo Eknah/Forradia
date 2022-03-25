@@ -2,13 +2,13 @@
 namespace Forradia
 {
 
-	class CSizeF
-	{
+class CSizeF
+{
 
-	public:
-		float Width = 0.0f;
-		float Height = 0.0f;
+public:
+    float Width = 0.0f;
+    float Height = 0.0f;
 
-	};
+};
 
 }

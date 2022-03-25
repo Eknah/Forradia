@@ -2,18 +2,18 @@
 namespace Forradia
 {
 
-	class CMapArea
-	{
+class CMapArea
+{
 
-	public:
-		CMapArea(CEngine& Engine, int mapAreaSize);
+public:
+    CMapArea(CEngine& Engine, int mapAreaSize);
 
-		int Size = -1;
-		bool IsCave = False;
-		List<List<CTile>> Tiles;
-		CPoint2F PlayerStartPosition = {-1, -1};
-		List<std::reference_wrapper<UPtr<CMob>>> MobsMirror;
+    int Size = -1;
+    bool IsCave = False;
+    List<List<CTile>> Tiles;
+    CPoint2F PlayerStartPosition = {-1, -1};
+    List<std::reference_wrapper<UPtr<CMob>>> MobsMirror;
 
-	};
+};
 
 }

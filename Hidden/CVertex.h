@@ -1,12 +1,12 @@
 #pragma once
 namespace Forradia
 {
-	class CVertex
-	{
+class CVertex
+{
 
-	public:
-		CVector3 Position;
-		CVector3 Normal;
-		CVector2 TextureCoordinate;
-	};
+public:
+    CVector3 Position;
+    CVector3 Normal;
+    CVector2 TextureCoordinate;
+};
 }

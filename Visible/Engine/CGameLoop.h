@@ -2,23 +2,23 @@
 namespace Forradia
 {
 
-	class CEngine;
+class CEngine;
 
-	class CGameLoop
-	{
+class CGameLoop
+{
 
-	public:
-		CGameLoop(CEngine& engine) : Engine(engine) {}
+public:
+    CGameLoop(CEngine& engine) : Engine(engine) {}
 
-		void Run();
+    void Run();
 
-	private:
-		void Update();
-		void Render();
-		static int EventFilter(void* pthis, const SDL_Event* event);
+private:
+    void Update();
+    void Render();
+    static int EventFilter(void* pthis, const SDL_Event* event);
 
-		CEngine& Engine;
+    CEngine& Engine;
 
-	};
+};
 
 }

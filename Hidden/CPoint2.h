@@ -2,13 +2,13 @@
 namespace Forradia
 {
 
-	class CPoint2
-	{
+class CPoint2
+{
 
-	public:
-		int X = 0;
-		int Y = 0;
+public:
+    int X = 0;
+    int Y = 0;
 
-	};
+};
 
 }

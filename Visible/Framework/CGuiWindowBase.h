@@ -3,45 +3,45 @@
 namespace Forradia
 {
 
-	class CGuiWindowBase
-	{
+class CGuiWindowBase
+{
 
-	public:
+public:
 
-		CGuiWindowBase(CEngine& engine, String title, CRectF bounds) : Engine(engine), Title(title), Bounds(bounds) {}
+    CGuiWindowBase(CEngine& engine, String title, CRectF bounds) : Engine(engine), Title(title), Bounds(bounds) {}
 
-		void Render();
-		void Update();
-		bool DoMouseDown(Uint8 mouseButton);
-		void DoMouseUp();
+    void Render();
+    void Update();
+    bool DoMouseDown(Uint8 mouseButton);
+    void DoMouseUp();
 
-		bool Visible = false;
+    bool Visible = false;
 
-	protected:
-		CRectF GetInteriorRect();
-		virtual void DoMouseDownDerived(Uint8 mouseButton) = 0;
-		virtual void RenderDerived() = 0;
+protected:
+    CRectF GetInteriorRect();
+    virtual void DoMouseDownDerived(Uint8 mouseButton) = 0;
+    virtual void RenderDerived() = 0;
 
-		CEngine& Engine;
+    CEngine& Engine;
 
-		const float Margin = 0.008;
+    const float Margin = 0.008;
 
-	private:
+private:
 
-		CRectF GetTitleBarRect();
+    CRectF GetTitleBarRect();
 
-		CPalette Palette;
+    CPalette Palette;
 
-		String Title;
+    String Title;
 
-		CRectF Bounds;
-		bool IsBeingMoved = false;
-		CUtilities Utilities;
-		SDL_FPoint StartMovePosition = { -1, -1 };
-		SDL_FPoint StartMoveMousePosition = { -1, -1 };
+    CRectF Bounds;
+    bool IsBeingMoved = false;
+    CUtilities Utilities;
+    SDL_FPoint StartMovePosition = { -1, -1 };
+    SDL_FPoint StartMoveMousePosition = { -1, -1 };
 
-		const float TitleBarHeight = 0.04f;
+    const float TitleBarHeight = 0.04f;
 
-	};
+};
 
 }

@@ -6,21 +6,21 @@
 namespace Forradia
 {
 
-	class CGameWorldRenderer
-	{
+class CGameWorldRenderer
+{
 
-	public:
-		CGameWorldRenderer(CEngine& engine, CCamera& camera) : Engine(engine), /*Skybox(engine),*/ Background(engine), PlanetTransformator(engine), Camera(camera) {}
+public:
+    CGameWorldRenderer(CEngine& engine, CCamera& camera) : Engine(engine), /*Skybox(engine),*/ Background(engine), PlanetTransformator(engine), Camera(camera) {}
 
-		void Render();
+    void Render();
 
-	private:
+private:
 
 
-		CEngine& Engine;
-		CBackground Background;
-		CCamera& Camera;
-		CPlanetTransformator PlanetTransformator;
+    CEngine& Engine;
+    CBackground Background;
+    CCamera& Camera;
+    CPlanetTransformator PlanetTransformator;
 
-	};
+};
 }

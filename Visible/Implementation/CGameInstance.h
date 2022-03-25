@@ -2,15 +2,15 @@
 namespace Forradia
 {
 
-	/**
-	 * @brief Game instance runner.
-	*/
-	class CGameInstance
-	{
+/**
+     * @brief Game instance runner.
+    */
+class CGameInstance
+{
 
-	public:
-		void StartGame();
+public:
+    void StartGame();
 
-	};
+};
 
 }

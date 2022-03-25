@@ -2,19 +2,19 @@
 namespace Forradia
 {
 
-	class CEngine;
+class CEngine;
 
-	class CBackground
-	{
-	public:
+class CBackground
+{
+public:
 
-		CBackground(CEngine& engine) : Engine(engine) {}
+    CBackground(CEngine& engine) : Engine(engine) {}
 
-		void Render(float zoom);
+    void Render(float zoom);
 
-	private:
+private:
 
-		CEngine& Engine;
-	};
+    CEngine& Engine;
+};
 
 }

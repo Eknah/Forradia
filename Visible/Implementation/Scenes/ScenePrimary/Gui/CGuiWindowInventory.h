@@ -3,18 +3,18 @@
 namespace Forradia
 {
 
-	class CGuiWindowInventory : public CGuiWindowBase
-	{
-	public:
-		using CGuiWindowBase::CGuiWindowBase;
+class CGuiWindowInventory : public CGuiWindowBase
+{
+public:
+    using CGuiWindowBase::CGuiWindowBase;
 
-		void RenderDerived() override;
-		void DoMouseDownDerived(Uint8 mouseButton) override;
+    void RenderDerived() override;
+    void DoMouseDownDerived(Uint8 mouseButton) override;
 
-	private:
-		const int NumSlotCols = 4;
-		CUtilities Utilities;
-		CPalette Palette;
-	};
+private:
+    const int NumSlotCols = 4;
+    CUtilities Utilities;
+    CPalette Palette;
+};
 
 }
