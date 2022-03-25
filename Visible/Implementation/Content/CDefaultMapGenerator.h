@@ -2,11 +2,13 @@
 namespace Forradia
 {
 
-	class CDefaultMapGenerator
+    class CDefaultMapGenerator : public IMapGenerator
 	{
 
 	public:
-		void GenerateDefaultMapArea(CEngine& engine, UPtr<CWorldMap>& worldMap, CPoint2 worldMapCoord);
+        using IMapGenerator::IMapGenerator;
+
+        void GenerateMapArea(CPoint2 worldMapCoord) override;
 
 	private:
 		void ClearToGrass(CMapArea& mapArea);

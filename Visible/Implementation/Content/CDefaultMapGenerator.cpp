@@ -3,28 +3,28 @@
 #include "CQuestCaveMapGenerator.h"
 namespace Forradia
 {
-	void CDefaultMapGenerator::GenerateDefaultMapArea(CEngine& engine, UPtr<CWorldMap>& worldMap, CPoint2 worldMapCoord)
-	{
-		worldMap->MapAreas.push_back(MakeUPtr<CMapArea>(engine, worldMap->MapAreaSize));
-		auto map_area_id = worldMap->MapAreas.size() - 1;
-		auto& map_area = *worldMap->MapAreas.at(map_area_id);
+    void CDefaultMapGenerator::GenerateMapArea(CPoint2 worldMapCoord)
+    {
+        WorldMap->MapAreas.push_back(MakeUPtr<CMapArea>(Engine, WorldMap->MapAreaSize));
+        auto map_area_id = WorldMap->MapAreas.size() - 1;
+        auto& map_area = *WorldMap->MapAreas.at(map_area_id);
 
-		ClearToGrass(map_area);
-		GeneratePlayerStartingPosition(map_area);
-		GenerateElevation(map_area);
-		GenerateWater(map_area);
-		GenerateSand(map_area);
-		GenerateClay(map_area);
-		GenerateRock(map_area);
-		GenerateTrees(map_area);
-		GenerateBushes(map_area);
-		GenerateSmallStones(map_area);
-		GenerateTallGrass(map_area);
-		GeneratePinkFlowers(map_area);
-		GenerateMobs(map_area);
-		GenerateQuestCaves(engine, map_area, worldMap);
+        ClearToGrass(map_area);
+        GeneratePlayerStartingPosition(map_area);
+        GenerateElevation(map_area);
+        GenerateWater(map_area);
+        GenerateSand(map_area);
+        GenerateClay(map_area);
+        GenerateRock(map_area);
+        GenerateTrees(map_area);
+        GenerateBushes(map_area);
+        GenerateSmallStones(map_area);
+        GenerateTallGrass(map_area);
+        GeneratePinkFlowers(map_area);
+        GenerateMobs(map_area);
+        GenerateQuestCaves(Engine, map_area, WorldMap);
 
-	}
+    }
 	void CDefaultMapGenerator::ClearToGrass(CMapArea& mapArea)
 	{
 		for (auto y = 0; y < mapArea.Size; y++)

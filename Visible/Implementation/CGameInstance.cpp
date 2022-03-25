@@ -29,17 +29,11 @@ namespace Forradia
         Scenes.Add("SceneMainMenu", MakeUPtr<CSceneMainMenu>(Engine));
         Scenes.Add("ScenePrimary", MakeUPtr<CScenePrimary>(Engine));
 
-        auto WorldMap = MakeUPtr<CWorldMap>(MapAreaSize );
+        auto WorldMap = MakeUPtr<CWorldMap>(MapAreaSize);
 
-        CDefaultMapGenerator DefaultMapGenerator;
+        CDefaultMapGenerator DefaultMapGenerator(Engine, WorldMap);
 
-		for (auto worldy = 0; worldy < 3; worldy++)
-		{
-			for (auto worldx = 0; worldx < 3; worldx++)
-			{
-                DefaultMapGenerator.GenerateDefaultMapArea(Engine, WorldMap, {worldx, worldy});
-			}
-		};
+        WorldMap->GenerateWorldMap(DefaultMapGenerator);
 
         CInventory StartingInventory;
         StartingInventory.Add(0, "ObjectWoodaxe");

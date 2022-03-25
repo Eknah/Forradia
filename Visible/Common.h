@@ -28,6 +28,7 @@
 #include "../Hidden/CSizeF.h"
 #include "../Hidden/ECursorTypes.h"
 #include "Framework/CGuiWindowBase.h"
+#include "Framework/IMapGenerator.h"
 #include "Framework/WorldStructure/CObject.h"
 #include "Framework/WorldStructure/CTile.h"
 #include "Framework/WorldStructure/CMapArea.h"
