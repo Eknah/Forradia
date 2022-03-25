@@ -23,6 +23,7 @@ To add
 * CMake
 
 ## Features
+* Engine allows representation of world map as planets instead of regular flat maps
 * Open-source
 * Cross-platform
 * Only two dependencies: OpenGL and SDL2
