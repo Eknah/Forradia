@@ -4,6 +4,7 @@
 #include "ScenePrimary/Gui/CGui.h"
 #include "ScenePrimary/CMobsEngine.h"
 #include "ScenePrimary/CGameWorldRenderer.h"
+
 namespace Forradia
 {
 
@@ -27,6 +28,7 @@ private:
     CUtilities Utilities;
     CMobsEngine MobsEngine;
     CGameWorldRenderer GameWorldRenderer;
+
 };
 
 }

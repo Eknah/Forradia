@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/CScenesCollection.h"
+
 namespace Forradia
 {
 
@@ -13,10 +14,12 @@ public:
         Scenes = std::move(scenes);
         CurrentScene = startScene;
     }
+
     inline UPtr<CSceneBase>& GetCurrentScene()
     {
         return Scenes.Scenes.at(CurrentScene);
     }
+
     inline void SwitchToScene(std::string newScene)
     {
         CurrentScene = GetId(newScene);
@@ -24,6 +27,7 @@ public:
     }
 
 private:
+
     CScenesCollection Scenes;
     int CurrentScene;
 

@@ -2,6 +2,7 @@
 #include "CommonExternal.h"
 #include "../Hidden/CUtilities.h"
 #include "Framework/CSceneBase.h"
+
 namespace Forradia
 {
 
@@ -9,6 +10,7 @@ class CSceneMainMenu : public CSceneBase
 {
 
 public:
+
     using CSceneBase::CSceneBase;
 
     void Enter() override {}
@@ -18,6 +20,7 @@ public:
     void DoMouseUp(Uint8 mouseButton) override {}
 
 private:
+
     CUtilities Utilities;
 
 };

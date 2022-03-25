@@ -1,13 +1,16 @@
 #include "CommonExternal.h"
 #include "CSceneMainMenu.h"
 #include "../Hidden/CEngine.h"
+
 namespace Forradia
 {
+
 void CSceneMainMenu::Update()
 {
     if (Engine.KeyboardHandler.KeysBeingPressed.size() > 0)
         Engine.SceneManager.SwitchToScene("ScenePrimary");
 }
+
 void CSceneMainMenu::Render()
 {
     Engine.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
@@ -21,8 +24,10 @@ void CSceneMainMenu::Render()
     auto image_height = (float)height / canvas_size.Height / 2;
     Engine.DrawImage("SceneForradiaLogo", 0.5 - image_width / 2, 0.15 - image_height / 2, image_width, image_height);
 }
+
 void CSceneMainMenu::DoMouseDown(Uint8 mouseButton)
 {
     Engine.SceneManager.SwitchToScene("ScenePrimary");
 }
+
 }

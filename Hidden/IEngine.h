@@ -8,7 +8,9 @@ namespace Forradia
 
 class IEngine
 {
+
 public:
+
     virtual inline void DrawImage(std::string imageName, float x, float y, float width, float height)  = 0;
     virtual inline void DrawImage(int imageNameHash, float x, float y, float width, float height)  = 0;
 
@@ -25,6 +27,7 @@ public:
 
 
     SDL_Window* GWindow = NULL;
+
 };
 
 }

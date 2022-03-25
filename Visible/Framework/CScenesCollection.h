@@ -1,6 +1,7 @@
 #pragma once
 #include "../Hidden/Aliases.h"
 #include "CSceneBase.h"
+
 namespace Forradia
 {
 

@@ -1,8 +1,10 @@
 #pragma once
 #include "CommonExternal.h"
 #include "CMath3D.h"
+
 namespace Forradia
 {
+
 class CVectorAlgorithms
 {
 
@@ -27,6 +29,7 @@ public:
     }
 
 private:
+
     inline bool SameSide(CVector3 p1, CVector3 p2, CVector3 a, CVector3 b)
     {
         CVector3 cp1 = Math3D.Cross(b - a, p1 - a);
@@ -37,6 +40,7 @@ private:
         else
             return false;
     }
+
     inline CVector3 GenTriNormal(CVector3 t1, CVector3 t2, CVector3 t3)
     {
         CVector3 u = t2 - t1;
@@ -50,4 +54,5 @@ private:
     CMath3D Math3D;
 
 };
+
 }

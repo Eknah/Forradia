@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/CInventory.h"
 #include "../Hidden/CPoint2F.h"
+
 namespace Forradia
 {
 

@@ -1,10 +1,12 @@
 #pragma once
 #include "../Hidden/CPoint2F.h"
+
 namespace Forradia
 {
 
 class CMob
 {
+
 public:
 
     CMob(float x, float y) : Position(x, y) {}

@@ -2,6 +2,7 @@
 #include "CommonExternal.h"
 #include "../Hidden/CSDL_Deleter.h"
 #include "../Hidden/Aliases.h"
+
 namespace Forradia
 {
 
@@ -11,6 +12,7 @@ class CTextGraphics
 {
 
 public:
+
     CTextGraphics(CEngine& engine) : Engine(engine) {}
 
     void Initialize();

@@ -1,6 +1,7 @@
 #pragma once
 #include "../Hidden/Aliases.h"
 #include "../Hidden/CPoint2.h"
+
 namespace Forradia
 {
 

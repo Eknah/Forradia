@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string>
 #include <unordered_map>
 #include <memory>
@@ -9,7 +8,7 @@
 namespace Forradia
 {
 
-// Pointers
+// Pointer related
 
 template <typename T, typename U>
 using UMap = std::unordered_map<T, U>;
@@ -29,7 +28,7 @@ inline std::unique_ptr<T> MakeUPtr(Args && ... args)
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
 
-// Common used functions
+// Commonly used functions
 
 inline int GetId(std::string text) { return (int)std::hash<std::string>{}(text); }
 constexpr auto Ticks = &SDL_GetTicks;

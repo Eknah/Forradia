@@ -3,6 +3,7 @@
 #include "CUtilities.h"
 #include "IEngine.h"
 #include "ECursorTypes.h"
+
 namespace Forradia
 {
 
@@ -10,6 +11,7 @@ class CCustomCursor
 {
 
 public:
+
     CCustomCursor(IEngine& engine) : Engine(engine) {}
 
     inline void ResetForNewFrame()
@@ -23,6 +25,7 @@ public:
 
         switch (CursorType)
         {
+
         case ECursorTypes::Default:
         {
             Engine.DrawImage("CursorDefault", mouse_pos_f.X, mouse_pos_f.Y, cursor_size_f.Width, cursor_size_f.Height);
@@ -33,6 +36,7 @@ public:
             Engine.DrawImage("CursorHoveringClickable", mouse_pos_f.X, mouse_pos_f.Y, cursor_size_f.Width, cursor_size_f.Height);
             break;
         }
+
         }
 
     }
@@ -40,6 +44,7 @@ public:
     ECursorTypes CursorType = ECursorTypes::Default;
 
 private:
+
     IEngine& Engine;
     CUtilities Utilities;
 

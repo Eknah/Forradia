@@ -1,12 +1,15 @@
 #pragma once
 #include "Aliases.h"
 #include "CVector3.h"
+
 namespace Forradia
 {
+
 class CMaterial
 {
 
 public:
+
     CMaterial() : Name(""), Ns(0.0f), Ni(0.0f), D(0.0f), Illum(0) {}
 
     std::string Name;
@@ -23,5 +26,7 @@ public:
     std::string MapNs;
     std::string MapD;
     std::string MapBump;
+
 };
+
 }

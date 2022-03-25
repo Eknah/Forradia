@@ -3,12 +3,15 @@
 #include "../Hidden/CUtilities.h"
 #include "CGuiMinimap.h"
 #include "Framework/CGuiWindowBase.h"
+
 namespace Forradia
 {
 
 class CGui
 {
+
 public:
+
     CGui(CEngine& engine) : Engine(engine), GuiMinimap(engine) {}
 
     void Initialize();
@@ -20,6 +23,7 @@ public:
     UMap<std::string, UPtr<CGuiWindowBase>> Windows;
 
 private:
+
     CEngine& Engine;
 
     CGuiMinimap GuiMinimap;

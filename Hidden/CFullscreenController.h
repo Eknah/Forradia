@@ -1,12 +1,14 @@
 #pragma once
 #include "CommonExternal.h"
 #include "IEngine.h"
+
 namespace Forradia
 {
 
 class CFullscreenController
 {
 public:
+
     CFullscreenController(IEngine& engine) : Engine(engine) {}
 
     inline void ToggleFullscreen()
@@ -17,8 +19,10 @@ public:
     }
 
 private:
+
     IEngine& Engine;
     bool FullscreenOn = true;
+
 };
 
 }

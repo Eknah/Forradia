@@ -9,9 +9,7 @@
 #include "CModelLoader.h"
 #include "CCustomCursor.h"
 #include "CFullscreenController.h"
-
 #include "IEngine.h"
-
 #include "../Visible/Engine/CImageGraphics.h"
 #include "../Visible/Engine/CPaintGraphics.h"
 #include "../Visible/Engine/CMouseHandler.h"
@@ -27,6 +25,7 @@ class CEngine : public IEngine
 {
 
 public:
+
     CEngine() : GameLoop(*this), ModelGraphics(*this), TextGraphics(*this), FpsCounter(*this), CustomCursor(*this), ImageGraphics(*this), PaintGraphics(*this), FullscreenController(*this), KeyboardHandler(*this), Player(*this) {}
 
     inline void Run(CScenesCollection scenes, int startScene, UPtr<CWorldMap> worldMap, CInventory startingInventory, CObjectsContent objectsContent)
@@ -75,15 +74,13 @@ public:
     UPtr<CWorldMap> WorldMap;
     CObjectsContent ObjectsContent;
 
-
-
-
     float TileSize = 0.5f;
 
     const int ScreenWidth = 640;
     const int ScreenHeight = 480;
 
 private:
+
     inline void InitializeEngine()
     {
         SDL_Init(SDL_INIT_VIDEO);
@@ -98,6 +95,7 @@ private:
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
+
     inline void StopEngine()
     {
         SDL_DestroyWindow(GWindow);

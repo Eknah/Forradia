@@ -1,13 +1,16 @@
 #include "CGui.h"
 #include "../Hidden/CEngine.h"
 #include "CGuiWindowInventory.h"
+
 namespace Forradia
 {
+
 void CGui::Initialize()
 {
     Windows.clear();
     Windows.insert({ "Inventory", std::make_unique<CGuiWindowInventory>(Engine, "Inventory", CRectF {0.1f, 0.1f, 0.2f, 0.7f}) });
 }
+
 void CGui::Update()
 {
     auto mouse_position_f = Utilities.GetMousePositionF();
@@ -20,6 +23,7 @@ void CGui::Update()
     for (auto& [key, window] : Windows)
         window->Update();
 }
+
 void CGui::Render()
 {
     GuiMinimap.Render();
@@ -51,6 +55,7 @@ void CGui::Render()
     for (auto& [key, window] : Windows)
         window->Render();
 }
+
 bool CGui::DoMouseDown(Uint8 mouseButton)
 {
     for (auto& [key, window] : Windows)
@@ -66,9 +71,11 @@ bool CGui::DoMouseDown(Uint8 mouseButton)
     }
     return false;
 }
+
 void CGui::DoMouseUp()
 {
     for (auto& [key, window] : Windows)
         window->DoMouseUp();
 }
+
 }

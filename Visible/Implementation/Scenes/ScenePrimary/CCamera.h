@@ -1,6 +1,6 @@
 #pragma once
-
 #include "../Hidden/CUtilities.h"
+
 namespace Forradia
 {
 
@@ -10,6 +10,7 @@ class CCamera
 {
 
 public:
+
     CCamera(CEngine& engine) : Engine(engine) {}
 
     void Update(int rotationDirection, float zoomChange);
@@ -28,6 +29,7 @@ public:
     int GetRenderDistance();
 
 private:
+
     CEngine& Engine;
     CUtilities Utilities;
 
@@ -38,6 +40,7 @@ private:
     int UpdateSpeed = 20;
     float RotationAmount = 5.0f;
     float ZoomMultiplier = 8.0;
+
 };
 
 

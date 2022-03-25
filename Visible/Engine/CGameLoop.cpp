@@ -21,7 +21,6 @@ namespace Forradia
  */
 void CGameLoop::Run()
 {
-
     bool quit = false;
     SDL_Event event;
 
@@ -29,7 +28,6 @@ void CGameLoop::Run()
 
     while (!quit)
     {
-
         Engine.KeyboardHandler.ResetForNewFrame();
         Engine.MouseHandler.ResetForNewFrame();
         Engine.CustomCursor.ResetForNewFrame();
@@ -42,6 +40,7 @@ void CGameLoop::Run()
             case SDL_QUIT:
             {
                 quit = true;
+
                 break;
             }
 
@@ -50,12 +49,14 @@ void CGameLoop::Run()
                 Engine.KeyboardHandler.DoKeyDown(event.key.keysym.sym);
                 if (event.key.keysym.sym == SDLK_RETURN && Engine.KeyboardHandler.KeysBeingPressed.count(SDLK_LALT) > 0)
                     Engine.FullscreenController.ToggleFullscreen();
+
                 break;
             }
 
             case SDL_KEYUP:
             {
                 Engine.KeyboardHandler.DoKeyUp(event.key.keysym.sym);
+
                 break;
             }
 
@@ -66,6 +67,7 @@ void CGameLoop::Run()
                     Engine.MouseHandler.LeftButtonDown = true;
                 else if (event.button.button == SDL_BUTTON_RIGHT)
                     Engine.MouseHandler.RightButtonDown = true;
+
                 break;
             }
 
@@ -76,24 +78,23 @@ void CGameLoop::Run()
                     Engine.MouseHandler.LeftButtonDown = false;
                 else if (event.button.button == SDL_BUTTON_RIGHT)
                     Engine.MouseHandler.RightButtonDown = false;
+
                 break;
             }
 
             case SDL_MOUSEWHEEL:
             {
                 Engine.MouseHandler.WheelAmount = event.wheel.y;
+
                 break;
             }
 
             }
-
         }
 
         Update();
         Render();
-
     }
-
 }
 
 /**
@@ -117,7 +118,6 @@ void CGameLoop::Render()
     Engine.CustomCursor.Render();
 
     SDL_GL_SwapWindow(Engine.GWindow);
-
 }
 
 /**

@@ -6,7 +6,6 @@
  *	/_/     /____/ /_/ \_\ /_/ \_\ /_//_/ /____/ /_/  /_//_/
  *
 **/
-
 #include "CommonExternal.h"
 #include "Implementation/CGameInstance.h"
 
@@ -18,5 +17,6 @@ int main()
 {
     Forradia::CGameInstance GameInstance;
     GameInstance.StartGame();
+
     return 0;
 }

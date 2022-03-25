@@ -12,6 +12,7 @@ public:
 
     inline void Split(const std::string& in, std::vector<std::string>& out, std::string token)
     {
+
         out.clear();
 
         std::string temp;
@@ -37,46 +38,55 @@ public:
             {
                 temp += in.substr(i, token.size());
                 out.push_back(temp);
+
                 break;
             }
             else
             {
                 temp += in[i];
             }
+
         }
+
     }
+
     inline std::string Tail(const std::string& in)
     {
+
         size_t tokenStart = in.find_first_not_of(" \t");
         size_t spaceStart = in.find_first_of(" \t", tokenStart);
         size_t tailStart = in.find_first_not_of(" \t", spaceStart);
         size_t tailEnd = in.find_last_not_of(" \t");
+
         if (tailStart != std::string::npos && tailEnd != std::string::npos)
-        {
             return in.substr(tailStart, tailEnd - tailStart + 1);
-        }
         else if (tailStart != std::string::npos)
-        {
             return in.substr(tailStart);
-        }
+
         return "";
+
     }
+
     inline std::string FirstToken(const std::string& in)
     {
+
         if (!in.empty())
         {
+
             size_t token_start = in.find_first_not_of(" \t");
             size_t token_end = in.find_first_of(" \t", token_start);
+
             if (token_start != std::string::npos && token_end != std::string::npos)
-            {
                 return in.substr(token_start, token_end - token_start);
-            }
             else if (token_start != std::string::npos)
-            {
                 return in.substr(token_start);
-            }
+
         }
+
         return "";
+
     }
+
 };
+
 }

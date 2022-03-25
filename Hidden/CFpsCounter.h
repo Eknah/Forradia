@@ -2,13 +2,15 @@
 #include "CommonExternal.h"
 #include "IEngine.h"
 #include "CPalette.h"
+
 namespace Forradia
 {
 
-
 class CFpsCounter
 {
+
 public:
+
     CFpsCounter(IEngine& engine) : Engine(engine) {}
 
     inline void Update()
@@ -21,6 +23,7 @@ public:
             TickLastUpdate = Ticks();
         }
     }
+
     inline void Render()
     {
         Engine.FillRectangle(Palette.MediumBlueSemiTrans, Posx - Width / 2, Posy - Height / 2, Width, Height);
@@ -29,6 +32,7 @@ public:
     }
 
 private:
+
     IEngine& Engine;
     CPalette Palette;
 
@@ -39,6 +43,7 @@ private:
     const float  Posy = 0.015f;
     const float  Width = 0.07f;
     const float  Height = 0.03f;
+
 };
 
 }

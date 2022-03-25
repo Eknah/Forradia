@@ -1,12 +1,15 @@
 #include "CommonExternal.h"
 #include "CImageGraphics.h"
 #include "../Hidden/CEngine.h"
+
 namespace Forradia
 {
+
 void CImageGraphics::DrawImage(std::string imageName, float X, float Y, float width, float height)
 {
     DrawImage(GetId(imageName), X, Y, width, height);
 }
+
 void CImageGraphics::DrawImage(int imageNameHash, float X, float Y, float width, float height)
 {
     glMatrixMode(GL_MODELVIEW);
@@ -33,4 +36,5 @@ void CImageGraphics::DrawImage(int imageNameHash, float X, float Y, float width,
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
 }
+
 }

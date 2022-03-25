@@ -1,15 +1,20 @@
 #include "CommonExternal.h"
 #include "CTextGraphics.h"
 #include "../Hidden/CEngine.h"
+
 namespace Forradia
 {
+
 void CTextGraphics::Initialize()
 {
     TTF_Init();
+
     auto font_path = std::string(SDL_GetBasePath());
     font_path.append(DefaultFontPath);
+
     DefaultFont = UPtrEx<TTF_Font, CSDL_Deleter>(TTF_OpenFont(font_path.c_str(), DefaultFontSize));
 }
+
 void CTextGraphics::DrawString(std::string message, SDL_Color color, float x, float y, bool centerAlign)
 {
     glMatrixMode(GL_MODELVIEW);
@@ -26,11 +31,13 @@ void CTextGraphics::DrawString(std::string message, SDL_Color color, float x, fl
     auto width = (float)s_font->w / Engine.ScreenWidth * Scaling;
     auto height = (float)s_font->h / Engine.ScreenHeight * Scaling;
     glColor4f(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f);
+
     if (centerAlign)
     {
         x -= width/2;
         y -= height/2;
     }
+
     glBegin(GL_QUADS);
     {
         glTexCoord2f(0, 1); glVertex2f(x, y + height);
@@ -38,10 +45,12 @@ void CTextGraphics::DrawString(std::string message, SDL_Color color, float x, fl
         glTexCoord2f(1, 0); glVertex2f(x + width, y);
         glTexCoord2f(0, 0); glVertex2f(x, y);
     }
+
     glEnd();
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
     glDeleteTextures(1, &texture);
     SDL_FreeSurface(s_font);
 }
+
 }

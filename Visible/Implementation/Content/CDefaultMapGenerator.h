@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/IMapGenerator.h"
 #include "Framework/WorldStructure/CMapArea.h"
+
 namespace Forradia
 {
 
@@ -8,11 +9,13 @@ class CDefaultMapGenerator : public IMapGenerator
 {
 
 public:
+
     using IMapGenerator::IMapGenerator;
 
     void GenerateMapArea(CPoint2 worldMapCoord) override;
 
 private:
+
     void ClearToGrass(CMapArea& mapArea);
     void GeneratePlayerStartingPosition(CMapArea& mapArea);
     void GenerateElevation(CMapArea& mapArea);

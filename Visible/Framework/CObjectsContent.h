@@ -1,6 +1,7 @@
 #pragma once
 #include "../Hidden/Aliases.h"
 #include "CObjectDescription.h"
+
 namespace Forradia
 {
 

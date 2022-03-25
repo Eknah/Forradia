@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include "../Hidden/Aliases.h"
+
 namespace Forradia
 {
 
@@ -9,6 +10,7 @@ class CObject
 {
 
 public:
+
     CObject(std::string objectTypeName, bool randomScaling = true);
 
     // Object usage
@@ -22,6 +24,7 @@ public:
     float Scaling = 1.0f;
 
 private:
+
     void TransformInto(std::string objectName);
 
 };

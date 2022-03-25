@@ -7,6 +7,7 @@ class CEngine;
 
 class CBackground
 {
+
 public:
 
     CBackground(CEngine& engine) : Engine(engine) {}
