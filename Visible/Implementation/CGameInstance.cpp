@@ -10,6 +10,8 @@ namespace Forradia
 
 	void CGameInstance::StartGame()
 	{
+        using std::move;
+
 		Randomize();
 
         auto MapAreaSize = 150;
@@ -40,8 +42,8 @@ namespace Forradia
 		};
 
         CInventory StartingInventory;
-        StartingInventory.Objects.insert({ 0, MakeUPtr<CObject>("ObjectWoodaxe") });
+        StartingInventory.Add(0, "ObjectWoodaxe");
 
-        Engine.Run(std::move(Scenes), Hash("SceneGameStart"), std::move(WorldMap), StartingInventory, ObjectsContent);
+        Engine.Run(move(Scenes), Hash("SceneGameStart"), move(WorldMap), StartingInventory, ObjectsContent);
 	}
 }

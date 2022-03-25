@@ -1,6 +1,7 @@
 #pragma once
 #define Randomize() srand(time(NULL))
 #define MakeUPtr std::make_unique
+
 namespace Forradia
 {
 
