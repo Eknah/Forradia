@@ -4,7 +4,7 @@
 #include "CGuiWindowInventory.h"
 namespace Forradia
 {
-void CGui::InitializeEngine()
+void CGui::Initialize()
 {
     Windows.clear();
     Windows.insert({ "Inventory", std::make_unique<CGuiWindowInventory>(Engine, "Inventory", CRectF {0.1f, 0.1f, 0.2f, 0.7f}) });

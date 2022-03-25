@@ -3,7 +3,7 @@
 #include "../Hidden/CEngine.h"
 namespace Forradia
 {
-void CTextGraphics::InitializeEngine()
+void CTextGraphics::Initialize()
 {
     TTF_Init();
     auto font_path = String(SDL_GetBasePath());

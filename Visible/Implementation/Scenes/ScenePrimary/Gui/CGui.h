@@ -9,7 +9,7 @@ class CGui
 public:
     CGui(CEngine& engine) : Engine(engine), GuiMinimap(engine) {}
 
-    void InitializeEngine();
+    void Initialize();
     void Update();
     void Render();
     bool DoMouseDown(Uint8 mouseButton);

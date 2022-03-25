@@ -7,7 +7,7 @@ class CSceneManager
 
 public:
 
-    inline void InitializeEngine(CScenesCollection scenes, int startScene)
+    inline void Initialize(CScenesCollection scenes, int startScene)
     {
         Scenes = std::move(scenes);
         CurrentScene = startScene;

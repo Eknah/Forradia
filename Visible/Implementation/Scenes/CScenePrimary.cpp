@@ -5,7 +5,7 @@ namespace Forradia
 {
 void CScenePrimary::Enter()
 {
-    Gui.InitializeEngine();
+    Gui.Initialize();
 }
 void CScenePrimary::Update()
 {

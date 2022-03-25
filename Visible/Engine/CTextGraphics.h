@@ -10,7 +10,7 @@ class CTextGraphics
 public:
     CTextGraphics(CEngine& engine) : Engine(engine) {}
 
-    void InitializeEngine();
+    void Initialize();
 
     // Drawing operations
     void DrawString(String message, SDL_Color color, float x, float y, bool centerAlign = false);
