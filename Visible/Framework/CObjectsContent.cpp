@@ -11,18 +11,18 @@ bool CObjectsContent::IsMovable(int objectType)
 {
     if (ObjectDescriptions.count(objectType))
         return ObjectDescriptions.at(objectType).Movable;
-    return False;
+    return false;
 }
 bool CObjectsContent::BlocksMovement(int objectType)
 {
     if (ObjectDescriptions.count(objectType))
         return ObjectDescriptions.at(objectType).BlocksMovement;
-    return False;
+    return false;
 }
 bool CObjectsContent::BlocksSight(int objectType)
 {
     if (ObjectDescriptions.count(objectType))
         return ObjectDescriptions.at(objectType).BlocksSight;
-    return False;
+    return false;
 }
 }

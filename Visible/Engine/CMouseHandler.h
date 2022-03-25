@@ -11,8 +11,8 @@ public:
     void ResetForNewFrame();
 
     float WheelAmount = 0;
-    bool LeftButtonDown = False;
-    bool RightButtonDown = False;
+    bool LeftButtonDown = false;
+    bool RightButtonDown = false;
 
 };
 

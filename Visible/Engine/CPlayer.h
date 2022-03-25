@@ -16,10 +16,10 @@ public:
     {
 
     public:
-        bool TryMoveForward = False;
-        bool TryMoveRight = False;
-        bool TryMoveBack = False;
-        bool TryMoveLeft = False;
+        bool TryMoveForward = false;
+        bool TryMoveRight = false;
+        bool TryMoveBack = false;
+        bool TryMoveLeft = false;
 
     };
 
@@ -53,10 +53,10 @@ public:
 
     // Rendering
     float PlayerSize = 0.6f;
-    bool IsWalking = False;
+    bool IsWalking = false;
 
     // Jumping
-    bool IsJumping = False;
+    bool IsJumping = false;
     int JumpDuration = 600;
     int TickStartJumping = 0;
     float MaxJumpHeight = 1.0f;

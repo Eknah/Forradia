@@ -6,7 +6,7 @@ class CObject
 {
 
 public:
-    CObject(std::string objectTypeName, bool randomScaling = True);
+    CObject(std::string objectTypeName, bool randomScaling = true);
 
     // Object usage
     void UseOn(std::unique_ptr<CObject>& other);

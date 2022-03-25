@@ -9,8 +9,8 @@ public:
     inline bool ContainsPoint(CPoint2F point)
     {
         if (point.X >= X && point.Y >= Y && point.X < X + Width && point.Y < Y + Height)
-            return True;
-        return False;
+            return true;
+        return false;
     }
 
     float X = 0.0f;

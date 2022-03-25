@@ -31,19 +31,19 @@ CRectF CGuiWindowBase::GetInteriorRect()
 }
 bool CGuiWindowBase::DoMouseDown(Uint8 mouseButton)
 {
-    if (!Visible) return False;
+    if (!Visible) return false;
     auto mouse_pos_f = Utilities.GetMousePositionF();
     auto title_bar_rect = GetTitleBarRect();
     if (title_bar_rect.ContainsPoint(mouse_pos_f))
     {
-        IsBeingMoved = True;
+        IsBeingMoved = true;
         StartMovePosition = { Bounds.X, Bounds.Y };
         StartMoveMousePosition = { mouse_pos_f.X, mouse_pos_f.Y };
     }
     DoMouseDownDerived(mouseButton);
     if (Bounds.ContainsPoint(mouse_pos_f))
-        return True;
-    return False;
+        return true;
+    return false;
 }
 CRectF CGuiWindowBase::GetTitleBarRect()
 {
@@ -51,6 +51,6 @@ CRectF CGuiWindowBase::GetTitleBarRect()
 }
 void CGuiWindowBase::DoMouseUp()
 {
-    IsBeingMoved = False;
+    IsBeingMoved = false;
 }
 }

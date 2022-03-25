@@ -11,7 +11,7 @@ public:
 
     // Basic data
     int Size = -1;
-    bool IsCave = False;
+    bool IsCave = false;
     CPoint2F PlayerStartPosition = {-1, -1};
 
     // Map structure of tiles and mobs

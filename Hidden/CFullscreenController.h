@@ -17,7 +17,7 @@ public:
 
 private:
     IEngine& Engine;
-    bool FullscreenOn = True;
+    bool FullscreenOn = true;
 };
 
 }

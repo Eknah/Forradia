@@ -57,15 +57,15 @@ bool CGui::DoMouseDown(Uint8 mouseButton)
     for (auto& [key, window] : Windows)
     {
         auto clicked_in_window = window->DoMouseDown(mouseButton);
-        if (clicked_in_window) return True;
+        if (clicked_in_window) return true;
     }
     auto mouse_position_f = Utilities.GetMousePositionF();
     if (BoundsButtonInventory.ContainsPoint(mouse_position_f))
     {
         Windows.at("Inventory")->Visible = !Windows.at("Inventory")->Visible;
-        return True;
+        return true;
     }
-    return False;
+    return false;
 }
 void CGui::DoMouseUp()
 {
