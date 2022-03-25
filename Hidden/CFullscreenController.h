@@ -12,6 +12,7 @@ public:
     {
         FullscreenOn = !FullscreenOn;
         SDL_SetWindowFullscreen(Engine.GWindow, FullscreenOn ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+        SDL_SetWindowResizable(Engine.GWindow, FullscreenOn ? SDL_FALSE : SDL_TRUE);
     }
 
 private:
