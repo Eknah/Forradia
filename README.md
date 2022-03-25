@@ -59,11 +59,11 @@ To add
 
 ## Credits
 Inspirational repos:
-[ManaPlus](https://github.com/ManaPlus/ManaPlus)
+* [ManaPlus](https://github.com/ManaPlus/ManaPlus)
 
 Game inspiration sources:
-RPG World Online
-Wurm Online
+* RPG World Online
+* Wurm Online
 
 ## License
 MIT ©
