@@ -9,7 +9,7 @@ class CMaterial
 public:
     CMaterial() : Name(""), Ns(0.0f), Ni(0.0f), D(0.0f), Illum(0) {}
 
-    String Name;
+    std::string Name;
     CVector3 Ka;
     CVector3 Kd;
     CVector3 Ks;
@@ -17,11 +17,11 @@ public:
     float Ni;
     float D;
     int Illum;
-    String MapKa;
-    String MapKd;
-    String MapKs;
-    String MapNs;
-    String MapD;
-    String MapBump;
+    std::string MapKa;
+    std::string MapKd;
+    std::string MapKs;
+    std::string MapNs;
+    std::string MapD;
+    std::string MapBump;
 };
 }

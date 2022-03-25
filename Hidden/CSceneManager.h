@@ -17,7 +17,7 @@ public:
     {
         return Scenes.Scenes.at(CurrentScene);
     }
-    inline void SwitchToScene(String newScene)
+    inline void SwitchToScene(std::string newScene)
     {
         CurrentScene = GetId(newScene);
         Scenes.Scenes[CurrentScene]->Enter();

@@ -228,7 +228,7 @@ void CGameWorldRenderer::Render()
     glTexCoord2f(0, 1); glVertex3f(player_x3, player_y3, player_z3);
     glEnd();
 
-    auto mode_name_player = String("Player");
+    auto mode_name_player = std::string("Player");
     if (Engine.Player.IsWalking)
     {
         auto animIndex = (Ticks() % 300) / 75;

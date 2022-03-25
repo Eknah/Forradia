@@ -10,7 +10,7 @@ class CObjectsContent
 public:
 
     // Collection operations
-    void Add(String objectName, CObjectDescription description);
+    void Add(std::string objectName, CObjectDescription description);
 
     // Get info about an object
     bool IsMovable(int objectType);

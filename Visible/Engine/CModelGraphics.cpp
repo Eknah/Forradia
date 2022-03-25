@@ -3,7 +3,7 @@
 #include "../Hidden/CEngine.h"
 namespace Forradia
 {
-void CModelGraphics::DrawModel(String modelName, float x, float y, float z, float rotation, float alpha, float specificScaling, CVector3 rotVec)
+void CModelGraphics::DrawModel(std::string modelName, float x, float y, float z, float rotation, float alpha, float specificScaling, CVector3 rotVec)
 {
     DrawModel(GetId(modelName), x, y, z, rotation, alpha, specificScaling, rotVec);
 }

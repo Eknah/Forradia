@@ -14,7 +14,7 @@ public:
     {
         Images.clear();
         ImageNames.clear();
-        auto file_path = String(SDL_GetBasePath());
+        auto file_path = std::string(SDL_GetBasePath());
         file_path.append(ImagesPath);
         auto entries = std::filesystem::recursive_directory_iterator(file_path.c_str());
 
@@ -42,12 +42,12 @@ public:
     }
 
     UMap<int, GLuint> Images;
-    UMap<int, String> ImageNames;
+    UMap<int, std::string> ImageNames;
 
 private:
 
-    const String ImagesPath = "/Resources/Images";
-    const String ImageNameExtension = ".png";
+    const std::string ImagesPath = "/Resources/Images";
+    const std::string ImageNameExtension = ".png";
 };
 
 }

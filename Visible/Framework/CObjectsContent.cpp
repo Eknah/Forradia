@@ -4,7 +4,7 @@
 namespace Forradia
 {
 
-void CObjectsContent::Add(String objectName, CObjectDescription description)
+void CObjectsContent::Add(std::string objectName, CObjectDescription description)
 {
     ObjectDescriptions.insert({GetId(objectName), description});
 }

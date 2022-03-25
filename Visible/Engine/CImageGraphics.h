@@ -15,7 +15,7 @@ public:
     CImageGraphics(CEngine& engine) : Engine(engine) {}
 
     // Drawing operations
-    void DrawImage(String imageName, float X, float Y, float width, float height);
+    void DrawImage(std::string imageName, float X, float Y, float width, float height);
     void DrawImage(int imageNameHash, float X, float Y, float width, float height);
 
 private:

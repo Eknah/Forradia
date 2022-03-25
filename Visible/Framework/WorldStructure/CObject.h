@@ -22,7 +22,7 @@ public:
     float Scaling = 1.0f;
 
 private:
-    void TransformInto(String objectName);
+    void TransformInto(std::string objectName);
 
 };
 

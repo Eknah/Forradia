@@ -29,13 +29,6 @@ inline std::unique_ptr<T> MakeUPtr(Args && ... args)
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
 
-// Common types
-
-using String = std::string;
-
-template <typename T>
-using List = std::vector<T>;
-
 // Common used functions
 
 constexpr auto GetId = std::hash<std::string>{};

@@ -1,20 +1,21 @@
 #pragma once
 #include "CommonExternal.h"
+#include "../Hidden/Aliases.h"
 
 namespace Forradia
 {
 class CAlgorithmsStrings
 {
 public:
-    inline void Split(const String& in, std::vector<String>& out, String token)
+    inline void Split(const std::string& in, std::vector<std::string>& out, std::string token)
     {
         out.clear();
 
-        String temp;
+        std::string temp;
 
         for (auto i = 0; i < int(in.size()); i++)
         {
-            String test = in.substr(i, token.size());
+            std::string test = in.substr(i, token.size());
 
             if (test == token)
             {
@@ -41,33 +42,33 @@ public:
             }
         }
     }
-    inline String Tail(const String& in)
+    inline std::string Tail(const std::string& in)
     {
         size_t tokenStart = in.find_first_not_of(" \t");
         size_t spaceStart = in.find_first_of(" \t", tokenStart);
         size_t tailStart = in.find_first_not_of(" \t", spaceStart);
         size_t tailEnd = in.find_last_not_of(" \t");
-        if (tailStart != String::npos && tailEnd != String::npos)
+        if (tailStart != std::string::npos && tailEnd != std::string::npos)
         {
             return in.substr(tailStart, tailEnd - tailStart + 1);
         }
-        else if (tailStart != String::npos)
+        else if (tailStart != std::string::npos)
         {
             return in.substr(tailStart);
         }
         return "";
     }
-    inline String FirstToken(const std::string& in)
+    inline std::string FirstToken(const std::string& in)
     {
         if (!in.empty())
         {
             size_t token_start = in.find_first_not_of(" \t");
             size_t token_end = in.find_first_of(" \t", token_start);
-            if (token_start != String::npos && token_end != String::npos)
+            if (token_start != std::string::npos && token_end != std::string::npos)
             {
                 return in.substr(token_start, token_end - token_start);
             }
-            else if (token_start != String::npos)
+            else if (token_start != std::string::npos)
             {
                 return in.substr(token_start);
             }

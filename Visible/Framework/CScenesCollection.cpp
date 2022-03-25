@@ -3,7 +3,7 @@
 namespace Forradia
 {
 
-void CScenesCollection::Add(String sceneName, UPtr<CSceneBase> scene)
+void CScenesCollection::Add(std::string sceneName, UPtr<CSceneBase> scene)
 {
     Scenes.insert({ GetId(sceneName), std::move(scene) });
 }

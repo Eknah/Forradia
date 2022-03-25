@@ -6,11 +6,11 @@ namespace Forradia
 void CTextGraphics::Initialize()
 {
     TTF_Init();
-    auto font_path = String(SDL_GetBasePath());
+    auto font_path = std::string(SDL_GetBasePath());
     font_path.append(DefaultFontPath);
     DefaultFont = UPtrEx<TTF_Font, CSDL_Deleter>(TTF_OpenFont(font_path.c_str(), DefaultFontSize));
 }
-void CTextGraphics::DrawString(String message, SDL_Color color, float x, float y, bool centerAlign)
+void CTextGraphics::DrawString(std::string message, SDL_Color color, float x, float y, bool centerAlign)
 {
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();

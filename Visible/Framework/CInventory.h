@@ -10,7 +10,7 @@ class CInventory
 public:
 
     // Collection operations
-    void Add(int position, String objectName);
+    void Add(int position, std::string objectName);
 
     // Collection structure
     UMap<int, SPtr<CObject>> Objects;

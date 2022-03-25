@@ -45,16 +45,16 @@ public:
         StopEngine();
     }
 
-    inline void DrawImage(String imageName, float x, float y, float width, float height) override { ImageGraphics.DrawImage(imageName, x, y, width, height); }
+    inline void DrawImage(std::string imageName, float x, float y, float width, float height) override { ImageGraphics.DrawImage(imageName, x, y, width, height); }
     inline void DrawImage(int imageNameHash, float x, float y, float width, float height)  override { ImageGraphics.DrawImage(imageNameHash, x, y, width, height); }
 
     inline void FillRectangle(SDL_Color color, float x, float y, float width, float height) override { PaintGraphics.FillRectangle(color, x, y, width, height); }
     inline void DrawRectangle(SDL_Color color, float X, float Y, float width, float height) override { PaintGraphics.DrawRectangle(color, X, Y, width, height); }
     inline void DrawLine(SDL_Color color, float x0, float y0, float x1, float y1)  override { PaintGraphics.DrawLine(color, x0, y0, x1, y1); }
 
-    inline void DrawString(String message, SDL_Color color, float x, float y, bool centerAlign = false) override { TextGraphics.DrawString(message, color, x, y, centerAlign); }
+    inline void DrawString(std::string message, SDL_Color color, float x, float y, bool centerAlign = false) override { TextGraphics.DrawString(message, color, x, y, centerAlign); }
 
-    inline void DrawModel(String modelName, float x, float y, float z, float rotation = 0.0f, float alpha = 1.0f, float specificScaling = 1.0f, CVector3 rotVec = CVector3(0, 0, 0))  override { ModelGraphics.DrawModel(modelName, x, y, z, rotation, alpha, specificScaling, rotVec); }
+    inline void DrawModel(std::string modelName, float x, float y, float z, float rotation = 0.0f, float alpha = 1.0f, float specificScaling = 1.0f, CVector3 rotVec = CVector3(0, 0, 0))  override { ModelGraphics.DrawModel(modelName, x, y, z, rotation, alpha, specificScaling, rotVec); }
     inline void DrawModel(int modelNameHash, float x, float y, float z, float rotation = 0.0f, float alpha = 1.0f, float specificScaling = 1.0f, CVector3 rotVec = CVector3(0, 0, 0))  override { ModelGraphics.DrawModel(modelNameHash, x, y, z, rotation, alpha, specificScaling, rotVec); }
 
     inline CMapArea& GetCurrentMapArea()  override

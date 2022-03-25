@@ -12,7 +12,7 @@ void CObject::UseOn(std::unique_ptr<CObject>& other)
     if (ObjectType == GetId("ObjectWoodaxe") && (other->ObjectType == GetId("ObjectTree1") || other->ObjectType == GetId("ObjectTree2")))
         other->TransformInto("ObjectFelledTree");
 }
-void CObject::TransformInto(String objectName)
+void CObject::TransformInto(std::string objectName)
 {
     ObjectType = GetId(objectName);
 }

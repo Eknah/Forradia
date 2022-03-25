@@ -11,7 +11,7 @@ class CGuiWindowBase
 
 public:
 
-    CGuiWindowBase(CEngine& engine, String title, CRectF bounds) : Engine(engine), Title(title), Bounds(bounds) {}
+    CGuiWindowBase(CEngine& engine, std::string title, CRectF bounds) : Engine(engine), Title(title), Bounds(bounds) {}
 
     // Looped operations
     void Render();
@@ -48,7 +48,7 @@ private:
     CUtilities Utilities;
 
     // Basic data
-    String Title;
+    std::string Title;
     const float TitleBarHeight = 0.04f;
 
     // Dimensions

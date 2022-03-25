@@ -13,7 +13,7 @@ bool CTile::MovementBlocked()
     return false;
 }
 
-bool CTile::HasObjectOfType(String objectName)
+bool CTile::HasObjectOfType(std::string objectName)
 {
     for (auto& object : Objects)
         if (object->ObjectType == GetId(objectName))

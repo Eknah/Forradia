@@ -13,7 +13,7 @@ public:
     {
         Models.clear();
         ModelNames.clear();
-        auto file_path = String(SDL_GetBasePath());
+        auto file_path = std::string(SDL_GetBasePath());
         file_path.append(ModelsPath);
         auto entries = std::filesystem::recursive_directory_iterator(file_path.c_str());
         auto index = 0;
@@ -37,8 +37,8 @@ public:
 
 private:
 
-    const String ModelsPath = "/Resources/Models";
-    const String ModelNameExtension = ".obj";
+    const std::string ModelsPath = "/Resources/Models";
+    const std::string ModelNameExtension = ".obj";
 };
 
 }

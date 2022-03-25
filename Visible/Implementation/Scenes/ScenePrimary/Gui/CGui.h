@@ -17,13 +17,13 @@ public:
     bool DoMouseDown(Uint8 mouseButton);
     void DoMouseUp();
 
-    UMap<String, UPtr<CGuiWindowBase>> Windows;
+    UMap<std::string, UPtr<CGuiWindowBase>> Windows;
 
 private:
     CEngine& Engine;
 
     CGuiMinimap GuiMinimap;
-    List<String> TextBoxText = { "You have entered the world of Forradia" };
+    std::vector<std::string> TextBoxText = { "You have entered the world of Forradia" };
     const float TextBoxMargin = 0.005f;
 
     CUtilities Utilities;

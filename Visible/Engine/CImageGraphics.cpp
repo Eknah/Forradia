@@ -3,7 +3,7 @@
 #include "../Hidden/CEngine.h"
 namespace Forradia
 {
-void CImageGraphics::DrawImage(String imageName, float X, float Y, float width, float height)
+void CImageGraphics::DrawImage(std::string imageName, float X, float Y, float width, float height)
 {
     DrawImage(GetId(imageName), X, Y, width, height);
 }

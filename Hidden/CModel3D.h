@@ -18,7 +18,7 @@ public:
         LoadedMeshes.clear();
     }
 
-    inline bool LoadFile(String Path)
+    inline bool LoadFile(std::string Path)
     {
         if (Path.substr(Path.size() - 4, 4) != ".obj")
             return false;
@@ -35,9 +35,9 @@ public:
         std::vector<unsigned int> Indices;
         std::vector<std::string> MeshMatNames;
         bool listening = false;
-        String meshname;
+        std::string meshname;
         CMesh tempMesh;
-        String curline;
+        std::string curline;
         while (std::getline(file, curline))
         {
             if (FirstToken(curline) == "o" || FirstToken(curline) == "g" || curline[0] == 'g')
@@ -74,7 +74,7 @@ public:
             }
             if (FirstToken(curline) == "v")
             {
-                std::vector<String> spos;
+                std::vector<std::string> spos;
                 CVector3 vpos;
                 Split(Tail(curline), spos, " ");
                 vpos.X = std::stof(spos[0]);
@@ -84,7 +84,7 @@ public:
             }
             if (FirstToken(curline) == "vt")
             {
-                std::vector<String> stex;
+                std::vector<std::string> stex;
                 CVector2 vtex;
                 Split(Tail(curline), stex, " ");
                 vtex.X = std::stof(stex[0]);
@@ -93,7 +93,7 @@ public:
             }
             if (FirstToken(curline) == "vn")
             {
-                std::vector<String> snor;
+                std::vector<std::string> snor;
                 CVector3 vnor;
                 Split(Tail(curline), snor, " ");
                 vnor.X = std::stof(snor[0]);
@@ -144,9 +144,9 @@ public:
             if (FirstToken(curline) == "mtllib")
             {
 
-                std::vector<String> temp;
+                std::vector<std::string> temp;
                 Split(Path, temp, "/");
-                String pathtomat = Path.substr(0, Path.length() - 4) + ".mtl";
+                std::string pathtomat = Path.substr(0, Path.length() - 4) + ".mtl";
                 LoadMaterials(pathtomat);
             }
         }
@@ -159,7 +159,7 @@ public:
         file.close();
         for (int i = 0; i < MeshMatNames.size(); i++)
         {
-            String matname = MeshMatNames[i];
+            std::string matname = MeshMatNames[i];
             for (int j = 0; j < LoadedMaterials.size(); j++)
             {
                 if (LoadedMaterials[j].Name == matname)
@@ -182,9 +182,9 @@ public:
     std::vector<CMaterial> LoadedMaterials;
 
 private:
-    inline void GenVerticesFromRawOBJ(std::vector<CVertex>& oVerts, const std::vector<CVector3>& iPositions, const std::vector<CVector2>& iTCoords, const std::vector<CVector3>& iNormals, String icurline)
+    inline void GenVerticesFromRawOBJ(std::vector<CVertex>& oVerts, const std::vector<CVector3>& iPositions, const std::vector<CVector2>& iTCoords, const std::vector<CVector3>& iNormals, std::string icurline)
     {
-        std::vector<String> sface, svert;
+        std::vector<std::string> sface, svert;
         CVertex vVert;
         Split(Tail(icurline), sface, " ");
         bool noNormal = false;
@@ -413,7 +413,7 @@ private:
                 break;
         }
     }
-    inline bool LoadMaterials(String path)
+    inline bool LoadMaterials(std::string path)
     {
         if (path.substr(path.size() - 4, path.size()) != ".mtl")
             return false;
@@ -428,7 +428,7 @@ private:
 
         bool listening = false;
 
-        String curline;
+        std::string curline;
         while (std::getline(file, curline))
         {
             if (FirstToken(curline) == "newmtl")
@@ -465,7 +465,7 @@ private:
             }
             if (FirstToken(curline) == "Ka")
             {
-                std::vector<String> temp;
+                std::vector<std::string> temp;
                 Split(Tail(curline), temp, " ");
 
                 if (temp.size() != 3)
@@ -477,7 +477,7 @@ private:
             }
             if (FirstToken(curline) == "Kd")
             {
-                std::vector<String> temp;
+                std::vector<std::string> temp;
                 Split(Tail(curline), temp, " ");
 
                 if (temp.size() != 3)
@@ -489,7 +489,7 @@ private:
             }
             if (FirstToken(curline) == "Ks")
             {
-                std::vector<String> temp;
+                std::vector<std::string> temp;
                 Split(Tail(curline), temp, " ");
 
                 if (temp.size() != 3)
@@ -551,7 +551,7 @@ private:
     }
 
     template <class T>
-    inline const T& GetElement(const std::vector<T>& elements, String& index)
+    inline const T& GetElement(const std::vector<T>& elements, std::string& index)
     {
         auto idx = std::stoi(index);
 

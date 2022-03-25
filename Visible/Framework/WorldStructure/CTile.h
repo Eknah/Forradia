@@ -16,11 +16,11 @@ public:
 
     // Get info about tile
     bool MovementBlocked();
-    bool HasObjectOfType(String objectName);
+    bool HasObjectOfType(std::string objectName);
 
     // Core tile data structure
     int GroundType = 0;
-    List<UPtr<CObject>> Objects;
+    std::vector<UPtr<CObject>> Objects;
     int Elevation = 0;
     UPtr<CMob> mob = nullptr;
     int WarpToMap = -1;

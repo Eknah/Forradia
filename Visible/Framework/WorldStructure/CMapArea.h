@@ -19,8 +19,8 @@ public:
     CPoint2F PlayerStartPosition = {-1, -1};
 
     // Map structure of tiles and mobs
-    List<List<CTile>> Tiles;
-    List<std::reference_wrapper<UPtr<CMob>>> MobsMirror;
+    std::vector<std::vector<CTile>> Tiles;
+    std::vector<std::reference_wrapper<UPtr<CMob>>> MobsMirror;
 
 };
 

@@ -10,9 +10,9 @@ public:
     CMesh() {}
     CMesh(std::vector<CVertex>& vertices, std::vector<unsigned int>& indices) : Vertices(vertices), Indices(indices) {}
 
-    String MeshName;
-    List<CVertex> Vertices;
-    List<unsigned int> Indices;
+    std::string MeshName;
+    std::vector<CVertex> Vertices;
+    std::vector<unsigned int> Indices;
     CMaterial MeshMaterial;
 };
 }
