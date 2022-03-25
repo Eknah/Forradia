@@ -1,4 +1,7 @@
 # Forradia
+
+![Forradia!](/Data/Images/Icon.png "Forradia")
+
 This is a cross-platform indie game written in C++ which is utilizing OpenGL for 3D rendering.
 It loads 3D models in Wavefront .obj-format (and materials in .mtl-format) and textures and sprites in .png-format, as well as a font in ttf-format. The wild-nature-themed maps are fully random-generated, at least in the projects current status.
 
@@ -20,6 +23,7 @@ To add
 * CMake
 
 ## Features
+* Engine allows representation of world map as planets instead of regular flat maps
 * Open-source
 * Cross-platform
 * Only two dependencies: OpenGL and SDL2
@@ -60,10 +64,6 @@ To add
 ## Credits
 **Inspirational repos**
 * [ManaPlus](https://github.com/ManaPlus/ManaPlus)
-
-**Game inspiration sources**
-* RPG World Online
-* Wurm Online
 
 ## License
 MIT ©
