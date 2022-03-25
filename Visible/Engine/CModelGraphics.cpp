@@ -5,26 +5,17 @@
 namespace Forradia
 {
 
-void CModelGraphics::DrawModel(std::string modelName, float x, float y, float z, float rotation, float alpha, float specificScaling, CVector3 rotVec)
+void CModelGraphics::DrawModel(std::string modelName, float x, float y, float z, float rotation, float specificScaling)
 {
-    DrawModel(GetId(modelName), x, y, z, rotation, alpha, specificScaling, rotVec);
+    DrawModel(GetId(modelName), x, y, z, rotation, specificScaling);
 }
 
-void CModelGraphics::DrawModel(int modelNameHash, float x, float y, float z, float rotation, float alpha, float specificScaling, CVector3 rotVec)
+void CModelGraphics::DrawModel(int modelNameHash, float x, float y, float z, float rotation, float specificScaling)
 {
     glDisable(GL_TEXTURE_2D);
     glColor3f(1, 1, 1);
     glTranslatef(x, y, z);
     glRotatef(rotation, 0, 1.0f, 0.0);
-
-    if (rotVec.X != 0 || rotVec.Y != 0 || rotVec.Z != 0)
-    {
-        if (y <= 0)
-            glRotatef(135, std::abs(rotVec.X), std::abs(rotVec.Y), std::abs(rotVec.Z));
-        else
-            glRotatef(45, std::abs(rotVec.X), std::abs(rotVec.Y), std::abs(rotVec.Z));
-    }
-
     glTranslatef(-x, -y, -z);
     glBegin(GL_TRIANGLES);
 
@@ -33,7 +24,7 @@ void CModelGraphics::DrawModel(int modelNameHash, float x, float y, float z, flo
     for (auto& mesh : model.LoadedMeshes)
     {
         GLfloat matColorD[3] = { mesh.MeshMaterial.Kd.X, mesh.MeshMaterial.Kd.Y, mesh.MeshMaterial.Kd.Z };
-        glColor4f(matColorD[0], matColorD[1], matColorD[2], alpha);
+        glColor4f(matColorD[0], matColorD[1], matColorD[2], 1.0f);
 
         for (auto& vec : mesh.Vertices)
         {
@@ -49,15 +40,6 @@ void CModelGraphics::DrawModel(int modelNameHash, float x, float y, float z, flo
     glEnd();
     glDisable(GL_COLOR_MATERIAL);
     glTranslatef(x, y, z);
-
-    if (rotVec.X != 0 || rotVec.Y != 0 || rotVec.Z != 0)
-    {
-        if (y <= 0)
-            glRotatef(-135, std::abs(rotVec.X), std::abs(rotVec.Y), std::abs(rotVec.Z));
-        else
-            glRotatef(-45, std::abs(rotVec.X), std::abs(rotVec.Y), std::abs(rotVec.Z));
-    }
-
     glRotatef(-rotation, 0, 1.0f, 0.0);
     glTranslatef(-x, -y, -z);
 }

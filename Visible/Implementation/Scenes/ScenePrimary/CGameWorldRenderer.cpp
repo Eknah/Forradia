@@ -208,7 +208,7 @@ void CGameWorldRenderer::Render()
                 auto tile_object = object->ObjectType;
 
                 if (tile_object != 0)
-                    Engine.DrawModel(tile_object,tile_x_0 + Engine.TileSize / 2, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3)/4.0f, tile_z_0 - Engine.TileSize / 2, object->Rotation, 1.0f, object->Scaling);
+                    Engine.DrawModel(tile_object,tile_x_0 + Engine.TileSize / 2, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3)/4.0f, tile_z_0 - Engine.TileSize / 2, object->Rotation, object->Scaling);
             }
 
             if (Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob != nullptr)

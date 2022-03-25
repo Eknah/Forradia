@@ -20,8 +20,8 @@ public:
 
     virtual inline void DrawString(std::string message, SDL_Color color, float x, float y, bool centerAlign = false)  = 0;
 
-    virtual inline void DrawModel(std::string modelName, float x, float y, float z, float rotation = 0.0f, float alpha = 1.0f, float specificScaling = 1.0f, CVector3 rotVec = CVector3(0, 0, 0)) = 0;
-    virtual inline void DrawModel(int modelNameHash, float x, float y, float z, float rotation = 0.0f, float alpha = 1.0f, float specificScaling = 1.0f, CVector3 rotVec = CVector3(0, 0, 0)) = 0;
+    virtual inline void DrawModel(std::string modelName, float x, float y, float z, float rotation = 0.0f, float specificScaling = 1.0f) = 0;
+    virtual inline void DrawModel(int modelNameHash, float x, float y, float z, float rotation = 0.0f, float specificScaling = 1.0f) = 0;
 
     virtual inline CMapArea& GetCurrentMapArea() = 0;
 

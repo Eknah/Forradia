@@ -7,6 +7,7 @@ namespace Forradia
 
 class CFullscreenController
 {
+
 public:
 
     CFullscreenController(IEngine& engine) : Engine(engine) {}
