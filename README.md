@@ -65,9 +65,5 @@ To add
 **Inspirational repos**
 * [ManaPlus](https://github.com/ManaPlus/ManaPlus)
 
-**Game inspiration sources**
-* RPG World Online
-* Wurm Online
-
 ## License
 MIT ©
