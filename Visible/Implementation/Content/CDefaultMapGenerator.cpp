@@ -1,4 +1,4 @@
-#include "Pch.h"
+#include "Common.h"
 #include "CDefaultMapGenerator.h"
 #include "CQuestCaveMapGenerator.h"
 namespace Forradia

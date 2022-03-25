@@ -1,4 +1,4 @@
-#include "Pch.h"
+#include "Common.h"
 #include "CTextGraphics.h"
 #include "../Hidden/CEngine.h"
 namespace Forradia

@@ -1,4 +1,4 @@
-#include "Pch.h"
+#include "Common.h"
 #include "CPaintGraphics.h"
 namespace Forradia
 {

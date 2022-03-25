@@ -1,4 +1,4 @@
-#include "Pch.h"
+#include "Common.h"
 #include "CGameInstance.h"
 #include "../Hidden/CEngine.h"
 #include "Implementation/Scenes/CSceneGameStart.h"

@@ -1,4 +1,4 @@
-#include "Pch.h"
+#include "Common.h"
 #include "CMapArea.h"
 namespace Forradia
 {
