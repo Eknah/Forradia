@@ -1,4 +1,7 @@
 #pragma once
+#include "Framework/WorldStructure/CMapArea.h"
+#include "CVector3.h"
+#include <SDL2/SDL.h>
 
 namespace Forradia
 {

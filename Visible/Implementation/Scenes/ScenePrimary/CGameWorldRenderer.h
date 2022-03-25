@@ -1,4 +1,5 @@
 #pragma once
+#include "CommonExternal.h"
 #include "CCamera.h"
 #include "CPlanetTransformator.h"
 #include "CBackground.h"

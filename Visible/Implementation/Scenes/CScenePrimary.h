@@ -1,4 +1,5 @@
 #pragma once
+#include "CommonExternal.h"
 #include "ScenePrimary/CCamera.h"
 #include "ScenePrimary/Gui/CGui.h"
 #include "ScenePrimary/CMobsEngine.h"

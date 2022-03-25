@@ -1,6 +1,8 @@
 #pragma once
+#include "CommonExternal.h"
 #include "CUtilities.h"
 #include "IEngine.h"
+#include "ECursorTypes.h"
 namespace Forradia
 {
 

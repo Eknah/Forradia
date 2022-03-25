@@ -1,5 +1,6 @@
-#include "Common.h"
+#include "CommonExternal.h"
 #include "CWorldMap.h"
+#include "Framework/IMapGenerator.h"
 namespace Forradia
 {
 void CWorldMap::GenerateWorldMap(IMapGenerator& mapGenerator)

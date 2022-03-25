@@ -1,4 +1,6 @@
 #pragma once
+#include "Framework/WorldStructure/CWorldMap.h"
+#include "Framework/CObjectsContent.h"
 #include "CModel3D.h"
 #include "CSceneManager.h"
 #include "CImageLoader.h"

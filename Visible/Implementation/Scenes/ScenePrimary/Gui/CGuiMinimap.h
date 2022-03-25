@@ -1,4 +1,5 @@
 #pragma once
+#include "../Hidden/CEngine.h"
 #include "../Hidden/CUtilities.h"
 namespace Forradia
 {

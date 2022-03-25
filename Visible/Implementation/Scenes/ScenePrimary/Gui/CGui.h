@@ -1,6 +1,8 @@
 #pragma once
+#include "../Hidden/CEngine.h"
 #include "../Hidden/CUtilities.h"
 #include "CGuiMinimap.h"
+#include "Framework/CGuiWindowBase.h"
 namespace Forradia
 {
 

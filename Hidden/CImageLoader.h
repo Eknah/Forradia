@@ -1,4 +1,8 @@
 #pragma once
+#include "CommonExternal.h"
+#include "CSDL_Deleter.h"
+#include "Aliases.h"
+#include "Typedefs.h"
 namespace Forradia
 {
 
@@ -13,7 +17,7 @@ public:
         auto file_path = String(SDL_GetBasePath());
         file_path.append(ImagesPath);
         auto entries = std::filesystem::recursive_directory_iterator(file_path.c_str());
-        auto index = 0;
+
         for (auto& file : entries)
         {
             auto full_filename = file.path().filename().string();

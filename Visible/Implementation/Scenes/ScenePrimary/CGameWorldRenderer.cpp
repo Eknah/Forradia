@@ -1,4 +1,4 @@
-#include "Common.h"
+
 #include "CGameWorldRenderer.h"
 #include "../Hidden/CEngine.h"
 namespace Forradia

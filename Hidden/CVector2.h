@@ -1,4 +1,5 @@
 #pragma once
+#include "CVector2.h"
 namespace Forradia
 {
 

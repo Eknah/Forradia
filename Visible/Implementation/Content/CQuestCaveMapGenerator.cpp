@@ -1,4 +1,3 @@
-#include "Common.h"
 #include "CQuestCaveMapGenerator.h"
 namespace Forradia
 {

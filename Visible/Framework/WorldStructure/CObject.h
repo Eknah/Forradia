@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+#include <memory>
+#include "../Hidden/Aliases.h"
 namespace Forradia
 {
 

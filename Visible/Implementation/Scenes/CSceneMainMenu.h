@@ -1,5 +1,7 @@
 #pragma once
+#include "CommonExternal.h"
 #include "../Hidden/CUtilities.h"
+#include "Framework/CSceneBase.h"
 namespace Forradia
 {
 

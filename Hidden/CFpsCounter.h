@@ -1,5 +1,7 @@
 #pragma once
+#include "CommonExternal.h"
 #include "IEngine.h"
+#include "CPalette.h"
 namespace Forradia
 {
 

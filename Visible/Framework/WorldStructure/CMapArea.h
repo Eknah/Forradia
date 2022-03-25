@@ -1,4 +1,8 @@
 #pragma once
+#include "../Hidden/CPoint2F.h"
+#include "CMob.h"
+#include "../Hidden/Aliases.h"
+#include "CTile.h"
 namespace Forradia
 {
 

@@ -1,6 +1,9 @@
 #pragma once
+#include "CMapArea.h"
 namespace Forradia
 {
+
+class IMapGenerator;
 
 class CWorldMap
 {

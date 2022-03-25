@@ -1,4 +1,6 @@
 #pragma once
+#include "Aliases.h"
+#include "CVector3.h"
 namespace Forradia
 {
 class CMaterial

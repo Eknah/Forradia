@@ -1,4 +1,6 @@
 #pragma once
+#include "CVector2.h"
+#include "CVector3.h"
 namespace Forradia
 {
 class CVertex

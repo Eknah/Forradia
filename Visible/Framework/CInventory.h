@@ -1,5 +1,6 @@
 #pragma once
-
+#include "../Hidden/Aliases.h"
+#include "WorldStructure/CObject.h"
 namespace Forradia
 {
 

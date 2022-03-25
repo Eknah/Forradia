@@ -1,4 +1,4 @@
-#include "Common.h"
+#include "CommonExternal.h"
 #include "CScenePrimary.h"
 #include "../Hidden/CEngine.h"
 namespace Forradia

@@ -1,4 +1,6 @@
 #pragma once
+#include "CVertex.h"
+#include "CMaterial.h"
 namespace Forradia
 {
 class CMesh

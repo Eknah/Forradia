@@ -1,5 +1,7 @@
 #pragma once
+#include "CommonExternal.h"
 #include "CMath3D.h"
+#include "CMesh.h"
 #include "CAlgorithmsVectors.h"
 #include "CAlgorithmsStrings.h"
 namespace Forradia

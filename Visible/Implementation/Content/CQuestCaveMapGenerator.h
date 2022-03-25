@@ -1,4 +1,6 @@
 #pragma once
+#include "Framework/WorldStructure/CMapArea.h"
+#include "../Hidden/CPoint2.h"
 namespace Forradia
 {
 

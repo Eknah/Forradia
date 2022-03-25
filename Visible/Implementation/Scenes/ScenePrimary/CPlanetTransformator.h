@@ -1,4 +1,6 @@
 #pragma once
+#include "CommonExternal.h"
+#include "../Hidden/CEngine.h"
 namespace Forradia
 {
 

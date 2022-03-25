@@ -1,5 +1,5 @@
-#include "Common.h"
 #include "CInventory.h"
+#include "../Hidden/Aliases.h"
 namespace Forradia
 {
 void CInventory::Add(int position, String objectName)

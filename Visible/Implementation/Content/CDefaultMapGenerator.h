@@ -1,4 +1,6 @@
 #pragma once
+#include "Framework/IMapGenerator.h"
+#include "Framework/WorldStructure/CMapArea.h"
 namespace Forradia
 {
 

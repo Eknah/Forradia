@@ -1,4 +1,3 @@
-#include "Common.h"
 #include "CGuiMinimap.h"
 #include "../Hidden/CEngine.h"
 namespace Forradia

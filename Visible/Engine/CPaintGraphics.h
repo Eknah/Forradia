@@ -1,6 +1,10 @@
 #pragma once
+#include "CommonExternal.h"
+#include "../Hidden/CPoint2F.h"
 namespace Forradia
 {
+
+class CEngine;
 
 class CPaintGraphics
 {

@@ -1,4 +1,5 @@
 #pragma once
+#include "CommonExternal.h"
 #include "CModel3D.h"
 namespace Forradia
 {

@@ -1,4 +1,3 @@
-#include "Common.h"
 #include "CGui.h"
 #include "../Hidden/CEngine.h"
 #include "CGuiWindowInventory.h"

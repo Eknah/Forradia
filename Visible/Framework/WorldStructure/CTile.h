@@ -1,9 +1,11 @@
 #pragma once
+#include "../Hidden/Aliases.h"
+#include "CMob.h"
+#include "CObject.h"
 namespace Forradia
 {
 
 class CEngine;
-class CObject;
 
 class CTile
 {

@@ -1,4 +1,7 @@
 #pragma once
+#include <math.h>
+#include "CVector3.h"
+
 namespace Forradia
 {
 class CMath3D

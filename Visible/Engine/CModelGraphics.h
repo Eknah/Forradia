@@ -1,4 +1,7 @@
 #pragma once
+#include "CommonExternal.h"
+#include "../Hidden/Aliases.h"
+#include "../Hidden/CVector3.h"
 namespace Forradia
 {
 

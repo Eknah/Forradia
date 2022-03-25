@@ -1,4 +1,4 @@
-#include "Common.h"
+#include "CommonExternal.h"
 #include "CGameLoop.h"
 #include "../Hidden/CEngine.h"
 

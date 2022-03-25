@@ -1,4 +1,5 @@
 #pragma once
+#include "../Hidden/CPoint2F.h"
 namespace Forradia
 {
 

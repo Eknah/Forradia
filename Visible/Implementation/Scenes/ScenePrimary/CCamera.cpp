@@ -1,4 +1,4 @@
-#include "Common.h"
+
 #include "CCamera.h"
 #include "../Hidden/CEngine.h"
 namespace Forradia

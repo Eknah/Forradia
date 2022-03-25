@@ -1,7 +1,11 @@
 #pragma once
+#include "CommonExternal.h"
+#include "../Hidden/Aliases.h"
 
 namespace Forradia
 {
+
+class CEngine;
 
 class CImageGraphics
 {

@@ -1,4 +1,10 @@
 #pragma once
+#include <GL/glew.h>
+#include <SDL2/SDL.h>
+#include "CSize.h"
+#include "CPoint2.h"
+#include "CPoint2F.h"
+#include "CSizeF.h"
 namespace Forradia
 {
 

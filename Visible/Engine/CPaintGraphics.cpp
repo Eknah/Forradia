@@ -1,4 +1,4 @@
-#include "Common.h"
+#include "CommonExternal.h"
 #include "CPaintGraphics.h"
 namespace Forradia
 {

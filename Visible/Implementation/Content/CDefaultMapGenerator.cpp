@@ -1,6 +1,6 @@
-#include "Common.h"
 #include "CDefaultMapGenerator.h"
 #include "CQuestCaveMapGenerator.h"
+#include "Framework/WorldStructure/CWorldMap.h"
 namespace Forradia
 {
 void CDefaultMapGenerator::GenerateMapArea(CPoint2 worldMapCoord)

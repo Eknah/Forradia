@@ -1,4 +1,3 @@
-#include "Common.h"
 #include "CScenesCollection.h"
 
 namespace Forradia

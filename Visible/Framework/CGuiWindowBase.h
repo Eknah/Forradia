@@ -1,5 +1,7 @@
 #pragma once
 #include "../Hidden/CUtilities.h"
+#include "../Hidden/CEngine.h"
+#include "../Hidden/CRectF.h"
 
 namespace Forradia
 {

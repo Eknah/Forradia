@@ -7,7 +7,7 @@
  *
 **/
 
-#include "Common.h"
+#include "CommonExternal.h"
 #include "Implementation/CGameInstance.h"
 
 /**
