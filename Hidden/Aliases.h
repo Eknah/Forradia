@@ -31,7 +31,7 @@ inline std::unique_ptr<T> MakeUPtr(Args && ... args)
 
 // Common used functions
 
-constexpr auto GetId = std::hash<std::string>{};
+inline int GetId(std::string text) { return (int)std::hash<std::string>{}(text); }
 constexpr auto Ticks = &SDL_GetTicks;
 
 // Rarely used functions

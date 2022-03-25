@@ -4,9 +4,12 @@
 
 namespace Forradia
 {
+
 class CAlgorithmsStrings
 {
+
 public:
+
     inline void Split(const std::string& in, std::vector<std::string>& out, std::string token)
     {
         out.clear();
