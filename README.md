@@ -17,6 +17,7 @@ To add
 ## Tech/framework used
 **Built with**
 * Qt Creator
+* CMake
 
 ## Features
 * Open-source
