@@ -6,6 +6,8 @@ class CMouseHandler
 {
 
 public:
+
+    // Game loop related
     void ResetForNewFrame();
 
     float WheelAmount = 0;

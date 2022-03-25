@@ -12,12 +12,11 @@ public:
 
     void InitializeEngine();
 
+    // Drawing operations
     void DrawString(String message, SDL_Color color, float x, float y, bool centerAlign = false);
 
-protected:
-
-
 private:
+
     const String DefaultFontPath = "/Resources/Fonts/PixeloidSans.ttf";
     const int DefaultFontSize = 9;
     const float Scaling = 0.8f;

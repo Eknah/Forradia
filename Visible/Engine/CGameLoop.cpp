@@ -124,7 +124,12 @@ void CGameLoop::Render()
  * @brief Enables game updating and rendering during window resize.
  * @param Pointer to the Engine-object.
  * @param Pointer to triggering event information.
- * @return Not sure, probably success result.
+ * @return See detailed description.
+ *
+ * From the SDL documentation:
+ * If the filter function returns 1 when called, then the event will be added to the internal queue.
+ * If it returns 0, then the event will be dropped from the queue, but the internal state will still be updated.
+ * This allows selective filtering of dynamically arriving events.
  */
 int CGameLoop::EventFilter(void* pthis, const SDL_Event* event)
 {
