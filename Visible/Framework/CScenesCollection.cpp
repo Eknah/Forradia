@@ -6,7 +6,7 @@ namespace Forradia
 
     void CScenesCollection::Add(String sceneName, UPtr<CSceneBase> scene)
     {
-        Scenes.insert({ Hash(sceneName), std::move(scene) });
+        Scenes.insert({ GetId(sceneName), std::move(scene) });
     }
 
 }

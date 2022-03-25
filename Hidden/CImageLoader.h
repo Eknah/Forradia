@@ -31,7 +31,7 @@ namespace Forradia
 				glTexImage2D(GL_TEXTURE_2D, 0, mode, surface->w, surface->h, 0, mode, GL_UNSIGNED_BYTE, surface->pixels);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-				image_name_hash = Hash(filename);
+                                image_name_hash = GetId(filename);
 				Images[image_name_hash] = texture_id;
 				ImageNames[image_name_hash] = filename;
 			}

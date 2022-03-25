@@ -28,12 +28,12 @@ namespace Forradia
 		auto turn_left = keys.count(SDLK_q);
 		if (turn_right)
 		{
-			Camera.Update(Hash("Right"), Engine.MouseHandler.WheelAmount);
+			Camera.Update(GetId("Right"), Engine.MouseHandler.WheelAmount);
 			player.UpdateRotation(Camera.LookingAngle);
 		}
 		else if (turn_left)
 		{
-			Camera.Update(Hash("Left"), Engine.MouseHandler.WheelAmount);
+			Camera.Update(GetId("Left"), Engine.MouseHandler.WheelAmount);
 			player.UpdateRotation(Camera.LookingAngle);
 		}
 		else

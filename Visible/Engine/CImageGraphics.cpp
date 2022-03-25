@@ -5,7 +5,7 @@ namespace Forradia
 {
 	void CImageGraphics::DrawImage(String imageName, float X, float Y, float width, float height)
 	{
-		DrawImage(Hash(imageName), X, Y, width, height);
+		DrawImage(GetId(imageName), X, Y, width, height);
 	}
 	void CImageGraphics::DrawImage(int imageNameHash, float X, float Y, float width, float height)
 	{

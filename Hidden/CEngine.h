@@ -70,7 +70,7 @@ namespace Forradia
 		          CMouseHandler MouseHandler;
 		          CCustomCursor CustomCursor;
 		          CFullscreenController FullscreenController;
-		          UPtr<CWorldMap> WorldMap;
+                          UPtr<CWorldMap> WorldMap;
 		          CObjectsContent ObjectsContent;
 
 		         

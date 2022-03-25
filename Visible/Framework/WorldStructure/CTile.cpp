@@ -5,7 +5,7 @@ namespace Forradia
 {
 	bool CTile::MovementBlocked()
 	{
-		if (GroundType == Hash("GroundtypeWater"))
+		if (GroundType == GetId("GroundtypeWater"))
 			return True;
 		for (auto& object : Objects)
 			if (Engine.ObjectsContent.BlocksMovement(object->ObjectType))
@@ -16,7 +16,7 @@ namespace Forradia
 	bool CTile::HasObjectOfType(String objectName)
 	{
 		for (auto& object : Objects)
-			if (object->ObjectType == Hash(objectName))
+			if (object->ObjectType == GetId(objectName))
 				return True;
 		return False;
 	}

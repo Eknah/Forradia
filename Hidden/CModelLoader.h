@@ -25,7 +25,7 @@ namespace Forradia
 					continue;
 				Forradia::CModel3D loaded_model;
 				loaded_model.LoadFile(file.path().string());
-				image_name_hash = Hash(filename);
+                                image_name_hash = GetId(filename);
 				Models[image_name_hash] = loaded_model;
 				ModelNames[image_name_hash] = filename;
 			}

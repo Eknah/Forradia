@@ -7,9 +7,9 @@ namespace Forradia
 	{
 		if (Ticks() > TickLastUpdate + UpdateSpeed)
 		{
-			if (rotationDirection == Hash("Right"))
+			if (rotationDirection == GetId("Right"))
 				LookingAngle -= RotationAmount;
-			else if (rotationDirection == Hash("Left"))
+			else if (rotationDirection == GetId("Left"))
 				LookingAngle += RotationAmount;
 			TickLastUpdate = Ticks();
 		}

@@ -12,7 +12,7 @@ namespace Forradia
 	{
 		Engine.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
 		auto canvas_size = Utilities.GetCanvasSize();
-		glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[Hash("SceneForradiaLogo")]);
+		glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GetId("SceneForradiaLogo")]);
 		int width, height;
 		int miplevel = 0;
 		glGetTexLevelParameteriv(GL_TEXTURE_2D, miplevel, GL_TEXTURE_WIDTH, &width);

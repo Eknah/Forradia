@@ -18,7 +18,7 @@ namespace Forradia
 		}
 		inline void SwitchToScene(String newScene)
 		{
-			CurrentScene = Hash(newScene);
+                        CurrentScene = GetId(newScene);
                         Scenes.Scenes[CurrentScene]->Enter();
 		}
 

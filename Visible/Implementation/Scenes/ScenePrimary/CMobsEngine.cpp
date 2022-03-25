@@ -41,7 +41,7 @@ namespace Forradia
 				auto old_y_i = int(Engine.GetCurrentMapArea().Tiles[x][y].mob->Position.Y);
 				if (new_x_i >= 0 && new_y_i >= 0 && new_x_i < Engine.WorldMap->MapAreaSize && new_y_i < Engine.WorldMap->MapAreaSize)
 				{
-					if (Engine.GetCurrentMapArea().Tiles[new_x_i][new_y_i].GroundType != Hash("GroundtypeWater"))
+					if (Engine.GetCurrentMapArea().Tiles[new_x_i][new_y_i].GroundType != GetId("GroundtypeWater"))
 					{
 						if (Engine.GetCurrentMapArea().Tiles[new_x_i][new_y_i].mob == nullptr || (new_x_i == old_x_i && new_y_i == old_y_i))
 						{

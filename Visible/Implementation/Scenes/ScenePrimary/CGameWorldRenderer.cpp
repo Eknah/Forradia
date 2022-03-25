@@ -60,14 +60,14 @@ namespace Forradia
 				auto water_anim_index_1 = 0;
 				auto water_anim_index_2 = 0;
 				auto water_anim_index_3 = 0;
-				if (groundtype_index == Hash("GroundtypeWater"))
+				if (groundtype_index == GetId("GroundtypeWater"))
 				{
 					water_anim_index_0 = ((Ticks() * 3 + ((int)map_x * (int)map_y) * 10) % 3600) / 1200;
 					water_anim_index_1 = ((Ticks() * 3 + ((int)map_x * (int)(map_y - 1)) * 10) % 3600) / 1200;
 					water_anim_index_2 = ((Ticks() * 3 + ((int)(map_x + 1) * (int)(map_y - 1)) * 10) % 3600) / 1200;
 					water_anim_index_3 = ((Ticks() * 3 + ((int)(map_x + 1) * (int)map_y) * 10) % 3600) / 1200;
 					if (water_anim_index_0 > 0)
-						groundtype_index = Hash("GroundtypeWater" + std::to_string(water_anim_index_0));
+						groundtype_index = GetId("GroundtypeWater" + std::to_string(water_anim_index_0));
 				}
 				auto elev_0 = 0.0f;
 				auto elev_1 = 0.0f;
@@ -157,7 +157,7 @@ namespace Forradia
 				if (Engine.GetCurrentMapArea().Tiles[map_x][map_y].Objects.size() > 0)
 				{
 
-					glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[Hash("TileShadow")]);
+					glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GetId("TileShadow")]);
 					glBegin(GL_QUADS);
 					glColor3f(r, g, b);
 					glTexCoord2f(0, 0); glVertex3f(tile_x_0, tile_y_0, tile_z_0);
@@ -172,7 +172,7 @@ namespace Forradia
 				auto hovered_y = Camera.GetHoveredTile().Y;
 				if (hovered_x == (int)map_x && hovered_y == (int)map_y && Engine.CustomCursor.CursorType != ECursorTypes::Hidden)
 				{
-					glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[Hash("TileHovering")]);
+					glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GetId("TileHovering")]);
 					glBegin(GL_QUADS);
 					auto left = offset_x + x * Engine.TileSize;
 					auto top = offset_y + y * Engine.TileSize - Engine.TileSize;
@@ -197,7 +197,7 @@ namespace Forradia
 				{
 					auto sub_x_pos = (Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->Position.X - int(Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->Position.X)) * Engine.TileSize;
 					auto sub_y_pos = (Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->Position.Y - int(Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->Position.Y)) * Engine.TileSize;
-					Engine.DrawModel(Hash("MobRabbit"), tile_x_0 + sub_x_pos, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3) / 4.0f, tile_z_0 - Engine.TileSize + sub_y_pos, Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->FacingAngle);
+					Engine.DrawModel(GetId("MobRabbit"), tile_x_0 + sub_x_pos, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3) / 4.0f, tile_z_0 - Engine.TileSize + sub_y_pos, Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->FacingAngle);
 				}
 			}
 		}
@@ -219,7 +219,7 @@ namespace Forradia
 		auto player_z3 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize + Engine.TileSize;
 		
 		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[Hash("TileShadow")]);
+		glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GetId("TileShadow")]);
 		glBegin(GL_QUADS);
 		glColor3f(1, 1, 1);
 		glTexCoord2f(0, 0); glVertex3f(player_x0, player_y0, player_z0);

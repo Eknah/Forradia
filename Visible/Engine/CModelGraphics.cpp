@@ -5,7 +5,7 @@ namespace Forradia
 {
 	void CModelGraphics::DrawModel(String modelName, float x, float y, float z, float rotation, float alpha, float specificScaling, CVector3 rotVec)
 	{
-		DrawModel(Hash(modelName), x, y, z, rotation, alpha, specificScaling, rotVec);
+		DrawModel(GetId(modelName), x, y, z, rotation, alpha, specificScaling, rotVec);
 	}
 	void CModelGraphics::DrawModel(int modelNameHash, float x, float y, float z, float rotation, float alpha, float specificScaling, CVector3 rotVec)
 	{

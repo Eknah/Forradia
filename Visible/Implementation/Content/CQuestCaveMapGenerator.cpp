@@ -15,7 +15,7 @@ namespace Forradia
 	{
 		for (auto y = 0; y < mapArea.Size; y++)
 			for (auto x = 0; x < mapArea.Size; x++)
-				mapArea.Tiles[x][y].GroundType = Hash("GroundtypeCaveFloor");
+				mapArea.Tiles[x][y].GroundType = GetId("GroundtypeCaveFloor");
 	}
 	void CQuestCaveMapGenerator::GenerateCaveWalls(CMapArea& mapArea)
 	{

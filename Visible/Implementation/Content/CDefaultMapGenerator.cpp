@@ -29,7 +29,7 @@ namespace Forradia
 	{
 		for (auto y = 0; y < mapArea.Size; y++)
 			for (auto x = 0; x < mapArea.Size; x++)
-                mapArea.Tiles[x][y].GroundType = (int)Hash("GroundtypeGrass");
+                mapArea.Tiles[x][y].GroundType = (int)GetId("GroundtypeGrass");
 	}
 	void CDefaultMapGenerator::GeneratePlayerStartingPosition(CMapArea& mapArea)
 	{
@@ -91,7 +91,7 @@ namespace Forradia
 					if (mapArea.Tiles[x - 1][y + 1].Elevation > 0) continue;
 					if (mapArea.Tiles[x + 1][y - 1].Elevation > 0) continue;
 					if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
-                    mapArea.Tiles[x][y].GroundType = (int)Hash("GroundtypeWater");
+                    mapArea.Tiles[x][y].GroundType = (int)GetId("GroundtypeWater");
 				}
 			}
 		}
@@ -114,24 +114,24 @@ namespace Forradia
 						auto dy = y - y_center;
 						if (dx * dx + dy * dy >= r * r) continue;
 						if (x <= 0 || y <= 0 || x >= mapArea.Size - 1 || y >= mapArea.Size - 1) continue;
-                        if (mapArea.Tiles[x][y].GroundType == (int)Hash("GroundtypeWater")) continue;
+                        if (mapArea.Tiles[x][y].GroundType == (int)GetId("GroundtypeWater")) continue;
 						if (mapArea.Tiles[x][y].Elevation > 5) continue;
 
 						if (
 							(
-                                mapArea.Tiles[x - 1][y].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x - 1][y].GroundType != (int)Hash("GroundtypeSand") &&
-                                mapArea.Tiles[x - 1][y - 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x - 1][y - 1].GroundType != (int)Hash("GroundtypeSand") &&
-                                mapArea.Tiles[x][y - 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x][y - 1].GroundType != (int)Hash("GroundtypeSand") &&
-                                mapArea.Tiles[x + 1][y - 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x + 1][y - 1].GroundType != (int)Hash("GroundtypeSand") &&
-                                mapArea.Tiles[x + 1][y].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x + 1][y].GroundType != (int)Hash("GroundtypeSand") &&
-                                mapArea.Tiles[x + 1][y + 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x + 1][y + 1].GroundType != (int)Hash("GroundtypeSand") &&
-                                mapArea.Tiles[x][y + 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x][y + 1].GroundType != (int)Hash("GroundtypeSand") &&
-                                mapArea.Tiles[x - 1][y + 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x - 1][y + 1].GroundType != (int)Hash("GroundtypeSand")
+                                mapArea.Tiles[x - 1][y].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x - 1][y].GroundType != (int)GetId("GroundtypeSand") &&
+                                mapArea.Tiles[x - 1][y - 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x - 1][y - 1].GroundType != (int)GetId("GroundtypeSand") &&
+                                mapArea.Tiles[x][y - 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x][y - 1].GroundType != (int)GetId("GroundtypeSand") &&
+                                mapArea.Tiles[x + 1][y - 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x + 1][y - 1].GroundType != (int)GetId("GroundtypeSand") &&
+                                mapArea.Tiles[x + 1][y].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x + 1][y].GroundType != (int)GetId("GroundtypeSand") &&
+                                mapArea.Tiles[x + 1][y + 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x + 1][y + 1].GroundType != (int)GetId("GroundtypeSand") &&
+                                mapArea.Tiles[x][y + 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x][y + 1].GroundType != (int)GetId("GroundtypeSand") &&
+                                mapArea.Tiles[x - 1][y + 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x - 1][y + 1].GroundType != (int)GetId("GroundtypeSand")
 								)
 							)
 							continue;
 
-                        mapArea.Tiles[x][y].GroundType = (int)Hash("GroundtypeSand");
+                        mapArea.Tiles[x][y].GroundType = (int)GetId("GroundtypeSand");
 					}
 				}
 			}
@@ -155,23 +155,23 @@ namespace Forradia
 						auto dy = y - y_center;
 						if (dx * dx + dy * dy >= r * r) continue;
 						if (x <= 0 || y <= 0 || x >= mapArea.Size - 1 || y >= mapArea.Size - 1) continue;
-                        if (mapArea.Tiles[x][y].GroundType != (int)Hash("GroundtypeWater")) continue;
+                        if (mapArea.Tiles[x][y].GroundType != (int)GetId("GroundtypeWater")) continue;
 
 						if (
 							(
-                                mapArea.Tiles[x - 1][y].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x - 1][y].GroundType != (int)Hash("GroundtypeClay") &&
-                                mapArea.Tiles[x - 1][y - 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x - 1][y - 1].GroundType != Hash("GroundtypeClay") &&
-                                mapArea.Tiles[x][y - 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x][y - 1].GroundType != (int)Hash("Gr(int)oundtypeClay") &&
-                                mapArea.Tiles[x + 1][y - 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x + 1][y - 1].GroundType != (int)Hash("GroundtypeClay") &&
-                                mapArea.Tiles[x + 1][y].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x + 1][y].GroundType != (int)Hash("GroundtypeClay") &&
-                                mapArea.Tiles[x + 1][y + 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x + 1][y + 1].GroundType != (int)Hash("GroundtypeClay") &&
-                                mapArea.Tiles[x][y + 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x][y + 1].GroundType != (int)Hash("GroundtypeClay") &&
-                                mapArea.Tiles[x - 1][y + 1].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x - 1][y + 1].GroundType != (int)Hash("GroundtypeClay")
+                                mapArea.Tiles[x - 1][y].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x - 1][y].GroundType != (int)GetId("GroundtypeClay") &&
+                                mapArea.Tiles[x - 1][y - 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x - 1][y - 1].GroundType != GetId("GroundtypeClay") &&
+                                mapArea.Tiles[x][y - 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x][y - 1].GroundType != (int)GetId("Gr(int)oundtypeClay") &&
+                                mapArea.Tiles[x + 1][y - 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x + 1][y - 1].GroundType != (int)GetId("GroundtypeClay") &&
+                                mapArea.Tiles[x + 1][y].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x + 1][y].GroundType != (int)GetId("GroundtypeClay") &&
+                                mapArea.Tiles[x + 1][y + 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x + 1][y + 1].GroundType != (int)GetId("GroundtypeClay") &&
+                                mapArea.Tiles[x][y + 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x][y + 1].GroundType != (int)GetId("GroundtypeClay") &&
+                                mapArea.Tiles[x - 1][y + 1].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x - 1][y + 1].GroundType != (int)GetId("GroundtypeClay")
 								)
 							)
 							continue;
 
-                        mapArea.Tiles[x][y].GroundType = (int)Hash("GroundtypeClay");
+                        mapArea.Tiles[x][y].GroundType = (int)GetId("GroundtypeClay");
 					}
 				}
 			}
@@ -193,7 +193,7 @@ namespace Forradia
 					if (dx * dx + dy * dy >= r * r) continue;
 					if (x < 0 || y < 0 || x >= mapArea.Size || y >= mapArea.Size) continue;
 					if (mapArea.Tiles[x][y].Elevation < 4) continue;
-                    mapArea.Tiles[x][y].GroundType = (int)Hash("GroundtypeRock");
+                    mapArea.Tiles[x][y].GroundType = (int)GetId("GroundtypeRock");
 				}
 			}
 		}
@@ -210,7 +210,7 @@ namespace Forradia
 				if (x >= 0 && y >= 0 && x < mapArea.Size && y < mapArea.Size)
 				{
 					if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
-                    if (mapArea.Tiles[x][y].GroundType == (int)Hash("GroundtypeGrass"))
+                    if (mapArea.Tiles[x][y].GroundType == (int)GetId("GroundtypeGrass"))
 						if (mapArea.Tiles[x][y].Objects.size() == 0)
                             mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<CObject>("ObjectTree1"));
 				}
@@ -228,7 +228,7 @@ namespace Forradia
 				if (x >= 0 && y >= 0 && x < mapArea.Size && y < mapArea.Size)
 				{
 					if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
-                    if (mapArea.Tiles[x][y].GroundType == (int)Hash("GroundtypeGrass"))
+                    if (mapArea.Tiles[x][y].GroundType == (int)GetId("GroundtypeGrass"))
 						if (mapArea.Tiles[x][y].Objects.size() == 0)
                             mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<CObject>("ObjectTree2"));
 				}
@@ -244,7 +244,7 @@ namespace Forradia
 			auto x = rand() % mapArea.Size;
 			auto y = rand() % mapArea.Size;
 			if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
-            if (mapArea.Tiles[x][y].GroundType == (int)Hash("GroundtypeGrass"))
+            if (mapArea.Tiles[x][y].GroundType == (int)GetId("GroundtypeGrass"))
 				if (mapArea.Tiles[x][y].Objects.size() == 0)
                     mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<CObject>("ObjectBush1"));
 		}
@@ -256,7 +256,7 @@ namespace Forradia
 			auto x = rand() % mapArea.Size;
 			auto y = rand() % mapArea.Size;
 			if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
-            if (mapArea.Tiles[x][y].GroundType != (int)Hash("GroundtypeWater"))
+            if (mapArea.Tiles[x][y].GroundType != (int)GetId("GroundtypeWater"))
 				if (mapArea.Tiles[x][y].Objects.size() == 0)
                     mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<CObject>("ObjectSmallStone"));
 		}
@@ -268,7 +268,7 @@ namespace Forradia
 			auto x = rand() % mapArea.Size;
 			auto y = rand() % mapArea.Size;
 			if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
-            if (mapArea.Tiles[x][y].GroundType == (int)Hash("GroundtypeGrass"))
+            if (mapArea.Tiles[x][y].GroundType == (int)GetId("GroundtypeGrass"))
 				if (mapArea.Tiles[x][y].Objects.size() == 0)
                     mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<CObject>("ObjectTallGrass"));
 		}
@@ -279,7 +279,7 @@ namespace Forradia
 		{
 			auto x = rand() % mapArea.Size;
 			auto y = rand() % mapArea.Size;
-            if (mapArea.Tiles[x][y].GroundType == (int)Hash("GroundtypeGrass"))
+            if (mapArea.Tiles[x][y].GroundType == (int)GetId("GroundtypeGrass"))
 				if (mapArea.Tiles[x][y].Objects.size() == 0)
                     mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<CObject>("ObjectPinkFlower"));
 		}
@@ -298,7 +298,7 @@ namespace Forradia
 			auto x = rand() % mapArea.Size;
 			auto y = rand() % mapArea.Size;
 			if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
-            if (mapArea.Tiles[x][y].GroundType != (int)Hash("GroundtypeWater") && mapArea.Tiles[x][y].mob == nullptr)
+            if (mapArea.Tiles[x][y].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x][y].mob == nullptr)
 			{
 				mapArea.Tiles[x][y].mob = std::make_unique<CMob>(x, y);
 				mapArea.MobsMirror.push_back(std::ref(mapArea.Tiles[x][y].mob));
@@ -314,7 +314,7 @@ namespace Forradia
 			auto x = rand() % 94 + 3;
 			auto y = rand() % 94 + 3;
 			if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
-            if (mapArea.Tiles[x][y].GroundType != (int)Hash("GroundtypeWater"))
+            if (mapArea.Tiles[x][y].GroundType != (int)GetId("GroundtypeWater"))
 			{
                 mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<CObject>("ObjectQuestCaveEntrance"));
 				mapArea.Tiles[x][y].WarpToMap = worldMap->MapAreas.size();
