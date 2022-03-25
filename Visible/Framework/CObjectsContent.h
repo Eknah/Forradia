@@ -7,6 +7,7 @@ namespace Forradia
 
 	public:
 
+        void Add(String objectName, CObjectDescription description);
 		bool IsMovable(int objectType);
 		bool BlocksMovement(int objectType);
 		bool BlocksSight(int objectType);

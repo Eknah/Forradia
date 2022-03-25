@@ -2,6 +2,11 @@
 #include "CObjectsContent.h"
 namespace Forradia
 {
+
+    void CObjectsContent::Add(String objectName, CObjectDescription description)
+    {
+        ObjectDescriptions.insert({Hash(objectName), description});
+    }
 	bool CObjectsContent::IsMovable(int objectType)
 	{
 		if (ObjectDescriptions.count(objectType))

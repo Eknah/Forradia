@@ -7,43 +7,41 @@
 #include "Implementation/Content/CDefaultMapGenerator.h"
 namespace Forradia
 {
-	/**
-	 * @brief Sets up an engine instance, with game content input and then runs it.
-	*/
+
 	void CGameInstance::StartGame()
 	{
 		Randomize();
 
-		auto map_area_size = 150;
+        auto MapAreaSize = 150;
 
-		CEngine engine;
-		UMap<int, UPtr<CSceneBase>> scenes;
-		CObjectsContent objects_content;
+        CEngine Engine;
+        UMap<int, UPtr<CSceneBase>> Scenes;
+        CObjectsContent ObjectsContent;
 
-		objects_content.ObjectDescriptions.insert({ int(Hash("ObjectTree1")), {False, True, True} });
-		objects_content.ObjectDescriptions.insert({ int(Hash("ObjectTree2")), {False, True, True} });
-		objects_content.ObjectDescriptions.insert({ int(Hash("ObjectBoulder")), {False, True, True} });
-		objects_content.ObjectDescriptions.insert({ int(Hash("ObjectCaveWallBlock")), {False, True, False} });
+        ObjectsContent.Add("ObjectTree1", {False, True, True} );
+        ObjectsContent.Add("ObjectTree2", {False, True, True}  );
+        ObjectsContent.Add("ObjectBoulder", {False, True, True}  );
+        ObjectsContent.Add("ObjectCaveWallBlock", {False, True, False} );
 
-		scenes.insert({ Hash("SceneGameStart"), MakeUPtr<CSceneGameStart>(engine) });
-		scenes.insert({ Hash("SceneMainMenu"), MakeUPtr<CSceneMainMenu>(engine) });
-		scenes.insert({ Hash("ScenePrimary"),  MakeUPtr<CScenePrimary>(engine) });
+        Scenes.insert({ Hash("SceneGameStart"), MakeUPtr<CSceneGameStart>(Engine) });
+        Scenes.insert({ Hash("SceneMainMenu"), MakeUPtr<CSceneMainMenu>(Engine) });
+        Scenes.insert({ Hash("ScenePrimary"),  MakeUPtr<CScenePrimary>(Engine) });
 
-		auto world_map = MakeUPtr<CWorldMap>(map_area_size);
+        auto WorldMap = MakeUPtr<CWorldMap>(MapAreaSize );
 
-		CDefaultMapGenerator default_map_generator;
+        CDefaultMapGenerator DefaultMapGenerator;
 
 		for (auto worldy = 0; worldy < 3; worldy++)
 		{
 			for (auto worldx = 0; worldx < 3; worldx++)
 			{
-				default_map_generator.GenerateDefaultMapArea(engine, world_map, {worldx, worldy});
+                DefaultMapGenerator.GenerateDefaultMapArea(Engine, WorldMap, {worldx, worldy});
 			}
 		};
 
-		CInventory starting_inventory;
-        starting_inventory.Objects.insert({ 0, MakeUPtr<CObject>("ObjectWoodaxe") });
+        CInventory StartingInventory;
+        StartingInventory.Objects.insert({ 0, MakeUPtr<CObject>("ObjectWoodaxe") });
 
-		engine.Run(std::move(scenes), Hash("SceneGameStart"), std::move(world_map), starting_inventory, objects_content);
+        Engine.Run(std::move(Scenes), Hash("SceneGameStart"), std::move(WorldMap), StartingInventory, ObjectsContent);
 	}
 }

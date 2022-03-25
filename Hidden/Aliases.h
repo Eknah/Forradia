@@ -4,7 +4,7 @@
 namespace Forradia
 {
 
-	constexpr auto Hash = std::hash<std::string>{};
+        constexpr auto Hash = std::hash<std::string>{};
 	constexpr auto Ticks = &SDL_GetTicks;
 	constexpr auto True = true;
 	constexpr auto False = false;
