@@ -9,8 +9,6 @@ class CKeyboardHandler
 
 public:
 
-    CKeyboardHandler(CEngine& engine) : Engine(engine) {}
-
     inline void ResetForNewFrame()
     {
         KeysBeenFired.clear();
@@ -29,10 +27,6 @@ public:
 
     std::set<SDL_Keycode> KeysBeingPressed;
     std::set<SDL_Keycode> KeysBeenFired;
-
-private:
-
-    CEngine& Engine;
 
 };
 

@@ -26,7 +26,7 @@ class CEngine : public IEngine
 
 public:
 
-    CEngine() : GameLoop(*this), ModelGraphics(*this), TextGraphics(*this), FpsCounter(*this), CustomCursor(*this), ImageGraphics(*this), PaintGraphics(*this), FullscreenController(*this), KeyboardHandler(*this), Player(*this) {}
+    CEngine() : GameLoop(*this), ModelGraphics(*this), TextGraphics(*this), FpsCounter(*this), CustomCursor(*this), ImageGraphics(*this), PaintGraphics(*this), FullscreenController(*this), Player(*this) {}
 
     inline void Run(CScenesCollection scenes, int startScene, UPtr<CWorldMap> worldMap, CInventory startingInventory, CObjectsContent objectsContent)
     {
@@ -41,7 +41,7 @@ public:
         ImageLoader.LoadImages();
         TextGraphics.Initialize();
         GameLoop.Run();
-        StopEngine();
+        SDL_Quit();
     }
 
     inline void DrawImage(std::string imageName, float x, float y, float width, float height) override { ImageGraphics.DrawImage(imageName, x, y, width, height); }
@@ -76,9 +76,6 @@ public:
 
     float TileSize = 0.5f;
 
-    const int ScreenWidth = 640;
-    const int ScreenHeight = 480;
-
 private:
 
     inline void InitializeEngine()
@@ -87,20 +84,13 @@ private:
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-        GWindow = SDL_CreateWindow("Forradia", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_MAXIMIZED);
-        SDL_GL_CreateContext(GWindow);
+        Window = WindowPtr(SDL_CreateWindow("Forradia", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_MAXIMIZED), CSDL_Deleter());
+        SDL_GL_CreateContext(Window.get());
         SDL_GL_SetSwapInterval(1);
         SDL_ShowCursor(0);
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    }
-
-    inline void StopEngine()
-    {
-        SDL_DestroyWindow(GWindow);
-        GWindow = NULL;
-        SDL_Quit();
     }
 
     CImageGraphics ImageGraphics;

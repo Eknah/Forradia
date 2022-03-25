@@ -8,12 +8,11 @@ class CVector2
 {
 
 public:
-
-    CVector2() : X(0.0f), Y(0.0f) {}
+    CVector2() = default;
     CVector2(float x, float y) : X(x), Y(y) {}
 
-    float X;
-    float Y;
+    float X = 0.0f;
+    float Y = 0.0f;
 };
 
 }

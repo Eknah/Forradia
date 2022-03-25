@@ -2,6 +2,7 @@
 #include "CommonExternal.h"
 #include "../Hidden/CSDL_Deleter.h"
 #include "../Hidden/Aliases.h"
+#include "../Hidden/CUtilities.h"
 
 namespace Forradia
 {
@@ -23,11 +24,12 @@ public:
 private:
 
     const std::string DefaultFontPath = "/Resources/Fonts/PixeloidSans.ttf";
-    const int DefaultFontSize = 9;
+    const int DefaultFontSize = 20;
     const float Scaling = 0.8f;
 
     CEngine& Engine;
     std::unique_ptr<TTF_Font, CSDL_Deleter> DefaultFont;
+    CUtilities Utilities;
 
 };
 

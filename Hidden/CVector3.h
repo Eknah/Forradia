@@ -7,8 +7,7 @@ class CVector3
 {
 
 public:
-
-    CVector3() : X(0.0f), Y(0.0f), Z(0.0f) {}
+    CVector3() = default;
     CVector3(float x, float y, float z) : X(x), Y(y), Z(z) {}
 
     inline bool operator==(const CVector3& other) const
@@ -41,9 +40,9 @@ public:
         return CVector3(this->X / other, this->Y / other, this->Z / other);
     }
 
-    float X;
-    float Y;
-    float Z;
+    float X = 0.0f;
+    float Y = 0.0f;
+    float Z = 0.0f;
 
 };
 

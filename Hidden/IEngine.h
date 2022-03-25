@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/WorldStructure/CMapArea.h"
+#include "Typedefs.h"
 #include "CVector3.h"
 #include <SDL2/SDL.h>
 
@@ -25,8 +26,7 @@ public:
 
     virtual inline CMapArea& GetCurrentMapArea() = 0;
 
-
-    SDL_Window* GWindow = NULL;
+    WindowPtr Window;
 
 };
 

@@ -117,7 +117,7 @@ void CGameLoop::Render()
     Engine.FpsCounter.Render();
     Engine.CustomCursor.Render();
 
-    SDL_GL_SwapWindow(Engine.GWindow);
+    SDL_GL_SwapWindow(Engine.Window.get());
 }
 
 /**
@@ -147,7 +147,7 @@ int CGameLoop::EventFilter(void* pthis, const SDL_Event* event)
     Engine->FpsCounter.Render();
     Engine->CustomCursor.Render();
 
-    SDL_GL_SwapWindow(Engine->GWindow);
+    SDL_GL_SwapWindow(Engine->Window.get());
 
     return 1;
 }

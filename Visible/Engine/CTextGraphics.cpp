@@ -28,8 +28,9 @@ void CTextGraphics::DrawString(std::string message, SDL_Color color, float x, fl
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, s_font->w, s_font->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, s_font->pixels);
-    auto width = (float)s_font->w / Engine.ScreenWidth * Scaling;
-    auto height = (float)s_font->h / Engine.ScreenHeight * Scaling;
+    auto canvasSize = Utilities.GetCanvasSize();
+    auto width = (float)s_font->w / canvasSize.Width * Scaling;
+    auto height = (float)s_font->h / canvasSize.Height * Scaling;
     glColor4f(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f);
 
     if (centerAlign)

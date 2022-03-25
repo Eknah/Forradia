@@ -9,6 +9,7 @@ namespace Forradia
 
 class CImageLoader
 {
+
 public:
 
     inline void LoadImages()
@@ -58,6 +59,7 @@ private:
 
     const std::string ImagesPath = "/Resources/Images";
     const std::string ImageNameExtension = ".png";
+
 };
 
 }

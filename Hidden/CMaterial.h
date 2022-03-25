@@ -10,16 +10,14 @@ class CMaterial
 
 public:
 
-    CMaterial() : Name(""), Ns(0.0f), Ni(0.0f), D(0.0f), Illum(0) {}
-
     std::string Name;
     CVector3 Ka;
     CVector3 Kd;
     CVector3 Ks;
-    float Ns;
-    float Ni;
-    float D;
-    int Illum;
+    float Ns = 0.0f;
+    float Ni = 0.0f;
+    float D = 0.0f;
+    int Illum = 0;
     std::string MapKa;
     std::string MapKd;
     std::string MapKs;
