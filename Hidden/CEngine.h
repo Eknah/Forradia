@@ -76,6 +76,8 @@ public:
 
     float TileSize = 0.5f;
 
+    WindowPtr Window;
+
 private:
 
     inline void InitializeEngine()

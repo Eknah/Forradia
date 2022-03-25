@@ -7,6 +7,8 @@
 namespace Forradia
 {
 
+class CEngine;
+
 class CMapArea
 {
 

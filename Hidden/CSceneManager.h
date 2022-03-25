@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/CScenesCollection.h"
+#include "Framework/CSceneBase.h"
 
 namespace Forradia
 {
