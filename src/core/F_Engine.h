@@ -31,6 +31,7 @@ public:
     // ---- Ctor ----
     // Give needed references to this engine to all sub components
 
+
     F_Engine() :
         GameLoop(*this),
         ModelGraphics(*this),
@@ -40,7 +41,8 @@ public:
         ImageGraphics(*this),
         PaintGraphics(*this),
         FullscreenController(*this),
-        Player(*this)
+        Player(*this),
+        F_IEngine(KeyboardHandler)
     {}
 
     // Loads content and initializes all engine components
@@ -53,6 +55,7 @@ public:
         using std::move;
 
         InitializeGL();
+
 
         WorldMap        = move(WorldMap_);
         ObjectsContent  = ObjectsContent_;

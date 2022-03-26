@@ -4,6 +4,7 @@
 #include "Typedefs.h"
 #include "F_Vector3.h"
 #include <SDL2/SDL.h>
+#include "F_IKeyboardHandler.h"
 
 namespace Forradia
 {
@@ -14,6 +15,8 @@ class F_IEngine
 {
 
 public:
+
+    F_IEngine(F_IKeyboardHandler& KeyboardHandler_) : KeyboardHandler(KeyboardHandler_) {}
 
     virtual inline void DrawImage(std::string imageName, float x, float y, float width, float height)  = 0;
     virtual inline void DrawImage(int imageNameHash, float x, float y, float width, float height)  = 0;
@@ -30,6 +33,8 @@ public:
     virtual inline F_MapArea& GetCurrentMapArea() = 0;
 
     F_WindowPtr Window;
+
+    F_IKeyboardHandler&       KeyboardHandler;
 
 };
 

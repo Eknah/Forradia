@@ -13,6 +13,12 @@ public:
 
     F_FullscreenController(F_IEngine& engine) : Engine(engine) {}
 
+    inline void UpdateFullscreenToggling()
+    {
+        if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_RETURN) > 0 && Engine.KeyboardHandler.KeysBeingPressed.count(SDLK_LALT) > 0)
+            ToggleFullscreen();
+    }
+
     inline void ToggleFullscreen()
     {
         FullscreenOn = !FullscreenOn;

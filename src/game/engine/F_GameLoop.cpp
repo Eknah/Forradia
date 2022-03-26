@@ -44,8 +44,8 @@ void F_GameLoop::Run()
             case SDL_KEYDOWN:
             {
                 Engine.KeyboardHandler.DoKeyDown(event.key.keysym.sym);
-                if (event.key.keysym.sym == SDLK_RETURN && Engine.KeyboardHandler.KeysBeingPressed.count(SDLK_LALT) > 0)
-                    Engine.FullscreenController.ToggleFullscreen();
+
+                Engine.FullscreenController.UpdateFullscreenToggling();
 
                 break;
             }
@@ -60,6 +60,7 @@ void F_GameLoop::Run()
             case SDL_MOUSEBUTTONDOWN:
             {
                 Engine.SceneManager.GetCurrentScene()->DoMouseDown(event.button.button);
+
                 if (event.button.button == SDL_BUTTON_LEFT)
                     Engine.MouseHandler.LeftButtonDown = true;
                 else if (event.button.button == SDL_BUTTON_RIGHT)
@@ -71,6 +72,7 @@ void F_GameLoop::Run()
             case SDL_MOUSEBUTTONUP:
             {
                 Engine.SceneManager.GetCurrentScene()->DoMouseUp(event.button.button);
+
                 if (event.button.button == SDL_BUTTON_LEFT)
                     Engine.MouseHandler.LeftButtonDown = false;
                 else if (event.button.button == SDL_BUTTON_RIGHT)
@@ -102,7 +104,6 @@ void F_GameLoop::Update()
     Engine.FpsCounter.Update();
 }
 
-
 // Render currently displayed scene and general engine components.
 
 void F_GameLoop::Render()
@@ -127,14 +128,7 @@ int F_GameLoop::EventFilter(void* pthis, const SDL_Event* event)
     F_Engine* Engine = (F_Engine*)pthis;
 
     Engine->GameLoop.Update();
-
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    Engine->SceneManager.GetCurrentScene()->Render();
-    Engine->FpsCounter.Render();
-    Engine->CustomCursor.Render();
-
-    SDL_GL_SwapWindow(Engine->Window.get());
+    Engine->GameLoop.Render();
 
     return 1;
 }
