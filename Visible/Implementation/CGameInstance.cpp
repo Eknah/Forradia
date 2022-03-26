@@ -5,6 +5,7 @@
 #include "Implementation/Scenes/CSceneMainMenu.h"
 #include "Implementation/Scenes/CScenePrimary.h"
 #include "Implementation/Content/CDefaultMapGenerator.h"
+#include "Script/CScript.h"
 
 namespace Forradia
 {
@@ -21,6 +22,8 @@ namespace Forradia
  */
 void CGameInstance::StartGame()
 {
+    CScript Script;
+
     using std::move;
 
     Randomize();

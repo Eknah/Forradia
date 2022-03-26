@@ -2,11 +2,11 @@
 
 ![Forradia!](/Data/Images/Icon.png "Forradia")
 
-This is a cross-platform indie game written in C++ which is utilizing OpenGL for 3D rendering, based on tile-based maps for a retro feel.
-It loads 3D models in Wavefront .obj-format (and materials in .mtl-format) and textures and sprites in .png-format, as well as a font in ttf-format. The wild-nature-themed maps are fully random-generated, at least in the projects current status.
+Forradia is a cross-platform sandbox survival/RPG game written in C++ with OpenGL and SDL2.
+The engine loads 3D models in Wavefront-format as well as textures and fonts. The maps are tile-based and fully randomly generated.
 
 ## Motivation
-The purpose of this project is mainly that I use it to improve my knowledge and experience in this technical areas, and eventually find collaborators. It is also a way for me to have fun and express creativity!
+The purpose of this project is mainly that I use it to improve my knowledge and experience in this technical areas, and eventually find collaborators.
 
 ## Build status
 To add
@@ -25,13 +25,12 @@ To add
 
 ## Features
 * Engine allows representation of world map as planets instead of regular flat maps
-* Open-source
+* Open-source under MIT license
 * Cross-platform
 * Only two dependencies: OpenGL and SDL2
-* Excellent foundation for further development and application performance with C++ as primary language
 
 ## Code Example
-Implementation example of the game engine from the actual code:
+**Engine implementation example**
 
     ObjectsContent.Add("ObjectTree1", DescObjectTree1 );
     ObjectsContent.Add("ObjectTree2", DescObjectTree2 );
@@ -62,9 +61,5 @@ To add
 ## Contribute
 To add
 
-## Credits
-**Inspirational repos**
-* [ManaPlus](https://github.com/ManaPlus/ManaPlus)
-
 ## License
-MIT ©
+MIT
