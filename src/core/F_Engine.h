@@ -4,15 +4,14 @@
 #include "framework/world_structure/F_WorldMap.h"
 #include "framework/F_ObjectsContent.h"
 #include "F_Model3D.h"
-#include "F_ImageLoader.h"
 #include "F_FpsCounter.h"
 #include "F_KeyboardHandler.h"
 #include "F_ModelLoader.h"
 #include "F_CustomCursor.h"
 #include "F_FullscreenController.h"
 #include "F_GameLoop.h"
+#include "F_ImageGraphics.h"
 #include "F_IEngine.h"
-#include "../game/engine/F_ImageGraphics.h"
 #include "../game/engine/F_PaintGraphics.h"
 #include "../game/engine/F_TextGraphics.h"
 #include "../game/engine/F_ModelGraphics.h"
@@ -133,7 +132,6 @@ public:
     // ---- Public members ----
 
     F_Player                Player;
-    F_ImageLoader           ImageLoader;
     F_ModelLoader           ModelLoader;
     UPtr<F_WorldMap>        WorldMap;
     F_ObjectsContent        ObjectsContent;
