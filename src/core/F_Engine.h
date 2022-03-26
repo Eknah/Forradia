@@ -131,8 +131,6 @@ public:
 
     // ---- Public members ----
 
-    F_WindowPtr             Window;
-
     F_GameLoop              GameLoop;
     F_Player                Player;
     F_SceneManager          SceneManager;
@@ -168,15 +166,19 @@ private:
         (
             SDL_CreateWindow
             (
-                "Forradia",
+                Title.c_str(),
                 SDL_WINDOWPOS_UNDEFINED,
                 SDL_WINDOWPOS_UNDEFINED,
-                0,
-                0,
-                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_MAXIMIZED
+                DefaultWindowSize.Width,
+                DefaultWindowSize.Height,
+                SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP
             ),
             F_SDL_Deleter()
          );
+
+        FullscreenController.ToggleFullscreen();
+        SDL_SetWindowResizable(Window.get(), SDL_TRUE);
+        FullscreenController.ToggleFullscreen();
 
         SDL_GL_CreateContext    (Window.get());
         SDL_GL_SetSwapInterval  (1);
@@ -191,6 +193,9 @@ private:
     F_PaintGraphics         PaintGraphics;
     F_TextGraphics          TextGraphics;
     F_ModelGraphics         ModelGraphics;
+
+    const std::string       Title = "Forradia";
+    const F_Size            DefaultWindowSize = {800, 600};
 
 };
 

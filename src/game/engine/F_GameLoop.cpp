@@ -6,20 +6,16 @@
 namespace Forradia
 {
 
-/**
- * @brief Loops all game loop processes until user quits game.
- *
- * Before loop:
- * Initializes game loop variables.
- * Sets event filter to enable game update and rendering during window resize.
- *
- * In loop:
- * Resets all engine components that need to be reset for each frame.
- * Poll events and handle them.
- * Update game.
- * Render game.
- *
- */
+// Before loop:
+// Initializes game loop variables
+// Sets event filter to enable game update and rendering during window resize
+//
+// In loop:
+// Resets all engine components that need to be reset for each frame
+// Poll events and handle them
+// Update game
+// Render game
+
 void F_GameLoop::Run()
 {
     bool quit = false;
@@ -98,18 +94,17 @@ void F_GameLoop::Run()
     }
 }
 
-/**
- * @brief Update currently displayed scene and fps counter.
- */
+// Update currently displayed scene and fps counter.
+
 void F_GameLoop::Update()
 {
     Engine.SceneManager.GetCurrentScene()->Update();
     Engine.FpsCounter.Update();
 }
 
-/**
- * @brief Render currently displayed scene and general engine components.
- */
+
+// Render currently displayed scene and general engine components.
+
 void F_GameLoop::Render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -121,17 +116,8 @@ void F_GameLoop::Render()
     SDL_GL_SwapWindow(Engine.Window.get());
 }
 
-/**
- * @brief Enables game updating and rendering during window resize.
- * @param Pointer to the Engine-object.
- * @param Pointer to triggering event information.
- * @return See detailed description.
- *
- * From the SDL documentation:
- * If the filter function returns 1 when called, then the event will be added to the internal queue.
- * If it returns 0, then the event will be dropped from the queue, but the internal state will still be updated.
- * This allows selective filtering of dynamically arriving events.
- */
+// Enables game updating and rendering during window resize.
+
 int F_GameLoop::EventFilter(void* pthis, const SDL_Event* event)
 {
     auto do_handle_event = event->type == SDL_WINDOWEVENT && event->window.event == SDL_WINDOWEVENT_SIZE_CHANGED;
