@@ -31,7 +31,7 @@ public:
 
 
     F_Engine() :
-        GameLoop(*this),
+        GameLoopImplemented(*this),
         ModelGraphics(*this),
         TextGraphics(*this),
         FpsCounterImplemented(*this),
@@ -40,7 +40,7 @@ public:
         PaintGraphics(*this),
         FullscreenControllerImplemented(*this),
         Player(*this),
-        F_IEngine(KeyboardHandlerImplemented, CustomCursorImplemented, FpsCounterImplemented, FullscreenControllerImplemented)
+        F_IEngine(KeyboardHandlerImplemented, CustomCursorImplemented, FpsCounterImplemented, FullscreenControllerImplemented, GameLoopImplemented)
     {}
 
     // Loads content and initializes all engine components
@@ -132,7 +132,6 @@ public:
 
     // ---- Public members ----
 
-    F_GameLoop              GameLoop;
     F_Player                Player;
     F_ImageLoader           ImageLoader;
     F_ModelLoader           ModelLoader;
@@ -143,6 +142,7 @@ public:
     F_CustomCursor          CustomCursorImplemented;
     F_FpsCounter            FpsCounterImplemented;
     F_FullscreenController  FullscreenControllerImplemented;
+    F_GameLoop              GameLoopImplemented;
 
     float                   TileSize = 0.5f;
 

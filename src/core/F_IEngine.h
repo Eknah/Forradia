@@ -8,6 +8,7 @@
 #include "F_ICustomCursor.h"
 #include "F_IFpsCounter.h"
 #include "F_IFullscreenController.h"
+#include "F_IGameLoop.h"
 #include "F_MouseHandler.h"
 #include "F_SceneManager.h"
 
@@ -21,7 +22,7 @@ class F_IEngine
 
 public:
 
-    F_IEngine(F_IKeyboardHandler& KeyboardHandler_, F_ICustomCursor& CustomCursor_, F_IFpsCounter& FpsCounter_, F_IFullscreenController& FullscreenController_) : KeyboardHandler(KeyboardHandler_), CustomCursor(CustomCursor_), FpsCounter(FpsCounter_), FullscreenController(FullscreenController_) {}
+    F_IEngine(F_IKeyboardHandler& KeyboardHandler_, F_ICustomCursor& CustomCursor_, F_IFpsCounter& FpsCounter_, F_IFullscreenController& FullscreenController_, F_IGameLoop& GameLoop_) : KeyboardHandler(KeyboardHandler_), CustomCursor(CustomCursor_), FpsCounter(FpsCounter_), FullscreenController(FullscreenController_), GameLoop(GameLoop_) {}
 
     virtual inline void DrawImage(std::string imageName, float x, float y, float width, float height)  = 0;
     virtual inline void DrawImage(int imageNameHash, float x, float y, float width, float height)  = 0;
@@ -43,6 +44,7 @@ public:
     F_ICustomCursor&            CustomCursor;
     F_IFpsCounter&              FpsCounter;
     F_IFullscreenController&    FullscreenController;
+    F_IGameLoop&                 GameLoop;
 
     F_MouseHandler              MouseHandler;
     F_SceneManager              SceneManager;
