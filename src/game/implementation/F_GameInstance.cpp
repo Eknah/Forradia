@@ -9,12 +9,13 @@
 namespace Forradia
 {
 
-// Randomizes for the purpose of map generation and mobs movement.
-// Prepares custom object descriptions for some objects.
-// Prepares scenes.
-// Generates world map.
-// Prepares player starting inventory.
-// Runs engine with all the preparation data.
+// Randomizes for the purpose of map generation and mobs movement
+// Prepares custom object descriptions for some objects
+// Prepares scenes
+// Generates world map
+// Prepares player starting inventory
+// Runs engine with all the preparation data
+
 void F_GameInstance::StartGame()
 {
 

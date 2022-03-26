@@ -1,22 +1,18 @@
-/**
- *	    ______  _____  _____   _____   _____  ___    __   _____
- *     / ____/ / _  / /    /  /    /  /    / / _ \  / /  /    /
- *	  / /_    / // / /  ^_/  /  ^_/  /  ^ / / // / / /  /  ^ /
- *	 / __/   / // / / . \   / . \   / // / / // / / /  / // /
- *	/_/     /____/ /_/ \_\ /_/ \_\ /_//_/ /____/ /_/  /_//_/
- *
-**/
+// 	    ______  _____  _____   _____   _____  ___    __   _____
+//     / ____/ / _  / /    /  /    /  /    / / _ \  / /  /    /
+//    / /_    / // / /  ^_/  /  ^_/  /  ^ / / // / / /  /  ^ /
+// 	 / __/   / // / / . \   / . \   / // / / // / / /  / // /
+// 	/_/     /____/ /_/ \_\ /_/ \_\ /_//_/ /____/ /_/  /_//_/
+//
+
 #include "CommonExternal.h"
 #include "implementation/F_GameInstance.h"
 
-/**
- * @brief Creates game instance and runs it.
- * @return Success result.
- */
+// Creates game instance and runs it
+
 int main()
 {
-    Forradia::F_GameInstance GameInstance;
-    GameInstance.StartGame();
+    Forradia::F_GameInstance().StartGame();
 
     return 0;
 }
