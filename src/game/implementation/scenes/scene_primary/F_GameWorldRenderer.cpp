@@ -223,19 +223,19 @@ void F_GameWorldRenderer::Render()
     }
 
     auto player_x0 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize;
-    auto player_y0 = 0.0 + Engine.Player.PositionZ;
+    auto player_y0 = 0.0 + Engine.Player.ModuleJumping.PositionZ;
     auto player_z0 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize;
 
     auto player_x1 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize - Engine.TileSize;
-    auto player_y1 = 0.0 + Engine.Player.PositionZ;
+    auto player_y1 = 0.0 + Engine.Player.ModuleJumping.PositionZ;
     auto player_z1 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize;
 
     auto player_x2 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize - Engine.TileSize;
-    auto player_y2 = 0.0 + Engine.Player.PositionZ;
+    auto player_y2 = 0.0 + Engine.Player.ModuleJumping.PositionZ;
     auto player_z2 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize + Engine.TileSize;
 
     auto player_x3 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize;
-    auto player_y3 = 0.0 + Engine.Player.PositionZ;
+    auto player_y3 = 0.0 + Engine.Player.ModuleJumping.PositionZ;
     auto player_z3 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize + Engine.TileSize;
 
     glEnable(GL_TEXTURE_2D);
@@ -258,7 +258,7 @@ void F_GameWorldRenderer::Render()
             mode_name_player.append(std::to_string(animIndex));
     }
 
-    Engine.DrawModel(mode_name_player, offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize / 2 + sub_step_x * Engine.TileSize, 0.0 + Engine.Player.PositionZ, offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize / 2 + sub_step_y * Engine.TileSize, Engine.Player.FacingAngleRotated);
+    Engine.DrawModel(mode_name_player, offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize / 2 + sub_step_x * Engine.TileSize, 0.0 + Engine.Player.ModuleJumping.PositionZ, offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize / 2 + sub_step_y * Engine.TileSize, Engine.Player.FacingAngleRotated);
 
     glPopMatrix();
     glDisable(GL_DEPTH_TEST);

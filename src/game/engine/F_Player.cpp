@@ -6,12 +6,6 @@
 namespace Forradia
 {
 
-void F_Player::Jump()
-{
-    IsJumping = true;
-    TickStartJumping = Ticks();
-}
-
 void F_Player::ResetForNewFrame()
 {
     IsWalking = false;
@@ -154,21 +148,6 @@ void F_Player::UpdateKboardMovement(MovementInstruction instr)
 void F_Player::UpdateRotation(float newFacingAngle)
 {
     FacingAngle = newFacingAngle;
-}
-
-void F_Player::UpdateJumping()
-{
-    if (IsJumping)
-    {
-        auto delta_ticks = Ticks() - TickStartJumping;
-        auto jump_height = std::pow((-std::pow((delta_ticks - JumpDuration / 2.0f), 2.0f) + 250000.0f) / 250000.0f, 3.0f) * MaxJumpHeight;
-        PositionZ = jump_height;
-    }
-    if (Ticks() > TickStartJumping + JumpDuration)
-    {
-        PositionZ = 0.0f;
-        IsJumping = false;
-    }
 }
 
 }

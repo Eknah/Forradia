@@ -2,18 +2,24 @@
 #pragma once
 #include "framework/F_Inventory.h"
 #include "../core/F_Point2F.h"
+#include "framework/F_Actor.h"
+#include "framework/actor_modules/F_ActorModuleJumping.h"
+#include "../core/Aliases.h"
 
 namespace Forradia
 {
 
 class F_Engine;
 
-class F_Player
+class F_Player : public F_Actor
 {
 
 public:
 
-    F_Player(F_Engine& engine) : Engine(engine) {}
+    F_Player(F_Engine& engine) : Engine(engine)
+    {
+        AddModule("ModuleJumping", ModuleJumping);
+    }
 
     // Argument grouping for UpdateKboardMovement()
     class MovementInstruction
@@ -30,19 +36,19 @@ public:
     // Game loop related
     void ResetForNewFrame();
 
-    // Player actions
-    void Jump();
-
     // Update operations
     void UpdateDestMovement();
     void UpdateKboardMovement(MovementInstruction instr);
     void UpdateRotation(float newFacingAngle);
-    void UpdateJumping();
+
+    void UpdatePlayer()
+    {
+        Update();
+    }
 
     // Localization
     int CurrentMapArea = 0;
     F_Point2F Position = { 50.0f, 50.0f };
-    float PositionZ = 0.0f;
 
     // Movement
     int TickLastMove = 0;
@@ -59,17 +65,13 @@ public:
     float PlayerSize = 0.6f;
     bool IsWalking = false;
 
-    // Jumping
-    bool IsJumping = false;
-    int JumpDuration = 600;
-    int TickStartJumping = 0;
-    float MaxJumpHeight = 1.0f;
-
     // Composition
     F_Inventory Inventory;
 
     // Object usage
     SPtr<F_Object> ObjectBeingUsed = nullptr;
+
+    F_ActorModuleJumping ModuleJumping = F_ActorModuleJumping();
 
 
 private:

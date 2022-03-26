@@ -65,12 +65,13 @@ void F_ScenePrimary::Update()
     }
 
     if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_SPACE) > 0)
-        Engine.Player.Jump();
+        Engine.Player.ModuleJumping.Jump();
 
     if (Engine.MouseHandler.RightButtonDown)
         Engine.CustomCursor.CursorType = F_ECursorTypes::Hidden;
 
-    player.UpdateJumping();
+    //player.UpdateJumping();
+    player.UpdatePlayer();
     MobsEngine.Update();
     Gui.Update();
 }
