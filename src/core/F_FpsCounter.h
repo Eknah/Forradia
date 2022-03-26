@@ -1,20 +1,19 @@
 
 #pragma once
-#include "CommonExternal.h"
-#include "F_Palette.h"
 #include "../core/F_IEngine.h"
+#include "F_IFpsCounter.h"
 
 namespace Forradia
 {
 
-class F_FpsCounter
+class F_FpsCounter : public F_IFpsCounter
 {
 
 public:
 
-    F_FpsCounter(F_IEngine& engine) : Engine(engine) {}
+    F_FpsCounter(F_IEngine& engine) : F_IFpsCounter(engine) {}
 
-    inline void Update()
+    inline void Update() override
     {
         FramesCount++;
         if (Ticks() > TickLastUpdate + 1000)
@@ -25,25 +24,12 @@ public:
         }
     }
 
-    inline void Render()
+    inline void Render() override
     {
         Engine.FillRectangle(Palette.MediumBlueSemiTrans, Posx - Width / 2, Posy - Height / 2, Width, Height);
         Engine.DrawRectangle(Palette.WhiteSemiTrans, Posx - Width / 2, Posy - Height / 2, Width, Height);
         Engine.DrawString("Fps: " + std::to_string(Fps), Palette.White, Posx, Posy, true);
     }
-
-private:
-
-    F_IEngine& Engine;
-    F_Palette Palette;
-
-    int FramesCount = 0;
-    int Fps = 0;
-    int TickLastUpdate = 0;
-    const float Posx = 0.97f;
-    const float  Posy = 0.015f;
-    const float  Width = 0.07f;
-    const float  Height = 0.03f;
 
 };
 

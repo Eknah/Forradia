@@ -6,6 +6,7 @@
 #include <SDL2/SDL.h>
 #include "F_IKeyboardHandler.h"
 #include "F_ICustomCursor.h"
+#include "F_IFpsCounter.h"
 #include "F_MouseHandler.h"
 #include "F_SceneManager.h"
 
@@ -19,7 +20,7 @@ class F_IEngine
 
 public:
 
-    F_IEngine(F_IKeyboardHandler& KeyboardHandler_, F_ICustomCursor& CustomCursor_) : KeyboardHandler(KeyboardHandler_), CustomCursor(CustomCursor_) {}
+    F_IEngine(F_IKeyboardHandler& KeyboardHandler_, F_ICustomCursor& CustomCursor_, F_IFpsCounter& FpsCounter_) : KeyboardHandler(KeyboardHandler_), CustomCursor(CustomCursor_), FpsCounter(FpsCounter_) {}
 
     virtual inline void DrawImage(std::string imageName, float x, float y, float width, float height)  = 0;
     virtual inline void DrawImage(int imageNameHash, float x, float y, float width, float height)  = 0;
@@ -39,6 +40,7 @@ public:
 
     F_IKeyboardHandler&     KeyboardHandler;
     F_ICustomCursor&        CustomCursor;
+    F_IFpsCounter&          FpsCounter;
 
     F_MouseHandler          MouseHandler;
     F_SceneManager          SceneManager;
