@@ -16,8 +16,8 @@ public:
     F_ImageGraphics(F_Engine& engine) : Engine(engine) {}
 
     // Drawing operations
-    void DrawImage(std::string imageName, float X, float Y, float width, float height);
-    void DrawImage(int imageNameHash, float X, float Y, float width, float height);
+    void DrawImage(std::string ImageName, float X, float Y, float Width, float Height);
+    void DrawImage(int ImageNameId, float X, float Y, float Width, float Height);
 
 private:
 

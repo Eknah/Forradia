@@ -33,10 +33,7 @@ void F_GuiWindowInventory::RenderDerived()
                 if (Engine.Player.ObjectBeingUsed == Engine.Player.Inventory.Objects.at(i))
                     Engine.DrawImage("ObjectSelected", x_pos, y_pos, slot_size, slot_size * aspect_ratio);
                 else
-                    if (mouse_x_rel >= x_pos && mouse_y_rel >= y_pos && mouse_x_rel < x_pos + slot_size && mouse_y_rel < y_pos + slot_size * aspect_ratio)
-                    {
                     Engine.DrawImage("ObjectBackgroundShadow", x_pos, y_pos, slot_size, slot_size * aspect_ratio);
-                    }
 
                 Engine.DrawImage(Engine.Player.Inventory.Objects.at(i)->ObjectType, x_pos, y_pos, slot_size, slot_size * aspect_ratio);
             }
