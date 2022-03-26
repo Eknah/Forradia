@@ -38,9 +38,9 @@ public:
         CustomCursorImplemented(*this),
         ImageGraphics(*this),
         PaintGraphics(*this),
-        FullscreenController(*this),
+        FullscreenControllerImplemented(*this),
         Player(*this),
-        F_IEngine(KeyboardHandlerImplemented, CustomCursorImplemented, FpsCounterImplemented)
+        F_IEngine(KeyboardHandlerImplemented, CustomCursorImplemented, FpsCounterImplemented, FullscreenControllerImplemented)
     {}
 
     // Loads content and initializes all engine components
@@ -136,13 +136,13 @@ public:
     F_Player                Player;
     F_ImageLoader           ImageLoader;
     F_ModelLoader           ModelLoader;
-    F_FullscreenController  FullscreenController;
     UPtr<F_WorldMap>        WorldMap;
     F_ObjectsContent        ObjectsContent;
 
     F_KeyboardHandler       KeyboardHandlerImplemented;
     F_CustomCursor          CustomCursorImplemented;
     F_FpsCounter            FpsCounterImplemented;
+    F_FullscreenController  FullscreenControllerImplemented;
 
     float                   TileSize = 0.5f;
 
