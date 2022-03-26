@@ -11,8 +11,8 @@
 #include "F_GameLoop.h"
 #include "F_ImageGraphics.h"
 #include "F_ModelGraphics.h"
+#include "F_PaintGraphics.h"
 #include "F_IEngine.h"
-#include "../game/engine/F_PaintGraphics.h"
 #include "../game/engine/F_TextGraphics.h"
 #include "../game/engine/F_Player.h"
 
@@ -35,7 +35,6 @@ public:
         FpsCounterImplemented(*this),
         CustomCursorImplemented(*this),
         ImageGraphics(*this),
-        PaintGraphics(*this),
         FullscreenControllerImplemented(*this),
         Player(*this),
         F_IEngine(KeyboardHandlerImplemented, CustomCursorImplemented, FpsCounterImplemented, FullscreenControllerImplemented, GameLoopImplemented)
