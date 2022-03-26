@@ -17,7 +17,7 @@ void F_Camera::Update(int rotationDirection, float zoomChange)
     }
 
     ZoomAmount += zoomChange * ZoomMultiplier / 100.0f;
-    ZoomAmount = std::min(std::max(ZoomAmount, 0.5f), 1.0f);
+    ZoomAmount = std::min(std::max(ZoomAmount, 0.5f), 15.0f);
 
     //-----------Ray Casting----------------
 

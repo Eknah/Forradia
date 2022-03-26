@@ -28,7 +28,7 @@ private:
     F_Engine& Engine;
 
     F_GuiMinimap GuiMinimap;
-    std::vector<std::string> TextBoxText = { "You have entered the world of Forradia" };
+    std::vector<std::string> TextBoxText = { "You have entered the world" };
     const float TextBoxMargin = 0.005f;
 
     F_Utilities Utilities;
