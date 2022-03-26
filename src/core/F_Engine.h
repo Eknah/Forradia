@@ -4,7 +4,6 @@
 #include "framework/world_structure/F_WorldMap.h"
 #include "framework/F_ObjectsContent.h"
 #include "F_Model3D.h"
-#include "F_SceneManager.h"
 #include "F_ImageLoader.h"
 #include "F_FpsCounter.h"
 #include "F_KeyboardHandler.h"
@@ -36,12 +35,12 @@ public:
         ModelGraphics(*this),
         TextGraphics(*this),
         FpsCounter(*this),
-        CustomCursor(*this),
+        CustomCursorImplemented(*this),
         ImageGraphics(*this),
         PaintGraphics(*this),
         FullscreenController(*this),
         Player(*this),
-        F_IEngine(KeyboardHandler)
+        F_IEngine(KeyboardHandlerImplemented, CustomCursorImplemented)
     {}
 
     // Loads content and initializes all engine components
@@ -135,15 +134,15 @@ public:
 
     F_GameLoop              GameLoop;
     F_Player                Player;
-    F_SceneManager          SceneManager;
     F_ImageLoader           ImageLoader;
     F_FpsCounter            FpsCounter;
-    F_KeyboardHandler       KeyboardHandler;
     F_ModelLoader           ModelLoader;
-    F_CustomCursor          CustomCursor;
     F_FullscreenController  FullscreenController;
     UPtr<F_WorldMap>        WorldMap;
     F_ObjectsContent        ObjectsContent;
+
+    F_KeyboardHandler       KeyboardHandlerImplemented;
+    F_CustomCursor          CustomCursorImplemented;
 
     float                   TileSize = 0.5f;
 

@@ -27,9 +27,6 @@ public:
         KeysBeingPressed.erase(key);
     }
 
-//    std::set<SDL_Keycode> KeysBeingPressed;
-//    std::set<SDL_Keycode> KeysBeenFired;
-
 };
 
 }

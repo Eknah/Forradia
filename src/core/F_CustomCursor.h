@@ -1,31 +1,30 @@
 
 #pragma once
 #include "CommonExternal.h"
-#include "F_Utilities.h"
 #include "F_IEngine.h"
-#include "F_ECursorTypes.h"
+#include "F_ICustomCursor.h"
 
 namespace Forradia
 {
 
-class F_CustomCursor
+class F_CustomCursor : public F_ICustomCursor
 {
 
 public:
 
-    F_CustomCursor(F_IEngine& engine) : Engine(engine) {}
+    F_CustomCursor(F_IEngine& engine) : F_ICustomCursor(engine) {}
 
-    inline void Initialize()
+    inline void Initialize() override
     {
         SDL_ShowCursor(0);
     }
 
-    inline void ResetForNewFrame()
+    inline void ResetForNewFrame() override
     {
         CursorType = F_ECursorTypes::Default;
     }
 
-    inline void Render()
+    inline void Render() override
     {
         auto mouse_pos_f = Utilities.GetMousePositionF();
         auto cursor_size_f = Utilities.ConvertToFloat(CursorSize);
@@ -48,14 +47,6 @@ public:
 
     }
 
-    F_ECursorTypes CursorType = F_ECursorTypes::Default;
-
-private:
-
-    F_IEngine& Engine;
-    F_Utilities Utilities;
-
-    int CursorSize = 20;
 };
 
 }
