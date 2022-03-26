@@ -1,3 +1,4 @@
+
 #pragma once
 #include "framework/world_structure/F_MapArea.h"
 #include "Typedefs.h"
@@ -28,7 +29,7 @@ public:
 
     virtual inline F_MapArea& GetCurrentMapArea() = 0;
 
-    WindowPtr Window;
+    F_WindowPtr Window;
 
 };
 

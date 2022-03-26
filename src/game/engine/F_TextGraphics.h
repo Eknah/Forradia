@@ -1,3 +1,4 @@
+
 #pragma once
 #include "CommonExternal.h"
 #include "../core/F_SDL_Deleter.h"

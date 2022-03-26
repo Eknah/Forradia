@@ -1,3 +1,4 @@
+
 #pragma once
 #include "framework/world_structure/F_MapArea.h"
 #include "../core/F_Point2.h"

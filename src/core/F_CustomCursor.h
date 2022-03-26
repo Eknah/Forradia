@@ -1,3 +1,4 @@
+
 #pragma once
 #include "CommonExternal.h"
 #include "F_Utilities.h"
@@ -14,10 +15,16 @@ public:
 
     F_CustomCursor(F_IEngine& engine) : Engine(engine) {}
 
+    inline void Initialize()
+    {
+        SDL_ShowCursor(0);
+    }
+
     inline void ResetForNewFrame()
     {
         CursorType = F_ECursorTypes::Default;
     }
+
     inline void Render()
     {
         auto mouse_pos_f = Utilities.GetMousePositionF();

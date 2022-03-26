@@ -1,3 +1,4 @@
+
 #pragma once
 #include "framework/F_IMapGenerator.h"
 #include "framework/world_structure/F_MapArea.h"

@@ -1,3 +1,4 @@
+
 #pragma once
 #include "framework/F_Inventory.h"
 #include "../core/F_Point2F.h"

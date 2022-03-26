@@ -1,3 +1,4 @@
+
 #pragma once
 #include "CommonExternal.h"
 #include "F_SDL_Deleter.h"
@@ -30,7 +31,7 @@ public:
 
             if (file.is_directory() || ImageNameExtension != full_filename.substr(full_filename.length() - ImageNameExtension.length(), ImageNameExtension.length())) continue;
 
-            auto surface = SurfacePtr(IMG_Load(file.path().string().c_str()), F_SDL_Deleter());
+            auto surface = F_SurfacePtr(IMG_Load(file.path().string().c_str()), F_SDL_Deleter());
             auto texture_id = GLuint(Images.size());
 
             glGenTextures(1, &texture_id);
