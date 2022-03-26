@@ -13,7 +13,6 @@
 #include "F_ModelGraphics.h"
 #include "F_PaintGraphics.h"
 #include "F_IEngine.h"
-#include "../game/engine/F_TextGraphics.h"
 #include "../game/engine/F_Player.h"
 
 namespace Forradia
@@ -31,7 +30,6 @@ public:
     F_Engine() :
         GameLoopImplemented(*this),
         ModelGraphics(*this),
-        TextGraphics(*this),
         FpsCounterImplemented(*this),
         CustomCursorImplemented(*this),
         ImageGraphics(*this),
@@ -186,7 +184,6 @@ private:
 
     F_ImageGraphics         ImageGraphics;
     F_PaintGraphics         PaintGraphics;
-    F_TextGraphics          TextGraphics;
     F_ModelGraphics         ModelGraphics;
 
     const std::string       Title = "Forradia";

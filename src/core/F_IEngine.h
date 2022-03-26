@@ -13,6 +13,7 @@
 #include "F_SceneManager.h"
 #include "F_ImageLoader.h"
 #include "F_ModelLoader.h"
+#include "F_TextGraphics.h"
 
 namespace Forradia
 {
@@ -46,12 +47,13 @@ public:
     F_ICustomCursor&            CustomCursor;
     F_IFpsCounter&              FpsCounter;
     F_IFullscreenController&    FullscreenController;
-    F_IGameLoop&                 GameLoop;
+    F_IGameLoop&                GameLoop;
 
     F_MouseHandler              MouseHandler;
     F_SceneManager              SceneManager;
     F_ImageLoader               ImageLoader;
     F_ModelLoader               ModelLoader;
+    F_TextGraphics              TextGraphics;
 
 };
 

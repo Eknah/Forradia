@@ -23,7 +23,7 @@ public:
 
     inline void DrawImage(int ImageNameId, float X, float Y, float Width, float Height)
     {
-
+        glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
 
         glOrtho(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f);
