@@ -50,15 +50,17 @@ public:
     inline void Run
     (F_ScenesCollection Scenes_, int StartScene_, UPtr<F_WorldMap> WorldMap_, F_Inventory StartingInventory_, F_ObjectsContent ObjectsContent_)
     {
+        using std::move;
+
         InitializeGL();
 
-        WorldMap        = std::move(WorldMap_);
+        WorldMap        = move(WorldMap_);
         ObjectsContent  = ObjectsContent_;
 
         Player          .CurrentMapArea = 0;
-        Player          .Position = { GetCurrentMapArea().PlayerStartPosition.X, GetCurrentMapArea().PlayerStartPosition.Y };
+        Player          .Position = GetCurrentMapArea().PlayerStartPosition;
         Player          .Inventory = StartingInventory_;
-        SceneManager    .Initialize(std::move(Scenes_), StartScene_);
+        SceneManager    .Initialize(move(Scenes_), StartScene_);
         ModelLoader     .LoadModels();
         ImageLoader     .LoadImages();
         TextGraphics    .Initialize();
