@@ -39,6 +39,7 @@ void F_GameInstance::StartGame()
 
     WorldMap            ->GenerateWorldMap(DefaultMapGenerator);
     StartingInventory   .Add(0, "ObjectWoodaxe");
+    StartingInventory   .Add(1, "ObjectSaw");
 
     DescObjectTree1     .BlocksMovement  = true;
     DescObjectTree1     .BlocksSight     = true;

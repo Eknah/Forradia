@@ -15,6 +15,9 @@ void F_Object::UseOn(std::unique_ptr<F_Object>& other)
 {
     if (ObjectType == GetId("ObjectWoodaxe") && (other->ObjectType == GetId("ObjectTree1") || other->ObjectType == GetId("ObjectTree2")))
         other->TransformInto("ObjectFelledTree");
+
+    if (ObjectType == GetId("ObjectSaw") && other->ObjectType == GetId("ObjectFelledTree"))
+        other->TransformInto("ObjectWoodplank");
 }
 
 void F_Object::TransformInto(std::string objectName)
