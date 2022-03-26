@@ -14,7 +14,6 @@
 #include "F_IEngine.h"
 #include "../game/engine/F_ImageGraphics.h"
 #include "../game/engine/F_PaintGraphics.h"
-#include "../game/engine/F_MouseHandler.h"
 #include "../game/engine/F_TextGraphics.h"
 #include "../game/engine/F_ModelGraphics.h"
 #include "../game/engine/F_GameLoop.h"
@@ -141,7 +140,6 @@ public:
     F_FpsCounter            FpsCounter;
     F_KeyboardHandler       KeyboardHandler;
     F_ModelLoader           ModelLoader;
-    F_MouseHandler          MouseHandler;
     F_CustomCursor          CustomCursor;
     F_FullscreenController  FullscreenController;
     UPtr<F_WorldMap>        WorldMap;

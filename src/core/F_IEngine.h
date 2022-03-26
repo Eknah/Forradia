@@ -5,6 +5,7 @@
 #include "F_Vector3.h"
 #include <SDL2/SDL.h>
 #include "F_IKeyboardHandler.h"
+#include "F_MouseHandler.h"
 
 namespace Forradia
 {
@@ -35,6 +36,7 @@ public:
     F_WindowPtr Window;
 
     F_IKeyboardHandler&       KeyboardHandler;
+    F_MouseHandler          MouseHandler;
 
 };
 
