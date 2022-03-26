@@ -12,6 +12,7 @@
 #include "F_MouseHandler.h"
 #include "F_SceneManager.h"
 #include "F_ImageLoader.h"
+#include "F_ModelLoader.h"
 
 namespace Forradia
 {
@@ -50,6 +51,7 @@ public:
     F_MouseHandler              MouseHandler;
     F_SceneManager              SceneManager;
     F_ImageLoader               ImageLoader;
+    F_ModelLoader               ModelLoader;
 
 };
 
