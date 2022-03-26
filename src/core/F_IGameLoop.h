@@ -5,24 +5,24 @@
 namespace Forradia
 {
 
-class F_Engine;
+class F_IEngine;
 
     class F_IGameLoop
     {
 
     public:
 
-        F_IGameLoop(F_Engine& engine) : Engine(engine) {}
+        F_IGameLoop(F_IEngine& engine) : Engine(engine) {}
 
-        virtual void Run() = 0;
+        inline virtual void Run() = 0;
 
         // Looped functions
-        virtual void Update() = 0;
-        virtual void Render() = 0;
+        inline virtual void Update() = 0;
+        inline virtual void Render() = 0;
 
     protected:
 
-        F_Engine& Engine;
+        F_IEngine& Engine;
 
     };
 

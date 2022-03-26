@@ -10,12 +10,12 @@
 #include "F_ModelLoader.h"
 #include "F_CustomCursor.h"
 #include "F_FullscreenController.h"
+#include "F_GameLoop.h"
 #include "F_IEngine.h"
 #include "../game/engine/F_ImageGraphics.h"
 #include "../game/engine/F_PaintGraphics.h"
 #include "../game/engine/F_TextGraphics.h"
 #include "../game/engine/F_ModelGraphics.h"
-#include "../game/engine/F_GameLoop.h"
 #include "../game/engine/F_Player.h"
 
 namespace Forradia
