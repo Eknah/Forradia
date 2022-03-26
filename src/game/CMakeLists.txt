@@ -14,6 +14,7 @@ file(GLOB_RECURSE all_files
 )
 add_executable(
     Forradia
+    ../Main.cpp
     ${all_files}
 )
 
