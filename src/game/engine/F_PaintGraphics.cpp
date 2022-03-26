@@ -5,61 +5,57 @@
 namespace Forradia
 {
 
-void F_PaintGraphics::FillRectangle(SDL_Color color, float X, float Y, float width, float height)
+void F_PaintGraphics::FillRectangle(SDL_Color Color, float X, float Y, float Width, float Height)
 {
     std::vector<F_Point2F> vertices =
     {
         {X,Y},
-        {X, Y + height},
-        {X + width, Y + height},
-        {X + width, Y}
+        {X, Y + Height},
+        {X + Width, Y + Height},
+        {X + Width, Y}
     };
 
-    RenderShape(GL_QUADS, vertices, color);
+    RenderShape(GL_QUADS, vertices, Color);
 }
 
-void F_PaintGraphics::DrawRectangle(SDL_Color color, float X, float Y, float width, float height)
+void F_PaintGraphics::DrawRectangle(SDL_Color Color, float X, float Y, float Width, float Height)
 {
     std::vector<F_Point2F> vertices =
     {
         {X,Y},
-        {X, Y + height},
-        {X + width, Y + height},
-        {X + width, Y}
+        {X, Y + Height},
+        {X + Width, Y + Height},
+        {X + Width, Y}
     };
 
-    RenderShape(GL_LINE_LOOP, vertices, color);
+    RenderShape(GL_LINE_LOOP, vertices, Color);
 }
 
-void F_PaintGraphics::DrawLine(SDL_Color color, float x0, float y0, float x1, float y1)
+void F_PaintGraphics::DrawLine(SDL_Color Color, float X0, float Y0, float X1, float Y1)
 {
     std::vector<F_Point2F> vertices =
     {
-        {x0,y0},
-        {x1, y1}
+        {X0,Y0},
+        {X1, Y1}
     };
 
-    RenderShape(GL_LINE_STRIP, vertices, color);
+    RenderShape(GL_LINE_STRIP, vertices, Color);
 }
 
-void F_PaintGraphics::RenderShape(GLenum geometryType, std::vector<F_Point2F>& vertices, SDL_Color color)
+void F_PaintGraphics::RenderShape(GLenum GeometryType, std::vector<F_Point2F>& Vertices, SDL_Color Color)
 {
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glLoadIdentity();
-    glDisable(GL_TEXTURE_2D);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f);
-    glBegin(geometryType);
-    glColor4f(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f);
 
-    for (auto& v : vertices)
-        glVertex2f(v.X, v.Y);
+    glBegin(GeometryType);
+
+    glColor4f(Color.r / 255.0f, Color.g / 255.0f, Color.b / 255.0f, Color.a / 255.0f);
+
+    for (auto& Vertex : Vertices)
+        glVertex2f(Vertex.X, Vertex.Y);
 
     glEnd();
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
 }
 
 }
