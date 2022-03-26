@@ -53,6 +53,8 @@ void F_TextGraphics::DrawString(std::string message, SDL_Color color, float x, f
     glPopMatrix();
     glDeleteTextures(1, &texture);
     SDL_FreeSurface(s_font);
+
+    glDisable(GL_TEXTURE_2D);
 }
 
 }

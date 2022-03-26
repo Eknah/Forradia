@@ -15,9 +15,10 @@ public:
 
     F_ModelGraphics(F_Engine& engine) : Engine(engine) {}
 
-    // Drawing operations
-    void DrawModel(std::string modelName, float x, float y, float z, float rotation = 0.0f, float specificScaling = 1.0f);
-    void DrawModel(int modelNameHash, float x, float y, float z, float rotation = 0.0f, float specificScaling = 1.0f);
+    // ---- Drawing operations ----
+
+    void DrawModel(std::string ModelName, float X, float Y, float Z, float Rotation = 0.0f, float SpecificScaling = 1.0f);
+    void DrawModel(int ModelNameId, float X, float Y, float Z, float Rotation = 0.0f, float SpecificScaling = 1.0f);
 
 private:
 

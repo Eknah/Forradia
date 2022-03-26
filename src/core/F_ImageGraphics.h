@@ -42,6 +42,8 @@ public:
 
         glEnd();
 
+        glDisable(GL_TEXTURE_2D);
+
     }
 
 private:

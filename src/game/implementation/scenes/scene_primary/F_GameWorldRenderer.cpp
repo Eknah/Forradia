@@ -247,6 +247,7 @@ void F_GameWorldRenderer::Render()
     glTexCoord2f(1, 1); glVertex3f(player_x2, player_y2, player_z2);
     glTexCoord2f(0, 1); glVertex3f(player_x3, player_y3, player_z3);
     glEnd();
+    glDisable(GL_TEXTURE_2D);
 
     auto mode_name_player = std::string("Player");
 
