@@ -7,7 +7,7 @@
  *
 **/
 #include "CommonExternal.h"
-#include "implementation/CGameInstance.h"
+#include "implementation/F_GameInstance.h"
 
 /**
  * @brief Creates game instance and runs it.
@@ -15,7 +15,7 @@
  */
 int main()
 {
-    Forradia::CGameInstance GameInstance;
+    Forradia::F_GameInstance GameInstance;
     GameInstance.StartGame();
 
     return 0;
