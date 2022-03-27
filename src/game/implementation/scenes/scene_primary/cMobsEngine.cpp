@@ -9,81 +9,81 @@ namespace Forradia
 void cMobsEngine::Update()
 {
 
-    for (unsigned int i = 0; i < Engine.GetCurrentMapArea().MobsMirror.size(); i++)
+    for (unsigned int I = 0; I < Engine.GetCurrentMapArea().MobsMirror.size(); I++)
     {
-        if (i >= Engine.GetCurrentMapArea().MobsMirror.size()) break;
+        if (I >= Engine.GetCurrentMapArea().MobsMirror.size()) break;
 
-        auto x = int(Engine.GetCurrentMapArea().MobsMirror.at(i).get()->Position.X);
-        auto y = int(Engine.GetCurrentMapArea().MobsMirror.at(i).get()->Position.Y);
+        auto X = int(Engine.GetCurrentMapArea().MobsMirror.at(I).get()->Position.X);
+        auto Y = int(Engine.GetCurrentMapArea().MobsMirror.at(I).get()->Position.Y);
 
-        if (Ticks() > Engine.GetCurrentMapArea().Tiles[x][y].Mob->TickLastMove + Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveSpeed)
+        if (Ticks() > Engine.GetCurrentMapArea().Tiles[X][Y].Mob->TickLastMove + Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveSpeed)
         {
-            Engine.GetCurrentMapArea().Tiles[x][y].Mob->TickLastMove = Ticks();
+            Engine.GetCurrentMapArea().Tiles[X][Y].Mob->TickLastMove = Ticks();
 
-            if (Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveDestination.X == -1 || Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveDestination.Y == -1)
+            if (Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination.X == -1 || Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination.Y == -1)
             {
-                auto destination_x = Engine.GetCurrentMapArea().Tiles[x][y].Mob->Position.X + rand() % 15 - rand() % 15;
-                auto destination_y = Engine.GetCurrentMapArea().Tiles[x][y].Mob->Position.Y + rand() % 15 - rand() % 15;
+                auto DestinationX = Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X + rand() % 15 - rand() % 15;
+                auto DestinationY = Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y + rand() % 15 - rand() % 15;
 
-                destination_x = std::min(std::max(destination_x, 0.0f), float(Engine.WorldMap->MapAreaSize) - 1.0f);
-                destination_y = std::min(std::max(destination_y, 0.0f), float(Engine.WorldMap->MapAreaSize) - 1.0f);
+                DestinationX = std::min(std::max(DestinationX, 0.0f), float(Engine.WorldMap->MapAreaSize) - 1.0f);
+                DestinationY = std::min(std::max(DestinationY, 0.0f), float(Engine.WorldMap->MapAreaSize) - 1.0f);
 
-                Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveDestination = { destination_x, destination_y };
+                Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination = { DestinationX, DestinationY };
             }
 
-            auto delta_x = Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveDestination.X - Engine.GetCurrentMapArea().Tiles[x][y].Mob->Position.X;
-            auto delta_y = Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveDestination.Y - Engine.GetCurrentMapArea().Tiles[x][y].Mob->Position.Y;
-            auto distance = std::sqrt(delta_x * delta_x + delta_y * delta_y);
+            auto DeltaX = Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination.X - Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X;
+            auto DeltaY = Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination.Y - Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y;
+            auto Distance = std::sqrt(DeltaX * DeltaX + DeltaY * DeltaY);
 
-            if (distance < 1)
+            if (Distance < 1)
             {
-                Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveDestination = { -1, -1 };
+                Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination = { -1, -1 };
 
                 continue;
             }
 
-            Engine.GetCurrentMapArea().Tiles[x][y].Mob->FacingAngle = (float)std::atan2(-delta_x, -delta_y) / (float)M_PI * 180.0f;
+            Engine.GetCurrentMapArea().Tiles[X][Y].Mob->FacingAngle = (float)std::atan2(-DeltaX, -DeltaY) / (float)M_PI * 180.0f;
 
-            auto angle = Engine.GetCurrentMapArea().Tiles[x][y].Mob->FacingAngle / 180.0f * M_PI - M_PI / 2 + M_PI;
-            auto dx = -std::cos(angle) * Engine.GetCurrentMapArea().Tiles[x][y].Mob->StepMultiplier;
-            auto dy = std::sin(angle) * Engine.GetCurrentMapArea().Tiles[x][y].Mob->StepMultiplier;
-            auto new_x = float(Engine.GetCurrentMapArea().Tiles[x][y].Mob->Position.X + dx * Engine.GetCurrentMapArea().Tiles[x][y].Mob->StepSize);
-            auto new_y = float(Engine.GetCurrentMapArea().Tiles[x][y].Mob->Position.Y + dy * Engine.GetCurrentMapArea().Tiles[x][y].Mob->StepSize);
-            auto new_x_i = int(new_x);
-            auto new_y_i = int(new_y);
-            auto old_x_i = int(Engine.GetCurrentMapArea().Tiles[x][y].Mob->Position.X);
-            auto old_y_i = int(Engine.GetCurrentMapArea().Tiles[x][y].Mob->Position.Y);
+            auto Angle = Engine.GetCurrentMapArea().Tiles[X][Y].Mob->FacingAngle / 180.0f * M_PI - M_PI / 2 + M_PI;
+            auto DX = -std::cos(Angle) * Engine.GetCurrentMapArea().Tiles[X][Y].Mob->StepMultiplier;
+            auto DY = std::sin(Angle) * Engine.GetCurrentMapArea().Tiles[X][Y].Mob->StepMultiplier;
+            auto NewX = float(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X + DX * Engine.GetCurrentMapArea().Tiles[X][Y].Mob->StepSize);
+            auto NewY = float(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y + DY * Engine.GetCurrentMapArea().Tiles[X][Y].Mob->StepSize);
+            auto NewXI = int(NewX);
+            auto NewYI = int(NewY);
+            auto OldXI = int(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X);
+            auto OldYI = int(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y);
 
-            if (new_x_i >= 0 && new_y_i >= 0 && new_x_i < Engine.WorldMap->MapAreaSize && new_y_i < Engine.WorldMap->MapAreaSize)
+            if (NewXI >= 0 && NewYI >= 0 && NewXI < Engine.WorldMap->MapAreaSize && NewYI < Engine.WorldMap->MapAreaSize)
             {
-                if (Engine.GetCurrentMapArea().Tiles[new_x_i][new_y_i].GroundType != GetId("GroundtypeWater"))
+                if (Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].GroundType != GetId("GroundtypeWater"))
                 {
-                    if (Engine.GetCurrentMapArea().Tiles[new_x_i][new_y_i].Mob == nullptr || (new_x_i == old_x_i && new_y_i == old_y_i))
+                    if (Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Mob == nullptr || (NewXI == OldXI && NewYI == OldYI))
                     {
-                        Engine.GetCurrentMapArea().Tiles[old_x_i][old_y_i].Mob->Position = { new_x, new_y };
+                        Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Mob->Position = { NewX, NewY };
 
-                        if (new_x_i != old_x_i || new_y_i != old_y_i)
+                        if (NewXI != OldXI || NewYI != OldYI)
                         {
-                            Engine.GetCurrentMapArea().Tiles[new_x_i][new_y_i].Mob = std::move(Engine.GetCurrentMapArea().Tiles[old_x_i][old_y_i].Mob);
-                            Engine.GetCurrentMapArea().Tiles[old_x_i][old_y_i].Mob = nullptr;
+                            Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Mob = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Mob);
+                            Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Mob = nullptr;
                         }
 
-                        Engine.GetCurrentMapArea().MobsMirror.erase(Engine.GetCurrentMapArea().MobsMirror.begin() + i);
-                        Engine.GetCurrentMapArea().MobsMirror.push_back(std::ref(Engine.GetCurrentMapArea().Tiles[new_x_i][new_y_i].Mob));
+                        Engine.GetCurrentMapArea().MobsMirror.erase(Engine.GetCurrentMapArea().MobsMirror.begin() + I);
+                        Engine.GetCurrentMapArea().MobsMirror.push_back(std::ref(Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Mob));
                     }
-                    else if (Engine.GetCurrentMapArea().Tiles[new_x_i][new_y_i].Mob != nullptr && (new_x_i != old_x_i || new_y_i != old_y_i))
+                    else if (Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Mob != nullptr && (NewXI != OldXI || NewYI != OldYI))
                     {
-                        Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveDestination = { -1, -1 };
+                        Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination = { -1, -1 };
                     }
                 }
                 else
                 {
-                    Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveDestination = { -1, -1 };
+                    Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination = { -1, -1 };
                 }
             }
             else
             {
-                Engine.GetCurrentMapArea().Tiles[x][y].Mob->MoveDestination = { -1, -1 };
+                Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination = { -1, -1 };
             }
         }
     }

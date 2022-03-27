@@ -12,7 +12,7 @@ class cMobsEngine
 
 public:
 
-    cMobsEngine(cEngine& engine) : Engine(engine) {}
+    cMobsEngine(cEngine& Engine_) : Engine(Engine_) {}
 
     void Update();
 

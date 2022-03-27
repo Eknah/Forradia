@@ -14,7 +14,7 @@ class cGameWorldRenderer
 
 public:
 
-    cGameWorldRenderer(cEngine& engine, cCamera& camera) : Engine(engine), /*Skybox(engine),*/ Background(engine), PlanetTransformator(engine), Camera(camera) {}
+    cGameWorldRenderer(cEngine& Engine_, cCamera& Camera_) : Engine(Engine_), Background(Engine_), PlanetTransformator(Engine_), Camera(Camera_) {}
 
     void Render();
 

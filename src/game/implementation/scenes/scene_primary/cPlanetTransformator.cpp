@@ -6,16 +6,16 @@
 namespace Forradia
 {
 
-float cPlanetTransformator::GetNewY(float tiley, float mapx, float mapy)
+float cPlanetTransformator::GetNewY(float Y, float TileX, float TileY)
 {
-    auto result = tiley;
-    auto dx = (int)mapx - Engine.Player.Position.X;
-    auto dy = (int)mapy - Engine.Player.Position.Y;
-    auto distance = dx * dx + dy * dy;
+    auto Result = Y;
+    auto DX = (int)TileX - Engine.Player.Position.X;
+    auto DY = (int)TileY - Engine.Player.Position.Y;
+    auto Distance = DX * DX + DY * DY;
 
-    result -= distance*0.01f;
+    Result -= Distance*0.01f;
 
-    return result;
+    return Result;
 }
 
 }

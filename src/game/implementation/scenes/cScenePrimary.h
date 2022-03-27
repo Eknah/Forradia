@@ -14,13 +14,13 @@ class cScenePrimary : public cSceneBase
 
 public:
 
-    cScenePrimary(cEngine& engine) : cSceneBase(engine), Gui(engine), Camera(engine), MobsEngine(engine), GameWorldRenderer(engine, Camera) {}
+    cScenePrimary(cEngine& Engine_) : cSceneBase(Engine_), Gui(Engine_), Camera(Engine_), MobsEngine(Engine_), GameWorldRenderer(Engine_, Camera) {}
 
     void Enter() override;
     void Update() override;
     void Render() override;
-    void DoMouseDown(Uint8 mouseButton) override;
-    void DoMouseUp(Uint8 mouseButton) override;
+    void DoMouseDown(Uint8 MouseButton) override;
+    void DoMouseUp(Uint8 MouseButton) override;
 
 private:
 

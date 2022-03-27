@@ -11,9 +11,9 @@ class cPlanetTransformator
 
 public:
 
-    cPlanetTransformator(cEngine& engine) : Engine(engine) {}
+    cPlanetTransformator(cEngine& Engine_) : Engine(Engine_) {}
 
-    float GetNewY(float tiley, float mapx, float mapy);
+    float GetNewY(float Y, float TileX, float TileY);
 
 private:
 

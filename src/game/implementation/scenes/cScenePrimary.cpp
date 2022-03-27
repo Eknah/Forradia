@@ -13,38 +13,38 @@ void cScenePrimary::Enter()
 
 void cScenePrimary::Update()
 {
-    auto& keys = Engine.KeyboardHandler.KeysBeingPressed;
-    auto& player = Engine.Player;
+    auto& Keys = Engine.KeyboardHandler.KeysBeingPressed;
+    auto& Player = Engine.Player;
 
-    player.ResetForNewFrame();
+    Player.ResetForNewFrame();
 
-    auto instruction = cModuleMovement::MovementInstruction();
+    auto Instruction = cModuleMovement::MovementInstruction();
 
-    instruction.TryMoveForward = keys.count(SDLK_w);
-    instruction.TryMoveRight = keys.count(SDLK_d);
-    instruction.TryMoveBack = keys.count(SDLK_s);
-    instruction.TryMoveLeft = keys.count(SDLK_a);
+    Instruction.TryMoveForward = Keys.count(SDLK_w);
+    Instruction.TryMoveRight = Keys.count(SDLK_d);
+    Instruction.TryMoveBack = Keys.count(SDLK_s);
+    Instruction.TryMoveLeft = Keys.count(SDLK_a);
 
-    player.GetModule<cModuleMovement>().Instruction = instruction;
+    Player.GetModule<cModuleMovement>().Instruction = Instruction;
 
-    if (instruction.TryMoveForward || instruction.TryMoveRight || instruction.TryMoveBack || instruction.TryMoveLeft)
+    if (Instruction.TryMoveForward || Instruction.TryMoveRight || Instruction.TryMoveBack || Instruction.TryMoveLeft)
     {
-        player.GetModule<cModuleMovement>().FacingAngle = Camera.LookingAngle;
-        player.GetModule<cModuleMovement>().MoveDestination = { -1, -1 };
+        Player.GetModule<cModuleMovement>().FacingAngle = Camera.LookingAngle;
+        Player.GetModule<cModuleMovement>().MoveDestination = { -1, -1 };
     }
 
-    auto turn_right = keys.count(SDLK_e);
-    auto turn_left = keys.count(SDLK_q);
+    auto TurnRight = Keys.count(SDLK_e);
+    auto TurnLeft = Keys.count(SDLK_q);
 
-    if (turn_right)
+    if (TurnRight)
     {
         Camera.Update(GetId("Right"), Engine.MouseHandler.WheelAmount);
-        player.GetModule<cModuleMovement>().UpdateRotation(Camera.LookingAngle);
+        Player.GetModule<cModuleMovement>().UpdateRotation(Camera.LookingAngle);
     }
-    else if (turn_left)
+    else if (TurnLeft)
     {
         Camera.Update(GetId("Left"), Engine.MouseHandler.WheelAmount);
-        player.GetModule<cModuleMovement>().UpdateRotation(Camera.LookingAngle);
+        Player.GetModule<cModuleMovement>().UpdateRotation(Camera.LookingAngle);
     }
     else
     {
@@ -60,7 +60,7 @@ void cScenePrimary::Update()
 
     if (Engine.MouseHandler.RightButtonDown)
     {
-        player.GetModule<cModuleMovement>().FacingAngle = Camera.LookingAngle;
+        Player.GetModule<cModuleMovement>().FacingAngle = Camera.LookingAngle;
     }
 
     if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_SPACE) > 0)
@@ -69,8 +69,7 @@ void cScenePrimary::Update()
     if (Engine.MouseHandler.RightButtonDown)
         Engine.CustomCursor.CursorType = eCursorTypes::Hidden;
 
-    //player.UpdateJumping();
-    player.Update();
+    Player.Update();
     MobsEngine.Update();
     Gui.Update();
 }
@@ -81,26 +80,26 @@ void cScenePrimary::Render()
     Gui.Render();
 }
 
-void cScenePrimary::DoMouseDown(Uint8 mouseButton)
+void cScenePrimary::DoMouseDown(Uint8 MouseButton)
 {
     if (Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed != nullptr)
     {
-        auto hovered = Camera.GetHoveredTile();
+        auto Hovered = Camera.GetHoveredTile();
 
-        if (Engine.GetCurrentMapArea().Tiles[hovered.X][hovered.Y].Objects.size() > 0)
-            Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed->UseOn(Engine.GetCurrentMapArea().Tiles[hovered.X][hovered.Y].Objects.at(Engine.GetCurrentMapArea().Tiles[hovered.X][hovered.Y].Objects.size() - 1));
+        if (Engine.GetCurrentMapArea().Tiles[Hovered.X][Hovered.Y].Objects.size() > 0)
+            Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed->UseOn(Engine.GetCurrentMapArea().Tiles[Hovered.X][Hovered.Y].Objects.at(Engine.GetCurrentMapArea().Tiles[Hovered.X][Hovered.Y].Objects.size() - 1));
 
         Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed = nullptr;
 
         return;
     }
 
-    auto clicked_in_gui = Gui.DoMouseDown(mouseButton);
+    auto ClickedInGui = Gui.DoMouseDown(MouseButton);
 
-    if (clicked_in_gui)
+    if (ClickedInGui)
         return;
 
-    switch (mouseButton)
+    switch (MouseButton)
     {
     case SDL_BUTTON_LEFT:
     {
@@ -114,7 +113,7 @@ void cScenePrimary::DoMouseDown(Uint8 mouseButton)
     }
 }
 
-void cScenePrimary::DoMouseUp(Uint8 mouseButton)
+void cScenePrimary::DoMouseUp(Uint8 MouseButton)
 {
     Gui.DoMouseUp();
 }
