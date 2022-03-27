@@ -6,14 +6,18 @@
 namespace Forradia
 {
 
+void F_ActorModuleJumping::ResetForNewFrame()
+{}
+
 void F_ActorModuleJumping::Update()
 {
     if (IsJumping)
     {
-        auto delta_ticks = Ticks() - TickStartJumping;
-        auto jump_height = std::pow((-std::pow((delta_ticks - JumpDuration / 2.0f), 2.0f) + 250000.0f) / 250000.0f, 3.0f) * MaxJumpHeight;
-        PositionZ = jump_height;
+        auto DeltaTicks = Ticks() - TickStartJumping;
+        auto JumpHeight = std::pow((-std::pow((DeltaTicks - JumpDuration / 2.0f), 2.0f) + 250000.0f) / 250000.0f, 3.0f) * MaxJumpHeight;
+        PositionZ = JumpHeight;
     }
+
     if (Ticks() > TickStartJumping + JumpDuration)
     {
         PositionZ = 0.0f;
@@ -24,8 +28,8 @@ void F_ActorModuleJumping::Update()
 void F_ActorModuleJumping::Jump()
 {
 
-    IsJumping = true;
-    TickStartJumping = Ticks();
+        IsJumping = true;
+        TickStartJumping = Ticks();
 }
 
 }

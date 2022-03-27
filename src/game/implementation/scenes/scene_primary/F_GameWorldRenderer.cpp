@@ -251,14 +251,14 @@ void F_GameWorldRenderer::Render()
 
     auto mode_name_player = std::string("Player");
 
-    if (Engine.Player.IsWalking)
+    if (Engine.Player.ModuleMovement.IsWalking)
     {
         auto animIndex = (Ticks() % 300) / 75;
         if (animIndex > 0)
             mode_name_player.append(std::to_string(animIndex));
     }
 
-    Engine.DrawModel(mode_name_player, offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize / 2 + sub_step_x * Engine.TileSize, 0.0 + Engine.Player.ModuleJumping.PositionZ, offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize / 2 + sub_step_y * Engine.TileSize, Engine.Player.FacingAngleRotated);
+    Engine.DrawModel(mode_name_player, offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize / 2 + sub_step_x * Engine.TileSize, 0.0 + Engine.Player.ModuleJumping.PositionZ, offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize / 2 + sub_step_y * Engine.TileSize, Engine.Player.ModuleMovement.FacingAngleRotated);
 
     glPopMatrix();
     glDisable(GL_DEPTH_TEST);

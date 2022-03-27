@@ -17,21 +17,20 @@ void F_ScenePrimary::Update()
     auto& player = Engine.Player;
 
     player.ResetForNewFrame();
-    player.UpdateDestMovement();
 
-    auto instruction = F_Player::MovementInstruction();
+    auto instruction = F_ActorModuleMovement::MovementInstruction();
 
     instruction.TryMoveForward = keys.count(SDLK_w);
     instruction.TryMoveRight = keys.count(SDLK_d);
     instruction.TryMoveBack = keys.count(SDLK_s);
     instruction.TryMoveLeft = keys.count(SDLK_a);
 
-    player.UpdateKboardMovement(instruction);
+    player.SetMovementInstruction(instruction);
 
     if (instruction.TryMoveForward || instruction.TryMoveRight || instruction.TryMoveBack || instruction.TryMoveLeft)
     {
-        player.FacingAngle = Camera.LookingAngle;
-        player.MoveDestination = { -1, -1 };
+        player.ModuleMovement.FacingAngle = Camera.LookingAngle;
+        player.ModuleMovement.MoveDestination = { -1, -1 };
     }
 
     auto turn_right = keys.count(SDLK_e);
@@ -61,7 +60,7 @@ void F_ScenePrimary::Update()
 
     if (Engine.MouseHandler.RightButtonDown)
     {
-        player.FacingAngle = Camera.LookingAngle;
+        player.ModuleMovement.FacingAngle = Camera.LookingAngle;
     }
 
     if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_SPACE) > 0)
@@ -71,7 +70,7 @@ void F_ScenePrimary::Update()
         Engine.CustomCursor.CursorType = F_ECursorTypes::Hidden;
 
     //player.UpdateJumping();
-    player.UpdatePlayer();
+    player.Update();
     MobsEngine.Update();
     Gui.Update();
 }
@@ -105,7 +104,7 @@ void F_ScenePrimary::DoMouseDown(Uint8 mouseButton)
     {
     case SDL_BUTTON_LEFT:
     {
-        Engine.Player.MoveDestination = { Camera.GetHoveredTile().X + 0.5f, Camera.GetHoveredTile().Y + 0.5f };
+        Engine.Player.ModuleMovement.MoveDestination = { Camera.GetHoveredTile().X + 0.5f, Camera.GetHoveredTile().Y + 0.5f };
         break;
     }
     case SDL_BUTTON_RIGHT:

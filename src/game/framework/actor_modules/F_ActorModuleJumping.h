@@ -9,6 +9,10 @@ class F_ActorModuleJumping : public F_IActorModule
 {
 
 public:
+
+    using F_IActorModule::F_IActorModule;
+
+    void ResetForNewFrame() override;
     void Update() override;
     void Jump();
 
