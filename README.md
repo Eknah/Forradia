@@ -1,6 +1,6 @@
 # Forradia
 
-![Forradia!](/data/images/Icon.png "Forradia")
+![Forradia!](/resources/images/Icon.png "Forradia")
 
 Forradia is a cross-platform sandbox survival/RPG game written in C++ with OpenGL and SDL2.
 The engine loads 3D models in Wavefront-format as well as textures and fonts. The maps are tile-based and fully randomly generated.
@@ -15,8 +15,8 @@ The purpose of this project is mainly that I use it to improve my knowledge and 
 To add
 
 ## Screenshots
-![Forradia Screenshot 1!](/data/images/Screenshot1.png "Forradia Screenshot 1")
-![Forradia Screenshot 2!](/data/images/Screenshot2.png "Forradia Screenshot 2")
+![Forradia Screenshot 1!](/resources/images/Screenshot1.png "Forradia Screenshot 1")
+![Forradia Screenshot 2!](/resources/images/Screenshot2.png "Forradia Screenshot 2")
 
 ## Tech/framework used
 **Built with**
