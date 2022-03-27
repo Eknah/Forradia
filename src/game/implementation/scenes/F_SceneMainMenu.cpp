@@ -21,9 +21,9 @@ void F_SceneMainMenu::Render()
     int miplevel = 0;
     glGetTexLevelParameteriv(GL_TEXTURE_2D, miplevel, GL_TEXTURE_WIDTH, &width);
     glGetTexLevelParameteriv(GL_TEXTURE_2D, miplevel, GL_TEXTURE_HEIGHT, &height);
-    auto image_width = (float)width / canvas_size.Width/2;
-    auto image_height = (float)height / canvas_size.Height / 2;
-    Engine.DrawImage("SceneForradiaLogo", 0.5 - image_width / 2, 0.15 - image_height / 2, image_width, image_height);
+    auto image_width = (float)width / canvas_size.Width/2.0f;
+    auto image_height = (float)height / canvas_size.Height / 2.0f;
+    Engine.DrawImage("SceneForradiaLogo", 0.5f - image_width / 2.0f, 0.15f - image_height / 2.0f, image_width, image_height);
 }
 
 void F_SceneMainMenu::DoMouseDown(Uint8 mouseButton)

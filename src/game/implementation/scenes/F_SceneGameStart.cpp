@@ -23,8 +23,8 @@ void F_SceneGameStart::Render()
     glGetTexLevelParameteriv(GL_TEXTURE_2D, miplevel, GL_TEXTURE_HEIGHT, &height);
     auto image_width = (float)width / canvas_size.Width;
     auto image_height = (float)height / canvas_size.Height;
-    Engine.DrawImage("SceneForradiaLogo", 0.5 - image_width / 2, 0.25 - image_height / 2, image_width, image_height);
-    Engine.DrawString("Press to start", { 255, 255 ,255, 255 }, 0.5, 0.5, true);
+    Engine.DrawImage("SceneForradiaLogo", 0.5f - image_width / 2.0f, 0.25f - image_height / 2.0f, image_width, image_height);
+    Engine.DrawString("Press to start", { 255, 255 ,255, 255 }, 0.5f, 0.5f, true);
 }
 
 void F_SceneGameStart::DoMouseDown(Uint8 mouseButton)

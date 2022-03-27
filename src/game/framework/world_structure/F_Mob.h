@@ -13,7 +13,7 @@ public:
     F_Mob(float x, float y) : Position(x, y) {}
 
     // Movement
-    int TickLastMove = 0;
+    unsigned int TickLastMove = 0;
     int MoveSpeed = 30;
     float StepSize = 1.0f;
     float StepMultiplier = 0.1f;

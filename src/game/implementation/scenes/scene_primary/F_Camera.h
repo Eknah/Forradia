@@ -37,7 +37,7 @@ private:
     F_Point2 PreviousMousePosition = { -1, -1 };
     int RenderDistance = 80;
     int RenderDistanceCave = 15;
-    int TickLastUpdate = 0;
+    unsigned int TickLastUpdate = 0;
     int UpdateSpeed = 20;
     float RotationAmount = 5.0f;
     float ZoomMultiplier = 8.0;

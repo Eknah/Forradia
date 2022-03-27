@@ -5,7 +5,7 @@
 namespace Forradia
 {
 
-F_Object::F_Object(std::string _objectTypeName, bool randomScaling) : ObjectType(GetId(_objectTypeName)), Rotation(rand() % 360)
+F_Object::F_Object(std::string _objectTypeName, bool randomScaling) : ObjectType(GetId(_objectTypeName)), Rotation((float)(rand() % 360))
 {
     if (randomScaling)
         Scaling = 0.6f + float(rand() % 8) / 10.0f;

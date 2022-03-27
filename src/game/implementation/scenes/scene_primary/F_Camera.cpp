@@ -34,9 +34,9 @@ void F_Camera::Update(int rotationDirection, float zoomChange)
     auto camera_dist = 1;
     auto zoom = ZoomAmount;
 
-    glTranslatef(0.0, -zoom, -2.0 - zoom * 4);
-    camera_x = cos(angle_radians) * camera_dist;
-    camera_z = -sin(angle_radians) * camera_dist;
+    glTranslatef(0.0f, -zoom, -2.0f - zoom * 4.0f);
+    camera_x = (float)cos(angle_radians) * camera_dist;
+    camera_z = -(float)sin(angle_radians) * camera_dist;
     gluLookAt(camera_x, CameraHeight, camera_z, 0, -1, 0, 0, 1, 0);
     GLint viewport[4];                  // Where The Viewport Values Will Be Stored
     glGetIntegerv(GL_VIEWPORT, viewport);
@@ -49,13 +49,13 @@ void F_Camera::Update(int rotationDirection, float zoomChange)
     win_x = (float)mouse_position.X;                  // Holds The Mouse X Coordinate
     win_y = (float)mouse_position.Y;
     win_y = (float)viewport[3] - win_y;
-    glReadPixels(win_x, win_y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &win_z);
+    glReadPixels((GLint)win_x, (GLint)win_y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &win_z);
     GLdouble pos_x, pos_y, pos_z;
     gluUnProject(win_x, win_y, win_z, modelview, projection, viewport, &pos_x, &pos_y, &pos_z);
 
-    RayCastingX = pos_x;
-    RayCastingY = pos_y;
-    RayCastingZ = pos_z;
+    RayCastingX = (float)pos_x;
+    RayCastingY = (float)pos_y;
+    RayCastingZ = (float)pos_z;
 }
 
 F_Point2 F_Camera::GetHoveredTile()

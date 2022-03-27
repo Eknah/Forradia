@@ -9,7 +9,7 @@ namespace Forradia
 void F_MobsEngine::Update()
 {
 
-    for (auto i = 0; i < Engine.GetCurrentMapArea().MobsMirror.size(); i++)
+    for (unsigned int i = 0; i < Engine.GetCurrentMapArea().MobsMirror.size(); i++)
     {
         if (i >= Engine.GetCurrentMapArea().MobsMirror.size()) break;
 
@@ -42,7 +42,7 @@ void F_MobsEngine::Update()
                 continue;
             }
 
-            Engine.GetCurrentMapArea().Tiles[x][y].mob->FacingAngle = std::atan2(-delta_x, -delta_y) / M_PI * 180.0f;
+            Engine.GetCurrentMapArea().Tiles[x][y].mob->FacingAngle = (float)std::atan2(-delta_x, -delta_y) / (float)M_PI * 180.0f;
 
             auto angle = Engine.GetCurrentMapArea().Tiles[x][y].mob->FacingAngle / 180.0f * M_PI - M_PI / 2 + M_PI;
             auto dx = -std::cos(angle) * Engine.GetCurrentMapArea().Tiles[x][y].mob->StepMultiplier;

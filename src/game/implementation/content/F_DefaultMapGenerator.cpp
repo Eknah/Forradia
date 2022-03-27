@@ -38,8 +38,8 @@ void F_DefaultMapGenerator::ClearToGrass(F_MapArea& mapArea)
 
 void F_DefaultMapGenerator::GeneratePlayerStartingPosition(F_MapArea& mapArea)
 {
-    mapArea.PlayerStartPosition.X = rand() % mapArea.Size;
-    mapArea.PlayerStartPosition.Y = rand() % mapArea.Size;
+    mapArea.PlayerStartPosition.X = (float)(rand() % mapArea.Size);
+    mapArea.PlayerStartPosition.Y = (float)(rand() % mapArea.Size);
 }
 
 void F_DefaultMapGenerator::GenerateElevation(F_MapArea& mapArea)
@@ -326,7 +326,7 @@ int F_DefaultMapGenerator::DistToPlayerStartingPos(F_MapArea& mapArea, int mapX,
     auto dy = mapArea.PlayerStartPosition.Y - mapY;
     auto distance = std::sqrt(dx * dx + dy * dy);
 
-    return distance;
+    return (int)distance;
 }
 
 void F_DefaultMapGenerator::GenerateMobs(F_MapArea& mapArea)
@@ -340,7 +340,7 @@ void F_DefaultMapGenerator::GenerateMobs(F_MapArea& mapArea)
 
         if (mapArea.Tiles[x][y].GroundType != (int)GetId("GroundtypeWater") && mapArea.Tiles[x][y].mob == nullptr)
         {
-            mapArea.Tiles[x][y].mob = std::make_unique<F_Mob>(x, y);
+            mapArea.Tiles[x][y].mob = std::make_unique<F_Mob>((float)x, (float)y);
             mapArea.MobsMirror.push_back(std::ref(mapArea.Tiles[x][y].mob));
         }
     }

@@ -21,16 +21,16 @@ void F_GameWorldRenderer::Render()
     auto camera_dist = 1;
     auto zoom = Camera.ZoomAmount;
 
-    glTranslatef(0.0, -zoom, -2.0 - zoom * 4);
-    camera_x = cos(angle_radians) * camera_dist;
-    camera_z = -sin(angle_radians) * camera_dist;
+    glTranslatef(0.0f, -zoom, -2.0f - zoom * 4.0f);
+    camera_x = (float)cos(angle_radians) * camera_dist;
+    camera_z = -(float)sin(angle_radians) * camera_dist;
     gluLookAt(camera_x, Camera.CameraHeight, camera_z, 0, -1, 0, 0, 1, 0);
 
     float sub_step_x = Engine.Player.Position.X - (int)Engine.Player.Position.X;
     float sub_step_y = Engine.Player.Position.Y - (int)Engine.Player.Position.Y;
 
-    auto offset_x = -(double)(2 * Camera.GetRenderDistance() + 1) / 2.0 * Engine.TileSize - sub_step_x * Engine.TileSize;
-    auto offset_y = -(double)(2 * Camera.GetRenderDistance() - 1) / 2.0 * Engine.TileSize - sub_step_y * Engine.TileSize;
+    auto offset_x = -(float)(2.0f * Camera.GetRenderDistance() + 1.0f) / 2.0f * Engine.TileSize - sub_step_x * Engine.TileSize;
+    auto offset_y = -(float)(2.0f * Camera.GetRenderDistance() - 1.0f) / 2.0f * Engine.TileSize - sub_step_y * Engine.TileSize;
 
     glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
@@ -66,7 +66,7 @@ void F_GameWorldRenderer::Render()
 
             if (map_x < 0 || map_y < 0 || map_x >= map_area_size || map_y >= map_area_size) continue;
 
-            auto groundtype_index = Engine.GetCurrentMapArea().Tiles[map_x][map_y].GroundType;
+            auto groundtype_index = Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].GroundType;
             auto water_anim_index_0 = 0;
             auto water_anim_index_1 = 0;
             auto water_anim_index_2 = 0;
@@ -92,24 +92,24 @@ void F_GameWorldRenderer::Render()
             auto water_wave_height_3 = water_anim_index_3 * Engine.TileSize / 4.0f;
 
             if (map_x >= 0 && map_y >= 0 && map_x < map_area_size && map_y < map_area_size)
-                elev_0 = Engine.GetCurrentMapArea().Tiles[map_x][map_y].Elevation / elev_amount - elev_player;
+                elev_0 = Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].Elevation / elev_amount - elev_player;
 
             if (map_x >= 0 && map_y - 1 >= 0 && map_x < map_area_size && map_y - 1 < map_area_size)
-                elev_1 = Engine.GetCurrentMapArea().Tiles[map_x][map_y - 1].Elevation / elev_amount - elev_player;
+                elev_1 = Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y - 1].Elevation / elev_amount - elev_player;
             else
                 elev_1 = elev_0;
 
             if (map_x + 1 >= 0 && map_y - 1 >= 0 && map_x + 1 < map_area_size && map_y - 1 < map_area_size)
-                elev_2 = Engine.GetCurrentMapArea().Tiles[map_x + 1][map_y - 1].Elevation / elev_amount - elev_player;
+                elev_2 = Engine.GetCurrentMapArea().Tiles[(int)map_x + 1][(int)map_y - 1].Elevation / elev_amount - elev_player;
             else if (map_x + 1 < map_area_size)
-                elev_2 = Engine.GetCurrentMapArea().Tiles[map_x + 1][map_y].Elevation / elev_amount - elev_player;
+                elev_2 = Engine.GetCurrentMapArea().Tiles[(int)map_x + 1][(int)map_y].Elevation / elev_amount - elev_player;
             else if (map_y - 1 >= 0)
-                elev_2 = Engine.GetCurrentMapArea().Tiles[map_x][map_y - 1].Elevation / elev_amount - elev_player;
+                elev_2 = Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y - 1].Elevation / elev_amount - elev_player;
             else
                 elev_2 = elev_0;
 
             if (map_x + 1 >= 0 && map_y >= 0 && map_x + 1 < map_area_size && map_y < map_area_size)
-                elev_3 = Engine.GetCurrentMapArea().Tiles[map_x + 1][map_y].Elevation / elev_amount - elev_player;
+                elev_3 = Engine.GetCurrentMapArea().Tiles[(int)map_x + 1][(int)map_y].Elevation / elev_amount - elev_player;
             else
                 elev_3 = elev_0;
 
@@ -147,10 +147,10 @@ void F_GameWorldRenderer::Render()
             auto tile_y_3 = elev_3;
             auto tile_z_3 = offset_y + y * Engine.TileSize;
 
-            tile_y_0 = PlanetTransformator.GetNewY(tile_y_0, (int)map_x, (int)map_y);
-            tile_y_1 = PlanetTransformator.GetNewY(tile_y_1, (int)map_x, (int)map_y - 1);
-            tile_y_2 = PlanetTransformator.GetNewY(tile_y_2, (int)map_x + 1, (int)map_y - 1);
-            tile_y_3 = PlanetTransformator.GetNewY(tile_y_3, (int)map_x + 1, (int)map_y);
+            tile_y_0 = PlanetTransformator.GetNewY(tile_y_0, (float)(int)map_x, (float)(int)map_y);
+            tile_y_1 = PlanetTransformator.GetNewY(tile_y_1, (float)(int)map_x, (float)(int)map_y - 1);
+            tile_y_2 = PlanetTransformator.GetNewY(tile_y_2, (float)(int)map_x + 1, (float)(int)map_y - 1);
+            tile_y_3 = PlanetTransformator.GetNewY(tile_y_3, (float)(int)map_x + 1, (float)(int)map_y);
 
             glBegin(GL_QUADS);
             glColor3f(r, g, b);
@@ -171,7 +171,7 @@ void F_GameWorldRenderer::Render()
                 glEnd();
             }
 
-            if (Engine.GetCurrentMapArea().Tiles[map_x][map_y].Objects.size() > 0)
+            if (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].Objects.size() > 0)
             {
                 glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GetId("TileShadow")]);
                 glBegin(GL_QUADS);
@@ -204,7 +204,7 @@ void F_GameWorldRenderer::Render()
 
             glDisable(GL_TEXTURE_2D);
 
-            for (auto& object : Engine.GetCurrentMapArea().Tiles[map_x][map_y].Objects)
+            for (auto& object : Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].Objects)
             {
                 auto tile_object = object->ObjectType;
 
@@ -212,30 +212,30 @@ void F_GameWorldRenderer::Render()
                     Engine.DrawModel(tile_object,tile_x_0 + Engine.TileSize / 2, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3)/4.0f, tile_z_0 - Engine.TileSize / 2, object->Rotation, object->Scaling);
             }
 
-            if (Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob != nullptr)
+            if (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob != nullptr)
             {
-                auto sub_x_pos = (Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->Position.X - int(Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->Position.X)) * Engine.TileSize;
-                auto sub_y_pos = (Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->Position.Y - int(Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->Position.Y)) * Engine.TileSize;
+                auto sub_x_pos = (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->Position.X - int(Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->Position.X)) * Engine.TileSize;
+                auto sub_y_pos = (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->Position.Y - int(Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->Position.Y)) * Engine.TileSize;
 
-                Engine.DrawModel(GetId("MobRabbit"), tile_x_0 + sub_x_pos, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3) / 4.0f, tile_z_0 - Engine.TileSize + sub_y_pos, Engine.GetCurrentMapArea().Tiles[map_x][map_y].mob->FacingAngle);
+                Engine.DrawModel(GetId("MobRabbit"), tile_x_0 + sub_x_pos, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3) / 4.0f, tile_z_0 - Engine.TileSize + sub_y_pos, Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->FacingAngle);
             }
         }
     }
 
     auto player_x0 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize;
-    auto player_y0 = 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
+    auto player_y0 = 0.0f + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
     auto player_z0 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize;
 
     auto player_x1 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize - Engine.TileSize;
-    auto player_y1 = 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
+    auto player_y1 = 0.0f + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
     auto player_z1 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize;
 
     auto player_x2 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize - Engine.TileSize;
-    auto player_y2 = 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
+    auto player_y2 = 0.0f + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
     auto player_z2 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize + Engine.TileSize;
 
     auto player_x3 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize;
-    auto player_y3 = 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
+    auto player_y3 = 0.0f + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
     auto player_z3 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize + Engine.TileSize;
 
     glEnable(GL_TEXTURE_2D);
@@ -258,7 +258,7 @@ void F_GameWorldRenderer::Render()
             mode_name_player.append(std::to_string(animIndex));
     }
 
-    Engine.DrawModel(mode_name_player, offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize / 2 + sub_step_x * Engine.TileSize, 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ, offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize / 2 + sub_step_y * Engine.TileSize, Engine.Player.GetModule<F_ModuleMovement>().FacingAngleRotated);
+    Engine.DrawModel(mode_name_player, offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize / 2.0f + sub_step_x * Engine.TileSize, 0.0f + Engine.Player.GetModule<F_ModuleJumping>().PositionZ, offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize / 2.0f + sub_step_y * Engine.TileSize, Engine.Player.GetModule<F_ModuleMovement>().FacingAngleRotated);
 
     glPopMatrix();
     glDisable(GL_DEPTH_TEST);
