@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include <SDL2/SDL_timer.h>
+#include <ctime>
 
 namespace Forradia
 {
