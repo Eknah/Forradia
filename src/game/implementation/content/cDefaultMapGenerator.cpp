@@ -38,8 +38,8 @@ void cDefaultMapGenerator::ClearToGrass(cMapArea& mapArea)
 
 void cDefaultMapGenerator::GeneratePlayerStartingPosition(cMapArea& mapArea)
 {
-    mapArea.PlayerStartPosition.X = (float)(rand() % mapArea.Size);
-    mapArea.PlayerStartPosition.Y = (float)(rand() % mapArea.Size);
+    mapArea.PlayerSpawnPosition.X = (float)(rand() % mapArea.Size);
+    mapArea.PlayerSpawnPosition.Y = (float)(rand() % mapArea.Size);
 }
 
 void cDefaultMapGenerator::GenerateElevation(cMapArea& mapArea)
@@ -322,8 +322,8 @@ void cDefaultMapGenerator::GeneratePinkFlowers(cMapArea& mapArea)
 
 int cDefaultMapGenerator::DistToPlayerStartingPos(cMapArea& mapArea, int mapX, int mapY)
 {
-    auto dx = mapArea.PlayerStartPosition.X - mapX;
-    auto dy = mapArea.PlayerStartPosition.Y - mapY;
+    auto dx = mapArea.PlayerSpawnPosition.X - mapX;
+    auto dy = mapArea.PlayerSpawnPosition.Y - mapY;
     auto distance = std::sqrt(dx * dx + dy * dy);
 
     return (int)distance;

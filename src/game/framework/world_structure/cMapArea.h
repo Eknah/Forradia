@@ -19,8 +19,7 @@ public:
 
     // Basic data
     int Size = -1;
-    bool IsCave = false;
-    cPoint2F PlayerStartPosition = {-1, -1};
+    cPoint2F PlayerSpawnPosition = {-1, -1};
 
     // Map structure of tiles and mobs
     std::vector<std::vector<cTile>> Tiles;

@@ -6,8 +6,6 @@ namespace Forradia
 
 void cQuestCaveMapGenerator::GenerateQuestCaveMapArea(cMapArea& mapArea, cPoint2 entranceLocation, int warpFromMap)
 {
-    mapArea.IsCave = true;
-
     ClearToCaveFloor(mapArea);
     GenerateCaveWalls(mapArea);
     GeneratePath(mapArea, entranceLocation);

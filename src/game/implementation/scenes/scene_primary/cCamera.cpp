@@ -75,9 +75,9 @@ int cCamera::GetRenderDistance()
 {
     auto& map_area = Engine.GetCurrentMapArea();
 
-    if (map_area.IsCave)
-        return RenderDistanceCave;
-    else
+    //if (map_area.IsCave)
+    //    return RenderDistanceCave;
+    //else
         return RenderDistance;
 }
 

@@ -54,7 +54,7 @@ public:
         ObjectsContent  = ObjectsContent_;
 
         Player          .CurrentMapArea = 0;
-        Player          .Position = GetCurrentMapArea().PlayerStartPosition;
+        Player          .Position = GetCurrentMapArea().PlayerSpawnPosition;
         Player          .GetModule<cModuleInventory>().Objects = StartingInventory_;
         SceneManager    .Initialize(move(ScenesCollection_), StartScene_);
         ModelLoader     .LoadModels();
