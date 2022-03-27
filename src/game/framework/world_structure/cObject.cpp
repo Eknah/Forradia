@@ -13,10 +13,16 @@ cObject::cObject(std::string ObjectTypeName, bool RandomScaling) : ObjectType(Ge
 
 void cObject::UseOn(std::unique_ptr<cObject>& Other)
 {
-    if (ObjectType == GetId("ObjectWoodaxe") && (Other->ObjectType == GetId("ObjectTree1") || Other->ObjectType == GetId("ObjectTree2")))
+    if (
+            ObjectType == GetId("ObjectWoodaxe") &&
+            (Other->ObjectType == GetId("ObjectTree1") || Other->ObjectType == GetId("ObjectTree2"))
+        )
         Other->TransformInto("ObjectFelledTree");
 
-    if (ObjectType == GetId("ObjectSaw") && Other->ObjectType == GetId("ObjectFelledTree"))
+    if (
+            ObjectType == GetId("ObjectSaw") &&
+            Other->ObjectType == GetId("ObjectFelledTree")
+        )
         Other->TransformInto("ObjectWoodplank");
 }
 

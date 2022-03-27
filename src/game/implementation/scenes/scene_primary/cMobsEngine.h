@@ -14,11 +14,11 @@ public:
 
     cMobsEngine(cEngine& Engine_) : Engine(Engine_) {}
 
-    void Update();
+    void        Update();
 
 private:
 
-    cEngine& Engine;
+    cEngine&    Engine;
 
 };
 

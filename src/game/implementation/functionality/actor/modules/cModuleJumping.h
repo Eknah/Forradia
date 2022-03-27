@@ -10,20 +10,20 @@ class cModuleJumping : public iModule
 
 public:
 
-    using iModule::iModule;
+    using           iModule::iModule;
 
-    void ResetForNewFrame() override;
-    void Update() override;
-    void Jump();
+    void            ResetForNewFrame() override;
+    void            Update() override;
+    void            Jump();
 
-    float PositionZ = 0.0f;
+    float           PositionZ = 0.0f;
 
 private:
 
-    bool IsJumping = false;
-    int JumpDuration = 600;
-    unsigned int TickStartJumping = 0;
-    float MaxJumpHeight = 1.0f;
+    bool            IsJumping = false;
+    int             JumpDuration = 600;
+    unsigned int    TickStartJumping = 0;
+    float           MaxJumpHeight = 1.0f;
 
 };
 

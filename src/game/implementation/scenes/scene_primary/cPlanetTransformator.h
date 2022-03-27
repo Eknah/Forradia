@@ -13,11 +13,11 @@ public:
 
     cPlanetTransformator(cEngine& Engine_) : Engine(Engine_) {}
 
-    float GetNewY(float Y, float TileX, float TileY);
+    float       GetNewY(float Y, float TileX, float TileY);
 
 private:
 
-    cEngine& Engine;
+    cEngine&    Engine;
 };
 
 }

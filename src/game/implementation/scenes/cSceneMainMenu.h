@@ -12,17 +12,17 @@ class cSceneMainMenu : public cSceneBase
 
 public:
 
-    using cSceneBase::cSceneBase;
+    using       cSceneBase::cSceneBase;
 
-    void Enter() override {}
-    void Update() override;
-    void Render() override;
-    void DoMouseDown(Uint8 mouseButton) override;
-    void DoMouseUp(Uint8 mouseButton) override {}
+    void        Enter() override {}
+    void        Update() override;
+    void        Render() override;
+    void        DoMouseDown(Uint8 mouseButton) override;
+    void        DoMouseUp(Uint8 mouseButton) override {}
 
 private:
 
-    cUtilities Utilities;
+    cUtilities  Utilities;
 
 };
 

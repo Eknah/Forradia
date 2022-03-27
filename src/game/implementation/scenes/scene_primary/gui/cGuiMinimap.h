@@ -17,11 +17,11 @@ public:
 
 private:
 
-    cEngine& Engine;
+    cEngine&    Engine;
 
-    const int MinimapSize = 250;
-    cPalette Palette;
-    cUtilities Utilities;
+    const int   MinimapSize = 250;
+    cPalette    Palette;
+    cUtilities  Utilities;
 };
 
 }

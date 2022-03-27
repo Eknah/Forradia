@@ -16,10 +16,10 @@ bool cTile::MovementBlocked()
     return false;
 }
 
-bool cTile::HasObjectOfType(std::string objectName)
+bool cTile::HasObjectOfType(std::string ObjectName)
 {
     for (auto& Object : Objects)
-        if (Object->ObjectType == GetId(objectName)) return true;
+        if (Object->ObjectType == GetId(ObjectName)) return true;
 
     return false;
 }

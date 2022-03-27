@@ -13,11 +13,11 @@ public:
 
     cBackground(cEngine& Engine_) : Engine(Engine_) {}
 
-    void Render(float Zoom);
+    void        Render(float Zoom);
 
 private:
 
-    cEngine& Engine;
+    cEngine&    Engine;
 };
 
 }

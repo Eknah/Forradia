@@ -15,14 +15,17 @@ public:
     cObject(std::string ObjectTypeName, bool RandomScaling = true);
 
     // Object usage
+
     void UseOn(std::unique_ptr<cObject>& Other);
 
     // Core
-    int ObjectType = 0;
+
+    int     ObjectType = 0;
 
     // Rendering
-    float Rotation = 0.0f;
-    float Scaling = 1.0f;
+
+    float   Rotation = 0.0f;
+    float   Scaling = 1.0f;
 
 private:
 

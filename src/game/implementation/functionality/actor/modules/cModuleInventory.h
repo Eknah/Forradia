@@ -12,16 +12,19 @@ class cModuleInventory : public iModule
 
 public:
 
-    using iModule::iModule;
+    using   iModule::iModule;
 
-    void ResetForNewFrame() override;
-    void Update() override;
+    void    ResetForNewFrame() override;
+    void    Update() override;
 
     // Collection operations
-    void Add(int Position, std::string ObjectName);
+
+    void    Add(int Position, std::string ObjectName);
 
     // Collection structure
-    UMap<int, SPtr<cObject>> Objects;
+
+    UMap<int, SPtr<cObject>>
+    Objects;
 
 };
 

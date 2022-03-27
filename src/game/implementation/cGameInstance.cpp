@@ -27,39 +27,42 @@ void cGameInstance::StartGame()
     const int               MapAreaSize = 150;
     auto                    WorldMap = MakeUPtr<cWorldMap>(MapAreaSize);
 
-    cEngine                Engine;
-    cObjectsContent        ObjectsContent;
-    cScenesCollection      ScenesCollection;
-    UMap<int, SPtr<cObject>> StartingInventory;
-    cDefaultMapGenerator   DefaultMapGenerator(Engine, WorldMap);
+    cEngine                 Engine;
+    cObjectsContent         ObjectsContent;
+    cScenesCollection       ScenesCollection;
 
-    cObjectDescription     DescObjectTree1;
-    cObjectDescription     DescObjectTree2;
-    cObjectDescription     DescCaveWallBlock;
+    UMap<int, SPtr<cObject>>
+            StartingInventory;
 
-    WorldMap            ->GenerateWorldMap(DefaultMapGenerator);
-    StartingInventory   .insert({0, MakeSPtr<cObject>("ObjectWoodaxe")});
-    StartingInventory   .insert({1, MakeSPtr<cObject>("ObjectSaw")});
+    cDefaultMapGenerator    DefaultMapGenerator(Engine, WorldMap);
 
-    DescObjectTree1     .BlocksMovement  = true;
-    DescObjectTree1     .BlocksSight     = true;
-    DescObjectTree1     .Movable         = false;
+    cObjectDescription      DescObjectTree1;
+    cObjectDescription      DescObjectTree2;
+    cObjectDescription      DescCaveWallBlock;
 
-    DescObjectTree2     .BlocksMovement  = true;
-    DescObjectTree2     .BlocksSight     = true;
-    DescObjectTree2     .Movable         = false;
+    WorldMap                ->GenerateWorldMap(DefaultMapGenerator);
+    StartingInventory       .insert({0, MakeSPtr<cObject>("ObjectWoodaxe")});
+    StartingInventory       .insert({1, MakeSPtr<cObject>("ObjectSaw")});
 
-    DescCaveWallBlock   .BlocksMovement  = true;
-    DescCaveWallBlock   .BlocksSight     = true;
-    DescCaveWallBlock   .Movable         = false;
+    DescObjectTree1         .BlocksMovement  = true;
+    DescObjectTree1         .BlocksSight     = true;
+    DescObjectTree1         .Movable         = false;
 
-    ObjectsContent      .Add("ObjectTree1",           DescObjectTree1 );
-    ObjectsContent      .Add("ObjectTree2",           DescObjectTree2 );
-    ObjectsContent      .Add("ObjectCaveWallBlock",   DescCaveWallBlock );
+    DescObjectTree2         .BlocksMovement  = true;
+    DescObjectTree2         .BlocksSight     = true;
+    DescObjectTree2         .Movable         = false;
 
-    ScenesCollection              .Add("SceneGameStart",    MakeUPtr<cSceneGameStart>(Engine));
-    ScenesCollection              .Add("SceneMainMenu",     MakeUPtr<cSceneMainMenu>(Engine));
-    ScenesCollection              .Add("ScenePrimary",      MakeUPtr<cScenePrimary>(Engine));
+    DescCaveWallBlock       .BlocksMovement  = true;
+    DescCaveWallBlock       .BlocksSight     = true;
+    DescCaveWallBlock       .Movable         = false;
+
+    ObjectsContent          .Add("ObjectTree1",           DescObjectTree1 );
+    ObjectsContent          .Add("ObjectTree2",           DescObjectTree2 );
+    ObjectsContent          .Add("ObjectCaveWallBlock",   DescCaveWallBlock );
+
+    ScenesCollection        .Add("SceneGameStart",    MakeUPtr<cSceneGameStart>(Engine));
+    ScenesCollection        .Add("SceneMainMenu",     MakeUPtr<cSceneMainMenu>(Engine));
+    ScenesCollection        .Add("ScenePrimary",      MakeUPtr<cScenePrimary>(Engine));
 
     Engine.Run
     (

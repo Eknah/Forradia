@@ -11,10 +11,10 @@ class cModuleObjectUsage : public iModule
 
 public:
 
-    using iModule::iModule;
+    using   iModule::iModule;
 
-    void ResetForNewFrame() override;
-    void Update() override;
+    void    ResetForNewFrame() override;
+    void    Update() override;
 
     SPtr<cObject> ObjectBeingUsed = nullptr;
 

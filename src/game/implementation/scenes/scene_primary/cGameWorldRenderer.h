@@ -16,14 +16,14 @@ public:
 
     cGameWorldRenderer(cEngine& Engine_, cCamera& Camera_) : Engine(Engine_), Background(Engine_), PlanetTransformator(Engine_), Camera(Camera_) {}
 
-    void Render();
+    void                    Render();
 
 private:
 
-    cEngine& Engine;
-    cBackground Background;
-    cCamera& Camera;
-    cPlanetTransformator PlanetTransformator;
+    cEngine&                Engine;
+    cBackground             Background;
+    cCamera&                Camera;
+    cPlanetTransformator    PlanetTransformator;
 
 };
 

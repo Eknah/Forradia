@@ -22,8 +22,10 @@ void cGameWorldRenderer::Render()
     auto Zoom = Camera.ZoomAmount;
 
     glTranslatef(0.0f, -Zoom, -2.0f - Zoom * 4.0f);
+
     CameraX = (float)cos(AngleRadians) * CameraDist;
     CameraZ = -(float)sin(AngleRadians) * CameraDist;
+
     gluLookAt(CameraX, Camera.CameraHeight, CameraZ, 0, -1, 0, 0, 1, 0);
 
     float SubStepX = Engine.Player.Position.X - (int)Engine.Player.Position.X;
@@ -67,6 +69,7 @@ void cGameWorldRenderer::Render()
             if (TileX < 0 || TileY < 0 || TileX >= MapAreaSize || TileY >= MapAreaSize) continue;
 
             auto GroundTypeId = Engine.GetCurrentMapArea().Tiles[(int)TileX][(int)TileY].GroundType;
+
             auto WaterAnimIndex0 = 0;
             auto WaterAnimIndex1 = 0;
             auto WaterAnimIndex2 = 0;
@@ -78,6 +81,7 @@ void cGameWorldRenderer::Render()
                 WaterAnimIndex1 = ((Ticks() * 3 + ((int)TileX * (int)(TileY - 1)) * 10) % 3600) / 1200;
                 WaterAnimIndex2 = ((Ticks() * 3 + ((int)(TileX + 1) * (int)(TileY - 1)) * 10) % 3600) / 1200;
                 WaterAnimIndex3 = ((Ticks() * 3 + ((int)(TileX + 1) * (int)TileY) * 10) % 3600) / 1200;
+
                 if (WaterAnimIndex0 > 0)
                     GroundTypeId = GetId("GroundtypeWater" + std::to_string(WaterAnimIndex0));
             }
@@ -86,6 +90,7 @@ void cGameWorldRenderer::Render()
             auto Elev1 = 0.0f;
             auto Elev2 = 0.0f;
             auto Elev3 = 0.0f;
+
             auto WaterWaveHeight0 = WaterAnimIndex0 * Engine.TileSize / 4.0f;
             auto WaterWaveHeight1 = WaterAnimIndex1 * Engine.TileSize / 4.0f;
             auto WaterWaveHeight2 = WaterAnimIndex2 * Engine.TileSize / 4.0f;
@@ -114,6 +119,7 @@ void cGameWorldRenderer::Render()
                 Elev3 = Elev0;
 
             auto Slope = Elev3 - Elev0 + Elev0 - Elev1;
+
             auto R = 0.85f;
             auto G = 0.85f;
             auto B = 0.85f;
@@ -153,33 +159,43 @@ void cGameWorldRenderer::Render()
             TileY3 = PlanetTransformator.GetNewY(TileY3, (float)(int)TileX + 1, (float)(int)TileY);
 
             glBegin(GL_QUADS);
+
             glColor3f(R, G, B);
+
             glTexCoord2f(0, 0); glVertex3f(TileX0, TileY0, TileZ0);
             glTexCoord2f(1, 0); glVertex3f(TileX1, TileY1, TileZ1);
             glTexCoord2f(1, 1); glVertex3f(TileX2, TileY2, TileZ2);
             glTexCoord2f(0, 1); glVertex3f(TileX3, TileY3, TileZ3);
+
             glEnd();
 
             if (WaterAnimIndex0 > 0)
             {
                 glBegin(GL_QUADS);
+
                 glColor3f(R, G, B);
+
                 glTexCoord2f(0, 0); glVertex3f(TileX0, TileY0 + WaterWaveHeight0, TileZ0);
                 glTexCoord2f(1, 0); glVertex3f(TileX1, TileY1 + WaterWaveHeight1, TileZ1);
                 glTexCoord2f(1, 1); glVertex3f(TileX2, TileY2 + WaterWaveHeight2, TileZ2);
                 glTexCoord2f(0, 1); glVertex3f(TileX3, TileY3 + WaterWaveHeight3, TileZ3);
+
                 glEnd();
             }
 
             if (Engine.GetCurrentMapArea().Tiles[(int)TileX][(int)TileY].Objects.size() > 0)
             {
                 glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GetId("TileShadow")]);
+
                 glBegin(GL_QUADS);
+
                 glColor3f(R, G, B);
+
                 glTexCoord2f(0, 0); glVertex3f(TileX0, TileY0, TileZ0);
                 glTexCoord2f(1, 0); glVertex3f(TileX1, TileY1, TileZ1);
                 glTexCoord2f(1, 1); glVertex3f(TileX2, TileY2, TileZ2);
                 glTexCoord2f(0, 1); glVertex3f(TileX3, TileY3, TileZ3);
+
                 glEnd();
             }
 
@@ -189,12 +205,16 @@ void cGameWorldRenderer::Render()
             if (HoveredX == (int)TileX && HoveredY == (int)TileY && Engine.CustomCursor.CursorType != eCursorTypes::Hidden)
             {
                 glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GetId("TileHovering")]);
+
                 glBegin(GL_QUADS);
+
                 glColor3f(1.0f, 1.0f, 1.0f);
+
                 glTexCoord2f(0, 0); glVertex3f(TileX0, TileY0, TileZ0);
                 glTexCoord2f(1, 0); glVertex3f(TileX1, TileY1, TileZ1);
                 glTexCoord2f(1, 1); glVertex3f(TileX2, TileY2, TileZ2);
                 glTexCoord2f(0, 1); glVertex3f(TileX3, TileY3, TileZ3);
+
                 glEnd();
             }
 
@@ -235,14 +255,20 @@ void cGameWorldRenderer::Render()
     auto PlayerZ3 = OffsetY + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + SubStepY * Engine.TileSize + Engine.TileSize;
 
     glEnable(GL_TEXTURE_2D);
+
     glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GetId("TileShadow")]);
+
     glBegin(GL_QUADS);
+
     glColor3f(1, 1, 1);
+
     glTexCoord2f(0, 0); glVertex3f(PlayerX0, PlayerY0, PlayerZ0);
     glTexCoord2f(1, 0); glVertex3f(PlayerX1, PlayerY1, PlayerZ1);
     glTexCoord2f(1, 1); glVertex3f(PlayerX2, PlayerY2, PlayerZ2);
     glTexCoord2f(0, 1); glVertex3f(PlayerX3, PlayerY3, PlayerZ3);
+
     glEnd();
+
     glDisable(GL_TEXTURE_2D);
 
     auto ModelNamePlayer = std::string("Player");
@@ -250,6 +276,7 @@ void cGameWorldRenderer::Render()
     if (Engine.Player.GetModule<cModuleMovement>().IsWalking)
     {
         auto AnimIndex = (Ticks() % 300) / 75;
+
         if (AnimIndex > 0)
             ModelNamePlayer.append(std::to_string(AnimIndex));
     }

@@ -8,8 +8,8 @@ namespace Forradia
 
 void cDefaultMapGenerator::GenerateMapArea(int WorldX, int WorldY, int WorldZ)
 {
-
-    WorldMap->MapAreas[WorldX][WorldY][WorldZ] = MakeUPtr<cMapArea>(Engine, WorldMap->MapAreaSize, WorldX, WorldY, WorldZ);
+    WorldMap->MapAreas[WorldX][WorldY][WorldZ] =
+            MakeUPtr<cMapArea>(Engine, WorldMap->MapAreaSize, WorldX, WorldY, WorldZ);
 
     auto& MapArea = *WorldMap->MapAreas[WorldX][WorldY][WorldZ];
 
@@ -32,6 +32,7 @@ void cDefaultMapGenerator::ClearToGrass(cMapArea& MapArea)
 {
     for (auto TileY = 0; TileY < MapArea.Size; TileY++)
         for (auto TileX = 0; TileX < MapArea.Size; TileX++)
+
             MapArea.Tiles[TileX][TileY].GroundType = (int)GetId("GroundtypeGrass");
 }
 
@@ -334,7 +335,7 @@ void cDefaultMapGenerator::GenerateMobs(cMapArea& MapArea)
 void cDefaultMapGenerator::GenerateQuestCaves(cEngine& Engine, cMapArea& MapArea, UPtr<cWorldMap>& WorldMap)
 {
 
-    cQuestCaveMapGenerator questCaveMapGenerator;
+    cQuestCaveMapGenerator QuestCaveMapGenerator;
 
     for (auto Floor = -1; Floor >= -20; Floor--)
     {
@@ -352,7 +353,7 @@ void cDefaultMapGenerator::GenerateQuestCaves(cEngine& Engine, cMapArea& MapArea
 
             auto& quest_cave_map_area = WorldMap->MapAreas[MapArea.WorldCoord.X][MapArea.WorldCoord.Y][Floor];
 
-            questCaveMapGenerator.GenerateQuestCaveMapArea(*quest_cave_map_area, { TileX, TileY });
+            QuestCaveMapGenerator.GenerateQuestCaveMapArea(*quest_cave_map_area, { TileX, TileY });
         }
     }
 }

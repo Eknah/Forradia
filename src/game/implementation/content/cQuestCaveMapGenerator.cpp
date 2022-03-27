@@ -65,21 +65,25 @@ void cQuestCaveMapGenerator::GeneratePath(cMapArea& MapArea, cPoint2 EntranceLoc
             case 0:
             {
                 TileX++;
+
                 break;
             }
             case 1:
             {
                 TileY++;
+
                 break;
             }
             case 2:
             {
                 TileX--;
+
                 break;
             }
             case 3:
             {
                 TileY--;
+
                 break;
             }
             }

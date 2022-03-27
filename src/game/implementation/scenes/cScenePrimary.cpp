@@ -52,16 +52,12 @@ void cScenePrimary::Update()
     }
 
     if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_F2))
-    {
         Gui.Windows.at("Inventory")->Visible = !Gui.Windows.at("Inventory")->Visible;
-    }
 
     Camera.UpdateCameraMovement();
 
     if (Engine.MouseHandler.RightButtonDown)
-    {
         Player.GetModule<cModuleMovement>().FacingAngle = Camera.LookingAngle;
-    }
 
     if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_SPACE) > 0)
         Engine.Player.GetModule<cModuleJumping>().Jump();

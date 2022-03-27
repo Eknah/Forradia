@@ -22,28 +22,30 @@ public:
 
     };
 
-    using iModule::iModule;
+    using           iModule::iModule;
 
-    void ResetForNewFrame() override;
-    void Update() override;
+    void            ResetForNewFrame() override;
+    void            Update() override;
 
-    void UpdateRotation(float newFacingAngle);
+    void            UpdateRotation(float newFacingAngle);
 
-    MovementInstruction Instruction;
-    bool IsWalking = false;
-    float FacingAngle = 0.0f;
-    float FacingAngleRotated = 0.0f;
-    cPoint2F MoveDestination = { -1, -1 };
+    MovementInstruction
+    Instruction;
+
+    bool            IsWalking = false;
+    float           FacingAngle = 0.0f;
+    float           FacingAngleRotated = 0.0f;
+    cPoint2F        MoveDestination = { -1, -1 };
 
 private:
 
-    void UpdateDirectionalMovement();
-    void UpdateDestinationMovement();
+    void            UpdateDirectionalMovement();
+    void            UpdateDestinationMovement();
 
-    unsigned int TickLastMove = 0;
-    int MoveSpeed = 30;
-    float StepSize = 3.0f;
-    float StepMultiplier = 0.1f;
+    unsigned int    TickLastMove = 0;
+    int             MoveSpeed = 30;
+    float           StepSize = 3.0f;
+    float           StepMultiplier = 0.1f;
 
 };
 

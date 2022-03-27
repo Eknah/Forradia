@@ -13,6 +13,7 @@ void cCamera::Update(int RotationDirection, float ZoomChange)
             LookingAngle -= RotationAmount;
         else if (RotationDirection == GetId("Left"))
             LookingAngle += RotationAmount;
+
         TickLastUpdate = Ticks();
     }
 
@@ -34,22 +35,36 @@ void cCamera::Update(int RotationDirection, float ZoomChange)
     auto Zoom = ZoomAmount;
 
     glTranslatef(0.0f, -Zoom, -2.0f - Zoom * 4.0f);
+
     CameraX = (float)cos(AngleRadians) * CameraDist;
     CameraZ = -(float)sin(AngleRadians) * CameraDist;
+
     gluLookAt(CameraX, CameraHeight, CameraZ, 0, -1, 0, 0, 1, 0);
+
     GLint Viewport[4];                  // Where The Viewport Values Will Be Stored
+
     glGetIntegerv(GL_VIEWPORT, Viewport);
+
     GLdouble Modelview[16];
+
     glGetDoublev(GL_MODELVIEW_MATRIX, Modelview);
+
     GLdouble Projection[16];                // Where The 16 Doubles Of The Projection Matrix Are To Be Stored
+
     glGetDoublev(GL_PROJECTION_MATRIX, Projection);
+
     auto MousePosition = Utilities.GetMousePositionI();
+
     GLfloat WinX, WinY, WinZ;               // Holds Our X, Y and Z Coordinates
+
     WinX = (float)MousePosition.X;                  // Holds The Mouse X Coordinate
     WinY = (float)MousePosition.Y;
     WinY = (float)Viewport[3] - WinY;
+
     glReadPixels((GLint)WinX, (GLint)WinY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &WinZ);
+
     GLdouble PosX, PosY, PosZ;
+
     gluUnProject(WinX, WinY, WinZ, Modelview, Projection, Viewport, &PosX, &PosY, &PosZ);
 
     RayCastingX = (float)PosX;

@@ -46,6 +46,7 @@ void cGuiWindowInventory::RenderDerived()
 void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton)
 {
     if (MouseButton != SDL_BUTTON_RIGHT) return;
+
     Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed = nullptr;
 
     auto CanvasSize = Utilities.GetCanvasSize();

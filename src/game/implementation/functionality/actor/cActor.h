@@ -17,8 +17,8 @@ public:
 
     cActor(iEngine& Engine_) : Engine(Engine_) {}
 
-    void ResetForNewFrame();
-    void Update();
+    void        ResetForNewFrame();
+    void        Update();
 
     template <class T>
     inline T& GetModule()
@@ -26,9 +26,8 @@ public:
         return static_cast<T&>(*Modules.at(typeid(T).hash_code()));
     }
 
-    //int CurrentMapArea = 0;
-    cPoint3 WorldMapCoord = {1, 1, 0};
-    cPoint2F Position = { 50.0f, 50.0f };
+    cPoint3     WorldMapCoord = {1, 1, 0};
+    cPoint2F    Position = { 50.0f, 50.0f };
 
 protected:
 
@@ -41,8 +40,10 @@ protected:
 
 private:
 
-    iEngine& Engine;
-    UMap<size_t, UPtr<iModule>> Modules;
+    iEngine&    Engine;
+
+    UMap<size_t, UPtr<iModule>>
+    Modules;
 
 
 };
