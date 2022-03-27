@@ -35,7 +35,7 @@ protected:
     virtual void RenderDerived() = 0;
 
     // Basic data
-    const float Margin = 0.008;
+    const float Margin = 0.008f;
 
     F_Engine& Engine;
 

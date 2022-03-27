@@ -40,7 +40,7 @@ private:
     void UpdateDirectionalMovement();
     void UpdateDestinationMovement();
 
-    int TickLastMove = 0;
+    unsigned int TickLastMove = 0;
     int MoveSpeed = 30;
     float StepSize = 3.0f;
     float StepMultiplier = 0.1f;

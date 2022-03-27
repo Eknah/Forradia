@@ -25,7 +25,7 @@ protected:
 
     int FramesCount = 0;
     int Fps = 0;
-    int TickLastUpdate = 0;
+    unsigned int TickLastUpdate = 0;
     const float Posx = 0.97f;
     const float  Posy = 0.015f;
     const float  Width = 0.07f;

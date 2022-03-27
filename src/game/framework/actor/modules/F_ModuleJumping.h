@@ -22,7 +22,7 @@ private:
 
     bool IsJumping = false;
     int JumpDuration = 600;
-    int TickStartJumping = 0;
+    unsigned int TickStartJumping = 0;
     float MaxJumpHeight = 1.0f;
 
 };

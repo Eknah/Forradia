@@ -8,7 +8,7 @@ namespace Forradia
 void F_GuiWindowInventory::RenderDerived()
 {
     auto canvas_size = Utilities.GetCanvasSize();
-    auto aspect_ratio = double(canvas_size.Width) / canvas_size.Height;
+    auto aspect_ratio = float(canvas_size.Width) / canvas_size.Height;
     auto rect_interior = GetInteriorRect();
 
     Engine.FillRectangle(Palette.Wheat, rect_interior.X, rect_interior.Y, rect_interior.Width, rect_interior.Height);

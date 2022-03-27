@@ -90,7 +90,7 @@ public:
 
                 case SDL_MOUSEWHEEL:
                 {
-                    Engine.MouseHandler.WheelAmount = event.wheel.y;
+                    Engine.MouseHandler.WheelAmount = (float)event.wheel.y;
 
                     break;
                 }

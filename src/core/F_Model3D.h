@@ -181,11 +181,11 @@ public:
 
         file.close();
 
-        for (int i = 0; i < MeshMatNames.size(); i++)
+        for (unsigned int i = 0; i < MeshMatNames.size(); i++)
         {
             std::string matname = MeshMatNames[i];
 
-            for (int j = 0; j < LoadedMaterials.size(); j++)
+            for (unsigned int j = 0; j < LoadedMaterials.size(); j++)
             {
                 if (LoadedMaterials[j].Name == matname)
                 {
@@ -378,7 +378,7 @@ private:
                     break;
                 }
 
-                float angle = Math3D.AngleBetween(pPrev.Position - pCur.Position, pNext.Position - pCur.Position) * (180 / 3.14159265359);
+                float angle = Math3D.AngleBetween(pPrev.Position - pCur.Position, pNext.Position - pCur.Position) * (180.0f / 3.14159265359f);
 
                 if (angle <= 0 && angle >= 180) continue;
 

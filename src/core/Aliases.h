@@ -43,6 +43,6 @@ constexpr auto Ticks = &SDL_GetTicks;
 
 // Rarely used functions
 
-inline void Randomize() {srand(time(NULL));}
+inline void Randomize() {srand((unsigned int)time(NULL));}
 
 }
