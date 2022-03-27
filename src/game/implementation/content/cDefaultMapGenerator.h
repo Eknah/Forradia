@@ -13,7 +13,7 @@ public:
 
     using iMapGenerator::iMapGenerator;
 
-    void GenerateMapArea(cPoint2 worldMapCoord) override;
+    void GenerateMapArea(int WorldX, int WorldY, int WorldZ) override;
 
 private:
 

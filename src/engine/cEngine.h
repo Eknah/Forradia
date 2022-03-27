@@ -53,7 +53,8 @@ public:
         WorldMap        = move(WorldMap_);
         ObjectsContent  = ObjectsContent_;
 
-        Player          .CurrentMapArea = 0;
+        //Player          .CurrentMapArea = 0;
+        Player          .WorldMapCoord = {1, 1, 0};
         Player          .Position = GetCurrentMapArea().PlayerSpawnPosition;
         Player          .GetModule<cModuleInventory>().Objects = StartingInventory_;
         SceneManager    .Initialize(move(ScenesCollection_), StartScene_);
@@ -122,7 +123,8 @@ public:
     inline cMapArea& GetCurrentMapArea
     ()  override
     {
-        return *WorldMap->MapAreas.at(Player.CurrentMapArea);
+        //return *WorldMap->MapAreas.at(Player.CurrentMapArea);
+        return *WorldMap->MapAreas[Player.WorldMapCoord.X][Player.WorldMapCoord.Y][Player.WorldMapCoord.Z];
     }
 
     // ---- Public members ----

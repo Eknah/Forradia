@@ -25,7 +25,7 @@ public:
     std::vector<UPtr<cObject>> Objects;
     int Elevation = 0;
     UPtr<cMob> mob = nullptr;
-    int WarpToMap = -1;
+    int WarpToFloor = -1;
 
 private:
     cEngine& Engine;

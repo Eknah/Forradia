@@ -4,6 +4,7 @@
 #include "../engine/Aliases.h"
 #include "../engine/iModule.h"
 #include "../engine/cPoint2F.h"
+#include "../engine/cPoint3.h"
 
 namespace Forradia
 {
@@ -25,7 +26,8 @@ public:
         return static_cast<T&>(*Modules.at(typeid(T).hash_code()));
     }
 
-    int CurrentMapArea = 0;
+    //int CurrentMapArea = 0;
+    cPoint3 WorldMapCoord = {1, 1, 0};
     cPoint2F Position = { 50.0f, 50.0f };
 
 protected:

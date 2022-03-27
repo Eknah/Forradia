@@ -6,12 +6,14 @@
 namespace Forradia
 {
 
-void cDefaultMapGenerator::GenerateMapArea(cPoint2 worldMapCoord)
+void cDefaultMapGenerator::GenerateMapArea(int WorldX, int WorldY, int WorldZ)
 {
-    WorldMap->MapAreas.push_back(MakeUPtr<cMapArea>(Engine, WorldMap->MapAreaSize));
+    //WorldMap->MapAreas.push_back(MakeUPtr<cMapArea>(Engine, WorldMap->MapAreaSize, WorldX, WorldY, WorldZ));
+
+    WorldMap->MapAreas[WorldX][WorldY][WorldZ] = MakeUPtr<cMapArea>(Engine, WorldMap->MapAreaSize, WorldX, WorldY, WorldZ);
 
     auto map_area_id = WorldMap->MapAreas.size() - 1;
-    auto& map_area = *WorldMap->MapAreas.at(map_area_id);
+    auto& map_area = *WorldMap->MapAreas[WorldX][WorldY][WorldZ];
 
     ClearToGrass(map_area);
     GeneratePlayerStartingPosition(map_area);
@@ -348,11 +350,10 @@ void cDefaultMapGenerator::GenerateMobs(cMapArea& mapArea)
 
 void cDefaultMapGenerator::GenerateQuestCaves(cEngine& engine, cMapArea& mapArea, UPtr<cWorldMap>& worldMap)
 {
-    auto warp_from_map_id = worldMap->MapAreas.size() - 1;
 
     cQuestCaveMapGenerator questCaveMapGenerator;
 
-    for (auto i = 0; i < 20; i++)
+    for (auto floor = -1; floor >= -20; floor--)
     {
         auto x = rand() % 94 + 3;
         auto y = rand() % 94 + 3;
@@ -362,13 +363,15 @@ void cDefaultMapGenerator::GenerateQuestCaves(cEngine& engine, cMapArea& mapArea
         if (mapArea.Tiles[x][y].GroundType != (int)GetId("GroundtypeWater"))
         {
             mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<cObject>("ObjectQuestCaveEntrance"));
-            mapArea.Tiles[x][y].WarpToMap = worldMap->MapAreas.size();
+            mapArea.Tiles[x][y].WarpToFloor = floor;
 
-            worldMap->MapAreas.push_back(std::make_unique<cMapArea>(engine, worldMap->MapAreaSize));
+            //worldMap->MapAreas.push_back(std::make_unique<cMapArea>(engine, worldMap->MapAreaSize, mapArea.WorldCoord.X, mapArea.WorldCoord.Y, i));
 
-            auto& quest_cave_map_area = worldMap->MapAreas.at(worldMap->MapAreas.size() - 1);
+            worldMap->MapAreas[mapArea.WorldCoord.X][mapArea.WorldCoord.Y][floor] =std::make_unique<cMapArea>(engine, worldMap->MapAreaSize, mapArea.WorldCoord.X, mapArea.WorldCoord.Y, floor);
 
-            questCaveMapGenerator.GenerateQuestCaveMapArea(*quest_cave_map_area, { x, y }, warp_from_map_id);
+            auto& quest_cave_map_area = worldMap->MapAreas[mapArea.WorldCoord.X][mapArea.WorldCoord.Y][floor];
+
+            questCaveMapGenerator.GenerateQuestCaveMapArea(*quest_cave_map_area, { x, y });
         }
     }
 }

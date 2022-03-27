@@ -11,7 +11,7 @@ class cQuestCaveMapGenerator
 
 public:
 
-    void GenerateQuestCaveMapArea(cMapArea& mapArea, cPoint2 entranceLocation, int warpFromMap);
+    void GenerateQuestCaveMapArea(cMapArea& mapArea, cPoint2 entranceLocation);
 
 private:
 

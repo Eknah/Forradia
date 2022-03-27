@@ -4,13 +4,13 @@
 namespace Forradia
 {
 
-void cQuestCaveMapGenerator::GenerateQuestCaveMapArea(cMapArea& mapArea, cPoint2 entranceLocation, int warpFromMap)
+void cQuestCaveMapGenerator::GenerateQuestCaveMapArea(cMapArea& mapArea, cPoint2 entranceLocation)
 {
     ClearToCaveFloor(mapArea);
     GenerateCaveWalls(mapArea);
     GeneratePath(mapArea, entranceLocation);
 
-    mapArea.Tiles[entranceLocation.X][entranceLocation.Y].WarpToMap = warpFromMap;
+    mapArea.Tiles[entranceLocation.X][entranceLocation.Y].WarpToFloor = 0;
     mapArea.Tiles[entranceLocation.X][entranceLocation.Y].Objects.push_back(MakeUPtr<cObject>("ObjectQuestCaveEntrance"));
 }
 

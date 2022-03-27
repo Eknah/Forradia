@@ -21,8 +21,7 @@ public:
     int MapAreaSize = -1;
 
     // Core world map data structures
-    std::vector<UPtr<cMapArea>> MapAreas;
-    UMap<int,UMap<int, int>> MapAreaCoords;
+    UMap<int,UMap<int,UMap<int, UPtr<cMapArea>>>> MapAreas;
 
 };
 

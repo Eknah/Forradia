@@ -4,6 +4,7 @@
 #include "cMob.h"
 #include "../engine/Aliases.h"
 #include "cTile.h"
+#include "../engine/cPoint3.h"
 
 namespace Forradia
 {
@@ -15,9 +16,12 @@ class cMapArea
 
 public:
 
-    cMapArea(cEngine& Engine, int mapAreaSize);
+    cMapArea(cEngine& Engine, int mapAreaSize, int WorldX, int WorldY, int WorldZ);
+
+    bool IsUnderground();
 
     // Basic data
+    cPoint3 WorldCoord = {-1, -1, -1};
     int Size = -1;
     cPoint2F PlayerSpawnPosition = {-1, -1};
 
