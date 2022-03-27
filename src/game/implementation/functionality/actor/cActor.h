@@ -2,7 +2,7 @@
 #pragma once
 #include "CommonExternal.h"
 #include "../engine/Aliases.h"
-#include "modules/iModule.h"
+#include "../engine/iModule.h"
 #include "../engine/cPoint2F.h"
 
 namespace Forradia

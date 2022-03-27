@@ -1,6 +1,6 @@
 
 #pragma once
-#include "iModule.h"
+#include "../engine/iModule.h"
 #include "../engine/cPoint2F.h"
 
 namespace Forradia

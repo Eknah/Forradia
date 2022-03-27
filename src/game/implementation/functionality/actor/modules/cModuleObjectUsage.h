@@ -1,6 +1,6 @@
 
 #pragma once
-#include "iModule.h"
+#include "../engine/iModule.h"
 #include "framework/world_structure/cObject.h"
 
 namespace Forradia
