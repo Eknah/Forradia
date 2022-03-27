@@ -21,6 +21,6 @@ add_executable(
     ${all_files}
 )
 
-target_link_libraries(Forradia GL GLU glut GLEW SDL2 SDL2_image SDL2_ttf)
+target_link_libraries(Forradia opengl32 GLU glut GLEW SDL2 SDL2_image SDL2_ttf)
 
 target_include_directories(Forradia PUBLIC .)
