@@ -27,7 +27,7 @@ private:
     void GenerateTrees(F_MapArea& mapArea);
     void GenerateBushes(F_MapArea& mapArea);
     void GenerateSmallStones(F_MapArea& mapArea);
-    void GenerateTallGrass(F_MapArea& mapArea);
+    //void GenerateTallGrass(F_MapArea& mapArea);
     void GeneratePinkFlowers(F_MapArea& mapArea);
     void GenerateMobs(F_MapArea& mapArea);
     void GenerateQuestCaves(F_Engine& Engine, F_MapArea& mapArea, UPtr<F_WorldMap>& WorldMap);

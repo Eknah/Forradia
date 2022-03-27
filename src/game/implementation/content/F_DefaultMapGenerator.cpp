@@ -23,7 +23,7 @@ void F_DefaultMapGenerator::GenerateMapArea(F_Point2 worldMapCoord)
     GenerateTrees(map_area);
     GenerateBushes(map_area);
     GenerateSmallStones(map_area);
-    GenerateTallGrass(map_area);
+    //GenerateTallGrass(map_area);
     GeneratePinkFlowers(map_area);
     GenerateMobs(map_area);
     GenerateQuestCaves(Engine, map_area, WorldMap);
@@ -292,20 +292,20 @@ void F_DefaultMapGenerator::GenerateSmallStones(F_MapArea& mapArea)
     }
 }
 
-void F_DefaultMapGenerator::GenerateTallGrass(F_MapArea& mapArea)
-{
-    for (auto i = 0; i < 7000; i++)
-    {
-        auto x = rand() % mapArea.Size;
-        auto y = rand() % mapArea.Size;
+//void F_DefaultMapGenerator::GenerateTallGrass(F_MapArea& mapArea)
+//{
+//    for (auto i = 0; i < 7000; i++)
+//    {
+//        auto x = rand() % mapArea.Size;
+//        auto y = rand() % mapArea.Size;
 
-        if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
+//        if (DistToPlayerStartingPos(mapArea, x, y) < PlayerStartingAreaSize) continue;
 
-        if (mapArea.Tiles[x][y].GroundType == (int)GetId("GroundtypeGrass"))
-            if (mapArea.Tiles[x][y].Objects.size() == 0)
-                mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<F_Object>("ObjectTallGrass"));
-    }
-}
+//        if (mapArea.Tiles[x][y].GroundType == (int)GetId("GroundtypeGrass"))
+//            if (mapArea.Tiles[x][y].Objects.size() == 0)
+//                mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<F_Object>("ObjectTallGrass"));
+//    }
+//}
 
 void F_DefaultMapGenerator::GeneratePinkFlowers(F_MapArea& mapArea)
 {

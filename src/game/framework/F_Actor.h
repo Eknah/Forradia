@@ -1,5 +1,6 @@
 
 #pragma once
+#include "CommonExternal.h"
 #include "../core/Aliases.h"
 #include "actor_modules/F_IActorModule.h"
 #include "../core/F_Point2F.h"
@@ -19,9 +20,9 @@ public:
     void Update();
 
     template <class T>
-    inline T& GetModule(std::string ModuleName)
+    inline T& GetModule()
     {
-        return static_cast<T&>(Modules.at(GetId(ModuleName)));
+        return static_cast<T&>(*ModulesPtrz.at(typeid(T).hash_code()));
     }
 
     int CurrentMapArea = 0;
@@ -32,8 +33,9 @@ protected:
     template <class T>
     inline void AddModule(std::string ModuleName)
     {
-        ModulesPtrs.insert({GetId(ModuleName), MakeUPtr<T>(Engine, *this)});
-        Modules.insert({GetId(ModuleName),*ModulesPtrs.at(GetId(ModuleName))});
+        auto& Type = typeid(T);
+        ModulesPtrz.insert({Type.hash_code(),MakeUPtr<T>(Engine, *this)});
+        Modules.insert({GetId(ModuleName),*ModulesPtrz.at(Type.hash_code())});
     }
 
     UMap<int, F_IActorModule&> Modules;
@@ -41,7 +43,8 @@ protected:
 private:
 
     F_IEngine& Engine;
-    UMap<int, UPtr<F_IActorModule>> ModulesPtrs;
+    UMap<size_t, UPtr<F_IActorModule>> ModulesPtrz;
+
 
 };
 

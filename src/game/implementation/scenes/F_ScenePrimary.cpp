@@ -29,8 +29,8 @@ void F_ScenePrimary::Update()
 
     if (instruction.TryMoveForward || instruction.TryMoveRight || instruction.TryMoveBack || instruction.TryMoveLeft)
     {
-        player.GetModule<F_ActorModuleMovement>("ModuleMovement").FacingAngle = Camera.LookingAngle;
-        player.GetModule<F_ActorModuleMovement>("ModuleMovement").MoveDestination = { -1, -1 };
+        player.GetModule<F_ActorModuleMovement>().FacingAngle = Camera.LookingAngle;
+        player.GetModule<F_ActorModuleMovement>().MoveDestination = { -1, -1 };
     }
 
     auto turn_right = keys.count(SDLK_e);
@@ -60,11 +60,11 @@ void F_ScenePrimary::Update()
 
     if (Engine.MouseHandler.RightButtonDown)
     {
-        player.GetModule<F_ActorModuleMovement>("ModuleMovement").FacingAngle = Camera.LookingAngle;
+        player.GetModule<F_ActorModuleMovement>().FacingAngle = Camera.LookingAngle;
     }
 
     if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_SPACE) > 0)
-        Engine.Player.GetModule<F_ActorModuleJumping>("ModuleJumping").Jump();
+        Engine.Player.GetModule<F_ActorModuleJumping>().Jump();
 
     if (Engine.MouseHandler.RightButtonDown)
         Engine.CustomCursor.CursorType = F_ECursorTypes::Hidden;
@@ -104,7 +104,7 @@ void F_ScenePrimary::DoMouseDown(Uint8 mouseButton)
     {
     case SDL_BUTTON_LEFT:
     {
-        Engine.Player.GetModule<F_ActorModuleMovement>("ModuleMovement").MoveDestination = { Camera.GetHoveredTile().X + 0.5f, Camera.GetHoveredTile().Y + 0.5f };
+        Engine.Player.GetModule<F_ActorModuleMovement>().MoveDestination = { Camera.GetHoveredTile().X + 0.5f, Camera.GetHoveredTile().Y + 0.5f };
         break;
     }
     case SDL_BUTTON_RIGHT:

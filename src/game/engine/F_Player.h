@@ -21,12 +21,11 @@ public:
         AddModule<F_ActorModuleMovement>("ModuleMovement");
     }
 
-
     void UpdateRotation(float newFacingAngle);
 
     void SetMovementInstruction(F_ActorModuleMovement::MovementInstruction Instruction_)
     {
-        GetModule<F_ActorModuleMovement>("ModuleMovement").Instruction = Instruction_;
+        GetModule<F_ActorModuleMovement>().Instruction = Instruction_;
     }
 
     // Rendering
