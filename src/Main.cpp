@@ -9,7 +9,11 @@
 
 // Creates game instance and runs it
 
-int main()
+// Linux
+// int main()
+
+// Windows
+int wmain()
 {
     Forradia::F_GameInstance().StartGame();
 
