@@ -1,7 +1,7 @@
 
 #pragma once
 #include "CommonExternal.h"
-#include "../core/F_Utilities.h"
+#include "../engine/F_Utilities.h"
 #include "framework/F_SceneBase.h"
 
 namespace Forradia

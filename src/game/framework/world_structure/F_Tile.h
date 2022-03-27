@@ -1,6 +1,6 @@
 
 #pragma once
-#include "../core/Aliases.h"
+#include "../engine/Aliases.h"
 #include "F_Mob.h"
 #include "F_Object.h"
 

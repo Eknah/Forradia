@@ -1,6 +1,6 @@
 
 #include "F_ObjectsContent.h"
-#include "../core/Aliases.h"
+#include "../engine/Aliases.h"
 #include "F_ObjectDescription.h"
 
 namespace Forradia

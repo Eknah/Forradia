@@ -1,8 +1,8 @@
 
 #pragma once
-#include "../core/F_Point2F.h"
+#include "../engine/F_Point2F.h"
 #include "F_Mob.h"
-#include "../core/Aliases.h"
+#include "../engine/Aliases.h"
 #include "F_Tile.h"
 
 namespace Forradia

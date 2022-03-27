@@ -1,7 +1,7 @@
 
 #pragma once
 #include "F_IModule.h"
-#include "../core/F_Point2F.h"
+#include "../engine/F_Point2F.h"
 
 namespace Forradia
 {

@@ -1,7 +1,7 @@
 
 #include "CommonExternal.h"
 #include "F_GameInstance.h"
-#include "../core/F_Engine.h"
+#include "../engine/F_Engine.h"
 #include "implementation/scenes/F_SceneGameStart.h"
 #include "implementation/scenes/F_SceneMainMenu.h"
 #include "implementation/scenes/F_ScenePrimary.h"

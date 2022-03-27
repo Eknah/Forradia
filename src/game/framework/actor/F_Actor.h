@@ -1,9 +1,9 @@
 
 #pragma once
 #include "CommonExternal.h"
-#include "../core/Aliases.h"
+#include "../engine/Aliases.h"
 #include "modules/F_IModule.h"
-#include "../core/F_Point2F.h"
+#include "../engine/F_Point2F.h"
 
 namespace Forradia
 {

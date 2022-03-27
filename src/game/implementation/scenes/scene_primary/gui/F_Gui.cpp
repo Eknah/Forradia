@@ -1,6 +1,6 @@
 
 #include "F_Gui.h"
-#include "../core/F_Engine.h"
+#include "../engine/F_Engine.h"
 #include "F_GuiWindowInventory.h"
 
 namespace Forradia

@@ -4,7 +4,7 @@
 #include "F_Camera.h"
 #include "F_PlanetTransformator.h"
 #include "F_Background.h"
-#include "../core/F_Engine.h"
+#include "../engine/F_Engine.h"
 
 namespace Forradia
 {

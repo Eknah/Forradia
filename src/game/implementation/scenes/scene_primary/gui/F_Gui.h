@@ -1,7 +1,7 @@
 
 #pragma once
-#include "../core/F_Engine.h"
-#include "../core/F_Utilities.h"
+#include "../engine/F_Engine.h"
+#include "../engine/F_Utilities.h"
 #include "F_GuiMinimap.h"
 #include "framework/F_GuiWindowBase.h"
 

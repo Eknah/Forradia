@@ -1,7 +1,7 @@
 
 #include "F_ModuleMovement.h"
-#include "../core/Aliases.h"
-#include "../core/F_IEngine.h"
+#include "../engine/Aliases.h"
+#include "../engine/F_IEngine.h"
 #include "framework/actor/F_Actor.h"
 
 namespace Forradia

@@ -1,7 +1,7 @@
 
 #include "F_ModuleJumping.h"
 #include "CommonExternal.h"
-#include "../core/Aliases.h"
+#include "../engine/Aliases.h"
 
 namespace Forradia
 {

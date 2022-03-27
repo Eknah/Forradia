@@ -1,7 +1,7 @@
 
 #pragma once
 #include "F_IModule.h"
-#include "../core/Aliases.h"
+#include "../engine/Aliases.h"
 #include "framework/world_structure/F_Object.h"
 
 namespace Forradia

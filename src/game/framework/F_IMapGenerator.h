@@ -1,7 +1,7 @@
 
 #pragma once
-#include "../core/Aliases.h"
-#include "../core/F_Point2.h"
+#include "../engine/Aliases.h"
+#include "../engine/F_Point2.h"
 
 namespace Forradia
 {

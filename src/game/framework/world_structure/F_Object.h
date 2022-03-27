@@ -2,7 +2,7 @@
 #pragma once
 #include <string>
 #include <memory>
-#include "../core/Aliases.h"
+#include "../engine/Aliases.h"
 
 namespace Forradia
 {
