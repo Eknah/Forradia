@@ -20,4 +20,4 @@ add_executable(
 
 target_link_libraries(Forradia GL GLU glut GLEW SDL2 SDL2_image SDL2_ttf)
 
-target_include_directories(Forradia PUBLIC . C:/)
+target_include_directories(Forradia PUBLIC .)
