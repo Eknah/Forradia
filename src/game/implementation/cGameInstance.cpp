@@ -45,7 +45,7 @@ void cGameInstance::StartGame()
     StartingInventory       .insert({1, MakeSPtr<cObject>("ObjectSaw")});
 
     DescObjectTree1         .BlocksMovement  = true;
-    DescObjectTree1         .BlocksSight     = true;
+    DescObjectTree1         .BlocksSight     = true; 
     DescObjectTree1         .Movable         = false;
 
     DescObjectTree2         .BlocksMovement  = true;
