@@ -4,82 +4,82 @@
 namespace Forradia
 {
 
-void cQuestCaveMapGenerator::GenerateQuestCaveMapArea(cMapArea& mapArea, cPoint2 entranceLocation)
+void cQuestCaveMapGenerator::GenerateQuestCaveMapArea(cMapArea& MapArea, cPoint2 EntranceLocation)
 {
-    ClearToCaveFloor(mapArea);
-    GenerateCaveWalls(mapArea);
-    GeneratePath(mapArea, entranceLocation);
+    ClearToCaveFloor(MapArea);
+    GenerateCaveWalls(MapArea);
+    GeneratePath(MapArea, EntranceLocation);
 
-    mapArea.Tiles[entranceLocation.X][entranceLocation.Y].WarpToFloor = 0;
-    mapArea.Tiles[entranceLocation.X][entranceLocation.Y].Objects.push_back(MakeUPtr<cObject>("ObjectQuestCaveEntrance"));
+    MapArea.Tiles[EntranceLocation.X][EntranceLocation.Y].WarpToFloor = 0;
+    MapArea.Tiles[EntranceLocation.X][EntranceLocation.Y].Objects.push_back(MakeUPtr<cObject>("ObjectQuestCaveEntrance"));
 }
 
-void cQuestCaveMapGenerator::ClearToCaveFloor(cMapArea& mapArea)
+void cQuestCaveMapGenerator::ClearToCaveFloor(cMapArea& MapArea)
 {
-    for (auto y = 0; y < mapArea.Size; y++)
-        for (auto x = 0; x < mapArea.Size; x++)
+    for (auto TileY = 0; TileY < MapArea.Size; TileY++)
+        for (auto TileX = 0; TileX < MapArea.Size; TileX++)
 
-            mapArea.Tiles[x][y].GroundType = GetId("GroundtypeCaveFloor");
+            MapArea.Tiles[TileX][TileY].GroundType = GetId("GroundtypeCaveFloor");
 }
 
-void cQuestCaveMapGenerator::GenerateCaveWalls(cMapArea& mapArea)
+void cQuestCaveMapGenerator::GenerateCaveWalls(cMapArea& MapArea)
 {
-    for (auto y = 0; y < mapArea.Size; y++)
-        for (auto x = 0; x < mapArea.Size; x++)
+    for (auto TileY = 0; TileY < MapArea.Size; TileY++)
+        for (auto TileX = 0; TileX < MapArea.Size; TileX++)
 
-            mapArea.Tiles[x][y].Objects.push_back(MakeUPtr<cObject>("ObjectCaveWallBlock", false));
+            MapArea.Tiles[TileX][TileY].Objects.push_back(MakeUPtr<cObject>("ObjectCaveWallBlock", false));
 }
 
-void cQuestCaveMapGenerator::GeneratePath(cMapArea& mapArea, cPoint2 entranceLocation)
+void cQuestCaveMapGenerator::GeneratePath(cMapArea& MapArea, cPoint2 EntranceLocation)
 {
-    for (auto y = entranceLocation.Y - 3; y <= entranceLocation.Y + 3; y++)
-        for (auto x = entranceLocation.X - 3; x <= entranceLocation.X + 3; x++)
+    for (auto TileY = EntranceLocation.Y - 3; TileY <= EntranceLocation.Y + 3; TileY++)
+        for (auto TileX = EntranceLocation.X - 3; TileX <= EntranceLocation.X + 3; TileX++)
 
-            mapArea.Tiles[x][y].Objects.clear();
+            MapArea.Tiles[TileX][TileY].Objects.clear();
 
-    auto x = entranceLocation.X;
-    auto y = entranceLocation.Y;
+    auto TileX = EntranceLocation.X;
+    auto TileY = EntranceLocation.Y;
 
-    for (auto i = 0; i < 20; i++)
+    for (auto I = 0; I < 20; I++)
     {
-        auto direction = rand() % 4;
-        auto num_steps = 4 + rand() % 20;
+        auto Direction = rand() % 4;
+        auto NumSteps = 4 + rand() % 20;
 
-        for (auto j = 0; j < num_steps; j++)
+        for (auto J = 0; J < NumSteps; J++)
         {
-            for (auto xx = x - 1; xx <= x + 1; xx++)
+            for (auto XX = TileX - 1; XX <= TileX + 1; XX++)
             {
-                for (auto yy = y - 1; yy <= y + 1; yy++)
+                for (auto YY = TileY - 1; YY <= TileY + 1; YY++)
                 {
 
-                    if (xx >= 0 && yy >= 0 && xx < mapArea.Size && yy < mapArea.Size)
-                        if (mapArea.Tiles[xx][yy].Objects.size() > 0)
-                            if (!mapArea.Tiles[xx][yy].HasObjectOfType("ObjectQuestCaveEntrance"))
-                                mapArea.Tiles[xx][yy].Objects.clear();
+                    if (XX >= 0 && YY >= 0 && XX < MapArea.Size && YY < MapArea.Size)
+                        if (MapArea.Tiles[XX][YY].Objects.size() > 0)
+                            if (!MapArea.Tiles[XX][YY].HasObjectOfType("ObjectQuestCaveEntrance"))
+                                MapArea.Tiles[XX][YY].Objects.clear();
 
                 }
             }
 
-            switch (direction)
+            switch (Direction)
             {
             case 0:
             {
-                x++;
+                TileX++;
                 break;
             }
             case 1:
             {
-                y++;
+                TileY++;
                 break;
             }
             case 2:
             {
-                x--;
+                TileX--;
                 break;
             }
             case 3:
             {
-                y--;
+                TileY--;
                 break;
             }
             }

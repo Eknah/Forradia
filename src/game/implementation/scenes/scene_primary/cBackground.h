@@ -11,9 +11,9 @@ class cBackground
 
 public:
 
-    cBackground(cEngine& engine) : Engine(engine) {}
+    cBackground(cEngine& Engine_) : Engine(Engine_) {}
 
-    void Render(float zoom);
+    void Render(float Zoom);
 
 private:
 

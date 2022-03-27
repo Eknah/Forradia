@@ -6,12 +6,12 @@
 namespace Forradia
 {
 
-void cWorldMap::GenerateWorldMap(iMapGenerator& mapGenerator)
+void cWorldMap::GenerateWorldMap(iMapGenerator& MapGenerator)
 {
 
-    for (auto worldy = 0; worldy < 3; worldy++)
-        for (auto worldx = 0; worldx < 3; worldx++)
-            mapGenerator.GenerateMapArea(worldx, worldy, 0);
+    for (auto WorldY = 0; WorldY < 3; WorldY++)
+        for (auto WorldX = 0; WorldX < 3; WorldX++)
+            MapGenerator.GenerateMapArea(WorldX, WorldY, 0);
 
 }
 

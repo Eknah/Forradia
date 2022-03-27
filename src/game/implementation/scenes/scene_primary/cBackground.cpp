@@ -5,7 +5,7 @@
 namespace Forradia
 {
 
-void cBackground::Render(float zoom)
+void cBackground::Render(float Zoom)
 {
     if (Engine.GetCurrentMapArea().IsUnderground())
     {

@@ -14,7 +14,7 @@ public:
     using cGuiWindowBase::cGuiWindowBase;
 
     void RenderDerived() override;
-    void DoMouseDownDerived(Uint8 mouseButton) override;
+    void DoMouseDownDerived(Uint8 MouseButton) override;
 
 private:
 

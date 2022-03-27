@@ -4,8 +4,6 @@
 namespace Forradia
 {
 
-
-
 void cActor::ResetForNewFrame()
 {
     for (auto& [Key, Module] : Modules)

@@ -17,21 +17,20 @@ public:
 
 private:
 
-    void ClearToGrass(cMapArea& mapArea);
-    void GeneratePlayerStartingPosition(cMapArea& mapArea);
-    void GenerateElevation(cMapArea& mapArea);
-    void GenerateWater(cMapArea& mapArea);
-    void GenerateSand(cMapArea& mapArea);
-    void GenerateClay(cMapArea& mapArea);
-    void GenerateRock(cMapArea& mapArea);
-    void GenerateTrees(cMapArea& mapArea);
-    void GenerateBushes(cMapArea& mapArea);
-    void GenerateSmallStones(cMapArea& mapArea);
-    //void GenerateTallGrass(F_MapArea& mapArea);
-    void GeneratePinkFlowers(cMapArea& mapArea);
-    void GenerateMobs(cMapArea& mapArea);
-    void GenerateQuestCaves(cEngine& Engine, cMapArea& mapArea, UPtr<cWorldMap>& WorldMap);
-    int DistToPlayerStartingPos(cMapArea& mapArea, int mapX, int mapY);
+    void ClearToGrass(cMapArea& MapArea);
+    void GeneratePlayerStartingPosition(cMapArea& MapArea);
+    void GenerateElevation(cMapArea& MapArea);
+    void GenerateWater(cMapArea& MapArea);
+    void GenerateSand(cMapArea& MapArea);
+    void GenerateClay(cMapArea& MapArea);
+    void GenerateRock(cMapArea& MapArea);
+    void GenerateTrees(cMapArea& MapArea);
+    void GenerateBushes(cMapArea& MapArea);
+    void GenerateSmallStones(cMapArea& MapArea);
+    void GeneratePinkFlowers(cMapArea& MapArea);
+    void GenerateMobs(cMapArea& MapArea);
+    void GenerateQuestCaves(cEngine& Engine, cMapArea& MapArea, UPtr<cWorldMap>& WorldMap);
+    int DistToPlayerStartingPos(cMapArea& MapArea, int TileX, int TileY);
 
     const int PlayerStartingAreaSize = 4;
 

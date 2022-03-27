@@ -12,12 +12,12 @@ class cObjectsContent
 public:
 
     // Collection operations
-    void Add(std::string objectName, cObjectDescription description);
+    void Add(std::string ObjectName, cObjectDescription Description);
 
     // Get info about an object
-    bool IsMovable(int objectType);
-    bool BlocksMovement(int objectType);
-    bool BlocksSight(int objectType);
+    bool IsMovable(int ObjectType);
+    bool BlocksMovement(int ObjectType);
+    bool BlocksSight(int ObjectType);
 
     // Collection structure
     UMap<int, cObjectDescription> ObjectDescriptions;

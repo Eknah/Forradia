@@ -12,9 +12,9 @@ class cCamera
 
 public:
 
-    cCamera(cEngine& engine) : Engine(engine) {}
+    cCamera(cEngine& Engine_) : Engine(Engine_) {}
 
-    void Update(int rotationDirection, float zoomChange);
+    void Update(int RotationDirection, float ZoomChange);
     void UpdateCameraMovement();
 
     float LookingAngle = 0.0f;

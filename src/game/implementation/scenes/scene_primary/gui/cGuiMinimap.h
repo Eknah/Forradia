@@ -11,7 +11,7 @@ class cGuiMinimap
 
 public:
 
-    cGuiMinimap(cEngine& engine) : Engine(engine) {}
+    cGuiMinimap(cEngine& Engine_) : Engine(Engine_) {}
 
     void Render();
 

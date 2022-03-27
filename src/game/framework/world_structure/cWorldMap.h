@@ -12,10 +12,10 @@ class cWorldMap
 
 public:
 
-    cWorldMap(int mapAreaSize) : MapAreaSize(mapAreaSize) {}
+    cWorldMap(int MapAreaSize_) : MapAreaSize(MapAreaSize_) {}
 
     // Core
-    void GenerateWorldMap(iMapGenerator& mapGenerator);
+    void GenerateWorldMap(iMapGenerator& MapGenerator);
 
     // Basic data
     int MapAreaSize = -1;

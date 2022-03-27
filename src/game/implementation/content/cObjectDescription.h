@@ -10,7 +10,7 @@ class cObjectDescription
 public:
 
     cObjectDescription() = default;
-    cObjectDescription(bool movable, bool blocksMovement, bool blocksSight) : Movable(movable), BlocksMovement(blocksMovement), BlocksSight(blocksSight) {}
+    cObjectDescription(bool Moveable_, bool BlocksMovement_, bool BlocksSight_) : Movable(Moveable_), BlocksMovement(BlocksMovement_), BlocksSight(BlocksSight_) {}
 
     // Description parameters
     bool Movable = false;

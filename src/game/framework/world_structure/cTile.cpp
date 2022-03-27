@@ -10,16 +10,16 @@ bool cTile::MovementBlocked()
 {
     if (GroundType == GetId("GroundtypeWater")) return true;
 
-    for (auto& object : Objects)
-        if (Engine.ObjectsContent.BlocksMovement(object->ObjectType)) return true;
+    for (auto& Object : Objects)
+        if (Engine.ObjectsContent.BlocksMovement(Object->ObjectType)) return true;
 
     return false;
 }
 
 bool cTile::HasObjectOfType(std::string objectName)
 {
-    for (auto& object : Objects)
-        if (object->ObjectType == GetId(objectName)) return true;
+    for (auto& Object : Objects)
+        if (Object->ObjectType == GetId(objectName)) return true;
 
     return false;
 }

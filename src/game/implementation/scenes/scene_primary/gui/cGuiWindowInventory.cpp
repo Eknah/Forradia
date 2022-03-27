@@ -7,78 +7,78 @@ namespace Forradia
 
 void cGuiWindowInventory::RenderDerived()
 {
-    auto canvas_size = Utilities.GetCanvasSize();
-    auto aspect_ratio = float(canvas_size.Width) / canvas_size.Height;
-    auto rect_interior = GetInteriorRect();
+    auto CanvasSize = Utilities.GetCanvasSize();
+    auto AspectRatio = float(CanvasSize.Width) / CanvasSize.Height;
+    auto BoundsInterior = GetInteriorBounds();
 
-    Engine.FillRectangle(Palette.Wheat, rect_interior.X, rect_interior.Y, rect_interior.Width, rect_interior.Height);
+    Engine.FillRectangle(Palette.Wheat, BoundsInterior.X, BoundsInterior.Y, BoundsInterior.Width, BoundsInterior.Height);
 
-    auto slot_size = rect_interior.Width / NumSlotCols - Margin;
-    auto num_slow_rows = rect_interior.Height / ((slot_size + Margin) * aspect_ratio);
-    auto i = 0;
+    auto SlotSize = BoundsInterior.Width / NumSlotCols - Margin;
+    auto NumSlotRows = BoundsInterior.Height / ((SlotSize + Margin) * AspectRatio);
+    auto I = 0;
 
-    auto mouse_position = Utilities.GetMousePositionI();
-    auto mouse_x_rel = (double)mouse_position.X / canvas_size.Width;
-    auto mouse_y_rel = (double)mouse_position.Y / canvas_size.Height;
+    auto MousePosition = Utilities.GetMousePositionI();
+    auto MouseXRel = (double)MousePosition.X / CanvasSize.Width;
+    auto MouseYRel = (double)MousePosition.Y / CanvasSize.Height;
 
-    for (auto Y = 0; Y < num_slow_rows; Y++)
+    for (auto Y = 0; Y < NumSlotRows; Y++)
     {
         for (auto X = 0; X < NumSlotCols; X++)
         {
-            auto x_pos = rect_interior.X + X * (slot_size + Margin);
-            auto y_pos = rect_interior.Y + Y * (slot_size * aspect_ratio + Margin);
+            auto XPos = BoundsInterior.X + X * (SlotSize + Margin);
+            auto YPos = BoundsInterior.Y + Y * (SlotSize * AspectRatio + Margin);
 
-            if (Engine.Player.GetModule<cModuleInventory>().Objects.count(i) > 0)
+            if (Engine.Player.GetModule<cModuleInventory>().Objects.count(I) > 0)
             {
-                if (Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed == Engine.Player.GetModule<cModuleInventory>().Objects.at(i))
-                    Engine.DrawImage("ObjectSelected", x_pos, y_pos, slot_size, slot_size * aspect_ratio);
+                if (Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed == Engine.Player.GetModule<cModuleInventory>().Objects.at(I))
+                    Engine.DrawImage("ObjectSelected", XPos, YPos, SlotSize, SlotSize * AspectRatio);
                 else
-                    Engine.DrawImage("ObjectBackgroundShadow", x_pos, y_pos, slot_size, slot_size * aspect_ratio);
+                    Engine.DrawImage("ObjectBackgroundShadow", XPos, YPos, SlotSize, SlotSize * AspectRatio);
 
-                Engine.DrawImage(Engine.Player.GetModule<cModuleInventory>().Objects.at(i)->ObjectType, x_pos, y_pos, slot_size, slot_size * aspect_ratio);
+                Engine.DrawImage(Engine.Player.GetModule<cModuleInventory>().Objects.at(I)->ObjectType, XPos, YPos, SlotSize, SlotSize * AspectRatio);
             }
 
-            i++;
+            I++;
         }
     }
 }
 
-void cGuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton)
+void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton)
 {
-    if (mouseButton != SDL_BUTTON_RIGHT) return;
+    if (MouseButton != SDL_BUTTON_RIGHT) return;
     Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed = nullptr;
 
-    auto canvas_size = Utilities.GetCanvasSize();
-    auto aspect_ratio = double(canvas_size.Width) / canvas_size.Height;
-    auto rect_interior = GetInteriorRect();
+    auto CanvasSize = Utilities.GetCanvasSize();
+    auto AspectRatio = double(CanvasSize.Width) / CanvasSize.Height;
+    auto BoundsInterior = GetInteriorBounds();
 
-    auto slot_size = rect_interior.Width / NumSlotCols - Margin;
-    auto num_slow_rows = rect_interior.Height / ((slot_size + Margin) * aspect_ratio);
-    auto i = 0;
+    auto SlotSize = BoundsInterior.Width / NumSlotCols - Margin;
+    auto NumSlotRows = BoundsInterior.Height / ((SlotSize + Margin) * AspectRatio);
+    auto I = 0;
 
-    auto mouse_position = Utilities.GetMousePositionI();
-    auto mouse_x_rel = (double)mouse_position.X / canvas_size.Width;
-    auto mouse_y_rel = (double)mouse_position.Y / canvas_size.Height;
+    auto MousePosition = Utilities.GetMousePositionI();
+    auto MouseXRel = (double)MousePosition.X / CanvasSize.Width;
+    auto MouseYRel = (double)MousePosition.Y / CanvasSize.Height;
 
-    for (auto Y = 0; Y < num_slow_rows; Y++)
+    for (auto Y = 0; Y < NumSlotRows; Y++)
     {
         for (auto X = 0; X < NumSlotCols; X++)
         {
-            auto x_pos = rect_interior.X + X * (slot_size + Margin);
-            auto y_pos = rect_interior.Y + Y * (slot_size * aspect_ratio + Margin);
+            auto XPos = BoundsInterior.X + X * (SlotSize + Margin);
+            auto YPos = BoundsInterior.Y + Y * (SlotSize * AspectRatio + Margin);
 
-            if (Engine.Player.GetModule<cModuleInventory>().Objects.count(i) > 0)
+            if (Engine.Player.GetModule<cModuleInventory>().Objects.count(I) > 0)
             {
-                if (mouse_x_rel >= x_pos && mouse_y_rel >= y_pos && mouse_x_rel < x_pos + slot_size && mouse_y_rel < y_pos + slot_size * aspect_ratio)
+                if (MouseXRel >= XPos && MouseYRel >= YPos && MouseXRel < XPos + SlotSize && MouseYRel < YPos + SlotSize * AspectRatio)
                 {
-                Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed = Engine.Player.GetModule<cModuleInventory>().Objects.at(i);
-                return;
+                    Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed = Engine.Player.GetModule<cModuleInventory>().Objects.at(I);
+                    return;
                 }
 
 
             }
 
-            i++;
+            I++;
         }
     }
 }

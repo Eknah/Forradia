@@ -6,31 +6,31 @@
 namespace Forradia
 {
 
-void cObjectsContent::Add(std::string objectName, cObjectDescription description)
+void cObjectsContent::Add(std::string ObjectName, cObjectDescription Description)
 {
-    ObjectDescriptions.insert({GetId(objectName), description});
+    ObjectDescriptions.insert({GetId(ObjectName), Description});
 }
 
-bool cObjectsContent::IsMovable(int objectType)
+bool cObjectsContent::IsMovable(int ObjectType)
 {
-    if (ObjectDescriptions.count(objectType))
-        return ObjectDescriptions.at(objectType).Movable;
+    if (ObjectDescriptions.count(ObjectType))
+        return ObjectDescriptions.at(ObjectType).Movable;
 
     return false;
 }
 
-bool cObjectsContent::BlocksMovement(int objectType)
+bool cObjectsContent::BlocksMovement(int ObjectType)
 {
-    if (ObjectDescriptions.count(objectType))
-        return ObjectDescriptions.at(objectType).BlocksMovement;
+    if (ObjectDescriptions.count(ObjectType))
+        return ObjectDescriptions.at(ObjectType).BlocksMovement;
 
     return false;
 }
 
-bool cObjectsContent::BlocksSight(int objectType)
+bool cObjectsContent::BlocksSight(int ObjectType)
 {
-    if (ObjectDescriptions.count(objectType))
-        return ObjectDescriptions.at(objectType).BlocksSight;
+    if (ObjectDescriptions.count(ObjectType))
+        return ObjectDescriptions.at(ObjectType).BlocksSight;
 
     return false;
 }

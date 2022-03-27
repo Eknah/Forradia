@@ -5,24 +5,24 @@
 namespace Forradia
 {
 
-cObject::cObject(std::string _objectTypeName, bool randomScaling) : ObjectType(GetId(_objectTypeName)), Rotation((float)(rand() % 360))
+cObject::cObject(std::string ObjectTypeName, bool RandomScaling) : ObjectType(GetId(ObjectTypeName)), Rotation((float)(rand() % 360))
 {
-    if (randomScaling)
+    if (RandomScaling)
         Scaling = 0.6f + float(rand() % 8) / 10.0f;
 }
 
-void cObject::UseOn(std::unique_ptr<cObject>& other)
+void cObject::UseOn(std::unique_ptr<cObject>& Other)
 {
-    if (ObjectType == GetId("ObjectWoodaxe") && (other->ObjectType == GetId("ObjectTree1") || other->ObjectType == GetId("ObjectTree2")))
-        other->TransformInto("ObjectFelledTree");
+    if (ObjectType == GetId("ObjectWoodaxe") && (Other->ObjectType == GetId("ObjectTree1") || Other->ObjectType == GetId("ObjectTree2")))
+        Other->TransformInto("ObjectFelledTree");
 
-    if (ObjectType == GetId("ObjectSaw") && other->ObjectType == GetId("ObjectFelledTree"))
-        other->TransformInto("ObjectWoodplank");
+    if (ObjectType == GetId("ObjectSaw") && Other->ObjectType == GetId("ObjectFelledTree"))
+        Other->TransformInto("ObjectWoodplank");
 }
 
-void cObject::TransformInto(std::string objectName)
+void cObject::TransformInto(std::string ObjectName)
 {
-    ObjectType = GetId(objectName);
+    ObjectType = GetId(ObjectName);
 }
 
 }

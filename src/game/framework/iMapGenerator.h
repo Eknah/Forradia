@@ -13,7 +13,7 @@ class iMapGenerator
 
 public:
 
-    iMapGenerator(cEngine& engine, UPtr<cWorldMap>& worldMap) : Engine(engine), WorldMap(worldMap) {}
+    iMapGenerator(cEngine& Engine_, UPtr<cWorldMap>& WorldMap_) : Engine(Engine_), WorldMap(WorldMap_) {}
 
     // Core map area generation
     virtual void GenerateMapArea(int WorldX, int WorldY, int WorldZ) = 0;

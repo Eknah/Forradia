@@ -22,46 +22,46 @@ void cGuiWindowBase::Update()
 {
     if (!IsBeingMoved) return;
 
-    auto mouse_pos_f = Utilities.GetMousePositionF();
-    auto delta_mouse_x = mouse_pos_f.X - StartMoveMousePosition.x;
-    auto delta_mouse_y = mouse_pos_f.Y - StartMoveMousePosition.y;
+    auto MousePosF = Utilities.GetMousePositionF();
+    auto DeltaMouseX = MousePosF.X - StartMoveMousePosition.x;
+    auto DeltaMouseY = MousePosF.Y - StartMoveMousePosition.y;
 
-    Bounds.X = StartMovePosition.x + delta_mouse_x;
-    Bounds.Y = StartMovePosition.y + delta_mouse_y;
+    Bounds.X = StartMovePosition.x + DeltaMouseX;
+    Bounds.Y = StartMovePosition.y + DeltaMouseY;
 }
 
-cRectF cGuiWindowBase::GetInteriorRect()
+cRectF cGuiWindowBase::GetInteriorBounds()
 {
-    auto x = Bounds.X + Margin;
-    auto y = Bounds.Y + TitleBarHeight + Margin;
-    auto width = Bounds.Width - 2 * Margin;
-    auto height = Bounds.Height - TitleBarHeight - 2 * Margin;
+    auto X = Bounds.X + Margin;
+    auto Y = Bounds.Y + TitleBarHeight + Margin;
+    auto Width = Bounds.Width - 2 * Margin;
+    auto Height = Bounds.Height - TitleBarHeight - 2 * Margin;
 
-    return { x, y, width, height };
+    return { X, Y, Width, Height };
 }
 
-bool cGuiWindowBase::DoMouseDown(Uint8 mouseButton)
+bool cGuiWindowBase::DoMouseDown(Uint8 MouseButton)
 {
     if (!Visible) return false;
 
-    auto mouse_pos_f = Utilities.GetMousePositionF();
-    auto title_bar_rect = GetTitleBarRect();
+    auto MousePosF = Utilities.GetMousePositionF();
+    auto TitleBarBounds = GetTitleBarBounds();
 
-    if (title_bar_rect.ContainsPoint(mouse_pos_f))
+    if (TitleBarBounds.ContainsPoint(MousePosF))
     {
         IsBeingMoved = true;
         StartMovePosition = { Bounds.X, Bounds.Y };
-        StartMoveMousePosition = { mouse_pos_f.X, mouse_pos_f.Y };
+        StartMoveMousePosition = { MousePosF.X, MousePosF.Y };
     }
 
-    DoMouseDownDerived(mouseButton);
+    DoMouseDownDerived(MouseButton);
 
-    if (Bounds.ContainsPoint(mouse_pos_f)) return true;
+    if (Bounds.ContainsPoint(MousePosF)) return true;
 
     return false;
 }
 
-cRectF cGuiWindowBase::GetTitleBarRect()
+cRectF cGuiWindowBase::GetTitleBarBounds()
 {
     return { Bounds.X, Bounds.Y, Bounds.Width, TitleBarHeight};
 }

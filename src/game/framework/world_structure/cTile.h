@@ -14,18 +14,18 @@ class cTile
 
 public:
 
-    cTile(cEngine& engine) : Engine(engine) {}
+    cTile(cEngine& Engine_) : Engine(Engine_) {}
 
     // Get info about tile
     bool MovementBlocked();
-    bool HasObjectOfType(std::string objectName);
+    bool HasObjectOfType(std::string ObjectName);
 
     // Core tile data structure
-    int GroundType = 0;
-    std::vector<UPtr<cObject>> Objects;
-    int Elevation = 0;
-    UPtr<cMob> mob = nullptr;
-    int WarpToFloor = -1;
+    int                         GroundType = 0;
+    std::vector<UPtr<cObject>>  Objects;
+    int                         Elevation = 0;
+    UPtr<cMob>                  Mob = nullptr;
+    int                         WarpToFloor = -1;
 
 private:
     cEngine& Engine;

@@ -13,12 +13,12 @@ class cGui
 
 public:
 
-    cGui(cEngine& engine) : Engine(engine), GuiMinimap(engine) {}
+    cGui(cEngine& Engine_) : Engine(Engine_), GuiMinimap(Engine_) {}
 
     void Initialize();
     void Update();
     void Render();
-    bool DoMouseDown(Uint8 mouseButton);
+    bool DoMouseDown(Uint8 MouseButton);
     void DoMouseUp();
 
     UMap<std::string, UPtr<cGuiWindowBase>> Windows;

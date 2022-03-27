@@ -5,18 +5,18 @@
 namespace Forradia
 {
 
-void cCamera::Update(int rotationDirection, float zoomChange)
+void cCamera::Update(int RotationDirection, float ZoomChange)
 {
     if (Ticks() > TickLastUpdate + UpdateSpeed)
     {
-        if (rotationDirection == GetId("Right"))
+        if (RotationDirection == GetId("Right"))
             LookingAngle -= RotationAmount;
-        else if (rotationDirection == GetId("Left"))
+        else if (RotationDirection == GetId("Left"))
             LookingAngle += RotationAmount;
         TickLastUpdate = Ticks();
     }
 
-    ZoomAmount += zoomChange * ZoomMultiplier / 100.0f;
+    ZoomAmount += ZoomChange * ZoomMultiplier / 100.0f;
     ZoomAmount = std::min(std::max(ZoomAmount, 0.5f), 15.0f);
 
     //-----------Ray Casting----------------

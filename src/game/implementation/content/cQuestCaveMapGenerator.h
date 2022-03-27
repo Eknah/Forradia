@@ -11,13 +11,13 @@ class cQuestCaveMapGenerator
 
 public:
 
-    void GenerateQuestCaveMapArea(cMapArea& mapArea, cPoint2 entranceLocation);
+    void GenerateQuestCaveMapArea(cMapArea& MapArea, cPoint2 EntranceLocation);
 
 private:
 
-    void ClearToCaveFloor(cMapArea& mapArea);
-    void GenerateCaveWalls(cMapArea& mapArea);
-    void GeneratePath(cMapArea& mapArea, cPoint2 entranceLocation);
+    void ClearToCaveFloor(cMapArea& MapArea);
+    void GenerateCaveWalls(cMapArea& MapArea);
+    void GeneratePath(cMapArea& MapArea, cPoint2 EntranceLocation);
 
 };
 

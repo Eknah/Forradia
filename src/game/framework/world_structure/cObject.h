@@ -12,10 +12,10 @@ class cObject
 
 public:
 
-    cObject(std::string objectTypeName, bool randomScaling = true);
+    cObject(std::string ObjectTypeName, bool RandomScaling = true);
 
     // Object usage
-    void UseOn(std::unique_ptr<cObject>& other);
+    void UseOn(std::unique_ptr<cObject>& Other);
 
     // Core
     int ObjectType = 0;
@@ -26,7 +26,7 @@ public:
 
 private:
 
-    void TransformInto(std::string objectName);
+    void TransformInto(std::string ObjectName);
 
 };
 

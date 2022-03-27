@@ -212,12 +212,12 @@ void cGameWorldRenderer::Render()
                     Engine.DrawModel(tile_object,tile_x_0 + Engine.TileSize / 2, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3)/4.0f, tile_z_0 - Engine.TileSize / 2, object->Rotation, object->Scaling);
             }
 
-            if (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob != nullptr)
+            if (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].Mob != nullptr)
             {
-                auto sub_x_pos = (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->Position.X - int(Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->Position.X)) * Engine.TileSize;
-                auto sub_y_pos = (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->Position.Y - int(Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->Position.Y)) * Engine.TileSize;
+                auto sub_x_pos = (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].Mob->Position.X - int(Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].Mob->Position.X)) * Engine.TileSize;
+                auto sub_y_pos = (Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].Mob->Position.Y - int(Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].Mob->Position.Y)) * Engine.TileSize;
 
-                Engine.DrawModel(GetId("MobRabbit"), tile_x_0 + sub_x_pos, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3) / 4.0f, tile_z_0 - Engine.TileSize + sub_y_pos, Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].mob->FacingAngle);
+                Engine.DrawModel(GetId("MobRabbit"), tile_x_0 + sub_x_pos, (tile_y_0 + tile_y_1 + tile_y_2 + tile_y_3) / 4.0f, tile_z_0 - Engine.TileSize + sub_y_pos, Engine.GetCurrentMapArea().Tiles[(int)map_x][(int)map_y].Mob->FacingAngle);
             }
         }
     }
