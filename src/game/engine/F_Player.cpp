@@ -9,7 +9,7 @@ namespace Forradia
 
 void F_Player::UpdateRotation(float newFacingAngle)
 {
-    ModuleMovement.FacingAngle = newFacingAngle;
+    GetModule<F_ActorModuleMovement>("ModuleMovement").FacingAngle = newFacingAngle;
 }
 
 }

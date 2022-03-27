@@ -1,7 +1,6 @@
 
 #pragma once
 #include "framework/F_Inventory.h"
-#include "../core/F_Point2F.h"
 #include "framework/F_Actor.h"
 #include "framework/actor_modules/F_ActorModuleJumping.h"
 #include "framework/actor_modules/F_ActorModuleMovement.h"
@@ -10,17 +9,16 @@
 namespace Forradia
 {
 
-class F_IEngine;
 
 class F_Player : public F_Actor
 {
 
 public:
 
-    F_Player(F_IEngine& engine) : Engine(engine), ModuleJumping(engine, *this), ModuleMovement(engine, *this)
+    F_Player(F_IEngine& engine) : F_Actor(engine)
     {
-        AddModule("ModuleJumping", ModuleJumping);
-        AddModule("ModuleMovement", ModuleMovement);
+        AddModule<F_ActorModuleJumping>("ModuleJumping");
+        AddModule<F_ActorModuleMovement>("ModuleMovement");
     }
 
 
@@ -28,7 +26,7 @@ public:
 
     void SetMovementInstruction(F_ActorModuleMovement::MovementInstruction Instruction_)
     {
-        ModuleMovement.Instruction = Instruction_;
+        GetModule<F_ActorModuleMovement>("ModuleMovement").Instruction = Instruction_;
     }
 
     // Rendering
@@ -40,13 +38,6 @@ public:
     // Object usage
     SPtr<F_Object> ObjectBeingUsed = nullptr;
 
-    F_ActorModuleJumping ModuleJumping;
-    F_ActorModuleMovement ModuleMovement;
-
-
-private:
-
-    F_IEngine& Engine;
 
 };
 
