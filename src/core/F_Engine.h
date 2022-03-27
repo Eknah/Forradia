@@ -13,7 +13,7 @@
 #include "F_ModelGraphics.h"
 #include "F_PaintGraphics.h"
 #include "F_IEngine.h"
-#include "../game/engine/F_Player.h"
+#include "F_Player.h"
 
 namespace Forradia
 {
