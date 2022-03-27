@@ -1,25 +1,30 @@
 
-#include "F_ActorModuleMovement.h"
+#include "F_ModuleMovement.h"
 #include "../core/Aliases.h"
 #include "../core/F_IEngine.h"
-#include "framework/F_Actor.h"
+#include "framework/actor/F_Actor.h"
 
 namespace Forradia
 {
 
-void F_ActorModuleMovement::ResetForNewFrame()
+void F_ModuleMovement::ResetForNewFrame()
 {
     IsWalking = false;
     FacingAngleRotated = FacingAngle;
 }
 
-void F_ActorModuleMovement::Update()
+void F_ModuleMovement::Update()
 {
     UpdateDirectionalMovement();
     UpdateDestinationMovement();
 }
 
-void F_ActorModuleMovement::UpdateDirectionalMovement()
+void F_ModuleMovement::UpdateRotation(float newFacingAngle)
+{
+    FacingAngle = newFacingAngle;
+}
+
+void F_ModuleMovement::UpdateDirectionalMovement()
 {
     if (!(Ticks() > TickLastMove + MoveSpeed && (Instruction.TryMoveForward || Instruction.TryMoveRight || Instruction.TryMoveBack || Instruction.TryMoveLeft))) return;
 
@@ -94,7 +99,7 @@ void F_ActorModuleMovement::UpdateDirectionalMovement()
     TickLastMove = Ticks();
 }
 
-void F_ActorModuleMovement::UpdateDestinationMovement()
+void F_ModuleMovement::UpdateDestinationMovement()
 {
     if (!(Ticks() > TickLastMove + MoveSpeed && MoveDestination.X != -1 && MoveDestination.Y != -1)) return;
 

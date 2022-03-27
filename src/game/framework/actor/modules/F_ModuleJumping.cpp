@@ -1,15 +1,15 @@
 
-#include "F_ActorModuleJumping.h"
+#include "F_ModuleJumping.h"
 #include "CommonExternal.h"
 #include "../core/Aliases.h"
 
 namespace Forradia
 {
 
-void F_ActorModuleJumping::ResetForNewFrame()
+void F_ModuleJumping::ResetForNewFrame()
 {}
 
-void F_ActorModuleJumping::Update()
+void F_ModuleJumping::Update()
 {
     if (IsJumping)
     {
@@ -25,7 +25,7 @@ void F_ActorModuleJumping::Update()
     }
 }
 
-void F_ActorModuleJumping::Jump()
+void F_ModuleJumping::Jump()
 {
 
         IsJumping = true;

@@ -2,7 +2,7 @@
 #pragma once
 #include "CommonExternal.h"
 #include "../core/Aliases.h"
-#include "actor_modules/F_IActorModule.h"
+#include "modules/F_IModule.h"
 #include "../core/F_Point2F.h"
 
 namespace Forradia
@@ -22,7 +22,7 @@ public:
     template <class T>
     inline T& GetModule()
     {
-        return static_cast<T&>(*ModulesPtrz.at(typeid(T).hash_code()));
+        return static_cast<T&>(*Modules.at(typeid(T).hash_code()));
     }
 
     int CurrentMapArea = 0;
@@ -31,19 +31,16 @@ public:
 protected:
 
     template <class T>
-    inline void AddModule(std::string ModuleName)
+    inline void AddModule()
     {
         auto& Type = typeid(T);
-        ModulesPtrz.insert({Type.hash_code(),MakeUPtr<T>(Engine, *this)});
-        Modules.insert({GetId(ModuleName),*ModulesPtrz.at(Type.hash_code())});
+        Modules.insert({Type.hash_code(),MakeUPtr<T>(Engine, *this)});
     }
-
-    UMap<int, F_IActorModule&> Modules;
 
 private:
 
     F_IEngine& Engine;
-    UMap<size_t, UPtr<F_IActorModule>> ModulesPtrz;
+    UMap<size_t, UPtr<F_IModule>> Modules;
 
 
 };

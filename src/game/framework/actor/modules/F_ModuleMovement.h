@@ -1,12 +1,12 @@
 
 #pragma once
-#include "F_IActorModule.h"
+#include "F_IModule.h"
 #include "../core/F_Point2F.h"
 
 namespace Forradia
 {
 
-class F_ActorModuleMovement : public F_IActorModule
+class F_ModuleMovement : public F_IModule
 {
 
 public:
@@ -22,10 +22,12 @@ public:
 
     };
 
-    using F_IActorModule::F_IActorModule;
+    using F_IModule::F_IModule;
 
     void ResetForNewFrame() override;
     void Update() override;
+
+    void UpdateRotation(float newFacingAngle);
 
     MovementInstruction Instruction;
     bool IsWalking = false;

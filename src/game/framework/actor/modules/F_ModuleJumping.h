@@ -1,16 +1,16 @@
 
 #pragma once
-#include "F_IActorModule.h"
+#include "F_IModule.h"
 
 namespace Forradia
 {
 
-class F_ActorModuleJumping : public F_IActorModule
+class F_ModuleJumping : public F_IModule
 {
 
 public:
 
-    using F_IActorModule::F_IActorModule;
+    using F_IModule::F_IModule;
 
     void ResetForNewFrame() override;
     void Update() override;

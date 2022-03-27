@@ -18,19 +18,19 @@ void F_ScenePrimary::Update()
 
     player.ResetForNewFrame();
 
-    auto instruction = F_ActorModuleMovement::MovementInstruction();
+    auto instruction = F_ModuleMovement::MovementInstruction();
 
     instruction.TryMoveForward = keys.count(SDLK_w);
     instruction.TryMoveRight = keys.count(SDLK_d);
     instruction.TryMoveBack = keys.count(SDLK_s);
     instruction.TryMoveLeft = keys.count(SDLK_a);
 
-    player.SetMovementInstruction(instruction);
+    player.GetModule<F_ModuleMovement>().Instruction = instruction;
 
     if (instruction.TryMoveForward || instruction.TryMoveRight || instruction.TryMoveBack || instruction.TryMoveLeft)
     {
-        player.GetModule<F_ActorModuleMovement>().FacingAngle = Camera.LookingAngle;
-        player.GetModule<F_ActorModuleMovement>().MoveDestination = { -1, -1 };
+        player.GetModule<F_ModuleMovement>().FacingAngle = Camera.LookingAngle;
+        player.GetModule<F_ModuleMovement>().MoveDestination = { -1, -1 };
     }
 
     auto turn_right = keys.count(SDLK_e);
@@ -39,12 +39,12 @@ void F_ScenePrimary::Update()
     if (turn_right)
     {
         Camera.Update(GetId("Right"), Engine.MouseHandler.WheelAmount);
-        player.UpdateRotation(Camera.LookingAngle);
+        player.GetModule<F_ModuleMovement>().UpdateRotation(Camera.LookingAngle);
     }
     else if (turn_left)
     {
         Camera.Update(GetId("Left"), Engine.MouseHandler.WheelAmount);
-        player.UpdateRotation(Camera.LookingAngle);
+        player.GetModule<F_ModuleMovement>().UpdateRotation(Camera.LookingAngle);
     }
     else
     {
@@ -60,11 +60,11 @@ void F_ScenePrimary::Update()
 
     if (Engine.MouseHandler.RightButtonDown)
     {
-        player.GetModule<F_ActorModuleMovement>().FacingAngle = Camera.LookingAngle;
+        player.GetModule<F_ModuleMovement>().FacingAngle = Camera.LookingAngle;
     }
 
     if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_SPACE) > 0)
-        Engine.Player.GetModule<F_ActorModuleJumping>().Jump();
+        Engine.Player.GetModule<F_ModuleJumping>().Jump();
 
     if (Engine.MouseHandler.RightButtonDown)
         Engine.CustomCursor.CursorType = F_ECursorTypes::Hidden;
@@ -83,14 +83,14 @@ void F_ScenePrimary::Render()
 
 void F_ScenePrimary::DoMouseDown(Uint8 mouseButton)
 {
-    if (Engine.Player.ObjectBeingUsed != nullptr)
+    if (Engine.Player.GetModule<F_ModuleObjectUsage>().ObjectBeingUsed != nullptr)
     {
         auto hovered = Camera.GetHoveredTile();
 
         if (Engine.GetCurrentMapArea().Tiles[hovered.X][hovered.Y].Objects.size() > 0)
-            Engine.Player.ObjectBeingUsed->UseOn(Engine.GetCurrentMapArea().Tiles[hovered.X][hovered.Y].Objects.at(Engine.GetCurrentMapArea().Tiles[hovered.X][hovered.Y].Objects.size() - 1));
+            Engine.Player.GetModule<F_ModuleObjectUsage>().ObjectBeingUsed->UseOn(Engine.GetCurrentMapArea().Tiles[hovered.X][hovered.Y].Objects.at(Engine.GetCurrentMapArea().Tiles[hovered.X][hovered.Y].Objects.size() - 1));
 
-        Engine.Player.ObjectBeingUsed = nullptr;
+        Engine.Player.GetModule<F_ModuleObjectUsage>().ObjectBeingUsed = nullptr;
 
         return;
     }
@@ -104,7 +104,7 @@ void F_ScenePrimary::DoMouseDown(Uint8 mouseButton)
     {
     case SDL_BUTTON_LEFT:
     {
-        Engine.Player.GetModule<F_ActorModuleMovement>().MoveDestination = { Camera.GetHoveredTile().X + 0.5f, Camera.GetHoveredTile().Y + 0.5f };
+        Engine.Player.GetModule<F_ModuleMovement>().MoveDestination = { Camera.GetHoveredTile().X + 0.5f, Camera.GetHoveredTile().Y + 0.5f };
         break;
     }
     case SDL_BUTTON_RIGHT:

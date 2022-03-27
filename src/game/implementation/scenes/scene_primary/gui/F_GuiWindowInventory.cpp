@@ -28,14 +28,14 @@ void F_GuiWindowInventory::RenderDerived()
             auto x_pos = rect_interior.X + X * (slot_size + Margin);
             auto y_pos = rect_interior.Y + Y * (slot_size * aspect_ratio + Margin);
 
-            if (Engine.Player.Inventory.Objects.count(i) > 0)
+            if (Engine.Player.GetModule<F_ModuleInventory>().Objects.count(i) > 0)
             {
-                if (Engine.Player.ObjectBeingUsed == Engine.Player.Inventory.Objects.at(i))
+                if (Engine.Player.GetModule<F_ModuleObjectUsage>().ObjectBeingUsed == Engine.Player.GetModule<F_ModuleInventory>().Objects.at(i))
                     Engine.DrawImage("ObjectSelected", x_pos, y_pos, slot_size, slot_size * aspect_ratio);
                 else
                     Engine.DrawImage("ObjectBackgroundShadow", x_pos, y_pos, slot_size, slot_size * aspect_ratio);
 
-                Engine.DrawImage(Engine.Player.Inventory.Objects.at(i)->ObjectType, x_pos, y_pos, slot_size, slot_size * aspect_ratio);
+                Engine.DrawImage(Engine.Player.GetModule<F_ModuleInventory>().Objects.at(i)->ObjectType, x_pos, y_pos, slot_size, slot_size * aspect_ratio);
             }
 
             i++;
@@ -46,7 +46,7 @@ void F_GuiWindowInventory::RenderDerived()
 void F_GuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton)
 {
     if (mouseButton != SDL_BUTTON_RIGHT) return;
-    Engine.Player.ObjectBeingUsed = nullptr;
+    Engine.Player.GetModule<F_ModuleObjectUsage>().ObjectBeingUsed = nullptr;
 
     auto canvas_size = Utilities.GetCanvasSize();
     auto aspect_ratio = double(canvas_size.Width) / canvas_size.Height;
@@ -67,11 +67,11 @@ void F_GuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton)
             auto x_pos = rect_interior.X + X * (slot_size + Margin);
             auto y_pos = rect_interior.Y + Y * (slot_size * aspect_ratio + Margin);
 
-            if (Engine.Player.Inventory.Objects.count(i) > 0)
+            if (Engine.Player.GetModule<F_ModuleInventory>().Objects.count(i) > 0)
             {
                 if (mouse_x_rel >= x_pos && mouse_y_rel >= y_pos && mouse_x_rel < x_pos + slot_size && mouse_y_rel < y_pos + slot_size * aspect_ratio)
                 {
-                Engine.Player.ObjectBeingUsed = Engine.Player.Inventory.Objects.at(i);
+                Engine.Player.GetModule<F_ModuleObjectUsage>().ObjectBeingUsed = Engine.Player.GetModule<F_ModuleInventory>().Objects.at(i);
                 return;
                 }
 

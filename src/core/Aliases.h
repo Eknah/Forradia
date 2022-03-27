@@ -29,6 +29,12 @@ inline std::unique_ptr<T> MakeUPtr(Args && ... args)
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
 
+template <typename T, typename... Args>
+inline std::shared_ptr<T> MakeSPtr(Args && ... args)
+{
+    return std::make_shared<T>(std::forward<Args>(args)...);
+}
+
 // Commonly used functions
 
 inline int GetId(std::string text) { return (int)std::hash<std::string>{}(text); }

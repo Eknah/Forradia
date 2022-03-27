@@ -223,19 +223,19 @@ void F_GameWorldRenderer::Render()
     }
 
     auto player_x0 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize;
-    auto player_y0 = 0.0 + Engine.Player.GetModule<F_ActorModuleJumping>().PositionZ;
+    auto player_y0 = 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
     auto player_z0 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize;
 
     auto player_x1 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize - Engine.TileSize;
-    auto player_y1 = 0.0 + Engine.Player.GetModule<F_ActorModuleJumping>().PositionZ;
+    auto player_y1 = 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
     auto player_z1 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize;
 
     auto player_x2 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize - Engine.TileSize;
-    auto player_y2 = 0.0 + Engine.Player.GetModule<F_ActorModuleJumping>().PositionZ;
+    auto player_y2 = 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
     auto player_z2 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize + Engine.TileSize;
 
     auto player_x3 = offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize + sub_step_x * Engine.TileSize;
-    auto player_y3 = 0.0 + Engine.Player.GetModule<F_ActorModuleJumping>().PositionZ;
+    auto player_y3 = 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ;
     auto player_z3 = offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize + sub_step_y * Engine.TileSize + Engine.TileSize;
 
     glEnable(GL_TEXTURE_2D);
@@ -251,14 +251,14 @@ void F_GameWorldRenderer::Render()
 
     auto mode_name_player = std::string("Player");
 
-    if (Engine.Player.GetModule<F_ActorModuleMovement>().IsWalking)
+    if (Engine.Player.GetModule<F_ModuleMovement>().IsWalking)
     {
         auto animIndex = (Ticks() % 300) / 75;
         if (animIndex > 0)
             mode_name_player.append(std::to_string(animIndex));
     }
 
-    Engine.DrawModel(mode_name_player, offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize / 2 + sub_step_x * Engine.TileSize, 0.0 + Engine.Player.GetModule<F_ActorModuleJumping>().PositionZ, offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize / 2 + sub_step_y * Engine.TileSize, Engine.Player.GetModule<F_ActorModuleMovement>().FacingAngleRotated);
+    Engine.DrawModel(mode_name_player, offset_x + Camera.GetRenderDistance() * Engine.TileSize + Engine.TileSize / 2 + sub_step_x * Engine.TileSize, 0.0 + Engine.Player.GetModule<F_ModuleJumping>().PositionZ, offset_y + Camera.GetRenderDistance() * Engine.TileSize - Engine.TileSize / 2 + sub_step_y * Engine.TileSize, Engine.Player.GetModule<F_ModuleMovement>().FacingAngleRotated);
 
     glPopMatrix();
     glDisable(GL_DEPTH_TEST);

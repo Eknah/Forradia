@@ -30,7 +30,7 @@ void F_GameInstance::StartGame()
     F_Engine                Engine;
     F_ObjectsContent        ObjectsContent;
     F_ScenesCollection      Scenes;
-    F_Inventory             StartingInventory;
+    UMap<int, SPtr<F_Object>> StartingInventory;
     F_DefaultMapGenerator   DefaultMapGenerator(Engine, WorldMap);
 
     F_ObjectDescription     DescObjectTree1;
@@ -38,8 +38,8 @@ void F_GameInstance::StartGame()
     F_ObjectDescription     DescCaveWallBlock;
 
     WorldMap            ->GenerateWorldMap(DefaultMapGenerator);
-    StartingInventory   .Add(0, "ObjectWoodaxe");
-    StartingInventory   .Add(1, "ObjectSaw");
+    StartingInventory   .insert({0, MakeSPtr<F_Object>("ObjectWoodaxe")});
+    StartingInventory   .insert({1, MakeSPtr<F_Object>("ObjectSaw")});
 
     DescObjectTree1     .BlocksMovement  = true;
     DescObjectTree1     .BlocksSight     = true;
