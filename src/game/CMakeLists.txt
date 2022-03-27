@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Forradia LANGUAGES CXX)
+project(Forradia)
 
 
 set(CMAKE_CXX_STANDARD 17)
