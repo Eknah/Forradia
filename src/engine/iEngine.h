@@ -1,6 +1,6 @@
 
 #pragma once
-#include "framework/world_structure/cMapArea.h"
+#include "../engine/cMapArea.h"
 #include "Typedefs.h"
 #include "cVector3.h"
 #include <SDL2/SDL.h>

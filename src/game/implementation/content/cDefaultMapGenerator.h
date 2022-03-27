@@ -1,7 +1,7 @@
 
 #pragma once
 #include "framework/iMapGenerator.h"
-#include "framework/world_structure/cMapArea.h"
+#include "../engine/cMapArea.h"
 
 namespace Forradia
 {

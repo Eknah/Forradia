@@ -1,6 +1,6 @@
 
 #pragma once
-#include "framework/world_structure/cMapArea.h"
+#include "../engine/cMapArea.h"
 #include "../engine/cPoint2.h"
 
 namespace Forradia

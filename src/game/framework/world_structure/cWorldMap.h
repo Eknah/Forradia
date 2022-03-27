@@ -1,6 +1,6 @@
 
 #pragma once
-#include "cMapArea.h"
+#include "../engine/cMapArea.h"
 
 namespace Forradia
 {
