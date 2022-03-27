@@ -5,7 +5,7 @@
 //  /_/     /____/ /_/ \_\ /_/ \_\ /_//_/ /____/ /_/  /_//_/
 //
 
-#include "implementation/F_GameInstance.h"
+#include "implementation/cGameInstance.h"
 
 // Creates game instance and runs it
 
@@ -15,7 +15,7 @@
 // Windows
 int wmain()
 {
-    Forradia::F_GameInstance().StartGame();
+    Forradia::cGameInstance().StartGame();
 
     return 0;
 }
