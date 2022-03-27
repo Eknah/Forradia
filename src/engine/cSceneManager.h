@@ -1,6 +1,6 @@
 
 #pragma once
-#include "framework/cScenesCollection.h"
+#include "cScenesCollection.h"
 #include "framework/cSceneBase.h"
 
 namespace Forradia
@@ -13,24 +13,24 @@ public:
 
     inline void Initialize(cScenesCollection scenes, int startScene)
     {
-        Scenes = std::move(scenes);
+        ScenesCollection = std::move(scenes);
         CurrentScene = startScene;
     }
 
     inline UPtr<cSceneBase>& GetCurrentScene()
     {
-        return Scenes.Scenes.at(CurrentScene);
+        return ScenesCollection.Scenes.at(CurrentScene);
     }
 
     inline void SwitchToScene(std::string newScene)
     {
         CurrentScene = GetId(newScene);
-        Scenes.Scenes[CurrentScene]->Enter();
+        ScenesCollection.Scenes[CurrentScene]->Enter();
     }
 
 private:
 
-    cScenesCollection Scenes;
+    cScenesCollection ScenesCollection;
     int CurrentScene;
 
 };

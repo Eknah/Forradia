@@ -43,7 +43,7 @@ public:
     // Cleans up SDL
 
     inline void Run
-    (cScenesCollection Scenes_, int StartScene_, UPtr<cWorldMap> WorldMap_, UMap<int, SPtr<cObject>> StartingInventory_, cObjectsContent ObjectsContent_)
+    (cScenesCollection ScenesCollection_, int StartScene_, UPtr<cWorldMap> WorldMap_, UMap<int, SPtr<cObject>> StartingInventory_, cObjectsContent ObjectsContent_)
     {
         using std::move;
 
@@ -56,7 +56,7 @@ public:
         Player          .CurrentMapArea = 0;
         Player          .Position = GetCurrentMapArea().PlayerStartPosition;
         Player          .GetModule<cModuleInventory>().Objects = StartingInventory_;
-        SceneManager    .Initialize(move(Scenes_), StartScene_);
+        SceneManager    .Initialize(move(ScenesCollection_), StartScene_);
         ModelLoader     .LoadModels();
         ImageLoader     .LoadImages();
         TextGraphics    .Initialize();

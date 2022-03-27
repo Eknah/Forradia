@@ -1,7 +1,7 @@
 
 #pragma once
 #include "../engine/Aliases.h"
-#include "cSceneBase.h"
+#include "framework/cSceneBase.h"
 
 namespace Forradia
 {
@@ -12,7 +12,10 @@ class cScenesCollection
 public:
 
     // Collection operations
-    void Add(std::string sceneName, UPtr<cSceneBase> scene);
+    inline void Add(std::string sceneName, UPtr<cSceneBase> scene)
+    {
+        Scenes.insert({ GetId(sceneName), std::move(scene) });
+    }
 
     // Collection structure
     UMap<int, UPtr<cSceneBase>> Scenes;

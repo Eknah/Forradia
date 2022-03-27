@@ -29,7 +29,7 @@ void cGameInstance::StartGame()
 
     cEngine                Engine;
     cObjectsContent        ObjectsContent;
-    cScenesCollection      Scenes;
+    cScenesCollection      ScenesCollection;
     UMap<int, SPtr<cObject>> StartingInventory;
     cDefaultMapGenerator   DefaultMapGenerator(Engine, WorldMap);
 
@@ -57,13 +57,13 @@ void cGameInstance::StartGame()
     ObjectsContent      .Add("ObjectTree2",           DescObjectTree2 );
     ObjectsContent      .Add("ObjectCaveWallBlock",   DescCaveWallBlock );
 
-    Scenes              .Add("SceneGameStart",    MakeUPtr<cSceneGameStart>(Engine));
-    Scenes              .Add("SceneMainMenu",     MakeUPtr<cSceneMainMenu>(Engine));
-    Scenes              .Add("ScenePrimary",      MakeUPtr<cScenePrimary>(Engine));
+    ScenesCollection              .Add("SceneGameStart",    MakeUPtr<cSceneGameStart>(Engine));
+    ScenesCollection              .Add("SceneMainMenu",     MakeUPtr<cSceneMainMenu>(Engine));
+    ScenesCollection              .Add("ScenePrimary",      MakeUPtr<cScenePrimary>(Engine));
 
     Engine.Run
     (
-        move(Scenes),
+        move(ScenesCollection),
         GetId("SceneGameStart"),
         move(WorldMap),
         StartingInventory,
