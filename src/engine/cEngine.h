@@ -2,7 +2,7 @@
 #pragma once
 
 #include "framework/world_structure/cWorldMap.h"
-#include "framework/cObjectsContent.h"
+#include "implementation/content/cObjectsContent.h"
 #include "cModel3D.h"
 #include "cFpsCounter.h"
 #include "cKeyboardHandler.h"
