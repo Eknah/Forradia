@@ -9,7 +9,7 @@ The engine loads 3D models in Wavefront-format as well as textures and fonts. Th
 The purpose of this project is mainly that I use it to improve my knowledge and experience in this technical areas, and eventually find collaborators.
 
 ## Build status
-To add
+[![Build status](https://ci.appveyor.com/api/projects/status/crge78bph1g0ki14?svg=true)](https://ci.appveyor.com/project/Eknah/forradia)
 
 ## Code style
 To add
