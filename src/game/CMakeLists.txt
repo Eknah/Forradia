@@ -12,6 +12,9 @@ file(GLOB_RECURSE all_files
      "*.h"
      "*.cpp"
 )
+
+link_directories(./lib)
+
 add_executable(
     Forradia
     ../Main.cpp
