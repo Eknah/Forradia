@@ -2,7 +2,7 @@
 #include "cModuleMovement.h"
 #include "../engine/Aliases.h"
 #include "../engine/iEngine.h"
-#include "framework/actor/cActor.h"
+#include "implementation/functionality/actor/cActor.h"
 
 namespace Forradia
 {

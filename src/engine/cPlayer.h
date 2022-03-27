@@ -1,10 +1,10 @@
 
 #pragma once
-#include "framework/actor/cActor.h"
-#include "framework/actor/modules/cModuleJumping.h"
-#include "framework/actor/modules/cModuleMovement.h"
-#include "framework/actor/modules/cModuleInventory.h"
-#include "framework/actor/modules/cModuleObjectUsage.h"
+#include "implementation/functionality/actor/cActor.h"
+#include "implementation/functionality/actor/modules/cModuleJumping.h"
+#include "implementation/functionality/actor/modules/cModuleMovement.h"
+#include "implementation/functionality/actor/modules/cModuleInventory.h"
+#include "implementation/functionality/actor/modules/cModuleObjectUsage.h"
 
 namespace Forradia
 {
