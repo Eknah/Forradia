@@ -51,6 +51,8 @@ Download:
 * SDL2 Development Library: [SDL2-devel-2.0.20-VC.zip](https://www.libsdl.org/release/SDL2-devel-2.0.20-VC.zip)  
 * SDL2_image Development Library: [SDL2_image-devel-2.0.5-VC.zip](https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.5-VC.zip)  
 * SDL2_ttf Development Library: [SDL2_ttf-devel-2.0.18-VC.zip](https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-devel-2.0.18-VC.zip)  
+* GLEW Development Library: [glew-2.1.0-win32.zip](https://netix.dl.sourceforge.net/project/glew/glew/2.1.0/glew-2.1.0-win32.zip)  
+* Freeglut Development Library: [freeglut-MSVC.zip](https://www.transmissionzero.co.uk/files/software/development/GLUT/freeglut-MSVC.zip)  
 
 
 
