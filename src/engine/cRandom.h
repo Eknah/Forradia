@@ -9,13 +9,22 @@ namespace Forradia {
 
 class cRandom {
  public:
-    inline int Next() {
+    cRandom() {
+        if (!IsInitialized) {
+            mt = std::mt19937(rd());
+            IsInitialized = true;
+        }
+    }
 
-        return mt();
+    inline int Next() const {
+        return result(mt);
     }
 
  private:
-    inline static std::mt19937 mt = std::mt19937(static_cast<unsigned int>(time(nullptr)));
+    inline static std::uniform_int_distribution<int> result = std::uniform_int_distribution<int>(0, 10000);
+    inline static std::random_device rd;
+    inline static bool IsInitialized = false;
+    inline static std::mt19937 mt;
 };
 
 }  // namespace Forradia
