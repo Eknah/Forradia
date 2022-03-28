@@ -68,44 +68,44 @@ class cEngine : public iEngine {
   // ---- Drawing operations ----
 
   inline void DrawImage(std::string ImageName, float X, float Y, float Width,
-                        float Height) override {
+                        float Height) const override {
     ImageGraphics.DrawImage(ImageName, X, Y, Width, Height);
   }
 
   inline void DrawImage(int ImageNameHash, float X, float Y, float Width,
-                        float Height) override {
+                        float Height) const override {
     ImageGraphics.DrawImage(ImageNameHash, X, Y, Width, Height);
   }
 
   inline void FillRectangle(SDL_Color Color, float X, float Y, float Width,
-                            float Height) override {
+                            float Height) const override {
     PaintGraphics.FillRectangle(Color, X, Y, Width, Height);
   }
 
   inline void DrawRectangle(SDL_Color Color, float X, float Y, float Width,
-                            float Height) override {
+                            float Height) const override {
     PaintGraphics.DrawRectangle(Color, X, Y, Width, Height);
   }
 
   inline void DrawLine(SDL_Color Color, float X0, float Y0, float X1,
-                       float Y1) override {
+                       float Y1) const override {
     PaintGraphics.DrawLine(Color, X0, Y0, X1, Y1);
   }
 
   inline void DrawString(std::string Message, SDL_Color Color, float X, float Y,
-                         bool CenterAlign = false) override {
+                         bool CenterAlign = false) const override {
     TextGraphics.DrawString(Message, Color, X, Y, CenterAlign);
   }
 
   inline void DrawModel(std::string ModelName, float X, float Y, float Z,
                         float Rotation = 0.0f,
-                        float SpecificScaling = 1.0f) override {
+                        float SpecificScaling = 1.0f) const override {
     ModelGraphics.DrawModel(ModelName, X, Y, Z, Rotation, SpecificScaling);
   }
 
   inline void DrawModel(int ModelNameHash, float X, float Y, float Z,
                         float Rotation = 0.0f,
-                        float SpecificScaling = 1.0f) override {
+                        float SpecificScaling = 1.0f) const override {
     ModelGraphics.DrawModel(ModelNameHash, X, Y, Z, Rotation, SpecificScaling);
   }
 

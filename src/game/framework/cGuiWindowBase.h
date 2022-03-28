@@ -11,7 +11,7 @@ namespace Forradia {
 
 class cGuiWindowBase {
  public:
-  cGuiWindowBase(cEngine &Engine_, std::string Title_, cRectF Bounds_)
+  cGuiWindowBase(const cEngine &Engine_, std::string Title_, cRectF Bounds_)
       : Engine(Engine_), Title(Title_), Bounds(Bounds_) {}
 
   // Looped operations
@@ -42,7 +42,7 @@ class cGuiWindowBase {
 
   const float Margin = 0.008f;
 
-  cEngine &Engine;
+  const cEngine &Engine;
 
  private:
   // Internal helpers

@@ -13,7 +13,7 @@ namespace Forradia {
 
 class cUtilities {
  public:
-  inline cSize GetCanvasSize() {
+  inline cSize GetCanvasSize() const {
     GLint viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
     auto canvas_width = viewport[2];

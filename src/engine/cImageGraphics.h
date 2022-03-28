@@ -16,12 +16,12 @@ class cImageGraphics {
   // ---- Drawing operations ----
 
   inline void DrawImage(std::string ImageName, float X, float Y, float Width,
-                        float Height) {
+                        float Height) const {
     DrawImage(GetId(ImageName), X, Y, Width, Height);
   }
 
   inline void DrawImage(int ImageNameId, float X, float Y, float Width,
-                        float Height) {
+                        float Height) const {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 

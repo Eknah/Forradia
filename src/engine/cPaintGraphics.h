@@ -13,7 +13,7 @@ class cPaintGraphics {
   // ---- Drawing operations ----
 
   inline void FillRectangle(SDL_Color Color, float X, float Y, float Width,
-                            float Height) {
+                            float Height) const {
     std::vector<cPoint2F> vertices = {
         {X, Y}, {X, Y + Height}, {X + Width, Y + Height}, {X + Width, Y}};
 
@@ -21,7 +21,7 @@ class cPaintGraphics {
   }
 
   inline void DrawRectangle(SDL_Color Color, float X, float Y, float Width,
-                            float Height) {
+                            float Height) const {
     std::vector<cPoint2F> vertices = {
         {X, Y}, {X, Y + Height}, {X + Width, Y + Height}, {X + Width, Y}};
 
@@ -29,7 +29,7 @@ class cPaintGraphics {
   }
 
   inline void DrawLine(SDL_Color Color, float X0, float Y0, float X1,
-                       float Y1) {
+                       float Y1) const {
     std::vector<cPoint2F> vertices = {{X0, Y0}, {X1, Y1}};
 
     RenderShape(GL_LINE_STRIP, vertices, Color);
@@ -39,7 +39,8 @@ class cPaintGraphics {
   // ---- Drawing operations generalization ----
 
   inline void RenderShape(GLenum GeometryType,
-                          const std::vector<cPoint2F> &Vertices, SDL_Color Color) {
+                          const std::vector<cPoint2F> &Vertices,
+                          SDL_Color Color) const {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f);

@@ -19,7 +19,7 @@ class cActor {
   void ResetForNewFrame();
   void Update();
 
-  template <class T> inline T &GetModule() {
+  template <class T> inline T &GetModule() const {
     return static_cast<T &>(*Modules.at(typeid(T).hash_code()));
   }
 

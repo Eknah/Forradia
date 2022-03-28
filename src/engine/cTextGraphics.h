@@ -26,7 +26,7 @@ class cTextGraphics {
   // --- Drawing operations ---
 
   inline void DrawString(std::string Text, SDL_Color Color, float X, float Y,
-                         bool CenterAlign = false) {
+                         bool CenterAlign = false) const {
     GLuint Texture;
 
     glEnable(GL_TEXTURE_2D);

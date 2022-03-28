@@ -502,10 +502,10 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
   template <class T>
   inline const T &GetElement(const std::vector<T> &elements,
                              const std::string &index) {
-    auto idx = std::stoi(index);
+    unsigned int idx = std::stoi(index);
 
     if (idx < 0)
-      idx = int(elements.size()) + idx;
+      idx = elements.size() + idx;
     else
       idx--;
 

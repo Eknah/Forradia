@@ -16,12 +16,12 @@ class cModelGraphics {
   // ---- Drawing operations ----
 
   inline void DrawModel(std::string ModelName, float X, float Y, float Z,
-                        float Rotation, float SpecificScaling) {
+                        float Rotation, float SpecificScaling) const {
     DrawModel(GetId(ModelName), X, Y, Z, Rotation, SpecificScaling);
   }
 
   inline void DrawModel(int ModelNameId, float X, float Y, float Z,
-                        float Rotation, float SpecificScaling) {
+                        float Rotation, float SpecificScaling) const {
     glTranslatef(X, Y, Z);
     glRotatef(Rotation, 0, 1.0f, 0.0);
     glTranslatef(-X, -Y, -Z);

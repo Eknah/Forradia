@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <stdio.h>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <GL/glu.h>
@@ -14,7 +15,6 @@
 #include <functional>
 #include <memory>
 #include <set>
-#include <stdio.h>
 #include <string>
 #include <typeinfo>
 #include <unordered_map>

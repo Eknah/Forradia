@@ -32,26 +32,26 @@ class iEngine {
         GameLoop(*GameLoop_) {}
 
   virtual inline void DrawImage(std::string imageName, float x, float y,
-                                float width, float height) = 0;
+                                float width, float height) const = 0;
   virtual inline void DrawImage(int imageNameHash, float x, float y,
-                                float width, float height) = 0;
+                                float width, float height) const = 0;
 
   virtual inline void FillRectangle(SDL_Color color, float x, float y,
-                                    float width, float height) = 0;
+                                    float width, float height) const = 0;
   virtual inline void DrawRectangle(SDL_Color color, float X, float Y,
-                                    float width, float height) = 0;
+                                    float width, float height) const = 0;
   virtual inline void DrawLine(SDL_Color color, float x0, float y0, float x1,
-                               float y1) = 0;
+                               float y1) const = 0;
 
   virtual inline void DrawString(std::string message, SDL_Color color, float x,
-                                 float y, bool centerAlign = false) = 0;
+                                 float y, bool centerAlign = false) const = 0;
 
   virtual inline void DrawModel(std::string modelName, float x, float y,
                                 float z, float rotation = 0.0f,
-                                float specificScaling = 1.0f) = 0;
+                                float specificScaling = 1.0f) const = 0;
   virtual inline void DrawModel(int modelNameHash, float x, float y, float z,
                                 float rotation = 0.0f,
-                                float specificScaling = 1.0f) = 0;
+                                float specificScaling = 1.0f) const = 0;
 
   virtual inline cMapArea& GetCurrentMapArea() const = 0;
 
