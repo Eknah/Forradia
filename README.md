@@ -24,7 +24,7 @@ The purpose of this project is mainly that I use it to improve my knowledge and 
 * Engine allows representation of world map as planets instead of regular flat maps
 * Open-source under MIT license
 * Cross-platform
-* Only two dependencies: OpenGL and SDL2
+* Only dependencies are SDL2-libraries and OpenGL-libraries
 
 ## Code Example
 **Engine implementation example**
