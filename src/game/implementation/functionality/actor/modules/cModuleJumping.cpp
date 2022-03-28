@@ -29,7 +29,6 @@ void cModuleJumping::Update() {
 }
 
 void cModuleJumping::Jump() {
-
   IsJumping = true;
   TickStartJumping = Ticks();
 }

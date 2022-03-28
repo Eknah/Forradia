@@ -7,7 +7,8 @@
 
 namespace Forradia {
 
-void cDefaultMapGenerator::GenerateMapArea(
+void
+cDefaultMapGenerator::GenerateMapArea(
         int WorldX, int WorldY, int WorldZ) const {
   WorldMap->MapAreas[WorldX][WorldY][WorldZ] =
       MakeUPtr<cMapArea>(Engine, WorldMap->MapAreaSize, WorldX, WorldY, WorldZ);
@@ -29,19 +30,23 @@ void cDefaultMapGenerator::GenerateMapArea(
   GenerateQuestCaves(Engine, MapArea, WorldMap);
 }
 
-void cDefaultMapGenerator::ClearToGrass(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::ClearToGrass(cMapArea *MapArea) const {
   for (auto TileY = 0; TileY < MapArea->Size; TileY++)
     for (auto TileX = 0; TileX < MapArea->Size; TileX++)
 
       MapArea->Tiles[TileX][TileY].GroundType = GetId("GroundtypeGrass");
 }
 
-void cDefaultMapGenerator::GeneratePlayerStartingPosition(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GeneratePlayerStartingPosition
+(cMapArea *MapArea) const {
   MapArea->PlayerSpawnPosition.X = static_cast<float>(Random.Next() % MapArea->Size);
   MapArea->PlayerSpawnPosition.Y = static_cast<float>(Random.Next() % MapArea->Size);
 }
 
-void cDefaultMapGenerator::GenerateElevation(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GenerateElevation(cMapArea *MapArea) const {
   for (auto I = 0; I < 40; I++) {
     auto CenterTileX = Random.Next() % MapArea->Size;
     auto CenterTileY = Random.Next() % MapArea->Size;
@@ -73,7 +78,8 @@ void cDefaultMapGenerator::GenerateElevation(cMapArea *MapArea) const {
   }
 }
 
-void cDefaultMapGenerator::GenerateWater(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GenerateWater(cMapArea *MapArea) const {
   for (auto I = 0; I < 20; I++) {
     auto CenterTileX = Random.Next() % MapArea->Size;
     auto CenterTileY = Random.Next() % MapArea->Size;
@@ -117,7 +123,8 @@ void cDefaultMapGenerator::GenerateWater(cMapArea *MapArea) const {
   }
 }
 
-void cDefaultMapGenerator::GenerateSand(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GenerateSand(cMapArea *MapArea) const {
   for (auto I = 0; I < 30; I++) {
     auto CenterTileX = Random.Next() % MapArea->Size;
     auto CenterTileY = Random.Next() % MapArea->Size;
@@ -181,7 +188,8 @@ void cDefaultMapGenerator::GenerateSand(cMapArea *MapArea) const {
   }
 }
 
-void cDefaultMapGenerator::GenerateClay(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GenerateClay(cMapArea *MapArea) const {
   for (auto I = 0; I < 30; I++) {
     auto CenterTileX = Random.Next() % MapArea->Size;
     auto CenterTileY = Random.Next() % MapArea->Size;
@@ -243,7 +251,8 @@ void cDefaultMapGenerator::GenerateClay(cMapArea *MapArea) const {
   }
 }
 
-void cDefaultMapGenerator::GenerateRock(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GenerateRock(cMapArea *MapArea) const {
   for (auto I = 0; I < 10; I++) {
     auto CenterTileX = Random.Next() % MapArea->Size;
     auto CenterTileY = Random.Next() % MapArea->Size;
@@ -268,7 +277,8 @@ void cDefaultMapGenerator::GenerateRock(cMapArea *MapArea) const {
   }
 }
 
-void cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
   for (auto I = 0; I < 30; I++) {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
@@ -317,7 +327,8 @@ void cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
   }
 }
 
-void cDefaultMapGenerator::GenerateBushes(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GenerateBushes(cMapArea *MapArea) const {
   for (auto I = 0; I < 200; I++) {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
@@ -332,7 +343,8 @@ void cDefaultMapGenerator::GenerateBushes(cMapArea *MapArea) const {
   }
 }
 
-void cDefaultMapGenerator::GenerateSmallStones(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GenerateSmallStones(cMapArea *MapArea) const {
   for (auto I = 0; I < 200; I++) {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
@@ -347,7 +359,8 @@ void cDefaultMapGenerator::GenerateSmallStones(cMapArea *MapArea) const {
   }
 }
 
-void cDefaultMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
   for (auto I = 0; I < 100; I++) {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
@@ -359,7 +372,8 @@ void cDefaultMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
   }
 }
 
-int cDefaultMapGenerator::DistToPlayerStartingPos(cMapArea *MapArea, int TileX,
+int
+cDefaultMapGenerator::DistToPlayerStartingPos(cMapArea *MapArea, int TileX,
                                                   int TileY) const {
   auto DX = MapArea->PlayerSpawnPosition.X - TileX;
   auto DY = MapArea->PlayerSpawnPosition.Y - TileY;
@@ -368,7 +382,8 @@ int cDefaultMapGenerator::DistToPlayerStartingPos(cMapArea *MapArea, int TileX,
   return static_cast<int>(Distance);
 }
 
-void cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
+void
+cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
   for (auto I = 0; I < 200; I++) {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
@@ -386,10 +401,10 @@ void cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
   }
 }
 
-void cDefaultMapGenerator::GenerateQuestCaves(const cEngine &Engine,
+void
+cDefaultMapGenerator::GenerateQuestCaves(const cEngine &Engine,
                                               cMapArea *MapArea,
                                               const UPtr<cWorldMap> &WorldMap) const {
-
   cQuestCaveMapGenerator QuestCaveMapGenerator;
 
   for (auto Floor = -1; Floor >= -20; Floor--) {

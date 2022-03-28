@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include "../engine/cRandom.h"
 #include "../engine/cMapArea.h"
 #include "../engine/cPoint2.h"
 
@@ -15,6 +16,8 @@ class cQuestCaveMapGenerator {
   void ClearToCaveFloor(cMapArea *MapArea);
   void GenerateCaveWalls(cMapArea *MapArea);
   void GeneratePath(cMapArea *MapArea, cPoint2 EntranceLocation);
+
+  cRandom Random;
 };
 
 }  // namespace Forradia
