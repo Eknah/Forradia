@@ -9,7 +9,7 @@
 namespace Forradia {
 
 class cImageGraphics {
-public:
+ public:
   cImageGraphics(iEngine &engine) : Engine(engine) {}
 
   // ---- Drawing operations ----
@@ -47,7 +47,7 @@ public:
     glDisable(GL_TEXTURE_2D);
   }
 
-private:
+ private:
   iEngine &Engine;
 };
 

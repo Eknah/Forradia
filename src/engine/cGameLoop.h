@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cGameLoop : public iGameLoop {
-public:
+ public:
   cGameLoop(iEngine &engine) : iGameLoop(engine) {}
 
   // Before loop:
@@ -91,7 +91,7 @@ public:
     }
   }
 
-private:
+ private:
   // ---- Looped functions ----
 
   // Update currently displayed scene and fps counter.

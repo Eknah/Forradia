@@ -10,7 +10,7 @@
 namespace Forradia {
 
 class cTextGraphics {
-public:
+ public:
   inline void Initialize() {
     TTF_Init();
 
@@ -77,7 +77,7 @@ public:
     glDisable(GL_TEXTURE_2D);
   }
 
-private:
+ private:
   const std::string DefaultFontPath = "/Resources/Fonts/PixeloidSans.ttf";
   const int DefaultFontSize = 20;
   const float Scaling = 0.8f;

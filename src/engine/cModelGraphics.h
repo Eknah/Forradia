@@ -9,7 +9,7 @@
 namespace Forradia {
 
 class cModelGraphics {
-public:
+ public:
   cModelGraphics(iEngine &engine) : Engine(engine) {}
 
   // ---- Drawing operations ----
@@ -50,7 +50,7 @@ public:
     glTranslatef(-X, -Y, -Z);
   }
 
-private:
+ private:
   iEngine &Engine;
 
   float ModelScaling = 0.1f;

@@ -11,7 +11,7 @@ namespace Forradia {
 class iEngine;
 
 class iCustomCursor {
-public:
+ public:
   iCustomCursor(iEngine &engine) : Engine(engine) {}
 
   virtual inline void Initialize() = 0;
@@ -20,7 +20,7 @@ public:
 
   eCursorTypes CursorType = eCursorTypes::Default;
 
-protected:
+ protected:
   iEngine &Engine;
   cUtilities Utilities;
 

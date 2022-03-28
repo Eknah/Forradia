@@ -22,7 +22,7 @@ namespace Forradia {
 class F_MapArea;
 
 class iEngine {
-public:
+ public:
   iEngine(iKeyboardHandler &KeyboardHandler_, iCustomCursor &CustomCursor_,
           iFpsCounter &FpsCounter_,
           iFullscreenController &FullscreenController_, iGameLoop &GameLoop_)

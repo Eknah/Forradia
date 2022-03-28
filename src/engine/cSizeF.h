@@ -6,7 +6,7 @@
 namespace Forradia {
 
 class cSizeF {
-public:
+ public:
   float Width = 0.0f;
   float Height = 0.0f;
 };

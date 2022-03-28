@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cSceneManager {
-public:
+ public:
   inline void Initialize(cScenesCollection scenes, int startScene) {
     ScenesCollection = std::move(scenes);
     CurrentScene = startScene;
@@ -23,7 +23,7 @@ public:
     ScenesCollection.Scenes[CurrentScene]->Enter();
   }
 
-private:
+ private:
   cScenesCollection ScenesCollection;
   int CurrentScene;
 };

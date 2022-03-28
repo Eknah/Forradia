@@ -7,7 +7,7 @@
 namespace Forradia {
 
 class cMouseHandler {
-public:
+ public:
   // Game loop related
 
   inline void ResetForNewFrame() {

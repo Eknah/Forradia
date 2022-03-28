@@ -9,7 +9,7 @@
 namespace Forradia {
 
 class cCustomCursor : public iCustomCursor {
-public:
+ public:
   cCustomCursor(iEngine &engine) : iCustomCursor(engine) {}
 
   inline void Initialize() override { SDL_ShowCursor(0); }

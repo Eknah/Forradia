@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cVertex {
-public:
+ public:
   cVector3 Position;
   cVector3 Normal;
   cVector2 TextureCoordinate;

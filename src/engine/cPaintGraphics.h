@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cPaintGraphics {
-public:
+ public:
   // ---- Drawing operations ----
 
   inline void FillRectangle(SDL_Color Color, float X, float Y, float Width,
@@ -34,7 +34,7 @@ public:
     RenderShape(GL_LINE_STRIP, vertices, Color);
   }
 
-private:
+ private:
   // ---- Drawing operations generalization ----
 
   inline void RenderShape(GLenum GeometryType, std::vector<cPoint2F> &Vertices,

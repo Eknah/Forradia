@@ -20,7 +20,7 @@
 namespace Forradia {
 
 class cEngine : public iEngine {
-public:
+ public:
   // ---- Ctor ----
   // Give needed references to this engine to all sub components
 
@@ -129,7 +129,7 @@ public:
 
   float TileSize = 0.5f;
 
-private:
+ private:
   // Initializes SDL video module
   // Specifices GL version
   // Creates game window with GL support

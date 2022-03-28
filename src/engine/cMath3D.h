@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cMath3D {
-public:
+ public:
   inline cVector3 Cross(const cVector3 a, const cVector3 b) {
     return cVector3(a.Y * b.Z - a.Z * b.Y, a.Z * b.X - a.X * b.Z,
                     a.X * b.Y - a.Y * b.X);

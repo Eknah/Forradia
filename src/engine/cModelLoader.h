@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cModelLoader {
-public:
+ public:
   inline void LoadModels() {
     Models.clear();
     ModelNames.clear();
@@ -44,7 +44,7 @@ public:
   UMap<int, Forradia::cModel3D> Models;
   UMap<int, std::string> ModelNames;
 
-private:
+ private:
   const std::string ModelsPath = "/Resources/Models";
   const std::string ModelNameExtension = ".obj";
 };

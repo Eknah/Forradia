@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cMesh {
-public:
+ public:
   cMesh() {}
   cMesh(std::vector<cVertex> &vertices, std::vector<unsigned int> &indices)
       : Vertices(vertices), Indices(indices) {}

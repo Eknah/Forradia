@@ -11,7 +11,7 @@
 namespace Forradia {
 
 class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
-public:
+ public:
   cModel3D() {}
 
   ~cModel3D() { LoadedMeshes.clear(); }
@@ -180,7 +180,7 @@ public:
   std::vector<unsigned int> LoadedIndices;
   std::vector<cMaterial> LoadedMaterials;
 
-private:
+ private:
   inline void GenVerticesFromRawOBJ(std::vector<cVertex> &oVerts,
                                     const std::vector<cVector3> &iPositions,
                                     const std::vector<cVector2> &iTCoords,

@@ -10,13 +10,13 @@ namespace Forradia {
 class iEngine;
 
 class iFpsCounter {
-public:
+ public:
   iFpsCounter(iEngine &engine) : Engine(engine) {}
 
   inline virtual void Update() = 0;
   inline virtual void Render() = 0;
 
-protected:
+ protected:
   iEngine &Engine;
   cPalette Palette;
 

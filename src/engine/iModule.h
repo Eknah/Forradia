@@ -9,7 +9,7 @@ class iEngine;
 class cActor;
 
 class iModule {
-public:
+ public:
   iModule(iEngine &Engine_, cActor &ParentActor_)
       : Engine(Engine_), ParentActor(ParentActor_) {}
 

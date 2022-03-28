@@ -10,7 +10,7 @@
 namespace Forradia {
 
 class cImageLoader {
-public:
+ public:
   inline void LoadImages() {
     Images.clear();
     ImageNames.clear();
@@ -60,7 +60,7 @@ public:
   UMap<int, GLuint> Images;
   UMap<int, std::string> ImageNames;
 
-private:
+ private:
   const std::string ImagesPath = "/Resources/Images";
   const std::string ImageNameExtension = ".png";
 };

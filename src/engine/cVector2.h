@@ -7,7 +7,7 @@
 namespace Forradia {
 
 class cVector2 {
-public:
+ public:
   cVector2() = default;
   cVector2(float x, float y) : X(x), Y(y) {}
 

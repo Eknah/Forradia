@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cFpsCounter : public iFpsCounter {
-public:
+ public:
   cFpsCounter(iEngine &engine) : iFpsCounter(engine) {}
 
   inline void Update() override {

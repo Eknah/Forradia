@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cKeyboardHandler : public iKeyboardHandler {
-public:
+ public:
   inline void ResetForNewFrame() override { KeysBeenFired.clear(); }
 
   inline void DoKeyDown(SDL_Keycode key) override {
