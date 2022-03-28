@@ -9,7 +9,6 @@
 #include "cImageLoader.h"
 #include "cModelLoader.h"
 #include "cMouseHandler.h"
-#include "cSceneManager.h"
 #include "cTextGraphics.h"
 #include "cVector3.h"
 #include "iCustomCursor.h"
@@ -17,6 +16,7 @@
 #include "iFullscreenController.h"
 #include "iGameLoop.h"
 #include "iKeyboardHandler.h"
+#include "iSceneManager.h"
 
 namespace Forradia {
 
@@ -26,10 +26,11 @@ class iEngine {
  public:
   iEngine(iKeyboardHandler* KeyboardHandler_, iCustomCursor* CustomCursor_,
           iFpsCounter* FpsCounter_,
-          iFullscreenController* FullscreenController_, iGameLoop* GameLoop_)
+          iFullscreenController* FullscreenController_, iGameLoop* GameLoop_,
+          iSceneManager* SceneManager_)
       : KeyboardHandler(*KeyboardHandler_), CustomCursor(*CustomCursor_),
         FpsCounter(*FpsCounter_), FullscreenController(*FullscreenController_),
-        GameLoop(*GameLoop_) {}
+        GameLoop(*GameLoop_), SceneManager(*SceneManager_) {}
 
   virtual inline void DrawImage(std::string imageName, float x, float y,
                                 float width, float height) const = 0;
@@ -53,6 +54,8 @@ class iEngine {
                                 float rotation = 0.0f,
                                 float specificScaling = 1.0f) const = 0;
 
+  virtual inline cSizeF GetImageSizeF(std::string ImageName) const = 0;
+
   virtual inline cMapArea& GetCurrentMapArea() const = 0;
 
   F_WindowPtr Window;
@@ -62,9 +65,9 @@ class iEngine {
   iFpsCounter &FpsCounter;
   iFullscreenController &FullscreenController;
   iGameLoop &GameLoop;
+  iSceneManager &SceneManager;
 
   cMouseHandler MouseHandler;
-  cSceneManager SceneManager;
   cImageLoader ImageLoader;
   cModelLoader ModelLoader;
   cTextGraphics TextGraphics;

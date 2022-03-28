@@ -16,6 +16,12 @@ class cScenesCollection {
     Scenes.insert({GetId(sceneName), std::move(scene)});
   }
 
+//  inline cScenesCollection& operator=(const cScenesCollection &Other) {
+//      Scenes = Other.Scenes;
+
+//      return *this;
+//  }
+
   // Collection structure
   UMap<int, UPtr<cSceneBase>> Scenes;
 };

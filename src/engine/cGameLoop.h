@@ -28,9 +28,7 @@ class cGameLoop : public iGameLoop {
     SDL_SetEventFilter((SDL_EventFilter)EventFilter, &Engine);
 
     while (!quit) {
-      Engine.KeyboardHandler.ResetForNewFrame();
-      Engine.MouseHandler.ResetForNewFrame();
-      Engine.CustomCursor.ResetForNewFrame();
+      ResetForNewFrame();
 
       while (SDL_PollEvent(&event) != 0) {
         switch (event.type) {
@@ -59,9 +57,15 @@ class cGameLoop : public iGameLoop {
               event.button.button);
 
           if (event.button.button == SDL_BUTTON_LEFT)
+          {
             Engine.MouseHandler.LeftButtonDown = true;
+              Engine.MouseHandler.SetLeftButtonBeenFired();
+          }
           else if (event.button.button == SDL_BUTTON_RIGHT)
+          {
             Engine.MouseHandler.RightButtonDown = true;
+              Engine.MouseHandler.SetRightButtonBeenFired();
+          }
 
           break;
         }
@@ -78,7 +82,7 @@ class cGameLoop : public iGameLoop {
         }
 
         case SDL_MOUSEWHEEL: {
-          Engine.MouseHandler.WheelAmount = static_cast<float>(event.wheel.y);
+          *Engine.MouseHandler.WheelAmount = static_cast<float>(event.wheel.y);
 
           break;
         }
@@ -88,6 +92,12 @@ class cGameLoop : public iGameLoop {
       Update();
       Render();
     }
+  }
+
+  inline void ResetForNewFrame() {
+      Engine.KeyboardHandler.ResetForNewFrame();
+      Engine.MouseHandler.ResetForNewFrame();
+      Engine.CustomCursor.ResetForNewFrame();
   }
 
  private:

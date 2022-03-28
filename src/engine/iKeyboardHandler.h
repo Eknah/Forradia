@@ -3,18 +3,19 @@
 
 #pragma once
 #include <set>
+#include "Aliases.h"
 #include "CommonExternal.h"
 
 namespace Forradia {
 
 class iKeyboardHandler {
  public:
-  inline virtual void ResetForNewFrame() = 0;
-  inline virtual void DoKeyDown(SDL_Keycode key) = 0;
-  inline virtual void DoKeyUp(SDL_Keycode key) = 0;
+  inline virtual void ResetForNewFrame() const = 0;
+  inline virtual void DoKeyDown(SDL_Keycode key) const = 0;
+  inline virtual void DoKeyUp(SDL_Keycode key) const = 0;
 
-  std::set<SDL_Keycode> KeysBeingPressed;
-  std::set<SDL_Keycode> KeysBeenFired;
+  const UPtr<std::set<SDL_Keycode>> KeysBeingPressed = MakeUPtr<std::set<SDL_Keycode>>();
+  const UPtr<std::set<SDL_Keycode>> KeysBeenFired = MakeUPtr<std::set<SDL_Keycode>>();
 };
 
 }  // namespace Forradia

@@ -48,8 +48,28 @@ class cImageGraphics {
     glDisable(GL_TEXTURE_2D);
   }
 
+  inline cSizeF GetImageSizeF(std::string ImageName) const
+  {
+      auto CanvasSize = Utilities.GetCanvasSize();
+
+      glBindTexture(GL_TEXTURE_2D,
+                    Engine.ImageLoader.Images.at(GetId(ImageName)));
+
+      int Width, Height;
+      int MipLevel = 0;
+
+      glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_WIDTH, &Width);
+      glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_HEIGHT, &Height);
+
+      auto ImageWidth = static_cast<float>(Width) / CanvasSize.Width;
+      auto ImageHeight = static_cast<float>(Height) / CanvasSize.Height;
+
+      return {ImageWidth, ImageHeight};
+  }
+
  private:
   iEngine &Engine;
+  cUtilities Utilities;
 };
 
 }  // namespace Forradia

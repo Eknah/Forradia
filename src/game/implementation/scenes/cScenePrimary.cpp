@@ -17,10 +17,10 @@ void cScenePrimary::Update() {
 
   auto Instruction = cModuleMovement::MovementInstruction();
 
-  Instruction.TryMoveForward = Keys.count(SDLK_w);
-  Instruction.TryMoveRight = Keys.count(SDLK_d);
-  Instruction.TryMoveBack = Keys.count(SDLK_s);
-  Instruction.TryMoveLeft = Keys.count(SDLK_a);
+  Instruction.TryMoveForward = Keys->count(SDLK_w);
+  Instruction.TryMoveRight = Keys->count(SDLK_d);
+  Instruction.TryMoveBack = Keys->count(SDLK_s);
+  Instruction.TryMoveLeft = Keys->count(SDLK_a);
 
   Player.GetModule<cModuleMovement>().Instruction = Instruction;
 
@@ -30,20 +30,20 @@ void cScenePrimary::Update() {
     Player.GetModule<cModuleMovement>().MoveDestination = {-1, -1};
   }
 
-  auto TurnRight = Keys.count(SDLK_e);
-  auto TurnLeft = Keys.count(SDLK_q);
+  auto TurnRight = Keys->count(SDLK_e);
+  auto TurnLeft = Keys->count(SDLK_q);
 
   if (TurnRight) {
-    Camera.Update(GetId("Right"), Engine.MouseHandler.WheelAmount);
+    Camera.Update(GetId("Right"), *Engine.MouseHandler.WheelAmount);
     Player.GetModule<cModuleMovement>().UpdateRotation(Camera.LookingAngle);
   } else if (TurnLeft) {
-    Camera.Update(GetId("Left"), Engine.MouseHandler.WheelAmount);
+    Camera.Update(GetId("Left"), *Engine.MouseHandler.WheelAmount);
     Player.GetModule<cModuleMovement>().UpdateRotation(Camera.LookingAngle);
   } else {
-    Camera.Update(0, Engine.MouseHandler.WheelAmount);
+    Camera.Update(0, *Engine.MouseHandler.WheelAmount);
   }
 
-  if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_F2))
+  if (Engine.KeyboardHandler.KeysBeenFired->count(SDLK_F2))
     Gui.Windows.at("Inventory")->Visible =
         !Gui.Windows.at("Inventory")->Visible;
 
@@ -52,7 +52,7 @@ void cScenePrimary::Update() {
   if (Engine.MouseHandler.RightButtonDown)
     Player.GetModule<cModuleMovement>().FacingAngle = Camera.LookingAngle;
 
-  if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_SPACE) > 0)
+  if (Engine.KeyboardHandler.KeysBeenFired->count(SDLK_SPACE) > 0)
     Engine.Player.GetModule<cModuleJumping>().Jump();
 
   if (Engine.MouseHandler.RightButtonDown)

@@ -13,8 +13,8 @@ class cFullscreenController : public iFullscreenController {
         iFullscreenController(engine) {}
 
   inline void UpdateFullscreenToggling() override {
-    if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_RETURN) > 0 &&
-        Engine.KeyboardHandler.KeysBeingPressed.count(SDLK_LALT) > 0)
+    if (Engine.KeyboardHandler.KeysBeenFired->count(SDLK_RETURN) > 0 &&
+        Engine.KeyboardHandler.KeysBeingPressed->count(SDLK_LALT) > 0)
       ToggleFullscreen();
   }
 

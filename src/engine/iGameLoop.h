@@ -17,6 +17,7 @@ class iGameLoop {
   // Looped functions
   inline virtual void Update() = 0;
   inline virtual void Render() = 0;
+  inline virtual void ResetForNewFrame() = 0;
 
  protected:
   iEngine &Engine;

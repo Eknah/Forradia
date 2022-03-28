@@ -4,30 +4,31 @@
 #pragma once
 #include <string>
 #include <utility>
-#include "cScenesCollection.h"
-#include "framework/cSceneBase.h"
+#include "iSceneManager.h"
 
 namespace Forradia {
 
-class cSceneManager {
+class cSceneManager : public iSceneManager {
  public:
-  inline void Initialize(cScenesCollection scenes, int startScene) {
+    explicit cSceneManager(const iEngine &engine) :
+          iSceneManager(engine) {}
+
+  inline void Initialize(cScenesCollection scenes,
+                         int startScene) override {
     ScenesCollection = std::move(scenes);
     *CurrentScene = startScene;
   }
 
-  inline UPtr<cSceneBase> &GetCurrentScene() {
+  inline UPtr<cSceneBase> &GetCurrentScene() override {
     return ScenesCollection.Scenes.at(*CurrentScene);
   }
 
-  inline void SwitchToScene(std::string newScene) const {
+  inline void SwitchToScene(
+          std::string newScene) const override {
     *CurrentScene = GetId(newScene);
     ScenesCollection.Scenes.at(*CurrentScene)->Enter();
+    Engine.GameLoop.ResetForNewFrame();
   }
-
- private:
-  cScenesCollection ScenesCollection;
-  const UPtr<int> CurrentScene = MakeUPtr<int>(-1);
 };
 
 }  // namespace Forradia

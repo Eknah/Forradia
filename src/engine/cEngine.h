@@ -15,6 +15,7 @@
 #include "cModelGraphics.h"
 #include "cPaintGraphics.h"
 #include "cPlayer.h"
+#include "cSceneManager.h"
 #include "framework/world_structure/cWorldMap.h"
 #include "iEngine.h"
 #include "implementation/content/cObjectsContent.h"
@@ -30,10 +31,10 @@ class cEngine : public iEngine {
       : GameLoopImplemented(*this), ModelGraphics(*this),
         FpsCounterImplemented(*this), CustomCursorImplemented(*this),
         ImageGraphics(*this), FullscreenControllerImplemented(*this),
-        Player(*this),
+        Player(*this), SceneManagerImplemented(*this),
         iEngine(&KeyboardHandlerImplemented, &CustomCursorImplemented,
                 &FpsCounterImplemented, &FullscreenControllerImplemented,
-                &GameLoopImplemented) {}
+                &GameLoopImplemented, &SceneManagerImplemented) {}
 
   // Loads content and initializes all engine components
   // Runs game loop until user exists program
@@ -112,6 +113,10 @@ class cEngine : public iEngine {
 
   // ---- Helper functions ----
 
+  inline cSizeF GetImageSizeF(std::string ImageName) const {
+    return ImageGraphics.GetImageSizeF(ImageName);
+  }
+
   inline cMapArea& GetCurrentMapArea() const override {
     // return *WorldMap->MapAreas.at(Player.CurrentMapArea);
     return *WorldMap->MapAreas[Player.WorldMapCoord.X][Player.WorldMapCoord.Y]
@@ -129,6 +134,7 @@ class cEngine : public iEngine {
   cFpsCounter FpsCounterImplemented;
   cFullscreenController FullscreenControllerImplemented;
   cGameLoop GameLoopImplemented;
+  cSceneManager SceneManagerImplemented;
 
   float TileSize = 0.5f;
 

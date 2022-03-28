@@ -8,8 +8,11 @@
 namespace Forradia {
 
 void cSceneMainMenu::Update() {
-  if (Engine.KeyboardHandler.KeysBeingPressed.size() > 0)
+  if (Engine.KeyboardHandler.KeysBeenFired->size() > 0)
     Engine.SceneManager.SwitchToScene("ScenePrimary");
+
+  if (Engine.MouseHandler.GetLeftButtonBeenFired() || Engine.MouseHandler.GetRightButtonBeenFired())
+      Engine.SceneManager.SwitchToScene("ScenePrimary");
 }
 
 void cSceneMainMenu::Render() {
@@ -17,24 +20,10 @@ void cSceneMainMenu::Render() {
 
   auto CanvasSize = Utilities.GetCanvasSize();
 
-  glBindTexture(GL_TEXTURE_2D,
-                Engine.ImageLoader.Images.at(GetId("SceneForradiaLogo")));
+  auto LogoSizeF = Engine.GetImageSizeF("SceneForradiaLogo");
 
-  int Width, Height;
-  int MipLevel = 0;
-
-  glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_WIDTH, &Width);
-  glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_HEIGHT, &Height);
-
-  auto ImageWidth = static_cast<float>(Width) / CanvasSize.Width / 2.0f;
-  auto ImageHeight = static_cast<float>(Height) / CanvasSize.Height / 2.0f;
-
-  Engine.DrawImage("SceneForradiaLogo", 0.5f - ImageWidth / 2.0f,
-                   0.15f - ImageHeight / 2.0f, ImageWidth, ImageHeight);
-}
-
-void cSceneMainMenu::DoMouseDown(Uint8 mouseButton) {
-  Engine.SceneManager.SwitchToScene("ScenePrimary");
+  Engine.DrawImage("SceneForradiaLogo", 0.5f - LogoSizeF.Width / 4.0f,
+                   0.15f - LogoSizeF.Height / 4.0f, LogoSizeF.Width/2, LogoSizeF.Height/2);
 }
 
 }  // namespace Forradia
