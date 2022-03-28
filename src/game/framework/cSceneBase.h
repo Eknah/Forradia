@@ -10,7 +10,7 @@ class cEngine;
 
 class cSceneBase {
  public:
-  cSceneBase(cEngine &Engine_) : Engine(Engine_) {}
+  explicit cSceneBase(cEngine &Engine_) : Engine(Engine_) {}
 
   // To implement in child
 

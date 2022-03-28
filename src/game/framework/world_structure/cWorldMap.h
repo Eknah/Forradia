@@ -10,7 +10,7 @@ class iMapGenerator;
 
 class cWorldMap {
  public:
-  cWorldMap(int MapAreaSize_) : MapAreaSize(MapAreaSize_) {}
+  explicit cWorldMap(int MapAreaSize_) : MapAreaSize(MapAreaSize_) {}
 
   // Core
 

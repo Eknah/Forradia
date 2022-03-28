@@ -12,7 +12,7 @@ class iEngine;
 
 class iCustomCursor {
  public:
-  iCustomCursor(iEngine &engine) : Engine(engine) {}
+  explicit iCustomCursor(iEngine &engine) : Engine(engine) {}
 
   virtual inline void Initialize() = 0;
   virtual inline void ResetForNewFrame() = 0;

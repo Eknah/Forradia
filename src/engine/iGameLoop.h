@@ -10,7 +10,7 @@ class iEngine;
 
 class iGameLoop {
  public:
-  iGameLoop(iEngine &engine) : Engine(engine) {}
+  explicit iGameLoop(iEngine &engine) : Engine(engine) {}
 
   inline virtual void Run() = 0;
 

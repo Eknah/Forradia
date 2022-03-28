@@ -11,7 +11,7 @@ class iEngine;
 
 class iFpsCounter {
  public:
-  iFpsCounter(iEngine &engine) : Engine(engine) {}
+  explicit iFpsCounter(iEngine &engine) : Engine(engine) {}
 
   inline virtual void Update() = 0;
   inline virtual void Render() = 0;

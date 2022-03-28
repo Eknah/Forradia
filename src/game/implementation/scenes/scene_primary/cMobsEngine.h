@@ -10,7 +10,7 @@ class cEngine;
 
 class cMobsEngine {
  public:
-  cMobsEngine(cEngine &Engine_) : Engine(Engine_) {}
+  explicit cMobsEngine(cEngine &Engine_) : Engine(Engine_) {}
 
   void Update();
 

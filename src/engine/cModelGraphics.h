@@ -10,7 +10,7 @@ namespace Forradia {
 
 class cModelGraphics {
  public:
-  cModelGraphics(iEngine &engine) : Engine(engine) {}
+  explicit cModelGraphics(iEngine &engine) : Engine(engine) {}
 
   // ---- Drawing operations ----
 

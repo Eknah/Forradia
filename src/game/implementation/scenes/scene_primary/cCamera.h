@@ -10,7 +10,7 @@ class cEngine;
 
 class cCamera {
  public:
-  cCamera(cEngine &Engine_) : Engine(Engine_) {}
+  explicit cCamera(cEngine &Engine_) : Engine(Engine_) {}
 
   void Update(int RotationDirection, float ZoomChange);
   void UpdateCameraMovement();

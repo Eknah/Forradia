@@ -14,7 +14,7 @@ class iEngine;
 
 class cActor {
  public:
-  cActor(iEngine &Engine_) : Engine(Engine_) {}
+  explicit cActor(iEngine &Engine_) : Engine(Engine_) {}
 
   void ResetForNewFrame();
   void Update();

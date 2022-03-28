@@ -11,7 +11,7 @@ namespace Forradia {
 
 class cGui {
  public:
-  cGui(cEngine &Engine_) : Engine(Engine_), GuiMinimap(Engine_) {}
+  explicit cGui(cEngine &Engine_) : Engine(Engine_), GuiMinimap(Engine_) {}
 
   void Initialize();
   void Update();

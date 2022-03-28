@@ -9,7 +9,7 @@ namespace Forradia {
 
 class cGuiMinimap {
  public:
-  cGuiMinimap(cEngine &Engine_) : Engine(Engine_) {}
+  explicit cGuiMinimap(cEngine &Engine_) : Engine(Engine_) {}
 
   void Render();
 
