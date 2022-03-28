@@ -57,7 +57,7 @@ Download:
 **Note:**  
 The project is configurated to locate headers and libraries in subfolders at C:/, if you change these locations, please change the paths accordingly in *CMakeLists.txt*.
 
-**Run in PowerShell**  
+**Run in PowerShell to unpack and relocate the dependencies**  
 
     tar -xf .\SDL2-devel-2.0.20-VC.zip
     tar -xf .\SDL2_image-devel-2.0.5-VC.zip
@@ -80,7 +80,14 @@ The project is configurated to locate headers and libraries in subfolders at C:/
 **Git glone the repo anywhere**
 
     git clone https://github.com/Eknah/Forradia.git
+    cd Forradia
 
+**Build project with CMake and NMake**
+
+    cmake -G "NMake Makefiles" src/game
+    nmake
+
+Hopefully everything was successful and you now have a compiled binary.
 
 Move 
 
