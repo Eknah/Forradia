@@ -33,16 +33,16 @@ class cUtilities {
   inline cPoint2F GetMousePositionF() {
     auto mouse_position = GetMousePositionI();
     auto canvas_size = GetCanvasSize();
-    auto mouse_x_f = float(mouse_position.X) / canvas_size.Width;
-    auto mouse_y_f = float(mouse_position.Y) / canvas_size.Height;
+    auto mouse_x_f = static_cast<float>(mouse_position.X) / canvas_size.Width;
+    auto mouse_y_f = static_cast<float>(mouse_position.Y) / canvas_size.Height;
 
     return {mouse_x_f, mouse_y_f};
   }
 
   inline cSizeF ConvertToFloat(int value) {
     auto canvas_size = GetCanvasSize();
-    auto result_width = float(value) / canvas_size.Width;
-    auto result_height = float(value) / canvas_size.Height;
+    auto result_width = static_cast<float>(value) / canvas_size.Width;
+    auto result_height = static_cast<float>(value) / canvas_size.Height;
 
     return {result_width, result_height};
   }

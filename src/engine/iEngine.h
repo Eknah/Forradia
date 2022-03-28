@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <SDL2/SDL.h>
 #include <string>
 #include "../engine/cMapArea.h"
 #include "Typedefs.h"
@@ -16,7 +17,6 @@
 #include "iFullscreenController.h"
 #include "iGameLoop.h"
 #include "iKeyboardHandler.h"
-#include <SDL2/SDL.h>
 
 namespace Forradia {
 
