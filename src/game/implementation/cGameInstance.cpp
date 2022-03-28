@@ -1,6 +1,7 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
+#include <utility>
 #include "cGameInstance.h"
 #include "../engine/cEngine.h"
 #include "CommonExternal.h"
@@ -19,7 +20,6 @@ namespace Forradia {
 // Runs engine with all the preparation data
 
 void cGameInstance::StartGame() {
-
   using std::move;
 
   Randomize();
