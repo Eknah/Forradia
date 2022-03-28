@@ -3,7 +3,7 @@ Forradia is a cross-platform sandbox survival/RPG game written in C++ with OpenG
 The engine loads 3D models in Wavefront-format as well as textures and fonts. The maps are tile-based and fully randomly generated.
 
 ## Motivation
-The purpose of this project is mainly that I use it to improve my knowledge and experience in this technical areas, and eventually find collaborators.
+The purpose of this project is mainly that I use it to improve my knowledge and experience in these technical areas, and eventually find collaborators.
 
 ## Build status
 [![Build status](https://ci.appveyor.com/api/projects/status/crge78bph1g0ki14?svg=true)](https://ci.appveyor.com/project/Eknah/forradia)
@@ -55,7 +55,7 @@ Download:
 * Freeglut Development Library: [freeglut-MSVC.zip](https://www.transmissionzero.co.uk/files/software/development/GLUT/freeglut-MSVC.zip)  
   
 **Note:**  
-The project is configurated to locate headers and libs in subfolders at C:/, if you change these locations, please change the paths accordingly in *CMakeLists.txt*.
+The project is configurated to locate headers and libraries in subfolders at C:/, if you change these locations, please change the paths accordingly in *CMakeLists.txt*.
 
 **Run in PowerShell**  
 
@@ -63,7 +63,20 @@ The project is configurated to locate headers and libs in subfolders at C:/, if 
     tar -xf .\SDL2_image-devel-2.0.5-VC.zip
     tar -xf .\SDL2_ttf-devel-2.0.18-VC.zip
     tar -xf .\glew-2.1.0-win32.zip
-    tar -xf .\freeglut-MSVC.zip
+    tar -xf .\freeglut-MSVC-3.0.0-2.mp.zip
+
+    xcopy .\SDL2-2.0.20\include C:\test\SDL2\include\SDL2 /E /H /C /I /Y
+    xcopy .\SDL2_image-2.0.5\include C:\test\SDL2\include\SDL2 /E /H /C /I /Y
+    xcopy .\SDL2_ttf-2.0.18\include C:\test\SDL2\include\SDL2 /E /H /C /I /Y
+    xcopy .\glew-2.1.0\include C:\test\GLEW\include /E /H /C /I /Y
+    xcopy .\freeglut\include C:\test\freeglut\include /E /H /C /I /Y
+
+    xcopy .\SDL2-2.0.20\lib\x86 C:\test\SDL2\lib\x86 /E /H /C /I /Y
+    xcopy .\SDL2_image-2.0.5\lib\x86 C:\test\SDL2\lib\x86 /E /H /C /I /Y
+    xcopy .\SDL2_ttf-2.0.18\lib\x86 C:\test\SDL2\lib\x86 /E /H /C /I /Y
+    xcopy .\glew-2.1.0\lib\Release\Win32 C:\test\GLEW\lib\Release\Win32 /E /H /C /I /Y
+    xcopy .\freeglut\lib C:\test\freeglut\lib /E /H /C /I /Y
+
 
 Move 
 
