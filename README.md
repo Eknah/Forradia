@@ -12,7 +12,6 @@ The purpose of this project is mainly that I use it to improve my knowledge and 
 [![Build status](https://ci.appveyor.com/api/projects/status/crge78bph1g0ki14?svg=true)](https://ci.appveyor.com/project/Eknah/forradia)
 
 ## Code style
-[![cpp-linter](https://github.com/shenxianpeng/cpp-linter-action/actions/workflows/cpp-linter.yml/badge.svg)](https://github.com/Eknah/Forradia/actions/workflows/cpp-linter.yml)  
 [![MegaLinter](https://github.com/Eknah/Forradia/workflows/MegaLinter/badge.svg?branch=main)](https://github.com/Eknah/Forradia/actions?query=workflow%3AMegaLinter+branch%3Amain)
 
 ## Screenshots
