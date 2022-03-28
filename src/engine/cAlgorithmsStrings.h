@@ -4,14 +4,16 @@
 #pragma once
 #include "../engine/Aliases.h"
 #include "CommonExternal.h"
+#include <vector>
+#include <string>
 
 namespace Forradia {
 
 class cAlgorithmsStrings {
  public:
-  inline void Split(const std::string &in, std::vector<std::string> &out,
+  inline void Split(const std::string &in, std::vector<std::string> *out,
                     std::string token) {
-    out.clear();
+    out->clear();
 
     std::string temp;
 
@@ -20,15 +22,15 @@ class cAlgorithmsStrings {
 
       if (test == token) {
         if (!temp.empty()) {
-          out.push_back(temp);
+          out->push_back(temp);
           temp.clear();
-          i += (int)token.size() - 1;
+          i += token.size() - 1;
         } else {
-          out.push_back("");
+          out->push_back("");
         }
       } else if (i + token.size() >= in.size()) {
         temp += in.substr(i, token.size());
-        out.push_back(temp);
+        out->push_back(temp);
 
         break;
       } else {

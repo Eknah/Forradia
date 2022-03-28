@@ -71,7 +71,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
       if (FirstToken(curline) == "v") {
         std::vector<std::string> spos;
         cVector3 vpos;
-        Split(Tail(curline), spos, " ");
+        Split(Tail(curline), &spos, " ");
         vpos.X = std::stof(spos[0]);
         vpos.Y = std::stof(spos[1]);
         vpos.Z = std::stof(spos[2]);
@@ -81,7 +81,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
       if (FirstToken(curline) == "vt") {
         std::vector<std::string> stex;
         cVector2 vtex;
-        Split(Tail(curline), stex, " ");
+        Split(Tail(curline), &stex, " ");
         vtex.X = std::stof(stex[0]);
         vtex.Y = std::stof(stex[1]);
         TCoords.push_back(vtex);
@@ -90,7 +90,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
       if (FirstToken(curline) == "vn") {
         std::vector<std::string> snor;
         cVector3 vnor;
-        Split(Tail(curline), snor, " ");
+        Split(Tail(curline), &snor, " ");
         vnor.X = std::stof(snor[0]);
         vnor.Y = std::stof(snor[1]);
         vnor.Z = std::stof(snor[2]);
@@ -144,7 +144,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
       if (FirstToken(curline) == "mtllib") {
         std::vector<std::string> temp;
-        Split(Path, temp, "/");
+        Split(Path, &temp, "/");
         std::string pathtomat = Path.substr(0, Path.length() - 4) + ".mtl";
         LoadMaterials(pathtomat);
       }
@@ -188,13 +188,13 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
                                     std::string icurline) {
     std::vector<std::string> sface, svert;
     cVertex vVert;
-    Split(Tail(icurline), sface, " ");
+    Split(Tail(icurline), &sface, " ");
     bool noNormal = false;
 
     for (int i = 0; i < int(sface.size()); i++) {
       int vtype;
 
-      Split(sface[i], svert, "/");
+      Split(sface[i], &svert, "/");
 
       if (svert.size() == 1)
         vtype = 1;
@@ -424,7 +424,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
       if (FirstToken(curline) == "Ka") {
         std::vector<std::string> temp;
-        Split(Tail(curline), temp, " ");
+        Split(Tail(curline), &temp, " ");
 
         if (temp.size() != 3)
           continue;
@@ -436,7 +436,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
       if (FirstToken(curline) == "Kd") {
         std::vector<std::string> temp;
-        Split(Tail(curline), temp, " ");
+        Split(Tail(curline), &temp, " ");
 
         if (temp.size() != 3)
           continue;
@@ -448,7 +448,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
       if (FirstToken(curline) == "Ks") {
         std::vector<std::string> temp;
-        Split(Tail(curline), temp, " ");
+        Split(Tail(curline), &temp, " ");
 
         if (temp.size() != 3)
           continue;
