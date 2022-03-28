@@ -28,4 +28,4 @@ class cSceneManager {
   int CurrentScene;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -18,4 +18,4 @@ class cScenesCollection {
   UMap<int, UPtr<cSceneBase>> Scenes;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

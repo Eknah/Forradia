@@ -23,4 +23,4 @@ class cModuleJumping : public iModule {
   float MaxJumpHeight = 1.0f;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

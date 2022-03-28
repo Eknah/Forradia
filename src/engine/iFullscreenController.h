@@ -20,4 +20,4 @@ class iFullscreenController {
   bool FullscreenOn = true;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

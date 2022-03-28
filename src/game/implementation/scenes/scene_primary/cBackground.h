@@ -17,4 +17,4 @@ class cBackground {
   cEngine &Engine;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

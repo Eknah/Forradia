@@ -22,4 +22,4 @@ class cSceneMainMenu : public cSceneBase {
   cUtilities Utilities;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -33,4 +33,4 @@ bool cObjectsContent::BlocksSight(int ObjectType) {
   return false;
 }
 
-} // namespace Forradia
+}  // namespace Forradia

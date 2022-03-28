@@ -16,4 +16,4 @@ class iKeyboardHandler {
   std::set<SDL_Keycode> KeysBeenFired;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

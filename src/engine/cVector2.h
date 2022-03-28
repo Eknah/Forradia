@@ -15,4 +15,4 @@ class cVector2 {
   float Y = 0.0f;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

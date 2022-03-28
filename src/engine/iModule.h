@@ -21,4 +21,4 @@ class iModule {
   cActor &ParentActor;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

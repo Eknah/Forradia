@@ -40,4 +40,4 @@ class cCamera {
   float ZoomMultiplier = 8.0;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -69,4 +69,4 @@ class cGuiWindowBase {
   SDL_FPoint StartMoveMousePosition = {-1, -1};
 };
 
-} // namespace Forradia
+}  // namespace Forradia

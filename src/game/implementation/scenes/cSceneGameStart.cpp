@@ -38,4 +38,4 @@ void cSceneGameStart::DoMouseDown(Uint8 mouseButton) {
   Engine.SceneManager.SwitchToScene("SceneMainMenu");
 }
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -116,4 +116,4 @@ void cCamera::UpdateCameraMovement() {
   PreviousMousePosition = MousePosition;
 }
 
-} // namespace Forradia
+}  // namespace Forradia

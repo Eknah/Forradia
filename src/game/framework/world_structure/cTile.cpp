@@ -26,4 +26,4 @@ bool cTile::HasObjectOfType(std::string ObjectName) {
   return false;
 }
 
-} // namespace Forradia
+}  // namespace Forradia

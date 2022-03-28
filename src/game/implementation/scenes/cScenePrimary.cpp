@@ -106,4 +106,4 @@ void cScenePrimary::DoMouseDown(Uint8 MouseButton) {
 
 void cScenePrimary::DoMouseUp(Uint8 MouseButton) { Gui.DoMouseUp(); }
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -29,4 +29,4 @@ class cObject {
   void TransformInto(std::string ObjectName);
 };
 
-} // namespace Forradia
+}  // namespace Forradia

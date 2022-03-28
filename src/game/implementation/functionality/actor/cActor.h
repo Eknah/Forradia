@@ -38,4 +38,4 @@ class cActor {
   UMap<size_t, UPtr<iModule>> Modules;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

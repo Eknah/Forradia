@@ -86,4 +86,4 @@ class cTextGraphics {
   cUtilities Utilities;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -15,4 +15,4 @@ void cActor::Update() {
     Module->Update();
 }
 
-} // namespace Forradia
+}  // namespace Forradia

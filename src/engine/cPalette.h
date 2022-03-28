@@ -16,4 +16,4 @@ class cPalette {
   SDL_Color Wheat = {255, 255, 230, 255};
 };
 
-} // namespace Forradia
+}  // namespace Forradia

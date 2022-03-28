@@ -15,4 +15,4 @@ void cWorldMap::GenerateWorldMap(iMapGenerator &MapGenerator) {
       MapGenerator.GenerateMapArea(WorldX, WorldY, 0);
 }
 
-} // namespace Forradia
+}  // namespace Forradia

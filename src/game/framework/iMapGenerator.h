@@ -23,4 +23,4 @@ class iMapGenerator {
   UPtr<cWorldMap> &WorldMap;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

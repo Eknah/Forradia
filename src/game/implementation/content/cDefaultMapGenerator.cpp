@@ -418,4 +418,4 @@ void cDefaultMapGenerator::GenerateQuestCaves(cEngine &Engine,
   }
 }
 
-} // namespace Forradia
+}  // namespace Forradia

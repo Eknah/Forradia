@@ -22,4 +22,4 @@ class cRectF {
   float Height = 0.0f;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

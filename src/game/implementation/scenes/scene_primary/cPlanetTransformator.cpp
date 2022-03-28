@@ -18,4 +18,4 @@ float cPlanetTransformator::GetNewY(float Y, float TileX, float TileY) {
   return Result;
 }
 
-} // namespace Forradia
+}  // namespace Forradia

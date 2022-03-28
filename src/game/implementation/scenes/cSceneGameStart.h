@@ -22,4 +22,4 @@ class cSceneGameStart : public cSceneBase {
   cUtilities Utilities;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

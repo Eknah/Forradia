@@ -20,4 +20,4 @@ class cPlayer : public cActor {
   }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

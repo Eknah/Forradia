@@ -22,4 +22,4 @@ class iGameLoop {
   iEngine &Engine;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

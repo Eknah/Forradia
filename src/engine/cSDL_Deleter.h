@@ -16,4 +16,4 @@ class cSDL_Deleter {
   void operator()(TTF_Font *p) const { TTF_CloseFont(p); }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

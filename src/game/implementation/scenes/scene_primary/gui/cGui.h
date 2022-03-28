@@ -49,4 +49,4 @@ class cGui {
                           TextBoxHeight};
 };
 
-} // namespace Forradia
+}  // namespace Forradia

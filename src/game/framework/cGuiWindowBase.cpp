@@ -70,4 +70,4 @@ cRectF cGuiWindowBase::GetTitleBarBounds() {
 
 void cGuiWindowBase::DoMouseUp() { IsBeingMoved = false; }
 
-} // namespace Forradia
+}  // namespace Forradia

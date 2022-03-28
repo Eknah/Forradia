@@ -123,4 +123,4 @@ void cGui::DoMouseUp() {
     Window->DoMouseUp();
 }
 
-} // namespace Forradia
+}  // namespace Forradia

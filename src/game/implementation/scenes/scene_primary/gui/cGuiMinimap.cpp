@@ -15,4 +15,4 @@ void cGuiMinimap::Render() {
                        MinimapSizeF.Height);
 }
 
-} // namespace Forradia
+}  // namespace Forradia

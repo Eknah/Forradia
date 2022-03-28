@@ -17,4 +17,4 @@ class cPlanetTransformator {
   cEngine &Engine;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

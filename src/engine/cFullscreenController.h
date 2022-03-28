@@ -9,7 +9,7 @@ namespace Forradia {
 
 class cFullscreenController : public iFullscreenController {
  public:
-  cFullscreenController(iEngine &engine) : iFullscreenController(engine) {}
+  explicit cFullscreenController(iEngine &engine) : iFullscreenController(engine) {}
 
   inline void UpdateFullscreenToggling() override {
     if (Engine.KeyboardHandler.KeysBeenFired.count(SDLK_RETURN) > 0 &&

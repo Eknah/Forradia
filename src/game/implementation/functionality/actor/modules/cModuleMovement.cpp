@@ -166,4 +166,4 @@ void cModuleMovement::UpdateDestinationMovement() {
   TickLastMove = Ticks();
 }
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -25,4 +25,4 @@ class cGameWorldRenderer {
   cPlanetTransformator PlanetTransformator;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

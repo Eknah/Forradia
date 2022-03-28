@@ -21,4 +21,4 @@ class cGuiWindowInventory : public cGuiWindowBase {
   cPalette Palette;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

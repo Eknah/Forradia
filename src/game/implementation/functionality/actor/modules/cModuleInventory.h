@@ -24,4 +24,4 @@ class cModuleInventory : public iModule {
   UMap<int, SPtr<cObject>> Objects;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

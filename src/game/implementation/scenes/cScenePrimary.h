@@ -30,4 +30,4 @@ class cScenePrimary : public cSceneBase {
   cGameWorldRenderer GameWorldRenderer;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

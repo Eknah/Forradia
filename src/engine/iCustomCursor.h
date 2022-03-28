@@ -27,4 +27,4 @@ class iCustomCursor {
   int CursorSize = 20;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

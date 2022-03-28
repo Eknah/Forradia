@@ -19,4 +19,4 @@ class cObjectDescription {
   bool BlocksSight = false;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -85,4 +85,4 @@ void cQuestCaveMapGenerator::GeneratePath(cMapArea &MapArea,
   }
 }
 
-} // namespace Forradia
+}  // namespace Forradia

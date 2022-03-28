@@ -17,4 +17,4 @@ class cModuleObjectUsage : public iModule {
   SPtr<cObject> ObjectBeingUsed = nullptr;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

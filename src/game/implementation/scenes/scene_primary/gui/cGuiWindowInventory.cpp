@@ -87,4 +87,4 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
   }
 }
 
-} // namespace Forradia
+}  // namespace Forradia

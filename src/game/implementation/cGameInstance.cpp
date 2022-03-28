@@ -67,4 +67,4 @@ void cGameInstance::StartGame() {
              StartingInventory, ObjectsContent);
 }
 
-} // namespace Forradia
+}  // namespace Forradia

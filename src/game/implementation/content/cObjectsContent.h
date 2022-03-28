@@ -24,4 +24,4 @@ class cObjectsContent {
   UMap<int, cObjectDescription> ObjectDescriptions;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

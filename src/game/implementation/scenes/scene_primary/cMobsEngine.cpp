@@ -110,4 +110,4 @@ void cMobsEngine::Update() {
   }
 }
 
-} // namespace Forradia
+}  // namespace Forradia

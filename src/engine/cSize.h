@@ -11,4 +11,4 @@ class cSize {
   int Height = 0;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

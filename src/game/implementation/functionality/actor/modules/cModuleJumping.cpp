@@ -34,4 +34,4 @@ void cModuleJumping::Jump() {
   TickStartJumping = Ticks();
 }
 
-} // namespace Forradia
+}  // namespace Forradia

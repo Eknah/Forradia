@@ -48,4 +48,4 @@ class cUtilities {
   }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

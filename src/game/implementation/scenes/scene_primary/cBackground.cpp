@@ -32,4 +32,4 @@ void cBackground::Render(float Zoom) {
   //    }
 }
 
-} // namespace Forradia
+}  // namespace Forradia

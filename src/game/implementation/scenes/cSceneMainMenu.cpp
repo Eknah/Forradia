@@ -37,4 +37,4 @@ void cSceneMainMenu::DoMouseDown(Uint8 mouseButton) {
   Engine.SceneManager.SwitchToScene("ScenePrimary");
 }
 
-} // namespace Forradia
+}  // namespace Forradia

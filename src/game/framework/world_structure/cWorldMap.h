@@ -25,4 +25,4 @@ class cWorldMap {
   UMap<int, UMap<int, UMap<int, UPtr<cMapArea>>>> MapAreas;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

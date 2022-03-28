@@ -13,4 +13,4 @@ void cModuleInventory::Add(int Position, std::string ObjectName) {
   Objects.insert({Position, MakeUPtr<cObject>(ObjectName)});
 }
 
-} // namespace Forradia
+}  // namespace Forradia

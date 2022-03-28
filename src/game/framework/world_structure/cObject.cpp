@@ -27,4 +27,4 @@ void cObject::TransformInto(std::string ObjectName) {
   ObjectType = GetId(ObjectName);
 }
 
-} // namespace Forradia
+}  // namespace Forradia

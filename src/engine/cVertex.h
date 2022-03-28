@@ -14,4 +14,4 @@ class cVertex {
   cVector2 TextureCoordinate;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

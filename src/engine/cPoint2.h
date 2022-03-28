@@ -11,4 +11,4 @@ class cPoint2 {
   int Y = 0;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

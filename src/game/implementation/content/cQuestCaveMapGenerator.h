@@ -17,4 +17,4 @@ class cQuestCaveMapGenerator {
   void GeneratePath(cMapArea &MapArea, cPoint2 EntranceLocation);
 };
 
-} // namespace Forradia
+}  // namespace Forradia

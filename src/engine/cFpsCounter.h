@@ -9,7 +9,7 @@ namespace Forradia {
 
 class cFpsCounter : public iFpsCounter {
  public:
-  cFpsCounter(iEngine &engine) : iFpsCounter(engine) {}
+  explicit cFpsCounter(iEngine &engine) : iFpsCounter(engine) {}
 
   inline void Update() override {
     FramesCount++;

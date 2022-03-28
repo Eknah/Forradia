@@ -28,4 +28,4 @@ class cMob {
   cPoint2F Position = {-1, -1};
 };
 
-} // namespace Forradia
+}  // namespace Forradia

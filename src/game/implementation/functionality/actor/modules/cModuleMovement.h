@@ -42,4 +42,4 @@ class cModuleMovement : public iModule {
   float StepMultiplier = 0.1f;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

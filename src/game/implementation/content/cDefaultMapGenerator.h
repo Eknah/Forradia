@@ -33,4 +33,4 @@ class cDefaultMapGenerator : public iMapGenerator {
   const int PlayerStartingAreaSize = 4;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

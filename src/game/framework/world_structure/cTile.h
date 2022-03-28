@@ -31,4 +31,4 @@ class cTile {
   cEngine &Engine;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

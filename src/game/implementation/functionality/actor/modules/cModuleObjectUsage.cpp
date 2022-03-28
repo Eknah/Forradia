@@ -9,4 +9,4 @@ void cModuleObjectUsage::ResetForNewFrame() {}
 
 void cModuleObjectUsage::Update() {}
 
-} // namespace Forradia
+}  // namespace Forradia

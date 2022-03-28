@@ -29,4 +29,4 @@ class iFpsCounter {
   const float Height = 0.03f;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -21,4 +21,4 @@ class cGuiMinimap {
   cUtilities Utilities;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -11,4 +11,4 @@ class cGameInstance {
   void StartGame();
 };
 
-} // namespace Forradia
+}  // namespace Forradia

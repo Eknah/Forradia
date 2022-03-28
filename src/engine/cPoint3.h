@@ -12,4 +12,4 @@ class cPoint3 {
   int Z = 0;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

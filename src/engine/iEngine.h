@@ -69,4 +69,4 @@ class iEngine {
   cTextGraphics TextGraphics;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

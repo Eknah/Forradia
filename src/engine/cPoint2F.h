@@ -13,4 +13,4 @@ class cPoint2F {
   float Y = 0.0f;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

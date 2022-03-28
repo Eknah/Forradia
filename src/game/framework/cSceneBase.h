@@ -24,4 +24,4 @@ class cSceneBase {
   cEngine &Engine;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

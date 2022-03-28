@@ -18,4 +18,4 @@ class cMobsEngine {
   cEngine &Engine;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -39,4 +39,4 @@ class cVector3 {
   float Z = 0.0f;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

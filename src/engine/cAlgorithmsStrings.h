@@ -15,7 +15,7 @@ class cAlgorithmsStrings {
 
     std::string temp;
 
-    for (auto i = 0; i < int(in.size()); i++) {
+    for (unsigned int i = 0; i < in.size(); i++) {
       std::string test = in.substr(i, token.size());
 
       if (test == token) {
