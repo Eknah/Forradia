@@ -2,6 +2,8 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <string>
+#include <vector>
 #include "../engine/Aliases.h"
 #include "cMob.h"
 #include "cObject.h"
@@ -12,7 +14,7 @@ class cEngine;
 
 class cTile {
  public:
-  cTile(const cEngine &Engine_) : Engine(Engine_) {}
+  explicit cTile(const cEngine &Engine_) : Engine(Engine_) {}
 
   // Get info about tile
 

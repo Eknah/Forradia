@@ -14,7 +14,7 @@ class cWorldMap {
 
   // Core
 
-  void GenerateWorldMap(iMapGenerator &MapGenerator);
+  void GenerateWorldMap(const iMapGenerator &MapGenerator);
 
   // Basic data
 

@@ -12,7 +12,7 @@ cObject::cObject(std::string ObjectTypeName, bool RandomScaling)
     Scaling = 0.6f + float(rand() % 8) / 10.0f;
 }
 
-void cObject::UseOn(std::unique_ptr<cObject> &Other) {
+void cObject::UseOn(const std::unique_ptr<cObject> &Other) {
   if (ObjectType == GetId("ObjectWoodaxe") &&
       (Other->ObjectType == GetId("ObjectTree1") ||
        Other->ObjectType == GetId("ObjectTree2")))

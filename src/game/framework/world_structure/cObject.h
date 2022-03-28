@@ -2,19 +2,18 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/Aliases.h"
 #include <memory>
 #include <string>
-
+#include "../engine/Aliases.h"
 namespace Forradia {
 
 class cObject {
  public:
-  cObject(std::string ObjectTypeName, bool RandomScaling = true);
+  explicit cObject(std::string ObjectTypeName, bool RandomScaling = true);
 
   // Object usage
 
-  void UseOn(std::unique_ptr<cObject> &Other);
+  void UseOn(const std::unique_ptr<cObject> &Other);
 
   // Core
 
