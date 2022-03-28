@@ -9,7 +9,7 @@ namespace Forradia {
 
 class cVectorAlgorithms {
 
-public:
+ public:
   inline bool InTriangle(cVector3 point, cVector3 tri1, cVector3 tri2,
                          cVector3 tri3) {
     bool within_tri_prisim = SameSide(point, tri1, tri2, tri3) &&
@@ -29,7 +29,7 @@ public:
       return false;
   }
 
-private:
+ private:
   inline bool SameSide(cVector3 p1, cVector3 p2, cVector3 a, cVector3 b) {
     cVector3 cp1 = Math3D.Cross(b - a, p1 - a);
     cVector3 cp2 = Math3D.Cross(b - a, p2 - a);
