@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include "../engine/Aliases.h"
+#include "framework/cRandom.h"
 namespace Forradia {
 
 class cObject {
@@ -26,6 +27,8 @@ class cObject {
 
  private:
   void TransformInto(std::string ObjectName);
+
+  cRandom Random;
 };
 
 }  // namespace Forradia

@@ -7,9 +7,10 @@
 namespace Forradia {
 
 cObject::cObject(std::string ObjectTypeName, bool RandomScaling)
-    : ObjectType(GetId(ObjectTypeName)), Rotation(static_cast<float>(rand() % 360)) {
-  if (RandomScaling)
-    Scaling = 0.6f + float(rand() % 8) / 10.0f;
+    : ObjectType(GetId(ObjectTypeName)) {
+  Rotation =static_cast<float>(Random.Generate() % 360);
+    if (RandomScaling)
+    Scaling = 0.6f + float(Random.Generate() % 8) / 10.0f;
 }
 
 void cObject::UseOn(const std::unique_ptr<cObject> &Other) {
