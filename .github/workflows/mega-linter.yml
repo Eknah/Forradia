@@ -36,7 +36,7 @@ jobs:
         id: ml
         # You can override MegaLinter flavor used to have faster performances
         # More info at https://megalinter.github.io/flavors/
-        uses: megalinter/megalinter@v5
+        uses: megalinter/megalinter@beta
         env:
           # All available variables are described in documentation
           # https://megalinter.github.io/configuration/
@@ -45,7 +45,6 @@ jobs:
           # ADD YOUR CUSTOM ENV VARIABLES HERE OR DEFINE THEM IN A FILE .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
           # DISABLE: COPYPASTE,SPELL # Uncomment to disable copy-paste and spell checks
           # DISABLE_LINTERS: COPYPASTE
-          ENABLE_LINTERS: CPP_CPPLINT
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
