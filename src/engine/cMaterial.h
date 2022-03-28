@@ -1,3 +1,4 @@
+// Copyright (C) 2022  Andreas Åkerberg
 
 #pragma once
 #include "Aliases.h"

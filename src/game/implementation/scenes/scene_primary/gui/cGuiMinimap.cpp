@@ -1,3 +1,4 @@
+// Copyright (C) 2022  Andreas Åkerberg
 
 #include "cGuiMinimap.h"
 #include "../engine/cEngine.h"

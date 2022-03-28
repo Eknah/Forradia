@@ -1,3 +1,4 @@
+// Copyright (C) 2022  Andreas Åkerberg
 
 #include "cGui.h"
 #include "../engine/cEngine.h"

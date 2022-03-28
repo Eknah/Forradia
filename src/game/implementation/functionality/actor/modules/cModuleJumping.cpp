@@ -1,3 +1,4 @@
+// Copyright (C) 2022  Andreas Åkerberg
 
 #include "cModuleJumping.h"
 #include "CommonExternal.h"

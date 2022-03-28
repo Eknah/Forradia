@@ -1,3 +1,4 @@
+// Copyright (C) 2022  Andreas Åkerberg
 
 #include "cGameWorldRenderer.h"
 #include "../engine/cEngine.h"
