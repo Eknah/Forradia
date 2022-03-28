@@ -26,8 +26,8 @@ void cSceneGameStart::Render() {
   glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_WIDTH, &Width);
   glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_HEIGHT, &Height);
 
-  auto ImageWidth = (float)Width / CanvasSize.Width;
-  auto ImageHeight = (float)Height / CanvasSize.Height;
+  auto ImageWidth = static_cast<float>(Width) / CanvasSize.Width;
+  auto ImageHeight = static_cast<float>(Height) / CanvasSize.Height;
 
   Engine.DrawImage("SceneForradiaLogo", 0.5f - ImageWidth / 2.0f,
                    0.25f - ImageHeight / 2.0f, ImageWidth, ImageHeight);

@@ -50,7 +50,6 @@ void cQuestCaveMapGenerator::GeneratePath(cMapArea *MapArea,
     for (auto J = 0; J < NumSteps; J++) {
       for (auto XX = TileX - 1; XX <= TileX + 1; XX++) {
         for (auto YY = TileY - 1; YY <= TileY + 1; YY++) {
-
           if (XX >= 0 && YY >= 0 && XX < MapArea->Size && YY < MapArea->Size)
             if (MapArea->Tiles[XX][YY].Objects.size() > 0)
               if (!MapArea->Tiles[XX][YY].HasObjectOfType(

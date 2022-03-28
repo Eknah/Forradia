@@ -85,10 +85,11 @@ void cModuleMovement::UpdateDirectionalMovement() {
     GetParentActor().Position.Y = NewY;
   }
 
-  if (Engine.GetCurrentMapArea().Tiles[static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor !=
-      -1) {
+  if (Engine.GetCurrentMapArea().Tiles
+          [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor != -1) {
     GetParentActor().WorldMapCoord.Z =
-        Engine.GetCurrentMapArea().Tiles[static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
+        Engine.GetCurrentMapArea().Tiles
+            [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
 
     auto Angle = FacingAngle / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
     auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
@@ -119,12 +120,12 @@ void cModuleMovement::UpdateDestinationMovement() {
     MoveDestination = {-1, -1};
   } else {
     IsWalking = true;
-    FacingAngle = (float)std::atan2(-DX, -DY) / PiF * 180.0f;
+    FacingAngle = static_cast<float>(std::atan2(-DX, -DY)) / PiF * 180.0f;
 
     auto Angle = FacingAngle / 180.0f * PiF - PiF / 2 +
                  0 * PiF / 2;
-    auto DX = -(float)std::cos(Angle) * StepMultiplier;
-    auto DY = (float)std::sin(Angle) * StepMultiplier;
+    auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
+    auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;
     auto NewX = GetParentActor().Position.X + DX * StepSize;
     auto NewY = GetParentActor().Position.Y + DY * StepSize;
 
@@ -147,10 +148,12 @@ void cModuleMovement::UpdateDestinationMovement() {
       GetParentActor().Position.Y = NewY;
     }
 
-    if (Engine.GetCurrentMapArea().Tiles[static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor !=
+    if (Engine.GetCurrentMapArea().Tiles
+            [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor !=
         -1) {
       GetParentActor().WorldMapCoord.Z =
-          Engine.GetCurrentMapArea().Tiles[static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
+          Engine.GetCurrentMapArea().Tiles
+              [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
 
       auto Angle = FacingAngle / 180.0f * PiF - PiF / 2 +
                    0 * PiF / 2;

@@ -41,8 +41,10 @@ cDefaultMapGenerator::ClearToGrass(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GeneratePlayerStartingPosition
 (cMapArea *MapArea) const {
-  MapArea->PlayerSpawnPosition.X = static_cast<float>(Random.Next() % MapArea->Size);
-  MapArea->PlayerSpawnPosition.Y = static_cast<float>(Random.Next() % MapArea->Size);
+  MapArea->PlayerSpawnPosition.X = static_cast<float>(
+              Random.Next() % MapArea->Size);
+  MapArea->PlayerSpawnPosition.Y = static_cast<float>(
+              Random.Next() % MapArea->Size);
 }
 
 void
@@ -395,7 +397,8 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
             GetId("GroundtypeWater") &&
         MapArea->Tiles[TileX][TileY].Mob == nullptr) {
       MapArea->Tiles[TileX][TileY].Mob =
-          std::make_unique<cMob>(static_cast<float>(TileX), static_cast<float>(TileY));
+          std::make_unique<cMob>(static_cast<float>(TileX),
+                                 static_cast<float>(TileY));
       MapArea->MobsMirror.push_back(std::ref(MapArea->Tiles[TileX][TileY].Mob));
     }
   }
@@ -403,8 +406,8 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
 
 void
 cDefaultMapGenerator::GenerateQuestCaves(const cEngine &Engine,
-                                              cMapArea *MapArea,
-                                              const UPtr<cWorldMap> &WorldMap) const {
+                                         cMapArea *MapArea,
+                                         const UPtr<cWorldMap> &WorldMap) const {
   cQuestCaveMapGenerator QuestCaveMapGenerator;
 
   for (auto Floor = -1; Floor >= -20; Floor--) {
@@ -428,8 +431,9 @@ cDefaultMapGenerator::GenerateQuestCaves(const cEngine &Engine,
       auto &quest_cave_map_area =
           WorldMap->MapAreas[MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor];
 
-      QuestCaveMapGenerator.GenerateQuestCaveMapArea(quest_cave_map_area.get(),
-                                                     {TileX, TileY});
+      QuestCaveMapGenerator.GenerateQuestCaveMapArea(
+                  quest_cave_map_area.get(),
+                  {TileX, TileY});
     }
   }
 }
