@@ -2,31 +2,28 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include "../engine/cEngine.h"
 #include "CommonExternal.h"
+#include "cBackground.h"
 #include "cCamera.h"
 #include "cPlanetTransformator.h"
-#include "cBackground.h"
-#include "../engine/cEngine.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cGameWorldRenderer
-{
+class cGameWorldRenderer {
 
 public:
+  cGameWorldRenderer(cEngine &Engine_, cCamera &Camera_)
+      : Engine(Engine_), Background(Engine_), PlanetTransformator(Engine_),
+        Camera(Camera_) {}
 
-    cGameWorldRenderer(cEngine& Engine_, cCamera& Camera_) : Engine(Engine_), Background(Engine_), PlanetTransformator(Engine_), Camera(Camera_) {}
-
-    void                    Render();
+  void Render();
 
 private:
-
-    cEngine&                Engine;
-    cBackground             Background;
-    cCamera&                Camera;
-    cPlanetTransformator    PlanetTransformator;
-
+  cEngine &Engine;
+  cBackground Background;
+  cCamera &Camera;
+  cPlanetTransformator PlanetTransformator;
 };
 
-}
+} // namespace Forradia

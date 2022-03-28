@@ -4,28 +4,23 @@
 #pragma once
 #include "CommonExternal.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cMouseHandler
-{
+class cMouseHandler {
 
 public:
+  // Game loop related
 
-    // Game loop related
+  inline void ResetForNewFrame() {
+    WheelAmount *= 0.85f;
 
-    inline void ResetForNewFrame()
-    {
-        WheelAmount *= 0.85f;
+    if (std::abs(WheelAmount) < 0.1f)
+      WheelAmount = 0;
+  }
 
-        if (std::abs(WheelAmount) < 0.1f)
-            WheelAmount = 0;
-    }
-
-    float WheelAmount = 0;
-    bool LeftButtonDown = false;
-    bool RightButtonDown = false;
-
+  float WheelAmount = 0;
+  bool LeftButtonDown = false;
+  bool RightButtonDown = false;
 };
 
-}
+} // namespace Forradia

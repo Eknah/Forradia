@@ -4,30 +4,26 @@
 #pragma once
 #include "../engine/cMapArea.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
 class iMapGenerator;
 
-class cWorldMap
-{
+class cWorldMap {
 
 public:
+  cWorldMap(int MapAreaSize_) : MapAreaSize(MapAreaSize_) {}
 
-    cWorldMap(int MapAreaSize_) : MapAreaSize(MapAreaSize_) {}
+  // Core
 
-    // Core
+  void GenerateWorldMap(iMapGenerator &MapGenerator);
 
-    void GenerateWorldMap(iMapGenerator& MapGenerator);
+  // Basic data
 
-    // Basic data
+  int MapAreaSize = -1;
 
-    int MapAreaSize = -1;
+  // Core world map data structures
 
-    // Core world map data structures
-
-    UMap<int,UMap<int,UMap<int, UPtr<cMapArea>>>> MapAreas;
-
+  UMap<int, UMap<int, UMap<int, UPtr<cMapArea>>>> MapAreas;
 };
 
-}
+} // namespace Forradia

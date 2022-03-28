@@ -5,22 +5,17 @@
 #include "../engine/cMapArea.h"
 #include "../engine/cPoint2.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cQuestCaveMapGenerator
-{
+class cQuestCaveMapGenerator {
 
 public:
-
-    void GenerateQuestCaveMapArea(cMapArea& MapArea, cPoint2 EntranceLocation);
+  void GenerateQuestCaveMapArea(cMapArea &MapArea, cPoint2 EntranceLocation);
 
 private:
-
-    void ClearToCaveFloor(cMapArea& MapArea);
-    void GenerateCaveWalls(cMapArea& MapArea);
-    void GeneratePath(cMapArea& MapArea, cPoint2 EntranceLocation);
-
+  void ClearToCaveFloor(cMapArea &MapArea);
+  void GenerateCaveWalls(cMapArea &MapArea);
+  void GeneratePath(cMapArea &MapArea, cPoint2 EntranceLocation);
 };
 
-}
+} // namespace Forradia

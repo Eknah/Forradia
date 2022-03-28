@@ -5,29 +5,24 @@
 #include "../engine/Aliases.h"
 #include "cObjectDescription.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cObjectsContent
-{
+class cObjectsContent {
 
 public:
+  // Collection operations
 
-    // Collection operations
+  void Add(std::string ObjectName, cObjectDescription Description);
 
-    void    Add(std::string ObjectName, cObjectDescription Description);
+  // Get info about an object
 
-    // Get info about an object
+  bool IsMovable(int ObjectType);
+  bool BlocksMovement(int ObjectType);
+  bool BlocksSight(int ObjectType);
 
-    bool    IsMovable(int ObjectType);
-    bool    BlocksMovement(int ObjectType);
-    bool    BlocksSight(int ObjectType);
+  // Collection structure
 
-    // Collection structure
-
-    UMap<int, cObjectDescription>
-    ObjectDescriptions;
-
+  UMap<int, cObjectDescription> ObjectDescriptions;
 };
 
-}
+} // namespace Forradia

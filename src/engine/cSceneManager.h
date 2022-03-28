@@ -5,36 +5,28 @@
 #include "cScenesCollection.h"
 #include "framework/cSceneBase.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cSceneManager
-{
+class cSceneManager {
 
 public:
+  inline void Initialize(cScenesCollection scenes, int startScene) {
+    ScenesCollection = std::move(scenes);
+    CurrentScene = startScene;
+  }
 
-    inline void Initialize(cScenesCollection scenes, int startScene)
-    {
-        ScenesCollection = std::move(scenes);
-        CurrentScene = startScene;
-    }
+  inline UPtr<cSceneBase> &GetCurrentScene() {
+    return ScenesCollection.Scenes.at(CurrentScene);
+  }
 
-    inline UPtr<cSceneBase>& GetCurrentScene()
-    {
-        return ScenesCollection.Scenes.at(CurrentScene);
-    }
-
-    inline void SwitchToScene(std::string newScene)
-    {
-        CurrentScene = GetId(newScene);
-        ScenesCollection.Scenes[CurrentScene]->Enter();
-    }
+  inline void SwitchToScene(std::string newScene) {
+    CurrentScene = GetId(newScene);
+    ScenesCollection.Scenes[CurrentScene]->Enter();
+  }
 
 private:
-
-    cScenesCollection ScenesCollection;
-    int CurrentScene;
-
+  cScenesCollection ScenesCollection;
+  int CurrentScene;
 };
 
-}
+} // namespace Forradia

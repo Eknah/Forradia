@@ -4,16 +4,12 @@
 #pragma once
 #include "CommonExternal.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cGameInstance
-{
+class cGameInstance {
 
 public:
-
-    void StartGame();
-
+  void StartGame();
 };
 
-}
+} // namespace Forradia

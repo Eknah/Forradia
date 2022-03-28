@@ -2,37 +2,32 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include <string>
-#include <memory>
 #include "../engine/Aliases.h"
+#include <memory>
+#include <string>
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cObject
-{
+class cObject {
 
 public:
+  cObject(std::string ObjectTypeName, bool RandomScaling = true);
 
-    cObject(std::string ObjectTypeName, bool RandomScaling = true);
+  // Object usage
 
-    // Object usage
+  void UseOn(std::unique_ptr<cObject> &Other);
 
-    void UseOn(std::unique_ptr<cObject>& Other);
+  // Core
 
-    // Core
+  int ObjectType = 0;
 
-    int     ObjectType = 0;
+  // Rendering
 
-    // Rendering
-
-    float   Rotation = 0.0f;
-    float   Scaling = 1.0f;
+  float Rotation = 0.0f;
+  float Scaling = 1.0f;
 
 private:
-
-    void TransformInto(std::string ObjectName);
-
+  void TransformInto(std::string ObjectName);
 };
 
-}
+} // namespace Forradia

@@ -2,32 +2,27 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/iModule.h"
 #include "../engine/Aliases.h"
+#include "../engine/iModule.h"
 #include "framework/world_structure/cObject.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cModuleInventory : public iModule
-{
+class cModuleInventory : public iModule {
 
 public:
+  using iModule::iModule;
 
-    using   iModule::iModule;
+  void ResetForNewFrame() override;
+  void Update() override;
 
-    void    ResetForNewFrame() override;
-    void    Update() override;
+  // Collection operations
 
-    // Collection operations
+  void Add(int Position, std::string ObjectName);
 
-    void    Add(int Position, std::string ObjectName);
+  // Collection structure
 
-    // Collection structure
-
-    UMap<int, SPtr<cObject>>
-    Objects;
-
+  UMap<int, SPtr<cObject>> Objects;
 };
 
-}
+} // namespace Forradia

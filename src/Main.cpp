@@ -15,9 +15,8 @@
 // int main()
 
 // Windows
-int wmain()
-{
-    Forradia::cGameInstance().StartGame();
+int wmain() {
+  Forradia::cGameInstance().StartGame();
 
-    return 0;
+  return 0;
 }

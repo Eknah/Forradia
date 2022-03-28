@@ -5,21 +5,17 @@
 #include "../engine/iModule.h"
 #include "framework/world_structure/cObject.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cModuleObjectUsage : public iModule
-{
+class cModuleObjectUsage : public iModule {
 
 public:
+  using iModule::iModule;
 
-    using   iModule::iModule;
+  void ResetForNewFrame() override;
+  void Update() override;
 
-    void    ResetForNewFrame() override;
-    void    Update() override;
-
-    SPtr<cObject> ObjectBeingUsed = nullptr;
-
+  SPtr<cObject> ObjectBeingUsed = nullptr;
 };
 
-}
+} // namespace Forradia

@@ -3,13 +3,10 @@
 
 #include "cModuleObjectUsage.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-void cModuleObjectUsage::ResetForNewFrame()
-{}
+void cModuleObjectUsage::ResetForNewFrame() {}
 
-void cModuleObjectUsage::Update()
-{}
+void cModuleObjectUsage::Update() {}
 
-}
+} // namespace Forradia

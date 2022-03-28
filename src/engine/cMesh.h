@@ -2,24 +2,22 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "cVertex.h"
 #include "cMaterial.h"
+#include "cVertex.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cMesh
-{
+class cMesh {
 
 public:
+  cMesh() {}
+  cMesh(std::vector<cVertex> &vertices, std::vector<unsigned int> &indices)
+      : Vertices(vertices), Indices(indices) {}
 
-    cMesh() {}
-    cMesh(std::vector<cVertex>& vertices, std::vector<unsigned int>& indices) : Vertices(vertices), Indices(indices) {}
-
-    std::string MeshName;
-    std::vector<cVertex> Vertices;
-    std::vector<unsigned int> Indices;
-    cMaterial MeshMaterial;
+  std::string MeshName;
+  std::vector<cVertex> Vertices;
+  std::vector<unsigned int> Indices;
+  cMaterial MeshMaterial;
 };
 
-}
+} // namespace Forradia

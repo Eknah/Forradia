@@ -6,34 +6,30 @@
 #include "cMob.h"
 #include "cObject.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
 class cEngine;
 
-class cTile
-{
+class cTile {
 
 public:
+  cTile(cEngine &Engine_) : Engine(Engine_) {}
 
-    cTile(cEngine& Engine_) : Engine(Engine_) {}
+  // Get info about tile
 
-    // Get info about tile
+  bool MovementBlocked();
+  bool HasObjectOfType(std::string ObjectName);
 
-    bool MovementBlocked();
-    bool HasObjectOfType(std::string ObjectName);
+  // Core tile data structure
 
-    // Core tile data structure
-
-    int                         GroundType = 0;
-    std::vector<UPtr<cObject>>  Objects;
-    int                         Elevation = 0;
-    UPtr<cMob>                  Mob = nullptr;
-    int                         WarpToFloor = -1;
+  int GroundType = 0;
+  std::vector<UPtr<cObject>> Objects;
+  int Elevation = 0;
+  UPtr<cMob> Mob = nullptr;
+  int WarpToFloor = -1;
 
 private:
-    cEngine& Engine;
-
+  cEngine &Engine;
 };
 
-}
+} // namespace Forradia

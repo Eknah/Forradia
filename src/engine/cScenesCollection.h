@@ -5,23 +5,18 @@
 #include "../engine/Aliases.h"
 #include "framework/cSceneBase.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cScenesCollection
-{
+class cScenesCollection {
 
 public:
+  // Collection operations
+  inline void Add(std::string sceneName, UPtr<cSceneBase> scene) {
+    Scenes.insert({GetId(sceneName), std::move(scene)});
+  }
 
-    // Collection operations
-    inline void Add(std::string sceneName, UPtr<cSceneBase> scene)
-    {
-        Scenes.insert({ GetId(sceneName), std::move(scene) });
-    }
-
-    // Collection structure
-    UMap<int, UPtr<cSceneBase>> Scenes;
-
+  // Collection structure
+  UMap<int, UPtr<cSceneBase>> Scenes;
 };
 
-}
+} // namespace Forradia

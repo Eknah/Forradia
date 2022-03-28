@@ -3,27 +3,23 @@
 
 #pragma once
 
-namespace Forradia
-{
+namespace Forradia {
 
 class iEngine;
 class cActor;
 
-class iModule
-{
+class iModule {
 
 public:
+  iModule(iEngine &Engine_, cActor &ParentActor_)
+      : Engine(Engine_), ParentActor(ParentActor_) {}
 
-    iModule(iEngine& Engine_, cActor& ParentActor_) : Engine(Engine_), ParentActor(ParentActor_) {}
-
-    virtual void ResetForNewFrame() = 0;
-    virtual void Update() = 0;
+  virtual void ResetForNewFrame() = 0;
+  virtual void Update() = 0;
 
 protected:
-
-    iEngine& Engine;
-    cActor& ParentActor;
-
+  iEngine &Engine;
+  cActor &ParentActor;
 };
 
-}
+} // namespace Forradia

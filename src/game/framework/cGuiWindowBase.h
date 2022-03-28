@@ -2,77 +2,72 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/cUtilities.h"
 #include "../engine/cEngine.h"
 #include "../engine/cRectF.h"
+#include "../engine/cUtilities.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cGuiWindowBase
-{
+class cGuiWindowBase {
 
 public:
+  cGuiWindowBase(cEngine &Engine_, std::string Title_, cRectF Bounds_)
+      : Engine(Engine_), Title(Title_), Bounds(Bounds_) {}
 
-    cGuiWindowBase(cEngine& Engine_, std::string Title_, cRectF Bounds_) : Engine(Engine_), Title(Title_), Bounds(Bounds_) {}
+  // Looped operations
 
-    // Looped operations
+  void Render();
+  void Update();
 
-    void            Render();
-    void            Update();
+  // Fired by events
 
-    // Fired by events
+  bool DoMouseDown(Uint8 MouseButton);
+  void DoMouseUp();
 
-    bool            DoMouseDown(Uint8 MouseButton);
-    void            DoMouseUp();
+  // Basic data
 
-    // Basic data
-
-    bool            Visible = false;
+  bool Visible = false;
 
 protected:
+  // Internal helpers
 
-    // Internal helpers
+  cRectF GetInteriorBounds();
 
-    cRectF          GetInteriorBounds();
+  // To implement in child
 
-    // To implement in child
+  virtual void DoMouseDownDerived(Uint8 MouseButton) = 0;
+  virtual void RenderDerived() = 0;
 
-    virtual void    DoMouseDownDerived(Uint8 MouseButton) = 0;
-    virtual void    RenderDerived() = 0;
+  // Basic data
 
-    // Basic data
+  const float Margin = 0.008f;
 
-    const float     Margin = 0.008f;
-
-    cEngine&        Engine;
+  cEngine &Engine;
 
 private:
+  // Internal helpers
 
-    // Internal helpers
+  cRectF GetTitleBarBounds();
 
-    cRectF          GetTitleBarBounds();
+  // Composition
 
-    // Composition
+  cPalette Palette;
+  cUtilities Utilities;
 
-    cPalette        Palette;
-    cUtilities      Utilities;
+  // Basic data
 
-    // Basic data
+  std::string Title;
+  const float TitleBarHeight = 0.04f;
 
-    std::string     Title;
-    const float     TitleBarHeight = 0.04f;
+  // Dimensions
 
-    // Dimensions
+  cRectF Bounds;
 
-    cRectF          Bounds;
+  // Window movement
 
-    // Window movement
-
-    bool            IsBeingMoved = false;
-    SDL_FPoint      StartMovePosition = { -1, -1 };
-    SDL_FPoint      StartMoveMousePosition = { -1, -1 };
-
+  bool IsBeingMoved = false;
+  SDL_FPoint StartMovePosition = {-1, -1};
+  SDL_FPoint StartMoveMousePosition = {-1, -1};
 };
 
-}
+} // namespace Forradia

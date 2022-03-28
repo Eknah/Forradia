@@ -5,25 +5,21 @@
 #include "../engine/cEngine.h"
 #include "../engine/cUtilities.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cGuiMinimap
-{
+class cGuiMinimap {
 
 public:
+  cGuiMinimap(cEngine &Engine_) : Engine(Engine_) {}
 
-    cGuiMinimap(cEngine& Engine_) : Engine(Engine_) {}
-
-    void Render();
+  void Render();
 
 private:
+  cEngine &Engine;
 
-    cEngine&    Engine;
-
-    const int   MinimapSize = 250;
-    cPalette    Palette;
-    cUtilities  Utilities;
+  const int MinimapSize = 250;
+  cPalette Palette;
+  cUtilities Utilities;
 };
 
-}
+} // namespace Forradia

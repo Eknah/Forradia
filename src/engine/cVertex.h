@@ -5,17 +5,14 @@
 #include "cVector2.h"
 #include "cVector3.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cVertex
-{
+class cVertex {
 
 public:
-
-    cVector3 Position;
-    cVector3 Normal;
-    cVector2 TextureCoordinate;
+  cVector3 Position;
+  cVector3 Normal;
+  cVector2 TextureCoordinate;
 };
 
-}
+} // namespace Forradia

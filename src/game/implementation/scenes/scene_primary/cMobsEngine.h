@@ -4,24 +4,19 @@
 #pragma once
 #include "CommonExternal.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
 class cEngine;
 
-class cMobsEngine
-{
+class cMobsEngine {
 
 public:
+  cMobsEngine(cEngine &Engine_) : Engine(Engine_) {}
 
-    cMobsEngine(cEngine& Engine_) : Engine(Engine_) {}
-
-    void        Update();
+  void Update();
 
 private:
-
-    cEngine&    Engine;
-
+  cEngine &Engine;
 };
 
-}
+} // namespace Forradia

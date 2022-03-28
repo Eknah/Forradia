@@ -4,26 +4,21 @@
 #pragma once
 #include "CommonExternal.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
 class iEngine;
 
-class iFullscreenController
-{
+class iFullscreenController {
 
 public:
+  iFullscreenController(iEngine &engine) : Engine(engine) {}
 
-    iFullscreenController(iEngine& engine) : Engine(engine) {}
-
-    inline virtual void UpdateFullscreenToggling() = 0;
-    inline virtual void ToggleFullscreen() = 0;
+  inline virtual void UpdateFullscreenToggling() = 0;
+  inline virtual void ToggleFullscreen() = 0;
 
 protected:
-
-    iEngine& Engine;
-    bool FullscreenOn = true;
-
+  iEngine &Engine;
+  bool FullscreenOn = true;
 };
 
-}
+} // namespace Forradia

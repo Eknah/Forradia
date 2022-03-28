@@ -3,18 +3,14 @@
 
 #include "cModuleInventory.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-void cModuleInventory::ResetForNewFrame()
-{}
+void cModuleInventory::ResetForNewFrame() {}
 
-void cModuleInventory::Update()
-{}
+void cModuleInventory::Update() {}
 
-void cModuleInventory::Add(int Position, std::string ObjectName)
-{
-    Objects.insert({ Position, MakeUPtr<cObject>(ObjectName) });
+void cModuleInventory::Add(int Position, std::string ObjectName) {
+  Objects.insert({Position, MakeUPtr<cObject>(ObjectName)});
 }
 
-}
+} // namespace Forradia

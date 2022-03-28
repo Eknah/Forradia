@@ -2,24 +2,20 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "CommonExternal.h"
 #include "../engine/cEngine.h"
+#include "CommonExternal.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cPlanetTransformator
-{
+class cPlanetTransformator {
 
 public:
+  cPlanetTransformator(cEngine &Engine_) : Engine(Engine_) {}
 
-    cPlanetTransformator(cEngine& Engine_) : Engine(Engine_) {}
-
-    float       GetNewY(float Y, float TileX, float TileY);
+  float GetNewY(float Y, float TileX, float TileY);
 
 private:
-
-    cEngine&    Engine;
+  cEngine &Engine;
 };
 
-}
+} // namespace Forradia

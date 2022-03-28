@@ -4,28 +4,24 @@
 #pragma once
 #include "../engine/Aliases.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
 class cEngine;
 class cWorldMap;
 
-class iMapGenerator
-{
+class iMapGenerator {
 
 public:
+  iMapGenerator(cEngine &Engine_, UPtr<cWorldMap> &WorldMap_)
+      : Engine(Engine_), WorldMap(WorldMap_) {}
 
-    iMapGenerator(cEngine& Engine_, UPtr<cWorldMap>& WorldMap_) : Engine(Engine_), WorldMap(WorldMap_) {}
+  // Core map area generation
 
-    // Core map area generation
-
-    virtual void        GenerateMapArea(int WorldX, int WorldY, int WorldZ) = 0;
-
+  virtual void GenerateMapArea(int WorldX, int WorldY, int WorldZ) = 0;
 
 protected:
-    cEngine&            Engine;
-    UPtr<cWorldMap>&    WorldMap;
-
+  cEngine &Engine;
+  UPtr<cWorldMap> &WorldMap;
 };
 
-}
+} // namespace Forradia

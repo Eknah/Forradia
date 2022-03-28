@@ -4,28 +4,23 @@
 #pragma once
 #include "CommonExternal.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
 class iEngine;
 
-    class iGameLoop
-    {
+class iGameLoop {
 
-    public:
+public:
+  iGameLoop(iEngine &engine) : Engine(engine) {}
 
-        iGameLoop(iEngine& engine) : Engine(engine) {}
+  inline virtual void Run() = 0;
 
-        inline virtual void Run() = 0;
+  // Looped functions
+  inline virtual void Update() = 0;
+  inline virtual void Render() = 0;
 
-        // Looped functions
-        inline virtual void Update() = 0;
-        inline virtual void Render() = 0;
+protected:
+  iEngine &Engine;
+};
 
-    protected:
-
-        iEngine& Engine;
-
-    };
-
-}
+} // namespace Forradia

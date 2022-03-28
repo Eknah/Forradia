@@ -2,30 +2,25 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "CommonExternal.h"
 #include "../engine/cUtilities.h"
+#include "CommonExternal.h"
 #include "framework/cSceneBase.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cSceneMainMenu : public cSceneBase
-{
+class cSceneMainMenu : public cSceneBase {
 
 public:
+  using cSceneBase::cSceneBase;
 
-    using       cSceneBase::cSceneBase;
-
-    void        Enter() override {}
-    void        Update() override;
-    void        Render() override;
-    void        DoMouseDown(Uint8 mouseButton) override;
-    void        DoMouseUp(Uint8 mouseButton) override {}
+  void Enter() override {}
+  void Update() override;
+  void Render() override;
+  void DoMouseDown(Uint8 mouseButton) override;
+  void DoMouseUp(Uint8 mouseButton) override {}
 
 private:
-
-    cUtilities  Utilities;
-
+  cUtilities Utilities;
 };
 
-}
+} // namespace Forradia

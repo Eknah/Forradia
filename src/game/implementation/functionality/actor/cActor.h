@@ -2,52 +2,40 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "CommonExternal.h"
 #include "../engine/Aliases.h"
-#include "../engine/iModule.h"
 #include "../engine/cPoint2F.h"
 #include "../engine/cPoint3.h"
+#include "../engine/iModule.h"
+#include "CommonExternal.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
 class iEngine;
 
-class cActor
-{
+class cActor {
 public:
+  cActor(iEngine &Engine_) : Engine(Engine_) {}
 
-    cActor(iEngine& Engine_) : Engine(Engine_) {}
+  void ResetForNewFrame();
+  void Update();
 
-    void        ResetForNewFrame();
-    void        Update();
+  template <class T> inline T &GetModule() {
+    return static_cast<T &>(*Modules.at(typeid(T).hash_code()));
+  }
 
-    template <class T>
-    inline T& GetModule()
-    {
-        return static_cast<T&>(*Modules.at(typeid(T).hash_code()));
-    }
-
-    cPoint3     WorldMapCoord = {1, 1, 0};
-    cPoint2F    Position = { 50.0f, 50.0f };
+  cPoint3 WorldMapCoord = {1, 1, 0};
+  cPoint2F Position = {50.0f, 50.0f};
 
 protected:
-
-    template <class T>
-    inline void AddModule()
-    {
-        auto& Type = typeid(T);
-        Modules.insert({Type.hash_code(),MakeUPtr<T>(Engine, *this)});
-    }
+  template <class T> inline void AddModule() {
+    auto &Type = typeid(T);
+    Modules.insert({Type.hash_code(), MakeUPtr<T>(Engine, *this)});
+  }
 
 private:
+  iEngine &Engine;
 
-    iEngine&    Engine;
-
-    UMap<size_t, UPtr<iModule>>
-    Modules;
-
-
+  UMap<size_t, UPtr<iModule>> Modules;
 };
 
-}
+} // namespace Forradia

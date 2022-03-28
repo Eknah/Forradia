@@ -2,53 +2,45 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/iModule.h"
 #include "../engine/cPoint2F.h"
+#include "../engine/iModule.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
-class cModuleMovement : public iModule
-{
+class cModuleMovement : public iModule {
 
 public:
+  class MovementInstruction {
 
-    class MovementInstruction
-    {
+  public:
+    bool TryMoveForward = false;
+    bool TryMoveRight = false;
+    bool TryMoveBack = false;
+    bool TryMoveLeft = false;
+  };
 
-    public:
-        bool TryMoveForward = false;
-        bool TryMoveRight = false;
-        bool TryMoveBack = false;
-        bool TryMoveLeft = false;
+  using iModule::iModule;
 
-    };
+  void ResetForNewFrame() override;
+  void Update() override;
 
-    using           iModule::iModule;
+  void UpdateRotation(float newFacingAngle);
 
-    void            ResetForNewFrame() override;
-    void            Update() override;
+  MovementInstruction Instruction;
 
-    void            UpdateRotation(float newFacingAngle);
-
-    MovementInstruction
-    Instruction;
-
-    bool            IsWalking = false;
-    float           FacingAngle = 0.0f;
-    float           FacingAngleRotated = 0.0f;
-    cPoint2F        MoveDestination = { -1, -1 };
+  bool IsWalking = false;
+  float FacingAngle = 0.0f;
+  float FacingAngleRotated = 0.0f;
+  cPoint2F MoveDestination = {-1, -1};
 
 private:
+  void UpdateDirectionalMovement();
+  void UpdateDestinationMovement();
 
-    void            UpdateDirectionalMovement();
-    void            UpdateDestinationMovement();
-
-    unsigned int    TickLastMove = 0;
-    int             MoveSpeed = 30;
-    float           StepSize = 3.0f;
-    float           StepMultiplier = 0.1f;
-
+  unsigned int TickLastMove = 0;
+  int MoveSpeed = 30;
+  float StepSize = 3.0f;
+  float StepMultiplier = 0.1f;
 };
 
-}
+} // namespace Forradia

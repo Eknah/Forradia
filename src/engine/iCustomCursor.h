@@ -6,30 +6,25 @@
 #include "cUtilities.h"
 #include "eCursorTypes.h"
 
-namespace Forradia
-{
+namespace Forradia {
 
 class iEngine;
 
-class iCustomCursor
-{
+class iCustomCursor {
 public:
+  iCustomCursor(iEngine &engine) : Engine(engine) {}
 
-    iCustomCursor(iEngine& engine) : Engine(engine) {}
+  virtual inline void Initialize() = 0;
+  virtual inline void ResetForNewFrame() = 0;
+  virtual inline void Render() = 0;
 
-    virtual inline void Initialize() = 0;
-    virtual inline void ResetForNewFrame() = 0;
-    virtual inline void Render() = 0;
-
-    eCursorTypes CursorType = eCursorTypes::Default;
+  eCursorTypes CursorType = eCursorTypes::Default;
 
 protected:
+  iEngine &Engine;
+  cUtilities Utilities;
 
-    iEngine& Engine;
-    cUtilities Utilities;
-
-    int CursorSize = 20;
-
+  int CursorSize = 20;
 };
 
-}
+} // namespace Forradia
