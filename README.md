@@ -53,8 +53,17 @@ Download:
 * SDL2_ttf Development Library: [SDL2_ttf-devel-2.0.18-VC.zip](https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-devel-2.0.18-VC.zip)  
 * GLEW Development Library: [glew-2.1.0-win32.zip](https://netix.dl.sourceforge.net/project/glew/glew/2.1.0/glew-2.1.0-win32.zip)  
 * Freeglut Development Library: [freeglut-MSVC.zip](https://www.transmissionzero.co.uk/files/software/development/GLUT/freeglut-MSVC.zip)  
+  
+Note: The project is configurated to locate headers and libs in subfolders at C:, if you change these locations, please change the paths accordingly in CMakeLists.txt.
 
-
+Run in PowerShell:
+    tar -xf .\SDL2-devel-2.0.20-VC.zip
+    tar -xf .\SDL2_image-devel-2.0.5-VC.zip
+    tar -xf .\SDL2_ttf-devel-2.0.18-VC.zip
+    tar -xf .\glew-2.1.0-win32.zip
+    tar -xf .\freeglut-MSVC.zip
+  
+Move 
 
 ### Linux
 
