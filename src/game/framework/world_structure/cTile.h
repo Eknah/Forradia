@@ -10,11 +10,11 @@
 
 namespace Forradia {
 
-class cEngine;
+class iEngine;
 
 class cTile {
  public:
-  explicit cTile(const cEngine &Engine_) : Engine(Engine_) {}
+  explicit cTile(const iEngine &Engine_) : Engine(Engine_) {}
 
   // Get info about tile
 
@@ -30,7 +30,7 @@ class cTile {
   int WarpToFloor = -1;
 
  private:
-  const cEngine &Engine;
+  const iEngine &Engine;
 };
 
 }  // namespace Forradia

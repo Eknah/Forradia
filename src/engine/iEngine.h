@@ -11,6 +11,7 @@
 #include "cMouseHandler.h"
 #include "cTextGraphics.h"
 #include "cVector3.h"
+#include "implementation/content/cObjectsContent.h"
 #include "iCustomCursor.h"
 #include "iFpsCounter.h"
 #include "iFullscreenController.h"
@@ -71,6 +72,7 @@ class iEngine {
   cImageLoader ImageLoader;
   cModelLoader ModelLoader;
   cTextGraphics TextGraphics;
+  cObjectsContent ObjectsContent;
 };
 
 }  // namespace Forradia

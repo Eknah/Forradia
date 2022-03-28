@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "cTile.h"
-#include "../engine/cEngine.h"
+#include "../engine/iEngine.h"
 #include "CommonExternal.h"
 
 namespace Forradia {

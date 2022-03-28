@@ -398,7 +398,8 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
             GetId("GroundtypeWater") &&
         MapArea->Tiles[TileX][TileY].Mob == nullptr) {
       MapArea->Tiles[TileX][TileY].Mob =
-          std::make_unique<cMob>(static_cast<float>(TileX),
+          std::make_unique<cMob>(Engine,
+                                 static_cast<float>(TileX),
                                  static_cast<float>(TileY),
                                  "MobRabbit");
       MapArea->MobsMirror.push_back(std::ref(MapArea->Tiles[TileX][TileY].Mob));
@@ -416,7 +417,8 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
             GetId("GroundtypeWater") &&
         MapArea->Tiles[TileX][TileY].Mob == nullptr) {
       MapArea->Tiles[TileX][TileY].Mob =
-          std::make_unique<cMob>(static_cast<float>(TileX),
+          std::make_unique<cMob>(Engine,
+                                 static_cast<float>(TileX),
                                  static_cast<float>(TileY),
                                  "MobRat");
       MapArea->MobsMirror.push_back(std::ref(MapArea->Tiles[TileX][TileY].Mob));
@@ -426,7 +428,7 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
 
 void
 cDefaultMapGenerator::
-GenerateQuestCaves(const cEngine &Engine,
+GenerateQuestCaves(const iEngine &Engine,
                    cMapArea *MapArea,
                    const UPtr<cWorldMap>&WorldMap) const {
   cQuestCaveMapGenerator QuestCaveMapGenerator;

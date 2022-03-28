@@ -14,7 +14,7 @@ class iEngine;
 
 class cActor {
  public:
-  explicit cActor(iEngine &Engine_) : Engine(Engine_) {}
+  explicit cActor(const iEngine &Engine_) : Engine(Engine_) {}
 
   void ResetForNewFrame() const;
   void Update() const;
@@ -33,7 +33,7 @@ class cActor {
   }
 
  private:
-  iEngine &Engine;
+  const iEngine &Engine;
 
   UMap<size_t, UPtr<iModule>> Modules;
 };

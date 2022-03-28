@@ -334,7 +334,7 @@ void cGameWorldRenderer::Render() {
 
         Engine.DrawModel(Engine.GetCurrentMapArea()
                          .Tiles[TileXI][TileYI]
-                         .Mob->MobType, TileX0 + SubXPos,
+                         .Mob->ModelId, TileX0 + SubXPos,
                          (TileY0 + TileY1 + TileY2 + TileY3) / 4.0f,
                          TileZ0 - Engine.TileSize + SubYPos,
                          Engine.GetCurrentMapArea()

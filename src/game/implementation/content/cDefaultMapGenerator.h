@@ -27,7 +27,7 @@ class cDefaultMapGenerator : public iMapGenerator {
   void GenerateSmallStones(cMapArea *MapArea) const;
   void GeneratePinkFlowers(cMapArea *MapArea) const;
   void GenerateMobs(cMapArea *MapArea) const;
-  void GenerateQuestCaves(const cEngine &Engine, cMapArea *MapArea,
+  void GenerateQuestCaves(const iEngine &Engine, cMapArea *MapArea,
                           const UPtr<cWorldMap> &WorldMap) const;
   int DistToPlayerStartingPos(cMapArea *MapArea, int TileX, int TileY) const;
 

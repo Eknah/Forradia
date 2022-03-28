@@ -18,7 +18,6 @@
 #include "cSceneManager.h"
 #include "framework/world_structure/cWorldMap.h"
 #include "iEngine.h"
-#include "implementation/content/cObjectsContent.h"
 
 namespace Forradia {
 
@@ -127,7 +126,6 @@ class cEngine : public iEngine {
 
   cPlayer Player;
   UPtr<cWorldMap> WorldMap;
-  cObjectsContent ObjectsContent;
 
   cKeyboardHandler KeyboardHandlerImplemented;
   cCustomCursor CustomCursorImplemented;

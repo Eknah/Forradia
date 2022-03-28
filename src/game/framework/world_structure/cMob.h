@@ -6,13 +6,16 @@
 #include <string>
 #include "../engine/cPoint2F.h"
 #include "../engine/Aliases.h"
+#include "implementation/functionality/actor/cActor.h"
 
 namespace Forradia {
 
-class cMob {
+class iEngine;
+
+class cMob : public cActor {
  public:
-  cMob(float X, float Y, std::string MobTypeName) : Position(X, Y),
-      MobType(GetId(MobTypeName)) {}
+  cMob(const iEngine &Engine, float X, float Y, std::string ModelName) : Position(X, Y),
+      ModelId(GetId(ModelName)), cActor(Engine) {}
 
   // Movement
 
@@ -21,7 +24,7 @@ class cMob {
   float StepSize = 1.0f;
   float StepMultiplier = 0.1f;
   cPoint2F MoveDestination = {-1, -1};
-  int MobType = 0;
+  int ModelId = 0;
 
   // Rotation
 
