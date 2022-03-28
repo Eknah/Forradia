@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "framework/cRandom.h"
+#include "../engine/cRandom.h"
 #include "../engine/cMapArea.h"
 #include "framework/iMapGenerator.h"
 

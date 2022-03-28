@@ -5,7 +5,7 @@
 #include <memory>
 #include <string>
 #include "../engine/Aliases.h"
-#include "framework/cRandom.h"
+#include "../engine/cRandom.h"
 namespace Forradia {
 
 class cObject {

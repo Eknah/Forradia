@@ -7,12 +7,8 @@
 
 namespace Forradia {
 
-
 class cRandom {
-
  public:
-
-
     inline int Next() {
 
         return mt();
@@ -20,7 +16,6 @@ class cRandom {
 
  private:
     inline static std::mt19937 mt = std::mt19937(static_cast<unsigned int>(time(nullptr)));
-    //std::mt19937 mt = std::mt19937(1);
 };
 
 }  // namespace Forradia
