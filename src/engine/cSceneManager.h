@@ -2,6 +2,8 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <string>
+#include <utility>
 #include "cScenesCollection.h"
 #include "framework/cSceneBase.h"
 

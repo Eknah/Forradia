@@ -1,6 +1,6 @@
 # Forradia
 
-![Forradia!](/resources/images/Icon.png "Forradia")
+![Forradia!](https://github.com/Eknah/Forradia/resources/images/Icon.png "Forradia")
 
 Forradia is a cross-platform sandbox survival/RPG game written in C++ with OpenGL and SDL2.
 The engine loads 3D models in Wavefront-format as well as textures and fonts. The maps are tile-based and fully randomly generated.
@@ -15,8 +15,8 @@ The purpose of this project is mainly that I use it to improve my knowledge and 
 [![MegaLinter](https://github.com/Eknah/Forradia/workflows/MegaLinter/badge.svg?branch=main)](https://github.com/Eknah/Forradia/actions?query=workflow%3AMegaLinter+branch%3Amain)
 
 ## Screenshots
-![Forradia Screenshot 1!](/resources/images/Screenshot1.png "Forradia Screenshot 1")
-![Forradia Screenshot 2!](/resources/images/Screenshot2.png "Forradia Screenshot 2")
+![Forradia Screenshot 1!](https://github.com/Eknah/Forradia/resources/images/Screenshot1.png "Forradia Screenshot 1")
+![Forradia Screenshot 2!](https://github.com/Eknah/Forradia/resources/images/Screenshot2.png "Forradia Screenshot 2")
 
 ## Tech/framework used
 **Built with**

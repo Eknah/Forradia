@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <string>
 #include "../engine/cEngine.h"
 #include "../engine/cRectF.h"
 #include "../engine/cUtilities.h"

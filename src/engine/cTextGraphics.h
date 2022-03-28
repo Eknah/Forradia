@@ -2,6 +2,8 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <string>
+#include <memory>
 #include "../engine/Aliases.h"
 #include "../engine/cSDL_Deleter.h"
 #include "../engine/cUtilities.h"

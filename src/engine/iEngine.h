@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <string>
 #include "../engine/cMapArea.h"
 #include "Typedefs.h"
 #include "cImageLoader.h"

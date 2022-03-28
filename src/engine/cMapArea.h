@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <vector>
 #include "../engine/Aliases.h"
 #include "../engine/cPoint2F.h"
 #include "../engine/cPoint3.h"
