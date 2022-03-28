@@ -8,10 +8,10 @@
 namespace Forradia {
 
 class cModuleMovement : public iModule {
-public:
+ public:
   class MovementInstruction {
 
-  public:
+   public:
     bool TryMoveForward = false;
     bool TryMoveRight = false;
     bool TryMoveBack = false;
@@ -32,7 +32,7 @@ public:
   float FacingAngleRotated = 0.0f;
   cPoint2F MoveDestination = {-1, -1};
 
-private:
+ private:
   void UpdateDirectionalMovement();
   void UpdateDestinationMovement();
 

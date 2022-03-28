@@ -51,4 +51,4 @@ class cImageGraphics {
   iEngine &Engine;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

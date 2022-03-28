@@ -8,12 +8,12 @@ namespace Forradia {
 class cEngine;
 
 class cBackground {
-public:
+ public:
   cBackground(cEngine &Engine_) : Engine(Engine_) {}
 
   void Render(float Zoom);
 
-private:
+ private:
   cEngine &Engine;
 };
 

@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cObjectsContent {
-public:
+ public:
   // Collection operations
 
   void Add(std::string ObjectName, cObjectDescription Description);

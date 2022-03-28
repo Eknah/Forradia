@@ -9,7 +9,7 @@ namespace Forradia {
 class iMapGenerator;
 
 class cWorldMap {
-public:
+ public:
   cWorldMap(int MapAreaSize_) : MapAreaSize(MapAreaSize_) {}
 
   // Core

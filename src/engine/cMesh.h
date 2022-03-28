@@ -19,4 +19,4 @@ class cMesh {
   cMaterial MeshMaterial;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

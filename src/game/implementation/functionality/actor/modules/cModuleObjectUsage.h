@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cModuleObjectUsage : public iModule {
-public:
+ public:
   using iModule::iModule;
 
   void ResetForNewFrame() override;

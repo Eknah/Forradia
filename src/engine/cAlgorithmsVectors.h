@@ -52,4 +52,4 @@ class cVectorAlgorithms {
   cMath3D Math3D;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

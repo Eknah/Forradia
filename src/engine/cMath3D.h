@@ -34,4 +34,4 @@ class cMath3D {
   }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

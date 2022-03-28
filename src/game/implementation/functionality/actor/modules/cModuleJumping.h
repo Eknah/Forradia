@@ -7,7 +7,7 @@
 namespace Forradia {
 
 class cModuleJumping : public iModule {
-public:
+ public:
   using iModule::iModule;
 
   void ResetForNewFrame() override;
@@ -16,7 +16,7 @@ public:
 
   float PositionZ = 0.0f;
 
-private:
+ private:
   bool IsJumping = false;
   int JumpDuration = 600;
   unsigned int TickStartJumping = 0;

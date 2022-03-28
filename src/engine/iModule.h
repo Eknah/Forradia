@@ -16,7 +16,7 @@ class iModule {
   virtual void ResetForNewFrame() = 0;
   virtual void Update() = 0;
 
-protected:
+ protected:
   iEngine &Engine;
   cActor &ParentActor;
 };

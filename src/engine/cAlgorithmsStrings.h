@@ -66,4 +66,4 @@ class cAlgorithmsStrings {
     return "";
   }
 };
-} // namespace Forradia
+}  // namespace Forradia

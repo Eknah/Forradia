@@ -49,4 +49,4 @@ class cModelLoader {
   const std::string ModelNameExtension = ".obj";
 };
 
-} // namespace Forradia
+}  // namespace Forradia

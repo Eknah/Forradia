@@ -24,4 +24,4 @@ class cFullscreenController : public iFullscreenController {
   }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -11,7 +11,7 @@
 namespace Forradia {
 
 class cScenePrimary : public cSceneBase {
-public:
+ public:
   cScenePrimary(cEngine &Engine_)
       : cSceneBase(Engine_), Gui(Engine_), Camera(Engine_), MobsEngine(Engine_),
         GameWorldRenderer(Engine_, Camera) {}
@@ -22,7 +22,7 @@ public:
   void DoMouseDown(Uint8 MouseButton) override;
   void DoMouseUp(Uint8 MouseButton) override;
 
-private:
+ private:
   cCamera Camera;
   cGui Gui;
   cUtilities Utilities;

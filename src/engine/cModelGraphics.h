@@ -56,4 +56,4 @@ class cModelGraphics {
   float ModelScaling = 0.1f;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

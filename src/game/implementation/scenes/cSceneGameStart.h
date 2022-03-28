@@ -9,7 +9,7 @@
 namespace Forradia {
 
 class cSceneGameStart : public cSceneBase {
-public:
+ public:
   using cSceneBase::cSceneBase;
 
   void Enter() override {}
@@ -18,7 +18,7 @@ public:
   void DoMouseDown(Uint8 mouseButton) override;
   void DoMouseUp(Uint8 mouseButton) override {}
 
-private:
+ private:
   cUtilities Utilities;
 };
 

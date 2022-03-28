@@ -19,4 +19,4 @@ class cKeyboardHandler : public iKeyboardHandler {
   inline void DoKeyUp(SDL_Keycode key) override { KeysBeingPressed.erase(key); }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -10,7 +10,7 @@
 namespace Forradia {
 
 class cGui {
-public:
+ public:
   cGui(cEngine &Engine_) : Engine(Engine_), GuiMinimap(Engine_) {}
 
   void Initialize();
@@ -21,7 +21,7 @@ public:
 
   UMap<std::string, UPtr<cGuiWindowBase>> Windows;
 
-private:
+ private:
   cEngine &Engine;
 
   cGuiMinimap GuiMinimap;

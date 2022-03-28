@@ -30,4 +30,4 @@ class cFpsCounter : public iFpsCounter {
   }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

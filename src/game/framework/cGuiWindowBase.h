@@ -9,7 +9,7 @@
 namespace Forradia {
 
 class cGuiWindowBase {
-public:
+ public:
   cGuiWindowBase(cEngine &Engine_, std::string Title_, cRectF Bounds_)
       : Engine(Engine_), Title(Title_), Bounds(Bounds_) {}
 
@@ -27,7 +27,7 @@ public:
 
   bool Visible = false;
 
-protected:
+ protected:
   // Internal helpers
 
   cRectF GetInteriorBounds();
@@ -43,7 +43,7 @@ protected:
 
   cEngine &Engine;
 
-private:
+ private:
   // Internal helpers
 
   cRectF GetTitleBarBounds();

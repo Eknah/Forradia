@@ -172,4 +172,4 @@ class cEngine : public iEngine {
   const cSize DefaultWindowSize = {800, 600};
 };
 
-} // namespace Forradia
+}  // namespace Forradia

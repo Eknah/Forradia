@@ -34,7 +34,7 @@ inline std::shared_ptr<T> MakeSPtr(Args &&...args) {
 // Commonly used functions
 
 inline int GetId(std::string text) {
-  return (int)std::hash<std::string>{}(text);
+  return static_cast<int>(std::hash<std::string>{}(text));
 }
 constexpr auto Ticks = &SDL_GetTicks;
 
@@ -42,4 +42,4 @@ constexpr auto Ticks = &SDL_GetTicks;
 
 inline void Randomize() { srand((unsigned int)time(NULL)); }
 
-} // namespace Forradia
+}  // namespace Forradia

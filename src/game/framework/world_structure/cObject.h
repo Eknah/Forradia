@@ -9,7 +9,7 @@
 namespace Forradia {
 
 class cObject {
-public:
+ public:
   cObject(std::string ObjectTypeName, bool RandomScaling = true);
 
   // Object usage
@@ -25,7 +25,7 @@ public:
   float Rotation = 0.0f;
   float Scaling = 1.0f;
 
-private:
+ private:
   void TransformInto(std::string ObjectName);
 };
 

@@ -8,13 +8,13 @@
 namespace Forradia {
 
 class cGuiWindowInventory : public cGuiWindowBase {
-public:
+ public:
   using cGuiWindowBase::cGuiWindowBase;
 
   void RenderDerived() override;
   void DoMouseDownDerived(Uint8 MouseButton) override;
 
-private:
+ private:
   const int NumSlotCols = 4;
 
   cUtilities Utilities;

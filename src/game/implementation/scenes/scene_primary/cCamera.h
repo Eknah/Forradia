@@ -9,7 +9,7 @@ namespace Forradia {
 class cEngine;
 
 class cCamera {
-public:
+ public:
   cCamera(cEngine &Engine_) : Engine(Engine_) {}
 
   void Update(int RotationDirection, float ZoomChange);
@@ -27,7 +27,7 @@ public:
 
   int GetRenderDistance();
 
-private:
+ private:
   cEngine &Engine;
   cUtilities Utilities;
 

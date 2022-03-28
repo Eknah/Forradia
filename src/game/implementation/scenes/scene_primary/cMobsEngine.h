@@ -9,12 +9,12 @@ namespace Forradia {
 class cEngine;
 
 class cMobsEngine {
-public:
+ public:
   cMobsEngine(cEngine &Engine_) : Engine(Engine_) {}
 
   void Update();
 
-private:
+ private:
   cEngine &Engine;
 };
 

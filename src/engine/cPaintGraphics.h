@@ -55,4 +55,4 @@ class cPaintGraphics {
   }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

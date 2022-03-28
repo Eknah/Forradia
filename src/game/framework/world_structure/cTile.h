@@ -11,7 +11,7 @@ namespace Forradia {
 class cEngine;
 
 class cTile {
-public:
+ public:
   cTile(cEngine &Engine_) : Engine(Engine_) {}
 
   // Get info about tile
@@ -27,7 +27,7 @@ public:
   UPtr<cMob> Mob = nullptr;
   int WarpToFloor = -1;
 
-private:
+ private:
   cEngine &Engine;
 };
 

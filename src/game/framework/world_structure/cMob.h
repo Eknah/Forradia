@@ -8,7 +8,7 @@
 namespace Forradia {
 
 class cMob {
-public:
+ public:
   cMob(float X, float Y) : Position(X, Y) {}
 
   // Movement

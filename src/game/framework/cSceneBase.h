@@ -9,7 +9,7 @@ namespace Forradia {
 class cEngine;
 
 class cSceneBase {
-public:
+ public:
   cSceneBase(cEngine &Engine_) : Engine(Engine_) {}
 
   // To implement in child
@@ -20,7 +20,7 @@ public:
   virtual void DoMouseDown(Uint8 MouseButton) = 0;
   virtual void DoMouseUp(Uint8 MouseButton) = 0;
 
-protected:
+ protected:
   cEngine &Engine;
 };
 

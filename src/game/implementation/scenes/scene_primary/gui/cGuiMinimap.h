@@ -8,12 +8,12 @@
 namespace Forradia {
 
 class cGuiMinimap {
-public:
+ public:
   cGuiMinimap(cEngine &Engine_) : Engine(Engine_) {}
 
   void Render();
 
-private:
+ private:
   cEngine &Engine;
 
   const int MinimapSize = 250;

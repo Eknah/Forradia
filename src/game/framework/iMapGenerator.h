@@ -10,7 +10,7 @@ class cEngine;
 class cWorldMap;
 
 class iMapGenerator {
-public:
+ public:
   iMapGenerator(cEngine &Engine_, UPtr<cWorldMap> &WorldMap_)
       : Engine(Engine_), WorldMap(WorldMap_) {}
 
@@ -18,7 +18,7 @@ public:
 
   virtual void GenerateMapArea(int WorldX, int WorldY, int WorldZ) = 0;
 
-protected:
+ protected:
   cEngine &Engine;
   UPtr<cWorldMap> &WorldMap;
 };

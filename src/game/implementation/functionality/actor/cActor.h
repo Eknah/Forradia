@@ -13,7 +13,7 @@ namespace Forradia {
 class iEngine;
 
 class cActor {
-public:
+ public:
   cActor(iEngine &Engine_) : Engine(Engine_) {}
 
   void ResetForNewFrame();
@@ -26,13 +26,13 @@ public:
   cPoint3 WorldMapCoord = {1, 1, 0};
   cPoint2F Position = {50.0f, 50.0f};
 
-protected:
+ protected:
   template <class T> inline void AddModule() {
     auto &Type = typeid(T);
     Modules.insert({Type.hash_code(), MakeUPtr<T>(Engine, *this)});
   }
 
-private:
+ private:
   iEngine &Engine;
 
   UMap<size_t, UPtr<iModule>> Modules;

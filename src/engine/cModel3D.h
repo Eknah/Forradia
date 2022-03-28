@@ -515,4 +515,4 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
   cMath3D Math3D;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

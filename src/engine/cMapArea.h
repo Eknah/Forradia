@@ -36,4 +36,4 @@ class cMapArea {
   std::vector<std::reference_wrapper<UPtr<cMob>>> MobsMirror;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

@@ -38,4 +38,4 @@ class cCustomCursor : public iCustomCursor {
   }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

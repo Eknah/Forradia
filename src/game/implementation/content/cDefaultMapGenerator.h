@@ -8,12 +8,12 @@
 namespace Forradia {
 
 class cDefaultMapGenerator : public iMapGenerator {
-public:
+ public:
   using iMapGenerator::iMapGenerator;
 
   void GenerateMapArea(int WorldX, int WorldY, int WorldZ) override;
 
-private:
+ private:
   void ClearToGrass(cMapArea &MapArea);
   void GeneratePlayerStartingPosition(cMapArea &MapArea);
   void GenerateElevation(cMapArea &MapArea);

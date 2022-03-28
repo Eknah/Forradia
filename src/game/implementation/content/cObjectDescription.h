@@ -6,7 +6,7 @@
 namespace Forradia {
 
 class cObjectDescription {
-public:
+ public:
   cObjectDescription() = default;
   cObjectDescription(bool Moveable_, bool BlocksMovement_, bool BlocksSight_)
       : Movable(Moveable_), BlocksMovement(BlocksMovement_),

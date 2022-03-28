@@ -131,4 +131,4 @@ class cGameLoop : public iGameLoop {
   }
 };
 
-} // namespace Forradia
+}  // namespace Forradia

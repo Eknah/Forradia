@@ -7,7 +7,7 @@
 namespace Forradia {
 
 class cGameInstance {
-public:
+ public:
   void StartGame();
 };
 

@@ -22,4 +22,4 @@ class cMouseHandler {
   bool RightButtonDown = false;
 };
 
-} // namespace Forradia
+}  // namespace Forradia

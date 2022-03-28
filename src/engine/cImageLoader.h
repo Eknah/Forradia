@@ -65,4 +65,4 @@ class cImageLoader {
   const std::string ImageNameExtension = ".png";
 };
 
-} // namespace Forradia
+}  // namespace Forradia

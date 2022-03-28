@@ -25,4 +25,4 @@ class cMaterial {
   std::string MapBump;
 };
 
-} // namespace Forradia
+}  // namespace Forradia
