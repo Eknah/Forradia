@@ -78,7 +78,7 @@ class cGameLoop : public iGameLoop {
         }
 
         case SDL_MOUSEWHEEL: {
-          Engine.MouseHandler.WheelAmount = (float)event.wheel.y;
+          Engine.MouseHandler.WheelAmount = static_cast<float>(event.wheel.y);
 
           break;
         }
@@ -121,7 +121,7 @@ class cGameLoop : public iGameLoop {
     if (!do_handle_event)
       return 1;
 
-    iEngine *Engine = (iEngine *)pthis;
+    iEngine *Engine = reinterpret_cast<iEngine *>(pthis);
 
     Engine->GameLoop.Update();
     Engine->GameLoop.Render();

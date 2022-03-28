@@ -15,9 +15,9 @@ class cObjectsContent {
 
   // Get info about an object
 
-  bool IsMovable(int ObjectType);
-  bool BlocksMovement(int ObjectType);
-  bool BlocksSight(int ObjectType);
+  bool IsMovable(int ObjectType) const;
+  bool BlocksMovement(int ObjectType) const;
+  bool BlocksSight(int ObjectType) const;
 
   // Collection structure
 

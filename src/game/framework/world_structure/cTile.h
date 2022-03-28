@@ -12,7 +12,7 @@ class cEngine;
 
 class cTile {
  public:
-  cTile(cEngine &Engine_) : Engine(Engine_) {}
+  cTile(const cEngine &Engine_) : Engine(Engine_) {}
 
   // Get info about tile
 
@@ -28,7 +28,7 @@ class cTile {
   int WarpToFloor = -1;
 
  private:
-  cEngine &Engine;
+  const cEngine &Engine;
 };
 
 }  // namespace Forradia

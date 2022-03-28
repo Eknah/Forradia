@@ -23,7 +23,6 @@ class cCustomCursor : public iCustomCursor {
     auto cursor_size_f = Utilities.ConvertToFloat(CursorSize);
 
     switch (CursorType) {
-
     case eCursorTypes::Default: {
       Engine.DrawImage("CursorDefault", mouse_pos_f.X, mouse_pos_f.Y,
                        cursor_size_f.Width, cursor_size_f.Height);

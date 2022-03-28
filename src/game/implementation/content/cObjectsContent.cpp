@@ -12,21 +12,21 @@ void cObjectsContent::Add(std::string ObjectName,
   ObjectDescriptions.insert({GetId(ObjectName), Description});
 }
 
-bool cObjectsContent::IsMovable(int ObjectType) {
+bool cObjectsContent::IsMovable(int ObjectType) const {
   if (ObjectDescriptions.count(ObjectType))
     return ObjectDescriptions.at(ObjectType).Movable;
 
   return false;
 }
 
-bool cObjectsContent::BlocksMovement(int ObjectType) {
+bool cObjectsContent::BlocksMovement(int ObjectType) const {
   if (ObjectDescriptions.count(ObjectType))
     return ObjectDescriptions.at(ObjectType).BlocksMovement;
 
   return false;
 }
 
-bool cObjectsContent::BlocksSight(int ObjectType) {
+bool cObjectsContent::BlocksSight(int ObjectType) const {
   if (ObjectDescriptions.count(ObjectType))
     return ObjectDescriptions.at(ObjectType).BlocksSight;
 

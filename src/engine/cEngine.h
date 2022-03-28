@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <utility>
+#include <string>
 #include "cCustomCursor.h"
 #include "cFpsCounter.h"
 #include "cFullscreenController.h"
