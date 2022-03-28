@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cGameLoop : public iGameLoop {
-
 public:
   cGameLoop(iEngine &engine) : iGameLoop(engine) {}
 

@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cModuleMovement : public iModule {
-
 public:
   class MovementInstruction {
 

@@ -9,7 +9,6 @@
 namespace Forradia {
 
 class cSceneGameStart : public cSceneBase {
-
 public:
   using cSceneBase::cSceneBase;
 

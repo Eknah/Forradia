@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cModuleObjectUsage : public iModule {
-
 public:
   using iModule::iModule;
 

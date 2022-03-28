@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cObjectsContent {
-
 public:
   // Collection operations
 

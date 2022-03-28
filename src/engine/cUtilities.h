@@ -12,7 +12,6 @@
 namespace Forradia {
 
 class cUtilities {
-
 public:
   inline cSize GetCanvasSize() {
     GLint viewport[4];

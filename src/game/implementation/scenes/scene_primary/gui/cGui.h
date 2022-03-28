@@ -10,7 +10,6 @@
 namespace Forradia {
 
 class cGui {
-
 public:
   cGui(cEngine &Engine_) : Engine(Engine_), GuiMinimap(Engine_) {}
 

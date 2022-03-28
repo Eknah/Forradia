@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cModelLoader {
-
 public:
   inline void LoadModels() {
     Models.clear();

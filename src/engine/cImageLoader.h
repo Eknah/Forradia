@@ -10,7 +10,6 @@
 namespace Forradia {
 
 class cImageLoader {
-
 public:
   inline void LoadImages() {
     Images.clear();

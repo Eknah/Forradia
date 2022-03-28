@@ -10,7 +10,6 @@
 namespace Forradia {
 
 class cTextGraphics {
-
 public:
   inline void Initialize() {
     TTF_Init();

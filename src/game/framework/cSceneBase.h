@@ -9,7 +9,6 @@ namespace Forradia {
 class cEngine;
 
 class cSceneBase {
-
 public:
   cSceneBase(cEngine &Engine_) : Engine(Engine_) {}
 

@@ -11,7 +11,6 @@ namespace Forradia {
 class cEngine;
 
 class cTile {
-
 public:
   cTile(cEngine &Engine_) : Engine(Engine_) {}
 

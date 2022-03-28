@@ -9,7 +9,6 @@
 namespace Forradia {
 
 class cSceneMainMenu : public cSceneBase {
-
 public:
   using cSceneBase::cSceneBase;
 

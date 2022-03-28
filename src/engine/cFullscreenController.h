@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cFullscreenController : public iFullscreenController {
-
 public:
   cFullscreenController(iEngine &engine) : iFullscreenController(engine) {}
 

@@ -11,7 +11,6 @@
 namespace Forradia {
 
 class cScenePrimary : public cSceneBase {
-
 public:
   cScenePrimary(cEngine &Engine_)
       : cSceneBase(Engine_), Gui(Engine_), Camera(Engine_), MobsEngine(Engine_),

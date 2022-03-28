@@ -7,7 +7,6 @@
 namespace Forradia {
 
 class cModuleJumping : public iModule {
-
 public:
   using iModule::iModule;
 

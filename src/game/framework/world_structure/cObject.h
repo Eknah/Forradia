@@ -9,7 +9,6 @@
 namespace Forradia {
 
 class cObject {
-
 public:
   cObject(std::string ObjectTypeName, bool RandomScaling = true);
 

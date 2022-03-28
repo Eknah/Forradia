@@ -9,7 +9,6 @@ namespace Forradia {
 class iEngine;
 
 class iGameLoop {
-
 public:
   iGameLoop(iEngine &engine) : Engine(engine) {}
 

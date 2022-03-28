@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cMaterial {
-
 public:
   std::string Name;
   cVector3 Ka;

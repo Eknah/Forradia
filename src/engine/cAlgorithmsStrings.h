@@ -8,11 +8,9 @@
 namespace Forradia {
 
 class cAlgorithmsStrings {
-
 public:
   inline void Split(const std::string &in, std::vector<std::string> &out,
                     std::string token) {
-
     out.clear();
 
     std::string temp;
@@ -40,7 +38,6 @@ public:
   }
 
   inline std::string Tail(const std::string &in) {
-
     size_t tokenStart = in.find_first_not_of(" \t");
     size_t spaceStart = in.find_first_of(" \t", tokenStart);
     size_t tailStart = in.find_first_not_of(" \t", spaceStart);
@@ -55,7 +52,6 @@ public:
   }
 
   inline std::string FirstToken(const std::string &in) {
-
     if (!in.empty()) {
 
       size_t token_start = in.find_first_not_of(" \t");

@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cPaintGraphics {
-
 public:
   // ---- Drawing operations ----
 

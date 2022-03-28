@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cScenesCollection {
-
 public:
   // Collection operations
   inline void Add(std::string sceneName, UPtr<cSceneBase> scene) {

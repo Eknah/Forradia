@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cFpsCounter : public iFpsCounter {
-
 public:
   cFpsCounter(iEngine &engine) : iFpsCounter(engine) {}
 

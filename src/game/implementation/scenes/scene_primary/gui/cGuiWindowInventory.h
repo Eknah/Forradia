@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cGuiWindowInventory : public cGuiWindowBase {
-
 public:
   using cGuiWindowBase::cGuiWindowBase;
 

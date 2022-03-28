@@ -8,7 +8,6 @@ namespace Forradia {
 class cEngine;
 
 class cBackground {
-
 public:
   cBackground(cEngine &Engine_) : Engine(Engine_) {}
 

@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cDefaultMapGenerator : public iMapGenerator {
-
 public:
   using iMapGenerator::iMapGenerator;
 

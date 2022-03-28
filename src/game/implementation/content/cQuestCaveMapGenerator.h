@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cQuestCaveMapGenerator {
-
 public:
   void GenerateQuestCaveMapArea(cMapArea &MapArea, cPoint2 EntranceLocation);
 

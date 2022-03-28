@@ -9,7 +9,6 @@
 namespace Forradia {
 
 class cCustomCursor : public iCustomCursor {
-
 public:
   cCustomCursor(iEngine &engine) : iCustomCursor(engine) {}
 

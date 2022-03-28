@@ -22,7 +22,6 @@ namespace Forradia {
 class F_MapArea;
 
 class iEngine {
-
 public:
   iEngine(iKeyboardHandler &KeyboardHandler_, iCustomCursor &CustomCursor_,
           iFpsCounter &FpsCounter_,

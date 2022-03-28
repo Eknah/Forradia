@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cVertex {
-
 public:
   cVector3 Position;
   cVector3 Normal;

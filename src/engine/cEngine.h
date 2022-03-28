@@ -20,7 +20,6 @@
 namespace Forradia {
 
 class cEngine : public iEngine {
-
 public:
   // ---- Ctor ----
   // Give needed references to this engine to all sub components

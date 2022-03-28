@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cPlanetTransformator {
-
 public:
   cPlanetTransformator(cEngine &Engine_) : Engine(Engine_) {}
 

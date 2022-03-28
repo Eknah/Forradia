@@ -9,7 +9,6 @@
 namespace Forradia {
 
 class cModuleInventory : public iModule {
-
 public:
   using iModule::iModule;
 

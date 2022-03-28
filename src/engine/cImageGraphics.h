@@ -9,7 +9,6 @@
 namespace Forradia {
 
 class cImageGraphics {
-
 public:
   cImageGraphics(iEngine &engine) : Engine(engine) {}
 

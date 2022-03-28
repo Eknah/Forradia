@@ -9,7 +9,6 @@
 namespace Forradia {
 
 class cGuiWindowBase {
-
 public:
   cGuiWindowBase(cEngine &Engine_, std::string Title_, cRectF Bounds_)
       : Engine(Engine_), Title(Title_), Bounds(Bounds_) {}

@@ -11,7 +11,6 @@
 namespace Forradia {
 
 class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
-
 public:
   cModel3D() {}
 

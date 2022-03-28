@@ -9,7 +9,6 @@ namespace Forradia {
 class cEngine;
 
 class cCamera {
-
 public:
   cCamera(cEngine &Engine_) : Engine(Engine_) {}
 

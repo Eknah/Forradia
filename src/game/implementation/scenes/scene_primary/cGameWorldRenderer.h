@@ -11,7 +11,6 @@
 namespace Forradia {
 
 class cGameWorldRenderer {
-
 public:
   cGameWorldRenderer(cEngine &Engine_, cCamera &Camera_)
       : Engine(Engine_), Background(Engine_), PlanetTransformator(Engine_),

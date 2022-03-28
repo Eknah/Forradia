@@ -10,7 +10,6 @@ class cEngine;
 class cWorldMap;
 
 class iMapGenerator {
-
 public:
   iMapGenerator(cEngine &Engine_, UPtr<cWorldMap> &WorldMap_)
       : Engine(Engine_), WorldMap(WorldMap_) {}

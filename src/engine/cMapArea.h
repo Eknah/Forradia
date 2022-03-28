@@ -13,7 +13,6 @@ namespace Forradia {
 class cEngine;
 
 class cMapArea {
-
 public:
   cMapArea(cEngine &Engine, int Size_, int WorldX, int WorldY, int WorldZ)
       : Size(Size_), WorldCoord({WorldX, WorldY, WorldZ}) {

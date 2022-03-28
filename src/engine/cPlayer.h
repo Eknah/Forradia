@@ -11,7 +11,6 @@
 namespace Forradia {
 
 class cPlayer : public cActor {
-
 public:
   cPlayer(iEngine &engine) : cActor(engine) {
     AddModule<cModuleJumping>();

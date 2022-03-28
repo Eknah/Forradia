@@ -6,7 +6,6 @@
 namespace Forradia {
 
 class cPoint2F {
-
 public:
   cPoint2F(float X, float Y) : X(X), Y(Y) {}
 
