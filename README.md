@@ -44,7 +44,9 @@ The purpose of this project is mainly that I use it to improve my knowledge and 
     Engine.Run(move(Scenes), GetId("SceneGameStart"), move(WorldMap), StartingInventory, ObjectsContent);
 
 ## Installation
-To add
+**Windows**
+
+**Linux**
 
 ## API Reference
 To add
