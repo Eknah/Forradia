@@ -1,6 +1,7 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
+#include <memory>
 #include "cDefaultMapGenerator.h"
 #include "cQuestCaveMapGenerator.h"
 #include "framework/world_structure/cWorldMap.h"
@@ -407,7 +408,8 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GenerateQuestCaves(const cEngine &Engine,
                                          cMapArea *MapArea,
-                                         const UPtr<cWorldMap> &WorldMap) const {
+                                         const UPtr<cWorldMap> &WorldMap
+                                         ) const {
   cQuestCaveMapGenerator QuestCaveMapGenerator;
 
   for (auto Floor = -1; Floor >= -20; Floor--) {
@@ -425,11 +427,13 @@ cDefaultMapGenerator::GenerateQuestCaves(const cEngine &Engine,
 
       WorldMap->MapAreas[MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor] =
           std::make_unique<cMapArea>(Engine, WorldMap->MapAreaSize,
-                                     MapArea->WorldCoord.X, MapArea->WorldCoord.Y,
+                                     MapArea->WorldCoord.X,
+                                     MapArea->WorldCoord.Y,
                                      Floor);
 
       auto &quest_cave_map_area =
-          WorldMap->MapAreas[MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor];
+          WorldMap->MapAreas
+              [MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor];
 
       QuestCaveMapGenerator.GenerateQuestCaveMapArea(
                   quest_cave_map_area.get(),

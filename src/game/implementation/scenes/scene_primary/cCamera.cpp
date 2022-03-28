@@ -1,6 +1,7 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
+#include <algorithm>
 #include "cCamera.h"
 #include "../engine/cEngine.h"
 
@@ -40,7 +41,7 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
 
   gluLookAt(CameraX, CameraHeight, CameraZ, 0, -1, 0, 0, 1, 0);
 
-  GLint Viewport[4]; // Where The Viewport Values Will Be Stored
+  GLint Viewport[4];  // Where The Viewport Values Will Be Stored
 
   glGetIntegerv(GL_VIEWPORT, Viewport);
 
@@ -48,16 +49,16 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
 
   glGetDoublev(GL_MODELVIEW_MATRIX, Modelview);
 
-  GLdouble Projection[16]; // Where The 16 Doubles Of The Projection Matrix Are
-                           // To Be Stored
+  GLdouble Projection[16];  // Where The 16 Doubles Of The Projection Matrix Are
+                            // To Be Stored
 
   glGetDoublev(GL_PROJECTION_MATRIX, Projection);
 
   auto MousePosition = Utilities.GetMousePositionI();
 
-  GLfloat WinX, WinY, WinZ; // Holds Our X, Y and Z Coordinates
+  GLfloat WinX, WinY, WinZ;  // Holds Our X, Y and Z Coordinates
 
-  WinX = static_cast<float>(MousePosition.X); // Holds The Mouse X Coordinate
+  WinX = static_cast<float>(MousePosition.X);  // Holds The Mouse X Coordinate
   WinY = static_cast<float>(MousePosition.Y);
   WinY = static_cast<float>(Viewport[3]) - WinY;
 
@@ -75,13 +76,13 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
 }
 
 cPoint2 cCamera::GetHoveredTile() const {
-  float SubStepX = Engine.Player.Position.X - (int)Engine.Player.Position.X;
-  float SubStepY = Engine.Player.Position.Y - (int)Engine.Player.Position.Y;
+  float SubStepX = Engine.Player.Position.X - static_cast<int>(Engine.Player.Position.X);
+  float SubStepY = Engine.Player.Position.Y - static_cast<int>(Engine.Player.Position.Y);
 
-  auto OffsetX = -static_cast<float>(2 * RenderDistance + 1) / 2.0f * Engine.TileSize -
-                 SubStepX * Engine.TileSize;
-  auto OffsetY = -static_cast<float>(2 * RenderDistance - 1) / 2.0f * Engine.TileSize -
-                 SubStepY * Engine.TileSize;
+  auto OffsetX = -static_cast<float>(2 * RenderDistance + 1)
+          / 2.0f * Engine.TileSize - SubStepX * Engine.TileSize;
+  auto OffsetY = -static_cast<float>(2 * RenderDistance - 1)
+          / 2.0f * Engine.TileSize - SubStepY * Engine.TileSize;
   auto MapX = Engine.Player.Position.X - RenderDistance +
               (RayCastingX - OffsetX) / Engine.TileSize;
   auto MapY = Engine.Player.Position.Y - RenderDistance +

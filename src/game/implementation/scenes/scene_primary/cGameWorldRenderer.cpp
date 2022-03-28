@@ -1,6 +1,7 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
+#include <string>
 #include "cGameWorldRenderer.h"
 #include "../engine/cEngine.h"
 
@@ -29,15 +30,16 @@ void cGameWorldRenderer::Render() {
 
   gluLookAt(CameraX, Camera.CameraHeight, CameraZ, 0, -1, 0, 0, 1, 0);
 
-  float SubStepX = Engine.Player.Position.X - static_cast<int>(Engine.Player.Position.X);
-  float SubStepY = Engine.Player.Position.Y - static_cast<int>(Engine.Player.Position.Y);
+  float SubStepX = Engine.Player.Position.X -
+          static_cast<int>(Engine.Player.Position.X);
 
-  auto OffsetX = -static_cast<float>(2.0f * Camera.GetRenderDistance() + 1.0f) / 2.0f *
-                     Engine.TileSize -
-                 SubStepX * Engine.TileSize;
-  auto OffsetY = -static_cast<float>(2.0f * Camera.GetRenderDistance() - 1.0f) / 2.0f *
-                     Engine.TileSize -
-                 SubStepY * Engine.TileSize;
+  float SubStepY = Engine.Player.Position.Y -
+          static_cast<int>(Engine.Player.Position.Y);
+
+  auto OffsetX = -static_cast<float>(2.0f * Camera.GetRenderDistance() + 1.0f)
+          / 2.0f * Engine.TileSize - SubStepX * Engine.TileSize;
+  auto OffsetY = -static_cast<float>(2.0f * Camera.GetRenderDistance() - 1.0f)
+          / 2.0f * Engine.TileSize - SubStepY * Engine.TileSize;
 
   glEnable(GL_DEPTH_TEST);
   glDepthMask(GL_TRUE);
@@ -209,13 +211,17 @@ void cGameWorldRenderer::Render() {
       auto TileY3 = Elev3;
       auto TileZ3 = OffsetY + Y * Engine.TileSize;
 
-      TileY0 = PlanetTransformator.GetNewY(TileY0, static_cast<float>(TileXI),
+      TileY0 = PlanetTransformator.GetNewY(TileY0,
+                                           static_cast<float>(TileXI),
                                            static_cast<float>(TileYI));
-      TileY1 = PlanetTransformator.GetNewY(TileY1, static_cast<float>(TileXI),
+      TileY1 = PlanetTransformator.GetNewY(TileY1,
+                                           static_cast<float>(TileXI),
                                            static_cast<float>(TileYI) - 1);
-      TileY2 = PlanetTransformator.GetNewY(TileY2, static_cast<float>(TileXI) + 1,
+      TileY2 = PlanetTransformator.GetNewY(TileY2,
+                                           static_cast<float>(TileXI) + 1,
                                            static_cast<float>(TileYI) - 1);
-      TileY3 = PlanetTransformator.GetNewY(TileY3, static_cast<float>(TileXI) + 1,
+      TileY3 = PlanetTransformator.GetNewY(TileY3,
+                                           static_cast<float>(TileXI) + 1,
                                            static_cast<float>(TileYI));
 
       glBegin(GL_QUADS);
@@ -251,7 +257,7 @@ void cGameWorldRenderer::Render() {
       }
 
       if (Engine.GetCurrentMapArea()
-              .Tiles[(int)TileX][(int)TileY]
+              .Tiles[TileXI][TileYI]
               .Objects.size() > 0) {
         glBindTexture(GL_TEXTURE_2D,
                       Engine.ImageLoader.Images.at(GetId("TileShadow")));
@@ -366,7 +372,8 @@ void cGameWorldRenderer::Render() {
 
   glEnable(GL_TEXTURE_2D);
 
-  glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images.at(GetId("TileShadow")));
+  glBindTexture(GL_TEXTURE_2D,
+                Engine.ImageLoader.Images.at(GetId("TileShadow")));
 
   glBegin(GL_QUADS);
 

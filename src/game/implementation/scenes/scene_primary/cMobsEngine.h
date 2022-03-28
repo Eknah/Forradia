@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include "../engine/cRandom.h"
 #include "CommonExternal.h"
 
 namespace Forradia {
@@ -16,6 +17,8 @@ class cMobsEngine {
 
  private:
   const cEngine &Engine;
+
+  cRandom Random;
 };
 
 }  // namespace Forradia

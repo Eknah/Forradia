@@ -8,7 +8,7 @@ namespace Forradia {
 
 void cGuiWindowInventory::RenderDerived() {
   auto CanvasSize = Utilities.GetCanvasSize();
-  auto AspectRatio = float(CanvasSize.Width) / CanvasSize.Height;
+  auto AspectRatio = static_cast<float>(CanvasSize.Width) / CanvasSize.Height;
   auto BoundsInterior = GetInteriorBounds();
 
   Engine.FillRectangle(Palette.Wheat, BoundsInterior.X, BoundsInterior.Y,
@@ -20,8 +20,8 @@ void cGuiWindowInventory::RenderDerived() {
   auto I = 0;
 
   auto MousePosition = Utilities.GetMousePositionI();
-  auto MouseXRel = (double)MousePosition.X / CanvasSize.Width;
-  auto MouseYRel = (double)MousePosition.Y / CanvasSize.Height;
+  auto MouseXRel = static_cast<float>(MousePosition.X) / CanvasSize.Width;
+  auto MouseYRel = static_cast<float>(MousePosition.Y) / CanvasSize.Height;
 
   for (auto Y = 0; Y < NumSlotRows; Y++) {
     for (auto X = 0; X < NumSlotCols; X++) {
@@ -55,7 +55,7 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
   Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed = nullptr;
 
   auto CanvasSize = Utilities.GetCanvasSize();
-  auto AspectRatio = double(CanvasSize.Width) / CanvasSize.Height;
+  auto AspectRatio = static_cast<float>(CanvasSize.Width) / CanvasSize.Height;
   auto BoundsInterior = GetInteriorBounds();
 
   auto SlotSize = BoundsInterior.Width / NumSlotCols - Margin;
@@ -64,8 +64,8 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
   auto I = 0;
 
   auto MousePosition = Utilities.GetMousePositionI();
-  auto MouseXRel = (double)MousePosition.X / CanvasSize.Width;
-  auto MouseYRel = (double)MousePosition.Y / CanvasSize.Height;
+  auto MouseXRel = static_cast<float>(MousePosition.X) / CanvasSize.Width;
+  auto MouseYRel = static_cast<float>(MousePosition.Y) / CanvasSize.Height;
 
   for (auto Y = 0; Y < NumSlotRows; Y++) {
     for (auto X = 0; X < NumSlotCols; X++) {

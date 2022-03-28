@@ -1,6 +1,8 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
+#include <algorithm>
+#include <utility>
 #include "cMobsEngine.h"
 #include "../engine/cEngine.h"
 #include "CommonExternal.h"
@@ -8,7 +10,6 @@
 namespace Forradia {
 
 void cMobsEngine::Update() {
-
   for (unsigned int I = 0; I < Engine.GetCurrentMapArea().MobsMirror.size();
        I++) {
     if (I >= Engine.GetCurrentMapArea().MobsMirror.size())
@@ -25,15 +26,15 @@ void cMobsEngine::Update() {
           Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination.Y == -1) {
         auto DestinationX =
             Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X +
-            rand() % 15 - rand() % 15;
+            Random.Next() % 15 - Random.Next() % 15;
         auto DestinationY =
             Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y +
-            rand() % 15 - rand() % 15;
+            Random.Next() % 15 - Random.Next() % 15;
 
         DestinationX = std::min(std::max(DestinationX, 0.0f),
-                                float(Engine.WorldMap->MapAreaSize) - 1.0f);
+                                static_cast<float>(Engine.WorldMap->MapAreaSize) - 1.0f);
         DestinationY = std::min(std::max(DestinationY, 0.0f),
-                                float(Engine.WorldMap->MapAreaSize) - 1.0f);
+                                static_cast<float>(Engine.WorldMap->MapAreaSize) - 1.0f);
 
         Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination = {
             DestinationX, DestinationY};
@@ -53,12 +54,14 @@ void cMobsEngine::Update() {
         continue;
       }
 
+      auto PiF = static_cast<float>(M_PI);
+
       Engine.GetCurrentMapArea().Tiles[X][Y].Mob->FacingAngle =
-          (float)std::atan2(-DeltaX, -DeltaY) / (float)M_PI * 180.0f;
+          static_cast<float>(std::atan2(-DeltaX, -DeltaY)) / PiF * 180.0f;
 
       auto Angle = Engine.GetCurrentMapArea().Tiles[X][Y].Mob->FacingAngle /
-                       180.0f * M_PI -
-                   M_PI / 2 + M_PI;
+                       180.0f * PiF -
+                   PiF / 2 + PiF;
       auto DX = -std::cos(Angle) *
                 Engine.GetCurrentMapArea().Tiles[X][Y].Mob->StepMultiplier;
       auto DY = std::sin(Angle) *
@@ -69,10 +72,10 @@ void cMobsEngine::Update() {
       auto NewY =
           float(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y +
                 DY * Engine.GetCurrentMapArea().Tiles[X][Y].Mob->StepSize);
-      auto NewXI = int(NewX);
-      auto NewYI = int(NewY);
-      auto OldXI = int(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X);
-      auto OldYI = int(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y);
+      auto NewXI = static_cast<int>(NewX);
+      auto NewYI = static_cast<int>(NewY);
+      auto OldXI = static_cast<int>(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X);
+      auto OldYI = static_cast<int>(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y);
 
       if (NewXI >= 0 && NewYI >= 0 && NewXI < Engine.WorldMap->MapAreaSize &&
           NewYI < Engine.WorldMap->MapAreaSize) {
