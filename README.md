@@ -83,10 +83,12 @@ The project is configurated to locate headers and libraries in subfolders at C:/
     git clone https://github.com/Eknah/Forradia.git
     cd Forradia
 
-**Build project with CMake and NMake**
+**Run in Developer PowerShell for VS: Build project with CMake and NMake**
 
     cmake -G "NMake Makefiles" src/game
     nmake
+
+**Note:** The above will not work in a *regular PowerShell*, it has to be a *Developer PowerShell for VS*.
 
 Hopefully everything was successful and you now have a compiled binary.
 
