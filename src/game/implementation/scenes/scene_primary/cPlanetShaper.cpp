@@ -1,13 +1,13 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "cPlanetTransformator.h"
+#include "cPlanetShaper.h"
 #include "../engine/cEngine.h"
 #include "CommonExternal.h"
 
 namespace Forradia {
 
-float cPlanetTransformator::GetNewY(float Y, float TileX, float TileY) {
+float cPlanetShaper::GetNewY(float Y, float TileX, float TileY) {
   auto Result = Y;
   auto DX = static_cast<int>(TileX) - Engine.Player.Position.X;
   auto DY = static_cast<int>(TileY) - Engine.Player.Position.Y;

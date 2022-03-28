@@ -7,9 +7,9 @@
 
 namespace Forradia {
 
-class cPlanetTransformator {
+class cPlanetShaper {
  public:
-  explicit cPlanetTransformator(const cEngine &Engine_) : Engine(Engine_) {}
+  explicit cPlanetShaper(const cEngine &Engine_) : Engine(Engine_) {}
 
   float GetNewY(float Y, float TileX, float TileY);
 

@@ -6,14 +6,14 @@
 #include "CommonExternal.h"
 #include "cBackground.h"
 #include "cCamera.h"
-#include "cPlanetTransformator.h"
+#include "cPlanetShaper.h"
 
 namespace Forradia {
 
 class cGameWorldRenderer {
  public:
   cGameWorldRenderer(const cEngine &Engine_, const cCamera &Camera_)
-      : Engine(Engine_), Background(Engine_), PlanetTransformator(Engine_),
+      : Engine(Engine_), Background(Engine_), PlanetShaper(Engine_),
         Camera(Camera_) {}
 
   void Render();
@@ -22,7 +22,7 @@ class cGameWorldRenderer {
   const cEngine &Engine;
   cBackground Background;
   const cCamera &Camera;
-  cPlanetTransformator PlanetTransformator;
+  cPlanetShaper PlanetShaper;
 };
 
 }  // namespace Forradia

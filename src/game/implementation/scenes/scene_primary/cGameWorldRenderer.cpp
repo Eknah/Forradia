@@ -211,16 +211,16 @@ void cGameWorldRenderer::Render() {
       auto TileY3 = Elev3;
       auto TileZ3 = OffsetY + Y * Engine.TileSize;
 
-      TileY0 = PlanetTransformator.GetNewY(TileY0,
+      TileY0 = PlanetShaper.GetNewY(TileY0,
                                            static_cast<float>(TileXI),
                                            static_cast<float>(TileYI));
-      TileY1 = PlanetTransformator.GetNewY(TileY1,
+      TileY1 = PlanetShaper.GetNewY(TileY1,
                                            static_cast<float>(TileXI),
                                            static_cast<float>(TileYI) - 1);
-      TileY2 = PlanetTransformator.GetNewY(TileY2,
+      TileY2 = PlanetShaper.GetNewY(TileY2,
                                            static_cast<float>(TileXI) + 1,
                                            static_cast<float>(TileYI) - 1);
-      TileY3 = PlanetTransformator.GetNewY(TileY3,
+      TileY3 = PlanetShaper.GetNewY(TileY3,
                                            static_cast<float>(TileXI) + 1,
                                            static_cast<float>(TileYI));
 
