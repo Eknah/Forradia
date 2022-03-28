@@ -404,6 +404,24 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
       MapArea->MobsMirror.push_back(std::ref(MapArea->Tiles[TileX][TileY].Mob));
     }
   }
+
+  for (auto I = 0; I < 200; I++) {
+    auto TileX = Random.Next() % MapArea->Size;
+    auto TileY = Random.Next() % MapArea->Size;
+
+    if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
+      continue;
+
+    if (MapArea->Tiles[TileX][TileY].GroundType !=
+            GetId("GroundtypeWater") &&
+        MapArea->Tiles[TileX][TileY].Mob == nullptr) {
+      MapArea->Tiles[TileX][TileY].Mob =
+          std::make_unique<cMob>(static_cast<float>(TileX),
+                                 static_cast<float>(TileY),
+                                 "MobRat");
+      MapArea->MobsMirror.push_back(std::ref(MapArea->Tiles[TileX][TileY].Mob));
+    }
+  }
 }
 
 void
