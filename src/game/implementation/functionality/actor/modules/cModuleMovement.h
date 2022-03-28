@@ -27,7 +27,6 @@ class cModuleMovement : public iModule {
   MovementInstruction Instruction;
 
   bool IsWalking = false;
-  float FacingAngle = 0.0f;
   float FacingAngleRotated = 0.0f;
   cPoint2F MoveDestination = {-1, -1};
 

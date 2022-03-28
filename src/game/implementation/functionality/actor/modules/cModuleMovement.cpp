@@ -10,7 +10,7 @@ namespace Forradia {
 
 void cModuleMovement::ResetForNewFrame() {
   IsWalking = false;
-  FacingAngleRotated = FacingAngle;
+  FacingAngleRotated = *GetParentActor().FacingAngle;
 }
 
 void cModuleMovement::Update() {
@@ -19,7 +19,7 @@ void cModuleMovement::Update() {
 }
 
 void cModuleMovement::UpdateRotation(float newFacingAngle) {
-  FacingAngle = newFacingAngle;
+  *GetParentActor().FacingAngle = newFacingAngle;
 }
 
 void cModuleMovement::UpdateDirectionalMovement() {
@@ -36,25 +36,25 @@ void cModuleMovement::UpdateDirectionalMovement() {
   auto PiF = static_cast<float>(M_PI);
 
   if (Instruction.TryMoveForward) {
-    Angle = FacingAngle / 180.0f * PiF - PiF / 2.0f +
+    Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2.0f +
             0.0f * PiF / 2.0f;
   }
 
   if (Instruction.TryMoveLeft) {
-    Angle = FacingAngle / 180.0f * PiF - PiF / 2.0f +
+    Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2.0f +
             1.0f * PiF / 2.0f;
-    FacingAngleRotated = FacingAngle + 1 * 90.0f;
+    FacingAngleRotated = *GetParentActor().FacingAngle + 1 * 90.0f;
   }
 
   if (Instruction.TryMoveBack) {
-    Angle = FacingAngle / 180.0f * PiF - PiF / 2.0f +
+    Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2.0f +
             2.0f * PiF / 2.0f;
   }
 
   if (Instruction.TryMoveRight) {
-    Angle = FacingAngle / 180.0f * PiF - PiF / 2.0f +
+    Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2.0f +
             3.0f * PiF / 2.0f;
-    FacingAngleRotated = FacingAngle + 3.0f * 90.0f;
+    FacingAngleRotated = *GetParentActor().FacingAngle + 3.0f * 90.0f;
   }
 
   auto DX = -std::cos(Angle) * StepMultiplier;
@@ -91,7 +91,7 @@ void cModuleMovement::UpdateDirectionalMovement() {
         Engine.GetCurrentMapArea().Tiles
             [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
 
-    auto Angle = FacingAngle / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
+    auto Angle = *GetParentActor().FacingAngle / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
     auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
     auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;
 
@@ -120,9 +120,9 @@ void cModuleMovement::UpdateDestinationMovement() {
     MoveDestination = {-1, -1};
   } else {
     IsWalking = true;
-    FacingAngle = static_cast<float>(std::atan2(-DX, -DY)) / PiF * 180.0f;
+    *GetParentActor().FacingAngle = static_cast<float>(std::atan2(-DX, -DY)) / PiF * 180.0f;
 
-    auto Angle = FacingAngle / 180.0f * PiF - PiF / 2 +
+    auto Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2 +
                  0 * PiF / 2;
     auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
     auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;
@@ -155,7 +155,7 @@ void cModuleMovement::UpdateDestinationMovement() {
           Engine.GetCurrentMapArea().Tiles
               [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
 
-      auto Angle = FacingAngle / 180.0f * PiF - PiF / 2 +
+      auto Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2 +
                    0 * PiF / 2;
       auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
       auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;

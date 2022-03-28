@@ -34,7 +34,9 @@ class cActor {
   cPoint3 WorldMapCoord = {1, 1, 0};
   cPoint2F Position = {50.0f, 50.0f};
   std::string ModelName;
-  //int ModelId = 0;
+  UPtr<float> FacingAngle = MakeUPtr<float>(0.0f);
+
+  virtual ~cActor() {}  // Just to make class polymorphic
 
  protected:
   template <class T> inline void AddModule() {

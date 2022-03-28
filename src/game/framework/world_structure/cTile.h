@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "../engine/Aliases.h"
-#include "cMob.h"
+#include "implementation/functionality/actor/cActor.h"
 #include "cObject.h"
 
 namespace Forradia {
@@ -26,7 +26,7 @@ class cTile {
   int GroundType = 0;
   std::vector<UPtr<cObject>> Objects;
   int Elevation = 0;
-  UPtr<cMob> Mob = nullptr;
+  UPtr<cActor> Actor = nullptr;
   int WarpToFloor = -1;
 
  private:

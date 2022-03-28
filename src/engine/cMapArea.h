@@ -34,7 +34,7 @@ class cMapArea {
 
   // Map structure of tiles and mobs
   std::vector<std::vector<cTile>> Tiles;
-  std::vector<std::reference_wrapper<UPtr<cMob>>> MobsMirror;
+  std::vector<std::reference_wrapper<UPtr<cActor>>> ActorsMirror;
 };
 
 }  // namespace Forradia

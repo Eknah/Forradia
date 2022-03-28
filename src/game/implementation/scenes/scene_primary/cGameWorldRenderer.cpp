@@ -315,31 +315,31 @@ void cGameWorldRenderer::Render() {
                            Object->Scaling);
       }
 
-      if (Engine.GetCurrentMapArea().Tiles[TileXI][TileYI].Mob !=
+      if (Engine.GetCurrentMapArea().Tiles[TileXI][TileYI].Actor !=
           nullptr) {
         auto SubXPos = (Engine.GetCurrentMapArea()
                             .Tiles[TileXI][TileYI]
-                            .Mob->Position.X -
+                            .Actor->Position.X -
                         static_cast<int>(Engine.GetCurrentMapArea()
                                 .Tiles[TileXI][TileYI]
-                                .Mob->Position.X)) *
+                                .Actor->Position.X)) *
                        Engine.TileSize;
         auto SubYPos = (Engine.GetCurrentMapArea()
                             .Tiles[TileXI][TileYI]
-                            .Mob->Position.Y -
+                            .Actor->Position.Y -
                         static_cast<int>(Engine.GetCurrentMapArea()
                                 .Tiles[TileXI][TileYI]
-                                .Mob->Position.Y)) *
+                                .Actor->Position.Y)) *
                        Engine.TileSize;
 
         Engine.DrawModel(Engine.GetCurrentMapArea()
                          .Tiles[TileXI][TileYI]
-                         .Mob->GetAnimatedModelId(), TileX0 + SubXPos,
+                         .Actor->GetAnimatedModelId(), TileX0 + SubXPos,
                          (TileY0 + TileY1 + TileY2 + TileY3) / 4.0f,
                          TileZ0 - Engine.TileSize + SubYPos,
-                         Engine.GetCurrentMapArea()
+                         *Engine.GetCurrentMapArea()
                              .Tiles[TileXI][TileYI]
-                             .Mob->FacingAngle);
+                             .Actor->FacingAngle);
       }
     }
   }

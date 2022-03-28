@@ -32,6 +32,7 @@ class cMob : public cActor {
   // Localization
 
   //cPoint2F Position = {-1, -1};
+
 };
 
 }  // namespace Forradia

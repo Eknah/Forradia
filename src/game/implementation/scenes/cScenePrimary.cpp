@@ -26,7 +26,7 @@ void cScenePrimary::Update() {
 
   if (Instruction.TryMoveForward || Instruction.TryMoveRight ||
       Instruction.TryMoveBack || Instruction.TryMoveLeft) {
-    Player.GetModule<cModuleMovement>().FacingAngle = Camera.LookingAngle;
+    *Player.FacingAngle = Camera.LookingAngle;
     Player.GetModule<cModuleMovement>().MoveDestination = {-1, -1};
   }
 
@@ -50,7 +50,7 @@ void cScenePrimary::Update() {
   Camera.UpdateCameraMovement();
 
   if (Engine.MouseHandler.RightButtonDown)
-    Player.GetModule<cModuleMovement>().FacingAngle = Camera.LookingAngle;
+    *Player.FacingAngle = Camera.LookingAngle;
 
   if (Engine.KeyboardHandler.KeysBeenFired->count(SDLK_SPACE) > 0)
     Engine.Player.GetModule<cModuleJumping>().Jump();
