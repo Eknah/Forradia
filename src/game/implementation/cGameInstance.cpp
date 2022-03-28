@@ -15,7 +15,7 @@ namespace Forradia
 // Prepares scenes
 // Generates world map
 // Prepares player starting inventory
-// Runs engine with all the preparation data
+// Runs engine with all the preparation data 
 
 void cGameInstance::StartGame()
 {
