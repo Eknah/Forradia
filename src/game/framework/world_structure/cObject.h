@@ -28,7 +28,7 @@ class cObject {
  private:
   void TransformInto(std::string ObjectName);
 
-  inline static cRandom Random;
+  cRandom Random;
 };
 
 }  // namespace Forradia

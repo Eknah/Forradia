@@ -13,13 +13,13 @@ class cRandom {
  public:
 
 
-    inline int Generate() {
+    inline int Next() {
 
         return mt();
     }
 
  private:
-    std::mt19937 mt = std::mt19937(time(nullptr));
+    inline static std::mt19937 mt = std::mt19937(static_cast<unsigned int>(time(nullptr)));
     //std::mt19937 mt = std::mt19937(1);
 };
 
