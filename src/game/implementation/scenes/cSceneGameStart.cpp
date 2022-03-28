@@ -18,7 +18,7 @@ void cSceneGameStart::Render() {
   auto CanvasSize = Utilities.GetCanvasSize();
 
   glBindTexture(GL_TEXTURE_2D,
-                Engine.ImageLoader.Images[GetId("SceneForradiaLogo")]);
+                Engine.ImageLoader.Images.at(GetId("SceneForradiaLogo")));
 
   int Width, Height;
   int MipLevel = 0;

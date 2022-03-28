@@ -16,8 +16,8 @@ class cActor {
  public:
   explicit cActor(iEngine &Engine_) : Engine(Engine_) {}
 
-  void ResetForNewFrame();
-  void Update();
+  void ResetForNewFrame() const;
+  void Update() const;
 
   template <class T> inline T &GetModule() const {
     return static_cast<T &>(*Modules.at(typeid(T).hash_code()));

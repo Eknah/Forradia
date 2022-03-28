@@ -12,6 +12,9 @@ void cWorldMap::GenerateWorldMap(const iMapGenerator &MapGenerator) {
   for (auto WorldY = 0; WorldY < 3; WorldY++)
     for (auto WorldX = 0; WorldX < 3; WorldX++)
 
+//        for (auto WorldY = 0; WorldY < 1; WorldY++)
+//          for (auto WorldX = 0; WorldX < 1; WorldX++)
+
       MapGenerator.GenerateMapArea(WorldX, WorldY, 0);
 }
 

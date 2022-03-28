@@ -13,21 +13,21 @@ class cSceneManager {
  public:
   inline void Initialize(cScenesCollection scenes, int startScene) {
     ScenesCollection = std::move(scenes);
-    CurrentScene = startScene;
+    *CurrentScene.get() = startScene;
   }
 
   inline UPtr<cSceneBase> &GetCurrentScene() {
-    return ScenesCollection.Scenes.at(CurrentScene);
+    return ScenesCollection.Scenes.at(*CurrentScene);
   }
 
-  inline void SwitchToScene(std::string newScene) {
-    CurrentScene = GetId(newScene);
-    ScenesCollection.Scenes[CurrentScene]->Enter();
+  inline void SwitchToScene(std::string newScene) const {
+    *CurrentScene.get() = GetId(newScene);
+    ScenesCollection.Scenes.at(*CurrentScene)->Enter();
   }
 
  private:
   cScenesCollection ScenesCollection;
-  int CurrentScene;
+  const UPtr<int> CurrentScene = MakeUPtr<int>(-1);
 };
 
 }  // namespace Forradia

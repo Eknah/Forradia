@@ -12,14 +12,14 @@ namespace Forradia {
 
 class cGameWorldRenderer {
  public:
-  cGameWorldRenderer(cEngine &Engine_, cCamera &Camera_)
+  cGameWorldRenderer(const cEngine &Engine_, cCamera &Camera_)
       : Engine(Engine_), Background(Engine_), PlanetTransformator(Engine_),
         Camera(Camera_) {}
 
   void Render();
 
  private:
-  cEngine &Engine;
+  const cEngine &Engine;
   cBackground Background;
   cCamera &Camera;
   cPlanetTransformator PlanetTransformator;

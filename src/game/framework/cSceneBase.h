@@ -10,7 +10,7 @@ class cEngine;
 
 class cSceneBase {
  public:
-  explicit cSceneBase(cEngine &Engine_) : Engine(Engine_) {}
+  explicit cSceneBase(const cEngine &Engine_) : Engine(Engine_) {}
 
   // To implement in child
 
@@ -21,7 +21,7 @@ class cSceneBase {
   virtual void DoMouseUp(Uint8 MouseButton) = 0;
 
  protected:
-  cEngine &Engine;
+  const cEngine &Engine;
 };
 
 }  // namespace Forradia

@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <string>
 #include "../engine/Aliases.h"
 #include "cObjectDescription.h"
 

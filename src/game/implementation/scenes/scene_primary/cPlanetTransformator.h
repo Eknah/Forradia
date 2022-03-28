@@ -9,12 +9,12 @@ namespace Forradia {
 
 class cPlanetTransformator {
  public:
-  cPlanetTransformator(cEngine &Engine_) : Engine(Engine_) {}
+  cPlanetTransformator(const cEngine &Engine_) : Engine(Engine_) {}
 
   float GetNewY(float Y, float TileX, float TileY);
 
  private:
-  cEngine &Engine;
+  const cEngine &Engine;
 };
 
 }  // namespace Forradia

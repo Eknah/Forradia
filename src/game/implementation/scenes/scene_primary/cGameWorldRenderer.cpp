@@ -191,7 +191,7 @@ void cGameWorldRenderer::Render() {
       }
 
       glEnable(GL_TEXTURE_2D);
-      glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GroundTypeId]);
+      glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images.at(GroundTypeId));
 
       auto TileX0 = OffsetX + X * Engine.TileSize;
       auto TileY0 = Elev0;
@@ -251,7 +251,7 @@ void cGameWorldRenderer::Render() {
               .Tiles[(int)TileX][(int)TileY]
               .Objects.size() > 0) {
         glBindTexture(GL_TEXTURE_2D,
-                      Engine.ImageLoader.Images[GetId("TileShadow")]);
+                      Engine.ImageLoader.Images.at(GetId("TileShadow")));
 
         glBegin(GL_QUADS);
 
@@ -275,7 +275,7 @@ void cGameWorldRenderer::Render() {
       if (HoveredX == (int)TileX && HoveredY == (int)TileY &&
           Engine.CustomCursor.CursorType != eCursorTypes::Hidden) {
         glBindTexture(GL_TEXTURE_2D,
-                      Engine.ImageLoader.Images[GetId("TileHovering")]);
+                      Engine.ImageLoader.Images.at(GetId("TileHovering")));
 
         glBegin(GL_QUADS);
 
@@ -363,7 +363,7 @@ void cGameWorldRenderer::Render() {
 
   glEnable(GL_TEXTURE_2D);
 
-  glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[GetId("TileShadow")]);
+  glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images.at(GetId("TileShadow")));
 
   glBegin(GL_QUADS);
 

@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <string>
 #include "../engine/Aliases.h"
 #include "../engine/iModule.h"
 #include "framework/world_structure/cObject.h"

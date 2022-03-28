@@ -52,6 +52,7 @@ class cEngine : public iEngine {
 
     // Player          .CurrentMapArea = 0;
     Player.WorldMapCoord = {1, 1, 0};
+    //Player.WorldMapCoord = {0, 0, 0};
     Player.Position = GetCurrentMapArea().PlayerSpawnPosition;
     Player.GetModule<cModuleInventory>().Objects = StartingInventory_;
     SceneManager.Initialize(move(ScenesCollection_), StartScene_);

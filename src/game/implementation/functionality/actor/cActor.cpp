@@ -5,12 +5,12 @@
 
 namespace Forradia {
 
-void cActor::ResetForNewFrame() {
+void cActor::ResetForNewFrame() const {
   for (auto &[Key, Module] : Modules)
     Module->ResetForNewFrame();
 }
 
-void cActor::Update() {
+void cActor::Update() const {
   for (auto &[Key, Module] : Modules)
     Module->Update();
 }

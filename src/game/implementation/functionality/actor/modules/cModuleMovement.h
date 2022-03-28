@@ -10,7 +10,6 @@ namespace Forradia {
 class cModuleMovement : public iModule {
  public:
   class MovementInstruction {
-
    public:
     bool TryMoveForward = false;
     bool TryMoveRight = false;

@@ -412,7 +412,7 @@ void cDefaultMapGenerator::GenerateQuestCaves(const cEngine &Engine,
       auto &quest_cave_map_area =
           WorldMap->MapAreas[MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor];
 
-      QuestCaveMapGenerator.GenerateQuestCaveMapArea(*quest_cave_map_area,
+      QuestCaveMapGenerator.GenerateQuestCaveMapArea(quest_cave_map_area.get(),
                                                      {TileX, TileY});
     }
   }

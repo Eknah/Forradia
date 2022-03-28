@@ -10,7 +10,7 @@ class cEngine;
 
 class cCamera {
  public:
-  explicit cCamera(cEngine &Engine_) : Engine(Engine_) {}
+  explicit cCamera(const cEngine &Engine_) : Engine(Engine_) {}
 
   void Update(int RotationDirection, float ZoomChange);
   void UpdateCameraMovement();
@@ -28,7 +28,7 @@ class cCamera {
   int GetRenderDistance();
 
  private:
-  cEngine &Engine;
+  const cEngine &Engine;
   cUtilities Utilities;
 
   cPoint2 PreviousMousePosition = {-1, -1};
