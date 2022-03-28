@@ -19,7 +19,7 @@ namespace Forradia
 
 void cGameInstance::StartGame()
 {
-
+    int asd = 3;
     using std::move;
 
     Randomize();
