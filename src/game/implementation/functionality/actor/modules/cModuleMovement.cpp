@@ -33,26 +33,27 @@ void cModuleMovement::UpdateDirectionalMovement() {
   auto NewX = GetParentActor().Position.X;
   auto NewY = GetParentActor().Position.Y;
   auto Angle = 0.0f;
+  auto PiF = static_cast<float>(M_PI);
 
   if (Instruction.TryMoveForward) {
-    Angle = FacingAngle / 180.0f * (float)M_PI - (float)M_PI / 2.0f +
-            0.0f * (float)M_PI / 2.0f;
+    Angle = FacingAngle / 180.0f * PiF - PiF / 2.0f +
+            0.0f * PiF / 2.0f;
   }
 
   if (Instruction.TryMoveLeft) {
-    Angle = FacingAngle / 180.0f * (float)M_PI - (float)M_PI / 2.0f +
-            1.0f * (float)M_PI / 2.0f;
+    Angle = FacingAngle / 180.0f * PiF - PiF / 2.0f +
+            1.0f * PiF / 2.0f;
     FacingAngleRotated = FacingAngle + 1 * 90.0f;
   }
 
   if (Instruction.TryMoveBack) {
-    Angle = FacingAngle / 180.0f * (float)M_PI - (float)M_PI / 2.0f +
-            2.0f * (float)M_PI / 2.0f;
+    Angle = FacingAngle / 180.0f * PiF - PiF / 2.0f +
+            2.0f * PiF / 2.0f;
   }
 
   if (Instruction.TryMoveRight) {
-    Angle = FacingAngle / 180.0f * (float)M_PI - (float)M_PI / 2.0f +
-            3.0f * (float)M_PI / 2.0f;
+    Angle = FacingAngle / 180.0f * PiF - PiF / 2.0f +
+            3.0f * PiF / 2.0f;
     FacingAngleRotated = FacingAngle + 3.0f * 90.0f;
   }
 
@@ -74,8 +75,8 @@ void cModuleMovement::UpdateDirectionalMovement() {
   if (NewY >= Engine.GetCurrentMapArea().Size)
     NewY -= Engine.GetCurrentMapArea().Size;
 
-  auto NewXRounded = int(std::round(NewX));
-  auto NewYRounded = int(std::round(NewY));
+  auto NewXRounded = static_cast<int>(std::round(NewX));
+  auto NewYRounded = static_cast<int>(std::round(NewY));
 
   if (!Engine.GetCurrentMapArea()
            .Tiles[NewXRounded][NewYRounded]
@@ -84,14 +85,14 @@ void cModuleMovement::UpdateDirectionalMovement() {
     GetParentActor().Position.Y = NewY;
   }
 
-  if (Engine.GetCurrentMapArea().Tiles[int(NewX)][int(NewY)].WarpToFloor !=
+  if (Engine.GetCurrentMapArea().Tiles[static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor !=
       -1) {
     GetParentActor().WorldMapCoord.Z =
-        Engine.GetCurrentMapArea().Tiles[int(NewX)][int(NewY)].WarpToFloor;
+        Engine.GetCurrentMapArea().Tiles[static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
 
     auto Angle = FacingAngle / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
-    auto DX = -(float)std::cos(Angle) * StepMultiplier;
-    auto DY = (float)std::sin(Angle) * StepMultiplier;
+    auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
+    auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;
 
     NewX += DX * StepSize * 10;
     NewY += DY * StepSize * 10;
@@ -112,15 +113,16 @@ void cModuleMovement::UpdateDestinationMovement() {
   auto DY = MoveDestination.Y - GetParentActor().Position.Y;
   auto AbsDX = std::abs(DX);
   auto AbsDY = std::abs(DY);
+  auto PiF = static_cast<float>(M_PI);
 
   if (AbsDX < StepMultiplier && AbsDY < StepMultiplier) {
     MoveDestination = {-1, -1};
   } else {
     IsWalking = true;
-    FacingAngle = (float)std::atan2(-DX, -DY) / (float)M_PI * 180.0f;
+    FacingAngle = (float)std::atan2(-DX, -DY) / PiF * 180.0f;
 
-    auto Angle = FacingAngle / 180.0f * (float)M_PI - (float)M_PI / 2 +
-                 0 * (float)M_PI / 2;
+    auto Angle = FacingAngle / 180.0f * PiF - PiF / 2 +
+                 0 * PiF / 2;
     auto DX = -(float)std::cos(Angle) * StepMultiplier;
     auto DY = (float)std::sin(Angle) * StepMultiplier;
     auto NewX = GetParentActor().Position.X + DX * StepSize;
@@ -135,8 +137,8 @@ void cModuleMovement::UpdateDestinationMovement() {
     if (NewY >= Engine.GetCurrentMapArea().Size)
       NewY -= Engine.GetCurrentMapArea().Size;
 
-    auto NewXRounded = int(std::round(NewX));
-    auto NewYRounded = int(std::round(NewY));
+    auto NewXRounded = static_cast<int>(std::round(NewX));
+    auto NewYRounded = static_cast<int>(std::round(NewY));
 
     if (!Engine.GetCurrentMapArea()
              .Tiles[NewXRounded][NewYRounded]
@@ -145,15 +147,15 @@ void cModuleMovement::UpdateDestinationMovement() {
       GetParentActor().Position.Y = NewY;
     }
 
-    if (Engine.GetCurrentMapArea().Tiles[int(NewX)][int(NewY)].WarpToFloor !=
+    if (Engine.GetCurrentMapArea().Tiles[static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor !=
         -1) {
       GetParentActor().WorldMapCoord.Z =
-          Engine.GetCurrentMapArea().Tiles[int(NewX)][int(NewY)].WarpToFloor;
+          Engine.GetCurrentMapArea().Tiles[static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
 
-      auto Angle = FacingAngle / 180.0f * (float)M_PI - (float)M_PI / 2 +
-                   0 * (float)M_PI / 2;
-      auto DX = -(float)std::cos(Angle) * StepMultiplier;
-      auto DY = (float)std::sin(Angle) * StepMultiplier;
+      auto Angle = FacingAngle / 180.0f * PiF - PiF / 2 +
+                   0 * PiF / 2;
+      auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
+      auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;
 
       NewX += DX * StepSize * 10;
       NewY += DY * StepSize * 10;
