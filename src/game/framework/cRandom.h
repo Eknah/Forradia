@@ -20,6 +20,7 @@ class cRandom {
 
  private:
     std::mt19937 mt = std::mt19937(time(nullptr));
+    //std::mt19937 mt = std::mt19937(1);
 };
 
 }  // namespace Forradia
