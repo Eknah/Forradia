@@ -6,7 +6,7 @@
 #include "../engine/cEngine.h"
 #include "CommonExternal.h"
 #include "implementation/content/cDefaultMapGenerator.h"
-#include "implementation/scenes/cSceneGameStart.h"
+#include "../engine/cSceneGameStart.h"
 #include "implementation/scenes/cSceneMainMenu.h"
 #include "implementation/scenes/cScenePrimary.h"
 
@@ -59,7 +59,11 @@ void cGameInstance::StartGame() {
   ObjectsContent.Add("ObjectTree2", DescObjectTree2);
   ObjectsContent.Add("ObjectCaveWallBlock", DescCaveWallBlock);
 
-  ScenesCollection.Add("SceneGameStart", MakeUPtr<cSceneGameStart>(Engine));
+  ScenesCollection.Add("SceneGameStart", MakeUPtr<cSceneGameStart>(Engine,
+                                                                   "SceneMainMenu",
+                                                                   "SceneGameStartBackground",
+                                                                   "SceneForradiaLogo",
+                                                                   "Press to start"));
   ScenesCollection.Add("SceneMainMenu", MakeUPtr<cSceneMainMenu>(Engine));
   ScenesCollection.Add("ScenePrimary", MakeUPtr<cScenePrimary>(Engine));
 
