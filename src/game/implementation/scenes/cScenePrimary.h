@@ -12,7 +12,7 @@ namespace Forradia {
 
 class cScenePrimary : public cSceneBase {
  public:
-  cScenePrimary(const cEngine &Engine_)
+  explicit cScenePrimary(const cEngine &Engine_)
       : cSceneBase(Engine_), Gui(Engine_), Camera(Engine_), MobsEngine(Engine_),
         GameWorldRenderer(Engine_, Camera) {}
 

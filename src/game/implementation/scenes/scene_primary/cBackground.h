@@ -9,7 +9,7 @@ class cEngine;
 
 class cBackground {
  public:
-  cBackground(const cEngine &Engine_) : Engine(Engine_) {}
+  explicit cBackground(const cEngine &Engine_) : Engine(Engine_) {}
 
   void Render(float Zoom);
 
