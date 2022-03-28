@@ -89,8 +89,6 @@ The project is configurated to locate headers and libraries in subfolders at C:/
 
 Hopefully everything was successful and you now have a compiled binary.
 
-Move 
-
 ### Linux
 
 **Dependencies**
