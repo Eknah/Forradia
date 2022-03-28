@@ -42,6 +42,11 @@ class cModelLoader {
     }
   }
 
+  inline bool ModelExists(std::string ModelName) const {
+      auto result =ModelNames.count(GetId(ModelName)) > 0;
+    return result;
+  }
+
   UMap<int, Forradia::cModel3D> Models;
   UMap<int, std::string> ModelNames;
 

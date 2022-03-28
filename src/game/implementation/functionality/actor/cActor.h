@@ -16,6 +16,12 @@ class cActor {
  public:
   explicit cActor(const iEngine &Engine_) : Engine(Engine_) {}
 
+  cActor(const iEngine &Engine_, float X, float Y, std::string ModelName_) :
+      Engine(Engine_), Position({X,Y}), ModelName(ModelName_) {}
+
+  cActor(const iEngine &Engine_, std::string ModelName_) :
+      Engine(Engine_), ModelName(ModelName_) {}
+
   void ResetForNewFrame() const;
   void Update() const;
 
@@ -23,8 +29,12 @@ class cActor {
     return static_cast<T &>(*Modules.at(typeid(T).hash_code()));
   }
 
+  int GetAnimatedModelId() const;
+
   cPoint3 WorldMapCoord = {1, 1, 0};
   cPoint2F Position = {50.0f, 50.0f};
+  std::string ModelName;
+  //int ModelId = 0;
 
  protected:
   template <class T> inline void AddModule() {
@@ -33,6 +43,11 @@ class cActor {
   }
 
  private:
+
+  template <class T> inline bool HasModule() const {
+    return Modules.count(typeid(T).hash_code()) > 0;
+  }
+
   const iEngine &Engine;
 
   UMap<size_t, UPtr<iModule>> Modules;

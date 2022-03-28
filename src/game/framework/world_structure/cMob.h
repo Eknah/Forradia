@@ -14,8 +14,8 @@ class iEngine;
 
 class cMob : public cActor {
  public:
-  cMob(const iEngine &Engine, float X, float Y, std::string ModelName) : Position(X, Y),
-      ModelId(GetId(ModelName)), cActor(Engine) {}
+  cMob(const iEngine &Engine, float X, float Y, std::string ModelName) :
+      cActor(Engine, X, Y, ModelName) {}
 
   // Movement
 
@@ -24,7 +24,6 @@ class cMob : public cActor {
   float StepSize = 1.0f;
   float StepMultiplier = 0.1f;
   cPoint2F MoveDestination = {-1, -1};
-  int ModelId = 0;
 
   // Rotation
 
@@ -32,7 +31,7 @@ class cMob : public cActor {
 
   // Localization
 
-  cPoint2F Position = {-1, -1};
+  //cPoint2F Position = {-1, -1};
 };
 
 }  // namespace Forradia

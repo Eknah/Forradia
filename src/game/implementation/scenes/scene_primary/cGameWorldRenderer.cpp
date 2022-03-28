@@ -334,7 +334,7 @@ void cGameWorldRenderer::Render() {
 
         Engine.DrawModel(Engine.GetCurrentMapArea()
                          .Tiles[TileXI][TileYI]
-                         .Mob->ModelId, TileX0 + SubXPos,
+                         .Mob->GetAnimatedModelId(), TileX0 + SubXPos,
                          (TileY0 + TileY1 + TileY2 + TileY3) / 4.0f,
                          TileZ0 - Engine.TileSize + SubYPos,
                          Engine.GetCurrentMapArea()
@@ -394,17 +394,8 @@ void cGameWorldRenderer::Render() {
 
   glDisable(GL_TEXTURE_2D);
 
-  auto ModelNamePlayer = std::string("Player");
-
-  if (Engine.Player.GetModule<cModuleMovement>().IsWalking) {
-    auto AnimIndex = (Ticks() % 300) / 75;
-
-    if (AnimIndex > 0)
-      ModelNamePlayer.append(std::to_string(AnimIndex));
-  }
-
   Engine.DrawModel(
-      ModelNamePlayer,
+        Engine.Player.GetAnimatedModelId(),
       OffsetX + Camera.GetRenderDistance() * Engine.TileSize +
           Engine.TileSize / 2.0f + SubStepX * Engine.TileSize,
       0.0f + Engine.Player.GetModule<cModuleJumping>().PositionZ,
