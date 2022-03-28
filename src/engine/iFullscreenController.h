@@ -10,13 +10,13 @@ class iEngine;
 
 class iFullscreenController {
  public:
-  explicit iFullscreenController(iEngine &engine) : Engine(engine) {}
+  explicit iFullscreenController(const iEngine &engine) : Engine(engine) {}
 
   inline virtual void UpdateFullscreenToggling() = 0;
   inline virtual void ToggleFullscreen() = 0;
 
  protected:
-  iEngine &Engine;
+  const iEngine &Engine;
   bool FullscreenOn = true;
 };
 

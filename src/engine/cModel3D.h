@@ -103,7 +103,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         std::vector<cVertex> vVerts;
         GenVerticesFromRawOBJ(vVerts, Positions, TCoords, Normals, curline);
 
-        for (int i = 0; i < int(vVerts.size()); i++) {
+        for (unsigned int i = 0; i < vVerts.size(); i++) {
           Vertices.push_back(vVerts[i]);
           LoadedVertices.push_back(vVerts[i]);
         }
@@ -111,7 +111,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         std::vector<unsigned int> iIndices;
         VertexTriangluation(iIndices, vVerts);
 
-        for (int i = 0; i < int(iIndices.size()); i++) {
+        for (unsigned int i = 0; i < iIndices.size(); i++) {
           unsigned int indnum =
               (unsigned int)((Vertices.size()) - vVerts.size()) + iIndices[i];
           Indices.push_back(indnum);
@@ -193,7 +193,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
     Split(Tail(icurline), &sface, " ");
     bool noNormal = false;
 
-    for (int i = 0; i < int(sface.size()); i++) {
+    for (unsigned int i = 0; i < sface.size(); i++) {
       int vtype;
 
       Split(sface[i], &svert, "/");
@@ -256,7 +256,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
       cVector3 Normal = Math3D.Cross(A, B);
 
-      for (int i = 0; i < int(oVerts.size()); i++)
+      for (unsigned int i = 0; i < oVerts.size(); i++)
         oVerts[i].Normal = Normal;
     }
   }
@@ -276,7 +276,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
     std::vector<cVertex> tVerts = iVerts;
 
     while (true) {
-      for (int i = 0; i < int(tVerts.size()); i++) {
+      for (unsigned int i = 0; i < tVerts.size(); i++) {
         cVertex pPrev;
 
         if (i == 0)
@@ -293,7 +293,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
           pNext = tVerts[i + 1];
 
         if (tVerts.size() == 3) {
-          for (int j = 0; j < int(tVerts.size()); j++) {
+          for (unsigned int j = 0; j < tVerts.size(); j++) {
             if (iVerts[j].Position == pCur.Position)
               oIndices.push_back(j);
             if (iVerts[j].Position == pPrev.Position)
@@ -307,7 +307,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
           break;
         }
         if (tVerts.size() == 4) {
-          for (int j = 0; j < int(iVerts.size()); j++) {
+          for (unsigned int j = 0; j < iVerts.size(); j++) {
             if (iVerts[j].Position == pCur.Position)
               oIndices.push_back(j);
             if (iVerts[j].Position == pPrev.Position)
@@ -317,7 +317,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
           }
 
           cVector3 tempVec;
-          for (int j = 0; j < int(tVerts.size()); j++) {
+          for (unsigned int j = 0; j < tVerts.size(); j++) {
             if (tVerts[j].Position != pCur.Position &&
                 tVerts[j].Position != pPrev.Position &&
                 tVerts[j].Position != pNext.Position) {
@@ -326,7 +326,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
             }
           }
 
-          for (int j = 0; j < int(iVerts.size()); j++) {
+          for (unsigned int j = 0; j < iVerts.size(); j++) {
             if (iVerts[j].Position == pPrev.Position)
               oIndices.push_back(j);
             if (iVerts[j].Position == pNext.Position)
@@ -348,7 +348,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
         bool inTri = false;
 
-        for (int j = 0; j < int(iVerts.size()); j++) {
+        for (unsigned int j = 0; j < iVerts.size(); j++) {
           if (InTriangle(iVerts[j].Position, pPrev.Position, pCur.Position,
                          pNext.Position) &&
               iVerts[j].Position != pPrev.Position &&
@@ -362,7 +362,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         if (inTri)
           continue;
 
-        for (int j = 0; j < int(iVerts.size()); j++) {
+        for (unsigned int j = 0; j < iVerts.size(); j++) {
           if (iVerts[j].Position == pCur.Position)
             oIndices.push_back(j);
           if (iVerts[j].Position == pPrev.Position)
@@ -371,7 +371,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
             oIndices.push_back(j);
         }
 
-        for (int j = 0; j < int(tVerts.size()); j++) {
+        for (unsigned int j = 0; j < tVerts.size(); j++) {
           if (tVerts[j].Position == pCur.Position) {
             tVerts.erase(tVerts.begin() + j);
             break;

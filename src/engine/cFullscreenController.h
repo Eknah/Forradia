@@ -9,7 +9,7 @@ namespace Forradia {
 
 class cFullscreenController : public iFullscreenController {
  public:
-  explicit cFullscreenController(iEngine &engine) :
+  explicit cFullscreenController(const iEngine &engine) :
         iFullscreenController(engine) {}
 
   inline void UpdateFullscreenToggling() override {
