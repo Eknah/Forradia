@@ -13,7 +13,7 @@ class cSceneManager {
  public:
   inline void Initialize(cScenesCollection scenes, int startScene) {
     ScenesCollection = std::move(scenes);
-    *CurrentScene.get() = startScene;
+    *CurrentScene = startScene;
   }
 
   inline UPtr<cSceneBase> &GetCurrentScene() {
@@ -21,7 +21,7 @@ class cSceneManager {
   }
 
   inline void SwitchToScene(std::string newScene) const {
-    *CurrentScene.get() = GetId(newScene);
+    *CurrentScene = GetId(newScene);
     ScenesCollection.Scenes.at(*CurrentScene)->Enter();
   }
 

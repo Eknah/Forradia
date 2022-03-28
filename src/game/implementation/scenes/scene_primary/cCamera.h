@@ -22,10 +22,10 @@ class cCamera {
   float RayCastingY = 0.0f;
   float RayCastingZ = 0.0f;
 
-  cPoint2 GetHoveredTile();
+  cPoint2 GetHoveredTile() const;
   float CameraHeight = 0.0f;
 
-  int GetRenderDistance();
+  int GetRenderDistance() const;
 
  private:
   const cEngine &Engine;

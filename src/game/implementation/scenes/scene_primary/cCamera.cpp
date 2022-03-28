@@ -74,7 +74,7 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
   RayCastingZ = (float)PosZ;
 }
 
-cPoint2 cCamera::GetHoveredTile() {
+cPoint2 cCamera::GetHoveredTile() const {
   float SubStepX = Engine.Player.Position.X - (int)Engine.Player.Position.X;
   float SubStepY = Engine.Player.Position.Y - (int)Engine.Player.Position.Y;
 
@@ -90,7 +90,7 @@ cPoint2 cCamera::GetHoveredTile() {
   return {(int)MapX, (int)MapY};
 }
 
-int cCamera::GetRenderDistance() {
+int cCamera::GetRenderDistance() const {
   auto &MapArea = Engine.GetCurrentMapArea();
 
   if (MapArea.IsUnderground())
