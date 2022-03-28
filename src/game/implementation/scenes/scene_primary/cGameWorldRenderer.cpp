@@ -320,14 +320,14 @@ void cGameWorldRenderer::Render() {
         auto SubXPos = (Engine.GetCurrentMapArea()
                             .Tiles[TileXI][TileYI]
                             .Mob->Position.X -
-                        int(Engine.GetCurrentMapArea()
+                        static_cast<int>(Engine.GetCurrentMapArea()
                                 .Tiles[TileXI][TileYI]
                                 .Mob->Position.X)) *
                        Engine.TileSize;
         auto SubYPos = (Engine.GetCurrentMapArea()
                             .Tiles[TileXI][TileYI]
                             .Mob->Position.Y -
-                        int(Engine.GetCurrentMapArea()
+                        static_cast<int>(Engine.GetCurrentMapArea()
                                 .Tiles[TileXI][TileYI]
                                 .Mob->Position.Y)) *
                        Engine.TileSize;

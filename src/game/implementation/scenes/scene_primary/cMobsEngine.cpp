@@ -15,8 +15,8 @@ void cMobsEngine::Update() {
     if (I >= Engine.GetCurrentMapArea().MobsMirror.size())
       break;
 
-    auto X = int(Engine.GetCurrentMapArea().MobsMirror.at(I).get()->Position.X);
-    auto Y = int(Engine.GetCurrentMapArea().MobsMirror.at(I).get()->Position.Y);
+    auto X = static_cast<int>(Engine.GetCurrentMapArea().MobsMirror.at(I).get()->Position.X);
+    auto Y = static_cast<int>(Engine.GetCurrentMapArea().MobsMirror.at(I).get()->Position.Y);
 
     if (Ticks() > Engine.GetCurrentMapArea().Tiles[X][Y].Mob->TickLastMove +
                       Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveSpeed) {
@@ -31,10 +31,12 @@ void cMobsEngine::Update() {
             Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y +
             Random.Next() % 15 - Random.Next() % 15;
 
-        DestinationX = std::min(std::max(DestinationX, 0.0f),
-                                static_cast<float>(Engine.WorldMap->MapAreaSize) - 1.0f);
-        DestinationY = std::min(std::max(DestinationY, 0.0f),
-                                static_cast<float>(Engine.WorldMap->MapAreaSize) - 1.0f);
+        DestinationX =
+                std::min(std::max(DestinationX, 0.0f),
+                         static_cast<float>(Engine.WorldMap->MapAreaSize) - 1.0f);
+        DestinationY =
+                std::min(std::max(DestinationY, 0.0f),
+                         static_cast<float>(Engine.WorldMap->MapAreaSize) - 1.0f);
 
         Engine.GetCurrentMapArea().Tiles[X][Y].Mob->MoveDestination = {
             DestinationX, DestinationY};
@@ -67,15 +69,17 @@ void cMobsEngine::Update() {
       auto DY = std::sin(Angle) *
                 Engine.GetCurrentMapArea().Tiles[X][Y].Mob->StepMultiplier;
       auto NewX =
-          float(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X +
+          static_cast<float>(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X +
                 DX * Engine.GetCurrentMapArea().Tiles[X][Y].Mob->StepSize);
       auto NewY =
-          float(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y +
+          static_cast<float>(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y +
                 DY * Engine.GetCurrentMapArea().Tiles[X][Y].Mob->StepSize);
       auto NewXI = static_cast<int>(NewX);
       auto NewYI = static_cast<int>(NewY);
-      auto OldXI = static_cast<int>(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.X);
-      auto OldYI = static_cast<int>(Engine.GetCurrentMapArea().Tiles[X][Y].Mob->Position.Y);
+      auto OldXI = static_cast<int>(Engine.GetCurrentMapArea().
+                                    Tiles[X][Y].Mob->Position.X);
+      auto OldYI = static_cast<int>(Engine.GetCurrentMapArea().
+                                    Tiles[X][Y].Mob->Position.Y);
 
       if (NewXI >= 0 && NewYI >= 0 && NewXI < Engine.WorldMap->MapAreaSize &&
           NewYI < Engine.WorldMap->MapAreaSize) {

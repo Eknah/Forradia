@@ -406,10 +406,10 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
 }
 
 void
-cDefaultMapGenerator::GenerateQuestCaves(const cEngine &Engine,
-                                         cMapArea *MapArea,
-                                         const UPtr<cWorldMap> &WorldMap
-                                         ) const {
+cDefaultMapGenerator::
+GenerateQuestCaves(const cEngine &Engine,
+                   cMapArea *MapArea,
+                   const UPtr<cWorldMap>&WorldMap) const {
   cQuestCaveMapGenerator QuestCaveMapGenerator;
 
   for (auto Floor = -1; Floor >= -20; Floor--) {
