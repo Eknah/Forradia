@@ -21,7 +21,6 @@ class cModelGraphics {
 
   inline void DrawModel(int ModelNameId, float X, float Y, float Z,
                         float Rotation, float SpecificScaling) {
-
     glTranslatef(X, Y, Z);
     glRotatef(Rotation, 0, 1.0f, 0.0);
     glTranslatef(-X, -Y, -Z);

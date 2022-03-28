@@ -186,7 +186,6 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
                                     const std::vector<cVector2> &iTCoords,
                                     const std::vector<cVector3> &iNormals,
                                     std::string icurline) {
-
     std::vector<std::string> sface, svert;
     cVertex vVert;
     Split(Tail(icurline), sface, " ");
@@ -410,8 +409,8 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
             tempMaterial.Name = Tail(curline);
           else
             tempMaterial.Name = "none";
-        } else {
-
+        }
+        else {
           LoadedMaterials.push_back(tempMaterial);
 
           tempMaterial = cMaterial();

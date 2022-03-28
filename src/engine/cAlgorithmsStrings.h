@@ -53,7 +53,6 @@ class cAlgorithmsStrings {
 
   inline std::string FirstToken(const std::string &in) {
     if (!in.empty()) {
-
       size_t token_start = in.find_first_not_of(" \t");
       size_t token_end = in.find_first_of(" \t", token_start);
 

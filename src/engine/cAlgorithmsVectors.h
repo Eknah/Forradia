@@ -8,7 +8,6 @@
 namespace Forradia {
 
 class cVectorAlgorithms {
-
  public:
   inline bool InTriangle(cVector3 point, cVector3 tri1, cVector3 tri2,
                          cVector3 tri3) {
