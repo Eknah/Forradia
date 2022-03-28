@@ -77,7 +77,7 @@ cDefaultMapGenerator::GenerateElevation(cMapArea *MapArea) const {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
 
-    MapArea->Tiles[TileX][TileY].Elevation += 2 - Random.Next() % 5;
+    MapArea->Tiles[TileX][TileY].Elevation += Random.Next() % 3;
   }
 }
 
