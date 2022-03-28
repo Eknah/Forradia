@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include "framework/cRandom.h"
 #include "../engine/cMapArea.h"
 #include "framework/iMapGenerator.h"
 
@@ -31,6 +32,7 @@ class cDefaultMapGenerator : public iMapGenerator {
   int DistToPlayerStartingPos(cMapArea *MapArea, int TileX, int TileY) const;
 
   const int PlayerStartingAreaSize = 4;
+  cRandom Random;
 };
 
 }  // namespace Forradia
