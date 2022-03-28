@@ -28,16 +28,16 @@ void cGuiWindowInventory::RenderDerived() {
       auto XPos = BoundsInterior.X + X * (SlotSize + Margin);
       auto YPos = BoundsInterior.Y + Y * (SlotSize * AspectRatio + Margin);
 
-      if (Engine.Player.GetModule<cModuleInventory>().Objects.count(I) > 0) {
-        if (Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed ==
-            Engine.Player.GetModule<cModuleInventory>().Objects.at(I))
+      if (Engine.GetPlayer().GetModule<cModuleInventory>().Objects.count(I) > 0) {
+        if (Engine.GetPlayer().GetModule<cModuleObjectUsage>().ObjectBeingUsed ==
+            Engine.GetPlayer().GetModule<cModuleInventory>().Objects.at(I))
           Engine.DrawImage("ObjectSelected", XPos, YPos, SlotSize,
                            SlotSize * AspectRatio);
         else
           Engine.DrawImage("ObjectBackgroundShadow", XPos, YPos, SlotSize,
                            SlotSize * AspectRatio);
 
-        Engine.DrawImage(Engine.Player.GetModule<cModuleInventory>()
+        Engine.DrawImage(Engine.GetPlayer().GetModule<cModuleInventory>()
                              .Objects.at(I)
                              ->ObjectType,
                          XPos, YPos, SlotSize, SlotSize * AspectRatio);
@@ -52,7 +52,7 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
   if (MouseButton != SDL_BUTTON_RIGHT)
     return;
 
-  Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed = nullptr;
+  Engine.GetPlayer().GetModule<cModuleObjectUsage>().ObjectBeingUsed = nullptr;
 
   auto CanvasSize = Utilities.GetCanvasSize();
   auto AspectRatio = static_cast<float>(CanvasSize.Width) / CanvasSize.Height;
@@ -72,12 +72,12 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
       auto XPos = BoundsInterior.X + X * (SlotSize + Margin);
       auto YPos = BoundsInterior.Y + Y * (SlotSize * AspectRatio + Margin);
 
-      if (Engine.Player.GetModule<cModuleInventory>().Objects.count(I) > 0) {
+      if (Engine.GetPlayer().GetModule<cModuleInventory>().Objects.count(I) > 0) {
         if (MouseXRel >= XPos && MouseYRel >= YPos &&
             MouseXRel < XPos + SlotSize &&
             MouseYRel < YPos + SlotSize * AspectRatio) {
-          Engine.Player.GetModule<cModuleObjectUsage>().ObjectBeingUsed =
-              Engine.Player.GetModule<cModuleInventory>().Objects.at(I);
+          Engine.GetPlayer().GetModule<cModuleObjectUsage>().ObjectBeingUsed =
+              Engine.GetPlayer().GetModule<cModuleInventory>().Objects.at(I);
           return;
         }
       }

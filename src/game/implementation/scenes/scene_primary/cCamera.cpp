@@ -76,19 +76,19 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
 }
 
 cPoint2 cCamera::GetHoveredTile() const {
-  float SubStepX = Engine.Player.Position.X -
-          static_cast<int>(Engine.Player.Position.X);
+  float SubStepX = Engine.GetPlayer().Position.X -
+          static_cast<int>(Engine.GetPlayer().Position.X);
 
-  float SubStepY = Engine.Player.Position.Y -
-          static_cast<int>(Engine.Player.Position.Y);
+  float SubStepY = Engine.GetPlayer().Position.Y -
+          static_cast<int>(Engine.GetPlayer().Position.Y);
 
   auto OffsetX = -static_cast<float>(2 * RenderDistance + 1)
           / 2.0f * Engine.TileSize - SubStepX * Engine.TileSize;
   auto OffsetY = -static_cast<float>(2 * RenderDistance - 1)
           / 2.0f * Engine.TileSize - SubStepY * Engine.TileSize;
-  auto MapX = Engine.Player.Position.X - RenderDistance +
+  auto MapX = Engine.GetPlayer().Position.X - RenderDistance +
               (RayCastingX - OffsetX) / Engine.TileSize;
-  auto MapY = Engine.Player.Position.Y - RenderDistance +
+  auto MapY = Engine.GetPlayer().Position.Y - RenderDistance +
               (RayCastingZ - OffsetY) / Engine.TileSize + 1;
 
   return {static_cast<int>(MapX), static_cast<int>(MapY)};

@@ -391,6 +391,10 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
 
+    if (TileX == static_cast<int>(MapArea->PlayerSpawnPosition.X)
+            && TileY == static_cast<int>(MapArea->PlayerSpawnPosition.Y))
+        continue;
+
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
       continue;
 
@@ -409,6 +413,10 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
   for (auto I = 0; I < 200; I++) {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
+
+    if (TileX == static_cast<int>(MapArea->PlayerSpawnPosition.X)
+            && TileY == static_cast<int>(MapArea->PlayerSpawnPosition.Y))
+        continue;
 
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
       continue;

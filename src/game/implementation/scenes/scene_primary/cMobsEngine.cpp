@@ -65,10 +65,10 @@ void cMobsEngine::Update() {
 
       auto PiF = static_cast<float>(M_PI);
 
-      Mob.FacingAngle =
+      *Mob.FacingAngle =
           static_cast<float>(std::atan2(-DeltaX, -DeltaY)) / PiF * 180.0f;
 
-      auto Angle = Mob.FacingAngle / 180.0f * PiF - PiF / 2 + PiF;
+      auto Angle = *Mob.FacingAngle / 180.0f * PiF - PiF / 2 + PiF;
       auto DX = -std::cos(Angle) * Mob.StepMultiplier;
       auto DY = std::sin(Angle) * Mob.StepMultiplier;
       auto NewX =

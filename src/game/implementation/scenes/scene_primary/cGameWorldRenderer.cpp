@@ -30,11 +30,11 @@ void cGameWorldRenderer::Render() {
 
   gluLookAt(CameraX, Camera.CameraHeight, CameraZ, 0, -1, 0, 0, 1, 0);
 
-  float SubStepX = Engine.Player.Position.X -
-          static_cast<int>(Engine.Player.Position.X);
+  float SubStepX = Engine.GetPlayer().Position.X -
+          static_cast<int>(Engine.GetPlayer().Position.X);
 
-  float SubStepY = Engine.Player.Position.Y -
-          static_cast<int>(Engine.Player.Position.Y);
+  float SubStepY = Engine.GetPlayer().Position.Y -
+          static_cast<int>(Engine.GetPlayer().Position.Y);
 
   auto OffsetX = -static_cast<float>(2.0f * Camera.GetRenderDistance() + 1.0f)
           / 2.0f * Engine.TileSize - SubStepX * Engine.TileSize;
@@ -50,8 +50,8 @@ void cGameWorldRenderer::Render() {
   glTranslatef(0.0, -2 + 2.0, 0.0);
 
   auto ElevAmount = 5.0f;
-  auto PlayerXInt = static_cast<int>(Engine.Player.Position.X);
-  auto PlayerYInt = static_cast<int>(Engine.Player.Position.Y);
+  auto PlayerXInt = static_cast<int>(Engine.GetPlayer().Position.X);
+  auto PlayerYInt = static_cast<int>(Engine.GetPlayer().Position.Y);
   auto ElevPlayer0 =
       Engine.GetCurrentMapArea().Tiles[PlayerXInt][PlayerYInt].Elevation /
       ElevAmount;
@@ -65,8 +65,8 @@ void cGameWorldRenderer::Render() {
   auto ElevPlayer3 =
       Engine.GetCurrentMapArea().Tiles[PlayerXInt][PlayerYInt + 1].Elevation /
       ElevAmount;
-  auto ElevX = Engine.Player.Position.X - PlayerXInt;
-  auto ElevY = Engine.Player.Position.Y - PlayerYInt;
+  auto ElevX = Engine.GetPlayer().Position.X - PlayerXInt;
+  auto ElevY = Engine.GetPlayer().Position.Y - PlayerYInt;
   auto ElevPlayer = (ElevPlayer0 + (ElevPlayer1 - ElevPlayer0) * ElevX +
                      ElevPlayer3 + (ElevPlayer2 - ElevPlayer3) * ElevX +
                      ElevPlayer0 + (ElevPlayer3 - ElevPlayer0) * ElevY +
@@ -83,8 +83,8 @@ void cGameWorldRenderer::Render() {
           Camera.GetRenderDistance() * Camera.GetRenderDistance())
         continue;
 
-      auto TileX = Engine.Player.Position.X - Camera.GetRenderDistance() + X;
-      auto TileY = Engine.Player.Position.Y - Camera.GetRenderDistance() + Y;
+      auto TileX = Engine.GetPlayer().Position.X - Camera.GetRenderDistance() + X;
+      auto TileY = Engine.GetPlayer().Position.Y - Camera.GetRenderDistance() + Y;
 
       if (TileX < 0 || TileY < 0 || TileX >= MapAreaSize ||
           TileY >= MapAreaSize)
@@ -346,28 +346,28 @@ void cGameWorldRenderer::Render() {
 
   auto PlayerX0 = OffsetX + Camera.GetRenderDistance() * Engine.TileSize +
                   Engine.TileSize + SubStepX * Engine.TileSize;
-  auto PlayerY0 = 0.0f + Engine.Player.GetModule<cModuleJumping>().PositionZ;
+  auto PlayerY0 = 0.0f + Engine.GetPlayer().GetModule<cModuleJumping>().PositionZ;
   auto PlayerZ0 = OffsetY + Camera.GetRenderDistance() * Engine.TileSize -
                   Engine.TileSize + SubStepY * Engine.TileSize;
 
   auto PlayerX1 = OffsetX + Camera.GetRenderDistance() * Engine.TileSize +
                   Engine.TileSize + SubStepX * Engine.TileSize -
                   Engine.TileSize;
-  auto PlayerY1 = 0.0f + Engine.Player.GetModule<cModuleJumping>().PositionZ;
+  auto PlayerY1 = 0.0f + Engine.GetPlayer().GetModule<cModuleJumping>().PositionZ;
   auto PlayerZ1 = OffsetY + Camera.GetRenderDistance() * Engine.TileSize -
                   Engine.TileSize + SubStepY * Engine.TileSize;
 
   auto PlayerX2 = OffsetX + Camera.GetRenderDistance() * Engine.TileSize +
                   Engine.TileSize + SubStepX * Engine.TileSize -
                   Engine.TileSize;
-  auto PlayerY2 = 0.0f + Engine.Player.GetModule<cModuleJumping>().PositionZ;
+  auto PlayerY2 = 0.0f + Engine.GetPlayer().GetModule<cModuleJumping>().PositionZ;
   auto PlayerZ2 = OffsetY + Camera.GetRenderDistance() * Engine.TileSize -
                   Engine.TileSize + SubStepY * Engine.TileSize +
                   Engine.TileSize;
 
   auto PlayerX3 = OffsetX + Camera.GetRenderDistance() * Engine.TileSize +
                   Engine.TileSize + SubStepX * Engine.TileSize;
-  auto PlayerY3 = 0.0f + Engine.Player.GetModule<cModuleJumping>().PositionZ;
+  auto PlayerY3 = 0.0f + Engine.GetPlayer().GetModule<cModuleJumping>().PositionZ;
   auto PlayerZ3 = OffsetY + Camera.GetRenderDistance() * Engine.TileSize -
                   Engine.TileSize + SubStepY * Engine.TileSize +
                   Engine.TileSize;
@@ -395,13 +395,13 @@ void cGameWorldRenderer::Render() {
   glDisable(GL_TEXTURE_2D);
 
   Engine.DrawModel(
-        Engine.Player.GetAnimatedModelId(),
+        Engine.GetPlayer().GetAnimatedModelId(),
       OffsetX + Camera.GetRenderDistance() * Engine.TileSize +
           Engine.TileSize / 2.0f + SubStepX * Engine.TileSize,
-      0.0f + Engine.Player.GetModule<cModuleJumping>().PositionZ,
+      0.0f + Engine.GetPlayer().GetModule<cModuleJumping>().PositionZ,
       OffsetY + Camera.GetRenderDistance() * Engine.TileSize -
           Engine.TileSize / 2.0f + SubStepY * Engine.TileSize,
-      Engine.Player.GetModule<cModuleMovement>().FacingAngleRotated);
+      Engine.GetPlayer().GetModule<cModuleMovement>().FacingAngleRotated);
 
   glPopMatrix();
   glDisable(GL_DEPTH_TEST);

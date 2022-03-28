@@ -30,7 +30,7 @@ class cEngine : public iEngine {
       : GameLoopImplemented(*this), ModelGraphics(*this),
         FpsCounterImplemented(*this), CustomCursorImplemented(*this),
         ImageGraphics(*this), FullscreenControllerImplemented(*this),
-        Player(*this), SceneManagerImplemented(*this),
+        SceneManagerImplemented(*this),
         iEngine(&KeyboardHandlerImplemented, &CustomCursorImplemented,
                 &FpsCounterImplemented, &FullscreenControllerImplemented,
                 &GameLoopImplemented, &SceneManagerImplemented) {}
@@ -53,9 +53,20 @@ class cEngine : public iEngine {
     // Player          .CurrentMapArea = 0;
 //    Player.WorldMapCoord = {1, 1, 0};
 //    Player.WorldMapCoord = {0, 0, 0};
-    Player.WorldMapCoord = {WorldMap->WorldMapWidth/2, WorldMap->WorldMapHeight/2, 0};
-    Player.Position = GetCurrentMapArea().PlayerSpawnPosition;
-    Player.GetModule<cModuleInventory>().Objects = StartingInventory_;
+
+    cPoint3 PlayerWorldPosition ={WorldMap->WorldMapWidth/2, WorldMap->WorldMapHeight/2, 0};
+    cPoint2F PlayerTilePosition = WorldMap->MapAreas[PlayerWorldPosition.X][PlayerWorldPosition.Y][PlayerWorldPosition.Z]->PlayerSpawnPosition;
+    cPoint2 PlayerTilePositionI = {static_cast<int>(PlayerTilePosition.X), static_cast<int>(PlayerTilePosition.Y)};
+
+    WorldMap->MapAreas[PlayerWorldPosition.X][PlayerWorldPosition.Y][PlayerWorldPosition.Z]
+            ->Tiles[PlayerTilePositionI.X][PlayerTilePositionI.Y].Actor = MakeUPtr<cPlayer>(*this);
+
+    PlayerPtrPtr = MakeUPtr<cPlayer*>(static_cast<cPlayer*>(WorldMap->MapAreas[PlayerWorldPosition.X][PlayerWorldPosition.Y][PlayerWorldPosition.Z]
+            ->Tiles[PlayerTilePositionI.X][PlayerTilePositionI.Y].Actor.get()));
+
+    GetPlayer().WorldMapCoord = PlayerWorldPosition;
+    GetPlayer().Position = GetCurrentMapArea().PlayerSpawnPosition;
+    GetPlayer().GetModule<cModuleInventory>().Objects = StartingInventory_;
     SceneManager.Initialize(move(ScenesCollection_), StartScene_);
     ModelLoader.LoadModels();
     ImageLoader.LoadImages();
@@ -65,6 +76,7 @@ class cEngine : public iEngine {
     GameLoop.Run();
 
     SDL_Quit();
+
   }
 
   // ---- Drawing operations ----
@@ -119,13 +131,16 @@ class cEngine : public iEngine {
 
   inline cMapArea& GetCurrentMapArea() const override {
     // return *WorldMap->MapAreas.at(Player.CurrentMapArea);
-    return *WorldMap->MapAreas[Player.WorldMapCoord.X][Player.WorldMapCoord.Y]
-                              [Player.WorldMapCoord.Z];
+    return *WorldMap->MapAreas[GetPlayer().WorldMapCoord.X][GetPlayer().WorldMapCoord.Y]
+                              [GetPlayer().WorldMapCoord.Z];
+  }
+
+  cPlayer &GetPlayer() const {
+      return **PlayerPtrPtr;
   }
 
   // ---- Public members ----
 
-  cPlayer Player;
   UPtr<cWorldMap> WorldMap;
 
   cKeyboardHandler KeyboardHandlerImplemented;
@@ -175,6 +190,7 @@ class cEngine : public iEngine {
   cImageGraphics ImageGraphics;
   cPaintGraphics PaintGraphics;
   cModelGraphics ModelGraphics;
+  UPtr<cPlayer*> PlayerPtrPtr;
 
   const std::string Title = "Forradia";
   const cSize DefaultWindowSize = {800, 600};

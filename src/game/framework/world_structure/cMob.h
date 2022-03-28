@@ -27,7 +27,7 @@ class cMob : public cActor {
 
   // Rotation
 
-  float FacingAngle = 0.0f;
+  //float FacingAngle = 0.0f;
 
   // Localization
 

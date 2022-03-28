@@ -25,6 +25,11 @@ class cMapArea {
     }
   }
 
+  inline cActor& AddActor(UPtr<cActor> Actor, int TileX, int TileY) {
+    Tiles[TileX][TileY].Actor = std::move(Actor);
+    return *Tiles[TileX][TileY].Actor;
+  }
+
   inline bool IsUnderground() { return WorldCoord.Z < 0; }
 
   // Basic data
