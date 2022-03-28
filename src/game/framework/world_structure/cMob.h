@@ -3,13 +3,16 @@
 
 #pragma once
 
+#include <string>
 #include "../engine/cPoint2F.h"
+#include "../engine/Aliases.h"
 
 namespace Forradia {
 
 class cMob {
  public:
-  cMob(float X, float Y) : Position(X, Y) {}
+  cMob(float X, float Y, std::string MobTypeName) : Position(X, Y),
+      MobType(GetId(MobTypeName)) {}
 
   // Movement
 
@@ -18,6 +21,7 @@ class cMob {
   float StepSize = 1.0f;
   float StepMultiplier = 0.1f;
   cPoint2F MoveDestination = {-1, -1};
+  int MobType = 0;
 
   // Rotation
 

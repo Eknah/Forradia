@@ -399,7 +399,8 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
         MapArea->Tiles[TileX][TileY].Mob == nullptr) {
       MapArea->Tiles[TileX][TileY].Mob =
           std::make_unique<cMob>(static_cast<float>(TileX),
-                                 static_cast<float>(TileY));
+                                 static_cast<float>(TileY),
+                                 "MobRabbit");
       MapArea->MobsMirror.push_back(std::ref(MapArea->Tiles[TileX][TileY].Mob));
     }
   }
