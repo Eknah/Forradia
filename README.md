@@ -47,6 +47,7 @@ The purpose of this project is mainly that I use it to improve my knowledge and 
 ### Windows
 
 **Dependencies**  
+  
 Download:  
 * SDL2 Development Library: [SDL2-devel-2.0.20-VC.zip](https://www.libsdl.org/release/SDL2-devel-2.0.20-VC.zip)  
 * SDL2_image Development Library: [SDL2_image-devel-2.0.5-VC.zip](https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.5-VC.zip)  
@@ -90,8 +91,9 @@ The project is configurated to locate headers and libraries in subfolders at C:/
 Hopefully everything was successful and you now have a compiled binary.
 
 ### Linux
-
+To add
 **Dependencies**
+To add
 
 ## API Reference
 To add
