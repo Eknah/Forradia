@@ -25,7 +25,7 @@ void cGameInstance::StartGame() {
   Randomize();
 
   const int MapAreaSize = 150;
-  auto WorldMap = MakeUPtr<cWorldMap>(MapAreaSize);
+  auto WorldMap = MakeUPtr<cWorldMap>(MapAreaSize, 3, 3);
 
   cEngine Engine;
   cObjectsContent ObjectsContent;

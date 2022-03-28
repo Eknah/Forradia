@@ -10,7 +10,9 @@ class iMapGenerator;
 
 class cWorldMap {
  public:
-  explicit cWorldMap(int MapAreaSize_) : MapAreaSize(MapAreaSize_) {}
+  explicit cWorldMap(int MapAreaSize_, int WorldMapWidth_, int WorldMapHeight_) :
+        MapAreaSize(MapAreaSize_), WorldMapWidth(WorldMapWidth_),
+        WorldMapHeight(WorldMapHeight_) {}
 
   // Core
 
@@ -19,6 +21,8 @@ class cWorldMap {
   // Basic data
 
   int MapAreaSize = -1;
+  int WorldMapWidth = -1;
+  int WorldMapHeight = -1;
 
   // Core world map data structures
 
