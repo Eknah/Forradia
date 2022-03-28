@@ -46,5 +46,17 @@
         "vtex",
         "wmain",
         "Åkerberg"
+        "Freeglut",
+        "GLEW",
+        "MSVC",
+        "Makefiles",
+        "cmake",
+        "configurated",
+        "devel",
+        "freeglut",
+        "glew",
+        "nmake",
+        "subfolders",
+        "xcopy"
     ]
 }
