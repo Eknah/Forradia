@@ -19,6 +19,9 @@ class cGameWorldRenderer {
   void Render();
 
  private:
+  void RenderTilesAndObjects();
+  void RenderActors();
+
   const cEngine &Engine;
   cBackground Background;
   const cCamera &Camera;

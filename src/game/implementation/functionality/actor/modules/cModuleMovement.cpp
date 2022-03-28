@@ -43,7 +43,7 @@ void cModuleMovement::UpdateDirectionalMovement() {
   if (Instruction.TryMoveLeft) {
     Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2.0f +
             1.0f * PiF / 2.0f;
-    FacingAngleRotated = *GetParentActor().FacingAngle + 1 * 90.0f;
+    *GetParentActor().FacingAngle = *GetParentActor().FacingAngle + 1 * 90.0f;
   }
 
   if (Instruction.TryMoveBack) {
@@ -54,7 +54,7 @@ void cModuleMovement::UpdateDirectionalMovement() {
   if (Instruction.TryMoveRight) {
     Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2.0f +
             3.0f * PiF / 2.0f;
-    FacingAngleRotated = *GetParentActor().FacingAngle + 3.0f * 90.0f;
+    *GetParentActor().FacingAngle = *GetParentActor().FacingAngle + 3.0f * 90.0f;
   }
 
   auto DX = -std::cos(Angle) * StepMultiplier;
@@ -81,8 +81,17 @@ void cModuleMovement::UpdateDirectionalMovement() {
   if (!Engine.GetCurrentMapArea()
            .Tiles[NewXRounded][NewYRounded]
            .MovementBlocked()) {
+
+      auto OldXI = static_cast<int>(GetParentActor().Position.X);
+      auto OldYI = static_cast<int>(GetParentActor().Position.Y);
+
     GetParentActor().Position.X = NewX;
     GetParentActor().Position.Y = NewY;
+
+    auto NewXI = static_cast<int>(NewX);
+    auto NewYI = static_cast<int>(NewY);
+
+    Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
   }
 
   if (Engine.GetCurrentMapArea().Tiles
@@ -144,8 +153,18 @@ void cModuleMovement::UpdateDestinationMovement() {
     if (!Engine.GetCurrentMapArea()
              .Tiles[NewXRounded][NewYRounded]
              .MovementBlocked()) {
+
+        auto OldXI = static_cast<int>(GetParentActor().Position.X);
+        auto OldYI = static_cast<int>(GetParentActor().Position.Y);
+
       GetParentActor().Position.X = NewX;
       GetParentActor().Position.Y = NewY;
+
+      auto NewXI = static_cast<int>(NewX);
+      auto NewYI = static_cast<int>(NewY);
+
+
+      Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
     }
 
     if (Engine.GetCurrentMapArea().Tiles

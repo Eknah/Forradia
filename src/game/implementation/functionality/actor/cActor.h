@@ -33,6 +33,7 @@ class cActor {
 
   cPoint3 WorldMapCoord = {1, 1, 0};
   cPoint2F Position = {50.0f, 50.0f};
+  float PositionZ = 0.0f;
   std::string ModelName;
   UPtr<float> FacingAngle = MakeUPtr<float>(0.0f);
 

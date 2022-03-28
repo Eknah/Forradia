@@ -14,7 +14,6 @@ class cModuleJumping : public iModule {
   void Update() override;
   void Jump();
 
-  float PositionZ = 0.0f;
 
  private:
   bool IsJumping = false;
