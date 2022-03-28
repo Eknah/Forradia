@@ -65,17 +65,17 @@ The project is configurated to locate headers and libraries in subfolders at C:/
     tar -xf .\glew-2.1.0-win32.zip
     tar -xf .\freeglut-MSVC-3.0.0-2.mp.zip
 
-    xcopy .\SDL2-2.0.20\include C:\test\SDL2\include\SDL2 /E /H /C /I /Y
-    xcopy .\SDL2_image-2.0.5\include C:\test\SDL2\include\SDL2 /E /H /C /I /Y
-    xcopy .\SDL2_ttf-2.0.18\include C:\test\SDL2\include\SDL2 /E /H /C /I /Y
-    xcopy .\glew-2.1.0\include C:\test\GLEW\include /E /H /C /I /Y
-    xcopy .\freeglut\include C:\test\freeglut\include /E /H /C /I /Y
+    xcopy .\SDL2-2.0.20\include C:\SDL2\include\SDL2 /E /H /C /I /Y
+    xcopy .\SDL2_image-2.0.5\include C:\SDL2\include\SDL2 /E /H /C /I /Y
+    xcopy .\SDL2_ttf-2.0.18\include C:\SDL2\include\SDL2 /E /H /C /I /Y
+    xcopy .\glew-2.1.0\include C:\GLEW\include /E /H /C /I /Y
+    xcopy .\freeglut\include C:\freeglut\include /E /H /C /I /Y
 
-    xcopy .\SDL2-2.0.20\lib\x86 C:\test\SDL2\lib\x86 /E /H /C /I /Y
-    xcopy .\SDL2_image-2.0.5\lib\x86 C:\test\SDL2\lib\x86 /E /H /C /I /Y
-    xcopy .\SDL2_ttf-2.0.18\lib\x86 C:\test\SDL2\lib\x86 /E /H /C /I /Y
-    xcopy .\glew-2.1.0\lib\Release\Win32 C:\test\GLEW\lib\Release\Win32 /E /H /C /I /Y
-    xcopy .\freeglut\lib C:\test\freeglut\lib /E /H /C /I /Y
+    xcopy .\SDL2-2.0.20\lib\x86 C:\SDL2\lib\x86 /E /H /C /I /Y
+    xcopy .\SDL2_image-2.0.5\lib\x86 C:\SDL2\lib\x86 /E /H /C /I /Y
+    xcopy .\SDL2_ttf-2.0.18\lib\x86 C:\SDL2\lib\x86 /E /H /C /I /Y
+    xcopy .\glew-2.1.0\lib\Release\Win32 C:\GLEW\lib\Release\Win32 /E /H /C /I /Y
+    xcopy .\freeglut\lib C:\freeglut\lib /E /H /C /I /Y
 
 
 Move 
