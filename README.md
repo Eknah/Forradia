@@ -13,7 +13,7 @@ The purpose of this project is mainly that I use it to improve my knowledge and 
 
 ## Code style
 [![cpp-linter](https://github.com/shenxianpeng/cpp-linter-action/actions/workflows/cpp-linter.yml/badge.svg)](https://github.com/Eknah/Forradia/actions/workflows/cpp-linter.yml) 
-[![MegaLinter](https://github.com/Eknah/Forradia/workflows/MegaLinter/badge.svg?branch=origin/master)](https://github.com/Eknah/Forradia/actions?query=workflow%3AMegaLinter+branch%3Aorigin/master)
+[![MegaLinter](https://github.com/Eknah/Forradia/workflows/MegaLinter/badge.svg?branch=main)](https://github.com/Eknah/Forradia/actions?query=workflow%3AMegaLinter+branch%3Amain)
 
 ## Screenshots
 ![Forradia Screenshot 1!](/resources/images/Screenshot1.png "Forradia Screenshot 1")
