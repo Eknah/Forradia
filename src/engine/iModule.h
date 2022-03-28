@@ -10,15 +10,21 @@ class cActor;
 
 class iModule {
  public:
-  iModule(iEngine &Engine_, cActor &ParentActor_)
+  iModule(const iEngine &Engine_, cActor *ParentActor_)
       : Engine(Engine_), ParentActor(ParentActor_) {}
 
   virtual void ResetForNewFrame() = 0;
   virtual void Update() = 0;
 
+  inline cActor &GetParentActor() {
+      return *ParentActor;
+  }
+
  protected:
-  iEngine &Engine;
-  cActor &ParentActor;
+  const iEngine &Engine;
+
+ private:
+  cActor *ParentActor;
 };
 
 }  // namespace Forradia

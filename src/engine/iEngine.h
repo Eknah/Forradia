@@ -53,7 +53,7 @@ class iEngine {
                                 float rotation = 0.0f,
                                 float specificScaling = 1.0f) = 0;
 
-  virtual inline cMapArea &GetCurrentMapArea() = 0;
+  virtual inline cMapArea& GetCurrentMapArea() const = 0;
 
   F_WindowPtr Window;
 

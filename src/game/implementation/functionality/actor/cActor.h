@@ -29,7 +29,7 @@ class cActor {
  protected:
   template <class T> inline void AddModule() {
     auto &Type = typeid(T);
-    Modules.insert({Type.hash_code(), MakeUPtr<T>(Engine, *this)});
+    Modules.insert({Type.hash_code(), MakeUPtr<T>(Engine, this)});
   }
 
  private:

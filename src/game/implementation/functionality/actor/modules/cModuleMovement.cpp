@@ -30,8 +30,8 @@ void cModuleMovement::UpdateDirectionalMovement() {
 
   IsWalking = true;
 
-  auto NewX = ParentActor.Position.X;
-  auto NewY = ParentActor.Position.Y;
+  auto NewX = GetParentActor().Position.X;
+  auto NewY = GetParentActor().Position.Y;
   auto Angle = 0.0f;
 
   if (Instruction.TryMoveForward) {
@@ -80,13 +80,13 @@ void cModuleMovement::UpdateDirectionalMovement() {
   if (!Engine.GetCurrentMapArea()
            .Tiles[NewXRounded][NewYRounded]
            .MovementBlocked()) {
-    ParentActor.Position.X = NewX;
-    ParentActor.Position.Y = NewY;
+    GetParentActor().Position.X = NewX;
+    GetParentActor().Position.Y = NewY;
   }
 
   if (Engine.GetCurrentMapArea().Tiles[int(NewX)][int(NewY)].WarpToFloor !=
       -1) {
-    ParentActor.WorldMapCoord.Z =
+    GetParentActor().WorldMapCoord.Z =
         Engine.GetCurrentMapArea().Tiles[int(NewX)][int(NewY)].WarpToFloor;
 
     auto Angle = FacingAngle / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
@@ -96,8 +96,8 @@ void cModuleMovement::UpdateDirectionalMovement() {
     NewX += DX * StepSize * 10;
     NewY += DY * StepSize * 10;
 
-    ParentActor.Position.X = NewX;
-    ParentActor.Position.Y = NewY;
+    GetParentActor().Position.X = NewX;
+    GetParentActor().Position.Y = NewY;
   }
 
   TickLastMove = Ticks();
@@ -108,8 +108,8 @@ void cModuleMovement::UpdateDestinationMovement() {
         MoveDestination.Y != -1))
     return;
 
-  auto DX = MoveDestination.X - ParentActor.Position.X;
-  auto DY = MoveDestination.Y - ParentActor.Position.Y;
+  auto DX = MoveDestination.X - GetParentActor().Position.X;
+  auto DY = MoveDestination.Y - GetParentActor().Position.Y;
   auto AbsDX = std::abs(DX);
   auto AbsDY = std::abs(DY);
 
@@ -123,8 +123,8 @@ void cModuleMovement::UpdateDestinationMovement() {
                  0 * (float)M_PI / 2;
     auto DX = -(float)std::cos(Angle) * StepMultiplier;
     auto DY = (float)std::sin(Angle) * StepMultiplier;
-    auto NewX = ParentActor.Position.X + DX * StepSize;
-    auto NewY = ParentActor.Position.Y + DY * StepSize;
+    auto NewX = GetParentActor().Position.X + DX * StepSize;
+    auto NewY = GetParentActor().Position.Y + DY * StepSize;
 
     if (NewX < 0)
       NewX += Engine.GetCurrentMapArea().Size;
@@ -141,13 +141,13 @@ void cModuleMovement::UpdateDestinationMovement() {
     if (!Engine.GetCurrentMapArea()
              .Tiles[NewXRounded][NewYRounded]
              .MovementBlocked()) {
-      ParentActor.Position.X = NewX;
-      ParentActor.Position.Y = NewY;
+      GetParentActor().Position.X = NewX;
+      GetParentActor().Position.Y = NewY;
     }
 
     if (Engine.GetCurrentMapArea().Tiles[int(NewX)][int(NewY)].WarpToFloor !=
         -1) {
-      ParentActor.WorldMapCoord.Z =
+      GetParentActor().WorldMapCoord.Z =
           Engine.GetCurrentMapArea().Tiles[int(NewX)][int(NewY)].WarpToFloor;
 
       auto Angle = FacingAngle / 180.0f * (float)M_PI - (float)M_PI / 2 +
@@ -158,8 +158,8 @@ void cModuleMovement::UpdateDestinationMovement() {
       NewX += DX * StepSize * 10;
       NewY += DY * StepSize * 10;
 
-      ParentActor.Position.X = NewX;
-      ParentActor.Position.Y = NewY;
+      GetParentActor().Position.X = NewX;
+      GetParentActor().Position.Y = NewY;
     }
   }
 
