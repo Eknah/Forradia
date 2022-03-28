@@ -31,9 +31,9 @@ class cEngine : public iEngine {
         FpsCounterImplemented(*this), CustomCursorImplemented(*this),
         ImageGraphics(*this), FullscreenControllerImplemented(*this),
         Player(*this),
-        iEngine(KeyboardHandlerImplemented, CustomCursorImplemented,
-                FpsCounterImplemented, FullscreenControllerImplemented,
-                GameLoopImplemented) {}
+        iEngine(&KeyboardHandlerImplemented, &CustomCursorImplemented,
+                &FpsCounterImplemented, &FullscreenControllerImplemented,
+                &GameLoopImplemented) {}
 
   // Loads content and initializes all engine components
   // Runs game loop until user exists program

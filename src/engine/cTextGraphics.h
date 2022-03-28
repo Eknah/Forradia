@@ -48,8 +48,12 @@ class cTextGraphics {
                  GL_BGRA, GL_UNSIGNED_BYTE, FontSurface->pixels);
 
     auto CanvasSize = Utilities.GetCanvasSize();
-    auto Width = static_cast<float>(FontSurface->w) / CanvasSize.Width * Scaling;
-    auto Height = static_cast<float>(FontSurface->h) / CanvasSize.Height * Scaling;
+
+    auto Width = static_cast<float>(FontSurface->w)
+            / CanvasSize.Width * Scaling;
+
+    auto Height = static_cast<float>(FontSurface->h)
+            / CanvasSize.Height * Scaling;
 
     glColor4f(Color.r / 255.0f, Color.g / 255.0f, Color.b / 255.0f,
               Color.a / 255.0f);

@@ -38,8 +38,8 @@ class cPaintGraphics {
  private:
   // ---- Drawing operations generalization ----
 
-  inline void RenderShape(GLenum GeometryType, const std::vector<cPoint2F> &Vertices,
-                          SDL_Color Color) {
+  inline void RenderShape(GLenum GeometryType,
+                          const std::vector<cPoint2F> &Vertices, SDL_Color Color) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f);

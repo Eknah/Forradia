@@ -101,7 +101,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
       if (FirstToken(curline) == "f") {
         std::vector<cVertex> vVerts;
-        GenVerticesFromRawOBJ(vVerts, Positions, TCoords, Normals, curline);
+        GenVerticesFromRawOBJ(&vVerts, Positions, TCoords, Normals, curline);
 
         for (unsigned int i = 0; i < vVerts.size(); i++) {
           Vertices.push_back(vVerts[i]);
@@ -109,7 +109,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         }
 
         std::vector<unsigned int> iIndices;
-        VertexTriangluation(iIndices, vVerts);
+        VertexTriangluation(&iIndices, vVerts);
 
         for (unsigned int i = 0; i < iIndices.size(); i++) {
           unsigned int indnum =
@@ -183,7 +183,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
   std::vector<cMaterial> LoadedMaterials;
 
  private:
-  inline void GenVerticesFromRawOBJ(std::vector<cVertex> &oVerts,
+  inline void GenVerticesFromRawOBJ(std::vector<cVertex> *oVerts,
                                     const std::vector<cVector3> &iPositions,
                                     const std::vector<cVector2> &iTCoords,
                                     const std::vector<cVector3> &iNormals,
@@ -216,7 +216,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         vVert.Position = GetElement(iPositions, svert[0]);
         vVert.TextureCoordinate = cVector2(0, 0);
         noNormal = true;
-        oVerts.push_back(vVert);
+        oVerts->push_back(vVert);
 
         break;
       }
@@ -224,7 +224,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         vVert.Position = GetElement(iPositions, svert[0]);
         vVert.TextureCoordinate = GetElement(iTCoords, svert[1]);
         noNormal = true;
-        oVerts.push_back(vVert);
+        oVerts->push_back(vVert);
 
         break;
       }
@@ -232,7 +232,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         vVert.Position = GetElement(iPositions, svert[0]);
         vVert.TextureCoordinate = cVector2(0, 0);
         vVert.Normal = GetElement(iNormals, svert[2]);
-        oVerts.push_back(vVert);
+        oVerts->push_back(vVert);
 
         break;
       }
@@ -240,7 +240,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         vVert.Position = GetElement(iPositions, svert[0]);
         vVert.TextureCoordinate = GetElement(iTCoords, svert[1]);
         vVert.Normal = GetElement(iNormals, svert[2]);
-        oVerts.push_back(vVert);
+        oVerts->push_back(vVert);
 
         break;
       }
@@ -251,24 +251,24 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
     }
 
     if (noNormal) {
-      cVector3 A = oVerts[0].Position - oVerts[1].Position;
-      cVector3 B = oVerts[2].Position - oVerts[1].Position;
+      cVector3 A = (*oVerts)[0].Position - (*oVerts)[1].Position;
+      cVector3 B = (*oVerts)[2].Position - (*oVerts)[1].Position;
 
       cVector3 Normal = Math3D.Cross(A, B);
 
-      for (unsigned int i = 0; i < oVerts.size(); i++)
-        oVerts[i].Normal = Normal;
+      for (unsigned int i = 0; i < oVerts->size(); i++)
+        (*oVerts)[i].Normal = Normal;
     }
   }
-  inline void VertexTriangluation(std::vector<unsigned int> &oIndices,
+  inline void VertexTriangluation(std::vector<unsigned int> *oIndices,
                                   const std::vector<cVertex> &iVerts) {
     if (iVerts.size() < 3)
       return;
 
     if (iVerts.size() == 3) {
-      oIndices.push_back(0);
-      oIndices.push_back(1);
-      oIndices.push_back(2);
+      oIndices->push_back(0);
+      oIndices->push_back(1);
+      oIndices->push_back(2);
 
       return;
     }
@@ -295,11 +295,11 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         if (tVerts.size() == 3) {
           for (unsigned int j = 0; j < tVerts.size(); j++) {
             if (iVerts[j].Position == pCur.Position)
-              oIndices.push_back(j);
+              oIndices->push_back(j);
             if (iVerts[j].Position == pPrev.Position)
-              oIndices.push_back(j);
+              oIndices->push_back(j);
             if (iVerts[j].Position == pNext.Position)
-              oIndices.push_back(j);
+              oIndices->push_back(j);
           }
 
           tVerts.clear();
@@ -309,11 +309,11 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         if (tVerts.size() == 4) {
           for (unsigned int j = 0; j < iVerts.size(); j++) {
             if (iVerts[j].Position == pCur.Position)
-              oIndices.push_back(j);
+              oIndices->push_back(j);
             if (iVerts[j].Position == pPrev.Position)
-              oIndices.push_back(j);
+              oIndices->push_back(j);
             if (iVerts[j].Position == pNext.Position)
-              oIndices.push_back(j);
+              oIndices->push_back(j);
           }
 
           cVector3 tempVec;
@@ -328,11 +328,11 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
           for (unsigned int j = 0; j < iVerts.size(); j++) {
             if (iVerts[j].Position == pPrev.Position)
-              oIndices.push_back(j);
+              oIndices->push_back(j);
             if (iVerts[j].Position == pNext.Position)
-              oIndices.push_back(j);
+              oIndices->push_back(j);
             if (iVerts[j].Position == tempVec)
-              oIndices.push_back(j);
+              oIndices->push_back(j);
           }
 
           tVerts.clear();
@@ -364,11 +364,11 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
         for (unsigned int j = 0; j < iVerts.size(); j++) {
           if (iVerts[j].Position == pCur.Position)
-            oIndices.push_back(j);
+            oIndices->push_back(j);
           if (iVerts[j].Position == pPrev.Position)
-            oIndices.push_back(j);
+            oIndices->push_back(j);
           if (iVerts[j].Position == pNext.Position)
-            oIndices.push_back(j);
+            oIndices->push_back(j);
         }
 
         for (unsigned int j = 0; j < tVerts.size(); j++) {
@@ -381,7 +381,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
         i = -1;
       }
 
-      if (oIndices.size() == 0)
+      if (oIndices->size() == 0)
         break;
       if (tVerts.size() == 0)
         break;
@@ -411,8 +411,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
             tempMaterial.Name = Tail(curline);
           else
             tempMaterial.Name = "none";
-        }
-        else {
+        } else {
           LoadedMaterials.push_back(tempMaterial);
 
           tempMaterial = cMaterial();
@@ -502,7 +501,7 @@ class cModel3D : public cVectorAlgorithms, cAlgorithmsStrings {
 
   template <class T>
   inline const T &GetElement(const std::vector<T> &elements,
-                             std::string &index) {
+                             const std::string &index) {
     auto idx = std::stoi(index);
 
     if (idx < 0)

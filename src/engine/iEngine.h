@@ -24,12 +24,12 @@ class F_MapArea;
 
 class iEngine {
  public:
-  iEngine(iKeyboardHandler &KeyboardHandler_, iCustomCursor &CustomCursor_,
-          iFpsCounter &FpsCounter_,
-          iFullscreenController &FullscreenController_, iGameLoop &GameLoop_)
-      : KeyboardHandler(KeyboardHandler_), CustomCursor(CustomCursor_),
-        FpsCounter(FpsCounter_), FullscreenController(FullscreenController_),
-        GameLoop(GameLoop_) {}
+  iEngine(iKeyboardHandler* KeyboardHandler_, iCustomCursor* CustomCursor_,
+          iFpsCounter* FpsCounter_,
+          iFullscreenController* FullscreenController_, iGameLoop* GameLoop_)
+      : KeyboardHandler(*KeyboardHandler_), CustomCursor(*CustomCursor_),
+        FpsCounter(*FpsCounter_), FullscreenController(*FullscreenController_),
+        GameLoop(*GameLoop_) {}
 
   virtual inline void DrawImage(std::string imageName, float x, float y,
                                 float width, float height) = 0;
