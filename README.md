@@ -77,6 +77,10 @@ The project is configurated to locate headers and libraries in subfolders at C:/
     xcopy .\glew-2.1.0\lib\Release\Win32 C:\GLEW\lib\Release\Win32 /E /H /C /I /Y
     xcopy .\freeglut\lib C:\freeglut\lib /E /H /C /I /Y
 
+**Git glone the repo anywhere**
+
+    git clone https://github.com/Eknah/Forradia.git
+
 
 Move 
 
