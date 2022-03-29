@@ -28,9 +28,9 @@ void cGameWorldRenderer::Render() {
   CameraX = static_cast<float>(cos(AngleRadians)) * CameraDist;
   CameraZ = -static_cast<float>(sin(AngleRadians)) * CameraDist;
 
-  gluLookAt(CameraX,
+  gluLookAt(CameraX-Engine.TileSize/2,
             Camera.CameraHeight,
-            CameraZ,
+            CameraZ-Engine.TileSize/2,
             -Engine.TileSize/2,
             -1,
             -Engine.TileSize/2,

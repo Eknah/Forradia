@@ -39,9 +39,9 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
   CameraX = static_cast<float>(cos(AngleRadians)) * CameraDist;
   CameraZ = -static_cast<float>(sin(AngleRadians)) * CameraDist;
 
-  gluLookAt(CameraX,
+  gluLookAt(CameraX-Engine.TileSize/2,
             CameraHeight,
-            CameraZ,
+            CameraZ-Engine.TileSize/2,
             -Engine.TileSize/2,
             -1,
             -Engine.TileSize/2,
