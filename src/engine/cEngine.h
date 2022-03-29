@@ -49,9 +49,17 @@ class cEngine : public iEngine {
     World = move(World_);
     ObjectsContent = ObjectsContent_;
 
-    cPoint3 PlayerWorldPos ={World->WorldMapWidth/2, World->WorldMapHeight/2, 0};
-    cPoint2F PlayerTilePos = World->Areas[PlayerWorldPos.X][PlayerWorldPos.Y][PlayerWorldPos.Z]->SpawnPos;
-    cPoint2 PlayerTilePosI = {static_cast<int>(PlayerTilePos.X), static_cast<int>(PlayerTilePos.Y)};
+    cPoint3 PlayerWorldPos = {
+        World->WorldMapWidth/2,
+        World->WorldMapHeight/2,
+        0
+    };
+
+    cPoint2F PlayerTilePos = World->GetArea(PlayerWorldPos)->SpawnPos;
+    cPoint2 PlayerTilePosI = {
+        static_cast<int>(PlayerTilePos.X),
+        static_cast<int>(PlayerTilePos.Y)
+    };
 
     World->Areas[PlayerWorldPos.X][PlayerWorldPos.Y][PlayerWorldPos.Z]
             ->Tiles[PlayerTilePosI.X][PlayerTilePosI.Y].Actor = MakeUPtr<cPlayer>(*this);
@@ -71,7 +79,6 @@ class cEngine : public iEngine {
     GameLoop.Run();
 
     SDL_Quit();
-
   }
 
   // ---- Drawing operations ----

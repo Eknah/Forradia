@@ -10,13 +10,17 @@ class iMapGenerator;
 
 class cWorldMap {
  public:
-  explicit cWorldMap(int MapAreaSize_, int WorldMapWidth_, int WorldMapHeight_) :
+  explicit cWorldMap(int MapAreaSize_,
+                     int WorldMapWidth_,
+                     int WorldMapHeight_) :
         MapAreaSize(MapAreaSize_), WorldMapWidth(WorldMapWidth_),
         WorldMapHeight(WorldMapHeight_) {}
 
   // Core
 
   void GenerateWorldMap(const iMapGenerator &MapGenerator);
+
+  UPtr<cMapArea>& GetArea(cPoint3 Pos);
 
   // Basic data
 

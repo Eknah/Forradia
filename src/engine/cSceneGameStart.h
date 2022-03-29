@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <string>
 #include "cUtilities.h"
 #include "CommonExternal.h"
 #include "framework/cSceneBase.h"
@@ -26,7 +27,8 @@ class cSceneGameStart : public cSceneBase {
     if (Engine.KeyboardHandler.KeysBeenFired->size() > 0)
       Engine.SceneManager.SwitchToScene(SwitchToSceneName);
 
-    if (Engine.MouseHandler.GetLeftButtonBeenFired() || Engine.MouseHandler.GetRightButtonBeenFired())
+    if (Engine.MouseHandler.GetLeftButtonBeenFired()
+            || Engine.MouseHandler.GetRightButtonBeenFired())
         Engine.SceneManager.SwitchToScene(SwitchToSceneName);
   }
 
@@ -36,7 +38,9 @@ class cSceneGameStart : public cSceneBase {
     auto LogoSizeF = Engine.GetImageSizeF(ImageNameLogo);
 
     Engine.DrawImage(ImageNameLogo, 0.5f - LogoSizeF.Width / 2.0f,
-                     0.25f - LogoSizeF.Height / 2.0f, LogoSizeF.Width, LogoSizeF.Height);
+                     0.25f - LogoSizeF.Height / 2.0f,
+                     LogoSizeF.Width,
+                     LogoSizeF.Height);
     Engine.DrawString(Text, {255, 255, 255, 255}, 0.5f, 0.5f, true);
   }
   void DoMouseDown(Uint8 mouseButton) override {};

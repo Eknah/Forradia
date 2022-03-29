@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <string>
 #include "../engine/Aliases.h"
 #include "../engine/cPoint2F.h"
 #include "../engine/cPoint3.h"
@@ -14,13 +15,19 @@ class iEngine;
 
 class cActor {
  public:
-  explicit cActor(const iEngine &Engine_) : Engine(Engine_) {ActorId = CurrentActorId++;}
+  explicit cActor(const iEngine &Engine_) : Engine(Engine_) {
+        ActorId = CurrentActorId++;
+    }
 
   cActor(const iEngine &Engine_, float X, float Y, std::string ModelName_) :
-      Engine(Engine_), Position({X,Y}), ModelName(ModelName_) {ActorId = CurrentActorId++;}
+      Engine(Engine_), Position({X,Y}), ModelName(ModelName_) {
+      ActorId = CurrentActorId++;
+  }
 
   cActor(const iEngine &Engine_, std::string ModelName_) :
-      Engine(Engine_), ModelName(ModelName_) {ActorId = CurrentActorId++;}
+      Engine(Engine_), ModelName(ModelName_) {
+      ActorId = CurrentActorId++;
+  }
 
   void ResetForNewFrame() const;
   void Update() const;
@@ -47,7 +54,6 @@ class cActor {
   }
 
  private:
-
   template <class T> inline bool HasModule() const {
     return Modules.count(typeid(T).hash_code()) > 0;
   }

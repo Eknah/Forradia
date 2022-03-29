@@ -14,8 +14,11 @@ class iKeyboardHandler {
   inline virtual void DoKeyDown(SDL_Keycode key) const = 0;
   inline virtual void DoKeyUp(SDL_Keycode key) const = 0;
 
-  const UPtr<std::set<SDL_Keycode>> KeysBeingPressed = MakeUPtr<std::set<SDL_Keycode>>();
-  const UPtr<std::set<SDL_Keycode>> KeysBeenFired = MakeUPtr<std::set<SDL_Keycode>>();
+  const UPtr<std::set<SDL_Keycode>> KeysBeingPressed
+  = MakeUPtr<std::set<SDL_Keycode>>();
+
+  const UPtr<std::set<SDL_Keycode>> KeysBeenFired
+  = MakeUPtr<std::set<SDL_Keycode>>();
 };
 
 }  // namespace Forradia

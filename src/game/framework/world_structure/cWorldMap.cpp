@@ -18,4 +18,8 @@ void cWorldMap::GenerateWorldMap(const iMapGenerator &MapGenerator) {
       MapGenerator.GenerateMapArea(WorldX, WorldY, 0);
 }
 
+UPtr<cMapArea>& cWorldMap::GetArea(cPoint3 Pos) {
+    return Areas[Pos.X][Pos.Y][Pos.Z];
+}
+
 }  // namespace Forradia

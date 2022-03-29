@@ -13,16 +13,16 @@ namespace Forradia
 void cMobsEngine::Update()
 {
 
-  for (unsigned int I = 0; I < Engine.GetCurrentMapArea().ActorsMirror.size(); I++)
+  for (unsigned int I = 0; I < Engine.GetCurrentMapArea().MobActorsMirror.size(); I++)
   {
 
-    if (I >= Engine.GetCurrentMapArea().ActorsMirror.size()) break;
+    if (I >= Engine.GetCurrentMapArea().MobActorsMirror.size()) break;
 
-    SPtr<cMob> MobPtr = std::dynamic_pointer_cast<cMob>(Engine.GetCurrentMapArea().ActorsMirror.at(I).get());
+    SPtr<cMob> MobPtr = std::dynamic_pointer_cast<cMob>(Engine.GetCurrentMapArea().MobActorsMirror.at(I).get());
 
     if (MobPtr == nullptr) continue;
 
-    cActor& Actor = *Engine.GetCurrentMapArea().ActorsMirror.at(I).get().get();
+    cActor& Actor = *Engine.GetCurrentMapArea().MobActorsMirror.at(I).get().get();
 
     if (Actor.ActorId == Engine.GetPlayer().ActorId) continue;
 
@@ -90,8 +90,8 @@ void cMobsEngine::Update()
                 Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor = nullptr;
             }
 
-            Engine.GetCurrentMapArea().ActorsMirror.erase(Engine.GetCurrentMapArea().ActorsMirror.begin() + I);
-            Engine.GetCurrentMapArea().ActorsMirror.push_back(std::ref(Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor));
+            Engine.GetCurrentMapArea().MobActorsMirror.erase(Engine.GetCurrentMapArea().MobActorsMirror.begin() + I);
+            Engine.GetCurrentMapArea().MobActorsMirror.push_back(std::ref(Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor));
 
           }
           else if (Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor != nullptr && (NewXI != OldXI || NewYI != OldYI))
