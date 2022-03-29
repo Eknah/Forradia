@@ -134,8 +134,7 @@ class cEngine : public iEngine {
 
   inline cMapArea& GetCurrentMapArea() const override {
     // return *WorldMap->MapAreas.at(Player.CurrentMapArea);
-    return *World->Areas[GetPlayer().WorldMapCoord.X][GetPlayer().WorldMapCoord.Y]
-                              [GetPlayer().WorldMapCoord.Z];
+    return *World->GetArea(GetPlayer().WorldMapCoord);
   }
 
   // ---- Public members ----

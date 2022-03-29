@@ -509,19 +509,19 @@ void cGameWorldRenderer::RenderActors() {
 
           glTexCoord2f(0, 0);
           glVertex3f(TileX0 - Engine.TileSize/2 + SubXPos,
-                     TileY0 + 0.1f,
+                     TileY0 + 0.05f,
                      TileZ0 - Engine.TileSize/2 + SubYPos);
           glTexCoord2f(1, 0);
           glVertex3f(TileX1 - Engine.TileSize/2 + SubXPos,
-                     TileY1 + 0.1f,
+                     TileY1 + 0.05f,
                      TileZ1 - Engine.TileSize/2 + SubYPos);
           glTexCoord2f(1, 1);
           glVertex3f(TileX2 - Engine.TileSize/2 + SubXPos,
-                     TileY2 + 0.1f,
+                     TileY2 + 0.05f,
                      TileZ2 - Engine.TileSize/2 + SubYPos);
           glTexCoord2f(0, 1);
           glVertex3f(TileX3 - Engine.TileSize/2 + SubXPos,
-                     TileY3 + 0.1f,
+                     TileY3 + 0.05f,
                      TileZ3 - Engine.TileSize/2 + SubYPos);
 
           glEnd();
