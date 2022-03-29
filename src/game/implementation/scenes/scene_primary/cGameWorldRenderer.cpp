@@ -508,13 +508,19 @@ void cGameWorldRenderer::RenderActors() {
 
           glDisable(GL_TEXTURE_2D);
 
+          auto ModelYPos0 = TileY1 + (TileY2 - TileY1)*SubXPos/Engine.TileSize;
+          auto ModelYPos1 = TileY0 + (TileY3 - TileY0)*SubXPos/Engine.TileSize;
+          auto ModelYPos = ModelYPos0 + (ModelYPos1 - ModelYPos0)*SubYPos/Engine.TileSize;
 
           Engine.DrawModel(Engine.GetCurrentMapArea()
                            .Tiles[TileXI][TileYI]
                            .Actor->GetAnimatedModelId(), TileX0 + SubXPos,
-                           (TileY0 + TileY1 + TileY2 + TileY3) / 4.0f + Engine.GetCurrentMapArea()
-                           .Tiles[TileXI][TileYI]
-                           .Actor->PositionZ,
+                           ModelYPos  + Engine.GetCurrentMapArea()
+                                                      .Tiles[TileXI][TileYI]
+                                                      .Actor->PositionZ,
+//                           (TileY0 + TileY1 + TileY2 + TileY3) / 4.0f + Engine.GetCurrentMapArea()
+//                           .Tiles[TileXI][TileYI]
+//                           .Actor->PositionZ,
                            TileZ0 - Engine.TileSize + SubYPos,
                            *Engine.GetCurrentMapArea()
                                .Tiles[TileXI][TileYI]
