@@ -54,7 +54,8 @@ void cModuleMovement::UpdateDirectionalMovement() {
   if (Instruction.TryMoveRight) {
     Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2.0f +
             3.0f * PiF / 2.0f;
-    *GetParentActor().FacingAngle = *GetParentActor().FacingAngle + 3.0f * 90.0f;
+    *GetParentActor().FacingAngle = *GetParentActor().FacingAngle
+            + 3.0f * 90.0f;
   }
 
   auto DX = -std::cos(Angle) * StepMultiplier;
@@ -75,21 +76,15 @@ void cModuleMovement::UpdateDirectionalMovement() {
   if (NewY >= Engine.GetCurrentMapArea().Size)
     NewY -= Engine.GetCurrentMapArea().Size;
 
-//  auto NewXRounded = std::round(NewX);
-//  auto NewYRounded = std::round(NewY);
   auto NewXRounded = NewX;
   auto NewYRounded = NewY;
 
   auto NewXRoundedI = static_cast<int>(NewXRounded);
   auto NewYRoundedI = static_cast<int>(NewYRounded);
-//  auto NewXRoundedI = static_cast<int>(std::round(NewXRounded));
-//  auto NewYRoundedI = static_cast<int>(std::round(NewYRounded));
 
   if (!Engine.GetCurrentMapArea()
            .Tiles[NewXRoundedI][NewYRoundedI]
-          //.Tiles[NewXI][NewYI]
            .MovementBlocked()) {
-
       auto OldXI = static_cast<int>(GetParentActor().Position.X);
       auto OldYI = static_cast<int>(GetParentActor().Position.Y);
 
@@ -155,20 +150,14 @@ void cModuleMovement::UpdateDestinationMovement() {
     if (NewY >= Engine.GetCurrentMapArea().Size)
       NewY -= Engine.GetCurrentMapArea().Size;
 
-    //  auto NewXRounded = std::round(NewX);
-    //  auto NewYRounded = std::round(NewY);
       auto NewXRounded = NewX;
       auto NewYRounded = NewY;
       auto NewXRoundedI = static_cast<int>(NewXRounded);
       auto NewYRoundedI = static_cast<int>(NewYRounded);
-    //  auto NewXRoundedI = static_cast<int>(std::round(NewXRounded));
-    //  auto NewYRoundedI = static_cast<int>(std::round(NewYRounded));
 
     if (!Engine.GetCurrentMapArea()
              .Tiles[NewXRoundedI][NewYRoundedI]
-            //.Tiles[NewXI][NewYI]
              .MovementBlocked()) {
-
         auto OldXI = static_cast<int>(GetParentActor().Position.X);
         auto OldYI = static_cast<int>(GetParentActor().Position.Y);
 

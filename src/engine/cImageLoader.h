@@ -2,10 +2,10 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include <filesystem>
-#include <string>
 #include <GL/glew.h>
 #include <SDL2/SDL_image.h>
+#include <filesystem>
+#include <string>
 #include "Aliases.h"
 #include "Typedefs.h"
 #include "cSDL_Deleter.h"

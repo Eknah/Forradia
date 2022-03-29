@@ -81,7 +81,8 @@ void cScenePrimary::DoMouseDown(Uint8 MouseButton) {
                   .Objects.size() -
               1));
 
-    Engine.GetPlayer().GetModule<cModuleObjectUsage>().ObjectBeingUsed = nullptr;
+    Engine.GetPlayer().GetModule<cModuleObjectUsage>().ObjectBeingUsed
+            = nullptr;
 
     return;
   }

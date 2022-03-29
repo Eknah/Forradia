@@ -18,7 +18,6 @@ void cActor::Update() const {
 }
 
 int cActor::GetAnimatedModelId() const {
-
     if (!HasModule<cModuleMovement>()) {
         return GetId(ModelName);
     } else {

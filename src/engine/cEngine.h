@@ -61,11 +61,12 @@ class cEngine : public iEngine {
         static_cast<int>(PlayerTilePos.Y)
     };
 
-    World->Areas[PlayerWorldPos.X][PlayerWorldPos.Y][PlayerWorldPos.Z]
-            ->Tiles[PlayerTilePosI.X][PlayerTilePosI.Y].Actor = MakeUPtr<cPlayer>(*this);
+    World->GetArea(PlayerWorldPos)->GetTile(PlayerTilePosI)
+            .Actor = MakeUPtr<cPlayer>(*this);
 
-    PlayerPtrPtr = MakeUPtr<cPlayer*>(static_cast<cPlayer*>(World->Areas[PlayerWorldPos.X][PlayerWorldPos.Y][PlayerWorldPos.Z]
-            ->Tiles[PlayerTilePosI.X][PlayerTilePosI.Y].Actor.get()));
+    PlayerPtrPtr = MakeUPtr<cPlayer*>(
+                static_cast<cPlayer*>(World->GetArea(PlayerWorldPos)
+                                      ->GetTile(PlayerTilePosI).Actor.get()));
 
     GetPlayer().WorldMapCoord = PlayerWorldPos;
     GetPlayer().Position = GetCurrentMapArea().SpawnPos;

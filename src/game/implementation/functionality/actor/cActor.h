@@ -19,7 +19,7 @@ class cActor {
     }
 
   cActor(const iEngine &Engine_, float X, float Y, std::string ModelName_) :
-      Engine(Engine_), Position({X,Y}), ModelName(ModelName_) {
+      Engine(Engine_), Position({X, Y}), ModelName(ModelName_) {
       ActorId = CurrentActorId++;
   }
 

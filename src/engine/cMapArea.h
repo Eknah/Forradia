@@ -7,6 +7,7 @@
 #include "../engine/Aliases.h"
 #include "../engine/cPoint2F.h"
 #include "../engine/cPoint3.h"
+#include "../engine/cPoint2.h"
 #include "framework/world_structure/cMob.h"
 #include "framework/world_structure/cTile.h"
 
@@ -32,6 +33,10 @@ class cMapArea {
   }
 
   inline bool IsUnderground() { return WorldCoord.Z < 0; }
+
+  inline cTile &GetTile(cPoint2 Pos) {
+    return Tiles[Pos.X][Pos.Y];
+  }
 
   // Basic data
   cPoint3 WorldCoord = {-1, -1, -1};
