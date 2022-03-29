@@ -14,11 +14,9 @@ bool cTile::MovementBlocked() {
   for (auto &Object : Objects)
     if (Engine.ObjectsContent.BlocksMovement(Object->ObjectType))
       return true;
-
-  if (Actor != nullptr &&
-          typeid(*Actor)
-          == typeid(cMob))
-      return true;
+  if (Actor != nullptr)
+      if (Actor->ActorId != Engine.GetPlayer().ActorId)
+        return true;
 
   return false;
 }

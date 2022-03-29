@@ -26,7 +26,7 @@ class cTile {
   int GroundType = 0;
   std::vector<UPtr<cObject>> Objects;
   int Elevation = 0;
-  UPtr<cActor> Actor = nullptr;
+  SPtr<cActor> Actor = nullptr;
   int WarpToFloor = -1;
 
  private:

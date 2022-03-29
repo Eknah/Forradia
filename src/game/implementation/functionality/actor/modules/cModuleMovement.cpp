@@ -75,23 +75,29 @@ void cModuleMovement::UpdateDirectionalMovement() {
   if (NewY >= Engine.GetCurrentMapArea().Size)
     NewY -= Engine.GetCurrentMapArea().Size;
 
-  auto NewXRounded = static_cast<int>(std::round(NewX));
-  auto NewYRounded = static_cast<int>(std::round(NewY));
+//  auto NewXRounded = std::round(NewX);
+//  auto NewYRounded = std::round(NewY);
+  auto NewXRounded = NewX;
+  auto NewYRounded = NewY;
+
+  auto NewXRoundedI = static_cast<int>(NewXRounded);
+  auto NewYRoundedI = static_cast<int>(NewYRounded);
 
   if (!Engine.GetCurrentMapArea()
-           .Tiles[NewXRounded][NewYRounded]
+           .Tiles[NewXRoundedI][NewYRoundedI]
+          //.Tiles[NewXI][NewYI]
            .MovementBlocked()) {
 
       auto OldXI = static_cast<int>(GetParentActor().Position.X);
       auto OldYI = static_cast<int>(GetParentActor().Position.Y);
 
-    GetParentActor().Position.X = NewX;
-    GetParentActor().Position.Y = NewY;
+    GetParentActor().Position.X = NewXRounded;
+    GetParentActor().Position.Y = NewYRounded;
 
-    auto NewXI = static_cast<int>(NewX);
-    auto NewYI = static_cast<int>(NewY);
-
-    Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
+    if (NewXRoundedI != OldXI || NewYRoundedI != OldYI) {
+  Engine.GetCurrentMapArea().Tiles[NewXRoundedI][NewYRoundedI].Actor = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
+  Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor = nullptr;
+    }
   }
 
   if (Engine.GetCurrentMapArea().Tiles
@@ -147,24 +153,29 @@ void cModuleMovement::UpdateDestinationMovement() {
     if (NewY >= Engine.GetCurrentMapArea().Size)
       NewY -= Engine.GetCurrentMapArea().Size;
 
-    auto NewXRounded = static_cast<int>(std::round(NewX));
-    auto NewYRounded = static_cast<int>(std::round(NewY));
+    //  auto NewXRounded = std::round(NewX);
+    //  auto NewYRounded = std::round(NewY);
+      auto NewXRounded = NewX;
+      auto NewYRounded = NewY;
+
+    auto NewXRoundedI = static_cast<int>(NewXRounded);
+    auto NewYRoundedI = static_cast<int>(NewYRounded);
 
     if (!Engine.GetCurrentMapArea()
-             .Tiles[NewXRounded][NewYRounded]
+             .Tiles[NewXRoundedI][NewYRoundedI]
+            //.Tiles[NewXI][NewYI]
              .MovementBlocked()) {
 
         auto OldXI = static_cast<int>(GetParentActor().Position.X);
         auto OldYI = static_cast<int>(GetParentActor().Position.Y);
 
-      GetParentActor().Position.X = NewX;
-      GetParentActor().Position.Y = NewY;
+      GetParentActor().Position.X = NewXRounded;
+      GetParentActor().Position.Y = NewYRounded;
 
-      auto NewXI = static_cast<int>(NewX);
-      auto NewYI = static_cast<int>(NewY);
-
-
-      Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
+        if (NewXRoundedI != OldXI || NewYRoundedI != OldYI) {
+      Engine.GetCurrentMapArea().Tiles[NewXRoundedI][NewYRoundedI].Actor = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
+      Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor = nullptr;
+        }
     }
 
     if (Engine.GetCurrentMapArea().Tiles

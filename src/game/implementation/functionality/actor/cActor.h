@@ -14,13 +14,13 @@ class iEngine;
 
 class cActor {
  public:
-  explicit cActor(const iEngine &Engine_) : Engine(Engine_) {}
+  explicit cActor(const iEngine &Engine_) : Engine(Engine_) {ActorId = CurrentActorId++;}
 
   cActor(const iEngine &Engine_, float X, float Y, std::string ModelName_) :
-      Engine(Engine_), Position({X,Y}), ModelName(ModelName_) {}
+      Engine(Engine_), Position({X,Y}), ModelName(ModelName_) {ActorId = CurrentActorId++;}
 
   cActor(const iEngine &Engine_, std::string ModelName_) :
-      Engine(Engine_), ModelName(ModelName_) {}
+      Engine(Engine_), ModelName(ModelName_) {ActorId = CurrentActorId++;}
 
   void ResetForNewFrame() const;
   void Update() const;
@@ -36,6 +36,7 @@ class cActor {
   float PositionZ = 0.0f;
   std::string ModelName;
   UPtr<float> FacingAngle = MakeUPtr<float>(0.0f);
+  int ActorId = -1;
 
   virtual ~cActor() {}  // Just to make class polymorphic
 
@@ -52,6 +53,8 @@ class cActor {
   }
 
   const iEngine &Engine;
+
+  inline static int CurrentActorId = 0;
 
   UMap<size_t, UPtr<iModule>> Modules;
 };

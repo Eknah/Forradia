@@ -14,7 +14,6 @@
 #include "cModel3D.h"
 #include "cModelGraphics.h"
 #include "cPaintGraphics.h"
-#include "cPlayer.h"
 #include "cSceneManager.h"
 #include "framework/world_structure/cWorldMap.h"
 #include "iEngine.h"
@@ -135,10 +134,6 @@ class cEngine : public iEngine {
                               [GetPlayer().WorldMapCoord.Z];
   }
 
-  cPlayer &GetPlayer() const {
-      return **PlayerPtrPtr;
-  }
-
   // ---- Public members ----
 
   UPtr<cWorldMap> WorldMap;
@@ -190,7 +185,6 @@ class cEngine : public iEngine {
   cImageGraphics ImageGraphics;
   cPaintGraphics PaintGraphics;
   cModelGraphics ModelGraphics;
-  UPtr<cPlayer*> PlayerPtrPtr;
 
   const std::string Title = "Forradia";
   const cSize DefaultWindowSize = {800, 600};

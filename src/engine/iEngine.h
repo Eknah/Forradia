@@ -18,6 +18,7 @@
 #include "iGameLoop.h"
 #include "iKeyboardHandler.h"
 #include "iSceneManager.h"
+#include "cPlayer.h"
 
 namespace Forradia {
 
@@ -59,6 +60,10 @@ class iEngine {
 
   virtual inline cMapArea& GetCurrentMapArea() const = 0;
 
+  cPlayer &GetPlayer() const {
+      return **PlayerPtrPtr;
+  }
+
   F_WindowPtr Window;
 
   iKeyboardHandler &KeyboardHandler;
@@ -73,6 +78,8 @@ class iEngine {
   cModelLoader ModelLoader;
   cTextGraphics TextGraphics;
   cObjectsContent ObjectsContent;
+
+  UPtr<cPlayer*> PlayerPtrPtr;
 };
 
 }  // namespace Forradia
