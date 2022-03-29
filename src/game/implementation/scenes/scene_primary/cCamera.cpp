@@ -39,7 +39,7 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
   CameraX = static_cast<float>(cos(AngleRadians)) * CameraDist;
   CameraZ = -static_cast<float>(sin(AngleRadians)) * CameraDist;
 
-  gluLookAt(CameraX, CameraHeight, CameraZ, 0, -1, 0, 0, 1, 0);
+  gluLookAt(CameraX, CameraHeight, CameraZ, -Engine.TileSize/2, -1, -Engine.TileSize/2, 0, 1, 0);
 
   GLint Viewport[4];  // Where The Viewport Values Will Be Stored
 

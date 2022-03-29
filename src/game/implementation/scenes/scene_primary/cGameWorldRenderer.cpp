@@ -28,7 +28,7 @@ void cGameWorldRenderer::Render() {
   CameraX = static_cast<float>(cos(AngleRadians)) * CameraDist;
   CameraZ = -static_cast<float>(sin(AngleRadians)) * CameraDist;
 
-  gluLookAt(CameraX, Camera.CameraHeight, CameraZ, 0, -1, 0, 0, 1, 0);
+  gluLookAt(CameraX, Camera.CameraHeight, CameraZ, -Engine.TileSize/2, -1, -Engine.TileSize/2, 0, 1, 0);
 
   glEnable(GL_DEPTH_TEST);
   glDepthMask(GL_TRUE);
