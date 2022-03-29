@@ -1,6 +1,7 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
+#include <utility>
 #include "cModuleMovement.h"
 #include "../engine/Aliases.h"
 #include "../engine/iEngine.h"
@@ -92,7 +93,8 @@ void cModuleMovement::UpdateDirectionalMovement() {
     GetParentActor().Position.Y = NewYRounded;
 
     if (NewXRoundedI != OldXI || NewYRoundedI != OldYI) {
-  Engine.GetCurrentMapArea().Tiles[NewXRoundedI][NewYRoundedI].Actor = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
+  Engine.GetCurrentMapArea().Tiles[NewXRoundedI][NewYRoundedI].Actor
+          = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
   Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor = nullptr;
     }
   }
@@ -103,7 +105,8 @@ void cModuleMovement::UpdateDirectionalMovement() {
         Engine.GetCurrentMapArea().Tiles
             [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
 
-    auto Angle = *GetParentActor().FacingAngle / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
+    auto Angle = *GetParentActor().FacingAngle
+            / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
     auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
     auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;
 
@@ -132,7 +135,8 @@ void cModuleMovement::UpdateDestinationMovement() {
     MoveDestination = {-1, -1};
   } else {
     IsWalking = true;
-    *GetParentActor().FacingAngle = static_cast<float>(std::atan2(-DX, -DY)) / PiF * 180.0f;
+    *GetParentActor().FacingAngle
+            = static_cast<float>(std::atan2(-DX, -DY)) / PiF * 180.0f;
 
     auto Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2 +
                  0 * PiF / 2;
@@ -165,7 +169,8 @@ void cModuleMovement::UpdateDestinationMovement() {
       GetParentActor().Position.Y = NewYRounded;
 
         if (NewXRoundedI != OldXI || NewYRoundedI != OldYI) {
-      Engine.GetCurrentMapArea().Tiles[NewXRoundedI][NewYRoundedI].Actor = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
+      Engine.GetCurrentMapArea().Tiles[NewXRoundedI][NewYRoundedI].Actor
+              = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
       Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor = nullptr;
         }
     }
