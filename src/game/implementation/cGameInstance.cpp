@@ -4,7 +4,6 @@
 #include <utility>
 #include "cGameInstance.h"
 #include "../engine/cEngine.h"
-#include "CommonExternal.h"
 #include "implementation/content/cDefaultMapGenerator.h"
 #include "../engine/cSceneGameStart.h"
 #include "implementation/scenes/cSceneMainMenu.h"

@@ -3,7 +3,6 @@
 
 #pragma once
 #include <string>
-#include "CommonExternal.h"
 #include "cModel3D.h"
 
 namespace Forradia {

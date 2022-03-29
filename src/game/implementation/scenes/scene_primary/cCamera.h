@@ -2,6 +2,9 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <GL/glew.h>
+#include <GL/freeglut.h>
+#include <GL/glu.h>
 #include "../engine/cUtilities.h"
 
 namespace Forradia {

@@ -2,7 +2,6 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "CommonExternal.h"
 #include "scene_primary/cCamera.h"
 #include "scene_primary/cGameWorldRenderer.h"
 #include "scene_primary/cMobsEngine.h"

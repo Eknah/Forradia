@@ -3,7 +3,6 @@
 
 #include "cTile.h"
 #include "../engine/iEngine.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

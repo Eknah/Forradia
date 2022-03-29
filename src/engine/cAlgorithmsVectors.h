@@ -2,7 +2,6 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "CommonExternal.h"
 #include "cMath3D.h"
 
 namespace Forradia {

@@ -4,7 +4,6 @@
 #pragma once
 #include <vector>
 #include "../engine/cPoint2F.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

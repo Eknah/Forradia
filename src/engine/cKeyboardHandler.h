@@ -3,7 +3,6 @@
 
 #pragma once
 #include <set>
-#include "CommonExternal.h"
 #include "iKeyboardHandler.h"
 
 namespace Forradia {

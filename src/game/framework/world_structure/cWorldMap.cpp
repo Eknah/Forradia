@@ -2,7 +2,6 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "cWorldMap.h"
-#include "CommonExternal.h"
 #include "framework/iMapGenerator.h"
 
 namespace Forradia {

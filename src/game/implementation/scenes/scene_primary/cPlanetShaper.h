@@ -3,7 +3,6 @@
 
 #pragma once
 #include "../engine/cEngine.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

@@ -3,7 +3,6 @@
 
 #pragma once
 #include "Aliases.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

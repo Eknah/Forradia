@@ -5,7 +5,6 @@
 #include <utility>
 #include "cMobsEngine.h"
 #include "../engine/cEngine.h"
-#include "CommonExternal.h"
 
 namespace Forradia
 {

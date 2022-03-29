@@ -2,7 +2,6 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "cObject.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

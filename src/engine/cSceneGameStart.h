@@ -4,7 +4,6 @@
 #pragma once
 #include <string>
 #include "cUtilities.h"
-#include "CommonExternal.h"
 #include "framework/cSceneBase.h"
 #include "cEngine.h"
 

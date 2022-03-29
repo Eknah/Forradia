@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 #include "../engine/Aliases.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

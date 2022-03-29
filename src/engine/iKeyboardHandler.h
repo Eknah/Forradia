@@ -4,7 +4,6 @@
 #pragma once
 #include <set>
 #include "Aliases.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

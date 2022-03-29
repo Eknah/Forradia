@@ -5,7 +5,6 @@
 #include <string>
 #include "../engine/Aliases.h"
 #include "../engine/iEngine.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

@@ -7,7 +7,6 @@
 #include "../engine/Aliases.h"
 #include "../engine/cSDL_Deleter.h"
 #include "../engine/cUtilities.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

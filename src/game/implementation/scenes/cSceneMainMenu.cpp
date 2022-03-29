@@ -3,7 +3,6 @@
 
 #include "cSceneMainMenu.h"
 #include "../engine/cEngine.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

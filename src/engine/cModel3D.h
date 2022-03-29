@@ -4,7 +4,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "CommonExternal.h"
+#include <fstream>
 #include "cAlgorithmsStrings.h"
 #include "cAlgorithmsVectors.h"
 #include "cMath3D.h"

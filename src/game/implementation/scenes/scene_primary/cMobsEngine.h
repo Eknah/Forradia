@@ -3,7 +3,6 @@
 
 #pragma once
 #include "../engine/cRandom.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

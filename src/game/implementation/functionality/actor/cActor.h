@@ -7,7 +7,6 @@
 #include "../engine/cPoint2F.h"
 #include "../engine/cPoint3.h"
 #include "../engine/iModule.h"
-#include "CommonExternal.h"
 
 namespace Forradia {
 

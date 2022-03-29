@@ -3,7 +3,6 @@
 
 #include "cModuleJumping.h"
 #include "../engine/Aliases.h"
-#include "CommonExternal.h"
 #include "implementation/functionality/actor/cActor.h"
 
 namespace Forradia {
