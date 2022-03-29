@@ -82,6 +82,8 @@ void cModuleMovement::UpdateDirectionalMovement() {
 
   auto NewXRoundedI = static_cast<int>(NewXRounded);
   auto NewYRoundedI = static_cast<int>(NewYRounded);
+//  auto NewXRoundedI = static_cast<int>(std::round(NewXRounded));
+//  auto NewYRoundedI = static_cast<int>(std::round(NewYRounded));
 
   if (!Engine.GetCurrentMapArea()
            .Tiles[NewXRoundedI][NewYRoundedI]
@@ -157,9 +159,10 @@ void cModuleMovement::UpdateDestinationMovement() {
     //  auto NewYRounded = std::round(NewY);
       auto NewXRounded = NewX;
       auto NewYRounded = NewY;
-
-    auto NewXRoundedI = static_cast<int>(NewXRounded);
-    auto NewYRoundedI = static_cast<int>(NewYRounded);
+      auto NewXRoundedI = static_cast<int>(NewXRounded);
+      auto NewYRoundedI = static_cast<int>(NewYRounded);
+    //  auto NewXRoundedI = static_cast<int>(std::round(NewXRounded));
+    //  auto NewYRoundedI = static_cast<int>(std::round(NewYRounded));
 
     if (!Engine.GetCurrentMapArea()
              .Tiles[NewXRoundedI][NewYRoundedI]

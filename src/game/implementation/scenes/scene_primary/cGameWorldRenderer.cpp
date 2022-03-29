@@ -496,13 +496,13 @@ void cGameWorldRenderer::RenderActors() {
           glColor3f(1, 1, 1);
 
           glTexCoord2f(0, 0);
-          glVertex3f(TileX0 + SubXPos, TileY0 + 0.1f, TileZ0 + SubYPos);
+          glVertex3f(TileX0 - Engine.TileSize/2 + SubXPos, TileY0 + 0.1f, TileZ0 - Engine.TileSize/2 + SubYPos);
           glTexCoord2f(1, 0);
-          glVertex3f(TileX1 + SubXPos, TileY1 + 0.1f, TileZ1 + SubYPos);
+          glVertex3f(TileX1 - Engine.TileSize/2 + SubXPos, TileY1 + 0.1f, TileZ1 - Engine.TileSize/2 + SubYPos);
           glTexCoord2f(1, 1);
-          glVertex3f(TileX2 + SubXPos, TileY2 + 0.1f, TileZ2 + SubYPos);
+          glVertex3f(TileX2 - Engine.TileSize/2 + SubXPos, TileY2 + 0.1f, TileZ2 - Engine.TileSize/2 + SubYPos);
           glTexCoord2f(0, 1);
-          glVertex3f(TileX3 + SubXPos, TileY3 + 0.1f, TileZ3 + SubYPos);
+          glVertex3f(TileX3 - Engine.TileSize/2 + SubXPos, TileY3 + 0.1f, TileZ3 - Engine.TileSize/2 + SubYPos);
 
           glEnd();
 
@@ -511,11 +511,11 @@ void cGameWorldRenderer::RenderActors() {
 
           Engine.DrawModel(Engine.GetCurrentMapArea()
                            .Tiles[TileXI][TileYI]
-                           .Actor->GetAnimatedModelId(), TileX0 + Engine.TileSize/2 + SubXPos,
+                           .Actor->GetAnimatedModelId(), TileX0 + SubXPos,
                            (TileY0 + TileY1 + TileY2 + TileY3) / 4.0f + Engine.GetCurrentMapArea()
                            .Tiles[TileXI][TileYI]
                            .Actor->PositionZ,
-                           TileZ0 - Engine.TileSize + Engine.TileSize/2 + SubYPos,
+                           TileZ0 - Engine.TileSize + SubYPos,
                            *Engine.GetCurrentMapArea()
                                .Tiles[TileXI][TileYI]
                                .Actor->FacingAngle);
