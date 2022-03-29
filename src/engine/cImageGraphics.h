@@ -48,21 +48,20 @@ class cImageGraphics {
     glDisable(GL_TEXTURE_2D);
   }
 
-  inline cSizeF GetImageSizeF(std::string ImageName) const
-  {
+  inline cSizeF GetImageSizeF(std::string ImageName) const {
       auto CanvasSize = Utilities.GetCanvasSize();
 
       glBindTexture(GL_TEXTURE_2D,
                     Engine.ImageLoader.Images.at(GetId(ImageName)));
 
-      int Width, Height;
+      int W, H;
       int MipLevel = 0;
 
-      glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_WIDTH, &Width);
-      glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_HEIGHT, &Height);
+      glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_WIDTH, &W);
+      glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_HEIGHT, &H);
 
-      auto ImageWidth = static_cast<float>(Width) / CanvasSize.Width;
-      auto ImageHeight = static_cast<float>(Height) / CanvasSize.Height;
+      auto ImageWidth = static_cast<float>(W) / CanvasSize.Width;
+      auto ImageHeight = static_cast<float>(H) / CanvasSize.Height;
 
       return {ImageWidth, ImageHeight};
   }

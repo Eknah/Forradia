@@ -39,32 +39,28 @@ class cEngine : public iEngine {
   // Cleans up SDL
 
   inline void Run(cScenesCollection ScenesCollection_, int StartScene_,
-                  UPtr<cWorldMap> WorldMap_,
+                  UPtr<cWorldMap> World_,
                   UMap<int, SPtr<cObject>> StartingInventory_,
                   cObjectsContent ObjectsContent_) {
     using std::move;
 
     InitializeGL();
 
-    WorldMap = move(WorldMap_);
+    World = move(World_);
     ObjectsContent = ObjectsContent_;
 
-    // Player          .CurrentMapArea = 0;
-//    Player.WorldMapCoord = {1, 1, 0};
-//    Player.WorldMapCoord = {0, 0, 0};
+    cPoint3 PlayerWorldPos ={World->WorldMapWidth/2, World->WorldMapHeight/2, 0};
+    cPoint2F PlayerTilePos = World->Areas[PlayerWorldPos.X][PlayerWorldPos.Y][PlayerWorldPos.Z]->SpawnPos;
+    cPoint2 PlayerTilePosI = {static_cast<int>(PlayerTilePos.X), static_cast<int>(PlayerTilePos.Y)};
 
-    cPoint3 PlayerWorldPosition ={WorldMap->WorldMapWidth/2, WorldMap->WorldMapHeight/2, 0};
-    cPoint2F PlayerTilePosition = WorldMap->MapAreas[PlayerWorldPosition.X][PlayerWorldPosition.Y][PlayerWorldPosition.Z]->PlayerSpawnPosition;
-    cPoint2 PlayerTilePositionI = {static_cast<int>(PlayerTilePosition.X), static_cast<int>(PlayerTilePosition.Y)};
+    World->Areas[PlayerWorldPos.X][PlayerWorldPos.Y][PlayerWorldPos.Z]
+            ->Tiles[PlayerTilePosI.X][PlayerTilePosI.Y].Actor = MakeUPtr<cPlayer>(*this);
 
-    WorldMap->MapAreas[PlayerWorldPosition.X][PlayerWorldPosition.Y][PlayerWorldPosition.Z]
-            ->Tiles[PlayerTilePositionI.X][PlayerTilePositionI.Y].Actor = MakeUPtr<cPlayer>(*this);
+    PlayerPtrPtr = MakeUPtr<cPlayer*>(static_cast<cPlayer*>(World->Areas[PlayerWorldPos.X][PlayerWorldPos.Y][PlayerWorldPos.Z]
+            ->Tiles[PlayerTilePosI.X][PlayerTilePosI.Y].Actor.get()));
 
-    PlayerPtrPtr = MakeUPtr<cPlayer*>(static_cast<cPlayer*>(WorldMap->MapAreas[PlayerWorldPosition.X][PlayerWorldPosition.Y][PlayerWorldPosition.Z]
-            ->Tiles[PlayerTilePositionI.X][PlayerTilePositionI.Y].Actor.get()));
-
-    GetPlayer().WorldMapCoord = PlayerWorldPosition;
-    GetPlayer().Position = GetCurrentMapArea().PlayerSpawnPosition;
+    GetPlayer().WorldMapCoord = PlayerWorldPos;
+    GetPlayer().Position = GetCurrentMapArea().SpawnPos;
     GetPlayer().GetModule<cModuleInventory>().Objects = StartingInventory_;
     SceneManager.Initialize(move(ScenesCollection_), StartScene_);
     ModelLoader.LoadModels();
@@ -130,13 +126,13 @@ class cEngine : public iEngine {
 
   inline cMapArea& GetCurrentMapArea() const override {
     // return *WorldMap->MapAreas.at(Player.CurrentMapArea);
-    return *WorldMap->MapAreas[GetPlayer().WorldMapCoord.X][GetPlayer().WorldMapCoord.Y]
+    return *World->Areas[GetPlayer().WorldMapCoord.X][GetPlayer().WorldMapCoord.Y]
                               [GetPlayer().WorldMapCoord.Z];
   }
 
   // ---- Public members ----
 
-  UPtr<cWorldMap> WorldMap;
+  UPtr<cWorldMap> World;
 
   cKeyboardHandler KeyboardHandlerImplemented;
   cCustomCursor CustomCursorImplemented;

@@ -43,7 +43,7 @@ class cModelLoader {
   }
 
   inline bool ModelExists(std::string ModelName) const {
-      auto result =ModelNames.count(GetId(ModelName)) > 0;
+    auto result = ModelNames.count(GetId(ModelName)) > 0;
     return result;
   }
 

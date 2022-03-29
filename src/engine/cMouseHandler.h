@@ -44,7 +44,6 @@ class cMouseHandler {
  private:
   UPtr<bool> LeftButtonBeenFired = MakeUPtr<bool>(false);
   UPtr<bool> RightButtonBeenFired = MakeUPtr<bool>(false);
-
 };
 
 }  // namespace Forradia

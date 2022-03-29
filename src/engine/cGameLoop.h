@@ -56,13 +56,10 @@ class cGameLoop : public iGameLoop {
           Engine.SceneManager.GetCurrentScene()->DoMouseDown(
               event.button.button);
 
-          if (event.button.button == SDL_BUTTON_LEFT)
-          {
+          if (event.button.button == SDL_BUTTON_LEFT) {
             Engine.MouseHandler.LeftButtonDown = true;
               Engine.MouseHandler.SetLeftButtonBeenFired();
-          }
-          else if (event.button.button == SDL_BUTTON_RIGHT)
-          {
+          } else if (event.button.button == SDL_BUTTON_RIGHT) {
             Engine.MouseHandler.RightButtonDown = true;
               Engine.MouseHandler.SetRightButtonBeenFired();
           }

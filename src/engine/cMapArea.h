@@ -3,6 +3,7 @@
 
 #pragma once
 #include <vector>
+#include <utility>
 #include "../engine/Aliases.h"
 #include "../engine/cPoint2F.h"
 #include "../engine/cPoint3.h"
@@ -34,7 +35,7 @@ class cMapArea {
 
   // Basic data
   cPoint3 WorldCoord = {-1, -1, -1};
-  cPoint2F PlayerSpawnPosition = {-1, -1};
+  cPoint2F SpawnPos = {-1, -1};
   int Size = -1;
 
   // Map structure of tiles and mobs

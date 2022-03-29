@@ -41,8 +41,8 @@ void cMobsEngine::Update()
         auto DestinationX = Mob.Position.X + Random.Next() % 15 - Random.Next() % 15;
         auto DestinationY = Mob.Position.Y + Random.Next() % 15 - Random.Next() % 15;
 
-        DestinationX = std::min(std::max(DestinationX, 0.0f), static_cast<float>(Engine.WorldMap->MapAreaSize) - 1.0f);
-        DestinationY = std::min(std::max(DestinationY, 0.0f), static_cast<float>(Engine.WorldMap->MapAreaSize) - 1.0f);
+        DestinationX = std::min(std::max(DestinationX, 0.0f), static_cast<float>(Engine.World->MapAreaSize) - 1.0f);
+        DestinationY = std::min(std::max(DestinationY, 0.0f), static_cast<float>(Engine.World->MapAreaSize) - 1.0f);
 
         Mob.MoveDestination = {DestinationX, DestinationY};
 
@@ -73,7 +73,7 @@ void cMobsEngine::Update()
       auto OldXI = static_cast<int>(Mob.Position.X);
       auto OldYI = static_cast<int>(Mob.Position.Y);
 
-      if (NewXI >= 0 && NewYI >= 0 && NewXI < Engine.WorldMap->MapAreaSize && NewYI < Engine.WorldMap->MapAreaSize)
+      if (NewXI >= 0 && NewYI >= 0 && NewXI < Engine.World->MapAreaSize && NewYI < Engine.World->MapAreaSize)
       {
 
         if (Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].GroundType != GetId("GroundtypeWater"))

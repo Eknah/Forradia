@@ -11,10 +11,10 @@ namespace Forradia {
 void
 cDefaultMapGenerator::GenerateMapArea(
         int WorldX, int WorldY, int WorldZ) const {
-  WorldMap->MapAreas[WorldX][WorldY][WorldZ] =
+  WorldMap->Areas[WorldX][WorldY][WorldZ] =
       MakeUPtr<cMapArea>(Engine, WorldMap->MapAreaSize, WorldX, WorldY, WorldZ);
 
-  auto MapArea = WorldMap->MapAreas[WorldX][WorldY][WorldZ].get();
+  auto MapArea = WorldMap->Areas[WorldX][WorldY][WorldZ].get();
 
   ClearToGrass(MapArea);
   GeneratePlayerStartingPosition(MapArea);
@@ -42,9 +42,9 @@ cDefaultMapGenerator::ClearToGrass(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GeneratePlayerStartingPosition
 (cMapArea *MapArea) const {
-  MapArea->PlayerSpawnPosition.X = static_cast<float>(
+  MapArea->SpawnPos.X = static_cast<float>(
               Random.Next() % MapArea->Size);
-  MapArea->PlayerSpawnPosition.Y = static_cast<float>(
+  MapArea->SpawnPos.Y = static_cast<float>(
               Random.Next() % MapArea->Size);
 }
 
@@ -378,8 +378,8 @@ cDefaultMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
 int
 cDefaultMapGenerator::DistToPlayerStartingPos(cMapArea *MapArea, int TileX,
                                                   int TileY) const {
-  auto DX = MapArea->PlayerSpawnPosition.X - TileX;
-  auto DY = MapArea->PlayerSpawnPosition.Y - TileY;
+  auto DX = MapArea->SpawnPos.X - TileX;
+  auto DY = MapArea->SpawnPos.Y - TileY;
   auto Distance = std::sqrt(DX * DX + DY * DY);
 
   return static_cast<int>(Distance);
@@ -391,8 +391,8 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
 
-    if (TileX == static_cast<int>(MapArea->PlayerSpawnPosition.X)
-            && TileY == static_cast<int>(MapArea->PlayerSpawnPosition.Y))
+    if (TileX == static_cast<int>(MapArea->SpawnPos.X)
+            && TileY == static_cast<int>(MapArea->SpawnPos.Y))
         continue;
 
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
@@ -414,8 +414,8 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
     auto TileX = Random.Next() % MapArea->Size;
     auto TileY = Random.Next() % MapArea->Size;
 
-    if (TileX == static_cast<int>(MapArea->PlayerSpawnPosition.X)
-            && TileY == static_cast<int>(MapArea->PlayerSpawnPosition.Y))
+    if (TileX == static_cast<int>(MapArea->SpawnPos.X)
+            && TileY == static_cast<int>(MapArea->SpawnPos.Y))
         continue;
 
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
@@ -454,14 +454,14 @@ GenerateQuestCaves(const iEngine &Engine,
           MakeUPtr<cObject>("ObjectQuestCaveEntrance"));
       MapArea->Tiles[TileX][TileY].WarpToFloor = Floor;
 
-      WorldMap->MapAreas[MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor] =
+      WorldMap->Areas[MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor] =
           std::make_unique<cMapArea>(Engine, WorldMap->MapAreaSize,
                                      MapArea->WorldCoord.X,
                                      MapArea->WorldCoord.Y,
                                      Floor);
 
       auto &quest_cave_map_area =
-          WorldMap->MapAreas
+          WorldMap->Areas
               [MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor];
 
       QuestCaveMapGenerator.GenerateQuestCaveMapArea(

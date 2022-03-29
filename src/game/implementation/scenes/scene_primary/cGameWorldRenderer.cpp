@@ -49,7 +49,7 @@ void cGameWorldRenderer::Render() {
 }
 
 void cGameWorldRenderer::RenderTilesAndObjects() {
-    auto MapAreaSize = Engine.WorldMap->MapAreaSize;
+    auto MapAreaSize = Engine.World->MapAreaSize;
 
     auto ElevAmount = 5.0f;
     auto PlayerXInt = static_cast<int>(Engine.GetPlayer().Position.X);
@@ -333,7 +333,7 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
 }
 
 void cGameWorldRenderer::RenderActors() {
-    auto MapAreaSize = Engine.WorldMap->MapAreaSize;
+    auto MapAreaSize = Engine.World->MapAreaSize;
     auto ElevAmount = 5.0f;
     auto PlayerXInt = static_cast<int>(Engine.GetPlayer().Position.X);
     auto PlayerYInt = static_cast<int>(Engine.GetPlayer().Position.Y);

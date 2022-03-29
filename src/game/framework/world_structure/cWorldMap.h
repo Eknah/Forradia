@@ -26,7 +26,7 @@ class cWorldMap {
 
   // Core world map data structures
 
-  UMap<int, UMap<int, UMap<int, UPtr<cMapArea>>>> MapAreas;
+  UMap<int, UMap<int, UMap<int, UPtr<cMapArea>>>> Areas;
 };
 
 }  // namespace Forradia
