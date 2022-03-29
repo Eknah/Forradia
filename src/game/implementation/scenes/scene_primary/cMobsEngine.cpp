@@ -32,11 +32,9 @@ void cMobsEngine::Update() {
       continue;
 
     if (Ticks() > Mob.TickLastMove + Mob.MoveSpeed) {
-
       Mob.TickLastMove = Ticks();
 
       if (Mob.MoveDestination.X == -1 || Mob.MoveDestination.Y == -1) {
-
         auto DestinationX =
             Mob.Position.X + Random.Next() % 15 - Random.Next() % 15;
         auto DestinationY =
@@ -79,13 +77,10 @@ void cMobsEngine::Update() {
 
       if (NewXI >= 0 && NewYI >= 0 && NewXI < Engine.World->MapAreaSize &&
           NewYI < Engine.World->MapAreaSize) {
-
         if (Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].GroundType !=
             GetId("GroundtypeWater")) {
-
           if (Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor == nullptr ||
               (NewXI == OldXI && NewYI == OldYI)) {
-
             Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor->Position = {
                 NewX, NewY};
 

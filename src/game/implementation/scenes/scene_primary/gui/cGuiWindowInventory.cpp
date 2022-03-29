@@ -19,17 +19,16 @@ void cGuiWindowInventory::RenderDerived() {
       BoundsInterior.Height / ((SlotSize + Margin) * AspectRatio);
   auto I = 0;
 
-  auto MousePosition = Utilities.GetMousePositionI();
-  auto MouseXRel = static_cast<float>(MousePosition.X) / CanvasSize.Width;
-  auto MouseYRel = static_cast<float>(MousePosition.Y) / CanvasSize.Height;
 
   for (auto Y = 0; Y < NumSlotRows; Y++) {
     for (auto X = 0; X < NumSlotCols; X++) {
       auto XPos = BoundsInterior.X + X * (SlotSize + Margin);
       auto YPos = BoundsInterior.Y + Y * (SlotSize * AspectRatio + Margin);
 
-      if (Engine.GetPlayer().GetModule<cModuleInventory>().Objects.count(I) > 0) {
-        if (Engine.GetPlayer().GetModule<cModuleObjectUsage>().ObjectBeingUsed ==
+      if (Engine.GetPlayer().GetModule<cModuleInventory>()
+              .Objects.count(I) > 0) {
+        if (Engine.GetPlayer().GetModule<cModuleObjectUsage>()
+                .ObjectBeingUsed ==
             Engine.GetPlayer().GetModule<cModuleInventory>().Objects.at(I))
           Engine.DrawImage("ObjectSelected", XPos, YPos, SlotSize,
                            SlotSize * AspectRatio);
@@ -72,7 +71,8 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
       auto XPos = BoundsInterior.X + X * (SlotSize + Margin);
       auto YPos = BoundsInterior.Y + Y * (SlotSize * AspectRatio + Margin);
 
-      if (Engine.GetPlayer().GetModule<cModuleInventory>().Objects.count(I) > 0) {
+      if (Engine.GetPlayer().GetModule<cModuleInventory>()
+              .Objects.count(I) > 0) {
         if (MouseXRel >= XPos && MouseYRel >= YPos &&
             MouseXRel < XPos + SlotSize &&
             MouseYRel < YPos + SlotSize * AspectRatio) {
