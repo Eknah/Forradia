@@ -109,5 +109,8 @@ To add
 ## Contribute
 To add
 
+## Credits
+Thanks to Bly7 for the [OBJ_Loader](https://github.com/Bly7/OBJ-Loader) repo which I have used and modified in this project.  
+
 ## License
 MIT 
