@@ -2,21 +2,18 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "eObjectDescriptionFlags.h"
+#include "eObjectFlags.h"
 
 namespace Forradia {
 
 class cObjectDescription {
  public:
   cObjectDescription() = default;
-  cObjectDescription(bool Moveable_, bool BlocksMovement_, bool BlocksSight_)
-      : Movable(Moveable_), BlocksMovement(BlocksMovement_) {}
+  explicit cObjectDescription(eObjectFlags Flags_)
+      : Flags(Flags_) {}
 
   // Description parameters
-
-  bool Movable = false;
-  bool BlocksMovement = false;
-  eObjectFlags objDescFlags = ObjectNone;
+  eObjectFlags Flags = ObjectNone;
 };
 
 }  // namespace Forradia

@@ -4,6 +4,7 @@
 #include "cObjectsContent.h"
 #include "../engine/Aliases.h"
 #include "cObjectDescription.h"
+#include "eObjectFlags.h"
 
 namespace Forradia {
 
@@ -12,16 +13,22 @@ void cObjectsContent::Add(std::string ObjectName,
   ObjectDescriptions.insert({GetId(ObjectName), Description});
 }
 
+void cObjectsContent::Add(std::string ObjectName,
+                          eObjectFlags Flags) {
+    ObjectDescriptions.insert({GetId(ObjectName),
+                               cObjectDescription(Flags)});
+}
+
 bool cObjectsContent::IsMovable(int ObjectType) const {
   if (ObjectDescriptions.count(ObjectType))
-    return ObjectDescriptions.at(ObjectType).Movable;
+    return ObjectDescriptions.at(ObjectType).Flags & ObjectMovable;
 
   return false;
 }
 
 bool cObjectsContent::BlocksMovement(int ObjectType) const {
   if (ObjectDescriptions.count(ObjectType))
-    return ObjectDescriptions.at(ObjectType).BlocksMovement;
+    return ObjectDescriptions.at(ObjectType).Flags & ObjectMovementBlock;
 
   return false;
 }

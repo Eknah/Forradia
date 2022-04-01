@@ -32,28 +32,14 @@ void cGameInstance::StartGame() {
 
   UMap<int, SPtr<cObject>> StartingInventory;
 
-  cDefaultMapGenerator DefaultMapGenerator(Engine, WorldMap);
+  WorldMap->GenerateWorldMap(cDefaultMapGenerator(Engine, WorldMap));
 
-  cObjectDescription DescObjectTree1;
-  cObjectDescription DescObjectTree2;
-  cObjectDescription DescCaveWallBlock;
-
-  WorldMap->GenerateWorldMap(DefaultMapGenerator);
   StartingInventory.insert({0, MakeSPtr<cObject>("ObjectWoodaxe")});
   StartingInventory.insert({1, MakeSPtr<cObject>("ObjectSaw")});
 
-  DescObjectTree1.BlocksMovement = true;
-  DescObjectTree1.Movable = false;
-
-  DescObjectTree2.BlocksMovement = true;
-  DescObjectTree2.Movable = false;
-
-  DescCaveWallBlock.BlocksMovement = true;
-  DescCaveWallBlock.Movable = false;
-
-  ObjectsContent.Add("ObjectTree1", DescObjectTree1);
-  ObjectsContent.Add("ObjectTree2", DescObjectTree2);
-  ObjectsContent.Add("ObjectCaveWallBlock", DescCaveWallBlock);
+  ObjectsContent.Add("ObjectTree1", ObjectMovementBlock);
+  ObjectsContent.Add("ObjectTree2", ObjectMovementBlock);
+  ObjectsContent.Add("ObjectCaveWallBlock", ObjectMovementBlock);
 
   ScenesCollection.Add("SceneGameStart",
                        MakeUPtr<cSceneGameStart>(Engine,

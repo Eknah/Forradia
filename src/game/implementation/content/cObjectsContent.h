@@ -5,6 +5,7 @@
 #include <string>
 #include "../engine/Aliases.h"
 #include "cObjectDescription.h"
+#include "eObjectFlags.h"
 
 namespace Forradia {
 
@@ -13,6 +14,7 @@ class cObjectsContent {
   // Collection operations
 
   void Add(std::string ObjectName, cObjectDescription Description);
+  void Add(std::string ObjectName, eObjectFlags Flags);
 
   // Get info about an object
 
