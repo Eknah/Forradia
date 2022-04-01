@@ -7,7 +7,7 @@
 #include <vector>
 #include "../engine/Aliases.h"
 #include "cObjectDescription.h"
-#include "eObjectFlags.h"
+#include "../engine/eObjectFlags.h"
 
 namespace Forradia {
 

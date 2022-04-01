@@ -39,8 +39,4 @@ inline int GetId(std::string text) {
 }
 constexpr auto Ticks = &SDL_GetTicks;
 
-// Rarely used functions
-
-inline void Randomize() { srand((unsigned int)time(NULL)); }
-
 }  // namespace Forradia

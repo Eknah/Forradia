@@ -40,7 +40,7 @@ class cEngine : public iEngine {
 
   void Run(cScenesCollection ScenesCollection_, int StartScene_,
                   UPtr<cWorldMap> World_,
-                  UMap<int, SPtr<cObject>> StartingInventory_,
+                  cInventory StartingInventory_,
                   cObjectsContent ObjectsContent_);
 
   // ---- Drawing operations ----

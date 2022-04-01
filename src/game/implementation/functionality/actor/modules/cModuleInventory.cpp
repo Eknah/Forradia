@@ -10,7 +10,7 @@ void cModuleInventory::ResetForNewFrame() {}
 void cModuleInventory::Update() {}
 
 void cModuleInventory::Add(int Position, std::string ObjectName) {
-  Objects.insert({Position, MakeUPtr<cObject>(ObjectName)});
+  Inventory.Objects.insert({Position, MakeUPtr<cObject>(ObjectName)});
 }
 
 }  // namespace Forradia

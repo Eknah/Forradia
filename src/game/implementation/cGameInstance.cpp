@@ -8,21 +8,11 @@
 #include "../engine/cSceneGameStart.h"
 #include "implementation/scenes/cSceneMainMenu.h"
 #include "implementation/scenes/cScenePrimary.h"
+#include "../engine/cInventory.h"
 
 namespace Forradia {
 
-// Randomizes for the purpose of map generation and mobs movement
-// Prepares custom object descriptions for some objects
-// Prepares scenes
-// Generates world map
-// Prepares player starting inventory
-// Runs engine with all the preparation data
-
 void cGameInstance::StartGame() {
-  using std::move;
-
-  Randomize();
-
   const int MapAreaSize = 150;
   auto WorldMap = MakeUPtr<cWorldMap>(MapAreaSize, 1, 1);
 
@@ -30,12 +20,12 @@ void cGameInstance::StartGame() {
   cObjectsContent ObjectsContent;
   cScenesCollection ScenesCollection;
 
-  UMap<int, SPtr<cObject>> StartingInventory;
+  cInventory StartingInventory;
 
   WorldMap->GenerateWorldMap(cDefaultMapGenerator(Engine, WorldMap));
 
-  StartingInventory.insert({0, MakeSPtr<cObject>("ObjectWoodaxe")});
-  StartingInventory.insert({1, MakeSPtr<cObject>("ObjectSaw")});
+  StartingInventory.Objects.insert({0, MakeSPtr<cObject>("ObjectWoodaxe")});
+  StartingInventory.Objects.insert({1, MakeSPtr<cObject>("ObjectSaw")});
 
   ObjectsContent.Add({{"ObjectTree1", ObjectMovementBlock},
                       {"ObjectTree2", ObjectMovementBlock},
@@ -50,7 +40,7 @@ void cGameInstance::StartGame() {
   ScenesCollection.Add("SceneMainMenu", MakeUPtr<cSceneMainMenu>(Engine));
   ScenesCollection.Add("ScenePrimary", MakeUPtr<cScenePrimary>(Engine));
 
-  Engine.Run(move(ScenesCollection), GetId("SceneGameStart"), move(WorldMap),
+  Engine.Run(std::move(ScenesCollection), GetId("SceneGameStart"), std::move(WorldMap),
              StartingInventory, ObjectsContent);
 }
 

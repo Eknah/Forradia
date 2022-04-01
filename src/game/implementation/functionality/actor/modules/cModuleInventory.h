@@ -6,6 +6,7 @@
 #include "../engine/Aliases.h"
 #include "../engine/iModule.h"
 #include "framework/world_structure/cObject.h"
+#include "../engine/cInventory.h"
 
 namespace Forradia {
 
@@ -22,7 +23,8 @@ class cModuleInventory : public iModule {
 
   // Collection structure
 
-  UMap<int, SPtr<cObject>> Objects;
+  //UMap<int, SPtr<cObject>> Objects;
+  cInventory Inventory;
 };
 
 }  // namespace Forradia
