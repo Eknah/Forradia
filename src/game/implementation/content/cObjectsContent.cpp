@@ -19,6 +19,17 @@ void cObjectsContent::Add(std::string ObjectName,
                                cObjectDescription(Flags)});
 }
 
+void cObjectsContent::Add(std::vector<std::tuple<std::string, eObjectFlags>>
+         Descriptions) {
+    for (auto& desc : Descriptions) {
+        auto objectName = std::get<0>(desc);
+        auto flags = std::get<1>(desc);
+
+        ObjectDescriptions.insert({GetId(objectName),
+                                   cObjectDescription(flags)});
+    }
+}
+
 bool cObjectsContent::IsMovable(int ObjectType) const {
   if (ObjectDescriptions.count(ObjectType))
     return ObjectDescriptions.at(ObjectType).Flags & ObjectMovable;

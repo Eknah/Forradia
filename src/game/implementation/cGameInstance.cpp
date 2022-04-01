@@ -37,9 +37,9 @@ void cGameInstance::StartGame() {
   StartingInventory.insert({0, MakeSPtr<cObject>("ObjectWoodaxe")});
   StartingInventory.insert({1, MakeSPtr<cObject>("ObjectSaw")});
 
-  ObjectsContent.Add("ObjectTree1", ObjectMovementBlock);
-  ObjectsContent.Add("ObjectTree2", ObjectMovementBlock);
-  ObjectsContent.Add("ObjectCaveWallBlock", ObjectMovementBlock);
+  ObjectsContent.Add({{"ObjectTree1", ObjectMovementBlock},
+                      {"ObjectTree2", ObjectMovementBlock},
+                      {"ObjectCaveWallBlock", ObjectMovementBlock}});
 
   ScenesCollection.Add("SceneGameStart",
                        MakeUPtr<cSceneGameStart>(Engine,

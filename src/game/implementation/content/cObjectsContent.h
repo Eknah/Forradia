@@ -3,6 +3,8 @@
 
 #pragma once
 #include <string>
+#include <tuple>
+#include <vector>
 #include "../engine/Aliases.h"
 #include "cObjectDescription.h"
 #include "eObjectFlags.h"
@@ -15,6 +17,8 @@ class cObjectsContent {
 
   void Add(std::string ObjectName, cObjectDescription Description);
   void Add(std::string ObjectName, eObjectFlags Flags);
+  void Add(std::vector<std::tuple<std::string, eObjectFlags>>
+           Descriptions);
 
   // Get info about an object
 
