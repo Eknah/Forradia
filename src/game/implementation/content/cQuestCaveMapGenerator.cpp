@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "cQuestCaveMapGenerator.h"
+#include "framework/world_structure/cObject.h"
 
 namespace Forradia {
 
@@ -11,9 +12,9 @@ void cQuestCaveMapGenerator::GenerateQuestCaveMapArea(
   GenerateCaveWalls(MapArea);
   GeneratePath(MapArea, EntranceLocation);
 
-  MapArea->Tiles[EntranceLocation.X][EntranceLocation.Y].WarpToFloor = 0;
+  MapArea->Tiles[EntranceLocation.X][EntranceLocation.Y].Properties["WarpToFloor"] = "0";
   MapArea->Tiles[EntranceLocation.X][EntranceLocation.Y].Objects.push_back(
-      MakeUPtr<cObject>("ObjectQuestCaveEntrance"));
+      MakeSPtr<cObject>("ObjectQuestCaveEntrance"));
 }
 
 void cQuestCaveMapGenerator::ClearToCaveFloor(cMapArea *MapArea) {
@@ -28,7 +29,7 @@ void cQuestCaveMapGenerator::GenerateCaveWalls(cMapArea *MapArea) {
     for (auto TileX = 0; TileX < MapArea->Size; TileX++)
 
       MapArea->Tiles[TileX][TileY].Objects.push_back(
-          MakeUPtr<cObject>("ObjectCaveWallBlock", false));
+          MakeSPtr<cObject>("ObjectCaveWallBlock", false));
 }
 
 void cQuestCaveMapGenerator::GeneratePath(cMapArea *MapArea,

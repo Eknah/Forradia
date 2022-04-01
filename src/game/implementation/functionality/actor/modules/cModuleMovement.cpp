@@ -85,7 +85,9 @@ void cModuleMovement::UpdateDirectionalMovement() {
 
   if (!Engine.GetCurrentMapArea()
            .Tiles[NewXRoundedI][NewYRoundedI]
-           .MovementBlocked()) {
+          .HasObjectWithFlag(ObjectMovementBlock)
+          && Engine.GetCurrentMapArea()
+          .Tiles[NewXRoundedI][NewYRoundedI].GroundType != GetId("GroundtypeWater")) {
       auto OldXI = static_cast<int>(GetParentActor().Position.X);
       auto OldYI = static_cast<int>(GetParentActor().Position.Y);
 
@@ -100,7 +102,7 @@ void cModuleMovement::UpdateDirectionalMovement() {
   }
 
   if (Engine.GetCurrentMapArea().Tiles
-          [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor != -1) {
+          [static_cast<int>(NewX)][static_cast<int>(NewY)].Properties.count("WarpToFloor") > 0) {
     auto Angle = *GetParentActor().FacingAngle
             / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
     auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
@@ -119,16 +121,16 @@ void cModuleMovement::UpdateDirectionalMovement() {
     GetParentActor().Position.Y = NewY;
 
     auto coord = Engine.GetCurrentMapArea().WorldCoord;
-    coord.Z = Engine.GetCurrentMapArea().Tiles
-            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].WarpToFloor;
+    coord.Z = std::stoi(Engine.GetCurrentMapArea().Tiles
+            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].Properties.at("WarpToFloor"));
 
     Engine.World->GetArea(coord)->Tiles[NewX][NewY].Actor
             = std::move(Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor);
     Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor = nullptr;
 
     GetParentActor().WorldMapCoord.Z =
-        Engine.GetCurrentMapArea().Tiles
-            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].WarpToFloor;
+        std::stoi(Engine.GetCurrentMapArea().Tiles
+            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].Properties.at("WarpToFloor"));
   }
 
   TickLastMove = Ticks();
@@ -175,7 +177,9 @@ void cModuleMovement::UpdateDestinationMovement() {
 
     if (!Engine.GetCurrentMapArea()
              .Tiles[NewXRoundedI][NewYRoundedI]
-             .MovementBlocked()) {
+            .HasObjectWithFlag(ObjectMovementBlock)
+            && Engine.GetCurrentMapArea()
+            .Tiles[NewXRoundedI][NewYRoundedI].GroundType != GetId("GroundtypeWater")) {
         auto OldXI = static_cast<int>(GetParentActor().Position.X);
         auto OldYI = static_cast<int>(GetParentActor().Position.Y);
 
@@ -190,8 +194,7 @@ void cModuleMovement::UpdateDestinationMovement() {
     }
 
     if (Engine.GetCurrentMapArea().Tiles
-            [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor !=
-        -1) {
+            [static_cast<int>(NewX)][static_cast<int>(NewY)].Properties.count("WarpToFloor") > 0) {
         auto Angle = *GetParentActor().FacingAngle
                 / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
         auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
@@ -210,16 +213,16 @@ void cModuleMovement::UpdateDestinationMovement() {
         GetParentActor().Position.Y = NewY;
 
         auto coord = Engine.GetCurrentMapArea().WorldCoord;
-        coord.Z = Engine.GetCurrentMapArea().Tiles
-                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].WarpToFloor;
+        coord.Z = std::stoi(Engine.GetCurrentMapArea().Tiles
+                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].Properties.at("WarpToFloor"));
 
         Engine.World->GetArea(coord)->Tiles[NewX][NewY].Actor
                 = std::move(Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor);
         Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor = nullptr;
 
         GetParentActor().WorldMapCoord.Z =
-            Engine.GetCurrentMapArea().Tiles
-                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].WarpToFloor;
+            std::stoi(Engine.GetCurrentMapArea().Tiles
+                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].Properties.at("WarpToFloor"));
     }
   }
 

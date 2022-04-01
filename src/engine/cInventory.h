@@ -4,9 +4,12 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "../game/framework/world_structure/cObject.h"
+#include <memory>
+#include "Aliases.h"
 
 namespace Forradia {
+
+class cObject;
 
 class cInventory {
 public:

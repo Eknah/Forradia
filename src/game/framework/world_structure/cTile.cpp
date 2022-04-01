@@ -4,20 +4,20 @@
 #include "cTile.h"
 #include "../engine/iEngine.h"
 
+
 namespace Forradia {
 
-bool cTile::MovementBlocked() {
-  if (GroundType == GetId("GroundtypeWater"))
-    return true;
+bool cTile::HasObjectWithFlag(eObjectFlags Flag) {
+    for (auto &Object : Objects) {
+        if (Engine.ObjectsContent.ObjectDescriptions.count(Object->ObjectType)) {
+            auto objFlags = Engine.ObjectsContent.ObjectDescriptions.at(Object->ObjectType).Flags;
 
-  for (auto &Object : Objects)
-    if (Engine.ObjectsContent.BlocksMovement(Object->ObjectType))
-      return true;
-  if (Actor != nullptr)
-      if (Actor->ActorId != Engine.GetPlayer().ActorId)
-        return true;
+            if (objFlags & Flag)
+                return true;
+        }
+    }
 
-  return false;
+    return false;
 }
 
 bool cTile::HasObjectOfType(std::string ObjectName) {

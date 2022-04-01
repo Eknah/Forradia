@@ -14,7 +14,7 @@ class cObject {
 
   // Object usage
 
-  void UseOn(const std::unique_ptr<cObject> &Other);
+  void UseOn(const std::shared_ptr<cObject> &Other);
 
   // Core
 

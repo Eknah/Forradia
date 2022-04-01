@@ -13,7 +13,6 @@
 namespace Forradia {
 
 void cGameInstance::StartGame() {
-    int test = 3;
   const int MapAreaSize = 150;
   auto WorldMap = MakeUPtr<cWorldMap>(MapAreaSize, 1, 1);
 

@@ -6,6 +6,7 @@
 #include <vector>
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/cActor.h"
+#include "../engine/eObjectFlags.h"
 #include "cObject.h"
 
 namespace Forradia {
@@ -18,16 +19,17 @@ class cTile {
 
   // Get info about tile
 
-  bool MovementBlocked();
+  bool HasObjectWithFlag(eObjectFlags Flag);
   bool HasObjectOfType(std::string ObjectName);
 
   // Core tile data structure
 
   int GroundType = 0;
-  std::vector<UPtr<cObject>> Objects;
+  std::vector<SPtr<cObject>> Objects;
   int Elevation = 0;
   SPtr<cActor> Actor = nullptr;
-  int WarpToFloor = -1;
+  std::unordered_map<std::string, std::string> Properties;
+  //int WarpToFloor = -1;
 
  private:
   const iEngine &Engine;

@@ -5,6 +5,7 @@
 #include "cDefaultMapGenerator.h"
 #include "cQuestCaveMapGenerator.h"
 #include "../engine/cWorldMap.h"
+#include "framework/world_structure/cObject.h"
 
 namespace Forradia {
 
@@ -298,7 +299,7 @@ cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
             GetId("GroundtypeGrass"))
           if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
             MapArea->Tiles[TileX][TileY].Objects.push_back(
-                MakeUPtr<cObject>("ObjectTree1"));
+                MakeSPtr<cObject>("ObjectTree1"));
       }
 
       TileX += Random.Next() % 7 - Random.Next() % 7;
@@ -321,7 +322,7 @@ cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
             GetId("GroundtypeGrass"))
           if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
             MapArea->Tiles[TileX][TileY].Objects.push_back(
-                MakeUPtr<cObject>("ObjectTree2"));
+                MakeSPtr<cObject>("ObjectTree2"));
       }
 
       TileX += Random.Next() % 7 - Random.Next() % 7;
@@ -342,7 +343,7 @@ cDefaultMapGenerator::GenerateBushes(cMapArea *MapArea) const {
     if (MapArea->Tiles[TileX][TileY].GroundType == GetId("GroundtypeGrass"))
       if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
         MapArea->Tiles[TileX][TileY].Objects.push_back(
-            MakeUPtr<cObject>("ObjectBush1"));
+            MakeSPtr<cObject>("ObjectBush1"));
   }
 }
 
@@ -358,7 +359,7 @@ cDefaultMapGenerator::GenerateSmallStones(cMapArea *MapArea) const {
     if (MapArea->Tiles[TileX][TileY].GroundType != GetId("GroundtypeWater"))
       if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
         MapArea->Tiles[TileX][TileY].Objects.push_back(
-            MakeUPtr<cObject>("ObjectSmallStone"));
+            MakeSPtr<cObject>("ObjectSmallStone"));
   }
 }
 
@@ -371,7 +372,7 @@ cDefaultMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
     if (MapArea->Tiles[TileX][TileY].GroundType == GetId("GroundtypeGrass"))
       if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
         MapArea->Tiles[TileX][TileY].Objects.push_back(
-            MakeUPtr<cObject>("ObjectPinkFlower"));
+            MakeSPtr<cObject>("ObjectPinkFlower"));
   }
 }
 
@@ -453,8 +454,9 @@ GenerateQuestCaves(const iEngine &Engine,
     if (MapArea->Tiles[TileX][TileY].GroundType !=
         GetId("GroundtypeWater")) {
       MapArea->Tiles[TileX][TileY].Objects.push_back(
-          MakeUPtr<cObject>("ObjectQuestCaveEntrance"));
-      MapArea->Tiles[TileX][TileY].WarpToFloor = Floor;
+          MakeSPtr<cObject>("ObjectQuestCaveEntrance"));
+      //MapArea->Tiles[TileX][TileY].WarpToFloor = Floor;
+      MapArea->Tiles[TileX][TileY].Properties["WarpToFloor"] = std::to_string(Floor);
 
       WorldMap->Areas[MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor] =
           std::make_unique<cMapArea>(Engine, WorldMap->MapAreaSize,
