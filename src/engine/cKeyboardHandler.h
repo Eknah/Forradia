@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <SDL2/SDL_keycode.h>
 #include <set>
 #include "iKeyboardHandler.h"
 
@@ -9,18 +10,11 @@ namespace Forradia {
 
 class cKeyboardHandler : public iKeyboardHandler {
  public:
-  inline void ResetForNewFrame() const override {
-      KeysBeenFired->clear();
-  }
+  void ResetForNewFrame() const override;
 
-  inline void DoKeyDown(SDL_Keycode key) const override {
-    KeysBeingPressed->insert(key);
-    KeysBeenFired->insert(key);
-  }
+  void DoKeyDown(SDL_Keycode key) const override;
 
-  inline void DoKeyUp(SDL_Keycode key) const override {
-      KeysBeingPressed->erase(key);
-  }
+  void DoKeyUp(SDL_Keycode key) const override;
 };
 
 }  // namespace Forradia

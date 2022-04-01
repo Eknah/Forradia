@@ -9,16 +9,9 @@ namespace Forradia {
 
 class cRandom {
  public:
-    cRandom() {
-        if (!IsInitialized) {
-            mt = std::mt19937(rd());
-            IsInitialized = true;
-        }
-    }
+    cRandom();
 
-    inline int Next() const {
-        return result(mt);
-    }
+    int Next() const;
 
  private:
     inline static std::uniform_int_distribution<int> result =

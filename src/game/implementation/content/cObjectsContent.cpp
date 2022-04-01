@@ -26,11 +26,4 @@ bool cObjectsContent::BlocksMovement(int ObjectType) const {
   return false;
 }
 
-bool cObjectsContent::BlocksSight(int ObjectType) const {
-  if (ObjectDescriptions.count(ObjectType))
-    return ObjectDescriptions.at(ObjectType).BlocksSight;
-
-  return false;
-}
-
 }  // namespace Forradia

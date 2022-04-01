@@ -8,13 +8,7 @@ namespace Forradia {
 
 class cRectF {
  public:
-  inline bool ContainsPoint(cPoint2F point) {
-    if (point.X >= X && point.Y >= Y && point.X < X + Width &&
-        point.Y < Y + Height)
-      return true;
-
-    return false;
-  }
+  bool ContainsPoint(cPoint2F point);
 
   float X = 0.0f;
   float Y = 0.0f;

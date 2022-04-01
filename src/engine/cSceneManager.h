@@ -4,6 +4,7 @@
 #pragma once
 #include <string>
 #include <utility>
+#include "iEngine.h"
 #include "iSceneManager.h"
 
 namespace Forradia {
@@ -13,22 +14,13 @@ class cSceneManager : public iSceneManager {
     explicit cSceneManager(const iEngine &engine) :
           iSceneManager(engine) {}
 
-  inline void Initialize(cScenesCollection scenes,
-                         int startScene) override {
-    ScenesCollection = std::move(scenes);
-    *CurrentScene = startScene;
-  }
+  void Initialize(cScenesCollection scenes,
+                         int startScene) override;
 
-  inline UPtr<cSceneBase> &GetCurrentScene() override {
-    return ScenesCollection.Scenes.at(*CurrentScene);
-  }
+  UPtr<cSceneBase> &GetCurrentScene() override;
 
-  inline void SwitchToScene(
-          std::string newScene) const override {
-    *CurrentScene = GetId(newScene);
-    ScenesCollection.Scenes.at(*CurrentScene)->Enter();
-    Engine.GameLoop.ResetForNewFrame();
-  }
+  void SwitchToScene(
+          std::string newScene) const override;
 };
 
 }  // namespace Forradia

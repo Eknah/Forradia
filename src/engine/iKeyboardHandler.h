@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include <SDL2/SDL_keycode.h>
 #include <set>
 #include "Aliases.h"
 

@@ -10,31 +10,15 @@ class cMouseHandler {
  public:
   // Game loop related
 
-  inline void ResetForNewFrame() const {
-    *WheelAmount *= 0.85f;
+  void ResetForNewFrame() const;
 
-    if (std::abs(*WheelAmount) < 0.1f)
-      *WheelAmount = 0;
+  bool GetLeftButtonBeenFired() const;
 
-    *LeftButtonBeenFired = false;
-    *RightButtonBeenFired = false;
-  }
+  bool GetRightButtonBeenFired() const;
 
-  inline bool GetLeftButtonBeenFired() const  {
-      return *LeftButtonBeenFired;
-  }
+  void SetLeftButtonBeenFired();
 
-  inline bool GetRightButtonBeenFired() const {
-      return *RightButtonBeenFired;
-  }
-
-  inline void SetLeftButtonBeenFired()  {
-      *LeftButtonBeenFired = true;
-  }
-
-  inline void SetRightButtonBeenFired() {
-      *RightButtonBeenFired = true;
-  }
+  void SetRightButtonBeenFired();
 
   UPtr<float> WheelAmount = MakeUPtr<float>(0.0f);
   bool LeftButtonDown = false;

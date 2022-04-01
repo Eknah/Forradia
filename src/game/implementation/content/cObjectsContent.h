@@ -18,7 +18,6 @@ class cObjectsContent {
 
   bool IsMovable(int ObjectType) const;
   bool BlocksMovement(int ObjectType) const;
-  bool BlocksSight(int ObjectType) const;
 
   // Collection structure
 

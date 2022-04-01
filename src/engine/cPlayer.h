@@ -12,12 +12,7 @@ namespace Forradia {
 
 class cPlayer : public cActor {
  public:
-  explicit cPlayer(iEngine &engine) : cActor(engine, "Player") {
-    AddModule<cModuleJumping>();
-    AddModule<cModuleMovement>();
-    AddModule<cModuleInventory>();
-    AddModule<cModuleObjectUsage>();
-  }
+  explicit cPlayer(iEngine &engine);
 };
 
 }  // namespace Forradia

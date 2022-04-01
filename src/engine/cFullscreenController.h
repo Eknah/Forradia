@@ -12,17 +12,9 @@ class cFullscreenController : public iFullscreenController {
   explicit cFullscreenController(const iEngine &engine) :
         iFullscreenController(engine) {}
 
-  inline void UpdateFullscreenToggling() override {
-    if (Engine.KeyboardHandler.KeysBeenFired->count(SDLK_RETURN) > 0 &&
-        Engine.KeyboardHandler.KeysBeingPressed->count(SDLK_LALT) > 0)
-      ToggleFullscreen();
-  }
+  void UpdateFullscreenToggling() override;
 
-  inline void ToggleFullscreen() override {
-    FullscreenOn = !FullscreenOn;
-    SDL_SetWindowFullscreen(Engine.Window.get(),
-                            FullscreenOn ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
-  }
+  void ToggleFullscreen() override;
 };
 
 }  // namespace Forradia

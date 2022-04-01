@@ -17,26 +17,13 @@ class iEngine;
 
 class cMapArea {
  public:
-  cMapArea(const iEngine &Engine, int Size_, int WorldX, int WorldY, int WorldZ)
-      : Size(Size_), WorldCoord({WorldX, WorldY, WorldZ}) {
-    for (auto x = 0; x < Size; x++) {
-      Tiles.push_back(std::vector<cTile>());
+  cMapArea(const iEngine &Engine, int Size_, int WorldX, int WorldY, int WorldZ);
 
-      for (auto y = 0; y < Size; y++)
-        Tiles[x].push_back(cTile(Engine));
-    }
-  }
+  cActor& AddActor(UPtr<cActor> Actor, int TileX, int TileY);
 
-  inline cActor& AddActor(UPtr<cActor> Actor, int TileX, int TileY) {
-    Tiles[TileX][TileY].Actor = std::move(Actor);
-    return *Tiles[TileX][TileY].Actor;
-  }
+  bool IsUnderground();
 
-  inline bool IsUnderground() { return WorldCoord.Z < 0; }
-
-  inline cTile &GetTile(cPoint2 Pos) {
-    return Tiles[Pos.X][Pos.Y];
-  }
+  cTile &GetTile(cPoint2 Pos);
 
   // Basic data
   cPoint3 WorldCoord = {-1, -1, -1};

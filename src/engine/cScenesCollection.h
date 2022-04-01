@@ -12,15 +12,7 @@ namespace Forradia {
 class cScenesCollection {
  public:
   // Collection operations
-  inline void Add(std::string sceneName, UPtr<cSceneBase> scene) {
-    Scenes.insert({GetId(sceneName), std::move(scene)});
-  }
-
-//  inline cScenesCollection& operator=(const cScenesCollection &Other) {
-//      Scenes = Other.Scenes;
-
-//      return *this;
-//  }
+  void Add(std::string sceneName, UPtr<cSceneBase> scene);
 
   // Collection structure
   UMap<int, UPtr<cSceneBase>> Scenes;
