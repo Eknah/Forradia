@@ -20,6 +20,7 @@ namespace Forradia {
 
 void cGameInstance::StartGame() {
   // dummy comment
+  // dummy comment 2
   using std::move;
 
   Randomize();
