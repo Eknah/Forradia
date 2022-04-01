@@ -2,10 +2,12 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+#include "../engine/Aliases.h"
 #include "../engine/iModule.h"
-#include "framework/world_structure/cObject.h"
 
 namespace Forradia {
+
+class cObject;
 
 class cModuleObjectUsage : public iModule {
  public:

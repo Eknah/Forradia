@@ -5,7 +5,6 @@
 #include <string>
 #include "../engine/Aliases.h"
 #include "../engine/iModule.h"
-#include "framework/world_structure/cObject.h"
 #include "../engine/cInventory.h"
 
 namespace Forradia {

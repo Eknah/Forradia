@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "cModuleInventory.h"
+#include "framework/world_structure/cObject.h"
 
 namespace Forradia {
 
