@@ -11,12 +11,12 @@ class iGameLoop {
  public:
   explicit iGameLoop(iEngine &engine) : Engine(engine) {}
 
-  inline virtual void Run() = 0;
+  virtual void Run() = 0;
 
   // Looped functions
-  inline virtual void Update() = 0;
-  inline virtual void Render() = 0;
-  inline virtual void ResetForNewFrame() = 0;
+  virtual void Update() = 0;
+  virtual void Render() = 0;
+  virtual void ResetForNewFrame() = 0;
 
  protected:
   iEngine &Engine;

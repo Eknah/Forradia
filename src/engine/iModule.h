@@ -16,9 +16,7 @@ class iModule {
   virtual void ResetForNewFrame() = 0;
   virtual void Update() = 0;
 
-  inline cActor &GetParentActor() {
-      return *ParentActor;
-  }
+  cActor &GetParentActor();
 
  protected:
   const iEngine &Engine;

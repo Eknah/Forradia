@@ -10,9 +10,9 @@ namespace Forradia {
 
 class iKeyboardHandler {
  public:
-  inline virtual void ResetForNewFrame() const = 0;
-  inline virtual void DoKeyDown(SDL_Keycode key) const = 0;
-  inline virtual void DoKeyUp(SDL_Keycode key) const = 0;
+  virtual void ResetForNewFrame() const = 0;
+  virtual void DoKeyDown(SDL_Keycode key) const = 0;
+  virtual void DoKeyUp(SDL_Keycode key) const = 0;
 
   const UPtr<std::set<SDL_Keycode>> KeysBeingPressed
   = MakeUPtr<std::set<SDL_Keycode>>();

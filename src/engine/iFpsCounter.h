@@ -12,8 +12,8 @@ class iFpsCounter {
  public:
   explicit iFpsCounter(iEngine &engine) : Engine(engine) {}
 
-  inline virtual void Update() = 0;
-  inline virtual void Render() = 0;
+  virtual void Update() = 0;
+  virtual void Render() = 0;
 
  protected:
   iEngine &Engine;
