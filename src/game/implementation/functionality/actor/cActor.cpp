@@ -12,9 +12,7 @@ cActor::cActor(const iEngine &Engine_, float X, float Y,
                std::string ModelName_) :
     Engine(Engine_), ModelName(ModelName_),
     ActorId(CurrentActorId++) {
-    if (!HasModule<cModuleMovementData>()) {
-        AddModule<cModuleMovementData>();
-    }
+    AddIfNotExists<cModuleMovementData>();
     GetModule<cModuleMovementData>().Position = {X, Y};
 }
 
