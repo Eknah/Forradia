@@ -26,6 +26,7 @@ class cDefaultMapGenerator : public iMapGenerator {
   void GenerateBushes(cMapArea *MapArea) const;
   void GenerateSmallStones(cMapArea *MapArea) const;
   void GeneratePinkFlowers(cMapArea *MapArea) const;
+  void GenerateTallGrass(cMapArea *MapArea) const;
   void GenerateMobs(cMapArea *MapArea) const;
   void GenerateQuestCaves(const iEngine &Engine, cMapArea *MapArea,
                           const UPtr<cWorldMap> &WorldMap) const;

@@ -28,6 +28,7 @@ cDefaultMapGenerator::GenerateMapArea(
   GenerateBushes(MapArea);
   GenerateSmallStones(MapArea);
   GeneratePinkFlowers(MapArea);
+  GenerateTallGrass(MapArea);
   GenerateMobs(MapArea);
   GenerateQuestCaves(Engine, MapArea, WorldMap);
 }
@@ -373,6 +374,19 @@ cDefaultMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
       if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
         MapArea->Tiles[TileX][TileY].Objects.push_back(
             MakeSPtr<cObject>("ObjectPinkFlower"));
+  }
+}
+
+void
+cDefaultMapGenerator::GenerateTallGrass(cMapArea *MapArea) const {
+  for (auto I = 0; I < 1000; I++) {
+    auto TileX = Random.Next() % MapArea->Size;
+    auto TileY = Random.Next() % MapArea->Size;
+
+    if (MapArea->Tiles[TileX][TileY].GroundType == GetId("GroundtypeGrass"))
+      if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
+        MapArea->Tiles[TileX][TileY].Objects.push_back(
+            MakeSPtr<cObject>("ObjectTallGrass"));
   }
 }
 
