@@ -21,7 +21,11 @@ void cGameInstance::StartGame() {
   cScenesCollection ScenesCollection;
   cInventory StartingInventory;
 
-  WorldMap->GenerateWorldMap(cDefaultMapGenerator(Engine, WorldMap));
+  auto defaultMapGen = MakeSPtr<cDefaultMapGenerator>(Engine, WorldMap);
+  auto worldMapGens = UMap<int, UMap<int, SPtr<iMapGenerator>>>();
+  worldMapGens[0][0] = defaultMapGen;
+  worldMapGens[1][0] = defaultMapGen;
+  WorldMap->GenerateWorldMap(worldMapGens);
 
   StartingInventory.AddMany({"ObjectWoodaxe",
                             "ObjectSaw"});

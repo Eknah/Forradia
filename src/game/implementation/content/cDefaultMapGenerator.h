@@ -4,7 +4,7 @@
 #pragma once
 #include "../engine/cRandom.h"
 #include "../engine/cMapArea.h"
-#include "framework/iMapGenerator.h"
+#include "../engine/iMapGenerator.h"
 
 namespace Forradia {
 

@@ -2,14 +2,16 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "cWorldMap.h"
-#include "framework/iMapGenerator.h"
+#include "../engine/iMapGenerator.h"
 
 namespace Forradia {
 
-void cWorldMap::GenerateWorldMap(const iMapGenerator &MapGenerator) {
-    for (auto WorldY = 0; WorldY < WorldMapHeight; WorldY++)
-      for (auto WorldX = 0; WorldX < WorldMapWidth; WorldX++)
-        MapGenerator.GenerateMapArea(WorldX, WorldY, 0);
+void cWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>> GenAreas) {
+    for (auto& [X, Remain] : GenAreas) {
+        for (auto& [Y, Gen] : Remain) {
+            Gen->GenerateMapArea(X, Y, 0);
+        }
+    }
 }
 
 UPtr<cMapArea>& cWorldMap::GetArea(cPoint3 Pos) {

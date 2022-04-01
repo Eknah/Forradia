@@ -18,7 +18,7 @@ class cWorldMap {
 
   // Core
 
-  void GenerateWorldMap(const iMapGenerator &MapGenerator);
+    void GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>> GenAreas);
 
   UPtr<cMapArea>& GetArea(cPoint3 Pos);
 
