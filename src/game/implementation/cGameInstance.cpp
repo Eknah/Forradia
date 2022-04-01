@@ -4,11 +4,11 @@
 #include <utility>
 #include "cGameInstance.h"
 #include "../engine/cEngine.h"
-#include "implementation/content/cDefaultMapGenerator.h"
 #include "../engine/cSceneGameStart.h"
+#include "../engine/cInventory.h"
 #include "implementation/scenes/cSceneMainMenu.h"
 #include "implementation/scenes/cScenePrimary.h"
-#include "../engine/cInventory.h"
+#include "implementation/content/cDefaultMapGenerator.h"
 
 namespace Forradia {
 

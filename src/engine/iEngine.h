@@ -19,6 +19,7 @@
 #include "iKeyboardHandler.h"
 #include "iSceneManager.h"
 #include "cPlayer.h"
+#include "framework/world_structure/cWorldMap.h"
 
 namespace Forradia {
 
@@ -78,6 +79,8 @@ class iEngine {
   cModelLoader ModelLoader;
   cTextGraphics TextGraphics;
   cObjectsContent ObjectsContent;
+
+  UPtr<cWorldMap> World;
 
   UPtr<cPlayer*> PlayerPtrPtr;
 };

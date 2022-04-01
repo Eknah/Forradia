@@ -15,7 +15,6 @@
 #include "cModelGraphics.h"
 #include "cPaintGraphics.h"
 #include "cSceneManager.h"
-#include "framework/world_structure/cWorldMap.h"
 #include "iEngine.h"
 
 namespace Forradia {
@@ -78,8 +77,6 @@ class cEngine : public iEngine {
   cMapArea& GetCurrentMapArea() const override;
 
   // ---- Public members ----
-
-  UPtr<cWorldMap> World;
 
   cKeyboardHandler KeyboardHandlerImplemented;
   cCustomCursor CustomCursorImplemented;

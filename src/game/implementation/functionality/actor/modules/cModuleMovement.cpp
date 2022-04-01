@@ -101,20 +101,34 @@ void cModuleMovement::UpdateDirectionalMovement() {
 
   if (Engine.GetCurrentMapArea().Tiles
           [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor != -1) {
-    GetParentActor().WorldMapCoord.Z =
-        Engine.GetCurrentMapArea().Tiles
-            [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
-
     auto Angle = *GetParentActor().FacingAngle
             / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
     auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
     auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;
 
+    auto NewXOld = NewX;
+    auto NewYOld = NewY;
+
     NewX += DX * StepSize * 10;
     NewY += DY * StepSize * 10;
 
+    auto OldXI = static_cast<int>(GetParentActor().Position.X);
+    auto OldYI = static_cast<int>(GetParentActor().Position.Y);
+
     GetParentActor().Position.X = NewX;
     GetParentActor().Position.Y = NewY;
+
+    auto coord = Engine.GetCurrentMapArea().WorldCoord;
+    coord.Z = Engine.GetCurrentMapArea().Tiles
+            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].WarpToFloor;
+
+    Engine.World->GetArea(coord)->Tiles[NewX][NewY].Actor
+            = std::move(Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor);
+    Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor = nullptr;
+
+    GetParentActor().WorldMapCoord.Z =
+        Engine.GetCurrentMapArea().Tiles
+            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].WarpToFloor;
   }
 
   TickLastMove = Ticks();
@@ -178,20 +192,34 @@ void cModuleMovement::UpdateDestinationMovement() {
     if (Engine.GetCurrentMapArea().Tiles
             [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor !=
         -1) {
-      GetParentActor().WorldMapCoord.Z =
-          Engine.GetCurrentMapArea().Tiles
-              [static_cast<int>(NewX)][static_cast<int>(NewY)].WarpToFloor;
+        auto Angle = *GetParentActor().FacingAngle
+                / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
+        auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
+        auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;
 
-      auto Angle = *GetParentActor().FacingAngle / 180.0f * PiF - PiF / 2 +
-                   0 * PiF / 2;
-      auto DX = -static_cast<float>(std::cos(Angle)) * StepMultiplier;
-      auto DY = static_cast<float>(std::sin(Angle)) * StepMultiplier;
+        auto NewXOld = NewX;
+        auto NewYOld = NewY;
 
-      NewX += DX * StepSize * 10;
-      NewY += DY * StepSize * 10;
+        NewX += DX * StepSize * 10;
+        NewY += DY * StepSize * 10;
 
-      GetParentActor().Position.X = NewX;
-      GetParentActor().Position.Y = NewY;
+        auto OldXI = static_cast<int>(GetParentActor().Position.X);
+        auto OldYI = static_cast<int>(GetParentActor().Position.Y);
+
+        GetParentActor().Position.X = NewX;
+        GetParentActor().Position.Y = NewY;
+
+        auto coord = Engine.GetCurrentMapArea().WorldCoord;
+        coord.Z = Engine.GetCurrentMapArea().Tiles
+                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].WarpToFloor;
+
+        Engine.World->GetArea(coord)->Tiles[NewX][NewY].Actor
+                = std::move(Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor);
+        Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor = nullptr;
+
+        GetParentActor().WorldMapCoord.Z =
+            Engine.GetCurrentMapArea().Tiles
+                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].WarpToFloor;
     }
   }
 
