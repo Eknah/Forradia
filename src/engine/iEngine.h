@@ -19,7 +19,7 @@
 #include "iKeyboardHandler.h"
 #include "iSceneManager.h"
 #include "cPlayer.h"
-#include "framework/world_structure/cWorldMap.h"
+#include "cWorldMap.h"
 
 namespace Forradia {
 
