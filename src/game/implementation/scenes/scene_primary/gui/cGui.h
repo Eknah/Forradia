@@ -29,7 +29,7 @@ class cGui {
 
   cGuiMinimap GuiMinimap;
 
-  std::vector<std::string> TextBoxText = {"You have entered the world"};
+  std::vector<std::string> TextBoxText = {"You have entered the Forradia"};
 
   const float TextBoxMargin = 0.005f;
 
