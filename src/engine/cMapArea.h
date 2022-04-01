@@ -9,7 +9,7 @@
 #include "../engine/cPoint3.h"
 #include "../engine/cPoint2.h"
 #include "framework/world_structure/cMob.h"
-#include "framework/world_structure/cTile.h"
+#include "../engine/cTile.h"
 
 namespace Forradia {
 

@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "cMapArea.h"
-#include "framework/world_structure/cTile.h"
+#include "../engine/cTile.h"
 
 namespace Forradia {
 

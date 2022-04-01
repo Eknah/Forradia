@@ -7,7 +7,7 @@
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/cActor.h"
 #include "../engine/eObjectFlags.h"
-#include "cObject.h"
+#include "framework/world_structure/cObject.h"
 
 namespace Forradia {
 
@@ -29,7 +29,6 @@ class cTile {
   int Elevation = 0;
   SPtr<cActor> Actor = nullptr;
   std::unordered_map<std::string, std::string> Properties;
-  //int WarpToFloor = -1;
 
  private:
   const iEngine &Engine;
