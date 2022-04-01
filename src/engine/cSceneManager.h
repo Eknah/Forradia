@@ -17,7 +17,7 @@ class cSceneManager : public iSceneManager {
   void Initialize(cScenesCollection scenes,
                          int startScene) override;
 
-  UPtr<cSceneBase> &GetCurrentScene() override;
+  SPtr<cSceneBase> &GetCurrentScene() override;
 
   void SwitchToScene(
           std::string newScene) const override;

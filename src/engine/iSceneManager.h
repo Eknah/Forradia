@@ -15,7 +15,7 @@ class iSceneManager {
 
   virtual inline void Initialize(cScenesCollection scenes, int startScene) = 0;
 
-  virtual inline UPtr<cSceneBase> &GetCurrentScene() = 0;
+  virtual inline SPtr<cSceneBase> &GetCurrentScene() = 0;
 
   virtual inline void SwitchToScene(std::string newScene) const = 0;
  protected:
