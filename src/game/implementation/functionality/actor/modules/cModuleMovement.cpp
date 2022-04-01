@@ -83,11 +83,21 @@ void cModuleMovement::UpdateDirectionalMovement() {
   auto NewXRoundedI = static_cast<int>(NewXRounded);
   auto NewYRoundedI = static_cast<int>(NewYRounded);
 
+  auto TileHasMob = false;
+
+  if (Engine.GetCurrentMapArea()
+          .Tiles[NewXRoundedI][NewYRoundedI].Actor != nullptr) {
+    if (Engine.GetCurrentMapArea()
+            .Tiles[NewXRoundedI][NewYRoundedI].Actor->ActorId != Engine.GetPlayer().ActorId)
+        TileHasMob = true;
+  }
+
   if (!Engine.GetCurrentMapArea()
            .Tiles[NewXRoundedI][NewYRoundedI]
           .HasObjectWithFlag(ObjectMovementBlock)
           && Engine.GetCurrentMapArea()
-          .Tiles[NewXRoundedI][NewYRoundedI].GroundType != GetId("GroundtypeWater")) {
+          .Tiles[NewXRoundedI][NewYRoundedI].GroundType != GetId("GroundtypeWater")
+          && !TileHasMob) {
       auto OldXI = static_cast<int>(GetParentActor().Position.X);
       auto OldYI = static_cast<int>(GetParentActor().Position.Y);
 
@@ -175,11 +185,21 @@ void cModuleMovement::UpdateDestinationMovement() {
       auto NewXRoundedI = static_cast<int>(NewXRounded);
       auto NewYRoundedI = static_cast<int>(NewYRounded);
 
+      auto TileHasMob = false;
+
+      if (Engine.GetCurrentMapArea()
+              .Tiles[NewXRoundedI][NewYRoundedI].Actor != nullptr) {
+        if (Engine.GetCurrentMapArea()
+                .Tiles[NewXRoundedI][NewYRoundedI].Actor->ActorId != Engine.GetPlayer().ActorId)
+            TileHasMob = true;
+      }
+
     if (!Engine.GetCurrentMapArea()
              .Tiles[NewXRoundedI][NewYRoundedI]
             .HasObjectWithFlag(ObjectMovementBlock)
             && Engine.GetCurrentMapArea()
-            .Tiles[NewXRoundedI][NewYRoundedI].GroundType != GetId("GroundtypeWater")) {
+            .Tiles[NewXRoundedI][NewYRoundedI].GroundType != GetId("GroundtypeWater")
+            && !TileHasMob) {
         auto OldXI = static_cast<int>(GetParentActor().Position.X);
         auto OldYI = static_cast<int>(GetParentActor().Position.Y);
 
