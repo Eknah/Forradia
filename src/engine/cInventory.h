@@ -11,7 +11,7 @@ namespace Forradia {
 class cInventory {
 public:
     void Add(std::string ObjectName);
-    void Add(std::vector<std::string> ObjectNames);
+    void AddMany(std::vector<std::string> ObjectNames);
 
     UMap<int, SPtr<cObject>> Objects;
 };

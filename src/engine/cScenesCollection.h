@@ -15,7 +15,7 @@ class cScenesCollection {
  public:
   // Collection operations
   void Add(std::string sceneName, SPtr<cSceneBase> scene);
-  void Add(std::vector<std::tuple<std::string, SPtr<cSceneBase>>> scenes);
+  void AddMany(std::vector<std::tuple<std::string, SPtr<cSceneBase>>> scenes);
 
   // Collection structure
   UMap<int, SPtr<cSceneBase>> Scenes;

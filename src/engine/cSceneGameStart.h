@@ -12,10 +12,10 @@ namespace Forradia {
 class cSceneGameStart : public cSceneBase {
  public:
     cSceneGameStart(const cEngine &Engine_,
-                    std::string SwitchToSceneName_,
                     std::string ImageNameBackground_,
                     std::string ImageNameLogo_,
-                    std::string Text_) :
+                    std::string Text_,
+                    std::string SwitchToSceneName_) :
                     cSceneBase(Engine_),
                     SwitchToSceneName(SwitchToSceneName_),
                     ImageNameBackground(ImageNameBackground_),

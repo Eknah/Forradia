@@ -14,7 +14,7 @@ void cInventory::Add(std::string ObjectName) {
     }
 }
 
-void cInventory::Add(std::vector<std::string> ObjectNames) {
+void cInventory::AddMany(std::vector<std::string> ObjectNames) {
     for (auto& name : ObjectNames) {
         Add(name);
     }

@@ -17,7 +17,7 @@ class cObjectsContent {
 
   void Add(std::string ObjectName, cObjectDescription Description);
   void Add(std::string ObjectName, eObjectFlags Flags);
-  void Add(std::vector<std::tuple<std::string, eObjectFlags>>
+  void AddMany(std::vector<std::tuple<std::string, eObjectFlags>>
            Descriptions);
 
   // Get info about an object

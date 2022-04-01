@@ -23,22 +23,23 @@ void cGameInstance::StartGame() {
 
   WorldMap->GenerateWorldMap(cDefaultMapGenerator(Engine, WorldMap));
 
-  StartingInventory.Add(std::vector<std::string>
-                        {"ObjectWoodaxe",
-                        "ObjectSaw"});
+  StartingInventory.AddMany({"ObjectWoodaxe",
+                            "ObjectSaw"});
 
-  ObjectsContent.Add({{"ObjectTree1", ObjectMovementBlock},
-                      {"ObjectTree2", ObjectMovementBlock},
-                      {"ObjectCaveWallBlock", ObjectMovementBlock}});
+  ObjectsContent.AddMany({{"ObjectTree1", ObjectMovementBlock},
+                          {"ObjectTree2", ObjectMovementBlock},
+                          {"ObjectCaveWallBlock", ObjectMovementBlock}});
 
-  ScenesCollection.Add({{"SceneGameStart",
-                       MakeSPtr<cSceneGameStart>(Engine,
-                                                 "SceneMainMenu",
-                                                 "SceneGameStartBackground",
-                                                 "SceneForradiaLogo",
-                                                 "Press to start")},
-                        {"SceneMainMenu", MakeSPtr<cSceneMainMenu>(Engine)},
-                        {"ScenePrimary", MakeSPtr<cScenePrimary>(Engine)}});
+  ScenesCollection.AddMany({{"SceneGameStart",
+                             MakeSPtr<cSceneGameStart>(Engine,
+                             "SceneGameStartBackground",
+                             "SceneForradiaLogo",
+                             "Press to start",
+                             "SceneMainMenu")},
+
+                            {"SceneMainMenu", MakeSPtr<cSceneMainMenu>(Engine)},
+
+                            {"ScenePrimary", MakeSPtr<cScenePrimary>(Engine)}});
 
   Engine.Run(std::move(ScenesCollection), GetId("SceneGameStart"), std::move(WorldMap),
              StartingInventory, ObjectsContent);

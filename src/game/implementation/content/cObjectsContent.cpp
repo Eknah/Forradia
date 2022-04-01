@@ -19,7 +19,7 @@ void cObjectsContent::Add(std::string ObjectName,
                                cObjectDescription(Flags)});
 }
 
-void cObjectsContent::Add(std::vector<std::tuple<std::string, eObjectFlags>>
+void cObjectsContent::AddMany(std::vector<std::tuple<std::string, eObjectFlags>>
          Descriptions) {
     for (auto& desc : Descriptions) {
         auto objectName = std::get<0>(desc);
