@@ -17,7 +17,9 @@ class cModuleMovement : public iModule {
     bool TryMoveLeft = false;
   };
 
-  using iModule::iModule;
+  cModuleMovement(const iEngine &Engine_, cActor *ParentActor_);
+
+  //using iModule::iModule;
 
   void ResetForNewFrame() override;
   void Update() override;
@@ -28,16 +30,11 @@ class cModuleMovement : public iModule {
 
   bool IsWalking = false;
   float FacingAngleRotated = 0.0f;
-  cPoint2F MoveDestination = {-1, -1};
 
  private:
   void UpdateDirectionalMovement();
   void UpdateDestinationMovement();
 
-  unsigned int TickLastMove = 0;
-  int MoveSpeed = 30;
-  float StepSize = 3.0f;
-  float StepMultiplier = 0.1f;
 };
 
 }  // namespace Forradia

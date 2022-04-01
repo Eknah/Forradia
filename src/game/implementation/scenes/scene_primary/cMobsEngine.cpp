@@ -5,6 +5,7 @@
 #include <utility>
 #include "cMobsEngine.h"
 #include "../engine/cEngine.h"
+#include "implementation/functionality/actor/modules/cModuleMovementData.h"
 
 namespace Forradia {
 
@@ -31,14 +32,14 @@ void cMobsEngine::Update() {
     if (Mob.ActorId == Engine.GetPlayer().ActorId)
       continue;
 
-    if (Ticks() > Mob.TickLastMove + Mob.MoveSpeed) {
-      Mob.TickLastMove = Ticks();
+    if (Ticks() > Mob.GetModule<cModuleMovementData>().TickLastMove + Mob.GetModule<cModuleMovementData>().MoveSpeed) {
+      Mob.GetModule<cModuleMovementData>().TickLastMove = Ticks();
 
-      if (Mob.MoveDestination.X == -1 || Mob.MoveDestination.Y == -1) {
+      if (Mob.GetModule<cModuleMovementData>().MoveDestination.X == -1 || Mob.GetModule<cModuleMovementData>().MoveDestination.Y == -1) {
         auto DestinationX =
-            Mob.Position.X + Random.Next() % 15 - Random.Next() % 15;
+            Mob.GetModule<cModuleMovementData>().Position.X + Random.Next() % 15 - Random.Next() % 15;
         auto DestinationY =
-            Mob.Position.Y + Random.Next() % 15 - Random.Next() % 15;
+            Mob.GetModule<cModuleMovementData>().Position.Y + Random.Next() % 15 - Random.Next() % 15;
 
         DestinationX =
             std::min(std::max(DestinationX, 0.0f),
@@ -47,33 +48,33 @@ void cMobsEngine::Update() {
             std::min(std::max(DestinationY, 0.0f),
                      static_cast<float>(Engine.World->MapAreaSize) - 1.0f);
 
-        Mob.MoveDestination = {DestinationX, DestinationY};
+        Mob.GetModule<cModuleMovementData>().MoveDestination = {DestinationX, DestinationY};
       }
 
-      auto DeltaX = Mob.MoveDestination.X - Mob.Position.X;
-      auto DeltaY = Mob.MoveDestination.Y - Mob.Position.Y;
+      auto DeltaX = Mob.GetModule<cModuleMovementData>().MoveDestination.X - Mob.GetModule<cModuleMovementData>().Position.X;
+      auto DeltaY = Mob.GetModule<cModuleMovementData>().MoveDestination.Y - Mob.GetModule<cModuleMovementData>().Position.Y;
       auto Distance = std::sqrt(DeltaX * DeltaX + DeltaY * DeltaY);
 
       if (Distance < 1) {
-        Mob.MoveDestination = {-1, -1};
+        Mob.GetModule<cModuleMovementData>().MoveDestination = {-1, -1};
 
         continue;
       }
 
       auto PiF = static_cast<float>(M_PI);
 
-      *Mob.FacingAngle =
+      *Mob.GetModule<cModuleMovementData>().FacingAngle =
           static_cast<float>(std::atan2(-DeltaX, -DeltaY)) / PiF * 180.0f;
 
-      auto Angle = *Mob.FacingAngle / 180.0f * PiF - PiF / 2 + PiF;
-      auto DX = -std::cos(Angle) * Mob.StepMultiplier;
-      auto DY = std::sin(Angle) * Mob.StepMultiplier;
-      auto NewX = static_cast<float>(Mob.Position.X + DX * Mob.StepSize);
-      auto NewY = static_cast<float>(Mob.Position.Y + DY * Mob.StepSize);
+      auto Angle = *Mob.GetModule<cModuleMovementData>().FacingAngle / 180.0f * PiF - PiF / 2 + PiF;
+      auto DX = -std::cos(Angle) * Mob.GetModule<cModuleMovementData>().StepMultiplier;
+      auto DY = std::sin(Angle) * Mob.GetModule<cModuleMovementData>().StepMultiplier;
+      auto NewX = static_cast<float>(Mob.GetModule<cModuleMovementData>().Position.X + DX * Mob.GetModule<cModuleMovementData>().StepSize);
+      auto NewY = static_cast<float>(Mob.GetModule<cModuleMovementData>().Position.Y + DY * Mob.GetModule<cModuleMovementData>().StepSize);
       auto NewXI = static_cast<int>(NewX);
       auto NewYI = static_cast<int>(NewY);
-      auto OldXI = static_cast<int>(Mob.Position.X);
-      auto OldYI = static_cast<int>(Mob.Position.Y);
+      auto OldXI = static_cast<int>(Mob.GetModule<cModuleMovementData>().Position.X);
+      auto OldYI = static_cast<int>(Mob.GetModule<cModuleMovementData>().Position.Y);
 
       if (NewXI >= 0 && NewYI >= 0 && NewXI < Engine.World->MapAreaSize &&
           NewYI < Engine.World->MapAreaSize) {
@@ -81,7 +82,7 @@ void cMobsEngine::Update() {
             GetId("GroundtypeWater")) {
           if (Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor == nullptr ||
               (NewXI == OldXI && NewYI == OldYI)) {
-            Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor->Position = {
+            Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor->GetModule<cModuleMovementData>().Position = {
                 NewX, NewY};
 
             if (NewXI != OldXI || NewYI != OldYI) {
@@ -98,15 +99,15 @@ void cMobsEngine::Update() {
           } else if (Engine.GetCurrentMapArea().Tiles[NewXI][NewYI].Actor !=
                          nullptr &&
                      (NewXI != OldXI || NewYI != OldYI)) {
-            Mob.MoveDestination = {-1, -1};
+            Mob.GetModule<cModuleMovementData>().MoveDestination = {-1, -1};
           }
 
         } else {
-          Mob.MoveDestination = {-1, -1};
+          Mob.GetModule<cModuleMovementData>().MoveDestination = {-1, -1};
         }
 
       } else {
-        Mob.MoveDestination = {-1, -1};
+        Mob.GetModule<cModuleMovementData>().MoveDestination = {-1, -1};
       }
     }
   }

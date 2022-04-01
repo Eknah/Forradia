@@ -3,6 +3,7 @@
 
 #include "cScenePrimary.h"
 #include "../engine/cEngine.h"
+#include "implementation/functionality/actor/modules/cModuleMovementData.h"
 
 namespace Forradia {
 
@@ -25,8 +26,8 @@ void cScenePrimary::Update() {
 
   if (Instruction.TryMoveForward || Instruction.TryMoveRight ||
       Instruction.TryMoveBack || Instruction.TryMoveLeft) {
-    *Player.FacingAngle = Camera.LookingAngle;
-    Player.GetModule<cModuleMovement>().MoveDestination = {-1, -1};
+    *Player.GetModule<cModuleMovementData>().FacingAngle = Camera.LookingAngle;
+    Player.GetModule<cModuleMovementData>().MoveDestination = {-1, -1};
   }
 
   auto TurnRight = Keys->count(SDLK_e);
@@ -49,7 +50,7 @@ void cScenePrimary::Update() {
   Camera.UpdateCameraMovement();
 
   if (Engine.MouseHandler.RightButtonDown)
-    *Player.FacingAngle = Camera.LookingAngle;
+    *Player.GetModule<cModuleMovementData>().FacingAngle = Camera.LookingAngle;
 
   if (Engine.KeyboardHandler.KeysBeenFired->count(SDLK_SPACE) > 0)
     Engine.GetPlayer().GetModule<cModuleJumping>().Jump();
@@ -94,7 +95,7 @@ void cScenePrimary::DoMouseDown(Uint8 MouseButton) {
 
   switch (MouseButton) {
   case SDL_BUTTON_LEFT: {
-    Engine.GetPlayer().GetModule<cModuleMovement>().MoveDestination = {
+    Engine.GetPlayer().GetModule<cModuleMovementData>().MoveDestination = {
         Camera.GetHoveredTile().X + 0.5f, Camera.GetHoveredTile().Y + 0.5f};
     break;
   }

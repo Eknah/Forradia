@@ -4,8 +4,19 @@
 #include "cActor.h"
 #include "modules/cModuleMovement.h"
 #include "../engine/iEngine.h"
+#include "modules/cModuleMovementData.h"
 
 namespace Forradia {
+
+cActor::cActor(const iEngine &Engine_, float X, float Y,
+               std::string ModelName_) :
+    Engine(Engine_), ModelName(ModelName_),
+    ActorId(CurrentActorId++) {
+    if (!HasModule<cModuleMovementData>()) {
+        AddModule<cModuleMovementData>();
+    }
+    GetModule<cModuleMovementData>().Position = {X, Y};
+}
 
 void cActor::ResetForNewFrame() const {
   for (auto &[Key, Module] : Modules)

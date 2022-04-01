@@ -7,6 +7,7 @@
 #include "../engine/cPoint2F.h"
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/cActor.h"
+#include "implementation/functionality/actor/modules/cModuleMovementData.h"
 
 namespace Forradia {
 
@@ -15,15 +16,11 @@ class iEngine;
 class cMob : public cActor {
  public:
   cMob(const iEngine &Engine, float X, float Y, std::string ModelName) :
-      cActor(Engine, X, Y, ModelName) {}
-
-  // Movement
-
-  unsigned int TickLastMove = 0;
-  int MoveSpeed = 30;
-  float StepSize = 1.0f;
-  float StepMultiplier = 0.1f;
-  cPoint2F MoveDestination = {-1, -1};
+      cActor(Engine, X, Y, ModelName) {
+      if (!HasModule<cModuleMovementData>()) {
+          AddModule<cModuleMovementData>();
+      }
+  }
 };
 
 }  // namespace Forradia

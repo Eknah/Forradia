@@ -4,6 +4,7 @@
 #include "cModuleJumping.h"
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/cActor.h"
+#include "implementation/functionality/actor/modules/cModuleMovementData.h"
 
 namespace Forradia {
 
@@ -19,11 +20,11 @@ void cModuleJumping::Update() {
                  3.0f) *
         MaxJumpHeight;
 
-    GetParentActor().PositionZ = JumpHeight;
+    GetParentActor().GetModule<cModuleMovementData>().PositionZ = JumpHeight;
   }
 
   if (Ticks() > TickStartJumping + JumpDuration) {
-    GetParentActor().PositionZ = 0.0f;
+    GetParentActor().GetModule<cModuleMovementData>().PositionZ = 0.0f;
     IsJumping = false;
   }
 }
