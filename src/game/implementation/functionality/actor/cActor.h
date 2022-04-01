@@ -37,6 +37,10 @@ class cActor {
   template <class T>
   bool HasModule() const;
 
+  template <class T>
+  void AddIfNotExists();
+
+
 //  cPoint3 WorldMapCoord = {1, 1, 0};
 //  cPoint2F Position = {50.0f, 50.0f};
 //  float PositionZ = 0.0f;
@@ -72,6 +76,13 @@ void cActor::AddModule() {
 template <class T>
 bool cActor::HasModule() const {
   return Modules.count(typeid(T).hash_code()) > 0;
+}
+
+template <class T>
+void cActor::AddIfNotExists() {
+    if (!HasModule<T>()) {
+        AddModule<T>();
+    }
 }
 
 

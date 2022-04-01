@@ -13,9 +13,7 @@ namespace Forradia {
 cModuleMovement::cModuleMovement(const iEngine &Engine_,
                                  cActor *ParentActor_)
     : iModule(Engine_, ParentActor_) {
-    if (!GetParentActor().HasModule<cModuleMovementData>()) {
-        GetParentActor().AddModule<cModuleMovementData>();
-    }
+    GetParentActor().AddIfNotExists<cModuleMovementData>();
 }
 
 void cModuleMovement::ResetForNewFrame() {

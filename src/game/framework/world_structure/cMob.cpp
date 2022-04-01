@@ -3,4 +3,12 @@
 
 #include "cMob.h"
 
-namespace Forradia {}
+namespace Forradia {
+
+cMob::cMob(const iEngine &Engine, float X, float Y,
+           std::string ModelName) :
+    cActor(Engine, X, Y, ModelName) {
+    AddIfNotExists<cModuleMovementData>();
+}
+
+}
