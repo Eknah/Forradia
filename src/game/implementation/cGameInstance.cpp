@@ -19,8 +19,6 @@ namespace Forradia {
 // Runs engine with all the preparation data
 
 void cGameInstance::StartGame() {
-  // dummy comment
-  // dummy comment 2
   using std::move;
 
   Randomize();
