@@ -13,40 +13,40 @@
 namespace Forradia {
 
 void cGameInstance::StartGame() {
-  const int MapAreaSize = 150;
-  auto WorldMap = MakeUPtr<cWorldMap>(MapAreaSize, 1, 1);
+  const int mapAreaSize = 150;
+  auto planetMap = MakeUPtr<cPlanetWorldMap>(mapAreaSize, 1, 1);
 
-  cEngine Engine;
-  cObjectsContent ObjectsContent;
-  cScenesCollection ScenesCollection;
-  cInventory StartingInventory;
+  cEngine engine;
+  cObjectsContent objectsContent;
+  cScenesCollection scenesCollection;
+  cInventory startingInventory;
 
-  auto DefaultMapGen = MakeSPtr<cDefaultMapGenerator>(Engine, WorldMap);
-  auto WorldMapGens = UMap<int, UMap<int, SPtr<iMapGenerator>>>();
-  WorldMapGens[0][0] = DefaultMapGen;
-  WorldMapGens[1][0] = DefaultMapGen;
-  WorldMap->GenerateWorldMap(WorldMapGens);
+  auto defaultMapGen = MakeSPtr<cDefaultMapGenerator>(engine, planetMap);
+  auto worldMapGens = UMap<int, UMap<int, SPtr<iMapGenerator>>>();
+  worldMapGens[0][0] = defaultMapGen;
+  worldMapGens[1][0] = defaultMapGen;
+  planetMap->GenerateWorldMap(worldMapGens);
 
-  StartingInventory.AddMany({"ObjectWoodaxe",
+  startingInventory.AddMany({"ObjectWoodaxe",
                             "ObjectSaw"});
 
-  ObjectsContent.AddMany({{"ObjectTree1", ObjectMovementBlock},
+  objectsContent.AddMany({{"ObjectTree1", ObjectMovementBlock},
                           {"ObjectTree2", ObjectMovementBlock},
                           {"ObjectCaveWallBlock", ObjectMovementBlock}});
 
-  ScenesCollection.AddMany({{"SceneGameStart",
-                             MakeSPtr<cSceneGameStart>(Engine,
+  scenesCollection.AddMany({{"SceneGameStart",
+                             MakeSPtr<cSceneGameStart>(engine,
                              "SceneGameStartBackground",
                              "SceneForradiaLogo",
                              "Press to start",
                              "SceneMainMenu")},
 
-                            {"SceneMainMenu", MakeSPtr<cSceneMainMenu>(Engine)},
+                            {"SceneMainMenu", MakeSPtr<cSceneMainMenu>(engine)},
 
-                            {"ScenePrimary", MakeSPtr<cScenePrimary>(Engine)}});
+                            {"ScenePrimary", MakeSPtr<cScenePrimary>(engine)}});
 
-  Engine.Run(std::move(ScenesCollection), GetId("SceneGameStart"), std::move(WorldMap),
-             StartingInventory, ObjectsContent);
+  engine.Run(std::move(scenesCollection), GetId("SceneGameStart"), std::move(planetMap),
+             startingInventory, objectsContent);
 }
 
 }  // namespace Forradia

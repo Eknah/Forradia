@@ -29,7 +29,7 @@ class cDefaultMapGenerator : public iMapGenerator {
   void GenerateTallGrass(cMapArea *MapArea) const;
   void GenerateMobs(cMapArea *MapArea) const;
   void GenerateQuestCaves(const iEngine &Engine, cMapArea *MapArea,
-                          const UPtr<cWorldMap> &WorldMap) const;
+                          const UPtr<cPlanetWorldMap> &WorldMap) const;
   int DistToPlayerStartingPos(cMapArea *MapArea, int TileX, int TileY) const;
 
   const int PlayerStartingAreaSize = 4;

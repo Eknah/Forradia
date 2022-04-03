@@ -8,9 +8,9 @@ namespace Forradia {
 
 class iMapGenerator;
 
-class cWorldMap {
+class cPlanetWorldMap {
  public:
-  explicit cWorldMap(int MapAreaSize_,
+  explicit cPlanetWorldMap(int MapAreaSize_,
                      int WorldMapWidth_,
                      int WorldMapHeight_) :
         MapAreaSize(MapAreaSize_), WorldMapWidth(WorldMapWidth_),

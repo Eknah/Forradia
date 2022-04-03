@@ -12,14 +12,12 @@
 
 namespace Forradia {
 
-// Pointer related
-
 template <typename T, typename U> using UMap = std::unordered_map<T, U>;
 
+// Pointer related
+
 template <typename T> using UPtr = std::unique_ptr<T>;
-
 template <typename T, typename U> using UPtrEx = std::unique_ptr<T, U>;
-
 template <typename T> using SPtr = std::shared_ptr<T>;
 
 template <typename T, typename... Args>

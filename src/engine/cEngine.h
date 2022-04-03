@@ -25,67 +25,67 @@ class cEngine : public iEngine {
   // Give needed references to this engine to all sub components
 
   cEngine()
-      : GameLoopImplemented(*this), ModelGraphics(*this),
-        FpsCounterImplemented(*this), CustomCursorImplemented(*this),
-        ImageGraphics(*this), FullscreenControllerImplemented(*this),
-        SceneManagerImplemented(*this),
-        iEngine(&KeyboardHandlerImplemented, &CustomCursorImplemented,
-                &FpsCounterImplemented, &FullscreenControllerImplemented,
-                &GameLoopImplemented, &SceneManagerImplemented) {}
+      : gameLoopImplemented(*this), modelGraphics(*this),
+        fpsCounterImplemented(*this), customCursorImplemented(*this),
+        imageGraphics(*this), fullscreenControllerImplemented(*this),
+        sceneManagerImplemented(*this),
+        iEngine(&keyboardHandlerImplemented, &customCursorImplemented,
+                &fpsCounterImplemented, &fullscreenControllerImplemented,
+                &gameLoopImplemented, &sceneManagerImplemented) {}
 
   // Loads content and initializes all engine components
   // Runs game loop until user exists program
   // Cleans up SDL
 
-  void Run(cScenesCollection ScenesCollection_, int StartScene_,
-                  UPtr<cWorldMap> World_,
-                  cInventory StartingInventory_,
-                  cObjectsContent ObjectsContent_);
+  void Run(cScenesCollection scenesCollection_, int startScene_,
+                  UPtr<cPlanetWorldMap> world_,
+                  cInventory startingInventory_,
+                  cObjectsContent objectsContent_);
 
   // ---- Drawing operations ----
 
-  void DrawImage(std::string ImageName, float X, float Y, float Width,
-                        float Height) const override;
+  void DrawImage(std::string imageName, float x, float y, float width,
+                        float height) const override;
 
-  void DrawImage(int ImageNameHash, float X, float Y, float Width,
-                        float Height) const override;
+  void DrawImage(int imageNameHash, float x, float y, float width,
+                        float height) const override;
 
-  void FillRectangle(SDL_Color Color, float X, float Y, float Width,
-                            float Height) const override;
+  void FillRectangle(SDL_Color color, float x, float y, float width,
+                            float height) const override;
 
-  void DrawRectangle(SDL_Color Color, float X, float Y, float Width,
-                            float Height) const override;
+  void DrawRectangle(SDL_Color color, float x, float y, float width,
+                            float height) const override;
 
-  void DrawLine(SDL_Color Color, float X0, float Y0, float X1,
-                       float Y1) const override;
+  void DrawLine(SDL_Color color, float x0, float y0, float x1,
+                       float y1) const override;
 
-  void DrawString(std::string Message, SDL_Color Color, float X, float Y,
-                         bool CenterAlign = false) const override;
+  void DrawString(std::string message, SDL_Color color, float x, float y,
+                         bool centerAlign = false) const override;
 
-  void DrawModel(std::string ModelName, float X, float Y, float Z,
-                        float Rotation = 0.0f,
-                        float SpecificScaling = 1.0f) const override;
+  void DrawModel(std::string modelName, float x, float y, float z,
+                        float rotation = 0.0f,
+                        float specificScaling = 1.0f) const override;
 
-  void DrawModel(int ModelNameHash, float X, float Y, float Z,
-                        float Rotation = 0.0f,
-                        float SpecificScaling = 1.0f) const override;
+  void DrawModel(int ModelNameHash, float x, float y, float z,
+                        float rotation = 0.0f,
+                        float specificScaling = 1.0f) const override;
 
   // ---- Helper functions ----
 
-  cSizeF GetImageSizeF(std::string ImageName) const;
+  cSizeF GetImageSizeF(std::string imageName) const override;
 
   cMapArea& GetCurrentMapArea() const override;
 
   // ---- Public members ----
 
-  cKeyboardHandler KeyboardHandlerImplemented;
-  cCustomCursor CustomCursorImplemented;
-  cFpsCounter FpsCounterImplemented;
-  cFullscreenController FullscreenControllerImplemented;
-  cGameLoop GameLoopImplemented;
-  cSceneManager SceneManagerImplemented;
+  cKeyboardHandler keyboardHandlerImplemented;
+  cCustomCursor customCursorImplemented;
+  cFpsCounter fpsCounterImplemented;
+  cFullscreenController fullscreenControllerImplemented;
+  cGameLoop gameLoopImplemented;
+  cSceneManager sceneManagerImplemented;
 
-  float TileSize = 0.5f;
+  float tileSize = 0.5f;
 
  private:
   // Initializes SDL video module
@@ -97,12 +97,12 @@ class cEngine : public iEngine {
 
   // ---- Private members ----
 
-  cImageGraphics ImageGraphics;
-  cPaintGraphics PaintGraphics;
-  cModelGraphics ModelGraphics;
+  cImageGraphics imageGraphics;
+  cPaintGraphics paintGraphics;
+  cModelGraphics modelGraphics;
 
-  const std::string Title = "Forradia";
-  const cSize DefaultWindowSize = {800, 600};
+  const std::string title = "Forradia";
+  const cSize defaultWindowSize = {800, 600};
 };
 
 }  // namespace Forradia

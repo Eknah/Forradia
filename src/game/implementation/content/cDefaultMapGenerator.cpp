@@ -4,7 +4,7 @@
 #include <memory>
 #include "cDefaultMapGenerator.h"
 #include "cQuestCaveMapGenerator.h"
-#include "../engine/cWorldMap.h"
+#include "../engine/cPlanetWorldMap.h"
 #include "framework/world_structure/cObject.h"
 
 namespace Forradia {
@@ -455,7 +455,7 @@ void
 cDefaultMapGenerator::
 GenerateQuestCaves(const iEngine &Engine,
                    cMapArea *MapArea,
-                   const UPtr<cWorldMap>&WorldMap) const {
+                   const UPtr<cPlanetWorldMap>&WorldMap) const {
   cQuestCaveMapGenerator QuestCaveMapGenerator;
 
   for (auto Floor = -1; Floor >= -20; Floor--) {

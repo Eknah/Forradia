@@ -6,40 +6,40 @@
 
 namespace Forradia {
 
-void cEngine::Run(cScenesCollection ScenesCollection_, int StartScene_,
-                  UPtr<cWorldMap> World_,
-                  cInventory StartingInventory_,
-                  cObjectsContent ObjectsContent_) {
+void cEngine::Run(cScenesCollection scenesCollection_, int startScene_,
+                  UPtr<cPlanetWorldMap> world_,
+                  cInventory startingInventory_,
+                  cObjectsContent objectsContent_) {
     using std::move;
 
     InitializeGL();
 
-    World = move(World_);
-    ObjectsContent = ObjectsContent_;
+    World = move(world_);
+    ObjectsContent = objectsContent_;
 
-    cPoint3 PlayerWorldPos = {
+    cPoint3 playerWorldPos = {
         World->WorldMapWidth/2,
         World->WorldMapHeight/2,
         0
     };
 
-    cPoint2F PlayerTilePos = World->GetArea(PlayerWorldPos)->SpawnPos;
-    cPoint2 PlayerTilePosI = {
-        static_cast<int>(PlayerTilePos.X),
-        static_cast<int>(PlayerTilePos.Y)
+    cPoint2F playerTilePos = World->GetArea(playerWorldPos)->SpawnPos;
+    cPoint2 playerTilePosI = {
+        static_cast<int>(playerTilePos.X),
+        static_cast<int>(playerTilePos.Y)
     };
 
-    World->GetArea(PlayerWorldPos)->GetTile(PlayerTilePosI)
+    World->GetArea(playerWorldPos)->GetTile(playerTilePosI)
             .Actor = MakeUPtr<cPlayer>(*this);
 
     PlayerPtrPtr = MakeUPtr<cPlayer*>(
-                static_cast<cPlayer*>(World->GetArea(PlayerWorldPos)
-                                      ->GetTile(PlayerTilePosI).Actor.get()));
+                static_cast<cPlayer*>(World->GetArea(playerWorldPos)
+                                      ->GetTile(playerTilePosI).Actor.get()));
 
-    GetPlayer().GetModule<cModuleMovementData>().WorldMapCoord = PlayerWorldPos;
+    GetPlayer().GetModule<cModuleMovementData>().WorldMapCoord = playerWorldPos;
     GetPlayer().GetModule<cModuleMovementData>().Position = GetCurrentMapArea().SpawnPos;
-    GetPlayer().GetModule<cModuleInventory>().Inventory = StartingInventory_;
-    SceneManager.Initialize(move(ScenesCollection_), StartScene_);
+    GetPlayer().GetModule<cModuleInventory>().Inventory = startingInventory_;
+    SceneManager.Initialize(move(scenesCollection_), startScene_);
     ModelLoader.LoadModels();
     ImageLoader.LoadImages();
     TextGraphics.Initialize();
@@ -50,50 +50,50 @@ void cEngine::Run(cScenesCollection ScenesCollection_, int StartScene_,
     SDL_Quit();
   }
 
-void cEngine::DrawImage(std::string ImageName, float X, float Y, float Width,
-                      float Height) const {
-  ImageGraphics.DrawImage(ImageName, X, Y, Width, Height);
+void cEngine::DrawImage(std::string imageName, float x, float y, float width,
+                      float height) const {
+  imageGraphics.DrawImage(imageName, x, y, width, height);
 }
 
-void cEngine::DrawImage(int ImageNameHash, float X, float Y, float Width,
-                        float Height) const {
-    ImageGraphics.DrawImage(ImageNameHash, X, Y, Width, Height);
+void cEngine::DrawImage(int imageNameHash, float x, float y, float width,
+                        float height) const {
+    imageGraphics.DrawImage(imageNameHash, x, y, width, height);
   }
 
-void cEngine::FillRectangle(SDL_Color Color, float X, float Y, float Width,
-                            float Height) const {
-    PaintGraphics.FillRectangle(Color, X, Y, Width, Height);
+void cEngine::FillRectangle(SDL_Color color, float x, float y, float width,
+                            float height) const {
+    paintGraphics.FillRectangle(color, x, y, width, height);
   }
 
-void cEngine::DrawRectangle(SDL_Color Color, float X, float Y, float Width,
-                            float Height) const {
-    PaintGraphics.DrawRectangle(Color, X, Y, Width, Height);
+void cEngine::DrawRectangle(SDL_Color color, float x, float y, float width,
+                            float height) const {
+    paintGraphics.DrawRectangle(color, x, y, width, height);
   }
 
-void cEngine::DrawLine(SDL_Color Color, float X0, float Y0, float X1,
-                       float Y1) const {
-    PaintGraphics.DrawLine(Color, X0, Y0, X1, Y1);
+void cEngine::DrawLine(SDL_Color color, float x0, float y0, float x1,
+                       float y1) const {
+    paintGraphics.DrawLine(color, x0, y0, x1, y1);
   }
 
-void cEngine::DrawString(std::string Message, SDL_Color Color, float X, float Y,
-                         bool CenterAlign) const {
-    TextGraphics.DrawString(Message, Color, X, Y, CenterAlign);
+void cEngine::DrawString(std::string message, SDL_Color color, float x, float y,
+                         bool centerAlign) const {
+    TextGraphics.DrawString(message, color, x, y, centerAlign);
   }
 
-void cEngine::DrawModel(std::string ModelName, float X, float Y, float Z,
-                        float Rotation,
-                        float SpecificScaling) const {
-    ModelGraphics.DrawModel(ModelName, X, Y, Z, Rotation, SpecificScaling);
+void cEngine::DrawModel(std::string modelName, float x, float y, float z,
+                        float rotation,
+                        float specificScaling) const {
+    modelGraphics.DrawModel(modelName, x, y, z, rotation, specificScaling);
   }
 
-void cEngine::DrawModel(int ModelNameHash, float X, float Y, float Z,
-                        float Rotation,
-                        float SpecificScaling) const {
-    ModelGraphics.DrawModel(ModelNameHash, X, Y, Z, Rotation, SpecificScaling);
+void cEngine::DrawModel(int modelNameHash, float x, float y, float z,
+                        float rotation,
+                        float specificScaling) const {
+    modelGraphics.DrawModel(modelNameHash, x, y, z, rotation, specificScaling);
   }
 
-cSizeF cEngine::GetImageSizeF(std::string ImageName) const {
-    return ImageGraphics.GetImageSizeF(ImageName);
+cSizeF cEngine::GetImageSizeF(std::string imageName) const {
+    return imageGraphics.GetImageSizeF(imageName);
   }
 
 cMapArea& cEngine::GetCurrentMapArea() const {
@@ -110,9 +110,9 @@ void cEngine::InitializeGL() {
                         SDL_GL_CONTEXT_PROFILE_CORE);
 
     Window = F_WindowPtr(
-        SDL_CreateWindow(Title.c_str(), SDL_WINDOWPOS_UNDEFINED,
-                         SDL_WINDOWPOS_UNDEFINED, DefaultWindowSize.Width,
-                         DefaultWindowSize.Height,
+        SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
+                         SDL_WINDOWPOS_UNDEFINED, defaultWindowSize.Width,
+                         defaultWindowSize.Height,
                          SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN |
                              SDL_WINDOW_FULLSCREEN_DESKTOP),
         cSDL_Deleter());

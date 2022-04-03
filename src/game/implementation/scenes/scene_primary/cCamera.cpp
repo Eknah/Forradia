@@ -40,12 +40,12 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
   CameraX = static_cast<float>(cos(AngleRadians)) * CameraDist;
   CameraZ = -static_cast<float>(sin(AngleRadians)) * CameraDist;
 
-  gluLookAt(CameraX-Engine.TileSize/2,
+  gluLookAt(CameraX-Engine.tileSize/2,
             CameraHeight,
-            CameraZ-Engine.TileSize/2,
-            -Engine.TileSize/2,
+            CameraZ-Engine.tileSize/2,
+            -Engine.tileSize/2,
             -1,
-            -Engine.TileSize/2,
+            -Engine.tileSize/2,
             0,
             1,
             0);
@@ -92,13 +92,13 @@ cPoint2 cCamera::GetHoveredTile() const {
           static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().Position.Y);
 
   auto OffsetX = -static_cast<float>(2 * RenderDistance + 1)
-          / 2.0f * Engine.TileSize - SubStepX * Engine.TileSize;
+          / 2.0f * Engine.tileSize - SubStepX * Engine.tileSize;
   auto OffsetY = -static_cast<float>(2 * RenderDistance - 1)
-          / 2.0f * Engine.TileSize - SubStepY * Engine.TileSize;
+          / 2.0f * Engine.tileSize - SubStepY * Engine.tileSize;
   auto MapX = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.X - RenderDistance +
-              (RayCastingX - OffsetX) / Engine.TileSize;
+              (RayCastingX - OffsetX) / Engine.tileSize;
   auto MapY = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.Y - RenderDistance +
-              (RayCastingZ - OffsetY) / Engine.TileSize + 1;
+              (RayCastingZ - OffsetY) / Engine.tileSize + 1;
 
   return {static_cast<int>(MapX), static_cast<int>(MapY)};
 }

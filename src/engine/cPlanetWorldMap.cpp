@@ -1,12 +1,12 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "cWorldMap.h"
+#include "cPlanetWorldMap.h"
 #include "../engine/iMapGenerator.h"
 
 namespace Forradia {
 
-void cWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>> GenAreas) {
+void cPlanetWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>> GenAreas) {
     for (auto& [X, Remain] : GenAreas) {
         for (auto& [Y, Gen] : Remain) {
             Gen->GenerateMapArea(X, Y, 0);
@@ -14,7 +14,7 @@ void cWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>> GenAr
     }
 }
 
-UPtr<cMapArea>& cWorldMap::GetArea(cPoint3 Pos) {
+UPtr<cMapArea>& cPlanetWorldMap::GetArea(cPoint3 Pos) {
     return Areas[Pos.X][Pos.Y][Pos.Z];
 }
 
