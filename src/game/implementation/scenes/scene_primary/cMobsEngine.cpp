@@ -79,7 +79,7 @@ void cMobsEngine::Update() {
       if (NewXI >= 0 && NewYI >= 0 && NewXI < Engine.world->mapAreaSize &&
           NewYI < Engine.world->mapAreaSize) {
         if (Engine.GetCurrentMapArea().tiles[NewXI][NewYI].groundType !=
-            GetId("GroundtypeWater")) {
+            GetId("GroundTypeWater")) {
           if (Engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor == nullptr ||
               (NewXI == OldXI && NewYI == OldYI)) {
             Engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor->GetModule<cModuleMovementData>().Position = {

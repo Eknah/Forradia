@@ -38,7 +38,7 @@ cDefaultMapGenerator::ClearToGrass(cMapArea *MapArea) const {
   for (auto TileY = 0; TileY < MapArea->size; TileY++)
     for (auto TileX = 0; TileX < MapArea->size; TileX++)
 
-      MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeGrass");
+      MapArea->tiles[TileX][TileY].groundType = GetId("GroundTypeGrass");
 }
 
 void
@@ -122,7 +122,7 @@ cDefaultMapGenerator::GenerateWater(cMapArea *MapArea) const {
             PlayerStartingAreaSize)
           continue;
 
-        MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeWater");
+        MapArea->tiles[TileX][TileY].groundType = GetId("GroundTypeWater");
       }
     }
   }
@@ -147,46 +147,46 @@ cDefaultMapGenerator::GenerateSand(cMapArea *MapArea) const {
               TileY >= MapArea->size - 1)
             continue;
           if (MapArea->tiles[TileX][TileY].groundType ==
-              GetId("GroundtypeWater"))
+              GetId("GroundTypeWater"))
             continue;
           if (MapArea->tiles[TileX][TileY].elevation > 5)
             continue;
 
           if (MapArea->tiles[TileX - 1][TileY].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX - 1][TileY].groundType !=
-                  GetId("GroundtypeSand") &&
+                  GetId("GroundTypeSand") &&
               MapArea->tiles[TileX - 1][TileY - 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX - 1][TileY - 1].groundType !=
-                  GetId("GroundtypeSand") &&
+                  GetId("GroundTypeSand") &&
               MapArea->tiles[TileX][TileY - 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX][TileY - 1].groundType !=
-                  GetId("GroundtypeSand") &&
+                  GetId("GroundTypeSand") &&
               MapArea->tiles[TileX + 1][TileY - 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX + 1][TileY - 1].groundType !=
-                  GetId("GroundtypeSand") &&
+                  GetId("GroundTypeSand") &&
               MapArea->tiles[TileX + 1][TileY].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX + 1][TileY].groundType !=
-                  GetId("GroundtypeSand") &&
+                  GetId("GroundTypeSand") &&
               MapArea->tiles[TileX + 1][TileY + 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX + 1][TileY + 1].groundType !=
-                  GetId("GroundtypeSand") &&
+                  GetId("GroundTypeSand") &&
               MapArea->tiles[TileX][TileY + 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX][TileY + 1].groundType !=
-                  GetId("GroundtypeSand") &&
+                  GetId("GroundTypeSand") &&
               MapArea->tiles[TileX - 1][TileY + 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX - 1][TileY + 1].groundType !=
-                  GetId("GroundtypeSand"))
+                  GetId("GroundTypeSand"))
             continue;
 
-          MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeSand");
+          MapArea->tiles[TileX][TileY].groundType = GetId("GroundTypeSand");
         }
       }
     }
@@ -212,44 +212,44 @@ cDefaultMapGenerator::GenerateClay(cMapArea *MapArea) const {
               TileY >= MapArea->size - 1)
             continue;
           if (MapArea->tiles[TileX][TileY].groundType !=
-              GetId("GroundtypeWater"))
+              GetId("GroundTypeWater"))
             continue;
 
           if (MapArea->tiles[TileX - 1][TileY].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX - 1][TileY].groundType !=
-                  GetId("GroundtypeClay") &&
+                  GetId("GroundTypeClay") &&
               MapArea->tiles[TileX - 1][TileY - 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX - 1][TileY - 1].groundType !=
-                  GetId("GroundtypeClay") &&
+                  GetId("GroundTypeClay") &&
               MapArea->tiles[TileX][TileY - 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX][TileY - 1].groundType !=
-                  GetId("Gr(int)oundtypeClay") &&
+                  GetId("GroundTypeClay") &&
               MapArea->tiles[TileX + 1][TileY - 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX + 1][TileY - 1].groundType !=
-                  GetId("GroundtypeClay") &&
+                  GetId("GroundTypeClay") &&
               MapArea->tiles[TileX + 1][TileY].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX + 1][TileY].groundType !=
-                  GetId("GroundtypeClay") &&
+                  GetId("GroundTypeClay") &&
               MapArea->tiles[TileX + 1][TileY + 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX + 1][TileY + 1].groundType !=
-                  GetId("GroundtypeClay") &&
+                  GetId("GroundTypeClay") &&
               MapArea->tiles[TileX][TileY + 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX][TileY + 1].groundType !=
-                  GetId("GroundtypeClay") &&
+                  GetId("GroundTypeClay") &&
               MapArea->tiles[TileX - 1][TileY + 1].groundType !=
-                  GetId("GroundtypeWater") &&
+                  GetId("GroundTypeWater") &&
               MapArea->tiles[TileX - 1][TileY + 1].groundType !=
-                  GetId("GroundtypeClay"))
+                  GetId("GroundTypeClay"))
             continue;
 
-          MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeClay");
+          MapArea->tiles[TileX][TileY].groundType = GetId("GroundTypeClay");
         }
       }
     }
@@ -276,7 +276,7 @@ cDefaultMapGenerator::GenerateRock(cMapArea *MapArea) const {
         if (MapArea->tiles[TileX][TileY].elevation < 4)
           continue;
 
-        MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeRock");
+        MapArea->tiles[TileX][TileY].groundType = GetId("GroundTypeRock");
       }
     }
   }
@@ -297,7 +297,7 @@ cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
           continue;
 
         if (MapArea->tiles[TileX][TileY].groundType ==
-            GetId("GroundtypeGrass"))
+            GetId("GroundTypeGrass"))
           if (MapArea->tiles[TileX][TileY].objects.size() == 0)
             MapArea->tiles[TileX][TileY].objects.push_back(
                 MakeSPtr<cObject>("ObjectTree1"));
@@ -320,7 +320,7 @@ cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
           continue;
 
         if (MapArea->tiles[TileX][TileY].groundType ==
-            GetId("GroundtypeGrass"))
+            GetId("GroundTypeGrass"))
           if (MapArea->tiles[TileX][TileY].objects.size() == 0)
             MapArea->tiles[TileX][TileY].objects.push_back(
                 MakeSPtr<cObject>("ObjectTree2"));
@@ -341,7 +341,7 @@ cDefaultMapGenerator::GenerateBushes(cMapArea *MapArea) const {
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
       continue;
 
-    if (MapArea->tiles[TileX][TileY].groundType == GetId("GroundtypeGrass"))
+    if (MapArea->tiles[TileX][TileY].groundType == GetId("GroundTypeGrass"))
       if (MapArea->tiles[TileX][TileY].objects.size() == 0)
         MapArea->tiles[TileX][TileY].objects.push_back(
             MakeSPtr<cObject>("ObjectBush1"));
@@ -357,7 +357,7 @@ cDefaultMapGenerator::GenerateSmallStones(cMapArea *MapArea) const {
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
       continue;
 
-    if (MapArea->tiles[TileX][TileY].groundType != GetId("GroundtypeWater"))
+    if (MapArea->tiles[TileX][TileY].groundType != GetId("GroundTypeWater"))
       if (MapArea->tiles[TileX][TileY].objects.size() == 0)
         MapArea->tiles[TileX][TileY].objects.push_back(
             MakeSPtr<cObject>("ObjectSmallStone"));
@@ -370,7 +370,7 @@ cDefaultMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
     auto TileX = Random.Next() % MapArea->size;
     auto TileY = Random.Next() % MapArea->size;
 
-    if (MapArea->tiles[TileX][TileY].groundType == GetId("GroundtypeGrass"))
+    if (MapArea->tiles[TileX][TileY].groundType == GetId("GroundTypeGrass"))
       if (MapArea->tiles[TileX][TileY].objects.size() == 0)
         MapArea->tiles[TileX][TileY].objects.push_back(
             MakeSPtr<cObject>("ObjectPinkFlower"));
@@ -383,7 +383,7 @@ cDefaultMapGenerator::GenerateTallGrass(cMapArea *MapArea) const {
     auto TileX = Random.Next() % MapArea->size;
     auto TileY = Random.Next() % MapArea->size;
 
-    if (MapArea->tiles[TileX][TileY].groundType == GetId("GroundtypeGrass"))
+    if (MapArea->tiles[TileX][TileY].groundType == GetId("GroundTypeGrass"))
       if (MapArea->tiles[TileX][TileY].objects.size() == 0)
         MapArea->tiles[TileX][TileY].objects.push_back(
             MakeSPtr<cObject>("ObjectTallGrass"));
@@ -414,7 +414,7 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
       continue;
 
     if (MapArea->tiles[TileX][TileY].groundType !=
-            GetId("GroundtypeWater") &&
+            GetId("GroundTypeWater") &&
         MapArea->tiles[TileX][TileY].actor == nullptr) {
       MapArea->tiles[TileX][TileY].actor =
           std::make_unique<cMob>(Engine,
@@ -438,7 +438,7 @@ cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
       continue;
 
     if (MapArea->tiles[TileX][TileY].groundType !=
-            GetId("GroundtypeWater") &&
+            GetId("GroundTypeWater") &&
         MapArea->tiles[TileX][TileY].actor == nullptr) {
       MapArea->tiles[TileX][TileY].actor =
           std::make_unique<cMob>(Engine,
@@ -466,7 +466,7 @@ GenerateQuestCaves(const iEngine &Engine,
       continue;
 
     if (MapArea->tiles[TileX][TileY].groundType !=
-        GetId("GroundtypeWater")) {
+        GetId("GroundTypeWater")) {
       MapArea->tiles[TileX][TileY].objects.push_back(
           MakeSPtr<cObject>("ObjectQuestCaveEntrance"));
       //MapArea->Tiles[TileX][TileY].WarpToFloor = Floor;

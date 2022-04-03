@@ -21,7 +21,7 @@ void cQuestCaveMapGenerator::ClearToCaveFloor(cMapArea *MapArea) {
   for (auto TileY = 0; TileY < MapArea->size; TileY++)
     for (auto TileX = 0; TileX < MapArea->size; TileX++)
 
-      MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeCaveFloor");
+      MapArea->tiles[TileX][TileY].groundType = GetId("GroundTypeCaveFloor");
 }
 
 void cQuestCaveMapGenerator::GenerateCaveWalls(cMapArea *MapArea) {

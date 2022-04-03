@@ -103,7 +103,7 @@ void cModuleMovement::UpdateDirectionalMovement() {
            .tiles[NewXRoundedI][NewYRoundedI]
           .HasObjectWithFlag(ObjectMovementBlock)
           && Engine.GetCurrentMapArea()
-          .tiles[NewXRoundedI][NewYRoundedI].groundType != GetId("GroundtypeWater")
+          .tiles[NewXRoundedI][NewYRoundedI].groundType != GetId("GroundTypeWater")
           && !TileHasMob) {
       auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.x);
       auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.y);
@@ -205,7 +205,7 @@ void cModuleMovement::UpdateDestinationMovement() {
              .tiles[NewXRoundedI][NewYRoundedI]
             .HasObjectWithFlag(ObjectMovementBlock)
             && Engine.GetCurrentMapArea()
-            .tiles[NewXRoundedI][NewYRoundedI].groundType != GetId("GroundtypeWater")
+            .tiles[NewXRoundedI][NewYRoundedI].groundType != GetId("GroundTypeWater")
             && !TileHasMob) {
         auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.x);
         auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.y);

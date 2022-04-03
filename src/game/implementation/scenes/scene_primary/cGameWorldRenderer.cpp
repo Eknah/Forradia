@@ -125,7 +125,7 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
         auto WaterAnimIndex2 = 0;
         auto WaterAnimIndex3 = 0;
 
-        if (GroundTypeId == GetId("GroundtypeWater")) {
+        if (GroundTypeId == GetId("GroundTypeWater")) {
           WaterAnimIndex0 =
               ((Ticks() * 3 + (TileXI * TileYI) * 10) % 3600) / 1200;
           WaterAnimIndex1 =
@@ -141,7 +141,7 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
 
           if (WaterAnimIndex0 > 0)
             GroundTypeId =
-                GetId("GroundtypeWater" + std::to_string(WaterAnimIndex0));
+                GetId("GroundTypeWater" + std::to_string(WaterAnimIndex0));
         }
 
         auto Elev0 = 0.0f;
