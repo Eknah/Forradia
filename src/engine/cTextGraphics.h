@@ -20,12 +20,12 @@ class cTextGraphics {
                          bool CenterAlign = false) const;
 
  private:
-  const std::string DefaultFontPath = "/Resources/Fonts/PixeloidSans.ttf";
-  const int DefaultFontSize = 20;
-  const float Scaling = 0.8f;
+  const std::string defaultFontPath = "/Resources/Fonts/PixeloidSans.ttf";
+  const int defaultFontSize = 20;
+  const float scaling = 0.8f;
 
-  std::unique_ptr<TTF_Font, cSDL_Deleter> DefaultFont;
-  cUtilities Utilities;
+  std::unique_ptr<TTF_Font, cSDL_Deleter> defaultFont;
+  cUtilities utilities;
 };
 
 }  // namespace Forradia

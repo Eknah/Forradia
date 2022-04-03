@@ -6,8 +6,8 @@
 namespace Forradia {
 
 bool cRectF::ContainsPoint(cPoint2F point) {
-    if (point.X >= X && point.Y >= Y && point.X < X + Width &&
-        point.Y < Y + Height)
+    if (point.x >= x && point.y >= y && point.x < x + width &&
+        point.y < y + height)
       return true;
 
     return false;

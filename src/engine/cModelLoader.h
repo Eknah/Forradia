@@ -14,12 +14,12 @@ class cModelLoader {
 
   bool ModelExists(std::string ModelName) const;
 
-  UMap<int, Forradia::cModel3D> Models;
-  UMap<int, std::string> ModelNames;
+  UMap<int, Forradia::cModel3D> models;
+  UMap<int, std::string> modelNames;
 
  private:
-  const std::string ModelsPath = "/Resources/Models";
-  const std::string ModelNameExtension = ".obj";
+  const std::string modelsPath = "/Resources/Models";
+  const std::string modelNameExtension = ".obj";
 };
 
 }  // namespace Forradia

@@ -11,7 +11,7 @@ void cModuleInventory::ResetForNewFrame() {}
 void cModuleInventory::Update() {}
 
 void cModuleInventory::Add(int Position, std::string ObjectName) {
-  Inventory.Objects.insert({Position, MakeSPtr<cObject>(ObjectName)});
+  Inventory.objects.insert({Position, MakeSPtr<cObject>(ObjectName)});
 }
 
 }  // namespace Forradia

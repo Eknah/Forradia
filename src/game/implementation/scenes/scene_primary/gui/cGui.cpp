@@ -19,13 +19,13 @@ void cGui::Update() {
   auto MousePositionF = Utilities.GetMousePositionF();
 
   if (BoundsButtonInventory.ContainsPoint(MousePositionF))
-    Engine.CustomCursor.CursorType = eCursorTypes::Hovering;
+    Engine.customCursor.cursorType = eCursorTypes::Hovering;
 
   if (BoundsButtonCharacter.ContainsPoint(MousePositionF))
-    Engine.CustomCursor.CursorType = eCursorTypes::Hovering;
+    Engine.customCursor.cursorType = eCursorTypes::Hovering;
 
   if (BoundsButtonSystem.ContainsPoint(MousePositionF))
-    Engine.CustomCursor.CursorType = eCursorTypes::Hovering;
+    Engine.customCursor.cursorType = eCursorTypes::Hovering;
 
   for (auto &[Key, Window] : Windows)
     Window->Update();
@@ -37,61 +37,61 @@ void cGui::Render() {
   auto MousePositionF = Utilities.GetMousePositionF();
 
   if (BoundsButtonInventory.ContainsPoint(MousePositionF))
-    Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonInventory.X,
-                         BoundsButtonInventory.Y, BoundsButtonInventory.Width,
-                         BoundsButtonInventory.Height);
+    Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonInventory.x,
+                         BoundsButtonInventory.y, BoundsButtonInventory.width,
+                         BoundsButtonInventory.height);
   else
-    Engine.FillRectangle({0, 150, 255, 100}, BoundsButtonInventory.X,
-                         BoundsButtonInventory.Y, BoundsButtonInventory.Width,
-                         BoundsButtonInventory.Height);
+    Engine.FillRectangle({0, 150, 255, 100}, BoundsButtonInventory.x,
+                         BoundsButtonInventory.y, BoundsButtonInventory.width,
+                         BoundsButtonInventory.height);
 
-  Engine.DrawRectangle({255, 255, 255, 100}, BoundsButtonInventory.X,
-                       BoundsButtonInventory.Y, BoundsButtonInventory.Width,
-                       BoundsButtonInventory.Height);
+  Engine.DrawRectangle({255, 255, 255, 100}, BoundsButtonInventory.x,
+                       BoundsButtonInventory.y, BoundsButtonInventory.width,
+                       BoundsButtonInventory.height);
   Engine.DrawString("Inventory [F2]", {255, 255, 255, 255},
-                    BoundsButtonInventory.X + BoundsButtonInventory.Width / 2,
-                    BoundsButtonInventory.Y + BoundsButtonInventory.Height / 2,
+                    BoundsButtonInventory.x + BoundsButtonInventory.width / 2,
+                    BoundsButtonInventory.y + BoundsButtonInventory.height / 2,
                     true);
 
   if (BoundsButtonCharacter.ContainsPoint(MousePositionF))
-    Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonCharacter.X,
-                         BoundsButtonCharacter.Y, BoundsButtonCharacter.Width,
-                         BoundsButtonCharacter.Height);
+    Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonCharacter.x,
+                         BoundsButtonCharacter.y, BoundsButtonCharacter.width,
+                         BoundsButtonCharacter.height);
   else
-    Engine.FillRectangle({0, 150, 255, 100}, BoundsButtonCharacter.X,
-                         BoundsButtonCharacter.Y, BoundsButtonCharacter.Width,
-                         BoundsButtonCharacter.Height);
+    Engine.FillRectangle({0, 150, 255, 100}, BoundsButtonCharacter.x,
+                         BoundsButtonCharacter.y, BoundsButtonCharacter.width,
+                         BoundsButtonCharacter.height);
 
-  Engine.DrawRectangle({255, 255, 255, 100}, BoundsButtonCharacter.X,
-                       BoundsButtonCharacter.Y, BoundsButtonCharacter.Width,
-                       BoundsButtonCharacter.Height);
+  Engine.DrawRectangle({255, 255, 255, 100}, BoundsButtonCharacter.x,
+                       BoundsButtonCharacter.y, BoundsButtonCharacter.width,
+                       BoundsButtonCharacter.height);
   Engine.DrawString("Character [F1]", {255, 255, 255, 255},
-                    BoundsButtonCharacter.X + BoundsButtonCharacter.Width / 2,
-                    BoundsButtonCharacter.Y + BoundsButtonCharacter.Height / 2,
+                    BoundsButtonCharacter.x + BoundsButtonCharacter.width / 2,
+                    BoundsButtonCharacter.y + BoundsButtonCharacter.height / 2,
                     true);
 
   if (BoundsButtonSystem.ContainsPoint(MousePositionF))
-    Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonSystem.X,
-                         BoundsButtonSystem.Y, BoundsButtonSystem.Width,
-                         BoundsButtonSystem.Height);
+    Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonSystem.x,
+                         BoundsButtonSystem.y, BoundsButtonSystem.width,
+                         BoundsButtonSystem.height);
   else
-    Engine.FillRectangle({0, 150, 255, 100}, BoundsButtonSystem.X,
-                         BoundsButtonSystem.Y, BoundsButtonSystem.Width,
-                         BoundsButtonSystem.Height);
+    Engine.FillRectangle({0, 150, 255, 100}, BoundsButtonSystem.x,
+                         BoundsButtonSystem.y, BoundsButtonSystem.width,
+                         BoundsButtonSystem.height);
 
-  Engine.DrawRectangle({255, 255, 255, 100}, BoundsButtonSystem.X,
-                       BoundsButtonSystem.Y, BoundsButtonSystem.Width,
-                       BoundsButtonSystem.Height);
+  Engine.DrawRectangle({255, 255, 255, 100}, BoundsButtonSystem.x,
+                       BoundsButtonSystem.y, BoundsButtonSystem.width,
+                       BoundsButtonSystem.height);
   Engine.DrawString("System [F3]", {255, 255, 255, 255},
-                    BoundsButtonSystem.X + BoundsButtonSystem.Width / 2,
-                    BoundsButtonSystem.Y + BoundsButtonSystem.Height / 2, true);
-  Engine.FillRectangle({0, 150, 255, 100}, BoundsTextBox.X, BoundsTextBox.Y,
-                       BoundsTextBox.Width, BoundsTextBox.Height);
-  Engine.DrawRectangle({255, 255, 255, 100}, BoundsTextBox.X, BoundsTextBox.Y,
-                       BoundsTextBox.Width, BoundsTextBox.Height);
+                    BoundsButtonSystem.x + BoundsButtonSystem.width / 2,
+                    BoundsButtonSystem.y + BoundsButtonSystem.height / 2, true);
+  Engine.FillRectangle({0, 150, 255, 100}, BoundsTextBox.x, BoundsTextBox.y,
+                       BoundsTextBox.width, BoundsTextBox.height);
+  Engine.DrawRectangle({255, 255, 255, 100}, BoundsTextBox.x, BoundsTextBox.y,
+                       BoundsTextBox.width, BoundsTextBox.height);
 
-  auto TextBoxTextX = BoundsTextBox.X + TextBoxMargin;
-  auto TextBoxTextY = BoundsTextBox.Y + TextBoxMargin;
+  auto TextBoxTextX = BoundsTextBox.x + TextBoxMargin;
+  auto TextBoxTextY = BoundsTextBox.y + TextBoxMargin;
 
   Engine.DrawString(TextBoxText.at(0), {255, 255, 255, 255}, TextBoxTextX,
                     TextBoxTextY);

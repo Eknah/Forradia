@@ -13,8 +13,8 @@ class cPlanetWorldMap {
   explicit cPlanetWorldMap(int MapAreaSize_,
                      int WorldMapWidth_,
                      int WorldMapHeight_) :
-        MapAreaSize(MapAreaSize_), WorldMapWidth(WorldMapWidth_),
-        WorldMapHeight(WorldMapHeight_) {}
+        mapAreaSize(MapAreaSize_), worldMapWidth(WorldMapWidth_),
+        worldMapHeight(WorldMapHeight_) {}
 
   // Core
 
@@ -24,13 +24,13 @@ class cPlanetWorldMap {
 
   // Basic data
 
-  int MapAreaSize = -1;
-  int WorldMapWidth = -1;
-  int WorldMapHeight = -1;
+  int mapAreaSize = -1;
+  int worldMapWidth = -1;
+  int worldMapHeight = -1;
 
   // Core world map data structures
 
-  UMap<int, UMap<int, UMap<int, UPtr<cMapArea>>>> Areas;
+  UMap<int, UMap<int, UMap<int, UPtr<cMapArea>>>> areas;
 };
 
 }  // namespace Forradia

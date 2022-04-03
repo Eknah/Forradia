@@ -15,10 +15,10 @@ class cScenesCollection {
  public:
   // Collection operations
   void Add(std::string sceneName, SPtr<cSceneBase> scene);
-  void AddMany(std::vector<std::tuple<std::string, SPtr<cSceneBase>>> scenes);
+  void AddMany(std::vector<std::tuple<std::string, SPtr<cSceneBase>>> scenes_);
 
   // Collection structure
-  UMap<int, SPtr<cSceneBase>> Scenes;
+  UMap<int, SPtr<cSceneBase>> scenes;
 };
 
 }  // namespace Forradia

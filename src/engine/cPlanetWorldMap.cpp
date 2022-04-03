@@ -15,7 +15,7 @@ void cPlanetWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>>
 }
 
 UPtr<cMapArea>& cPlanetWorldMap::GetArea(cPoint3 Pos) {
-    return Areas[Pos.X][Pos.Y][Pos.Z];
+    return areas[Pos.x][Pos.y][Pos.z];
 }
 
 }  // namespace Forradia

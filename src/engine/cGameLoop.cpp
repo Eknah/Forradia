@@ -23,47 +23,47 @@ void cGameLoop::Run() {
         }
 
         case SDL_KEYDOWN: {
-          Engine.KeyboardHandler.DoKeyDown(event.key.keysym.sym);
+          Engine.keyboardHandler.DoKeyDown(event.key.keysym.sym);
 
-          Engine.FullscreenController.UpdateFullscreenToggling();
+          Engine.fullscreenController.UpdateFullscreenToggling();
 
           break;
         }
 
         case SDL_KEYUP: {
-          Engine.KeyboardHandler.DoKeyUp(event.key.keysym.sym);
+          Engine.keyboardHandler.DoKeyUp(event.key.keysym.sym);
 
           break;
         }
 
         case SDL_MOUSEBUTTONDOWN: {
-          Engine.SceneManager.GetCurrentScene()->DoMouseDown(
+          Engine.sceneManager.GetCurrentScene()->DoMouseDown(
               event.button.button);
 
           if (event.button.button == SDL_BUTTON_LEFT) {
-            Engine.MouseHandler.LeftButtonDown = true;
-              Engine.MouseHandler.SetLeftButtonBeenFired();
+            Engine.mouseHandler.leftButtonDown = true;
+              Engine.mouseHandler.SetLeftButtonBeenFired();
           } else if (event.button.button == SDL_BUTTON_RIGHT) {
-            Engine.MouseHandler.RightButtonDown = true;
-              Engine.MouseHandler.SetRightButtonBeenFired();
+            Engine.mouseHandler.rightButtonDown = true;
+              Engine.mouseHandler.SetRightButtonBeenFired();
           }
 
           break;
         }
 
         case SDL_MOUSEBUTTONUP: {
-          Engine.SceneManager.GetCurrentScene()->DoMouseUp(event.button.button);
+          Engine.sceneManager.GetCurrentScene()->DoMouseUp(event.button.button);
 
           if (event.button.button == SDL_BUTTON_LEFT)
-            Engine.MouseHandler.LeftButtonDown = false;
+            Engine.mouseHandler.leftButtonDown = false;
           else if (event.button.button == SDL_BUTTON_RIGHT)
-            Engine.MouseHandler.RightButtonDown = false;
+            Engine.mouseHandler.rightButtonDown = false;
 
           break;
         }
 
         case SDL_MOUSEWHEEL: {
-          *Engine.MouseHandler.WheelAmount = static_cast<float>(event.wheel.y);
+          *Engine.mouseHandler.wheelAmount = static_cast<float>(event.wheel.y);
 
           break;
         }
@@ -76,24 +76,24 @@ void cGameLoop::Run() {
   }
 
 void cGameLoop::ResetForNewFrame() {
-      Engine.KeyboardHandler.ResetForNewFrame();
-      Engine.MouseHandler.ResetForNewFrame();
-      Engine.CustomCursor.ResetForNewFrame();
+      Engine.keyboardHandler.ResetForNewFrame();
+      Engine.mouseHandler.ResetForNewFrame();
+      Engine.customCursor.ResetForNewFrame();
   }
 
 void cGameLoop::Update() {
-    Engine.SceneManager.GetCurrentScene()->Update();
-    Engine.FpsCounter.Update();
+    Engine.sceneManager.GetCurrentScene()->Update();
+    Engine.fpsCounter.Update();
   }
 
 void cGameLoop::Render() {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    Engine.SceneManager.GetCurrentScene()->Render();
-    Engine.FpsCounter.Render();
-    Engine.CustomCursor.Render();
+    Engine.sceneManager.GetCurrentScene()->Render();
+    Engine.fpsCounter.Render();
+    Engine.customCursor.Render();
 
-    SDL_GL_SwapWindow(Engine.Window.get());
+    SDL_GL_SwapWindow(Engine.window.get());
   }
 
 int cGameLoop::EventFilter(void *pthis, const SDL_Event *event) {
@@ -105,8 +105,8 @@ int cGameLoop::EventFilter(void *pthis, const SDL_Event *event) {
 
     iEngine *Engine = reinterpret_cast<iEngine *>(pthis);
 
-    Engine->GameLoop.Update();
-    Engine->GameLoop.Render();
+    Engine->gameLoop.Update();
+    Engine->gameLoop.Render();
 
     return 1;
   }

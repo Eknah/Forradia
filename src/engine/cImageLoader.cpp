@@ -6,33 +6,33 @@
 namespace Forradia {
 
 void cImageLoader::LoadImages() {
-    Images.clear();
-    ImageNames.clear();
+    images.clear();
+    imageNames.clear();
 
-    auto file_path = std::string(SDL_GetBasePath());
-    file_path.append(ImagesPath);
+    auto filePath = std::string(SDL_GetBasePath());
+    filePath.append(imagesPath);
 
     auto entries =
-        std::filesystem::recursive_directory_iterator(file_path.c_str());
+        std::filesystem::recursive_directory_iterator(filePath.c_str());
 
     for (auto &file : entries) {
-      auto full_filename = file.path().filename().string();
-      auto filename = full_filename.substr(0, full_filename.find("."));
-      auto image_name_hash = int();
+      auto fullFilename = file.path().filename().string();
+      auto filename = fullFilename.substr(0, fullFilename.find("."));
+      auto imageNameHash = int();
 
       if (file.is_directory() ||
-          ImageNameExtension !=
-              full_filename.substr(full_filename.length() -
-                                       ImageNameExtension.length(),
-                                   ImageNameExtension.length()))
+          imageNameExtension !=
+              fullFilename.substr(fullFilename.length() -
+                                       imageNameExtension.length(),
+                                   imageNameExtension.length()))
         continue;
 
       auto surface =
           F_SurfacePtr(IMG_Load(file.path().string().c_str()), cSDL_Deleter());
-      auto texture_id = GLuint(Images.size());
+      auto textureId = GLuint(images.size());
 
-      glGenTextures(1, &texture_id);
-      glBindTexture(GL_TEXTURE_2D, texture_id);
+      glGenTextures(1, &textureId);
+      glBindTexture(GL_TEXTURE_2D, textureId);
 
       int mode = GL_RGB;
 
@@ -44,10 +44,10 @@ void cImageLoader::LoadImages() {
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-      image_name_hash = GetId(filename);
+      imageNameHash = GetId(filename);
 
-      Images[image_name_hash] = texture_id;
-      ImageNames[image_name_hash] = filename;
+      images[imageNameHash] = textureId;
+      imageNames[imageNameHash] = filename;
     }
   }
 

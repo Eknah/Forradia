@@ -1,5 +1,8 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
+//
+// This source file is built upon source code from the OBJ-Loader
+// repo by Bly7 at https://github.com/Bly7/OBJ-Loader
 
 #pragma once
 #include <string>
@@ -10,20 +13,20 @@ namespace Forradia {
 
 class cMaterial {
  public:
-  std::string Name;
-  cVector3 Ka;
-  cVector3 Kd;
-  cVector3 Ks;
-  float Ns = 0.0f;
-  float Ni = 0.0f;
-  float D = 0.0f;
-  int Illum = 0;
-  std::string MapKa;
-  std::string MapKd;
-  std::string MapKs;
-  std::string MapNs;
-  std::string MapD;
-  std::string MapBump;
+  std::string name;
+  cVector3 ka;
+  cVector3 kd;
+  cVector3 ks;
+  float ns = 0.0f;
+  float ni = 0.0f;
+  float d = 0.0f;
+  int illum = 0;
+  std::string mapKa;
+  std::string mapKd;
+  std::string mapKs;
+  std::string mapNs;
+  std::string mapD;
+  std::string mapBump;
 };
 
 }  // namespace Forradia

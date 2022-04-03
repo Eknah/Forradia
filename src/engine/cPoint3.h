@@ -7,9 +7,9 @@ namespace Forradia {
 
 class cPoint3 {
  public:
-  int X = 0;
-  int Y = 0;
-  int Z = 0;
+  int x = 0;
+  int y = 0;
+  int z = 0;
 };
 
 }  // namespace Forradia

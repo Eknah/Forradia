@@ -9,10 +9,10 @@ void cTextGraphics::Initialize() {
     TTF_Init();
 
     auto FontPath = std::string(SDL_GetBasePath());
-    FontPath.append(DefaultFontPath);
+    FontPath.append(defaultFontPath);
 
-    DefaultFont = UPtrEx<TTF_Font, cSDL_Deleter>(
-        TTF_OpenFont(FontPath.c_str(), DefaultFontSize));
+    defaultFont = UPtrEx<TTF_Font, cSDL_Deleter>(
+        TTF_OpenFont(FontPath.c_str(), defaultFontSize));
   }
 
 void cTextGraphics::DrawString(std::string Text, SDL_Color Color, float X, float Y,
@@ -29,7 +29,7 @@ void cTextGraphics::DrawString(std::string Text, SDL_Color Color, float X, float
     glBindTexture(GL_TEXTURE_2D, Texture);
 
     auto FontSurface =
-        TTF_RenderText_Blended(DefaultFont.get(), Text.c_str(), Color);
+        TTF_RenderText_Blended(defaultFont.get(), Text.c_str(), Color);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -37,13 +37,13 @@ void cTextGraphics::DrawString(std::string Text, SDL_Color Color, float X, float
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, FontSurface->w, FontSurface->h, 0,
                  GL_BGRA, GL_UNSIGNED_BYTE, FontSurface->pixels);
 
-    auto CanvasSize = Utilities.GetCanvasSize();
+    auto CanvasSize = utilities.GetCanvasSize();
 
     auto Width = static_cast<float>(FontSurface->w)
-            / CanvasSize.Width * Scaling;
+            / CanvasSize.width * scaling;
 
     auto Height = static_cast<float>(FontSurface->h)
-            / CanvasSize.Height * Scaling;
+            / CanvasSize.height * scaling;
 
     glColor4f(Color.r / 255.0f, Color.g / 255.0f, Color.b / 255.0f,
               Color.a / 255.0f);

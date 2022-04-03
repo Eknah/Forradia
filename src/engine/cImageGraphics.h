@@ -10,7 +10,7 @@ namespace Forradia {
 
 class cImageGraphics {
  public:
-  explicit cImageGraphics(iEngine &engine) : Engine(engine) {}
+  explicit cImageGraphics(iEngine &engine) : engine(engine) {}
 
   // ---- Drawing operations ----
 
@@ -23,8 +23,8 @@ class cImageGraphics {
   cSizeF GetImageSizeF(std::string ImageName) const;
 
  private:
-  iEngine &Engine;
-  cUtilities Utilities;
+  iEngine &engine;
+  cUtilities utilities;
 };
 
 }  // namespace Forradia

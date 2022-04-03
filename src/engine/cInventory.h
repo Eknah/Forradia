@@ -13,10 +13,10 @@ class cObject;
 
 class cInventory {
 public:
-    void Add(std::string ObjectName);
-    void AddMany(std::vector<std::string> ObjectNames);
+    void Add(std::string objectName);
+    void AddMany(std::vector<std::string> objectNames);
 
-    UMap<int, SPtr<cObject>> Objects;
+    UMap<int, SPtr<cObject>> objects;
 };
 
 }  // namespace Forradia

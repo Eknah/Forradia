@@ -6,24 +6,24 @@
 namespace Forradia {
 
 void cSceneGameStart::Update() {
-    if (Engine.KeyboardHandler.KeysBeenFired->size() > 0)
-      Engine.SceneManager.SwitchToScene(SwitchToSceneName);
+    if (Engine.keyboardHandler.KeysBeenFired->size() > 0)
+      Engine.sceneManager.SwitchToScene(switchToSceneName);
 
-    if (Engine.MouseHandler.GetLeftButtonBeenFired()
-            || Engine.MouseHandler.GetRightButtonBeenFired())
-        Engine.SceneManager.SwitchToScene(SwitchToSceneName);
+    if (Engine.mouseHandler.GetLeftButtonBeenFired()
+            || Engine.mouseHandler.GetRightButtonBeenFired())
+        Engine.sceneManager.SwitchToScene(switchToSceneName);
   }
 
 void cSceneGameStart::Render() {
-    Engine.DrawImage(ImageNameBackground, 0, 0, 1, 1);
+    Engine.DrawImage(imageNameBackground, 0, 0, 1, 1);
 
-    auto LogoSizeF = Engine.GetImageSizeF(ImageNameLogo);
+    auto LogoSizeF = Engine.GetImageSizeF(imageNameLogo);
 
-    Engine.DrawImage(ImageNameLogo, 0.5f - LogoSizeF.Width / 2.0f,
-                     0.25f - LogoSizeF.Height / 2.0f,
-                     LogoSizeF.Width,
-                     LogoSizeF.Height);
-    Engine.DrawString(Text, {255, 255, 255, 255}, 0.5f, 0.5f, true);
+    Engine.DrawImage(imageNameLogo, 0.5f - LogoSizeF.width / 2.0f,
+                     0.25f - LogoSizeF.height / 2.0f,
+                     LogoSizeF.width,
+                     LogoSizeF.height);
+    Engine.DrawString(text, {255, 255, 255, 255}, 0.5f, 0.5f, true);
   }
 
 }  // namespace Forradia

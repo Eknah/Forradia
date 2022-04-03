@@ -18,16 +18,16 @@ void cModelGraphics::DrawModel(int ModelNameId, float X, float Y, float Z,
 
     glBegin(GL_TRIANGLES);
 
-    auto &Model = Engine.ModelLoader.Models[ModelNameId];
+    auto &Model = engine.modelLoader.models[ModelNameId];
 
-    for (auto &Mesh : Model.LoadedMeshes) {
-      glColor4f(Mesh.MeshMaterial.Kd.X, Mesh.MeshMaterial.Kd.Y,
-                Mesh.MeshMaterial.Kd.Z, 1.0f);
+    for (auto &Mesh : Model.loadedMeshes) {
+      glColor4f(Mesh.meshMaterial.kd.x, Mesh.meshMaterial.kd.y,
+                Mesh.meshMaterial.kd.z, 1.0f);
 
-      for (auto &Vector : Mesh.Vertices) {
-        auto XVec = X + ModelScaling * Vector.Position.X * SpecificScaling;
-        auto YVec = Y + ModelScaling * Vector.Position.Y * SpecificScaling;
-        auto ZVec = Z + ModelScaling * Vector.Position.Z * SpecificScaling;
+      for (auto &Vector : Mesh.vertices) {
+        auto XVec = X + modelScaling * Vector.position.x * SpecificScaling;
+        auto YVec = Y + modelScaling * Vector.position.y * SpecificScaling;
+        auto ZVec = Z + modelScaling * Vector.position.z * SpecificScaling;
 
         glVertex3f(XVec, YVec, ZVec);
       }

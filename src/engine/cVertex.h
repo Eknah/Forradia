@@ -12,9 +12,9 @@ namespace Forradia {
 
 class cVertex {
  public:
-  cVector3 Position;
-  cVector3 Normal;
-  cVector2 TextureCoordinate;
+  cVector3 position;
+  cVector3 normal;
+  cVector2 textureCoordinate;
 };
 
 }  // namespace Forradia

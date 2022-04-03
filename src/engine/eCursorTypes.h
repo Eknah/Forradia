@@ -5,6 +5,10 @@
 
 namespace Forradia {
 
-enum class eCursorTypes { Default, Hovering, Hidden };
+enum class eCursorTypes {
+    Default,
+    Hovering,
+    Hidden
+};
 
 }  // namespace Forradia

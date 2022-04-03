@@ -38,8 +38,8 @@ void cModuleMovement::UpdateDirectionalMovement() {
 
   IsWalking = true;
 
-  auto NewX = GetParentActor().GetModule<cModuleMovementData>().Position.X;
-  auto NewY = GetParentActor().GetModule<cModuleMovementData>().Position.Y;
+  auto NewX = GetParentActor().GetModule<cModuleMovementData>().Position.x;
+  auto NewY = GetParentActor().GetModule<cModuleMovementData>().Position.y;
   auto Angle = 0.0f;
   auto PiF = static_cast<float>(M_PI);
 
@@ -73,16 +73,16 @@ void cModuleMovement::UpdateDirectionalMovement() {
   NewY += DY * GetParentActor().GetModule<cModuleMovementData>().StepSize;
 
   if (NewX < 0)
-    NewX += Engine.GetCurrentMapArea().Size;
+    NewX += Engine.GetCurrentMapArea().size;
 
   if (NewY < 0)
-    NewY += Engine.GetCurrentMapArea().Size;
+    NewY += Engine.GetCurrentMapArea().size;
 
-  if (NewX >= Engine.GetCurrentMapArea().Size)
-    NewX -= Engine.GetCurrentMapArea().Size;
+  if (NewX >= Engine.GetCurrentMapArea().size)
+    NewX -= Engine.GetCurrentMapArea().size;
 
-  if (NewY >= Engine.GetCurrentMapArea().Size)
-    NewY -= Engine.GetCurrentMapArea().Size;
+  if (NewY >= Engine.GetCurrentMapArea().size)
+    NewY -= Engine.GetCurrentMapArea().size;
 
   auto NewXRounded = NewX;
   auto NewYRounded = NewY;
@@ -93,33 +93,33 @@ void cModuleMovement::UpdateDirectionalMovement() {
   auto TileHasMob = false;
 
   if (Engine.GetCurrentMapArea()
-          .Tiles[NewXRoundedI][NewYRoundedI].Actor != nullptr) {
+          .tiles[NewXRoundedI][NewYRoundedI].actor != nullptr) {
     if (Engine.GetCurrentMapArea()
-            .Tiles[NewXRoundedI][NewYRoundedI].Actor->ActorId != Engine.GetPlayer().ActorId)
+            .tiles[NewXRoundedI][NewYRoundedI].actor->ActorId != Engine.GetPlayer().ActorId)
         TileHasMob = true;
   }
 
   if (!Engine.GetCurrentMapArea()
-           .Tiles[NewXRoundedI][NewYRoundedI]
+           .tiles[NewXRoundedI][NewYRoundedI]
           .HasObjectWithFlag(ObjectMovementBlock)
           && Engine.GetCurrentMapArea()
-          .Tiles[NewXRoundedI][NewYRoundedI].GroundType != GetId("GroundtypeWater")
+          .tiles[NewXRoundedI][NewYRoundedI].groundType != GetId("GroundtypeWater")
           && !TileHasMob) {
-      auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.X);
-      auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.Y);
+      auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.x);
+      auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.y);
 
-    GetParentActor().GetModule<cModuleMovementData>().Position.X = NewXRounded;
-    GetParentActor().GetModule<cModuleMovementData>().Position.Y = NewYRounded;
+    GetParentActor().GetModule<cModuleMovementData>().Position.x = NewXRounded;
+    GetParentActor().GetModule<cModuleMovementData>().Position.y = NewYRounded;
 
     if (NewXRoundedI != OldXI || NewYRoundedI != OldYI) {
-  Engine.GetCurrentMapArea().Tiles[NewXRoundedI][NewYRoundedI].Actor
-          = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
-  Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor = nullptr;
+  Engine.GetCurrentMapArea().tiles[NewXRoundedI][NewYRoundedI].actor
+          = std::move(Engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor);
+  Engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor = nullptr;
     }
   }
 
-  if (Engine.GetCurrentMapArea().Tiles
-          [static_cast<int>(NewX)][static_cast<int>(NewY)].Properties.count("WarpToFloor") > 0) {
+  if (Engine.GetCurrentMapArea().tiles
+          [static_cast<int>(NewX)][static_cast<int>(NewY)].properties.count("WarpToFloor") > 0) {
     auto Angle = *GetParentActor().GetModule<cModuleMovementData>().FacingAngle
             / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
     auto DX = -static_cast<float>(std::cos(Angle)) * GetParentActor().GetModule<cModuleMovementData>().StepMultiplier;
@@ -131,35 +131,35 @@ void cModuleMovement::UpdateDirectionalMovement() {
     NewX += DX * GetParentActor().GetModule<cModuleMovementData>().StepSize * 10;
     NewY += DY * GetParentActor().GetModule<cModuleMovementData>().StepSize * 10;
 
-    auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.X);
-    auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.Y);
+    auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.x);
+    auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.y);
 
-    GetParentActor().GetModule<cModuleMovementData>().Position.X = NewX;
-    GetParentActor().GetModule<cModuleMovementData>().Position.Y = NewY;
+    GetParentActor().GetModule<cModuleMovementData>().Position.x = NewX;
+    GetParentActor().GetModule<cModuleMovementData>().Position.y = NewY;
 
-    auto coord = Engine.GetCurrentMapArea().WorldCoord;
-    coord.Z = std::stoi(Engine.GetCurrentMapArea().Tiles
-            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].Properties.at("WarpToFloor"));
+    auto coord = Engine.GetCurrentMapArea().worldCoord;
+    coord.z = std::stoi(Engine.GetCurrentMapArea().tiles
+            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].properties.at("WarpToFloor"));
 
-    Engine.World->GetArea(coord)->Tiles[NewX][NewY].Actor
-            = std::move(Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor);
-    Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor = nullptr;
+    Engine.world->GetArea(coord)->tiles[NewX][NewY].actor
+            = std::move(Engine.GetCurrentMapArea().tiles[NewXOld][NewYOld].actor);
+    Engine.GetCurrentMapArea().tiles[NewXOld][NewYOld].actor = nullptr;
 
-    GetParentActor().GetModule<cModuleMovementData>().WorldMapCoord.Z =
-        std::stoi(Engine.GetCurrentMapArea().Tiles
-            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].Properties.at("WarpToFloor"));
+    GetParentActor().GetModule<cModuleMovementData>().WorldMapCoord.z =
+        std::stoi(Engine.GetCurrentMapArea().tiles
+            [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].properties.at("WarpToFloor"));
   }
 
   GetParentActor().GetModule<cModuleMovementData>().TickLastMove = Ticks();
 }
 
 void cModuleMovement::UpdateDestinationMovement() {
-  if (!(Ticks() > GetParentActor().GetModule<cModuleMovementData>().TickLastMove + GetParentActor().GetModule<cModuleMovementData>().MoveSpeed && GetParentActor().GetModule<cModuleMovementData>().MoveDestination.X != -1 &&
-        GetParentActor().GetModule<cModuleMovementData>().MoveDestination.Y != -1))
+  if (!(Ticks() > GetParentActor().GetModule<cModuleMovementData>().TickLastMove + GetParentActor().GetModule<cModuleMovementData>().MoveSpeed && GetParentActor().GetModule<cModuleMovementData>().MoveDestination.x != -1 &&
+        GetParentActor().GetModule<cModuleMovementData>().MoveDestination.y != -1))
     return;
 
-  auto DX = GetParentActor().GetModule<cModuleMovementData>().MoveDestination.X - GetParentActor().GetModule<cModuleMovementData>().Position.X;
-  auto DY = GetParentActor().GetModule<cModuleMovementData>().MoveDestination.Y - GetParentActor().GetModule<cModuleMovementData>().Position.Y;
+  auto DX = GetParentActor().GetModule<cModuleMovementData>().MoveDestination.x - GetParentActor().GetModule<cModuleMovementData>().Position.x;
+  auto DY = GetParentActor().GetModule<cModuleMovementData>().MoveDestination.y - GetParentActor().GetModule<cModuleMovementData>().Position.y;
   auto AbsDX = std::abs(DX);
   auto AbsDY = std::abs(DY);
   auto PiF = static_cast<float>(M_PI);
@@ -175,17 +175,17 @@ void cModuleMovement::UpdateDestinationMovement() {
                  0 * PiF / 2;
     auto DX = -static_cast<float>(std::cos(Angle)) * GetParentActor().GetModule<cModuleMovementData>().StepMultiplier;
     auto DY = static_cast<float>(std::sin(Angle)) * GetParentActor().GetModule<cModuleMovementData>().StepMultiplier;
-    auto NewX = GetParentActor().GetModule<cModuleMovementData>().Position.X + DX * GetParentActor().GetModule<cModuleMovementData>().StepSize;
-    auto NewY = GetParentActor().GetModule<cModuleMovementData>().Position.Y + DY * GetParentActor().GetModule<cModuleMovementData>().StepSize;
+    auto NewX = GetParentActor().GetModule<cModuleMovementData>().Position.x + DX * GetParentActor().GetModule<cModuleMovementData>().StepSize;
+    auto NewY = GetParentActor().GetModule<cModuleMovementData>().Position.y + DY * GetParentActor().GetModule<cModuleMovementData>().StepSize;
 
     if (NewX < 0)
-      NewX += Engine.GetCurrentMapArea().Size;
+      NewX += Engine.GetCurrentMapArea().size;
     if (NewY < 0)
-      NewY += Engine.GetCurrentMapArea().Size;
-    if (NewX >= Engine.GetCurrentMapArea().Size)
-      NewX -= Engine.GetCurrentMapArea().Size;
-    if (NewY >= Engine.GetCurrentMapArea().Size)
-      NewY -= Engine.GetCurrentMapArea().Size;
+      NewY += Engine.GetCurrentMapArea().size;
+    if (NewX >= Engine.GetCurrentMapArea().size)
+      NewX -= Engine.GetCurrentMapArea().size;
+    if (NewY >= Engine.GetCurrentMapArea().size)
+      NewY -= Engine.GetCurrentMapArea().size;
 
       auto NewXRounded = NewX;
       auto NewYRounded = NewY;
@@ -195,33 +195,33 @@ void cModuleMovement::UpdateDestinationMovement() {
       auto TileHasMob = false;
 
       if (Engine.GetCurrentMapArea()
-              .Tiles[NewXRoundedI][NewYRoundedI].Actor != nullptr) {
+              .tiles[NewXRoundedI][NewYRoundedI].actor != nullptr) {
         if (Engine.GetCurrentMapArea()
-                .Tiles[NewXRoundedI][NewYRoundedI].Actor->ActorId != Engine.GetPlayer().ActorId)
+                .tiles[NewXRoundedI][NewYRoundedI].actor->ActorId != Engine.GetPlayer().ActorId)
             TileHasMob = true;
       }
 
     if (!Engine.GetCurrentMapArea()
-             .Tiles[NewXRoundedI][NewYRoundedI]
+             .tiles[NewXRoundedI][NewYRoundedI]
             .HasObjectWithFlag(ObjectMovementBlock)
             && Engine.GetCurrentMapArea()
-            .Tiles[NewXRoundedI][NewYRoundedI].GroundType != GetId("GroundtypeWater")
+            .tiles[NewXRoundedI][NewYRoundedI].groundType != GetId("GroundtypeWater")
             && !TileHasMob) {
-        auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.X);
-        auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.Y);
+        auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.x);
+        auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.y);
 
-      GetParentActor().GetModule<cModuleMovementData>().Position.X = NewXRounded;
-      GetParentActor().GetModule<cModuleMovementData>().Position.Y = NewYRounded;
+      GetParentActor().GetModule<cModuleMovementData>().Position.x = NewXRounded;
+      GetParentActor().GetModule<cModuleMovementData>().Position.y = NewYRounded;
 
         if (NewXRoundedI != OldXI || NewYRoundedI != OldYI) {
-      Engine.GetCurrentMapArea().Tiles[NewXRoundedI][NewYRoundedI].Actor
-              = std::move(Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor);
-      Engine.GetCurrentMapArea().Tiles[OldXI][OldYI].Actor = nullptr;
+      Engine.GetCurrentMapArea().tiles[NewXRoundedI][NewYRoundedI].actor
+              = std::move(Engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor);
+      Engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor = nullptr;
         }
     }
 
-    if (Engine.GetCurrentMapArea().Tiles
-            [static_cast<int>(NewX)][static_cast<int>(NewY)].Properties.count("WarpToFloor") > 0) {
+    if (Engine.GetCurrentMapArea().tiles
+            [static_cast<int>(NewX)][static_cast<int>(NewY)].properties.count("WarpToFloor") > 0) {
         auto Angle = *GetParentActor().GetModule<cModuleMovementData>().FacingAngle
                 / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
         auto DX = -static_cast<float>(std::cos(Angle)) * GetParentActor().GetModule<cModuleMovementData>().StepMultiplier;
@@ -233,23 +233,23 @@ void cModuleMovement::UpdateDestinationMovement() {
         NewX += DX * GetParentActor().GetModule<cModuleMovementData>().StepSize * 10;
         NewY += DY * GetParentActor().GetModule<cModuleMovementData>().StepSize * 10;
 
-        auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.X);
-        auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.Y);
+        auto OldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.x);
+        auto OldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().Position.y);
 
-        GetParentActor().GetModule<cModuleMovementData>().Position.X = NewX;
-        GetParentActor().GetModule<cModuleMovementData>().Position.Y = NewY;
+        GetParentActor().GetModule<cModuleMovementData>().Position.x = NewX;
+        GetParentActor().GetModule<cModuleMovementData>().Position.y = NewY;
 
-        auto coord = Engine.GetCurrentMapArea().WorldCoord;
-        coord.Z = std::stoi(Engine.GetCurrentMapArea().Tiles
-                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].Properties.at("WarpToFloor"));
+        auto coord = Engine.GetCurrentMapArea().worldCoord;
+        coord.z = std::stoi(Engine.GetCurrentMapArea().tiles
+                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].properties.at("WarpToFloor"));
 
-        Engine.World->GetArea(coord)->Tiles[NewX][NewY].Actor
-                = std::move(Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor);
-        Engine.GetCurrentMapArea().Tiles[NewXOld][NewYOld].Actor = nullptr;
+        Engine.world->GetArea(coord)->tiles[NewX][NewY].actor
+                = std::move(Engine.GetCurrentMapArea().tiles[NewXOld][NewYOld].actor);
+        Engine.GetCurrentMapArea().tiles[NewXOld][NewYOld].actor = nullptr;
 
-        GetParentActor().GetModule<cModuleMovementData>().WorldMapCoord.Z =
-            std::stoi(Engine.GetCurrentMapArea().Tiles
-                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].Properties.at("WarpToFloor"));
+        GetParentActor().GetModule<cModuleMovementData>().WorldMapCoord.z =
+            std::stoi(Engine.GetCurrentMapArea().tiles
+                [static_cast<int>(NewXOld)][static_cast<int>(NewYOld)].properties.at("WarpToFloor"));
     }
   }
 

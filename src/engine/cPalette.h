@@ -8,12 +8,12 @@ namespace Forradia {
 
 class cPalette {
  public:
-  SDL_Color White = {255, 255, 255, 255};
-  SDL_Color WhiteSemiTrans = {255, 255, 255, 150};
-  SDL_Color Black = {0, 0, 0, 255};
-  SDL_Color MediumBlue = {0, 150, 255, 255};
-  SDL_Color MediumBlueSemiTrans = {0, 150, 255, 100};
-  SDL_Color Wheat = {255, 255, 230, 255};
+  SDL_Color white = {255, 255, 255, 255};
+  SDL_Color whiteSemiTrans = {255, 255, 255, 150};
+  SDL_Color black = {0, 0, 0, 255};
+  SDL_Color mediumBlue = {0, 150, 255, 255};
+  SDL_Color mediumBlueSemiTrans = {0, 150, 255, 100};
+  SDL_Color wheat = {255, 255, 230, 255};
 };
 
 }  // namespace Forradia

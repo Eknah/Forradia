@@ -6,29 +6,29 @@
 namespace Forradia {
 
 void cMouseHandler::ResetForNewFrame() const {
-    *WheelAmount *= 0.85f;
+    *wheelAmount *= 0.85f;
 
-    if (std::abs(*WheelAmount) < 0.1f)
-      *WheelAmount = 0;
+    if (std::abs(*wheelAmount) < 0.1f)
+      *wheelAmount = 0;
 
-    *LeftButtonBeenFired = false;
-    *RightButtonBeenFired = false;
+    *leftButtonBeenFired = false;
+    *rightButtonBeenFired = false;
   }
 
 bool cMouseHandler::GetLeftButtonBeenFired() const  {
-      return *LeftButtonBeenFired;
+      return *leftButtonBeenFired;
   }
 
 bool cMouseHandler::GetRightButtonBeenFired() const {
-      return *RightButtonBeenFired;
+      return *rightButtonBeenFired;
   }
 
 void cMouseHandler::SetLeftButtonBeenFired()  {
-      *LeftButtonBeenFired = true;
+      *leftButtonBeenFired = true;
   }
 
 void cMouseHandler::SetRightButtonBeenFired() {
-      *RightButtonBeenFired = true;
+      *rightButtonBeenFired = true;
   }
 
 }  // namespace Forradia

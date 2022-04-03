@@ -20,13 +20,13 @@ class cMouseHandler {
 
   void SetRightButtonBeenFired();
 
-  UPtr<float> WheelAmount = MakeUPtr<float>(0.0f);
-  bool LeftButtonDown = false;
-  bool RightButtonDown = false;
+  UPtr<float> wheelAmount = MakeUPtr<float>(0.0f);
+  bool leftButtonDown = false;
+  bool rightButtonDown = false;
 
  private:
-  UPtr<bool> LeftButtonBeenFired = MakeUPtr<bool>(false);
-  UPtr<bool> RightButtonBeenFired = MakeUPtr<bool>(false);
+  UPtr<bool> leftButtonBeenFired = MakeUPtr<bool>(false);
+  UPtr<bool> rightButtonBeenFired = MakeUPtr<bool>(false);
 };
 
 }  // namespace Forradia

@@ -7,11 +7,11 @@
 namespace Forradia {
 
 void cModelLoader::LoadModels() {
-    Models.clear();
-    ModelNames.clear();
+    models.clear();
+    modelNames.clear();
 
     auto file_path = std::string(SDL_GetBasePath());
-    file_path.append(ModelsPath);
+    file_path.append(modelsPath);
 
     auto entries =
         std::filesystem::recursive_directory_iterator(file_path.c_str());
@@ -22,10 +22,10 @@ void cModelLoader::LoadModels() {
       auto image_name_hash = int();
 
       if (file.is_directory() ||
-          ModelNameExtension !=
+          modelNameExtension !=
               full_filename.substr(full_filename.length() -
-                                       ModelNameExtension.length(),
-                                   ModelNameExtension.length()))
+                                       modelNameExtension.length(),
+                                   modelNameExtension.length()))
         continue;
 
       Forradia::cModel3D loaded_model;
@@ -33,13 +33,13 @@ void cModelLoader::LoadModels() {
 
       image_name_hash = GetId(filename);
 
-      Models[image_name_hash] = loaded_model;
-      ModelNames[image_name_hash] = filename;
+      models[image_name_hash] = loaded_model;
+      modelNames[image_name_hash] = filename;
     }
   }
 
 bool cModelLoader::ModelExists(std::string ModelName) const {
-    auto result = ModelNames.count(GetId(ModelName)) > 0;
+    auto result = modelNames.count(GetId(ModelName)) > 0;
     return result;
   }
 

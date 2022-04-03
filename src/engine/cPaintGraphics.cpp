@@ -41,7 +41,7 @@ void cPaintGraphics::RenderShape(GLenum GeometryType,
               Color.a / 255.0f);
 
     for (auto &Vertex : Vertices)
-      glVertex2f(Vertex.X, Vertex.Y);
+      glVertex2f(Vertex.x, Vertex.y);
 
     glEnd();
   }

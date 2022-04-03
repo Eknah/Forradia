@@ -11,7 +11,8 @@ namespace Forradia {
 class cVector3 {
  public:
   cVector3() = default;
-  cVector3(float x, float y, float z) : X(x), Y(y), Z(z) {}
+  cVector3(float x_, float y_, float z_) :
+      x(x_), y(y_), z(z_) {}
 
   bool operator==(const cVector3 &other) const;
   bool operator!=(const cVector3 &other) const;
@@ -20,9 +21,9 @@ class cVector3 {
   cVector3 operator*(const float &other) const;
   cVector3 operator/(const float &other) const;
 
-  float X = 0.0f;
-  float Y = 0.0f;
-  float Z = 0.0f;
+  float x = 0.0f;
+  float y = 0.0f;
+  float z = 0.0f;
 };
 
 }  // namespace Forradia

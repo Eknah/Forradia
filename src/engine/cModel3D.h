@@ -23,10 +23,10 @@ class cModel3D : public cAlgorithmsVectors, cAlgorithmsStrings {
 
   bool LoadFile(std::string Path);
 
-  std::vector<cMesh> LoadedMeshes;
-  std::vector<cVertex> LoadedVertices;
-  std::vector<unsigned int> LoadedIndices;
-  std::vector<cMaterial> LoadedMaterials;
+  std::vector<cMesh> loadedMeshes;
+  std::vector<cVertex> loadedVertices;
+  std::vector<unsigned int> loadedIndices;
+  std::vector<cMaterial> loadedMaterials;
 
  private:
   void GenVerticesFromRawOBJ(std::vector<cVertex> *oVerts,
@@ -44,7 +44,7 @@ class cModel3D : public cAlgorithmsVectors, cAlgorithmsStrings {
   const T &GetElement(const std::vector<T> &elements,
                              const std::string &index);
 
-  cMath3D Math3D;
+  cMath3D math3D;
 };
 
 template <class T>

@@ -10,13 +10,13 @@ void cGuiWindowBase::Render() {
   if (!Visible)
     return;
 
-  Engine.FillRectangle(Palette.MediumBlue, Bounds.X, Bounds.Y, Bounds.Width,
-                       Bounds.Height);
-  Engine.DrawRectangle(Palette.Black, Bounds.X, Bounds.Y, Bounds.Width,
-                       Bounds.Height);
-  Engine.DrawString(Title, Palette.Black, Bounds.X + Margin, Bounds.Y + Margin);
-  Engine.DrawLine(Palette.Black, Bounds.X, Bounds.Y + TitleBarHeight,
-                  Bounds.X + Bounds.Width, Bounds.Y + TitleBarHeight);
+  Engine.FillRectangle(Palette.mediumBlue, Bounds.x, Bounds.y, Bounds.width,
+                       Bounds.height);
+  Engine.DrawRectangle(Palette.black, Bounds.x, Bounds.y, Bounds.width,
+                       Bounds.height);
+  Engine.DrawString(Title, Palette.black, Bounds.x + Margin, Bounds.y + Margin);
+  Engine.DrawLine(Palette.black, Bounds.x, Bounds.y + TitleBarHeight,
+                  Bounds.x + Bounds.width, Bounds.y + TitleBarHeight);
 
   RenderDerived();
 }
@@ -26,18 +26,18 @@ void cGuiWindowBase::Update() {
     return;
 
   auto MousePosF = Utilities.GetMousePositionF();
-  auto DeltaMouseX = MousePosF.X - StartMoveMousePosition.x;
-  auto DeltaMouseY = MousePosF.Y - StartMoveMousePosition.y;
+  auto DeltaMouseX = MousePosF.x - StartMoveMousePosition.x;
+  auto DeltaMouseY = MousePosF.y - StartMoveMousePosition.y;
 
-  Bounds.X = StartMovePosition.x + DeltaMouseX;
-  Bounds.Y = StartMovePosition.y + DeltaMouseY;
+  Bounds.x = StartMovePosition.x + DeltaMouseX;
+  Bounds.y = StartMovePosition.y + DeltaMouseY;
 }
 
 cRectF cGuiWindowBase::GetInteriorBounds() {
-  auto X = Bounds.X + Margin;
-  auto Y = Bounds.Y + TitleBarHeight + Margin;
-  auto Width = Bounds.Width - 2 * Margin;
-  auto Height = Bounds.Height - TitleBarHeight - 2 * Margin;
+  auto X = Bounds.x + Margin;
+  auto Y = Bounds.y + TitleBarHeight + Margin;
+  auto Width = Bounds.width - 2 * Margin;
+  auto Height = Bounds.height - TitleBarHeight - 2 * Margin;
 
   return {X, Y, Width, Height};
 }
@@ -51,8 +51,8 @@ bool cGuiWindowBase::DoMouseDown(Uint8 MouseButton) {
 
   if (TitleBarBounds.ContainsPoint(MousePosF)) {
     IsBeingMoved = true;
-    StartMovePosition = {Bounds.X, Bounds.Y};
-    StartMoveMousePosition = {MousePosF.X, MousePosF.Y};
+    StartMovePosition = {Bounds.x, Bounds.y};
+    StartMoveMousePosition = {MousePosF.x, MousePosF.y};
   }
 
   DoMouseDownDerived(MouseButton);
@@ -64,7 +64,7 @@ bool cGuiWindowBase::DoMouseDown(Uint8 MouseButton) {
 }
 
 cRectF cGuiWindowBase::GetTitleBarBounds() {
-  return {Bounds.X, Bounds.Y, Bounds.Width, TitleBarHeight};
+  return {Bounds.x, Bounds.y, Bounds.width, TitleBarHeight};
 }
 
 void cGuiWindowBase::DoMouseUp() { IsBeingMoved = false; }

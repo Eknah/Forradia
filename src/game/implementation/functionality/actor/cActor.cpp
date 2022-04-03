@@ -39,7 +39,7 @@ int cActor::GetAnimatedModelId() const {
             ModelNameAnimated.append(std::to_string(AnimIndex));
         }
 
-        if (Engine.ModelLoader.ModelExists(ModelNameAnimated))
+        if (Engine.modelLoader.ModelExists(ModelNameAnimated))
             return GetId(ModelNameAnimated);
         else
             return GetId(ModelName);

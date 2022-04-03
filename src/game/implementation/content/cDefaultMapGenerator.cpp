@@ -12,10 +12,10 @@ namespace Forradia {
 void
 cDefaultMapGenerator::GenerateMapArea(
         int WorldX, int WorldY, int WorldZ) const {
-  WorldMap->Areas[WorldX][WorldY][WorldZ] =
-      MakeUPtr<cMapArea>(Engine, WorldMap->MapAreaSize, WorldX, WorldY, WorldZ);
+  WorldMap->areas[WorldX][WorldY][WorldZ] =
+      MakeUPtr<cMapArea>(Engine, WorldMap->mapAreaSize, WorldX, WorldY, WorldZ);
 
-  auto MapArea = WorldMap->Areas[WorldX][WorldY][WorldZ].get();
+  auto MapArea = WorldMap->areas[WorldX][WorldY][WorldZ].get();
 
   ClearToGrass(MapArea);
   GeneratePlayerStartingPosition(MapArea);
@@ -35,26 +35,26 @@ cDefaultMapGenerator::GenerateMapArea(
 
 void
 cDefaultMapGenerator::ClearToGrass(cMapArea *MapArea) const {
-  for (auto TileY = 0; TileY < MapArea->Size; TileY++)
-    for (auto TileX = 0; TileX < MapArea->Size; TileX++)
+  for (auto TileY = 0; TileY < MapArea->size; TileY++)
+    for (auto TileX = 0; TileX < MapArea->size; TileX++)
 
-      MapArea->Tiles[TileX][TileY].GroundType = GetId("GroundtypeGrass");
+      MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeGrass");
 }
 
 void
 cDefaultMapGenerator::GeneratePlayerStartingPosition
 (cMapArea *MapArea) const {
-  MapArea->SpawnPos.X = static_cast<float>(
-              Random.Next() % MapArea->Size);
-  MapArea->SpawnPos.Y = static_cast<float>(
-              Random.Next() % MapArea->Size);
+  MapArea->spawnPos.x = static_cast<float>(
+              Random.Next() % MapArea->size);
+  MapArea->spawnPos.y = static_cast<float>(
+              Random.Next() % MapArea->size);
 }
 
 void
 cDefaultMapGenerator::GenerateElevation(cMapArea *MapArea) const {
   for (auto I = 0; I < 40; I++) {
-    auto CenterTileX = Random.Next() % MapArea->Size;
-    auto CenterTileY = Random.Next() % MapArea->Size;
+    auto CenterTileX = Random.Next() % MapArea->size;
+    auto CenterTileY = Random.Next() % MapArea->size;
     auto MaxR = 4 + Random.Next() % 12;
 
     for (auto R = MaxR; R >= 0; R--) {
@@ -65,29 +65,29 @@ cDefaultMapGenerator::GenerateElevation(cMapArea *MapArea) const {
 
           if (DX * DX + DY * DY >= R * R)
             continue;
-          if (TileX < 0 || TileY < 0 || TileX >= MapArea->Size ||
-              TileY >= MapArea->Size)
+          if (TileX < 0 || TileY < 0 || TileX >= MapArea->size ||
+              TileY >= MapArea->size)
             continue;
 
-          MapArea->Tiles[TileX][TileY].Elevation += 2;
+          MapArea->tiles[TileX][TileY].elevation += 2;
         }
       }
     }
   }
 
   for (auto I = 0; I < 1000; I++) {
-    auto TileX = Random.Next() % MapArea->Size;
-    auto TileY = Random.Next() % MapArea->Size;
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
 
-    MapArea->Tiles[TileX][TileY].Elevation += Random.Next() % 3;
+    MapArea->tiles[TileX][TileY].elevation += Random.Next() % 3;
   }
 }
 
 void
 cDefaultMapGenerator::GenerateWater(cMapArea *MapArea) const {
   for (auto I = 0; I < 20; I++) {
-    auto CenterTileX = Random.Next() % MapArea->Size;
-    auto CenterTileY = Random.Next() % MapArea->Size;
+    auto CenterTileX = Random.Next() % MapArea->size;
+    auto CenterTileY = Random.Next() % MapArea->size;
     auto R = 5 + Random.Next() % 13;
 
     for (auto TileY = CenterTileY - R; TileY <= CenterTileY + R; TileY++) {
@@ -97,32 +97,32 @@ cDefaultMapGenerator::GenerateWater(cMapArea *MapArea) const {
 
         if (DX * DX + DY * DY >= R * R)
           continue;
-        if (TileX <= 0 || TileY <= 0 || TileX >= MapArea->Size - 1 ||
-            TileY >= MapArea->Size - 1)
+        if (TileX <= 0 || TileY <= 0 || TileX >= MapArea->size - 1 ||
+            TileY >= MapArea->size - 1)
           continue;
-        if (MapArea->Tiles[TileX][TileY].Elevation > 0)
+        if (MapArea->tiles[TileX][TileY].elevation > 0)
           continue;
-        if (MapArea->Tiles[TileX - 1][TileY].Elevation > 0)
+        if (MapArea->tiles[TileX - 1][TileY].elevation > 0)
           continue;
-        if (MapArea->Tiles[TileX - 1][TileY - 1].Elevation > 0)
+        if (MapArea->tiles[TileX - 1][TileY - 1].elevation > 0)
           continue;
-        if (MapArea->Tiles[TileX][TileY - 1].Elevation > 0)
+        if (MapArea->tiles[TileX][TileY - 1].elevation > 0)
           continue;
-        if (MapArea->Tiles[TileX + 1][TileY].Elevation > 0)
+        if (MapArea->tiles[TileX + 1][TileY].elevation > 0)
           continue;
-        if (MapArea->Tiles[TileX + 1][TileY + 1].Elevation > 0)
+        if (MapArea->tiles[TileX + 1][TileY + 1].elevation > 0)
           continue;
-        if (MapArea->Tiles[TileX][TileY + 1].Elevation > 0)
+        if (MapArea->tiles[TileX][TileY + 1].elevation > 0)
           continue;
-        if (MapArea->Tiles[TileX - 1][TileY + 1].Elevation > 0)
+        if (MapArea->tiles[TileX - 1][TileY + 1].elevation > 0)
           continue;
-        if (MapArea->Tiles[TileX + 1][TileY - 1].Elevation > 0)
+        if (MapArea->tiles[TileX + 1][TileY - 1].elevation > 0)
           continue;
         if (DistToPlayerStartingPos(MapArea, TileX, TileY) <
             PlayerStartingAreaSize)
           continue;
 
-        MapArea->Tiles[TileX][TileY].GroundType = GetId("GroundtypeWater");
+        MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeWater");
       }
     }
   }
@@ -131,8 +131,8 @@ cDefaultMapGenerator::GenerateWater(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GenerateSand(cMapArea *MapArea) const {
   for (auto I = 0; I < 30; I++) {
-    auto CenterTileX = Random.Next() % MapArea->Size;
-    auto CenterTileY = Random.Next() % MapArea->Size;
+    auto CenterTileX = Random.Next() % MapArea->size;
+    auto CenterTileY = Random.Next() % MapArea->size;
     auto R = 4 + Random.Next() % 5;
 
     for (auto I = 0; I < R; I++) {
@@ -143,50 +143,50 @@ cDefaultMapGenerator::GenerateSand(cMapArea *MapArea) const {
 
           if (DX * DX + DY * DY >= R * R)
             continue;
-          if (TileX <= 0 || TileY <= 0 || TileX >= MapArea->Size - 1 ||
-              TileY >= MapArea->Size - 1)
+          if (TileX <= 0 || TileY <= 0 || TileX >= MapArea->size - 1 ||
+              TileY >= MapArea->size - 1)
             continue;
-          if (MapArea->Tiles[TileX][TileY].GroundType ==
+          if (MapArea->tiles[TileX][TileY].groundType ==
               GetId("GroundtypeWater"))
             continue;
-          if (MapArea->Tiles[TileX][TileY].Elevation > 5)
+          if (MapArea->tiles[TileX][TileY].elevation > 5)
             continue;
 
-          if (MapArea->Tiles[TileX - 1][TileY].GroundType !=
+          if (MapArea->tiles[TileX - 1][TileY].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX - 1][TileY].GroundType !=
+              MapArea->tiles[TileX - 1][TileY].groundType !=
                   GetId("GroundtypeSand") &&
-              MapArea->Tiles[TileX - 1][TileY - 1].GroundType !=
+              MapArea->tiles[TileX - 1][TileY - 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX - 1][TileY - 1].GroundType !=
+              MapArea->tiles[TileX - 1][TileY - 1].groundType !=
                   GetId("GroundtypeSand") &&
-              MapArea->Tiles[TileX][TileY - 1].GroundType !=
+              MapArea->tiles[TileX][TileY - 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX][TileY - 1].GroundType !=
+              MapArea->tiles[TileX][TileY - 1].groundType !=
                   GetId("GroundtypeSand") &&
-              MapArea->Tiles[TileX + 1][TileY - 1].GroundType !=
+              MapArea->tiles[TileX + 1][TileY - 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX + 1][TileY - 1].GroundType !=
+              MapArea->tiles[TileX + 1][TileY - 1].groundType !=
                   GetId("GroundtypeSand") &&
-              MapArea->Tiles[TileX + 1][TileY].GroundType !=
+              MapArea->tiles[TileX + 1][TileY].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX + 1][TileY].GroundType !=
+              MapArea->tiles[TileX + 1][TileY].groundType !=
                   GetId("GroundtypeSand") &&
-              MapArea->Tiles[TileX + 1][TileY + 1].GroundType !=
+              MapArea->tiles[TileX + 1][TileY + 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX + 1][TileY + 1].GroundType !=
+              MapArea->tiles[TileX + 1][TileY + 1].groundType !=
                   GetId("GroundtypeSand") &&
-              MapArea->Tiles[TileX][TileY + 1].GroundType !=
+              MapArea->tiles[TileX][TileY + 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX][TileY + 1].GroundType !=
+              MapArea->tiles[TileX][TileY + 1].groundType !=
                   GetId("GroundtypeSand") &&
-              MapArea->Tiles[TileX - 1][TileY + 1].GroundType !=
+              MapArea->tiles[TileX - 1][TileY + 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX - 1][TileY + 1].GroundType !=
+              MapArea->tiles[TileX - 1][TileY + 1].groundType !=
                   GetId("GroundtypeSand"))
             continue;
 
-          MapArea->Tiles[TileX][TileY].GroundType = GetId("GroundtypeSand");
+          MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeSand");
         }
       }
     }
@@ -196,8 +196,8 @@ cDefaultMapGenerator::GenerateSand(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GenerateClay(cMapArea *MapArea) const {
   for (auto I = 0; I < 30; I++) {
-    auto CenterTileX = Random.Next() % MapArea->Size;
-    auto CenterTileY = Random.Next() % MapArea->Size;
+    auto CenterTileX = Random.Next() % MapArea->size;
+    auto CenterTileY = Random.Next() % MapArea->size;
     auto R = 2 + Random.Next() % 3;
 
     for (auto I = 0; I < R; I++) {
@@ -208,48 +208,48 @@ cDefaultMapGenerator::GenerateClay(cMapArea *MapArea) const {
 
           if (DX * DX + DY * DY >= R * R)
             continue;
-          if (TileX <= 0 || TileY <= 0 || TileX >= MapArea->Size - 1 ||
-              TileY >= MapArea->Size - 1)
+          if (TileX <= 0 || TileY <= 0 || TileX >= MapArea->size - 1 ||
+              TileY >= MapArea->size - 1)
             continue;
-          if (MapArea->Tiles[TileX][TileY].GroundType !=
+          if (MapArea->tiles[TileX][TileY].groundType !=
               GetId("GroundtypeWater"))
             continue;
 
-          if (MapArea->Tiles[TileX - 1][TileY].GroundType !=
+          if (MapArea->tiles[TileX - 1][TileY].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX - 1][TileY].GroundType !=
+              MapArea->tiles[TileX - 1][TileY].groundType !=
                   GetId("GroundtypeClay") &&
-              MapArea->Tiles[TileX - 1][TileY - 1].GroundType !=
+              MapArea->tiles[TileX - 1][TileY - 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX - 1][TileY - 1].GroundType !=
+              MapArea->tiles[TileX - 1][TileY - 1].groundType !=
                   GetId("GroundtypeClay") &&
-              MapArea->Tiles[TileX][TileY - 1].GroundType !=
+              MapArea->tiles[TileX][TileY - 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX][TileY - 1].GroundType !=
+              MapArea->tiles[TileX][TileY - 1].groundType !=
                   GetId("Gr(int)oundtypeClay") &&
-              MapArea->Tiles[TileX + 1][TileY - 1].GroundType !=
+              MapArea->tiles[TileX + 1][TileY - 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX + 1][TileY - 1].GroundType !=
+              MapArea->tiles[TileX + 1][TileY - 1].groundType !=
                   GetId("GroundtypeClay") &&
-              MapArea->Tiles[TileX + 1][TileY].GroundType !=
+              MapArea->tiles[TileX + 1][TileY].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX + 1][TileY].GroundType !=
+              MapArea->tiles[TileX + 1][TileY].groundType !=
                   GetId("GroundtypeClay") &&
-              MapArea->Tiles[TileX + 1][TileY + 1].GroundType !=
+              MapArea->tiles[TileX + 1][TileY + 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX + 1][TileY + 1].GroundType !=
+              MapArea->tiles[TileX + 1][TileY + 1].groundType !=
                   GetId("GroundtypeClay") &&
-              MapArea->Tiles[TileX][TileY + 1].GroundType !=
+              MapArea->tiles[TileX][TileY + 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX][TileY + 1].GroundType !=
+              MapArea->tiles[TileX][TileY + 1].groundType !=
                   GetId("GroundtypeClay") &&
-              MapArea->Tiles[TileX - 1][TileY + 1].GroundType !=
+              MapArea->tiles[TileX - 1][TileY + 1].groundType !=
                   GetId("GroundtypeWater") &&
-              MapArea->Tiles[TileX - 1][TileY + 1].GroundType !=
+              MapArea->tiles[TileX - 1][TileY + 1].groundType !=
                   GetId("GroundtypeClay"))
             continue;
 
-          MapArea->Tiles[TileX][TileY].GroundType = GetId("GroundtypeClay");
+          MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeClay");
         }
       }
     }
@@ -259,8 +259,8 @@ cDefaultMapGenerator::GenerateClay(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GenerateRock(cMapArea *MapArea) const {
   for (auto I = 0; I < 10; I++) {
-    auto CenterTileX = Random.Next() % MapArea->Size;
-    auto CenterTileY = Random.Next() % MapArea->Size;
+    auto CenterTileX = Random.Next() % MapArea->size;
+    auto CenterTileY = Random.Next() % MapArea->size;
     auto R = 5 + Random.Next() % 13;
 
     for (auto TileY = CenterTileY - R; TileY <= CenterTileY + R; TileY++) {
@@ -270,13 +270,13 @@ cDefaultMapGenerator::GenerateRock(cMapArea *MapArea) const {
 
         if (DX * DX + DY * DY >= R * R)
           continue;
-        if (TileX < 0 || TileY < 0 || TileX >= MapArea->Size ||
-            TileY >= MapArea->Size)
+        if (TileX < 0 || TileY < 0 || TileX >= MapArea->size ||
+            TileY >= MapArea->size)
           continue;
-        if (MapArea->Tiles[TileX][TileY].Elevation < 4)
+        if (MapArea->tiles[TileX][TileY].elevation < 4)
           continue;
 
-        MapArea->Tiles[TileX][TileY].GroundType = GetId("GroundtypeRock");
+        MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeRock");
       }
     }
   }
@@ -285,21 +285,21 @@ cDefaultMapGenerator::GenerateRock(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
   for (auto I = 0; I < 30; I++) {
-    auto TileX = Random.Next() % MapArea->Size;
-    auto TileY = Random.Next() % MapArea->Size;
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
     auto NumTrees = 15 + Random.Next() % 15;
 
     for (auto J = 0; J < NumTrees; J++) {
-      if (TileX >= 0 && TileY >= 0 && TileX < MapArea->Size &&
-          TileY < MapArea->Size) {
+      if (TileX >= 0 && TileY >= 0 && TileX < MapArea->size &&
+          TileY < MapArea->size) {
         if (DistToPlayerStartingPos(MapArea, TileX, TileY) <
             PlayerStartingAreaSize)
           continue;
 
-        if (MapArea->Tiles[TileX][TileY].GroundType ==
+        if (MapArea->tiles[TileX][TileY].groundType ==
             GetId("GroundtypeGrass"))
-          if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
-            MapArea->Tiles[TileX][TileY].Objects.push_back(
+          if (MapArea->tiles[TileX][TileY].objects.size() == 0)
+            MapArea->tiles[TileX][TileY].objects.push_back(
                 MakeSPtr<cObject>("ObjectTree1"));
       }
 
@@ -308,21 +308,21 @@ cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
     }
   }
   for (auto I = 0; I < 30; I++) {
-    auto TileX = Random.Next() % MapArea->Size;
-    auto TileY = Random.Next() % MapArea->Size;
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
     auto NumTrees = 15 + Random.Next() % 15;
 
     for (auto J = 0; J < NumTrees; J++) {
-      if (TileX >= 0 && TileY >= 0 && TileX < MapArea->Size &&
-          TileY < MapArea->Size) {
+      if (TileX >= 0 && TileY >= 0 && TileX < MapArea->size &&
+          TileY < MapArea->size) {
         if (DistToPlayerStartingPos(MapArea, TileX, TileY) <
             PlayerStartingAreaSize)
           continue;
 
-        if (MapArea->Tiles[TileX][TileY].GroundType ==
+        if (MapArea->tiles[TileX][TileY].groundType ==
             GetId("GroundtypeGrass"))
-          if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
-            MapArea->Tiles[TileX][TileY].Objects.push_back(
+          if (MapArea->tiles[TileX][TileY].objects.size() == 0)
+            MapArea->tiles[TileX][TileY].objects.push_back(
                 MakeSPtr<cObject>("ObjectTree2"));
       }
 
@@ -335,15 +335,15 @@ cDefaultMapGenerator::GenerateTrees(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GenerateBushes(cMapArea *MapArea) const {
   for (auto I = 0; I < 200; I++) {
-    auto TileX = Random.Next() % MapArea->Size;
-    auto TileY = Random.Next() % MapArea->Size;
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
 
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
       continue;
 
-    if (MapArea->Tiles[TileX][TileY].GroundType == GetId("GroundtypeGrass"))
-      if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
-        MapArea->Tiles[TileX][TileY].Objects.push_back(
+    if (MapArea->tiles[TileX][TileY].groundType == GetId("GroundtypeGrass"))
+      if (MapArea->tiles[TileX][TileY].objects.size() == 0)
+        MapArea->tiles[TileX][TileY].objects.push_back(
             MakeSPtr<cObject>("ObjectBush1"));
   }
 }
@@ -351,15 +351,15 @@ cDefaultMapGenerator::GenerateBushes(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GenerateSmallStones(cMapArea *MapArea) const {
   for (auto I = 0; I < 200; I++) {
-    auto TileX = Random.Next() % MapArea->Size;
-    auto TileY = Random.Next() % MapArea->Size;
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
 
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
       continue;
 
-    if (MapArea->Tiles[TileX][TileY].GroundType != GetId("GroundtypeWater"))
-      if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
-        MapArea->Tiles[TileX][TileY].Objects.push_back(
+    if (MapArea->tiles[TileX][TileY].groundType != GetId("GroundtypeWater"))
+      if (MapArea->tiles[TileX][TileY].objects.size() == 0)
+        MapArea->tiles[TileX][TileY].objects.push_back(
             MakeSPtr<cObject>("ObjectSmallStone"));
   }
 }
@@ -367,12 +367,12 @@ cDefaultMapGenerator::GenerateSmallStones(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
   for (auto I = 0; I < 100; I++) {
-    auto TileX = Random.Next() % MapArea->Size;
-    auto TileY = Random.Next() % MapArea->Size;
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
 
-    if (MapArea->Tiles[TileX][TileY].GroundType == GetId("GroundtypeGrass"))
-      if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
-        MapArea->Tiles[TileX][TileY].Objects.push_back(
+    if (MapArea->tiles[TileX][TileY].groundType == GetId("GroundtypeGrass"))
+      if (MapArea->tiles[TileX][TileY].objects.size() == 0)
+        MapArea->tiles[TileX][TileY].objects.push_back(
             MakeSPtr<cObject>("ObjectPinkFlower"));
   }
 }
@@ -380,12 +380,12 @@ cDefaultMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
 void
 cDefaultMapGenerator::GenerateTallGrass(cMapArea *MapArea) const {
   for (auto I = 0; I < 1000; I++) {
-    auto TileX = Random.Next() % MapArea->Size;
-    auto TileY = Random.Next() % MapArea->Size;
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
 
-    if (MapArea->Tiles[TileX][TileY].GroundType == GetId("GroundtypeGrass"))
-      if (MapArea->Tiles[TileX][TileY].Objects.size() == 0)
-        MapArea->Tiles[TileX][TileY].Objects.push_back(
+    if (MapArea->tiles[TileX][TileY].groundType == GetId("GroundtypeGrass"))
+      if (MapArea->tiles[TileX][TileY].objects.size() == 0)
+        MapArea->tiles[TileX][TileY].objects.push_back(
             MakeSPtr<cObject>("ObjectTallGrass"));
   }
 }
@@ -393,8 +393,8 @@ cDefaultMapGenerator::GenerateTallGrass(cMapArea *MapArea) const {
 int
 cDefaultMapGenerator::DistToPlayerStartingPos(cMapArea *MapArea, int TileX,
                                                   int TileY) const {
-  auto DX = MapArea->SpawnPos.X - TileX;
-  auto DY = MapArea->SpawnPos.Y - TileY;
+  auto DX = MapArea->spawnPos.x - TileX;
+  auto DY = MapArea->spawnPos.y - TileY;
   auto Distance = std::sqrt(DX * DX + DY * DY);
 
   return static_cast<int>(Distance);
@@ -403,50 +403,50 @@ cDefaultMapGenerator::DistToPlayerStartingPos(cMapArea *MapArea, int TileX,
 void
 cDefaultMapGenerator::GenerateMobs(cMapArea *MapArea) const {
   for (auto I = 0; I < 200; I++) {
-    auto TileX = Random.Next() % MapArea->Size;
-    auto TileY = Random.Next() % MapArea->Size;
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
 
-    if (TileX == static_cast<int>(MapArea->SpawnPos.X)
-            && TileY == static_cast<int>(MapArea->SpawnPos.Y))
+    if (TileX == static_cast<int>(MapArea->spawnPos.x)
+            && TileY == static_cast<int>(MapArea->spawnPos.y))
         continue;
 
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
       continue;
 
-    if (MapArea->Tiles[TileX][TileY].GroundType !=
+    if (MapArea->tiles[TileX][TileY].groundType !=
             GetId("GroundtypeWater") &&
-        MapArea->Tiles[TileX][TileY].Actor == nullptr) {
-      MapArea->Tiles[TileX][TileY].Actor =
+        MapArea->tiles[TileX][TileY].actor == nullptr) {
+      MapArea->tiles[TileX][TileY].actor =
           std::make_unique<cMob>(Engine,
                                  static_cast<float>(TileX),
                                  static_cast<float>(TileY),
                                  "MobRabbit");
-      MapArea->MobActorsMirror.push_back(
-                  std::ref(MapArea->Tiles[TileX][TileY].Actor));
+      MapArea->mobActorsMirror.push_back(
+                  std::ref(MapArea->tiles[TileX][TileY].actor));
     }
   }
 
   for (auto I = 0; I < 200; I++) {
-    auto TileX = Random.Next() % MapArea->Size;
-    auto TileY = Random.Next() % MapArea->Size;
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
 
-    if (TileX == static_cast<int>(MapArea->SpawnPos.X)
-            && TileY == static_cast<int>(MapArea->SpawnPos.Y))
+    if (TileX == static_cast<int>(MapArea->spawnPos.x)
+            && TileY == static_cast<int>(MapArea->spawnPos.y))
         continue;
 
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
       continue;
 
-    if (MapArea->Tiles[TileX][TileY].GroundType !=
+    if (MapArea->tiles[TileX][TileY].groundType !=
             GetId("GroundtypeWater") &&
-        MapArea->Tiles[TileX][TileY].Actor == nullptr) {
-      MapArea->Tiles[TileX][TileY].Actor =
+        MapArea->tiles[TileX][TileY].actor == nullptr) {
+      MapArea->tiles[TileX][TileY].actor =
           std::make_unique<cMob>(Engine,
                                  static_cast<float>(TileX),
                                  static_cast<float>(TileY),
                                  "MobRat");
-      MapArea->MobActorsMirror.push_back(
-                  std::ref(MapArea->Tiles[TileX][TileY].Actor));
+      MapArea->mobActorsMirror.push_back(
+                  std::ref(MapArea->tiles[TileX][TileY].actor));
     }
   }
 }
@@ -465,22 +465,22 @@ GenerateQuestCaves(const iEngine &Engine,
     if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
       continue;
 
-    if (MapArea->Tiles[TileX][TileY].GroundType !=
+    if (MapArea->tiles[TileX][TileY].groundType !=
         GetId("GroundtypeWater")) {
-      MapArea->Tiles[TileX][TileY].Objects.push_back(
+      MapArea->tiles[TileX][TileY].objects.push_back(
           MakeSPtr<cObject>("ObjectQuestCaveEntrance"));
       //MapArea->Tiles[TileX][TileY].WarpToFloor = Floor;
-      MapArea->Tiles[TileX][TileY].Properties["WarpToFloor"] = std::to_string(Floor);
+      MapArea->tiles[TileX][TileY].properties["WarpToFloor"] = std::to_string(Floor);
 
-      WorldMap->Areas[MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor] =
-          std::make_unique<cMapArea>(Engine, WorldMap->MapAreaSize,
-                                     MapArea->WorldCoord.X,
-                                     MapArea->WorldCoord.Y,
+      WorldMap->areas[MapArea->worldCoord.x][MapArea->worldCoord.y][Floor] =
+          std::make_unique<cMapArea>(Engine, WorldMap->mapAreaSize,
+                                     MapArea->worldCoord.x,
+                                     MapArea->worldCoord.y,
                                      Floor);
 
       auto &quest_cave_map_area =
-          WorldMap->Areas
-              [MapArea->WorldCoord.X][MapArea->WorldCoord.Y][Floor];
+          WorldMap->areas
+              [MapArea->worldCoord.x][MapArea->worldCoord.y][Floor];
 
       QuestCaveMapGenerator.GenerateQuestCaveMapArea(
                   quest_cave_map_area.get(),

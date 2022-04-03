@@ -18,7 +18,7 @@ void cImageGraphics::DrawImage(int ImageNameId, float X, float Y, float Width,
     glOrtho(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f);
 
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, Engine.ImageLoader.Images[ImageNameId]);
+    glBindTexture(GL_TEXTURE_2D, engine.imageLoader.images[ImageNameId]);
 
     glBegin(GL_QUADS);
 
@@ -39,21 +39,21 @@ void cImageGraphics::DrawImage(int ImageNameId, float X, float Y, float Width,
   }
 
 cSizeF cImageGraphics::GetImageSizeF(std::string ImageName) const {
-      auto CanvasSize = Utilities.GetCanvasSize();
+      auto canvasSize = utilities.GetCanvasSize();
 
       glBindTexture(GL_TEXTURE_2D,
-                    Engine.ImageLoader.Images.at(GetId(ImageName)));
+                    engine.imageLoader.images.at(GetId(ImageName)));
 
-      int W, H;
-      int MipLevel = 0;
+      int w, h;
+      int mipLevel = 0;
 
-      glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_WIDTH, &W);
-      glGetTexLevelParameteriv(GL_TEXTURE_2D, MipLevel, GL_TEXTURE_HEIGHT, &H);
+      glGetTexLevelParameteriv(GL_TEXTURE_2D, mipLevel, GL_TEXTURE_WIDTH, &w);
+      glGetTexLevelParameteriv(GL_TEXTURE_2D, mipLevel, GL_TEXTURE_HEIGHT, &h);
 
-      auto ImageWidth = static_cast<float>(W) / CanvasSize.Width;
-      auto ImageHeight = static_cast<float>(H) / CanvasSize.Height;
+      auto imageWidth = static_cast<float>(w) / canvasSize.width;
+      auto imageHeight = static_cast<float>(h) / canvasSize.height;
 
-      return {ImageWidth, ImageHeight};
+      return {imageWidth, imageHeight};
   }
 
 }  // namespace Forradia

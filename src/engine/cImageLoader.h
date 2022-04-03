@@ -16,12 +16,12 @@ class cImageLoader {
  public:
   void LoadImages();
 
-  UMap<int, GLuint> Images;
-  UMap<int, std::string> ImageNames;
+  UMap<int, GLuint> images;
+  UMap<int, std::string> imageNames;
 
  private:
-  const std::string ImagesPath = "/Resources/Images";
-  const std::string ImageNameExtension = ".png";
+  const std::string imagesPath = "/Resources/Images";
+  const std::string imageNameExtension = ".png";
 };
 
 }  // namespace Forradia

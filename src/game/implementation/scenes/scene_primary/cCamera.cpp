@@ -67,8 +67,8 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
 
   GLfloat WinX, WinY, WinZ;  // Holds Our X, Y and Z Coordinates
 
-  WinX = static_cast<float>(MousePosition.X);  // Holds The Mouse X Coordinate
-  WinY = static_cast<float>(MousePosition.Y);
+  WinX = static_cast<float>(MousePosition.x);  // Holds The Mouse X Coordinate
+  WinY = static_cast<float>(MousePosition.y);
   WinY = static_cast<float>(Viewport[3]) - WinY;
 
   glReadPixels((GLint)WinX, (GLint)WinY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT,
@@ -85,19 +85,19 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
 }
 
 cPoint2 cCamera::GetHoveredTile() const {
-  float SubStepX = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.X -
-          static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().Position.X);
+  float SubStepX = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.x -
+          static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().Position.x);
 
-  float SubStepY = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.Y -
-          static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().Position.Y);
+  float SubStepY = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.y -
+          static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().Position.y);
 
   auto OffsetX = -static_cast<float>(2 * RenderDistance + 1)
           / 2.0f * Engine.tileSize - SubStepX * Engine.tileSize;
   auto OffsetY = -static_cast<float>(2 * RenderDistance - 1)
           / 2.0f * Engine.tileSize - SubStepY * Engine.tileSize;
-  auto MapX = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.X - RenderDistance +
+  auto MapX = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.x - RenderDistance +
               (RayCastingX - OffsetX) / Engine.tileSize;
-  auto MapY = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.Y - RenderDistance +
+  auto MapY = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.y - RenderDistance +
               (RayCastingZ - OffsetY) / Engine.tileSize + 1;
 
   return {static_cast<int>(MapX), static_cast<int>(MapY)};
@@ -114,14 +114,14 @@ int cCamera::GetRenderDistance() const {
 
 void cCamera::UpdateCameraMovement() {
   auto MousePosition = Utilities.GetMousePositionI();
-  auto DeltaMouseX = MousePosition.X - PreviousMousePosition.X;
+  auto DeltaMouseX = MousePosition.x - PreviousMousePosition.x;
 
-  if (Engine.MouseHandler.RightButtonDown)
+  if (Engine.mouseHandler.rightButtonDown)
     LookingAngle -= DeltaMouseX / 5.0f;
 
-  auto DeltaMouseY = MousePosition.Y - PreviousMousePosition.Y;
+  auto DeltaMouseY = MousePosition.y - PreviousMousePosition.y;
 
-  if (Engine.MouseHandler.RightButtonDown) {
+  if (Engine.mouseHandler.rightButtonDown) {
     CameraHeight += DeltaMouseY / 100.0f;
     CameraHeight = std::max(std::min(CameraHeight, 2.0f), -1.0f);
   }

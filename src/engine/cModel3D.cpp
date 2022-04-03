@@ -9,7 +9,7 @@
 namespace Forradia {
 
 cModel3D::~cModel3D() {
-    LoadedMeshes.clear();
+    loadedMeshes.clear();
 }
 
 bool cModel3D::LoadFile(std::string Path) {
@@ -21,9 +21,9 @@ bool cModel3D::LoadFile(std::string Path) {
     if (!file.is_open())
       return false;
 
-    LoadedMeshes.clear();
-    LoadedVertices.clear();
-    LoadedIndices.clear();
+    loadedMeshes.clear();
+    loadedVertices.clear();
+    loadedIndices.clear();
 
     std::vector<cVector3> Positions;
     std::vector<cVector2> TCoords;
@@ -49,8 +49,8 @@ bool cModel3D::LoadFile(std::string Path) {
         } else {
           if (!Indices.empty() && !Vertices.empty()) {
             tempMesh = cMesh(Vertices, Indices);
-            tempMesh.MeshName = meshname;
-            LoadedMeshes.push_back(tempMesh);
+            tempMesh.meshName = meshname;
+            loadedMeshes.push_back(tempMesh);
             Vertices.clear();
             Indices.clear();
             meshname.clear();
@@ -68,9 +68,9 @@ bool cModel3D::LoadFile(std::string Path) {
         std::vector<std::string> spos;
         cVector3 vpos;
         Split(Tail(curline), &spos, " ");
-        vpos.X = std::stof(spos[0]);
-        vpos.Y = std::stof(spos[1]);
-        vpos.Z = std::stof(spos[2]);
+        vpos.x = std::stof(spos[0]);
+        vpos.y = std::stof(spos[1]);
+        vpos.z = std::stof(spos[2]);
         Positions.push_back(vpos);
       }
 
@@ -78,8 +78,8 @@ bool cModel3D::LoadFile(std::string Path) {
         std::vector<std::string> stex;
         cVector2 vtex;
         Split(Tail(curline), &stex, " ");
-        vtex.X = std::stof(stex[0]);
-        vtex.Y = std::stof(stex[1]);
+        vtex.x = std::stof(stex[0]);
+        vtex.y = std::stof(stex[1]);
         TCoords.push_back(vtex);
       }
 
@@ -87,9 +87,9 @@ bool cModel3D::LoadFile(std::string Path) {
         std::vector<std::string> snor;
         cVector3 vnor;
         Split(Tail(curline), &snor, " ");
-        vnor.X = std::stof(snor[0]);
-        vnor.Y = std::stof(snor[1]);
-        vnor.Z = std::stof(snor[2]);
+        vnor.x = std::stof(snor[0]);
+        vnor.y = std::stof(snor[1]);
+        vnor.z = std::stof(snor[2]);
         Normals.push_back(vnor);
       }
 
@@ -99,7 +99,7 @@ bool cModel3D::LoadFile(std::string Path) {
 
         for (unsigned int i = 0; i < vVerts.size(); i++) {
           Vertices.push_back(vVerts[i]);
-          LoadedVertices.push_back(vVerts[i]);
+          loadedVertices.push_back(vVerts[i]);
         }
 
         std::vector<unsigned int> iIndices;
@@ -109,9 +109,9 @@ bool cModel3D::LoadFile(std::string Path) {
           unsigned int indnum =
               (unsigned int)((Vertices.size()) - vVerts.size()) + iIndices[i];
           Indices.push_back(indnum);
-          indnum = (unsigned int)((LoadedVertices.size()) - vVerts.size()) +
+          indnum = (unsigned int)((loadedVertices.size()) - vVerts.size()) +
                    iIndices[i];
-          LoadedIndices.push_back(indnum);
+          loadedIndices.push_back(indnum);
         }
       }
 
@@ -120,19 +120,19 @@ bool cModel3D::LoadFile(std::string Path) {
 
         if (!Indices.empty() && !Vertices.empty()) {
           tempMesh = cMesh(Vertices, Indices);
-          tempMesh.MeshName = meshname;
+          tempMesh.meshName = meshname;
           int i = 2;
 
           while (1) {
-            tempMesh.MeshName = meshname + "_" + std::to_string(i);
+            tempMesh.meshName = meshname + "_" + std::to_string(i);
 
-            for (auto &m : LoadedMeshes)
-              if (m.MeshName == tempMesh.MeshName)
+            for (auto &m : loadedMeshes)
+              if (m.meshName == tempMesh.meshName)
                 continue;
             break;
           }
 
-          LoadedMeshes.push_back(tempMesh);
+          loadedMeshes.push_back(tempMesh);
           Vertices.clear();
           Indices.clear();
         }
@@ -148,8 +148,8 @@ bool cModel3D::LoadFile(std::string Path) {
 
     if (!Indices.empty() && !Vertices.empty()) {
       tempMesh = cMesh(Vertices, Indices);
-      tempMesh.MeshName = meshname;
-      LoadedMeshes.push_back(tempMesh);
+      tempMesh.meshName = meshname;
+      loadedMeshes.push_back(tempMesh);
     }
 
     file.close();
@@ -157,15 +157,15 @@ bool cModel3D::LoadFile(std::string Path) {
     for (unsigned int i = 0; i < MeshMatNames.size(); i++) {
       std::string matname = MeshMatNames[i];
 
-      for (unsigned int j = 0; j < LoadedMaterials.size(); j++) {
-        if (LoadedMaterials[j].Name == matname) {
-          LoadedMeshes[i].MeshMaterial = LoadedMaterials[j];
+      for (unsigned int j = 0; j < loadedMaterials.size(); j++) {
+        if (loadedMaterials[j].name == matname) {
+          loadedMeshes[i].meshMaterial = loadedMaterials[j];
           break;
         }
       }
     }
 
-    if (LoadedMeshes.empty() && LoadedVertices.empty() && LoadedIndices.empty())
+    if (loadedMeshes.empty() && loadedVertices.empty() && loadedIndices.empty())
       return false;
     else
       return true;
@@ -201,33 +201,33 @@ void cModel3D::GenVerticesFromRawOBJ(std::vector<cVertex> *oVerts,
 
       switch (vtype) {
       case 1: {
-        vVert.Position = GetElement(iPositions, svert[0]);
-        vVert.TextureCoordinate = cVector2(0, 0);
+        vVert.position = GetElement(iPositions, svert[0]);
+        vVert.textureCoordinate = cVector2(0, 0);
         noNormal = true;
         oVerts->push_back(vVert);
 
         break;
       }
       case 2: {
-        vVert.Position = GetElement(iPositions, svert[0]);
-        vVert.TextureCoordinate = GetElement(iTCoords, svert[1]);
+        vVert.position = GetElement(iPositions, svert[0]);
+        vVert.textureCoordinate = GetElement(iTCoords, svert[1]);
         noNormal = true;
         oVerts->push_back(vVert);
 
         break;
       }
       case 3: {
-        vVert.Position = GetElement(iPositions, svert[0]);
-        vVert.TextureCoordinate = cVector2(0, 0);
-        vVert.Normal = GetElement(iNormals, svert[2]);
+        vVert.position = GetElement(iPositions, svert[0]);
+        vVert.textureCoordinate = cVector2(0, 0);
+        vVert.normal = GetElement(iNormals, svert[2]);
         oVerts->push_back(vVert);
 
         break;
       }
       case 4: {
-        vVert.Position = GetElement(iPositions, svert[0]);
-        vVert.TextureCoordinate = GetElement(iTCoords, svert[1]);
-        vVert.Normal = GetElement(iNormals, svert[2]);
+        vVert.position = GetElement(iPositions, svert[0]);
+        vVert.textureCoordinate = GetElement(iTCoords, svert[1]);
+        vVert.normal = GetElement(iNormals, svert[2]);
         oVerts->push_back(vVert);
 
         break;
@@ -239,13 +239,13 @@ void cModel3D::GenVerticesFromRawOBJ(std::vector<cVertex> *oVerts,
     }
 
     if (noNormal) {
-      cVector3 A = (*oVerts)[0].Position - (*oVerts)[1].Position;
-      cVector3 B = (*oVerts)[2].Position - (*oVerts)[1].Position;
+      cVector3 A = (*oVerts)[0].position - (*oVerts)[1].position;
+      cVector3 B = (*oVerts)[2].position - (*oVerts)[1].position;
 
-      cVector3 Normal = Math3D.Cross(A, B);
+      cVector3 Normal = math3D.Cross(A, B);
 
       for (unsigned int i = 0; i < oVerts->size(); i++)
-        (*oVerts)[i].Normal = Normal;
+        (*oVerts)[i].normal = Normal;
     }
   }
 
@@ -283,11 +283,11 @@ void cModel3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
 
         if (tVerts.size() == 3) {
           for (unsigned int j = 0; j < tVerts.size(); j++) {
-            if (iVerts[j].Position == pCur.Position)
+            if (iVerts[j].position == pCur.position)
               oIndices->push_back(j);
-            if (iVerts[j].Position == pPrev.Position)
+            if (iVerts[j].position == pPrev.position)
               oIndices->push_back(j);
-            if (iVerts[j].Position == pNext.Position)
+            if (iVerts[j].position == pNext.position)
               oIndices->push_back(j);
           }
 
@@ -297,30 +297,30 @@ void cModel3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
         }
         if (tVerts.size() == 4) {
           for (unsigned int j = 0; j < iVerts.size(); j++) {
-            if (iVerts[j].Position == pCur.Position)
+            if (iVerts[j].position == pCur.position)
               oIndices->push_back(j);
-            if (iVerts[j].Position == pPrev.Position)
+            if (iVerts[j].position == pPrev.position)
               oIndices->push_back(j);
-            if (iVerts[j].Position == pNext.Position)
+            if (iVerts[j].position == pNext.position)
               oIndices->push_back(j);
           }
 
           cVector3 tempVec;
           for (unsigned int j = 0; j < tVerts.size(); j++) {
-            if (tVerts[j].Position != pCur.Position &&
-                tVerts[j].Position != pPrev.Position &&
-                tVerts[j].Position != pNext.Position) {
-              tempVec = tVerts[j].Position;
+            if (tVerts[j].position != pCur.position &&
+                tVerts[j].position != pPrev.position &&
+                tVerts[j].position != pNext.position) {
+              tempVec = tVerts[j].position;
               break;
             }
           }
 
           for (unsigned int j = 0; j < iVerts.size(); j++) {
-            if (iVerts[j].Position == pPrev.Position)
+            if (iVerts[j].position == pPrev.position)
               oIndices->push_back(j);
-            if (iVerts[j].Position == pNext.Position)
+            if (iVerts[j].position == pNext.position)
               oIndices->push_back(j);
-            if (iVerts[j].Position == tempVec)
+            if (iVerts[j].position == tempVec)
               oIndices->push_back(j);
           }
 
@@ -328,8 +328,8 @@ void cModel3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
           break;
         }
 
-        float angle = Math3D.AngleBetween(pPrev.Position - pCur.Position,
-                                          pNext.Position - pCur.Position) *
+        float angle = math3D.AngleBetween(pPrev.position - pCur.position,
+                                          pNext.position - pCur.position) *
                       (180.0f / 3.14159265359f);
 
         if (angle <= 0 && angle >= 180)
@@ -338,11 +338,11 @@ void cModel3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
         bool inTri = false;
 
         for (unsigned int j = 0; j < iVerts.size(); j++) {
-          if (InTriangle(iVerts[j].Position, pPrev.Position, pCur.Position,
-                         pNext.Position) &&
-              iVerts[j].Position != pPrev.Position &&
-              iVerts[j].Position != pCur.Position &&
-              iVerts[j].Position != pNext.Position) {
+          if (InTriangle(iVerts[j].position, pPrev.position, pCur.position,
+                         pNext.position) &&
+              iVerts[j].position != pPrev.position &&
+              iVerts[j].position != pCur.position &&
+              iVerts[j].position != pNext.position) {
             inTri = true;
             break;
           }
@@ -352,16 +352,16 @@ void cModel3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
           continue;
 
         for (unsigned int j = 0; j < iVerts.size(); j++) {
-          if (iVerts[j].Position == pCur.Position)
+          if (iVerts[j].position == pCur.position)
             oIndices->push_back(j);
-          if (iVerts[j].Position == pPrev.Position)
+          if (iVerts[j].position == pPrev.position)
             oIndices->push_back(j);
-          if (iVerts[j].Position == pNext.Position)
+          if (iVerts[j].position == pNext.position)
             oIndices->push_back(j);
         }
 
         for (unsigned int j = 0; j < tVerts.size(); j++) {
-          if (tVerts[j].Position == pCur.Position) {
+          if (tVerts[j].position == pCur.position) {
             tVerts.erase(tVerts.begin() + j);
             break;
           }
@@ -398,18 +398,18 @@ bool cModel3D::LoadMaterials(std::string path) {
           listening = true;
 
           if (curline.size() > 7)
-            tempMaterial.Name = Tail(curline);
+            tempMaterial.name = Tail(curline);
           else
-            tempMaterial.Name = "none";
+            tempMaterial.name = "none";
         } else {
-          LoadedMaterials.push_back(tempMaterial);
+          loadedMaterials.push_back(tempMaterial);
 
           tempMaterial = cMaterial();
 
           if (curline.size() > 7)
-            tempMaterial.Name = Tail(curline);
+            tempMaterial.name = Tail(curline);
           else
-            tempMaterial.Name = "none";
+            tempMaterial.name = "none";
         }
       }
 
@@ -420,9 +420,9 @@ bool cModel3D::LoadMaterials(std::string path) {
         if (temp.size() != 3)
           continue;
 
-        tempMaterial.Ka.X = std::stof(temp[0]);
-        tempMaterial.Ka.Y = std::stof(temp[1]);
-        tempMaterial.Ka.Z = std::stof(temp[2]);
+        tempMaterial.ka.x = std::stof(temp[0]);
+        tempMaterial.ka.y = std::stof(temp[1]);
+        tempMaterial.ka.z = std::stof(temp[2]);
       }
 
       if (FirstToken(curline) == "Kd") {
@@ -432,9 +432,9 @@ bool cModel3D::LoadMaterials(std::string path) {
         if (temp.size() != 3)
           continue;
 
-        tempMaterial.Kd.X = std::stof(temp[0]);
-        tempMaterial.Kd.Y = std::stof(temp[1]);
-        tempMaterial.Kd.Z = std::stof(temp[2]);
+        tempMaterial.kd.x = std::stof(temp[0]);
+        tempMaterial.kd.y = std::stof(temp[1]);
+        tempMaterial.kd.z = std::stof(temp[2]);
       }
 
       if (FirstToken(curline) == "Ks") {
@@ -444,46 +444,46 @@ bool cModel3D::LoadMaterials(std::string path) {
         if (temp.size() != 3)
           continue;
 
-        tempMaterial.Ks.X = std::stof(temp[0]);
-        tempMaterial.Ks.Y = std::stof(temp[1]);
-        tempMaterial.Ks.Z = std::stof(temp[2]);
+        tempMaterial.ks.x = std::stof(temp[0]);
+        tempMaterial.ks.y = std::stof(temp[1]);
+        tempMaterial.ks.z = std::stof(temp[2]);
       }
 
       if (FirstToken(curline) == "Ns")
-        tempMaterial.Ns = std::stof(Tail(curline));
+        tempMaterial.ns = std::stof(Tail(curline));
 
       if (FirstToken(curline) == "Ni")
-        tempMaterial.Ni = std::stof(Tail(curline));
+        tempMaterial.ni = std::stof(Tail(curline));
 
       if (FirstToken(curline) == "d")
-        tempMaterial.D = std::stof(Tail(curline));
+        tempMaterial.d = std::stof(Tail(curline));
 
       if (FirstToken(curline) == "illum")
-        tempMaterial.Illum = std::stoi(Tail(curline));
+        tempMaterial.illum = std::stoi(Tail(curline));
 
       if (FirstToken(curline) == "map_Ka")
-        tempMaterial.MapKa = Tail(curline);
+        tempMaterial.mapKa = Tail(curline);
 
       if (FirstToken(curline) == "map_Kd")
-        tempMaterial.MapKd = Tail(curline);
+        tempMaterial.mapKd = Tail(curline);
 
       if (FirstToken(curline) == "map_Ks")
-        tempMaterial.MapKs = Tail(curline);
+        tempMaterial.mapKs = Tail(curline);
 
       if (FirstToken(curline) == "map_Ns")
-        tempMaterial.MapNs = Tail(curline);
+        tempMaterial.mapNs = Tail(curline);
 
       if (FirstToken(curline) == "map_d")
-        tempMaterial.MapD = Tail(curline);
+        tempMaterial.mapD = Tail(curline);
 
       if (FirstToken(curline) == "map_Bump" ||
           FirstToken(curline) == "map_bump" || FirstToken(curline) == "bump")
-        tempMaterial.MapBump = Tail(curline);
+        tempMaterial.mapBump = Tail(curline);
     }
 
-    LoadedMaterials.push_back(tempMaterial);
+    loadedMaterials.push_back(tempMaterial);
 
-    if (LoadedMaterials.empty())
+    if (loadedMaterials.empty())
       return false;
     else
       return true;

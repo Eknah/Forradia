@@ -16,7 +16,7 @@ class cRandom {
  private:
     inline static std::uniform_int_distribution<int> result =
             std::uniform_int_distribution<int>(0, 10000);
-    inline static std::random_device rd;
+    inline static std::random_device device;
     inline static bool IsInitialized = false;
     inline static std::mt19937 mt;
 };

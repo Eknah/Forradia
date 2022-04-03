@@ -17,24 +17,21 @@ class cSceneGameStart : public cSceneBase {
                     std::string Text_,
                     std::string SwitchToSceneName_) :
                     cSceneBase(Engine_),
-                    SwitchToSceneName(SwitchToSceneName_),
-                    ImageNameBackground(ImageNameBackground_),
-                    ImageNameLogo(ImageNameLogo_), Text(Text_) {}
+                    switchToSceneName(SwitchToSceneName_),
+                    imageNameBackground(ImageNameBackground_),
+                    imageNameLogo(ImageNameLogo_), text(Text_) {}
 
   void Enter() override {}
-
   void Update() override;
-
   void Render() override;
-
   void DoMouseDown(Uint8 mouseButton) override {};
   void DoMouseUp(Uint8 mouseButton) override {}
 
  private:
-  std::string SwitchToSceneName;
-  std::string ImageNameBackground;
-  std::string ImageNameLogo;
-  std::string Text;
+  std::string switchToSceneName;
+  std::string imageNameBackground;
+  std::string imageNameLogo;
+  std::string text;
 };
 
 }  // namespace Forradia

@@ -8,28 +8,28 @@ namespace Forradia {
 
 void cGuiWindowInventory::RenderDerived() {
   auto CanvasSize = Utilities.GetCanvasSize();
-  auto AspectRatio = static_cast<float>(CanvasSize.Width) / CanvasSize.Height;
+  auto AspectRatio = static_cast<float>(CanvasSize.width) / CanvasSize.height;
   auto BoundsInterior = GetInteriorBounds();
 
-  Engine.FillRectangle(Palette.Wheat, BoundsInterior.X, BoundsInterior.Y,
-                       BoundsInterior.Width, BoundsInterior.Height);
+  Engine.FillRectangle(Palette.wheat, BoundsInterior.x, BoundsInterior.y,
+                       BoundsInterior.width, BoundsInterior.height);
 
-  auto SlotSize = BoundsInterior.Width / NumSlotCols - Margin;
+  auto SlotSize = BoundsInterior.width / NumSlotCols - Margin;
   auto NumSlotRows =
-      BoundsInterior.Height / ((SlotSize + Margin) * AspectRatio);
+      BoundsInterior.height / ((SlotSize + Margin) * AspectRatio);
   auto I = 0;
 
 
   for (auto Y = 0; Y < NumSlotRows; Y++) {
     for (auto X = 0; X < NumSlotCols; X++) {
-      auto XPos = BoundsInterior.X + X * (SlotSize + Margin);
-      auto YPos = BoundsInterior.Y + Y * (SlotSize * AspectRatio + Margin);
+      auto XPos = BoundsInterior.x + X * (SlotSize + Margin);
+      auto YPos = BoundsInterior.y + Y * (SlotSize * AspectRatio + Margin);
 
       if (Engine.GetPlayer().GetModule<cModuleInventory>()
-              .Inventory.Objects.count(I) > 0) {
+              .Inventory.objects.count(I) > 0) {
         if (Engine.GetPlayer().GetModule<cModuleObjectUsage>()
                 .ObjectBeingUsed ==
-            Engine.GetPlayer().GetModule<cModuleInventory>().Inventory.Objects.at(I))
+            Engine.GetPlayer().GetModule<cModuleInventory>().Inventory.objects.at(I))
           Engine.DrawImage("ObjectSelected", XPos, YPos, SlotSize,
                            SlotSize * AspectRatio);
         else
@@ -37,7 +37,7 @@ void cGuiWindowInventory::RenderDerived() {
                            SlotSize * AspectRatio);
 
         Engine.DrawImage(Engine.GetPlayer().GetModule<cModuleInventory>()
-                             .Inventory.Objects.at(I)
+                             .Inventory.objects.at(I)
                              ->ObjectType,
                          XPos, YPos, SlotSize, SlotSize * AspectRatio);
       }
@@ -54,31 +54,31 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
   Engine.GetPlayer().GetModule<cModuleObjectUsage>().ObjectBeingUsed = nullptr;
 
   auto CanvasSize = Utilities.GetCanvasSize();
-  auto AspectRatio = static_cast<float>(CanvasSize.Width) / CanvasSize.Height;
+  auto AspectRatio = static_cast<float>(CanvasSize.width) / CanvasSize.height;
   auto BoundsInterior = GetInteriorBounds();
 
-  auto SlotSize = BoundsInterior.Width / NumSlotCols - Margin;
+  auto SlotSize = BoundsInterior.width / NumSlotCols - Margin;
   auto NumSlotRows =
-      BoundsInterior.Height / ((SlotSize + Margin) * AspectRatio);
+      BoundsInterior.height / ((SlotSize + Margin) * AspectRatio);
   auto I = 0;
 
   auto MousePosition = Utilities.GetMousePositionI();
-  auto MouseXRel = static_cast<float>(MousePosition.X) / CanvasSize.Width;
-  auto MouseYRel = static_cast<float>(MousePosition.Y) / CanvasSize.Height;
+  auto MouseXRel = static_cast<float>(MousePosition.x) / CanvasSize.width;
+  auto MouseYRel = static_cast<float>(MousePosition.y) / CanvasSize.height;
 
   for (auto Y = 0; Y < NumSlotRows; Y++) {
     for (auto X = 0; X < NumSlotCols; X++) {
-      auto XPos = BoundsInterior.X + X * (SlotSize + Margin);
-      auto YPos = BoundsInterior.Y + Y * (SlotSize * AspectRatio + Margin);
+      auto XPos = BoundsInterior.x + X * (SlotSize + Margin);
+      auto YPos = BoundsInterior.y + Y * (SlotSize * AspectRatio + Margin);
 
       if (Engine.GetPlayer().GetModule<cModuleInventory>()
-              .Inventory.Objects.count(I) > 0) {
+              .Inventory.objects.count(I) > 0) {
         if (MouseXRel >= XPos && MouseYRel >= YPos &&
             MouseXRel < XPos + SlotSize &&
             MouseYRel < YPos + SlotSize * AspectRatio) {
           Engine.GetPlayer().GetModule<cModuleObjectUsage>().ObjectBeingUsed =
               Engine.GetPlayer().GetModule<cModuleInventory>().Inventory
-                  .Objects.at(I);
+                  .objects.at(I);
           return;
         }
       }

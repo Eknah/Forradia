@@ -12,14 +12,14 @@ void cSceneManager::Initialize(cScenesCollection scenes,
   }
 
 SPtr<cSceneBase> &cSceneManager::GetCurrentScene() {
-    return ScenesCollection.Scenes.at(*CurrentScene);
+    return ScenesCollection.scenes.at(*CurrentScene);
   }
 
 void cSceneManager::SwitchToScene(
           std::string newScene) const {
     *CurrentScene = GetId(newScene);
-    ScenesCollection.Scenes.at(*CurrentScene)->Enter();
-    Engine.GameLoop.ResetForNewFrame();
+    ScenesCollection.scenes.at(*CurrentScene)->Enter();
+    Engine.gameLoop.ResetForNewFrame();
   }
 
 }  // namespace Forradia

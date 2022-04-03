@@ -26,13 +26,13 @@ class cMapArea {
   cTile &GetTile(cPoint2 Pos);
 
   // Basic data
-  cPoint3 WorldCoord = {-1, -1, -1};
-  cPoint2F SpawnPos = {-1, -1};
-  int Size = -1;
+  cPoint3 worldCoord = {-1, -1, -1};
+  cPoint2F spawnPos = {-1, -1};
+  int size = -1;
 
   // Map structure of tiles and mobs
-  std::vector<std::vector<cTile>> Tiles;
-  std::vector<std::reference_wrapper<SPtr<cActor>>> MobActorsMirror;
+  std::vector<std::vector<cTile>> tiles;
+  std::vector<std::reference_wrapper<SPtr<cActor>>> mobActorsMirror;
 };
 
 }  // namespace Forradia

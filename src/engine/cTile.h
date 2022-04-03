@@ -15,7 +15,7 @@ class iEngine;
 
 class cTile {
  public:
-  explicit cTile(const iEngine &Engine_) : Engine(Engine_) {}
+  explicit cTile(const iEngine &Engine_) : engine(Engine_) {}
 
   // Get info about tile
 
@@ -24,14 +24,14 @@ class cTile {
 
   // Core tile data structure
 
-  int GroundType = 0;
-  std::vector<SPtr<cObject>> Objects;
-  int Elevation = 0;
-  SPtr<cActor> Actor = nullptr;
-  std::unordered_map<std::string, std::string> Properties;
+  int groundType = 0;
+  std::vector<SPtr<cObject>> objects;
+  int elevation = 0;
+  SPtr<cActor> actor = nullptr;
+  std::unordered_map<std::string, std::string> properties;
 
  private:
-  const iEngine &Engine;
+  const iEngine &engine;
 };
 
 }  // namespace Forradia

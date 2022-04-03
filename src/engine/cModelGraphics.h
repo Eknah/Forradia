@@ -10,7 +10,7 @@ namespace Forradia {
 
 class cModelGraphics {
  public:
-  explicit cModelGraphics(iEngine &engine) : Engine(engine) {}
+  explicit cModelGraphics(iEngine &engine) : engine(engine) {}
 
   // ---- Drawing operations ----
 
@@ -21,9 +21,9 @@ class cModelGraphics {
                         float Rotation, float SpecificScaling) const;
 
  private:
-  iEngine &Engine;
+  iEngine &engine;
 
-  float ModelScaling = 0.1f;
+  float modelScaling = 0.1f;
 };
 
 }  // namespace Forradia

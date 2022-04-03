@@ -11,19 +11,19 @@ class iEngine;
 
 class iCustomCursor {
  public:
-  explicit iCustomCursor(iEngine &engine) : Engine(engine) {}
+  explicit iCustomCursor(iEngine &engine_) : engine(engine_) {}
 
   virtual void Initialize() = 0;
   virtual void ResetForNewFrame() = 0;
   virtual void Render() = 0;
 
-  eCursorTypes CursorType = eCursorTypes::Default;
+  eCursorTypes cursorType = eCursorTypes::Default;
 
  protected:
-  iEngine &Engine;
-  cUtilities Utilities;
+  iEngine &engine;
+  cUtilities utilities;
 
-  int CursorSize = 20;
+  int cursorSize = 20;
 };
 
 }  // namespace Forradia

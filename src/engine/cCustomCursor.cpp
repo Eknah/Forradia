@@ -10,22 +10,22 @@ void cCustomCursor::Initialize() {
 }
 
 void cCustomCursor::ResetForNewFrame() {
-  CursorType = eCursorTypes::Default;
+  cursorType = eCursorTypes::Default;
 }
 
 void cCustomCursor::Render() {
-    auto mouse_pos_f = Utilities.GetMousePositionF();
-    auto cursor_size_f = Utilities.ConvertToFloat(CursorSize);
+    auto mouse_pos_f = utilities.GetMousePositionF();
+    auto cursor_size_f = utilities.ConvertToFloat(cursorSize);
 
-    switch (CursorType) {
+    switch (cursorType) {
     case eCursorTypes::Default: {
-      Engine.DrawImage("CursorDefault", mouse_pos_f.X, mouse_pos_f.Y,
-                       cursor_size_f.Width, cursor_size_f.Height);
+      engine.DrawImage("CursorDefault", mouse_pos_f.x, mouse_pos_f.y,
+                       cursor_size_f.width, cursor_size_f.height);
       break;
     }
     case eCursorTypes::Hovering: {
-      Engine.DrawImage("CursorHoveringClickable", mouse_pos_f.X, mouse_pos_f.Y,
-                       cursor_size_f.Width, cursor_size_f.Height);
+      engine.DrawImage("CursorHoveringClickable", mouse_pos_f.x, mouse_pos_f.y,
+                       cursor_size_f.width, cursor_size_f.height);
       break;
     }
     }

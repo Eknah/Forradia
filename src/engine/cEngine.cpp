@@ -14,38 +14,38 @@ void cEngine::Run(cScenesCollection scenesCollection_, int startScene_,
 
     InitializeGL();
 
-    World = move(world_);
-    ObjectsContent = objectsContent_;
+    world = move(world_);
+    objectsContent = objectsContent_;
 
     cPoint3 playerWorldPos = {
-        World->WorldMapWidth/2,
-        World->WorldMapHeight/2,
+        world->worldMapWidth/2,
+        world->worldMapHeight/2,
         0
     };
 
-    cPoint2F playerTilePos = World->GetArea(playerWorldPos)->SpawnPos;
+    cPoint2F playerTilePos = world->GetArea(playerWorldPos)->spawnPos;
     cPoint2 playerTilePosI = {
-        static_cast<int>(playerTilePos.X),
-        static_cast<int>(playerTilePos.Y)
+        static_cast<int>(playerTilePos.x),
+        static_cast<int>(playerTilePos.y)
     };
 
-    World->GetArea(playerWorldPos)->GetTile(playerTilePosI)
-            .Actor = MakeUPtr<cPlayer>(*this);
+    world->GetArea(playerWorldPos)->GetTile(playerTilePosI)
+            .actor = MakeUPtr<cPlayer>(*this);
 
-    PlayerPtrPtr = MakeUPtr<cPlayer*>(
-                static_cast<cPlayer*>(World->GetArea(playerWorldPos)
-                                      ->GetTile(playerTilePosI).Actor.get()));
+    playerPtrPtr = MakeUPtr<cPlayer*>(
+                static_cast<cPlayer*>(world->GetArea(playerWorldPos)
+                                      ->GetTile(playerTilePosI).actor.get()));
 
     GetPlayer().GetModule<cModuleMovementData>().WorldMapCoord = playerWorldPos;
-    GetPlayer().GetModule<cModuleMovementData>().Position = GetCurrentMapArea().SpawnPos;
+    GetPlayer().GetModule<cModuleMovementData>().Position = GetCurrentMapArea().spawnPos;
     GetPlayer().GetModule<cModuleInventory>().Inventory = startingInventory_;
-    SceneManager.Initialize(move(scenesCollection_), startScene_);
-    ModelLoader.LoadModels();
-    ImageLoader.LoadImages();
-    TextGraphics.Initialize();
-    CustomCursor.Initialize();
+    sceneManager.Initialize(move(scenesCollection_), startScene_);
+    modelLoader.LoadModels();
+    imageLoader.LoadImages();
+    textGraphics.Initialize();
+    customCursor.Initialize();
 
-    GameLoop.Run();
+    gameLoop.Run();
 
     SDL_Quit();
   }
@@ -77,7 +77,7 @@ void cEngine::DrawLine(SDL_Color color, float x0, float y0, float x1,
 
 void cEngine::DrawString(std::string message, SDL_Color color, float x, float y,
                          bool centerAlign) const {
-    TextGraphics.DrawString(message, color, x, y, centerAlign);
+    textGraphics.DrawString(message, color, x, y, centerAlign);
   }
 
 void cEngine::DrawModel(std::string modelName, float x, float y, float z,
@@ -98,7 +98,7 @@ cSizeF cEngine::GetImageSizeF(std::string imageName) const {
 
 cMapArea& cEngine::GetCurrentMapArea() const {
     // return *WorldMap->MapAreas.at(Player.CurrentMapArea);
-    return *World->GetArea(GetPlayer().GetModule<cModuleMovementData>().WorldMapCoord);
+    return *world->GetArea(GetPlayer().GetModule<cModuleMovementData>().WorldMapCoord);
   }
 
 void cEngine::InitializeGL() {
@@ -109,19 +109,19 @@ void cEngine::InitializeGL() {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
                         SDL_GL_CONTEXT_PROFILE_CORE);
 
-    Window = F_WindowPtr(
+    window = F_WindowPtr(
         SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
-                         SDL_WINDOWPOS_UNDEFINED, defaultWindowSize.Width,
-                         defaultWindowSize.Height,
+                         SDL_WINDOWPOS_UNDEFINED, defaultWindowSize.width,
+                         defaultWindowSize.height,
                          SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN |
                              SDL_WINDOW_FULLSCREEN_DESKTOP),
         cSDL_Deleter());
 
-    FullscreenController.ToggleFullscreen();
-    SDL_SetWindowResizable(Window.get(), SDL_TRUE);
-    FullscreenController.ToggleFullscreen();
+    fullscreenController.ToggleFullscreen();
+    SDL_SetWindowResizable(window.get(), SDL_TRUE);
+    fullscreenController.ToggleFullscreen();
 
-    SDL_GL_CreateContext(Window.get());
+    SDL_GL_CreateContext(window.get());
     SDL_GL_SetSwapInterval(1);
 
     glEnable(GL_BLEND);

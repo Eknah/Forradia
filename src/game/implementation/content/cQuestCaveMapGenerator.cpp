@@ -12,37 +12,37 @@ void cQuestCaveMapGenerator::GenerateQuestCaveMapArea(
   GenerateCaveWalls(MapArea);
   GeneratePath(MapArea, EntranceLocation);
 
-  MapArea->Tiles[EntranceLocation.X][EntranceLocation.Y].Properties["WarpToFloor"] = "0";
-  MapArea->Tiles[EntranceLocation.X][EntranceLocation.Y].Objects.push_back(
+  MapArea->tiles[EntranceLocation.x][EntranceLocation.y].properties["WarpToFloor"] = "0";
+  MapArea->tiles[EntranceLocation.x][EntranceLocation.y].objects.push_back(
       MakeSPtr<cObject>("ObjectQuestCaveEntrance"));
 }
 
 void cQuestCaveMapGenerator::ClearToCaveFloor(cMapArea *MapArea) {
-  for (auto TileY = 0; TileY < MapArea->Size; TileY++)
-    for (auto TileX = 0; TileX < MapArea->Size; TileX++)
+  for (auto TileY = 0; TileY < MapArea->size; TileY++)
+    for (auto TileX = 0; TileX < MapArea->size; TileX++)
 
-      MapArea->Tiles[TileX][TileY].GroundType = GetId("GroundtypeCaveFloor");
+      MapArea->tiles[TileX][TileY].groundType = GetId("GroundtypeCaveFloor");
 }
 
 void cQuestCaveMapGenerator::GenerateCaveWalls(cMapArea *MapArea) {
-  for (auto TileY = 0; TileY < MapArea->Size; TileY++)
-    for (auto TileX = 0; TileX < MapArea->Size; TileX++)
+  for (auto TileY = 0; TileY < MapArea->size; TileY++)
+    for (auto TileX = 0; TileX < MapArea->size; TileX++)
 
-      MapArea->Tiles[TileX][TileY].Objects.push_back(
+      MapArea->tiles[TileX][TileY].objects.push_back(
           MakeSPtr<cObject>("ObjectCaveWallBlock", false));
 }
 
 void cQuestCaveMapGenerator::GeneratePath(cMapArea *MapArea,
                                           cPoint2 EntranceLocation) {
-  for (auto TileY = EntranceLocation.Y - 3; TileY <= EntranceLocation.Y + 3;
+  for (auto TileY = EntranceLocation.y - 3; TileY <= EntranceLocation.y + 3;
        TileY++)
-    for (auto TileX = EntranceLocation.X - 3; TileX <= EntranceLocation.X + 3;
+    for (auto TileX = EntranceLocation.x - 3; TileX <= EntranceLocation.x + 3;
          TileX++)
 
-      MapArea->Tiles[TileX][TileY].Objects.clear();
+      MapArea->tiles[TileX][TileY].objects.clear();
 
-  auto TileX = EntranceLocation.X;
-  auto TileY = EntranceLocation.Y;
+  auto TileX = EntranceLocation.x;
+  auto TileY = EntranceLocation.y;
 
   for (auto I = 0; I < 20; I++) {
     auto Direction = Random.Next() % 4;
@@ -51,11 +51,11 @@ void cQuestCaveMapGenerator::GeneratePath(cMapArea *MapArea,
     for (auto J = 0; J < NumSteps; J++) {
       for (auto XX = TileX - 1; XX <= TileX + 1; XX++) {
         for (auto YY = TileY - 1; YY <= TileY + 1; YY++) {
-          if (XX >= 0 && YY >= 0 && XX < MapArea->Size && YY < MapArea->Size)
-            if (MapArea->Tiles[XX][YY].Objects.size() > 0)
-              if (!MapArea->Tiles[XX][YY].HasObjectOfType(
+          if (XX >= 0 && YY >= 0 && XX < MapArea->size && YY < MapArea->size)
+            if (MapArea->tiles[XX][YY].objects.size() > 0)
+              if (!MapArea->tiles[XX][YY].HasObjectOfType(
                       "ObjectQuestCaveEntrance"))
-                MapArea->Tiles[XX][YY].Objects.clear();
+                MapArea->tiles[XX][YY].objects.clear();
         }
       }
 

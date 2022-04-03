@@ -31,9 +31,9 @@ class iEngine {
           iFpsCounter* FpsCounter_,
           iFullscreenController* FullscreenController_, iGameLoop* GameLoop_,
           iSceneManager* SceneManager_)
-      : KeyboardHandler(*KeyboardHandler_), CustomCursor(*CustomCursor_),
-        FpsCounter(*FpsCounter_), FullscreenController(*FullscreenController_),
-        GameLoop(*GameLoop_), SceneManager(*SceneManager_) {}
+      : keyboardHandler(*KeyboardHandler_), customCursor(*CustomCursor_),
+        fpsCounter(*FpsCounter_), fullscreenController(*FullscreenController_),
+        gameLoop(*GameLoop_), sceneManager(*SceneManager_) {}
 
   virtual void DrawImage(std::string imageName, float x, float y,
                                 float width, float height) const = 0;
@@ -63,24 +63,24 @@ class iEngine {
 
   cPlayer &GetPlayer() const;
 
-  F_WindowPtr Window;
+  F_WindowPtr window;
 
-  iKeyboardHandler &KeyboardHandler;
-  iCustomCursor &CustomCursor;
-  iFpsCounter &FpsCounter;
-  iFullscreenController &FullscreenController;
-  iGameLoop &GameLoop;
-  iSceneManager &SceneManager;
+  iKeyboardHandler &keyboardHandler;
+  iCustomCursor &customCursor;
+  iFpsCounter &fpsCounter;
+  iFullscreenController &fullscreenController;
+  iGameLoop &gameLoop;
+  iSceneManager &sceneManager;
 
-  cMouseHandler MouseHandler;
-  cImageLoader ImageLoader;
-  cModelLoader ModelLoader;
-  cTextGraphics TextGraphics;
-  cObjectsContent ObjectsContent;
+  cMouseHandler mouseHandler;
+  cImageLoader imageLoader;
+  cModelLoader modelLoader;
+  cTextGraphics textGraphics;
+  cObjectsContent objectsContent;
 
-  UPtr<cPlanetWorldMap> World;
+  UPtr<cPlanetWorldMap> world;
 
-  UPtr<cPlayer*> PlayerPtrPtr;
+  UPtr<cPlayer*> playerPtrPtr;
 };
 
 }  // namespace Forradia
