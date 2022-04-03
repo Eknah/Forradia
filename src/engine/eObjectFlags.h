@@ -8,7 +8,8 @@ namespace Forradia {
 enum eObjectFlags : char {
     ObjectNone = 0,
     ObjectMovementBlock = 1,
-    ObjectMovable = 2
+    ObjectMovable = 2,
+    ObjectNoShadow = 4
 };
 
 }  // namespace Forradia

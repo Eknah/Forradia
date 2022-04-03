@@ -3,6 +3,7 @@
 
 #pragma once
 #include "../engine/cMapArea.h"
+#include "cRect.h"
 
 namespace Forradia {
 
@@ -19,6 +20,7 @@ class cPlanetWorldMap {
   // Core
 
     void GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>> GenAreas);
+    cRect GetBounds();
 
   UPtr<cMapArea>& GetArea(cPoint3 Pos);
 

@@ -34,7 +34,10 @@ void cGameInstance::StartGame() {
 
   objectsContent.AddMany({{"ObjectTree1", ObjectMovementBlock},
                           {"ObjectTree2", ObjectMovementBlock},
-                          {"ObjectCaveWallBlock", ObjectMovementBlock}});
+                          {"ObjectCaveWallBlock", ObjectMovementBlock},
+                          {"ObjectTallGrass", ObjectNoShadow},
+                          {"ObjectWoodFence", ObjectNoShadow},
+                          {"ObjectWoodWall", ObjectNoShadow}});
 
   scenesCollection.AddMany({{"SceneGameStart",
                              MakeSPtr<cSceneGameStart>(engine,

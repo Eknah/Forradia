@@ -281,27 +281,7 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
           glEnd();
         }
 
-        if (Engine.GetCurrentMapArea()
-                .tiles[TileXI][TileYI]
-                .objects.size() > 0) {
-          glBindTexture(GL_TEXTURE_2D,
-                        Engine.imageLoader.images.at(GetId("TileShadow")));
 
-          glBegin(GL_QUADS);
-
-          glColor3f(R, G, B);
-
-          glTexCoord2f(0, 0);
-          glVertex3f(TileX0, TileY0, TileZ0);
-          glTexCoord2f(1, 0);
-          glVertex3f(TileX1, TileY1, TileZ1);
-          glTexCoord2f(1, 1);
-          glVertex3f(TileX2, TileY2, TileZ2);
-          glTexCoord2f(0, 1);
-          glVertex3f(TileX3, TileY3, TileZ3);
-
-          glEnd();
-        }
 
         auto HoveredX = Camera.GetHoveredTile().x;
         auto HoveredY = Camera.GetHoveredTile().y;
@@ -327,10 +307,43 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
           glEnd();
         }
 
-        glDisable(GL_TEXTURE_2D);
 
         for (auto &Object :
              Engine.GetCurrentMapArea().tiles[TileXI][TileYI].objects) {
+
+            auto dropShadow = true;
+
+            if (Engine.objectsContent.ObjectDescriptions.count(Object->ObjectType))
+            if (Engine.objectsContent.ObjectDescriptions.at(Object->ObjectType).Flags & ObjectNoShadow)
+                dropShadow = false;
+
+                if (dropShadow) {
+glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D,
+                          Engine.imageLoader.images.at(GetId("TileShadow")));
+
+            glBegin(GL_QUADS);
+
+            glColor3f(R, G, B);
+
+            glTexCoord2f(0, 0);
+            glVertex3f(TileX0, TileY0, TileZ0);
+            glTexCoord2f(1, 0);
+            glVertex3f(TileX1, TileY1, TileZ1);
+            glTexCoord2f(1, 1);
+            glVertex3f(TileX2, TileY2, TileZ2);
+            glTexCoord2f(0, 1);
+            glVertex3f(TileX3, TileY3, TileZ3);
+
+            glEnd();
+
+}
+
+                glDisable(GL_TEXTURE_2D);
+
+
+
+
           auto TileObject = Object->ObjectType;
 
           if (TileObject != 0)

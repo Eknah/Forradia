@@ -161,7 +161,7 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
     for (auto y = yStart; y <= yEnd; y++)  {
 
         for (auto x = xStart; x <= xEnd; x++)  {
-            //MapArea->tiles[x][y].groundType = GetId("GroundTypeDirtyGrass");
+            //MapArea->tiles[x][y].groundType = GetId("GroundTypeTrail");
             MapArea->tiles[x][y].objects.clear();
         }
     }
@@ -174,10 +174,10 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
     }
 
     for (auto y = 0; y < MapArea->size; y++)
-        MapArea->tiles[xCenter][y].groundType = GetId("GroundTypeDirtyGrass");
+        MapArea->tiles[xCenter][y].groundType = GetId("GroundTypeTrail");
 
     for (auto x = 0; x < MapArea->size; x++)
-        MapArea->tiles[x][yCenter].groundType = GetId("GroundTypeDirtyGrass");
+        MapArea->tiles[x][yCenter].groundType = GetId("GroundTypeTrail");
 
     for (auto y = yStart; y <= yEnd; y++)
         MapArea->tiles[xCenter][y].groundType = GetId("GroundTypeCobblestone");
@@ -195,10 +195,10 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
                     MakeSPtr<cObject>("ObjectBush1"));
 
         MapArea->tiles[xStart][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodFence", false, false));
+                    MakeSPtr<cObject>("ObjectWoodFence", false, false, 180));
 
         MapArea->tiles[xEnd][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodFence", false, false));
+                    MakeSPtr<cObject>("ObjectWoodFence", false, false, 0));
     }
 
     for (auto x = xStart; x <= xEnd; x++) {
@@ -214,7 +214,7 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
                     MakeSPtr<cObject>("ObjectWoodFence", false, false, 90));
 
         MapArea->tiles[x][yEnd].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodFence", false, false, 90));
+                    MakeSPtr<cObject>("ObjectWoodFence", false, false, 270));
     }
 
     auto houseWidth = 4;
@@ -331,7 +331,7 @@ cValleyMapGenerator::GeneratePinkFlowers(cMapArea *MapArea) const {
 
 void
 cValleyMapGenerator::GenerateTallGrass(cMapArea *MapArea) const {
-  for (auto I = 0; I < 1000; I++) {
+  for (auto I = 0; I < 6000; I++) {
     auto TileX = Random.Next() % MapArea->size;
     auto TileY = Random.Next() % MapArea->size;
 
