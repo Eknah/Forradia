@@ -11,7 +11,7 @@ void cBackground::Render(float Zoom) {
     glClearColor(0, 0, 0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
   } else {
-    glClearColor(0, 0.4f, 1, 1.0f);
+    glClearColor(0.3f, 0.4f, 0.7f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
   }
 

@@ -10,7 +10,8 @@ namespace Forradia {
 
 class cObject {
  public:
-  explicit cObject(std::string ObjectTypeName, bool RandomScaling = true);
+  explicit cObject(std::string ObjectTypeName, bool RandomScaling = true,
+                   bool RandomRotation = true, float rotation = 0);
 
   // Object usage
 

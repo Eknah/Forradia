@@ -9,6 +9,7 @@
 #include "implementation/scenes/cSceneMainMenu.h"
 #include "implementation/scenes/cScenePrimary.h"
 #include "implementation/content/cDefaultMapGenerator.h"
+#include "implementation/content/cValleyMapGenerator.h"
 
 namespace Forradia {
 
@@ -21,7 +22,8 @@ void cGameInstance::StartGame() {
   cScenesCollection scenesCollection;
   cInventory startingInventory;
 
-  auto defaultMapGen = MakeSPtr<cDefaultMapGenerator>(engine, planetMap);
+  //auto defaultMapGen = MakeSPtr<cDefaultMapGenerator>(engine, planetMap);
+  auto defaultMapGen = MakeSPtr<cValleyMapGenerator>(engine, planetMap);
   auto worldMapGens = UMap<int, UMap<int, SPtr<iMapGenerator>>>();
   worldMapGens[0][0] = defaultMapGen;
   worldMapGens[1][0] = defaultMapGen;

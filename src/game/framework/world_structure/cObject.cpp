@@ -5,9 +5,13 @@
 
 namespace Forradia {
 
-cObject::cObject(std::string ObjectTypeName, bool RandomScaling)
+cObject::cObject(std::string ObjectTypeName, bool RandomScaling,
+                 bool RandomRotation, float rotation)
     : ObjectType(GetId(ObjectTypeName)) {
+    if (RandomRotation)
   Rotation = static_cast<float>(Random.Next() % 360);
+    else Rotation = rotation;
+
     if (RandomScaling)
     Scaling = 0.6f + static_cast<float>(Random.Next() % 8) / 10.0f;
 }
