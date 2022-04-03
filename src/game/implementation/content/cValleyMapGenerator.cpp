@@ -189,10 +189,10 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
         if (y == yCenter) continue;
 
         MapArea->tiles[xStart + 1][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectBush1", false, false));
+                    MakeSPtr<cObject>("ObjectBush1"));
 
         MapArea->tiles[xEnd - 1][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectBush1", false, false));
+                    MakeSPtr<cObject>("ObjectBush1"));
 
         MapArea->tiles[xStart][y].objects.push_back(
                     MakeSPtr<cObject>("ObjectWoodFence", false, false));
@@ -205,10 +205,10 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
         if (x == xCenter) continue;
 
         MapArea->tiles[x][yStart + 1].objects.push_back(
-                    MakeSPtr<cObject>("ObjectBush1", false, false, 90));
+                    MakeSPtr<cObject>("ObjectBush1"));
 
         MapArea->tiles[x][yEnd - 1].objects.push_back(
-                    MakeSPtr<cObject>("ObjectBush1", false, false, 90));
+                    MakeSPtr<cObject>("ObjectBush1"));
 
         MapArea->tiles[x][yStart].objects.push_back(
                     MakeSPtr<cObject>("ObjectWoodFence", false, false, 90));
