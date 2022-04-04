@@ -16,8 +16,8 @@ class cObjectsContent {
   // Collection operations
 
   void Add(std::string ObjectName, cObjectDescription Description);
-  void Add(std::string ObjectName, eObjectFlags Flags);
-  void AddMany(std::vector<std::tuple<std::string, eObjectFlags>>
+  void Add(std::string ObjectName, char Flags);
+  void AddMany(std::vector<std::tuple<std::string, char>>
            Descriptions);
 
   void SetOpacity(std::string ObjectName, float opacity);

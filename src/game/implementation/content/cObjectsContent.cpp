@@ -14,12 +14,12 @@ void cObjectsContent::Add(std::string ObjectName,
 }
 
 void cObjectsContent::Add(std::string ObjectName,
-                          eObjectFlags Flags) {
+                          char Flags) {
     ObjectDescriptions.insert({GetId(ObjectName),
                                cObjectDescription(Flags)});
 }
 
-void cObjectsContent::AddMany(std::vector<std::tuple<std::string, eObjectFlags>>
+void cObjectsContent::AddMany(std::vector<std::tuple<std::string, char>>
          Descriptions) {
     for (auto& desc : Descriptions) {
         auto objectName = std::get<0>(desc);

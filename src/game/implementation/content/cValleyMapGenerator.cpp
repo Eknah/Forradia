@@ -274,6 +274,12 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
     auto housexEnd = housexStart + houseWidth;
     auto houseyEnd = houseyStart + houseDepth;
 
+    for (auto y = houseyStart - 1; y <= houseyEnd + 1; y++) {
+        for (auto x = housexStart - 1; x <= housexEnd + 1; x++) {
+            MapArea->tiles[x][y].elevation = MapArea->tiles[housexCenter][houseyCenter].elevation;
+        }
+    }
+
     for (auto y = houseyStart; y <= houseyEnd; y++) {
         for (auto x = housexStart; x <= housexEnd; x++) {
             MapArea->tiles[x][y].roof = MakeSPtr<cObject>("ObjectRoof", false, false);

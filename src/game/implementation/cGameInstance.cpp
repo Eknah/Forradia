@@ -36,8 +36,8 @@ void cGameInstance::StartGame() {
                           {"ObjectTree2", ObjectMovementBlock},
                           {"ObjectCaveWallBlock", ObjectMovementBlock},
                           {"ObjectTallGrass", ObjectNoShadow},
-                          {"ObjectWoodFence", ObjectNoShadow},
-                          {"ObjectWoodWall", ObjectNoShadow},
+                          {"ObjectWoodFence", ObjectNoShadow | ObjectMovementBlock},
+                          {"ObjectWoodWall", ObjectNoShadow | ObjectMovementBlock},
                           {"ObjectRoof", ObjectNoShadow}});
 
   objectsContent.SetOpacity("ObjectRoof", 0.5f);

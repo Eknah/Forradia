@@ -9,11 +9,11 @@ namespace Forradia {
 class cObjectDescription {
  public:
   cObjectDescription() = default;
-  explicit cObjectDescription(eObjectFlags Flags_)
+  explicit cObjectDescription(char Flags_)
       : Flags(Flags_) {}
 
   // Description parameters
-  eObjectFlags Flags = ObjectNone;
+  char Flags = ObjectNone;
   float Opacity = 1.0f;
 };
 
