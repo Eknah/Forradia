@@ -321,7 +321,19 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
     }
 
     MapArea->tiles[anvilx][anvily].objects.push_back(
-                MakeSPtr<cObject>("ObjectLargeAnvil"));
+                MakeSPtr<cObject>("ObjectLargeAnvil", false));
+
+    MapArea->tiles[xCenter + 1][yCenter - villageSize/2].objects.push_back(
+                MakeSPtr<cObject>("ObjectStreetLantern", false));
+
+    MapArea->tiles[xCenter + 1][yCenter + villageSize/2].objects.push_back(
+                MakeSPtr<cObject>("ObjectStreetLantern", false));
+
+    MapArea->tiles[xCenter + villageSize/2][yCenter + 1].objects.push_back(
+                MakeSPtr<cObject>("ObjectStreetLantern", false));
+
+    MapArea->tiles[xCenter - villageSize/2][yCenter + 1].objects.push_back(
+                MakeSPtr<cObject>("ObjectStreetLantern", false));
 
 }
 
