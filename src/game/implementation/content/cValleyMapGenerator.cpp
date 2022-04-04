@@ -61,11 +61,54 @@ cValleyMapGenerator::GenerateElevation(cMapArea *MapArea) const {
 
       }
   }
+
+
+
+
+
+  for (auto I = 0; I < 40; I++) {
+    auto CenterTileX = 0;
+    auto CenterTileY = 0;
+    auto MaxR = 4 + Random.Next() % 12;
+
+    do {
+  CenterTileX = Random.Next() % MapArea->size;
+  CenterTileY = Random.Next() % MapArea->size;
+  MaxR = 5 + Random.Next() % 13;
+    } while(std::abs(CenterTileX - MapArea->size/2) < villageSize/2 + MaxR
+            || std::abs(CenterTileY - MapArea->size/2) < villageSize/2 + MaxR);
+
+    for (auto R = MaxR; R >= 0; R--) {
+      for (auto TileY = CenterTileY - R; TileY <= CenterTileY + R; TileY++) {
+        for (auto TileX = CenterTileX - R; TileX <= CenterTileX + R; TileX++) {
+          auto DX = TileX - CenterTileX;
+          auto DY = TileY - CenterTileY;
+
+          if (DX * DX + DY * DY >= R * R)
+            continue;
+          if (TileX < 0 || TileY < 0 || TileX >= MapArea->size ||
+              TileY >= MapArea->size)
+            continue;
+
+          MapArea->tiles[TileX][TileY].elevation += 2;
+        }
+      }
+    }
+  }
+
+
+
+  for (auto I = 0; I < 1000; I++) {
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
+
+    MapArea->tiles[TileX][TileY].elevation += Random.Next() % 3;
+  }
 }
 
 void
 cValleyMapGenerator::GenerateRock(cMapArea *MapArea) const {
-  for (auto I = 0; I < 10; I++) {
+  for (auto I = 0; I < 30; I++) {
 
       auto CenterTileX = 0;
       auto CenterTileY = 0;
