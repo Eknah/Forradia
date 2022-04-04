@@ -82,14 +82,14 @@ void cEngine::DrawString(std::string message, SDL_Color color, float x, float y,
 
 void cEngine::DrawModel(std::string modelName, float x, float y, float z,
                         float rotation,
-                        float specificScaling) const {
-    modelGraphics.DrawModel(modelName, x, y, z, rotation, specificScaling);
+                        float specificScaling, float Opacity) const {
+    modelGraphics.DrawModel(modelName, x, y, z, rotation, specificScaling, Opacity);
   }
 
 void cEngine::DrawModel(int modelNameHash, float x, float y, float z,
                         float rotation,
-                        float specificScaling) const {
-    modelGraphics.DrawModel(modelNameHash, x, y, z, rotation, specificScaling);
+                        float specificScaling, float Opacity) const {
+    modelGraphics.DrawModel(modelNameHash, x, y, z, rotation, specificScaling, Opacity);
   }
 
 cSizeF cEngine::GetImageSizeF(std::string imageName) const {

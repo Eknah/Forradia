@@ -14,6 +14,7 @@ class cObjectDescription {
 
   // Description parameters
   eObjectFlags Flags = ObjectNone;
+  float Opacity = 1.0f;
 };
 
 }  // namespace Forradia

@@ -6,12 +6,13 @@
 namespace Forradia {
 
 void cModelGraphics::DrawModel(std::string ModelName, float X, float Y, float Z,
-                        float Rotation, float SpecificScaling) const {
-    DrawModel(GetId(ModelName), X, Y, Z, Rotation, SpecificScaling);
+                        float Rotation, float SpecificScaling, float Opacity) const {
+    DrawModel(GetId(ModelName), X, Y, Z, Rotation, SpecificScaling, Opacity);
   }
 
 void cModelGraphics::DrawModel(int ModelNameId, float X, float Y, float Z,
-                        float Rotation, float SpecificScaling) const {
+                        float Rotation, float SpecificScaling, float Opacity) const {
+
     glTranslatef(X, Y, Z);
     glRotatef(Rotation, 0, 1.0f, 0.0);
     glTranslatef(-X, -Y, -Z);
@@ -22,7 +23,7 @@ void cModelGraphics::DrawModel(int ModelNameId, float X, float Y, float Z,
 
     for (auto &Mesh : Model.loadedMeshes) {
       glColor4f(Mesh.meshMaterial.kd.x, Mesh.meshMaterial.kd.y,
-                Mesh.meshMaterial.kd.z, 1.0f);
+                Mesh.meshMaterial.kd.z, Opacity);
 
       for (auto &Vector : Mesh.vertices) {
         auto XVec = X + modelScaling * Vector.position.x * SpecificScaling;

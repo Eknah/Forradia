@@ -52,10 +52,12 @@ class iEngine {
 
   virtual void DrawModel(std::string modelName, float x, float y,
                                 float z, float rotation = 0.0f,
-                                float specificScaling = 1.0f) const = 0;
+                                float specificScaling = 1.0f,
+                         float Opacity = 1.0f) const = 0;
   virtual void DrawModel(int modelNameHash, float x, float y, float z,
                                 float rotation = 0.0f,
-                                float specificScaling = 1.0f) const = 0;
+                                float specificScaling = 1.0f,
+                         float Opacity = 1.0f) const = 0;
 
   virtual cSizeF GetImageSizeF(std::string ImageName) const = 0;
 

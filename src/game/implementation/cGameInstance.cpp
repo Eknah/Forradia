@@ -37,7 +37,10 @@ void cGameInstance::StartGame() {
                           {"ObjectCaveWallBlock", ObjectMovementBlock},
                           {"ObjectTallGrass", ObjectNoShadow},
                           {"ObjectWoodFence", ObjectNoShadow},
-                          {"ObjectWoodWall", ObjectNoShadow}});
+                          {"ObjectWoodWall", ObjectNoShadow},
+                          {"ObjectRoof", ObjectNoShadow}});
+
+  objectsContent.SetOpacity("ObjectRoof", 0.5f);
 
   scenesCollection.AddMany({{"SceneGameStart",
                              MakeSPtr<cSceneGameStart>(engine,

@@ -64,11 +64,11 @@ class cEngine : public iEngine {
 
   void DrawModel(std::string modelName, float x, float y, float z,
                         float rotation = 0.0f,
-                        float specificScaling = 1.0f) const override;
+                        float specificScaling = 1.0f, float Opacity = 1.0f) const override;
 
   void DrawModel(int ModelNameHash, float x, float y, float z,
                         float rotation = 0.0f,
-                        float specificScaling = 1.0f) const override;
+                        float specificScaling = 1.0f, float Opacity = 1.0f) const override;
 
   // ---- Helper functions ----
 

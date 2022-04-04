@@ -30,6 +30,10 @@ void cObjectsContent::AddMany(std::vector<std::tuple<std::string, eObjectFlags>>
     }
 }
 
+void cObjectsContent::SetOpacity(std::string ObjectName, float opacity) {
+    ObjectDescriptions.at(GetId(ObjectName)).Opacity = opacity;
+}
+
 bool cObjectsContent::IsMovable(int ObjectType) const {
   if (ObjectDescriptions.count(ObjectType))
     return ObjectDescriptions.at(ObjectType).Flags & ObjectMovable;

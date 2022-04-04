@@ -173,11 +173,15 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
         }
     }
 
-    for (auto y = 0; y < MapArea->size; y++)
+    for (auto y = 0; y < MapArea->size; y++) {
+        MapArea->tiles[xCenter][y].objects.clear();
         MapArea->tiles[xCenter][y].groundType = GetId("GroundTypeTrail");
+    }
 
-    for (auto x = 0; x < MapArea->size; x++)
+    for (auto x = 0; x < MapArea->size; x++) {
+        MapArea->tiles[x][yCenter].objects.clear();
         MapArea->tiles[x][yCenter].groundType = GetId("GroundTypeTrail");
+    }
 
     for (auto y = yStart; y <= yEnd; y++)
         MapArea->tiles[xCenter][y].groundType = GetId("GroundTypeCobblestone");
@@ -229,6 +233,7 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
 
     for (auto y = houseyStart; y <= houseyEnd; y++) {
         for (auto x = housexStart; x <= housexEnd; x++) {
+            MapArea->tiles[x][y].roof = MakeSPtr<cObject>("ObjectRoof", false, false);
             MapArea->tiles[x][y].groundType = GetId("GroundTypeWoodfloor");
         }
     }

@@ -15,10 +15,12 @@ class cModelGraphics {
   // ---- Drawing operations ----
 
   void DrawModel(std::string ModelName, float X, float Y, float Z,
-                        float Rotation, float SpecificScaling) const;
+                        float Rotation, float SpecificScaling,
+                 float Opacity = 1.0f) const;
 
   void DrawModel(int ModelNameId, float X, float Y, float Z,
-                        float Rotation, float SpecificScaling) const;
+                        float Rotation, float SpecificScaling,
+                 float Opacity = 1.0f) const;
 
  private:
   iEngine &engine;

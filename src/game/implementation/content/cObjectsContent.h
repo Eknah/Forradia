@@ -20,6 +20,8 @@ class cObjectsContent {
   void AddMany(std::vector<std::tuple<std::string, eObjectFlags>>
            Descriptions);
 
+  void SetOpacity(std::string ObjectName, float opacity);
+
   // Get info about an object
 
   bool IsMovable(int ObjectType) const;

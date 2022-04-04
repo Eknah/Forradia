@@ -26,6 +26,7 @@ class cTile {
 
   int groundType = 0;
   std::vector<SPtr<cObject>> objects;
+  SPtr<cObject> roof;
   int elevation = 0;
   SPtr<cActor> actor = nullptr;
   std::unordered_map<std::string, std::string> properties;
