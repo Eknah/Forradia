@@ -57,7 +57,7 @@ cValleyMapGenerator::GenerateElevation(cMapArea *MapArea) const {
         auto elevVertical = std::max(dyTop, dyBottom);
         auto elev = std::max(std::max(elevHorizontal, elevVertical), 86)*5 - 40;
 
-        MapArea->tiles[x][y].elevation = elev;
+        MapArea->tiles[x][y].elevation = elev/1.5f;
 
       }
   }
@@ -66,17 +66,17 @@ cValleyMapGenerator::GenerateElevation(cMapArea *MapArea) const {
 
 
 
-  for (auto I = 0; I < 40; I++) {
+  for (auto I = 0; I < 60; I++) {
     auto CenterTileX = 0;
     auto CenterTileY = 0;
-    auto MaxR = 4 + Random.Next() % 12;
+    auto MaxR = 4 + Random.Next() % 6;
 
     do {
   CenterTileX = Random.Next() % MapArea->size;
   CenterTileY = Random.Next() % MapArea->size;
-  MaxR = 5 + Random.Next() % 13;
-    } while(std::abs(CenterTileX - MapArea->size/2) < villageSize/2 + MaxR
-            || std::abs(CenterTileY - MapArea->size/2) < villageSize/2 + MaxR);
+  MaxR = 1 + Random.Next() % 6;
+    } while(std::abs(CenterTileX - MapArea->size/2) < villageSize/2
+            || std::abs(CenterTileY - MapArea->size/2) < villageSize/2);
 
     for (auto R = MaxR; R >= 0; R--) {
       for (auto TileY = CenterTileY - R; TileY <= CenterTileY + R; TileY++) {
@@ -90,7 +90,7 @@ cValleyMapGenerator::GenerateElevation(cMapArea *MapArea) const {
               TileY >= MapArea->size)
             continue;
 
-          MapArea->tiles[TileX][TileY].elevation += 2;
+          MapArea->tiles[TileX][TileY].elevation += 5;
         }
       }
     }
@@ -98,12 +98,6 @@ cValleyMapGenerator::GenerateElevation(cMapArea *MapArea) const {
 
 
 
-  for (auto I = 0; I < 1000; I++) {
-    auto TileX = Random.Next() % MapArea->size;
-    auto TileY = Random.Next() % MapArea->size;
-
-    MapArea->tiles[TileX][TileY].elevation += Random.Next() % 3;
-  }
 }
 
 void
