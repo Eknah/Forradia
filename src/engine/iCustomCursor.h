@@ -23,7 +23,7 @@ class iCustomCursor {
   iEngine &engine;
   cUtilities utilities;
 
-  int cursorSize = 20;
+  int cursorSize = 40;
 };
 
 }  // namespace Forradia

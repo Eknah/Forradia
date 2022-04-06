@@ -5,6 +5,7 @@
 #include "cGui.h"
 #include "../engine/cEngine.h"
 #include "cGuiWindowInventory.h"
+#include "cGuiWindowMall.h"
 
 namespace Forradia {
 
@@ -13,6 +14,9 @@ void cGui::Initialize() {
   Windows.insert(
       {"Inventory", std::make_unique<cGuiWindowInventory>(
                         Engine, "Inventory", cRectF{0.1f, 0.1f, 0.2f, 0.7f})});
+  Windows.insert(
+      {"Mall", std::make_unique<cGuiWindowMall>(
+                        Engine, "Mall", cRectF{0.2f, 0.1f, 0.7f, 0.6f})});
 }
 
 void cGui::Update() {
@@ -27,6 +31,13 @@ void cGui::Update() {
   if (BoundsButtonSystem.ContainsPoint(MousePositionF))
     Engine.customCursor.cursorType = eCursorTypes::Hovering;
 
+  auto mallIconSize = Utilities.ConvertToFloat(ButtonMallSize);
+
+  auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
+
+  if (mallIconBounds.ContainsPoint(MousePositionF))
+    Engine.customCursor.cursorType = eCursorTypes::Hovering;
+
   for (auto &[Key, Window] : Windows)
     Window->Update();
 }
@@ -35,6 +46,17 @@ void cGui::Render() {
   GuiMinimap.Render();
 
   auto MousePositionF = Utilities.GetMousePositionF();
+
+
+
+  auto mallIconSize = Utilities.ConvertToFloat(ButtonMallSize);
+
+  auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
+
+  if (mallIconBounds.ContainsPoint(MousePositionF))
+    Engine.DrawImage("GuiIconMallHovered", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
+  else
+      Engine.DrawImage("GuiIconMall", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
 
   if (BoundsButtonInventory.ContainsPoint(MousePositionF))
     Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonInventory.x,
@@ -114,6 +136,16 @@ bool cGui::DoMouseDown(Uint8 MouseButton) {
     Windows.at("Inventory")->Visible = !Windows.at("Inventory")->Visible;
 
     return true;
+  }
+
+  auto mallIconSize = Utilities.ConvertToFloat(ButtonMallSize);
+
+  auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
+
+  if (mallIconBounds.ContainsPoint(MousePositionF)) {
+      Windows.at("Mall")->Visible = !Windows.at("Mall")->Visible;
+
+      return true;
   }
 
   return false;

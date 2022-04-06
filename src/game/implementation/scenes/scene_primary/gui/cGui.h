@@ -40,6 +40,8 @@ class cGui {
   const float TextBoxWidth = 3 * ButtonWidth;
   const float TextBoxHeight = 0.15f;
 
+  const int ButtonMallSize = 100;
+
   cRectF BoundsButtonInventory = {0.5f - ButtonWidth / 2, 1.0f - ButtonHeight,
                                   ButtonWidth, ButtonHeight};
   cRectF BoundsButtonCharacter = {0.5f - ButtonWidth / 2 - ButtonWidth,

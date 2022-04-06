@@ -86,6 +86,7 @@ class cEngine : public iEngine {
   cSceneManager sceneManagerImplemented;
 
   float tileSize = 0.5f;
+  float fov = 90.0f;
 
  private:
   // Initializes SDL video module
