@@ -13,7 +13,7 @@ class cModuleMovementData : public iModule {
  public:
   using iModule::iModule;
 
-  void ResetForNewFrame() override {};
+  void ResetForNewFrame() override;
   void Update() override {};
 
   cPoint3 WorldMapCoord = {1, 1, 0};
@@ -26,6 +26,7 @@ class cModuleMovementData : public iModule {
   int MoveSpeed = 30;
   float StepSize = 3.0f;
   float StepMultiplier = 0.1f;
+  bool IsWalking = false;
 
 };
 

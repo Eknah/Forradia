@@ -28,7 +28,6 @@ class cModuleMovement : public iModule {
 
   MovementInstruction Instruction;
 
-  bool IsWalking = false;
   float FacingAngleRotated = 0.0f;
 
  private:

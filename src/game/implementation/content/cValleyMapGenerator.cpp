@@ -452,6 +452,30 @@ cValleyMapGenerator::GenerateMobs(cMapArea *MapArea) const {
                   std::ref(MapArea->tiles[TileX][TileY].actor));
     }
   }
+
+  for (auto I = 0; I < 100; I++) {
+    auto TileX = Random.Next() % MapArea->size;
+    auto TileY = Random.Next() % MapArea->size;
+
+    if (TileX == static_cast<int>(MapArea->spawnPos.x)
+            && TileY == static_cast<int>(MapArea->spawnPos.y))
+        continue;
+
+    if (DistToPlayerStartingPos(MapArea, TileX, TileY) < PlayerStartingAreaSize)
+      continue;
+
+    if (MapArea->tiles[TileX][TileY].groundType !=
+            GetId("GroundTypeWater") &&
+        MapArea->tiles[TileX][TileY].actor == nullptr) {
+      MapArea->tiles[TileX][TileY].actor =
+          std::make_unique<cMob>(Engine,
+                                 static_cast<float>(TileX),
+                                 static_cast<float>(TileY),
+                                 "MobPinkSlime");
+      MapArea->mobActorsMirror.push_back(
+                  std::ref(MapArea->tiles[TileX][TileY].actor));
+    }
+  }
 }
 
 

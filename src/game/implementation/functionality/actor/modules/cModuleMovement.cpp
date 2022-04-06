@@ -17,7 +17,6 @@ cModuleMovement::cModuleMovement(const iEngine &Engine_,
 }
 
 void cModuleMovement::ResetForNewFrame() {
-  IsWalking = false;
   FacingAngleRotated = *GetParentActor().GetModule<cModuleMovementData>().FacingAngle;
 }
 
@@ -36,7 +35,7 @@ void cModuleMovement::UpdateDirectionalMovement() {
          Instruction.TryMoveBack || Instruction.TryMoveLeft)))
     return;
 
-  IsWalking = true;
+  GetParentActor().GetModule<cModuleMovementData>().IsWalking = true;
 
   auto NewX = GetParentActor().GetModule<cModuleMovementData>().Position.x;
   auto NewY = GetParentActor().GetModule<cModuleMovementData>().Position.y;
@@ -167,7 +166,7 @@ void cModuleMovement::UpdateDestinationMovement() {
   if (AbsDX < GetParentActor().GetModule<cModuleMovementData>().StepMultiplier && AbsDY < GetParentActor().GetModule<cModuleMovementData>().StepMultiplier) {
     GetParentActor().GetModule<cModuleMovementData>().MoveDestination = {-1, -1};
   } else {
-    IsWalking = true;
+    GetParentActor().GetModule<cModuleMovementData>().IsWalking = true;
     *GetParentActor().GetModule<cModuleMovementData>().FacingAngle
             = static_cast<float>(std::atan2(-DX, -DY)) / PiF * 180.0f;
 

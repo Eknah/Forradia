@@ -27,13 +27,13 @@ void cActor::Update() const {
 }
 
 int cActor::GetAnimatedModelId() const {
-    if (!HasModule<cModuleMovement>()) {
+    if (!HasModule<cModuleMovementData>()) {
         return GetId(ModelName);
     } else {
         auto ModelNameAnimated = ModelName;
 
-        if (GetModule<cModuleMovement>().IsWalking) {
-          auto AnimIndex = (Ticks() % 300) / 75;
+        if (GetModule<cModuleMovementData>().IsWalking) {
+          auto AnimIndex = ((Ticks() + ActorId*10) % 300) / 75;
 
           if (AnimIndex > 0)
             ModelNameAnimated.append(std::to_string(AnimIndex));
