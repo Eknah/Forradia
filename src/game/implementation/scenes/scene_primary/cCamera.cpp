@@ -25,7 +25,8 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(45, 1.333, 0.5, 100);
+  //gluPerspective(45, 1.333, 0.5, 100);
+  gluPerspective(120, 1.333, 0.5, 100);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
