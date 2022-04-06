@@ -12,7 +12,7 @@ void cScenePrimary::Enter() {
 }
 
 void cScenePrimary::Update() {
-  auto &Keys = Engine.keyboardHandler.KeysBeingPressed;
+  auto &Keys = Engine.keyboardHandler.keysBeingPressed;
   auto &Player = Engine.GetPlayer();
 
   Player.ResetForNewFrame();
@@ -45,7 +45,7 @@ void cScenePrimary::Update() {
     Camera.Update(0, *Engine.mouseHandler.wheelAmount);
   }
 
-  if (Engine.keyboardHandler.KeysBeenFired->count(SDLK_F2))
+  if (Engine.keyboardHandler.keysBeenFired->count(SDLK_F2))
     Gui.Windows.at("Inventory")->Visible =
         !Gui.Windows.at("Inventory")->Visible;
 
@@ -54,7 +54,7 @@ void cScenePrimary::Update() {
   if (Engine.mouseHandler.rightButtonDown)
     *Player.GetModule<cModuleMovementData>().FacingAngle = Camera.LookingAngle;
 
-  if (Engine.keyboardHandler.KeysBeenFired->count(SDLK_SPACE) > 0)
+  if (Engine.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
     Engine.GetPlayer().GetModule<cModuleJumping>().Jump();
 
   if (Engine.mouseHandler.rightButtonDown)

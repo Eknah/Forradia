@@ -6,16 +6,16 @@
 namespace Forradia {
 
 void cKeyboardHandler::ResetForNewFrame() const {
-      KeysBeenFired->clear();
+      keysBeenFired->clear();
   }
 
 void cKeyboardHandler::DoKeyDown(SDL_Keycode key) const {
-    KeysBeingPressed->insert(key);
-    KeysBeenFired->insert(key);
+    keysBeingPressed->insert(key);
+    keysBeenFired->insert(key);
   }
 
 void cKeyboardHandler::DoKeyUp(SDL_Keycode key) const {
-      KeysBeingPressed->erase(key);
+      keysBeingPressed->erase(key);
   }
 
 }  // namespace Forradia

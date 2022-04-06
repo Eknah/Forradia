@@ -10,22 +10,22 @@ class iEngine;
 
 class iFpsCounter {
  public:
-  explicit iFpsCounter(iEngine &engine) : Engine(engine) {}
+  explicit iFpsCounter(iEngine &_engine) : engine(_engine) {}
 
   virtual void Update() = 0;
   virtual void Render() = 0;
 
  protected:
-  iEngine &Engine;
-  cPalette Palette;
+  iEngine &engine;
+  cPalette palette;
 
-  int FramesCount = 0;
-  int Fps = 0;
-  unsigned int TickLastUpdate = 0;
-  const float Width = 0.07f;
-  const float Height = 0.03f;
-  const float Posx = 0.97f;
-  const float Posy = 1.0f - Height/2;
+  int framesCount = 0;
+  int fps = 0;
+  unsigned int tickLastUpdate = 0;
+  const float width = 0.07f;
+  const float height = 0.03f;
+  const float posx = 0.97f;
+  const float posy = 1.0f - height/2;
 };
 
 }  // namespace Forradia

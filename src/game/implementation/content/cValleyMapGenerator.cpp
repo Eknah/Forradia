@@ -11,10 +11,10 @@ namespace Forradia {
 void
 cValleyMapGenerator::GenerateMapArea(
         int WorldX, int WorldY, int WorldZ) const {
-  WorldMap->areas[WorldX][WorldY][WorldZ] =
-      MakeUPtr<cMapArea>(Engine, WorldMap->mapAreaSize, WorldX, WorldY, WorldZ);
+  worldMap->areas[WorldX][WorldY][WorldZ] =
+      MakeUPtr<cMapArea>(engine, worldMap->mapAreaSize, WorldX, WorldY, WorldZ);
 
-  auto MapArea = WorldMap->areas[WorldX][WorldY][WorldZ].get();
+  auto MapArea = worldMap->areas[WorldX][WorldY][WorldZ].get();
 
   ClearToGrass(MapArea);
   GeneratePlayerStartingPosition(MapArea);
@@ -420,7 +420,7 @@ cValleyMapGenerator::GenerateMobs(cMapArea *MapArea) const {
             GetId("GroundTypeWater") &&
         MapArea->tiles[TileX][TileY].actor == nullptr) {
       MapArea->tiles[TileX][TileY].actor =
-          std::make_unique<cMob>(Engine,
+          std::make_unique<cMob>(engine,
                                  static_cast<float>(TileX),
                                  static_cast<float>(TileY),
                                  "MobRabbit");
@@ -444,7 +444,7 @@ cValleyMapGenerator::GenerateMobs(cMapArea *MapArea) const {
             GetId("GroundTypeWater") &&
         MapArea->tiles[TileX][TileY].actor == nullptr) {
       MapArea->tiles[TileX][TileY].actor =
-          std::make_unique<cMob>(Engine,
+          std::make_unique<cMob>(engine,
                                  static_cast<float>(TileX),
                                  static_cast<float>(TileY),
                                  "MobRat");
@@ -468,7 +468,7 @@ cValleyMapGenerator::GenerateMobs(cMapArea *MapArea) const {
             GetId("GroundTypeWater") &&
         MapArea->tiles[TileX][TileY].actor == nullptr) {
       MapArea->tiles[TileX][TileY].actor =
-          std::make_unique<cMob>(Engine,
+          std::make_unique<cMob>(engine,
                                  static_cast<float>(TileX),
                                  static_cast<float>(TileY),
                                  "MobPinkSlime");

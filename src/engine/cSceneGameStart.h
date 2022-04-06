@@ -11,15 +11,15 @@ namespace Forradia {
 
 class cSceneGameStart : public cSceneBase {
  public:
-    cSceneGameStart(const cEngine &Engine_,
-                    std::string ImageNameBackground_,
-                    std::string ImageNameLogo_,
-                    std::string Text_,
-                    std::string SwitchToSceneName_) :
-                    cSceneBase(Engine_),
-                    switchToSceneName(SwitchToSceneName_),
-                    imageNameBackground(ImageNameBackground_),
-                    imageNameLogo(ImageNameLogo_), text(Text_) {}
+    cSceneGameStart(const cEngine &_engine,
+                    std::string _imageNameBackground,
+                    std::string _imageNameLogo,
+                    std::string _text,
+                    std::string _switchToSceneName) :
+                    cSceneBase(_engine),
+                    switchToSceneName(_switchToSceneName),
+                    imageNameBackground(_imageNameBackground),
+                    imageNameLogo(_imageNameLogo), text(_text) {}
 
   void Enter() override {}
   void Update() override;

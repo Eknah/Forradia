@@ -6,7 +6,7 @@
 namespace Forradia {
 
 void cSceneGameStart::Update() {
-    if (Engine.keyboardHandler.KeysBeenFired->size() > 0)
+    if (Engine.keyboardHandler.keysBeenFired->size() > 0)
       Engine.sceneManager.SwitchToScene(switchToSceneName);
 
     if (Engine.mouseHandler.GetLeftButtonBeenFired()

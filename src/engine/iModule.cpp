@@ -6,7 +6,7 @@
 namespace Forradia {
 
 cActor &iModule::GetParentActor() {
-    return *ParentActor;
+    return *parentActor;
 }
 
 }  // namespace Forradia

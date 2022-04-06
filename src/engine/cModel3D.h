@@ -21,7 +21,7 @@ class cModel3D : public cAlgorithmsVectors, cAlgorithmsStrings {
 
   ~cModel3D();
 
-  bool LoadFile(std::string Path);
+  bool LoadFile(std::string path);
 
   std::vector<cMesh> loadedMeshes;
   std::vector<cVertex> loadedVertices;

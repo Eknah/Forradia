@@ -6,9 +6,9 @@
 namespace Forradia {
 
 cRandom::cRandom() {
-    if (!IsInitialized) {
+    if (!isInitialized) {
         mt = std::mt19937(device());
-        IsInitialized = true;
+        isInitialized = true;
     }
 }
 

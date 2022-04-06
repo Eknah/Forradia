@@ -14,11 +14,8 @@ namespace Forradia {
 class cUtilities {
  public:
   cSize GetCanvasSize() const;
-
   cPoint2 GetMousePositionI();
-
   cPoint2F GetMousePositionF();
-
   cSizeF ConvertToFloat(int value);
 };
 

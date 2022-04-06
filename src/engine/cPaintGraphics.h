@@ -13,21 +13,21 @@ class cPaintGraphics {
  public:
   // ---- Drawing operations ----
 
-  void FillRectangle(SDL_Color Color, float X, float Y, float Width,
+  void FillRectangle(SDL_Color color, float x, float y, float width,
                             float Height) const;
 
-  void DrawRectangle(SDL_Color Color, float X, float Y, float Width,
-                            float Height) const;
+  void DrawRectangle(SDL_Color color, float x, float y, float width,
+                            float height) const;
 
-  void DrawLine(SDL_Color Color, float X0, float Y0, float X1,
-                       float Y1) const;
+  void DrawLine(SDL_Color color, float x0, float y0, float x1,
+                       float y1) const;
 
  private:
   // ---- Drawing operations generalization ----
 
-  void RenderShape(GLenum GeometryType,
-                          const std::vector<cPoint2F> &Vertices,
-                          SDL_Color Color) const;
+  void RenderShape(GLenum geometryType,
+                          const std::vector<cPoint2F> &vertices,
+                          SDL_Color color) const;
 };
 
 }  // namespace Forradia

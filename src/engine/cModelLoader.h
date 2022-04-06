@@ -12,7 +12,7 @@ class cModelLoader {
  public:
   void LoadModels();
 
-  bool ModelExists(std::string ModelName) const;
+  bool ModelExists(std::string modelName) const;
 
   UMap<int, Forradia::cModel3D> models;
   UMap<int, std::string> modelNames;

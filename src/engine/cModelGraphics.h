@@ -14,13 +14,13 @@ class cModelGraphics {
 
   // ---- Drawing operations ----
 
-  void DrawModel(std::string ModelName, float X, float Y, float Z,
-                        float Rotation, float SpecificScaling,
-                 float Opacity = 1.0f) const;
+  void DrawModel(std::string modelName, float x, float y, float z,
+                        float rotation, float specificScaling,
+                 float ppacity = 1.0f) const;
 
-  void DrawModel(int ModelNameId, float X, float Y, float Z,
-                        float Rotation, float SpecificScaling,
-                 float Opacity = 1.0f) const;
+  void DrawModel(int modelNameId, float x, float y, float z,
+                        float rotation, float specificScaling,
+                 float opacity = 1.0f) const;
 
  private:
   iEngine &engine;

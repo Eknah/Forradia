@@ -15,12 +15,12 @@ class iEngine;
 
 class cTile {
  public:
-  explicit cTile(const iEngine &Engine_) : engine(Engine_) {}
+  explicit cTile(const iEngine &_engine) : engine(_engine) {}
 
   // Get info about tile
 
-  bool HasObjectWithFlag(eObjectFlags Flag);
-  bool HasObjectOfType(std::string ObjectName);
+  bool HasObjectWithFlag(eObjectFlags flag);
+  bool HasObjectOfType(std::string objectName);
 
   // Core tile data structure
 

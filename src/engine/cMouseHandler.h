@@ -11,13 +11,9 @@ class cMouseHandler {
   // Game loop related
 
   void ResetForNewFrame() const;
-
   bool GetLeftButtonBeenFired() const;
-
   bool GetRightButtonBeenFired() const;
-
   void SetLeftButtonBeenFired();
-
   void SetRightButtonBeenFired();
 
   UPtr<float> wheelAmount = MakeUPtr<float>(0.0f);

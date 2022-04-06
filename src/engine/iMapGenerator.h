@@ -11,16 +11,16 @@ class cPlanetWorldMap;
 
 class iMapGenerator {
  public:
-  iMapGenerator(const iEngine &Engine_, const UPtr<cPlanetWorldMap> &WorldMap_)
-      : Engine(Engine_), WorldMap(WorldMap_) {}
+  iMapGenerator(const iEngine &Engine_, const UPtr<cPlanetWorldMap> &_worldMap)
+      : engine(Engine_), worldMap(_worldMap) {}
 
   // Core map area generation
 
   virtual void GenerateMapArea(int WorldX, int WorldY, int WorldZ) const = 0;
 
  protected:
-  const iEngine &Engine;
-  const UPtr<cPlanetWorldMap> &WorldMap;
+  const iEngine &engine;
+  const UPtr<cPlanetWorldMap> &worldMap;
 };
 
 }  // namespace Forradia

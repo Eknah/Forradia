@@ -15,8 +15,8 @@ namespace Forradia {
 class cMesh {
  public:
   cMesh() {}
-  cMesh(std::vector<cVertex> Vertices_, std::vector<unsigned int> Indices_)
-      : vertices(Vertices_), indices(Indices_) {}
+  cMesh(std::vector<cVertex> _vertices, std::vector<unsigned int> _indices)
+      : vertices(_vertices), indices(_indices) {}
 
   std::string meshName;
   std::vector<cVertex> vertices;

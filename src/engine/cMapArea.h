@@ -17,9 +17,9 @@ class iEngine;
 
 class cMapArea {
  public:
-  cMapArea(const iEngine &Engine, int Size_, int WorldX, int WorldY, int WorldZ);
+  cMapArea(const iEngine &engine, int _size, int worldx, int worldy, int worldz);
 
-  cActor& AddActor(UPtr<cActor> Actor, int TileX, int TileY);
+  cActor& AddActor(UPtr<cActor> actor, int tilex, int tiley);
 
   bool IsUnderground();
 

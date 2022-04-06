@@ -7,19 +7,19 @@ namespace Forradia {
 
 void cSceneManager::Initialize(cScenesCollection scenes,
                          int startScene) {
-    ScenesCollection = std::move(scenes);
-    *CurrentScene = startScene;
+    scenesCollection = std::move(scenes);
+    *currentScene = startScene;
   }
 
 SPtr<cSceneBase> &cSceneManager::GetCurrentScene() {
-    return ScenesCollection.scenes.at(*CurrentScene);
+    return scenesCollection.scenes.at(*currentScene);
   }
 
 void cSceneManager::SwitchToScene(
           std::string newScene) const {
-    *CurrentScene = GetId(newScene);
-    ScenesCollection.scenes.at(*CurrentScene)->Enter();
-    Engine.gameLoop.ResetForNewFrame();
+    *currentScene = GetId(newScene);
+    scenesCollection.scenes.at(*currentScene)->Enter();
+    engine.gameLoop.ResetForNewFrame();
   }
 
 }  // namespace Forradia

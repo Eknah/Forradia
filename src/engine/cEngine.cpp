@@ -109,7 +109,7 @@ void cEngine::InitializeGL() {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
                         SDL_GL_CONTEXT_PROFILE_CORE);
 
-    window = F_WindowPtr(
+    window = WindowPtr(
         SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
                          SDL_WINDOWPOS_UNDEFINED, defaultWindowSize.width,
                          defaultWindowSize.height,

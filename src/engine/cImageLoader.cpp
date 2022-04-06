@@ -28,7 +28,7 @@ void cImageLoader::LoadImages() {
         continue;
 
       auto surface =
-          F_SurfacePtr(IMG_Load(file.path().string().c_str()), cSDL_Deleter());
+          SurfacePtr(IMG_Load(file.path().string().c_str()), cSDL_Deleter());
       auto textureId = GLuint(images.size());
 
       glGenTextures(1, &textureId);

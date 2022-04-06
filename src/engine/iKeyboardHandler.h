@@ -14,10 +14,10 @@ class iKeyboardHandler {
   virtual void DoKeyDown(SDL_Keycode key) const = 0;
   virtual void DoKeyUp(SDL_Keycode key) const = 0;
 
-  const UPtr<std::set<SDL_Keycode>> KeysBeingPressed
+  const UPtr<std::set<SDL_Keycode>> keysBeingPressed
   = MakeUPtr<std::set<SDL_Keycode>>();
 
-  const UPtr<std::set<SDL_Keycode>> KeysBeenFired
+  const UPtr<std::set<SDL_Keycode>> keysBeenFired
   = MakeUPtr<std::set<SDL_Keycode>>();
 };
 

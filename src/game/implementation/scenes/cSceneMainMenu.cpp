@@ -13,7 +13,7 @@ void cSceneMainMenu::Enter() {
 }
 
 void cSceneMainMenu::Update() {
-  if (Engine.keyboardHandler.KeysBeenFired->size() > 0)
+  if (Engine.keyboardHandler.keysBeenFired->size() > 0)
     Engine.sceneManager.SwitchToScene("ScenePrimary");
 
   if (Engine.mouseHandler.GetLeftButtonBeenFired()

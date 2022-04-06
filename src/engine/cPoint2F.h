@@ -7,7 +7,7 @@ namespace Forradia {
 
 class cPoint2F {
  public:
-  cPoint2F(float X, float Y) : x(X), y(Y) {}
+  cPoint2F(float _x, float y) : x(_x), y(y) {}
 
   float x = 0.0f;
   float y = 0.0f;

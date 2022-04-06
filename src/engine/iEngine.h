@@ -27,13 +27,13 @@ class F_MapArea;
 
 class iEngine {
  public:
-  iEngine(iKeyboardHandler* KeyboardHandler_, iCustomCursor* CustomCursor_,
-          iFpsCounter* FpsCounter_,
-          iFullscreenController* FullscreenController_, iGameLoop* GameLoop_,
-          iSceneManager* SceneManager_)
-      : keyboardHandler(*KeyboardHandler_), customCursor(*CustomCursor_),
-        fpsCounter(*FpsCounter_), fullscreenController(*FullscreenController_),
-        gameLoop(*GameLoop_), sceneManager(*SceneManager_) {}
+  iEngine(iKeyboardHandler* _keyboardHandler, iCustomCursor* _customCursor,
+          iFpsCounter* _fpsCounter,
+          iFullscreenController* _fullscreenController, iGameLoop* _gameLoop,
+          iSceneManager* _sceneManager)
+      : keyboardHandler(*_keyboardHandler), customCursor(*_customCursor),
+        fpsCounter(*_fpsCounter), fullscreenController(*_fullscreenController),
+        gameLoop(*_gameLoop), sceneManager(*_sceneManager) {}
 
   virtual void DrawImage(std::string imageName, float x, float y,
                                 float width, float height) const = 0;
@@ -57,15 +57,15 @@ class iEngine {
   virtual void DrawModel(int modelNameHash, float x, float y, float z,
                                 float rotation = 0.0f,
                                 float specificScaling = 1.0f,
-                         float Opacity = 1.0f) const = 0;
+                         float opacity = 1.0f) const = 0;
 
-  virtual cSizeF GetImageSizeF(std::string ImageName) const = 0;
+  virtual cSizeF GetImageSizeF(std::string imageName) const = 0;
 
   virtual cMapArea& GetCurrentMapArea() const = 0;
 
   cPlayer &GetPlayer() const;
 
-  F_WindowPtr window;
+  WindowPtr window;
 
   iKeyboardHandler &keyboardHandler;
   iCustomCursor &customCursor;

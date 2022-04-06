@@ -19,7 +19,7 @@ class cAlgorithmsVectors {
 
   cVector3 GenTriNormal(cVector3 t1, cVector3 t2, cVector3 t3);
 
-  cMath3D Math3D;
+  cMath3D math3D;
 };
 
 }  // namespace Forradia

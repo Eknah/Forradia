@@ -9,7 +9,7 @@ class iEngine;
 
 class iGameLoop {
  public:
-  explicit iGameLoop(iEngine &engine) : Engine(engine) {}
+  explicit iGameLoop(iEngine &_engine) : engine(_engine) {}
 
   virtual void Run() = 0;
 
@@ -19,7 +19,7 @@ class iGameLoop {
   virtual void ResetForNewFrame() = 0;
 
  protected:
-  iEngine &Engine;
+  iEngine &engine;
 };
 
 }  // namespace Forradia
