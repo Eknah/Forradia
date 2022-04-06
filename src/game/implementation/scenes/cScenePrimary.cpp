@@ -7,7 +7,9 @@
 
 namespace Forradia {
 
-void cScenePrimary::Enter() { Gui.Initialize(); }
+void cScenePrimary::Enter() {
+    Gui.Initialize();
+}
 
 void cScenePrimary::Update() {
   auto &Keys = Engine.keyboardHandler.KeysBeingPressed;
@@ -105,6 +107,8 @@ void cScenePrimary::DoMouseDown(Uint8 MouseButton) {
   }
 }
 
-void cScenePrimary::DoMouseUp(Uint8 MouseButton) { Gui.DoMouseUp(); }
+void cScenePrimary::DoMouseUp(Uint8 MouseButton) {
+    Gui.DoMouseUp();
+}
 
 }  // namespace Forradia

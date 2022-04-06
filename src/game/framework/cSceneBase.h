@@ -3,6 +3,8 @@
 
 #pragma once
 #include "SDL2/SDL.h"
+#include "cTextRect.h"
+#include <vector>
 
 namespace Forradia {
 
@@ -22,6 +24,8 @@ class cSceneBase {
 
  protected:
   const cEngine &Engine;
+
+  std::vector<cTextRect> sceneButtons;
 };
 
 }  // namespace Forradia

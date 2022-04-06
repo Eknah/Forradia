@@ -26,6 +26,13 @@ class cGameWorldRenderer {
   cBackground Background;
   const cCamera &Camera;
   cPlanetShaper PlanetShaper;
+  const int GroundTypeWaterId = GetId("GroundTypeWater");
+  const int GroundTypeWaterAnimatedId[4] = {
+    GetId("GroundTypeWater"),
+    GetId("GroundTypeWater1"),
+    GetId("GroundTypeWater2"),
+    GetId("GroundTypeWater3")
+  };
 };
 
 }  // namespace Forradia
