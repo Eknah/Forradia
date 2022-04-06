@@ -19,7 +19,8 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
   }
 
   ZoomAmount += ZoomChange * ZoomMultiplier / 100.0f;
-  ZoomAmount = std::min(std::max(ZoomAmount, 0.5f), 15.0f);
+  //ZoomAmount = std::min(std::max(ZoomAmount, 0.5f), 15.0f);
+  ZoomAmount = std::min(std::max(ZoomAmount, -3.0f), 15.0f);
 
   // -----------Ray Casting----------------
 
@@ -36,13 +37,14 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
   auto CameraDist = 1;
   auto Zoom = ZoomAmount;
 
-  glTranslatef(0.0f, -Zoom, -2.0f - Zoom * 4.0f);
+  auto ZoomEx = std::max(Zoom, 1.0f);
+  glTranslatef(0.0f, -ZoomEx - 1, - (ZoomEx - 1.0f)* 4.0f);
 
   CameraX = static_cast<float>(cos(AngleRadians)) * CameraDist;
   CameraZ = -static_cast<float>(sin(AngleRadians)) * CameraDist;
 
   gluLookAt(CameraX-Engine.tileSize/2,
-            CameraHeight,
+            CameraHeight*(ZoomEx - 0.5f),
             CameraZ-Engine.tileSize/2,
             -Engine.tileSize/2,
             -1,
