@@ -15,21 +15,21 @@ class cObjectsContent {
  public:
   // Collection operations
 
-  void Add(std::string ObjectName, cObjectDescription Description);
-  void Add(std::string ObjectName, char Flags);
+  void Add(std::string objectName, cObjectDescription description);
+  void Add(std::string objectName, char flags);
   void AddMany(std::vector<std::tuple<std::string, char>>
-           Descriptions);
+           descriptions);
 
-  void SetOpacity(std::string ObjectName, float opacity);
+  void SetOpacity(std::string objectName, float opacity);
 
   // Get info about an object
 
-  bool IsMovable(int ObjectType) const;
-  bool BlocksMovement(int ObjectType) const;
+  bool IsMovable(int objectType) const;
+  bool BlocksMovement(int objectType) const;
 
   // Collection structure
 
-  UMap<int, cObjectDescription> ObjectDescriptions;
+  UMap<int, cObjectDescription> objectDescriptions;
 };
 
 }  // namespace Forradia

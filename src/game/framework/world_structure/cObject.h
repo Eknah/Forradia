@@ -10,26 +10,26 @@ namespace Forradia {
 
 class cObject {
  public:
-  explicit cObject(std::string ObjectTypeName, bool RandomScaling = true,
-                   bool RandomRotation = true, float rotation = 0);
+  explicit cObject(std::string objectTypeName, bool randomScaling = true,
+                   bool randomRotation = true, float _rotation = 0);
 
   // Object usage
 
-  void UseOn(const std::shared_ptr<cObject> &Other);
+  void UseOn(const std::shared_ptr<cObject> &other);
 
   // Core
 
-  int ObjectType = 0;
+  int objectType = 0;
 
   // Rendering
 
-  float Rotation = 0.0f;
-  float Scaling = 1.0f;
+  float rotation = 0.0f;
+  float scaling = 1.0f;
 
  private:
-  void TransformInto(std::string ObjectName);
+  void TransformInto(std::string objectName);
 
-  cRandom Random;
+  cRandom random;
 };
 
 }  // namespace Forradia

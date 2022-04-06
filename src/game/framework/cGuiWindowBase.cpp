@@ -7,66 +7,66 @@
 namespace Forradia {
 
 void cGuiWindowBase::Render() {
-  if (!Visible)
+  if (!visible)
     return;
 
-  Engine.FillRectangle(Palette.mediumBlue, Bounds.x, Bounds.y, Bounds.width,
-                       Bounds.height);
-  Engine.DrawRectangle(Palette.black, Bounds.x, Bounds.y, Bounds.width,
-                       Bounds.height);
-  Engine.DrawString(Title, Palette.black, Bounds.x + Margin, Bounds.y + Margin);
-  Engine.DrawLine(Palette.black, Bounds.x, Bounds.y + TitleBarHeight,
-                  Bounds.x + Bounds.width, Bounds.y + TitleBarHeight);
+  engine.FillRectangle(palette.mediumBlue, bounds.x, bounds.y, bounds.width,
+                       bounds.height);
+  engine.DrawRectangle(palette.black, bounds.x, bounds.y, bounds.width,
+                       bounds.height);
+  engine.DrawString(title, palette.black, bounds.x + margin, bounds.y + margin);
+  engine.DrawLine(palette.black, bounds.x, bounds.y + titleBarHeight,
+                  bounds.x + bounds.width, bounds.y + titleBarHeight);
 
   RenderDerived();
 }
 
 void cGuiWindowBase::Update() {
-  if (!IsBeingMoved)
+  if (!isBeingMoved)
     return;
 
-  auto MousePosF = Utilities.GetMousePositionF();
-  auto DeltaMouseX = MousePosF.x - StartMoveMousePosition.x;
-  auto DeltaMouseY = MousePosF.y - StartMoveMousePosition.y;
+  auto MousePosF = utilities.GetMousePositionF();
+  auto DeltaMouseX = MousePosF.x - startMoveMousePosition.x;
+  auto DeltaMouseY = MousePosF.y - startMoveMousePosition.y;
 
-  Bounds.x = StartMovePosition.x + DeltaMouseX;
-  Bounds.y = StartMovePosition.y + DeltaMouseY;
+  bounds.x = startMovePosition.x + DeltaMouseX;
+  bounds.y = startMovePosition.y + DeltaMouseY;
 }
 
 cRectF cGuiWindowBase::GetInteriorBounds() {
-  auto X = Bounds.x + Margin;
-  auto Y = Bounds.y + TitleBarHeight + Margin;
-  auto Width = Bounds.width - 2 * Margin;
-  auto Height = Bounds.height - TitleBarHeight - 2 * Margin;
+  auto X = bounds.x + margin;
+  auto Y = bounds.y + titleBarHeight + margin;
+  auto Width = bounds.width - 2 * margin;
+  auto Height = bounds.height - titleBarHeight - 2 * margin;
 
   return {X, Y, Width, Height};
 }
 
 bool cGuiWindowBase::DoMouseDown(Uint8 MouseButton) {
-  if (!Visible)
+  if (!visible)
     return false;
 
-  auto MousePosF = Utilities.GetMousePositionF();
+  auto MousePosF = utilities.GetMousePositionF();
   auto TitleBarBounds = GetTitleBarBounds();
 
   if (TitleBarBounds.ContainsPoint(MousePosF)) {
-    IsBeingMoved = true;
-    StartMovePosition = {Bounds.x, Bounds.y};
-    StartMoveMousePosition = {MousePosF.x, MousePosF.y};
+    isBeingMoved = true;
+    startMovePosition = {bounds.x, bounds.y};
+    startMoveMousePosition = {MousePosF.x, MousePosF.y};
   }
 
   DoMouseDownDerived(MouseButton);
 
-  if (Bounds.ContainsPoint(MousePosF))
+  if (bounds.ContainsPoint(MousePosF))
     return true;
 
   return false;
 }
 
 cRectF cGuiWindowBase::GetTitleBarBounds() {
-  return {Bounds.x, Bounds.y, Bounds.width, TitleBarHeight};
+  return {bounds.x, bounds.y, bounds.width, titleBarHeight};
 }
 
-void cGuiWindowBase::DoMouseUp() { IsBeingMoved = false; }
+void cGuiWindowBase::DoMouseUp() { isBeingMoved = false; }
 
 }  // namespace Forradia

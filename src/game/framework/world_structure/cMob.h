@@ -15,8 +15,8 @@ class iEngine;
 
 class cMob : public cActor {
  public:
-  cMob(const iEngine &Engine, float X, float Y,
-       std::string ModelName);
+  cMob(const iEngine &engine, float X, float Y,
+       std::string modelName);
 };
 
 }  // namespace Forradia

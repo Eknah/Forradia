@@ -13,30 +13,30 @@ void cSceneMainMenu::Enter() {
 }
 
 void cSceneMainMenu::Update() {
-  if (Engine.keyboardHandler.keysBeenFired->size() > 0)
-    Engine.sceneManager.SwitchToScene("ScenePrimary");
+  if (engine.keyboardHandler.keysBeenFired->size() > 0)
+    engine.sceneManager.SwitchToScene("ScenePrimary");
 
-  if (Engine.mouseHandler.GetLeftButtonBeenFired()
-          || Engine.mouseHandler.GetRightButtonBeenFired())
-      Engine.sceneManager.SwitchToScene("ScenePrimary");
+  if (engine.mouseHandler.GetLeftButtonBeenFired()
+          || engine.mouseHandler.GetRightButtonBeenFired())
+      engine.sceneManager.SwitchToScene("ScenePrimary");
 }
 
 void cSceneMainMenu::Render() {
-  Engine.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
+  engine.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
 
   auto CanvasSize = Utilities.GetCanvasSize();
 
-  auto LogoSizeF = Engine.GetImageSizeF("SceneForradiaLogo");
+  auto LogoSizeF = engine.GetImageSizeF("SceneForradiaLogo");
 
-  Engine.DrawImage("SceneForradiaLogo",
+  engine.DrawImage("SceneForradiaLogo",
                    0.5f - LogoSizeF.width / 4.0f,
                    0.15f - LogoSizeF.height / 4.0f,
                    LogoSizeF.width/2,
                    LogoSizeF.height/2);
 
   for (auto& button : sceneButtons) {
-    Engine.FillRectangle(palette.wheat, button.Bounds.x - button.Bounds.width/2, button.Bounds.y - button.Bounds.height/2, button.Bounds.width, button.Bounds.height);
-    Engine.DrawString(button.Text, palette.black, button.Bounds.x, button.Bounds.y, true);
+    engine.FillRectangle(palette.wheat, button.bounds.x - button.bounds.width/2, button.bounds.y - button.bounds.height/2, button.bounds.width, button.bounds.height);
+    engine.DrawString(button.text, palette.black, button.bounds.x, button.bounds.y, true);
   }
 }
 

@@ -14,14 +14,14 @@ class iEngine;
 
 class cActor {
  public:
-  explicit cActor(const iEngine &Engine_) : Engine(Engine_),
-    ActorId(CurrentActorId++) {}
+  explicit cActor(const iEngine &_engine) : engine(_engine),
+    actorId(currentActorId++) {}
 
-  cActor(const iEngine &Engine_, float X, float Y, std::string ModelName_);
+  cActor(const iEngine &_engine, float x, float y, std::string _modelName);
 
-  cActor(const iEngine &Engine_, std::string ModelName_) :
-      Engine(Engine_), ModelName(ModelName_),
-      ActorId(CurrentActorId++) {}
+  cActor(const iEngine &_engine, std::string _modelName) :
+      engine(_engine), modelName(_modelName),
+      actorId(currentActorId++) {}
 
   void ResetForNewFrame() const;
   void Update() const;
@@ -46,8 +46,8 @@ class cActor {
 //  float PositionZ = 0.0f;
 //  std::string ModelName;
 //  UPtr<float> FacingAngle = MakeUPtr<float>(0.0f);
-  int ActorId = -1;
-  std::string ModelName;
+  int actorId = -1;
+  std::string modelName;
 
   virtual ~cActor() {}  // Just to make class polymorphic
 
@@ -55,27 +55,27 @@ class cActor {
 
  private:
 
-  const iEngine &Engine;
+  const iEngine &engine;
 
-  inline static int CurrentActorId = 0;
+  inline static int currentActorId = 0;
 
-  UMap<size_t, UPtr<iModule>> Modules;
+  UMap<size_t, UPtr<iModule>> modules;
 };
 
 template <class T>
 T &cActor::GetModule() const {
-  return static_cast<T &>(*Modules.at(typeid(T).hash_code()));
+  return static_cast<T &>(*modules.at(typeid(T).hash_code()));
 }
 
 template <class T>
 void cActor::AddModule() {
   auto &Type = typeid(T);
-  Modules.insert({Type.hash_code(), MakeUPtr<T>(Engine, this)});
+  modules.insert({Type.hash_code(), MakeUPtr<T>(engine, this)});
 }
 
 template <class T>
 bool cActor::HasModule() const {
-  return Modules.count(typeid(T).hash_code()) > 0;
+  return modules.count(typeid(T).hash_code()) > 0;
 }
 
 template <class T>

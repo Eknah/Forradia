@@ -17,8 +17,8 @@ class cGuiWindowInventory : public cGuiWindowBase {
  private:
   const int NumSlotCols = 4;
 
-  cUtilities Utilities;
-  cPalette Palette;
+  cUtilities utilities;
+  cPalette palette;
 };
 
 }  // namespace Forradia

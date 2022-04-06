@@ -16,7 +16,7 @@ class cModuleObjectUsage : public iModule {
   void ResetForNewFrame() override;
   void Update() override;
 
-  SPtr<cObject> ObjectBeingUsed = nullptr;
+  SPtr<cObject> objectBeingUsed = nullptr;
 };
 
 }  // namespace Forradia

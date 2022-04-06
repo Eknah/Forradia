@@ -11,8 +11,8 @@ namespace Forradia {
 
 class cGuiWindowBase {
  public:
-  cGuiWindowBase(const cEngine &Engine_, std::string Title_, cRectF Bounds_)
-      : Engine(Engine_), Title(Title_), Bounds(Bounds_) {}
+  cGuiWindowBase(const cEngine &_engine, std::string _tile, cRectF _bounds)
+      : engine(_engine), title(_tile), bounds(_bounds) {}
 
   // Looped operations
 
@@ -26,7 +26,7 @@ class cGuiWindowBase {
 
   // Basic data
 
-  bool Visible = false;
+  bool visible = false;
 
  protected:
   // Internal helpers
@@ -40,9 +40,9 @@ class cGuiWindowBase {
 
   // Basic data
 
-  const float Margin = 0.008f;
+  const float margin = 0.008f;
 
-  const cEngine &Engine;
+  const cEngine &engine;
 
  private:
   // Internal helpers
@@ -51,23 +51,23 @@ class cGuiWindowBase {
 
   // Composition
 
-  cPalette Palette;
-  cUtilities Utilities;
+  cPalette palette;
+  cUtilities utilities;
 
   // Basic data
 
-  std::string Title;
-  const float TitleBarHeight = 0.04f;
+  std::string title;
+  const float titleBarHeight = 0.04f;
 
   // Dimensions
 
-  cRectF Bounds;
+  cRectF bounds;
 
   // Window movement
 
-  bool IsBeingMoved = false;
-  SDL_FPoint StartMovePosition = {-1, -1};
-  SDL_FPoint StartMoveMousePosition = {-1, -1};
+  bool isBeingMoved = false;
+  SDL_FPoint startMovePosition = {-1, -1};
+  SDL_FPoint startMoveMousePosition = {-1, -1};
 };
 
 }  // namespace Forradia

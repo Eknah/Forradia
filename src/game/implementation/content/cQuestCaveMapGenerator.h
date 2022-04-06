@@ -10,14 +10,14 @@ namespace Forradia {
 
 class cQuestCaveMapGenerator {
  public:
-  void GenerateQuestCaveMapArea(cMapArea *MapArea, cPoint2 EntranceLocation);
+  void GenerateQuestCaveMapArea(cMapArea *mapArea, cPoint2 entranceLocation);
 
  private:
-  void ClearToCaveFloor(cMapArea *MapArea);
-  void GenerateCaveWalls(cMapArea *MapArea);
-  void GeneratePath(cMapArea *MapArea, cPoint2 EntranceLocation);
+  void ClearToCaveFloor(cMapArea *mapArea);
+  void GenerateCaveWalls(cMapArea *mapArea);
+  void GeneratePath(cMapArea *mapArea, cPoint2 entranceLocation);
 
-  cRandom Random;
+  cRandom random;
 };
 
 }  // namespace Forradia

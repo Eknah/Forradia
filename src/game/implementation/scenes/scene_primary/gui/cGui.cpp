@@ -133,7 +133,7 @@ bool cGui::DoMouseDown(Uint8 MouseButton) {
   auto MousePositionF = Utilities.GetMousePositionF();
 
   if (BoundsButtonInventory.ContainsPoint(MousePositionF)) {
-    Windows.at("Inventory")->Visible = !Windows.at("Inventory")->Visible;
+    Windows.at("Inventory")->visible = !Windows.at("Inventory")->visible;
 
     return true;
   }
@@ -143,7 +143,7 @@ bool cGui::DoMouseDown(Uint8 MouseButton) {
   auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
   if (mallIconBounds.ContainsPoint(MousePositionF)) {
-      Windows.at("Mall")->Visible = !Windows.at("Mall")->Visible;
+      Windows.at("Mall")->visible = !Windows.at("Mall")->visible;
 
       return true;
   }

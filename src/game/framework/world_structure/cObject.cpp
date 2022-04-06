@@ -6,29 +6,29 @@
 namespace Forradia {
 
 cObject::cObject(std::string ObjectTypeName, bool RandomScaling,
-                 bool RandomRotation, float rotation)
-    : ObjectType(GetId(ObjectTypeName)) {
+                 bool RandomRotation, float _rotation)
+    : objectType(GetId(ObjectTypeName)) {
     if (RandomRotation)
-  Rotation = static_cast<float>(Random.Next() % 360);
-    else Rotation = rotation;
+  rotation = static_cast<float>(random.Next() % 360);
+    else rotation = _rotation;
 
     if (RandomScaling)
-    Scaling = 0.6f + static_cast<float>(Random.Next() % 8) / 10.0f;
+    scaling = 0.6f + static_cast<float>(random.Next() % 8) / 10.0f;
 }
 
 void cObject::UseOn(const std::shared_ptr<cObject> &Other) {
-  if (ObjectType == GetId("ObjectWoodaxe") &&
-      (Other->ObjectType == GetId("ObjectTree1") ||
-       Other->ObjectType == GetId("ObjectTree2")))
+  if (objectType == GetId("ObjectWoodaxe") &&
+      (Other->objectType == GetId("ObjectTree1") ||
+       Other->objectType == GetId("ObjectTree2")))
     Other->TransformInto("ObjectFelledTree");
 
-  if (ObjectType == GetId("ObjectSaw") &&
-      Other->ObjectType == GetId("ObjectFelledTree"))
+  if (objectType == GetId("ObjectSaw") &&
+      Other->objectType == GetId("ObjectFelledTree"))
     Other->TransformInto("ObjectWoodplank");
 }
 
 void cObject::TransformInto(std::string ObjectName) {
-  ObjectType = GetId(ObjectName);
+  objectType = GetId(ObjectName);
 }
 
 }  // namespace Forradia

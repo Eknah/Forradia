@@ -11,13 +11,13 @@ class cModuleMovement : public iModule {
  public:
   class MovementInstruction {
    public:
-    bool TryMoveForward = false;
-    bool TryMoveRight = false;
-    bool TryMoveBack = false;
-    bool TryMoveLeft = false;
+    bool tryMoveForward = false;
+    bool tryMoveRight = false;
+    bool tryMoveBack = false;
+    bool tryMoveLeft = false;
   };
 
-  cModuleMovement(const iEngine &Engine_, cActor *ParentActor_);
+  cModuleMovement(const iEngine &_engine, cActor *_parentActor);
 
   //using iModule::iModule;
 
@@ -26,9 +26,9 @@ class cModuleMovement : public iModule {
 
   void UpdateRotation(float newFacingAngle);
 
-  MovementInstruction Instruction;
+  MovementInstruction instruction;
 
-  float FacingAngleRotated = 0.0f;
+  float facingAngleRotated = 0.0f;
 
  private:
   void UpdateDirectionalMovement();

@@ -45,8 +45,8 @@ void cQuestCaveMapGenerator::GeneratePath(cMapArea *MapArea,
   auto TileY = EntranceLocation.y;
 
   for (auto I = 0; I < 20; I++) {
-    auto Direction = Random.Next() % 4;
-    auto NumSteps = 4 + Random.Next() % 20;
+    auto Direction = random.Next() % 4;
+    auto NumSteps = 4 + random.Next() % 20;
 
     for (auto J = 0; J < NumSteps; J++) {
       for (auto XX = TileX - 1; XX <= TileX + 1; XX++) {

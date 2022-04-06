@@ -88,19 +88,19 @@ void cCamera::Update(int RotationDirection, float ZoomChange) {
 }
 
 cPoint2 cCamera::GetHoveredTile() const {
-  float SubStepX = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.x -
-          static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().Position.x);
+  float SubStepX = Engine.GetPlayer().GetModule<cModuleMovementData>().position.x -
+          static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
 
-  float SubStepY = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.y -
-          static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().Position.y);
+  float SubStepY = Engine.GetPlayer().GetModule<cModuleMovementData>().position.y -
+          static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
 
   auto OffsetX = -static_cast<float>(2 * RenderDistance + 1)
           / 2.0f * Engine.tileSize - SubStepX * Engine.tileSize;
   auto OffsetY = -static_cast<float>(2 * RenderDistance - 1)
           / 2.0f * Engine.tileSize - SubStepY * Engine.tileSize;
-  auto MapX = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.x - RenderDistance +
+  auto MapX = Engine.GetPlayer().GetModule<cModuleMovementData>().position.x - RenderDistance +
               (RayCastingX - OffsetX) / Engine.tileSize;
-  auto MapY = Engine.GetPlayer().GetModule<cModuleMovementData>().Position.y - RenderDistance +
+  auto MapY = Engine.GetPlayer().GetModule<cModuleMovementData>().position.y - RenderDistance +
               (RayCastingZ - OffsetY) / Engine.tileSize + 1;
 
   return {static_cast<int>(MapX), static_cast<int>(MapY)};

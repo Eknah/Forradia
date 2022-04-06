@@ -9,7 +9,7 @@ cMob::cMob(const iEngine &Engine, float X, float Y,
            std::string ModelName) :
     cActor(Engine, X, Y, ModelName) {
     AddIfNotExists<cModuleMovementData>();
-    GetModule<cModuleMovementData>().IsWalking = true;
+    GetModule<cModuleMovementData>().isWalking = true;
 }
 
 }

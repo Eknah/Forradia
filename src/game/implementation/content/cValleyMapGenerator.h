@@ -12,25 +12,25 @@ class cValleyMapGenerator : public iMapGenerator {
  public:
   using iMapGenerator::iMapGenerator;
 
-  void GenerateMapArea(int WorldX, int WorldY, int WorldZ) const override;
+  void GenerateMapArea(int worldX, int worldY, int worldZ) const override;
 
  private:
-  void ClearToGrass(cMapArea *MapArea) const;
-  void GeneratePlayerStartingPosition(cMapArea *MapArea) const;
-  void GenerateElevation(cMapArea *MapArea) const;
-  void GenerateRock(cMapArea *MapArea) const;
-  void GenerateVillage(cMapArea *MapArea) const;
-  void GenerateTrees(cMapArea *MapArea) const;
-  void GenerateBushes(cMapArea *MapArea) const;
-  void GenerateSmallStones(cMapArea *MapArea) const;
-  void GeneratePinkFlowers(cMapArea *MapArea) const;
-  void GenerateTallGrass(cMapArea *MapArea) const;
-  void GenerateMobs(cMapArea *MapArea) const;
+  void ClearToGrass(cMapArea *mapArea) const;
+  void GeneratePlayerStartingPosition(cMapArea *mapArea) const;
+  void GenerateElevation(cMapArea *mapArea) const;
+  void GenerateRock(cMapArea *mapArea) const;
+  void GenerateVillage(cMapArea *mapArea) const;
+  void GenerateTrees(cMapArea *mapArea) const;
+  void GenerateBushes(cMapArea *mapArea) const;
+  void GenerateSmallStones(cMapArea *mapArea) const;
+  void GeneratePinkFlowers(cMapArea *mapArea) const;
+  void GenerateTallGrass(cMapArea *mapArea) const;
+  void GenerateMobs(cMapArea *mapArea) const;
 
-  int DistToPlayerStartingPos(cMapArea *MapArea, int TileX, int TileY) const;
+  int DistToPlayerStartingPos(cMapArea *mapArea, int tileX, int tileY) const;
 
-  const int PlayerStartingAreaSize = 4;
-  cRandom Random;
+  const int playerStartingAreaSize = 4;
+  cRandom random;
   int villageSize = 17;
 };
 

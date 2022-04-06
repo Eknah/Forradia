@@ -18,12 +18,12 @@ class cModuleInventory : public iModule {
 
   // Collection operations
 
-  void Add(int Position, std::string ObjectName);
+  void Add(int position, std::string objectName);
 
   // Collection structure
 
   //UMap<int, SPtr<cObject>> Objects;
-  cInventory Inventory;
+  cInventory inventory;
 };
 
 }  // namespace Forradia

@@ -16,10 +16,10 @@ class cModuleJumping : public iModule {
 
 
  private:
-  bool IsJumping = false;
-  int JumpDuration = 600;
-  unsigned int TickStartJumping = 0;
-  float MaxJumpHeight = 1.0f;
+  bool isJumping = false;
+  int jumpDuration = 600;
+  unsigned int tickStartJumping = 0;
+  float maxJumpHeight = 1.0f;
 };
 
 }  // namespace Forradia

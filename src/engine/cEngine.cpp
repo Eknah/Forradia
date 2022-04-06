@@ -36,9 +36,9 @@ void cEngine::Run(cScenesCollection scenesCollection_, int startScene_,
                 static_cast<cPlayer*>(world->GetArea(playerWorldPos)
                                       ->GetTile(playerTilePosI).actor.get()));
 
-    GetPlayer().GetModule<cModuleMovementData>().WorldMapCoord = playerWorldPos;
-    GetPlayer().GetModule<cModuleMovementData>().Position = GetCurrentMapArea().spawnPos;
-    GetPlayer().GetModule<cModuleInventory>().Inventory = startingInventory_;
+    GetPlayer().GetModule<cModuleMovementData>().worldMapCoord = playerWorldPos;
+    GetPlayer().GetModule<cModuleMovementData>().position = GetCurrentMapArea().spawnPos;
+    GetPlayer().GetModule<cModuleInventory>().inventory = startingInventory_;
     sceneManager.Initialize(move(scenesCollection_), startScene_);
     modelLoader.LoadModels();
     imageLoader.LoadImages();
@@ -98,7 +98,7 @@ cSizeF cEngine::GetImageSizeF(std::string imageName) const {
 
 cMapArea& cEngine::GetCurrentMapArea() const {
     // return *WorldMap->MapAreas.at(Player.CurrentMapArea);
-    return *world->GetArea(GetPlayer().GetModule<cModuleMovementData>().WorldMapCoord);
+    return *world->GetArea(GetPlayer().GetModule<cModuleMovementData>().worldMapCoord);
   }
 
 void cEngine::InitializeGL() {

@@ -10,12 +10,12 @@ namespace Forradia {
 
 void cObjectsContent::Add(std::string ObjectName,
                           cObjectDescription Description) {
-  ObjectDescriptions.insert({GetId(ObjectName), Description});
+  objectDescriptions.insert({GetId(ObjectName), Description});
 }
 
 void cObjectsContent::Add(std::string ObjectName,
                           char Flags) {
-    ObjectDescriptions.insert({GetId(ObjectName),
+    objectDescriptions.insert({GetId(ObjectName),
                                cObjectDescription(Flags)});
 }
 
@@ -25,25 +25,25 @@ void cObjectsContent::AddMany(std::vector<std::tuple<std::string, char>>
         auto objectName = std::get<0>(desc);
         auto flags = std::get<1>(desc);
 
-        ObjectDescriptions.insert({GetId(objectName),
+        objectDescriptions.insert({GetId(objectName),
                                    cObjectDescription(flags)});
     }
 }
 
 void cObjectsContent::SetOpacity(std::string ObjectName, float opacity) {
-    ObjectDescriptions.at(GetId(ObjectName)).Opacity = opacity;
+    objectDescriptions.at(GetId(ObjectName)).opacity = opacity;
 }
 
 bool cObjectsContent::IsMovable(int ObjectType) const {
-  if (ObjectDescriptions.count(ObjectType))
-    return ObjectDescriptions.at(ObjectType).Flags & ObjectMovable;
+  if (objectDescriptions.count(ObjectType))
+    return objectDescriptions.at(ObjectType).flags & ObjectMovable;
 
   return false;
 }
 
 bool cObjectsContent::BlocksMovement(int ObjectType) const {
-  if (ObjectDescriptions.count(ObjectType))
-    return ObjectDescriptions.at(ObjectType).Flags & ObjectMovementBlock;
+  if (objectDescriptions.count(ObjectType))
+    return objectDescriptions.at(ObjectType).flags & ObjectMovementBlock;
 
   return false;
 }

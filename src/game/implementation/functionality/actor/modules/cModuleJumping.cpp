@@ -11,27 +11,27 @@ namespace Forradia {
 void cModuleJumping::ResetForNewFrame() {}
 
 void cModuleJumping::Update() {
-  if (IsJumping) {
-    auto DeltaTicks = Ticks() - TickStartJumping;
+  if (isJumping) {
+    auto DeltaTicks = Ticks() - tickStartJumping;
     auto JumpHeight =
-        std::pow(((((-std::pow((((DeltaTicks - JumpDuration / 2.0f))), 2.0f) +
+        std::pow(((((-std::pow((((DeltaTicks - jumpDuration / 2.0f))), 2.0f) +
                      250000.0f)))) /
                      250000.0f,
                  3.0f) *
-        MaxJumpHeight;
+        maxJumpHeight;
 
-    GetParentActor().GetModule<cModuleMovementData>().PositionZ = JumpHeight;
+    GetParentActor().GetModule<cModuleMovementData>().positionZ = JumpHeight;
   }
 
-  if (Ticks() > TickStartJumping + JumpDuration) {
-    GetParentActor().GetModule<cModuleMovementData>().PositionZ = 0.0f;
-    IsJumping = false;
+  if (Ticks() > tickStartJumping + jumpDuration) {
+    GetParentActor().GetModule<cModuleMovementData>().positionZ = 0.0f;
+    isJumping = false;
   }
 }
 
 void cModuleJumping::Jump() {
-  IsJumping = true;
-  TickStartJumping = Ticks();
+  isJumping = true;
+  tickStartJumping = Ticks();
 }
 
 }  // namespace Forradia
