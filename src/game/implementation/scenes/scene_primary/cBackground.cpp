@@ -7,7 +7,7 @@
 namespace Forradia {
 
 void cBackground::Render(float Zoom) {
-  if (Engine.GetCurrentMapArea().IsUnderground()) {
+  if (engine.GetCurrentMapArea().IsUnderground()) {
     glClearColor(0, 0, 0, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
   } else {

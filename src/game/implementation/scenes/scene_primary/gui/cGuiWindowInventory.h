@@ -12,10 +12,10 @@ class cGuiWindowInventory : public cGuiWindowBase {
   using cGuiWindowBase::cGuiWindowBase;
 
   void RenderDerived() override;
-  void DoMouseDownDerived(Uint8 MouseButton) override;
+  void DoMouseDownDerived(Uint8 mouseButton) override;
 
  private:
-  const int NumSlotCols = 4;
+  const int numSlotCols = 4;
 
   cUtilities utilities;
   cPalette palette;

@@ -9,12 +9,12 @@ class cEngine;
 
 class cBackground {
  public:
-  explicit cBackground(const cEngine &Engine_) : Engine(Engine_) {}
+  explicit cBackground(const cEngine &_engine) : engine(_engine) {}
 
-  void Render(float Zoom);
+  void Render(float zoom);
 
  private:
-  const cEngine &Engine;
+  const cEngine &engine;
 };
 
 }  // namespace Forradia

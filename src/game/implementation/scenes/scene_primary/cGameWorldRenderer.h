@@ -11,9 +11,9 @@ namespace Forradia {
 
 class cGameWorldRenderer {
  public:
-  cGameWorldRenderer(const cEngine &Engine_, const cCamera &Camera_)
-      : Engine(Engine_), Background(Engine_), PlanetShaper(Engine_),
-        Camera(Camera_) {}
+  cGameWorldRenderer(const cEngine &_engine, const cCamera &_camera)
+      : engine(_engine), background(_engine), planetShaper(_engine),
+        camera(_camera) {}
 
   void Render();
 
@@ -22,12 +22,12 @@ class cGameWorldRenderer {
   void RenderActors();
   void RenderRoof();
 
-  const cEngine &Engine;
-  cBackground Background;
-  const cCamera &Camera;
-  cPlanetShaper PlanetShaper;
-  const int GroundTypeWaterId = GetId("GroundTypeWater");
-  const int GroundTypeWaterAnimatedId[4] = {
+  const cEngine &engine;
+  cBackground background;
+  const cCamera &camera;
+  cPlanetShaper planetShaper;
+  const int groundTypeWaterId = GetId("GroundTypeWater");
+  const int groundTypeWaterAnimatedId[4] = {
     GetId("GroundTypeWater"),
     GetId("GroundTypeWater1"),
     GetId("GroundTypeWater2"),

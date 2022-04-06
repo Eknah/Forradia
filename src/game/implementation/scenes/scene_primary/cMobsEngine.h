@@ -10,14 +10,14 @@ class cEngine;
 
 class cMobsEngine {
  public:
-  explicit cMobsEngine(const cEngine &Engine_) : Engine(Engine_) {}
+  explicit cMobsEngine(const cEngine &_engine) : engine(_engine) {}
 
   void Update();
 
  private:
-  const cEngine &Engine;
+  const cEngine &engine;
 
-  cRandom Random;
+  cRandom random;
 };
 
 }  // namespace Forradia

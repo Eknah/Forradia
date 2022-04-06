@@ -13,34 +13,34 @@ class cEngine;
 
 class cCamera {
  public:
-  explicit cCamera(const cEngine &Engine_) : Engine(Engine_) {}
+  explicit cCamera(const cEngine &_engine) : engine(_engine) {}
 
-  void Update(int RotationDirection, float ZoomChange);
+  void Update(int rotationDirection, float zoomChange);
   void UpdateCameraMovement();
 
-  float LookingAngle = 0.0f;
-  float ZoomAmount = 2.0f;
+  float lookingAngle = 0.0f;
+  float zoomAmount = 2.0f;
 
-  float RayCastingX = 0.0f;
-  float RayCastingY = 0.0f;
-  float RayCastingZ = 0.0f;
+  float rayCastingX = 0.0f;
+  float rayCastingY = 0.0f;
+  float rayCastingZ = 0.0f;
 
   cPoint2 GetHoveredTile() const;
-  float CameraHeight = 0.0f;
+  float cameraHeight = 0.0f;
 
   int GetRenderDistance() const;
 
  private:
-  const cEngine &Engine;
-  cUtilities Utilities;
+  const cEngine &engine;
+  cUtilities utilities;
 
-  cPoint2 PreviousMousePosition = {-1, -1};
-  int RenderDistance = 80;
-  int RenderDistanceCave = 15;
-  unsigned int TickLastUpdate = 0;
-  int UpdateSpeed = 20;
-  float RotationAmount = 5.0f;
-  float ZoomMultiplier = 8.0;
+  cPoint2 previousMousePosition = {-1, -1};
+  int renderDistance = 80;
+  int renderDistanceCave = 15;
+  unsigned int tickLastUpdate = 0;
+  int updateSpeed = 20;
+  float rotationAmount = 5.0f;
+  float zoomMultiplier = 8.0;
 };
 
 }  // namespace Forradia

@@ -13,45 +13,45 @@ namespace Forradia {
 
 class cGui {
  public:
-  explicit cGui(const cEngine &Engine_) :
-        Engine(Engine_), GuiMinimap(Engine_) {}
+  explicit cGui(const cEngine &_engine) :
+        engine(_engine), guiMinimap(_engine) {}
 
   void Initialize();
   void Update();
   void Render();
-  bool DoMouseDown(Uint8 MouseButton);
+  bool DoMouseDown(Uint8 mouseButton);
   void DoMouseUp();
 
-  UMap<std::string, UPtr<cGuiWindowBase>> Windows;
+  UMap<std::string, UPtr<cGuiWindowBase>> windows;
 
  private:
-  const cEngine &Engine;
+  const cEngine &engine;
 
-  cGuiMinimap GuiMinimap;
+  cGuiMinimap guiMinimap;
 
-  std::vector<std::string> TextBoxText = {"You have entered Forradia"};
+  std::vector<std::string> textBoxText = {"You have entered Forradia"};
 
-  const float TextBoxMargin = 0.005f;
+  const float textBoxMargin = 0.005f;
 
-  cUtilities Utilities;
+  cUtilities utilities;
 
-  const float ButtonWidth = 0.15f;
-  const float ButtonHeight = 0.03f;
-  const float TextBoxWidth = 3 * ButtonWidth;
-  const float TextBoxHeight = 0.15f;
+  const float buttonWidth = 0.15f;
+  const float buttonHeight = 0.03f;
+  const float textBoxWidth = 3 * buttonWidth;
+  const float textBoxHeight = 0.15f;
 
-  const int ButtonMallSize = 100;
+  const int buttonMallSize = 100;
 
-  cRectF BoundsButtonInventory = {0.5f - ButtonWidth / 2, 1.0f - ButtonHeight,
-                                  ButtonWidth, ButtonHeight};
-  cRectF BoundsButtonCharacter = {0.5f - ButtonWidth / 2 - ButtonWidth,
-                                  1.0f - ButtonHeight, ButtonWidth,
-                                  ButtonHeight};
-  cRectF BoundsButtonSystem = {0.5f - ButtonWidth / 2 + ButtonWidth,
-                               1.0f - ButtonHeight, ButtonWidth, ButtonHeight};
-  cRectF BoundsTextBox = {0.5f - TextBoxWidth / 2,
-                          1.0f - ButtonHeight - TextBoxHeight, TextBoxWidth,
-                          TextBoxHeight};
+  cRectF boundsButtonInventory = {0.5f - buttonWidth / 2, 1.0f - buttonHeight,
+                                  buttonWidth, buttonHeight};
+  cRectF boundsButtonCharacter = {0.5f - buttonWidth / 2 - buttonWidth,
+                                  1.0f - buttonHeight, buttonWidth,
+                                  buttonHeight};
+  cRectF boundsButtonSystem = {0.5f - buttonWidth / 2 + buttonWidth,
+                               1.0f - buttonHeight, buttonWidth, buttonHeight};
+  cRectF boundsTextBox = {0.5f - textBoxWidth / 2,
+                          1.0f - buttonHeight - textBoxHeight, textBoxWidth,
+                          textBoxHeight};
 };
 
 }  // namespace Forradia

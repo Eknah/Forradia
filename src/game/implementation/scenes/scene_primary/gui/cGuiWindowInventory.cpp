@@ -14,14 +14,14 @@ void cGuiWindowInventory::RenderDerived() {
   engine.FillRectangle(palette.wheat, BoundsInterior.x, BoundsInterior.y,
                        BoundsInterior.width, BoundsInterior.height);
 
-  auto SlotSize = BoundsInterior.width / NumSlotCols - margin;
+  auto SlotSize = BoundsInterior.width / numSlotCols - margin;
   auto NumSlotRows =
       BoundsInterior.height / ((SlotSize + margin) * AspectRatio);
   auto I = 0;
 
 
   for (auto Y = 0; Y < NumSlotRows; Y++) {
-    for (auto X = 0; X < NumSlotCols; X++) {
+    for (auto X = 0; X < numSlotCols; X++) {
       auto XPos = BoundsInterior.x + X * (SlotSize + margin);
       auto YPos = BoundsInterior.y + Y * (SlotSize * AspectRatio + margin);
 
@@ -57,7 +57,7 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
   auto AspectRatio = static_cast<float>(CanvasSize.width) / CanvasSize.height;
   auto BoundsInterior = GetInteriorBounds();
 
-  auto SlotSize = BoundsInterior.width / NumSlotCols - margin;
+  auto SlotSize = BoundsInterior.width / numSlotCols - margin;
   auto NumSlotRows =
       BoundsInterior.height / ((SlotSize + margin) * AspectRatio);
   auto I = 0;
@@ -67,7 +67,7 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
   auto MouseYRel = static_cast<float>(MousePosition.y) / CanvasSize.height;
 
   for (auto Y = 0; Y < NumSlotRows; Y++) {
-    for (auto X = 0; X < NumSlotCols; X++) {
+    for (auto X = 0; X < numSlotCols; X++) {
       auto XPos = BoundsInterior.x + X * (SlotSize + margin);
       auto YPos = BoundsInterior.y + Y * (SlotSize * AspectRatio + margin);
 

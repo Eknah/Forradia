@@ -10,140 +10,140 @@
 namespace Forradia {
 
 void cGui::Initialize() {
-  Windows.clear();
-  Windows.insert(
+  windows.clear();
+  windows.insert(
       {"Inventory", std::make_unique<cGuiWindowInventory>(
-                        Engine, "Inventory", cRectF{0.1f, 0.1f, 0.2f, 0.7f})});
-  Windows.insert(
+                        engine, "Inventory", cRectF{0.1f, 0.1f, 0.2f, 0.7f})});
+  windows.insert(
       {"Mall", std::make_unique<cGuiWindowMall>(
-                        Engine, "Mall", cRectF{0.2f, 0.1f, 0.7f, 0.6f})});
+                        engine, "Mall", cRectF{0.2f, 0.1f, 0.7f, 0.6f})});
 }
 
 void cGui::Update() {
-  auto MousePositionF = Utilities.GetMousePositionF();
+  auto MousePositionF = utilities.GetMousePositionF();
 
-  if (BoundsButtonInventory.ContainsPoint(MousePositionF))
-    Engine.customCursor.cursorType = eCursorTypes::Hovering;
+  if (boundsButtonInventory.ContainsPoint(MousePositionF))
+    engine.customCursor.cursorType = eCursorTypes::Hovering;
 
-  if (BoundsButtonCharacter.ContainsPoint(MousePositionF))
-    Engine.customCursor.cursorType = eCursorTypes::Hovering;
+  if (boundsButtonCharacter.ContainsPoint(MousePositionF))
+    engine.customCursor.cursorType = eCursorTypes::Hovering;
 
-  if (BoundsButtonSystem.ContainsPoint(MousePositionF))
-    Engine.customCursor.cursorType = eCursorTypes::Hovering;
+  if (boundsButtonSystem.ContainsPoint(MousePositionF))
+    engine.customCursor.cursorType = eCursorTypes::Hovering;
 
-  auto mallIconSize = Utilities.ConvertToFloat(ButtonMallSize);
+  auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
 
   auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
   if (mallIconBounds.ContainsPoint(MousePositionF))
-    Engine.customCursor.cursorType = eCursorTypes::Hovering;
+    engine.customCursor.cursorType = eCursorTypes::Hovering;
 
-  for (auto &[Key, Window] : Windows)
+  for (auto &[Key, Window] : windows)
     Window->Update();
 }
 
 void cGui::Render() {
-  GuiMinimap.Render();
+  guiMinimap.Render();
 
-  auto MousePositionF = Utilities.GetMousePositionF();
+  auto MousePositionF = utilities.GetMousePositionF();
 
 
 
-  auto mallIconSize = Utilities.ConvertToFloat(ButtonMallSize);
+  auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
 
   auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
   if (mallIconBounds.ContainsPoint(MousePositionF))
-    Engine.DrawImage("GuiIconMallHovered", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
+    engine.DrawImage("GuiIconMallHovered", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
   else
-      Engine.DrawImage("GuiIconMall", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
+      engine.DrawImage("GuiIconMall", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
 
-  if (BoundsButtonInventory.ContainsPoint(MousePositionF))
-    Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonInventory.x,
-                         BoundsButtonInventory.y, BoundsButtonInventory.width,
-                         BoundsButtonInventory.height);
+  if (boundsButtonInventory.ContainsPoint(MousePositionF))
+    engine.FillRectangle({100, 200, 255, 100}, boundsButtonInventory.x,
+                         boundsButtonInventory.y, boundsButtonInventory.width,
+                         boundsButtonInventory.height);
   else
-    Engine.FillRectangle({0, 150, 255, 100}, BoundsButtonInventory.x,
-                         BoundsButtonInventory.y, BoundsButtonInventory.width,
-                         BoundsButtonInventory.height);
+    engine.FillRectangle({0, 150, 255, 100}, boundsButtonInventory.x,
+                         boundsButtonInventory.y, boundsButtonInventory.width,
+                         boundsButtonInventory.height);
 
-  Engine.DrawRectangle({255, 255, 255, 100}, BoundsButtonInventory.x,
-                       BoundsButtonInventory.y, BoundsButtonInventory.width,
-                       BoundsButtonInventory.height);
-  Engine.DrawString("Inventory [F2]", {255, 255, 255, 255},
-                    BoundsButtonInventory.x + BoundsButtonInventory.width / 2,
-                    BoundsButtonInventory.y + BoundsButtonInventory.height / 2,
+  engine.DrawRectangle({255, 255, 255, 100}, boundsButtonInventory.x,
+                       boundsButtonInventory.y, boundsButtonInventory.width,
+                       boundsButtonInventory.height);
+  engine.DrawString("Inventory [F2]", {255, 255, 255, 255},
+                    boundsButtonInventory.x + boundsButtonInventory.width / 2,
+                    boundsButtonInventory.y + boundsButtonInventory.height / 2,
                     true);
 
-  if (BoundsButtonCharacter.ContainsPoint(MousePositionF))
-    Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonCharacter.x,
-                         BoundsButtonCharacter.y, BoundsButtonCharacter.width,
-                         BoundsButtonCharacter.height);
+  if (boundsButtonCharacter.ContainsPoint(MousePositionF))
+    engine.FillRectangle({100, 200, 255, 100}, boundsButtonCharacter.x,
+                         boundsButtonCharacter.y, boundsButtonCharacter.width,
+                         boundsButtonCharacter.height);
   else
-    Engine.FillRectangle({0, 150, 255, 100}, BoundsButtonCharacter.x,
-                         BoundsButtonCharacter.y, BoundsButtonCharacter.width,
-                         BoundsButtonCharacter.height);
+    engine.FillRectangle({0, 150, 255, 100}, boundsButtonCharacter.x,
+                         boundsButtonCharacter.y, boundsButtonCharacter.width,
+                         boundsButtonCharacter.height);
 
-  Engine.DrawRectangle({255, 255, 255, 100}, BoundsButtonCharacter.x,
-                       BoundsButtonCharacter.y, BoundsButtonCharacter.width,
-                       BoundsButtonCharacter.height);
-  Engine.DrawString("Character [F1]", {255, 255, 255, 255},
-                    BoundsButtonCharacter.x + BoundsButtonCharacter.width / 2,
-                    BoundsButtonCharacter.y + BoundsButtonCharacter.height / 2,
+  engine.DrawRectangle({255, 255, 255, 100}, boundsButtonCharacter.x,
+                       boundsButtonCharacter.y, boundsButtonCharacter.width,
+                       boundsButtonCharacter.height);
+  engine.DrawString("Character [F1]", {255, 255, 255, 255},
+                    boundsButtonCharacter.x + boundsButtonCharacter.width / 2,
+                    boundsButtonCharacter.y + boundsButtonCharacter.height / 2,
                     true);
 
-  if (BoundsButtonSystem.ContainsPoint(MousePositionF))
-    Engine.FillRectangle({100, 200, 255, 100}, BoundsButtonSystem.x,
-                         BoundsButtonSystem.y, BoundsButtonSystem.width,
-                         BoundsButtonSystem.height);
+  if (boundsButtonSystem.ContainsPoint(MousePositionF))
+    engine.FillRectangle({100, 200, 255, 100}, boundsButtonSystem.x,
+                         boundsButtonSystem.y, boundsButtonSystem.width,
+                         boundsButtonSystem.height);
   else
-    Engine.FillRectangle({0, 150, 255, 100}, BoundsButtonSystem.x,
-                         BoundsButtonSystem.y, BoundsButtonSystem.width,
-                         BoundsButtonSystem.height);
+    engine.FillRectangle({0, 150, 255, 100}, boundsButtonSystem.x,
+                         boundsButtonSystem.y, boundsButtonSystem.width,
+                         boundsButtonSystem.height);
 
-  Engine.DrawRectangle({255, 255, 255, 100}, BoundsButtonSystem.x,
-                       BoundsButtonSystem.y, BoundsButtonSystem.width,
-                       BoundsButtonSystem.height);
-  Engine.DrawString("System [F3]", {255, 255, 255, 255},
-                    BoundsButtonSystem.x + BoundsButtonSystem.width / 2,
-                    BoundsButtonSystem.y + BoundsButtonSystem.height / 2, true);
-  Engine.FillRectangle({0, 150, 255, 100}, BoundsTextBox.x, BoundsTextBox.y,
-                       BoundsTextBox.width, BoundsTextBox.height);
-  Engine.DrawRectangle({255, 255, 255, 100}, BoundsTextBox.x, BoundsTextBox.y,
-                       BoundsTextBox.width, BoundsTextBox.height);
+  engine.DrawRectangle({255, 255, 255, 100}, boundsButtonSystem.x,
+                       boundsButtonSystem.y, boundsButtonSystem.width,
+                       boundsButtonSystem.height);
+  engine.DrawString("System [F3]", {255, 255, 255, 255},
+                    boundsButtonSystem.x + boundsButtonSystem.width / 2,
+                    boundsButtonSystem.y + boundsButtonSystem.height / 2, true);
+  engine.FillRectangle({0, 150, 255, 100}, boundsTextBox.x, boundsTextBox.y,
+                       boundsTextBox.width, boundsTextBox.height);
+  engine.DrawRectangle({255, 255, 255, 100}, boundsTextBox.x, boundsTextBox.y,
+                       boundsTextBox.width, boundsTextBox.height);
 
-  auto TextBoxTextX = BoundsTextBox.x + TextBoxMargin;
-  auto TextBoxTextY = BoundsTextBox.y + TextBoxMargin;
+  auto TextBoxTextX = boundsTextBox.x + textBoxMargin;
+  auto TextBoxTextY = boundsTextBox.y + textBoxMargin;
 
-  Engine.DrawString(TextBoxText.at(0), {255, 255, 255, 255}, TextBoxTextX,
+  engine.DrawString(textBoxText.at(0), {255, 255, 255, 255}, TextBoxTextX,
                     TextBoxTextY);
 
-  for (auto &[Key, Window] : Windows)
+  for (auto &[Key, Window] : windows)
     Window->Render();
 }
 
 bool cGui::DoMouseDown(Uint8 MouseButton) {
-  for (auto &[Key, Window] : Windows) {
+  for (auto &[Key, Window] : windows) {
     auto ClickedInWindow = Window->DoMouseDown(MouseButton);
 
     if (ClickedInWindow)
       return true;
   }
 
-  auto MousePositionF = Utilities.GetMousePositionF();
+  auto MousePositionF = utilities.GetMousePositionF();
 
-  if (BoundsButtonInventory.ContainsPoint(MousePositionF)) {
-    Windows.at("Inventory")->visible = !Windows.at("Inventory")->visible;
+  if (boundsButtonInventory.ContainsPoint(MousePositionF)) {
+    windows.at("Inventory")->visible = !windows.at("Inventory")->visible;
 
     return true;
   }
 
-  auto mallIconSize = Utilities.ConvertToFloat(ButtonMallSize);
+  auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
 
   auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
   if (mallIconBounds.ContainsPoint(MousePositionF)) {
-      Windows.at("Mall")->visible = !Windows.at("Mall")->visible;
+      windows.at("Mall")->visible = !windows.at("Mall")->visible;
 
       return true;
   }
@@ -152,7 +152,7 @@ bool cGui::DoMouseDown(Uint8 MouseButton) {
 }
 
 void cGui::DoMouseUp() {
-  for (auto &[Key, Window] : Windows)
+  for (auto &[Key, Window] : windows)
     Window->DoMouseUp();
 }
 

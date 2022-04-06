@@ -11,25 +11,25 @@ namespace Forradia {
 
 void cMobsEngine::Update() {
   for (unsigned int I = 0;
-       I < Engine.GetCurrentMapArea().mobActorsMirror.size(); I++) {
-    if (I >= Engine.GetCurrentMapArea().mobActorsMirror.size())
+       I < engine.GetCurrentMapArea().mobActorsMirror.size(); I++) {
+    if (I >= engine.GetCurrentMapArea().mobActorsMirror.size())
       break;
 
     SPtr<cMob> MobPtr = std::dynamic_pointer_cast<cMob>(
-        Engine.GetCurrentMapArea().mobActorsMirror.at(I).get());
+        engine.GetCurrentMapArea().mobActorsMirror.at(I).get());
 
     if (MobPtr == nullptr)
       continue;
 
     cActor &Actor =
-        *Engine.GetCurrentMapArea().mobActorsMirror.at(I).get().get();
+        *engine.GetCurrentMapArea().mobActorsMirror.at(I).get().get();
 
-    if (Actor.actorId == Engine.GetPlayer().actorId)
+    if (Actor.actorId == engine.GetPlayer().actorId)
       continue;
 
     cMob &Mob = *MobPtr;
 
-    if (Mob.actorId == Engine.GetPlayer().actorId)
+    if (Mob.actorId == engine.GetPlayer().actorId)
       continue;
 
     if (Ticks() > Mob.GetModule<cModuleMovementData>().tickLastMove + Mob.GetModule<cModuleMovementData>().moveSpeed) {
@@ -37,16 +37,16 @@ void cMobsEngine::Update() {
 
       if (Mob.GetModule<cModuleMovementData>().moveDestination.x == -1 || Mob.GetModule<cModuleMovementData>().moveDestination.y == -1) {
         auto DestinationX =
-            Mob.GetModule<cModuleMovementData>().position.x + Random.Next() % 15 - Random.Next() % 15;
+            Mob.GetModule<cModuleMovementData>().position.x + random.Next() % 15 - random.Next() % 15;
         auto DestinationY =
-            Mob.GetModule<cModuleMovementData>().position.y + Random.Next() % 15 - Random.Next() % 15;
+            Mob.GetModule<cModuleMovementData>().position.y + random.Next() % 15 - random.Next() % 15;
 
         DestinationX =
             std::min(std::max(DestinationX, 0.0f),
-                     static_cast<float>(Engine.world->mapAreaSize) - 1.0f);
+                     static_cast<float>(engine.world->mapAreaSize) - 1.0f);
         DestinationY =
             std::min(std::max(DestinationY, 0.0f),
-                     static_cast<float>(Engine.world->mapAreaSize) - 1.0f);
+                     static_cast<float>(engine.world->mapAreaSize) - 1.0f);
 
         Mob.GetModule<cModuleMovementData>().moveDestination = {DestinationX, DestinationY};
       }
@@ -76,27 +76,27 @@ void cMobsEngine::Update() {
       auto OldXI = static_cast<int>(Mob.GetModule<cModuleMovementData>().position.x);
       auto OldYI = static_cast<int>(Mob.GetModule<cModuleMovementData>().position.y);
 
-      if (NewXI >= 0 && NewYI >= 0 && NewXI < Engine.world->mapAreaSize &&
-          NewYI < Engine.world->mapAreaSize) {
-        if (Engine.GetCurrentMapArea().tiles[NewXI][NewYI].groundType !=
+      if (NewXI >= 0 && NewYI >= 0 && NewXI < engine.world->mapAreaSize &&
+          NewYI < engine.world->mapAreaSize) {
+        if (engine.GetCurrentMapArea().tiles[NewXI][NewYI].groundType !=
             GetId("GroundTypeWater")) {
-          if (Engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor == nullptr ||
+          if (engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor == nullptr ||
               (NewXI == OldXI && NewYI == OldYI)) {
-            Engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor->GetModule<cModuleMovementData>().position = {
+            engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor->GetModule<cModuleMovementData>().position = {
                 NewX, NewY};
 
             if (NewXI != OldXI || NewYI != OldYI) {
-              Engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor = std::move(
-                  Engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor);
-              Engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor = nullptr;
+              engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor = std::move(
+                  engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor);
+              engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor = nullptr;
             }
 
-            Engine.GetCurrentMapArea().mobActorsMirror.erase(
-                Engine.GetCurrentMapArea().mobActorsMirror.begin() + I);
-            Engine.GetCurrentMapArea().mobActorsMirror.push_back(
-                std::ref(Engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor));
+            engine.GetCurrentMapArea().mobActorsMirror.erase(
+                engine.GetCurrentMapArea().mobActorsMirror.begin() + I);
+            engine.GetCurrentMapArea().mobActorsMirror.push_back(
+                std::ref(engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor));
 
-          } else if (Engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor !=
+          } else if (engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor !=
                          nullptr &&
                      (NewXI != OldXI || NewYI != OldYI)) {
             Mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};

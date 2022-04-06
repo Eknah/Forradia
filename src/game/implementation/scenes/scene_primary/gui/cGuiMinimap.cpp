@@ -7,11 +7,11 @@
 namespace Forradia {
 
 void cGuiMinimap::Render() {
-  auto MinimapSizeF = Utilities.ConvertToFloat(MinimapSize);
+  auto MinimapSizeF = utilities.ConvertToFloat(minimapSize);
 
-  Engine.FillRectangle(Palette.mediumBlue, 0, 0, MinimapSizeF.width,
+  engine.FillRectangle(palette.mediumBlue, 0, 0, MinimapSizeF.width,
                        MinimapSizeF.height);
-  Engine.DrawRectangle(Palette.black, 0, 0, MinimapSizeF.width,
+  engine.DrawRectangle(palette.black, 0, 0, MinimapSizeF.width,
                        MinimapSizeF.height);
 }
 

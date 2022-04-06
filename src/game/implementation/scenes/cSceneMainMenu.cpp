@@ -24,7 +24,7 @@ void cSceneMainMenu::Update() {
 void cSceneMainMenu::Render() {
   engine.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
 
-  auto CanvasSize = Utilities.GetCanvasSize();
+  auto CanvasSize = utilities.GetCanvasSize();
 
   auto LogoSizeF = engine.GetImageSizeF("SceneForradiaLogo");
 

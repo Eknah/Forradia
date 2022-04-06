@@ -8,7 +8,7 @@
 namespace Forradia {
 
 void cScenePrimary::Enter() {
-    Gui.Initialize();
+    gui.Initialize();
 }
 
 void cScenePrimary::Update() {
@@ -28,7 +28,7 @@ void cScenePrimary::Update() {
 
   if (Instruction.tryMoveForward || Instruction.tryMoveRight ||
       Instruction.tryMoveBack || Instruction.tryMoveLeft) {
-    *Player.GetModule<cModuleMovementData>().facingAngle = Camera.LookingAngle;
+    *Player.GetModule<cModuleMovementData>().facingAngle = camera.lookingAngle;
     Player.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
   }
 
@@ -36,23 +36,23 @@ void cScenePrimary::Update() {
   auto TurnLeft = Keys->count(SDLK_q);
 
   if (TurnRight) {
-    Camera.Update(GetId("Right"), *engine.mouseHandler.wheelAmount);
-    Player.GetModule<cModuleMovement>().UpdateRotation(Camera.LookingAngle);
+    camera.Update(GetId("Right"), *engine.mouseHandler.wheelAmount);
+    Player.GetModule<cModuleMovement>().UpdateRotation(camera.lookingAngle);
   } else if (TurnLeft) {
-    Camera.Update(GetId("Left"), *engine.mouseHandler.wheelAmount);
-    Player.GetModule<cModuleMovement>().UpdateRotation(Camera.LookingAngle);
+    camera.Update(GetId("Left"), *engine.mouseHandler.wheelAmount);
+    Player.GetModule<cModuleMovement>().UpdateRotation(camera.lookingAngle);
   } else {
-    Camera.Update(0, *engine.mouseHandler.wheelAmount);
+    camera.Update(0, *engine.mouseHandler.wheelAmount);
   }
 
   if (engine.keyboardHandler.keysBeenFired->count(SDLK_F2))
-    Gui.Windows.at("Inventory")->visible =
-        !Gui.Windows.at("Inventory")->visible;
+    gui.windows.at("Inventory")->visible =
+        !gui.windows.at("Inventory")->visible;
 
-  Camera.UpdateCameraMovement();
+  camera.UpdateCameraMovement();
 
   if (engine.mouseHandler.rightButtonDown)
-    *Player.GetModule<cModuleMovementData>().facingAngle = Camera.LookingAngle;
+    *Player.GetModule<cModuleMovementData>().facingAngle = camera.lookingAngle;
 
   if (engine.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
     engine.GetPlayer().GetModule<cModuleJumping>().Jump();
@@ -61,19 +61,19 @@ void cScenePrimary::Update() {
     engine.customCursor.cursorType = eCursorTypes::Hidden;
 
   Player.Update();
-  MobsEngine.Update();
-  Gui.Update();
+  mobsEngine.Update();
+  gui.Update();
 }
 
 void cScenePrimary::Render() {
-  GameWorldRenderer.Render();
-  Gui.Render();
+  gameWorldRenderer.Render();
+  gui.Render();
 }
 
 void cScenePrimary::DoMouseDown(Uint8 MouseButton) {
   if (engine.GetPlayer().GetModule<cModuleObjectUsage>().objectBeingUsed !=
       nullptr) {
-    auto Hovered = Camera.GetHoveredTile();
+    auto Hovered = camera.GetHoveredTile();
 
     if (engine.GetCurrentMapArea().tiles[Hovered.x][Hovered.y].objects.size() >
         0)
@@ -90,7 +90,7 @@ void cScenePrimary::DoMouseDown(Uint8 MouseButton) {
     return;
   }
 
-  auto ClickedInGui = Gui.DoMouseDown(MouseButton);
+  auto ClickedInGui = gui.DoMouseDown(MouseButton);
 
   if (ClickedInGui)
     return;
@@ -98,7 +98,7 @@ void cScenePrimary::DoMouseDown(Uint8 MouseButton) {
   switch (MouseButton) {
   case SDL_BUTTON_LEFT: {
     engine.GetPlayer().GetModule<cModuleMovementData>().moveDestination = {
-        Camera.GetHoveredTile().x + 0.5f, Camera.GetHoveredTile().y + 0.5f};
+        camera.GetHoveredTile().x + 0.5f, camera.GetHoveredTile().y + 0.5f};
     break;
   }
   case SDL_BUTTON_RIGHT: {
@@ -108,7 +108,7 @@ void cScenePrimary::DoMouseDown(Uint8 MouseButton) {
 }
 
 void cScenePrimary::DoMouseUp(Uint8 MouseButton) {
-    Gui.DoMouseUp();
+    gui.DoMouseUp();
 }
 
 }  // namespace Forradia

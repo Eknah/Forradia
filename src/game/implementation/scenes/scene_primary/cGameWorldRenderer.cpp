@@ -9,21 +9,21 @@
 namespace Forradia {
 
 void cGameWorldRenderer::Render() {
-  Background.Render(Camera.ZoomAmount);
+  background.Render(camera.zoomAmount);
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   //gluPerspective(45, 1.333, 0.5, 100);
-  gluPerspective(Engine.fov, 1.333, 0.5, 100);
+  gluPerspective(engine.fov, 1.333, 0.5, 100);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
   auto CameraX = 0.0f;
   auto CameraZ = -1.0f;
   auto AngleRadians =
-      atan2(CameraZ, CameraX) + Camera.LookingAngle / 180.0f * M_PI;
+      atan2(CameraZ, CameraX) + camera.lookingAngle / 180.0f * M_PI;
   auto CameraDist = 1;
-  auto Zoom = Camera.ZoomAmount;
+  auto Zoom = camera.zoomAmount;
 
 
   auto ZoomEx = std::max(Zoom, 1.0f);
@@ -32,12 +32,12 @@ void cGameWorldRenderer::Render() {
   CameraX = static_cast<float>(cos(AngleRadians)) * CameraDist;
   CameraZ = -static_cast<float>(sin(AngleRadians)) * CameraDist;
 
-  gluLookAt(CameraX-Engine.tileSize/2,
-            Camera.CameraHeight*(ZoomEx - 0.5f),
-            CameraZ-Engine.tileSize/2,
-            -Engine.tileSize/2,
+  gluLookAt(CameraX-engine.tileSize/2,
+            camera.cameraHeight*(ZoomEx - 0.5f),
+            CameraZ-engine.tileSize/2,
+            -engine.tileSize/2,
             -1,
-            -Engine.tileSize/2,
+            -engine.tileSize/2,
             0,
             1,
             0);
@@ -59,9 +59,9 @@ void cGameWorldRenderer::Render() {
 }
 
 void cGameWorldRenderer::RenderTilesAndObjects() {
-    auto MapAreaSize = Engine.world->mapAreaSize;
-    auto& movementData = Engine.GetPlayer().GetModule<cModuleMovementData>();
-    auto& tiles = Engine.GetCurrentMapArea().tiles;
+    auto MapAreaSize = engine.world->mapAreaSize;
+    auto& movementData = engine.GetPlayer().GetModule<cModuleMovementData>();
+    auto& tiles = engine.GetCurrentMapArea().tiles;
 
     auto ElevAmount = 5.0f;
     auto PlayerXInt = static_cast<int>(movementData.position.x);
@@ -92,25 +92,25 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
     float SubStepY = movementData.position.y -
             PlayerYInt;
 
-    auto OffsetX = -static_cast<float>(2.0f * Camera.GetRenderDistance() + 1.0f)
-            / 2.0f * Engine.tileSize - SubStepX * Engine.tileSize;
-    auto OffsetY = -static_cast<float>(2.0f * Camera.GetRenderDistance() - 1.0f)
-            / 2.0f * Engine.tileSize - SubStepY * Engine.tileSize;
+    auto OffsetX = -static_cast<float>(2.0f * camera.GetRenderDistance() + 1.0f)
+            / 2.0f * engine.tileSize - SubStepX * engine.tileSize;
+    auto OffsetY = -static_cast<float>(2.0f * camera.GetRenderDistance() - 1.0f)
+            / 2.0f * engine.tileSize - SubStepY * engine.tileSize;
 
-    for (auto Y = 0; Y < 2 * Camera.GetRenderDistance() + 1; Y++) {
-      for (auto X = 0; X < 2 * Camera.GetRenderDistance() + 1; X++) {
-        auto DX = X - Camera.GetRenderDistance();
-        auto DY = Y - Camera.GetRenderDistance();
+    for (auto Y = 0; Y < 2 * camera.GetRenderDistance() + 1; Y++) {
+      for (auto X = 0; X < 2 * camera.GetRenderDistance() + 1; X++) {
+        auto DX = X - camera.GetRenderDistance();
+        auto DY = Y - camera.GetRenderDistance();
 
         if (DX * DX + DY * DY >=
-            Camera.GetRenderDistance() * Camera.GetRenderDistance())
+            camera.GetRenderDistance() * camera.GetRenderDistance())
           continue;
 
         auto TileX = movementData.position.x
-                - Camera.GetRenderDistance() + X;
+                - camera.GetRenderDistance() + X;
 
         auto TileY = movementData.position.y
-                - Camera.GetRenderDistance() + Y;
+                - camera.GetRenderDistance() + Y;
 
         if (TileX < 0 || TileY < 0 || TileX >= MapAreaSize ||
             TileY >= MapAreaSize)
@@ -127,7 +127,7 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
         auto WaterAnimIndex2 = 0;
         auto WaterAnimIndex3 = 0;
 
-        if (GroundTypeId == GroundTypeWaterId) {
+        if (GroundTypeId == groundTypeWaterId) {
           WaterAnimIndex0 =
               ((Ticks() * 3 + (TileXI * TileYI) * 10) % 3600) / 1200;
           WaterAnimIndex1 =
@@ -143,7 +143,7 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
 
           if (WaterAnimIndex0 > 0)
             GroundTypeId =
-                GroundTypeWaterAnimatedId[WaterAnimIndex0];
+                groundTypeWaterAnimatedId[WaterAnimIndex0];
         }
 
         auto Elev0 = 0.0f;
@@ -151,10 +151,10 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
         auto Elev2 = 0.0f;
         auto Elev3 = 0.0f;
 
-        auto WaterWaveHeight0 = WaterAnimIndex0 * Engine.tileSize / 4.0f;
-        auto WaterWaveHeight1 = WaterAnimIndex1 * Engine.tileSize / 4.0f;
-        auto WaterWaveHeight2 = WaterAnimIndex2 * Engine.tileSize / 4.0f;
-        auto WaterWaveHeight3 = WaterAnimIndex3 * Engine.tileSize / 4.0f;
+        auto WaterWaveHeight0 = WaterAnimIndex0 * engine.tileSize / 4.0f;
+        auto WaterWaveHeight1 = WaterAnimIndex1 * engine.tileSize / 4.0f;
+        auto WaterWaveHeight2 = WaterAnimIndex2 * engine.tileSize / 4.0f;
+        auto WaterWaveHeight3 = WaterAnimIndex3 * engine.tileSize / 4.0f;
 
         if (TileX >= 0 && TileY >= 0 && TileX < MapAreaSize &&
             TileY < MapAreaSize)
@@ -222,31 +222,31 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
 
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,
-                      Engine.imageLoader.images.at(GroundTypeId));
+                      engine.imageLoader.images.at(GroundTypeId));
 
-        auto TileX0 = OffsetX + X * Engine.tileSize;
+        auto TileX0 = OffsetX + X * engine.tileSize;
         auto TileY0 = Elev0;
-        auto TileZ0 = OffsetY + Y * Engine.tileSize;
-        auto TileX1 = OffsetX + X * Engine.tileSize;
+        auto TileZ0 = OffsetY + Y * engine.tileSize;
+        auto TileX1 = OffsetX + X * engine.tileSize;
         auto TileY1 = Elev1;
-        auto TileZ1 = OffsetY + Y * Engine.tileSize - Engine.tileSize;
-        auto TileX2 = OffsetX + X * Engine.tileSize + Engine.tileSize;
+        auto TileZ1 = OffsetY + Y * engine.tileSize - engine.tileSize;
+        auto TileX2 = OffsetX + X * engine.tileSize + engine.tileSize;
         auto TileY2 = Elev2;
-        auto TileZ2 = OffsetY + Y * Engine.tileSize - Engine.tileSize;
-        auto TileX3 = OffsetX + X * Engine.tileSize + Engine.tileSize;
+        auto TileZ2 = OffsetY + Y * engine.tileSize - engine.tileSize;
+        auto TileX3 = OffsetX + X * engine.tileSize + engine.tileSize;
         auto TileY3 = Elev3;
-        auto TileZ3 = OffsetY + Y * Engine.tileSize;
+        auto TileZ3 = OffsetY + Y * engine.tileSize;
 
-        TileY0 = PlanetShaper.GetNewY(TileY0,
+        TileY0 = planetShaper.GetNewY(TileY0,
                                              static_cast<float>(TileXI),
                                              static_cast<float>(TileYI));
-        TileY1 = PlanetShaper.GetNewY(TileY1,
+        TileY1 = planetShaper.GetNewY(TileY1,
                                              static_cast<float>(TileXI),
                                              static_cast<float>(TileYI) - 1);
-        TileY2 = PlanetShaper.GetNewY(TileY2,
+        TileY2 = planetShaper.GetNewY(TileY2,
                                              static_cast<float>(TileXI) + 1,
                                              static_cast<float>(TileYI) - 1);
-        TileY3 = PlanetShaper.GetNewY(TileY3,
+        TileY3 = planetShaper.GetNewY(TileY3,
                                              static_cast<float>(TileXI) + 1,
                                              static_cast<float>(TileYI));
 
@@ -284,13 +284,13 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
 
 
 
-        auto HoveredX = Camera.GetHoveredTile().x;
-        auto HoveredY = Camera.GetHoveredTile().y;
+        auto HoveredX = camera.GetHoveredTile().x;
+        auto HoveredY = camera.GetHoveredTile().y;
 
         if (HoveredX == TileXI && HoveredY == TileYI &&
-            Engine.customCursor.cursorType != eCursorTypes::Hidden) {
+            engine.customCursor.cursorType != eCursorTypes::Hidden) {
           glBindTexture(GL_TEXTURE_2D,
-                        Engine.imageLoader.images.at(GetId("TileHovering")));
+                        engine.imageLoader.images.at(GetId("TileHovering")));
 
           glBegin(GL_QUADS);
 
@@ -313,14 +313,14 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
 
             auto dropShadow = true;
 
-            if (Engine.objectsContent.objectDescriptions.count(Object->objectType))
-            if (Engine.objectsContent.objectDescriptions.at(Object->objectType).flags & ObjectNoShadow)
+            if (engine.objectsContent.objectDescriptions.count(Object->objectType))
+            if (engine.objectsContent.objectDescriptions.at(Object->objectType).flags & ObjectNoShadow)
                 dropShadow = false;
 
                 if (dropShadow) {
 glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D,
-                          Engine.imageLoader.images.at(GetId("TileShadow")));
+                          engine.imageLoader.images.at(GetId("TileShadow")));
 
             glBegin(GL_QUADS);
 
@@ -347,13 +347,13 @@ glEnable(GL_TEXTURE_2D);
           auto TileObject = Object->objectType;
           auto opacity = 1.0f;
 
-          if (Engine.objectsContent.objectDescriptions.count(TileObject))
-              opacity = Engine.objectsContent.objectDescriptions.at(TileObject).opacity;
+          if (engine.objectsContent.objectDescriptions.count(TileObject))
+              opacity = engine.objectsContent.objectDescriptions.at(TileObject).opacity;
 
           if (TileObject != 0)
-            Engine.DrawModel(TileObject, TileX0 + Engine.tileSize / 2,
+            engine.DrawModel(TileObject, TileX0 + engine.tileSize / 2,
                              (TileY0 + TileY1 + TileY2 + TileY3) / 4.0f,
-                             TileZ0 - Engine.tileSize / 2, Object->rotation,
+                             TileZ0 - engine.tileSize / 2, Object->rotation,
                              Object->scaling, opacity);
         }
       }
@@ -361,56 +361,56 @@ glEnable(GL_TEXTURE_2D);
 }
 
 void cGameWorldRenderer::RenderActors() {
-    auto MapAreaSize = Engine.world->mapAreaSize;
+    auto MapAreaSize = engine.world->mapAreaSize;
     auto ElevAmount = 5.0f;
-    auto PlayerXInt = static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
-    auto PlayerYInt = static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
+    auto PlayerXInt = static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
+    auto PlayerYInt = static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
     auto ElevPlayer0 =
-        Engine.GetCurrentMapArea().tiles[PlayerXInt][PlayerYInt].elevation /
+        engine.GetCurrentMapArea().tiles[PlayerXInt][PlayerYInt].elevation /
         ElevAmount;
     auto ElevPlayer1 =
-        Engine.GetCurrentMapArea().tiles[PlayerXInt + 1][PlayerYInt].elevation /
+        engine.GetCurrentMapArea().tiles[PlayerXInt + 1][PlayerYInt].elevation /
         ElevAmount;
-    auto ElevPlayer2 = Engine.GetCurrentMapArea()
+    auto ElevPlayer2 = engine.GetCurrentMapArea()
                            .tiles[PlayerXInt + 1][PlayerYInt + 1]
                            .elevation /
                        ElevAmount;
     auto ElevPlayer3 =
-        Engine.GetCurrentMapArea().tiles[PlayerXInt][PlayerYInt + 1].elevation /
+        engine.GetCurrentMapArea().tiles[PlayerXInt][PlayerYInt + 1].elevation /
         ElevAmount;
-    auto ElevX = Engine.GetPlayer().GetModule<cModuleMovementData>().position.x - PlayerXInt;
-    auto ElevY = Engine.GetPlayer().GetModule<cModuleMovementData>().position.y - PlayerYInt;
+    auto ElevX = engine.GetPlayer().GetModule<cModuleMovementData>().position.x - PlayerXInt;
+    auto ElevY = engine.GetPlayer().GetModule<cModuleMovementData>().position.y - PlayerYInt;
     auto ElevPlayer = (ElevPlayer0 + (ElevPlayer1 - ElevPlayer0) * ElevX +
                        ElevPlayer3 + (ElevPlayer2 - ElevPlayer3) * ElevX +
                        ElevPlayer0 + (ElevPlayer3 - ElevPlayer0) * ElevY +
                        ElevPlayer1 + (ElevPlayer2 - ElevPlayer1) * ElevY) /
                       4.0f;
 
-    float SubStepX = Engine.GetPlayer().GetModule<cModuleMovementData>().position.x -
-            static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
+    float SubStepX = engine.GetPlayer().GetModule<cModuleMovementData>().position.x -
+            static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
 
-    float SubStepY = Engine.GetPlayer().GetModule<cModuleMovementData>().position.y -
-            static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
+    float SubStepY = engine.GetPlayer().GetModule<cModuleMovementData>().position.y -
+            static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
 
-    auto OffsetX = -static_cast<float>(2.0f * Camera.GetRenderDistance() + 1.0f)
-            / 2.0f * Engine.tileSize - SubStepX * Engine.tileSize;
-    auto OffsetY = -static_cast<float>(2.0f * Camera.GetRenderDistance() - 1.0f)
-            / 2.0f * Engine.tileSize - SubStepY * Engine.tileSize;
+    auto OffsetX = -static_cast<float>(2.0f * camera.GetRenderDistance() + 1.0f)
+            / 2.0f * engine.tileSize - SubStepX * engine.tileSize;
+    auto OffsetY = -static_cast<float>(2.0f * camera.GetRenderDistance() - 1.0f)
+            / 2.0f * engine.tileSize - SubStepY * engine.tileSize;
 
-    for (auto Y = 0; Y < 2 * Camera.GetRenderDistance() + 1; Y++) {
-      for (auto X = 0; X < 2 * Camera.GetRenderDistance() + 1; X++) {
-          auto DX = X - Camera.GetRenderDistance();
-          auto DY = Y - Camera.GetRenderDistance();
+    for (auto Y = 0; Y < 2 * camera.GetRenderDistance() + 1; Y++) {
+      for (auto X = 0; X < 2 * camera.GetRenderDistance() + 1; X++) {
+          auto DX = X - camera.GetRenderDistance();
+          auto DY = Y - camera.GetRenderDistance();
 
           if (DX * DX + DY * DY >=
-              Camera.GetRenderDistance() * Camera.GetRenderDistance())
+              camera.GetRenderDistance() * camera.GetRenderDistance())
             continue;
 
-          auto TileX = Engine.GetPlayer().GetModule<cModuleMovementData>().position.x
-                  - Camera.GetRenderDistance() + X;
+          auto TileX = engine.GetPlayer().GetModule<cModuleMovementData>().position.x
+                  - camera.GetRenderDistance() + X;
 
-          auto TileY = Engine.GetPlayer().GetModule<cModuleMovementData>().position.y
-                  - Camera.GetRenderDistance() + Y;
+          auto TileY = engine.GetPlayer().GetModule<cModuleMovementData>().position.y
+                  - camera.GetRenderDistance() + Y;
 
           if (TileX < 0 || TileY < 0 || TileX >= MapAreaSize ||
               TileY >= MapAreaSize)
@@ -427,13 +427,13 @@ void cGameWorldRenderer::RenderActors() {
           if (TileX >= 0 && TileY >= 0 && TileX < MapAreaSize &&
               TileY < MapAreaSize)
             Elev0 =
-                Engine.GetCurrentMapArea().tiles[TileXI][TileYI].elevation /
+                engine.GetCurrentMapArea().tiles[TileXI][TileYI].elevation /
                     ElevAmount -
                 ElevPlayer;
 
           if (TileX >= 0 && TileY - 1 >= 0 && TileX < MapAreaSize &&
               TileY - 1 < MapAreaSize)
-            Elev1 = Engine.GetCurrentMapArea()
+            Elev1 = engine.GetCurrentMapArea()
                             .tiles[TileXI][TileYI - 1]
                             .elevation /
                         ElevAmount -
@@ -443,19 +443,19 @@ void cGameWorldRenderer::RenderActors() {
 
           if (TileX + 1 >= 0 && TileY - 1 >= 0 && TileX + 1 < MapAreaSize &&
               TileY - 1 < MapAreaSize)
-            Elev2 = Engine.GetCurrentMapArea()
+            Elev2 = engine.GetCurrentMapArea()
                             .tiles[TileXI + 1][TileYI - 1]
                             .elevation /
                         ElevAmount -
                     ElevPlayer;
           else if (TileX + 1 < MapAreaSize)
-            Elev2 = Engine.GetCurrentMapArea()
+            Elev2 = engine.GetCurrentMapArea()
                             .tiles[TileXI + 1][TileYI]
                             .elevation /
                         ElevAmount -
                     ElevPlayer;
           else if (TileY - 1 >= 0)
-            Elev2 = Engine.GetCurrentMapArea()
+            Elev2 = engine.GetCurrentMapArea()
                             .tiles[TileXI][TileYI - 1]
                             .elevation /
                         ElevAmount -
@@ -465,7 +465,7 @@ void cGameWorldRenderer::RenderActors() {
 
           if (TileX + 1 >= 0 && TileY >= 0 && TileX + 1 < MapAreaSize &&
               TileY < MapAreaSize)
-            Elev3 = Engine.GetCurrentMapArea()
+            Elev3 = engine.GetCurrentMapArea()
                             .tiles[TileXI + 1][TileYI]
                             .elevation /
                         ElevAmount -
@@ -473,92 +473,92 @@ void cGameWorldRenderer::RenderActors() {
           else
             Elev3 = Elev0;
 
-          auto TileX0 = OffsetX + X * Engine.tileSize;
+          auto TileX0 = OffsetX + X * engine.tileSize;
           auto TileY0 = Elev0;
-          auto TileZ0 = OffsetY + Y * Engine.tileSize;
-          auto TileX1 = OffsetX + X * Engine.tileSize;
+          auto TileZ0 = OffsetY + Y * engine.tileSize;
+          auto TileX1 = OffsetX + X * engine.tileSize;
           auto TileY1 = Elev1;
-          auto TileZ1 = OffsetY + Y * Engine.tileSize - Engine.tileSize;
-          auto TileX2 = OffsetX + X * Engine.tileSize + Engine.tileSize;
+          auto TileZ1 = OffsetY + Y * engine.tileSize - engine.tileSize;
+          auto TileX2 = OffsetX + X * engine.tileSize + engine.tileSize;
           auto TileY2 = Elev2;
-          auto TileZ2 = OffsetY + Y * Engine.tileSize - Engine.tileSize;
-          auto TileX3 = OffsetX + X * Engine.tileSize + Engine.tileSize;
+          auto TileZ2 = OffsetY + Y * engine.tileSize - engine.tileSize;
+          auto TileX3 = OffsetX + X * engine.tileSize + engine.tileSize;
           auto TileY3 = Elev3;
-          auto TileZ3 = OffsetY + Y * Engine.tileSize;
+          auto TileZ3 = OffsetY + Y * engine.tileSize;
 
-          TileY0 = PlanetShaper.GetNewY(TileY0,
+          TileY0 = planetShaper.GetNewY(TileY0,
                                                static_cast<float>(TileXI),
                                                static_cast<float>(TileYI));
-          TileY1 = PlanetShaper.GetNewY(TileY1,
+          TileY1 = planetShaper.GetNewY(TileY1,
                                                static_cast<float>(TileXI),
                                                static_cast<float>(TileYI) - 1);
-          TileY2 = PlanetShaper.GetNewY(TileY2,
+          TileY2 = planetShaper.GetNewY(TileY2,
                                                static_cast<float>(TileXI) + 1,
                                                static_cast<float>(TileYI) - 1);
-          TileY3 = PlanetShaper.GetNewY(TileY3,
+          TileY3 = planetShaper.GetNewY(TileY3,
                                                static_cast<float>(TileXI) + 1,
                                                static_cast<float>(TileYI));
 
-        if (Engine.GetCurrentMapArea().tiles[TileXI][TileYI].actor !=
+        if (engine.GetCurrentMapArea().tiles[TileXI][TileYI].actor !=
             nullptr) {
-          auto SubXPos = (Engine.GetCurrentMapArea()
+          auto SubXPos = (engine.GetCurrentMapArea()
                               .tiles[TileXI][TileYI]
                               .actor->GetModule<cModuleMovementData>().position.x -
-                          static_cast<int>(Engine.GetCurrentMapArea()
+                          static_cast<int>(engine.GetCurrentMapArea()
                                   .tiles[TileXI][TileYI]
                                   .actor->GetModule<cModuleMovementData>().position.x)) *
-                         Engine.tileSize;
-          auto SubYPos = (Engine.GetCurrentMapArea()
+                         engine.tileSize;
+          auto SubYPos = (engine.GetCurrentMapArea()
                               .tiles[TileXI][TileYI]
                               .actor->GetModule<cModuleMovementData>().position.y -
-                          static_cast<int>(Engine.GetCurrentMapArea()
+                          static_cast<int>(engine.GetCurrentMapArea()
                                   .tiles[TileXI][TileYI]
                                   .actor->GetModule<cModuleMovementData>().position.y)) *
-                         Engine.tileSize;
+                         engine.tileSize;
 
           glEnable(GL_TEXTURE_2D);
 
           glBindTexture(GL_TEXTURE_2D,
-                        Engine.imageLoader.images.at(GetId("TileShadow")));
+                        engine.imageLoader.images.at(GetId("TileShadow")));
 
           glBegin(GL_QUADS);
 
           glColor3f(1, 1, 1);
 
           glTexCoord2f(0, 0);
-          glVertex3f(TileX0 - Engine.tileSize/2 + SubXPos,
+          glVertex3f(TileX0 - engine.tileSize/2 + SubXPos,
                      TileY0 + 0.05f,
-                     TileZ0 - Engine.tileSize/2 + SubYPos);
+                     TileZ0 - engine.tileSize/2 + SubYPos);
           glTexCoord2f(1, 0);
-          glVertex3f(TileX1 - Engine.tileSize/2 + SubXPos,
+          glVertex3f(TileX1 - engine.tileSize/2 + SubXPos,
                      TileY1 + 0.05f,
-                     TileZ1 - Engine.tileSize/2 + SubYPos);
+                     TileZ1 - engine.tileSize/2 + SubYPos);
           glTexCoord2f(1, 1);
-          glVertex3f(TileX2 - Engine.tileSize/2 + SubXPos,
+          glVertex3f(TileX2 - engine.tileSize/2 + SubXPos,
                      TileY2 + 0.05f,
-                     TileZ2 - Engine.tileSize/2 + SubYPos);
+                     TileZ2 - engine.tileSize/2 + SubYPos);
           glTexCoord2f(0, 1);
-          glVertex3f(TileX3 - Engine.tileSize/2 + SubXPos,
+          glVertex3f(TileX3 - engine.tileSize/2 + SubXPos,
                      TileY3 + 0.05f,
-                     TileZ3 - Engine.tileSize/2 + SubYPos);
+                     TileZ3 - engine.tileSize/2 + SubYPos);
 
           glEnd();
 
           glDisable(GL_TEXTURE_2D);
 
-          auto ModelYPos0 = TileY1 + (TileY2 - TileY1)*SubXPos/Engine.tileSize;
-          auto ModelYPos1 = TileY0 + (TileY3 - TileY0)*SubXPos/Engine.tileSize;
+          auto ModelYPos0 = TileY1 + (TileY2 - TileY1)*SubXPos/engine.tileSize;
+          auto ModelYPos1 = TileY0 + (TileY3 - TileY0)*SubXPos/engine.tileSize;
           auto ModelYPos = ModelYPos0
-                  + (ModelYPos1 - ModelYPos0)*SubYPos/Engine.tileSize;
+                  + (ModelYPos1 - ModelYPos0)*SubYPos/engine.tileSize;
 
-          Engine.DrawModel(Engine.GetCurrentMapArea()
+          engine.DrawModel(engine.GetCurrentMapArea()
                            .tiles[TileXI][TileYI]
                            .actor->GetAnimatedModelId(), TileX0 + SubXPos,
-                           ModelYPos  + Engine.GetCurrentMapArea()
+                           ModelYPos  + engine.GetCurrentMapArea()
                                                       .tiles[TileXI][TileYI]
                                                       .actor->GetModule<cModuleMovementData>().positionZ,
-                           TileZ0 - Engine.tileSize + SubYPos,
-                           *Engine.GetCurrentMapArea()
+                           TileZ0 - engine.tileSize + SubYPos,
+                           *engine.GetCurrentMapArea()
                                .tiles[TileXI][TileYI]
                                .actor->GetModule<cModuleMovementData>().facingAngle);
         }
@@ -575,57 +575,57 @@ void cGameWorldRenderer::RenderActors() {
 
 
 void cGameWorldRenderer::RenderRoof() {
-    auto MapAreaSize = Engine.world->mapAreaSize;
+    auto MapAreaSize = engine.world->mapAreaSize;
 
     auto ElevAmount = 5.0f;
-    auto PlayerXInt = static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
-    auto PlayerYInt = static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
+    auto PlayerXInt = static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
+    auto PlayerYInt = static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
     auto ElevPlayer0 =
-        Engine.GetCurrentMapArea().tiles[PlayerXInt][PlayerYInt].elevation /
+        engine.GetCurrentMapArea().tiles[PlayerXInt][PlayerYInt].elevation /
         ElevAmount;
     auto ElevPlayer1 =
-        Engine.GetCurrentMapArea().tiles[PlayerXInt + 1][PlayerYInt].elevation /
+        engine.GetCurrentMapArea().tiles[PlayerXInt + 1][PlayerYInt].elevation /
         ElevAmount;
-    auto ElevPlayer2 = Engine.GetCurrentMapArea()
+    auto ElevPlayer2 = engine.GetCurrentMapArea()
                            .tiles[PlayerXInt + 1][PlayerYInt + 1]
                            .elevation /
                        ElevAmount;
     auto ElevPlayer3 =
-        Engine.GetCurrentMapArea().tiles[PlayerXInt][PlayerYInt + 1].elevation /
+        engine.GetCurrentMapArea().tiles[PlayerXInt][PlayerYInt + 1].elevation /
         ElevAmount;
-    auto ElevX = Engine.GetPlayer().GetModule<cModuleMovementData>().position.x - PlayerXInt;
-    auto ElevY = Engine.GetPlayer().GetModule<cModuleMovementData>().position.y - PlayerYInt;
+    auto ElevX = engine.GetPlayer().GetModule<cModuleMovementData>().position.x - PlayerXInt;
+    auto ElevY = engine.GetPlayer().GetModule<cModuleMovementData>().position.y - PlayerYInt;
     auto ElevPlayer = (ElevPlayer0 + (ElevPlayer1 - ElevPlayer0) * ElevX +
                        ElevPlayer3 + (ElevPlayer2 - ElevPlayer3) * ElevX +
                        ElevPlayer0 + (ElevPlayer3 - ElevPlayer0) * ElevY +
                        ElevPlayer1 + (ElevPlayer2 - ElevPlayer1) * ElevY) /
                       4.0f;
 
-    float SubStepX = Engine.GetPlayer().GetModule<cModuleMovementData>().position.x -
-            static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
+    float SubStepX = engine.GetPlayer().GetModule<cModuleMovementData>().position.x -
+            static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
 
-    float SubStepY = Engine.GetPlayer().GetModule<cModuleMovementData>().position.y -
-            static_cast<int>(Engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
+    float SubStepY = engine.GetPlayer().GetModule<cModuleMovementData>().position.y -
+            static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
 
-    auto OffsetX = -static_cast<float>(2.0f * Camera.GetRenderDistance() + 1.0f)
-            / 2.0f * Engine.tileSize - SubStepX * Engine.tileSize;
-    auto OffsetY = -static_cast<float>(2.0f * Camera.GetRenderDistance() - 1.0f)
-            / 2.0f * Engine.tileSize - SubStepY * Engine.tileSize;
+    auto OffsetX = -static_cast<float>(2.0f * camera.GetRenderDistance() + 1.0f)
+            / 2.0f * engine.tileSize - SubStepX * engine.tileSize;
+    auto OffsetY = -static_cast<float>(2.0f * camera.GetRenderDistance() - 1.0f)
+            / 2.0f * engine.tileSize - SubStepY * engine.tileSize;
 
-    for (auto Y = 0; Y < 2 * Camera.GetRenderDistance() + 1; Y++) {
-      for (auto X = 0; X < 2 * Camera.GetRenderDistance() + 1; X++) {
-        auto DX = X - Camera.GetRenderDistance();
-        auto DY = Y - Camera.GetRenderDistance();
+    for (auto Y = 0; Y < 2 * camera.GetRenderDistance() + 1; Y++) {
+      for (auto X = 0; X < 2 * camera.GetRenderDistance() + 1; X++) {
+        auto DX = X - camera.GetRenderDistance();
+        auto DY = Y - camera.GetRenderDistance();
 
         if (DX * DX + DY * DY >=
-            Camera.GetRenderDistance() * Camera.GetRenderDistance())
+            camera.GetRenderDistance() * camera.GetRenderDistance())
           continue;
 
-        auto TileX = Engine.GetPlayer().GetModule<cModuleMovementData>().position.x
-                - Camera.GetRenderDistance() + X;
+        auto TileX = engine.GetPlayer().GetModule<cModuleMovementData>().position.x
+                - camera.GetRenderDistance() + X;
 
-        auto TileY = Engine.GetPlayer().GetModule<cModuleMovementData>().position.y
-                - Camera.GetRenderDistance() + Y;
+        auto TileY = engine.GetPlayer().GetModule<cModuleMovementData>().position.y
+                - camera.GetRenderDistance() + Y;
 
         if (TileX < 0 || TileY < 0 || TileX >= MapAreaSize ||
             TileY >= MapAreaSize)
@@ -642,13 +642,13 @@ void cGameWorldRenderer::RenderRoof() {
         if (TileX >= 0 && TileY >= 0 && TileX < MapAreaSize &&
             TileY < MapAreaSize)
           Elev0 =
-              Engine.GetCurrentMapArea().tiles[TileXI][TileYI].elevation /
+              engine.GetCurrentMapArea().tiles[TileXI][TileYI].elevation /
                   ElevAmount -
               ElevPlayer;
 
         if (TileX >= 0 && TileY - 1 >= 0 && TileX < MapAreaSize &&
             TileY - 1 < MapAreaSize)
-          Elev1 = Engine.GetCurrentMapArea()
+          Elev1 = engine.GetCurrentMapArea()
                           .tiles[TileXI][TileYI - 1]
                           .elevation /
                       ElevAmount -
@@ -658,19 +658,19 @@ void cGameWorldRenderer::RenderRoof() {
 
         if (TileX + 1 >= 0 && TileY - 1 >= 0 && TileX + 1 < MapAreaSize &&
             TileY - 1 < MapAreaSize)
-          Elev2 = Engine.GetCurrentMapArea()
+          Elev2 = engine.GetCurrentMapArea()
                           .tiles[TileXI + 1][TileYI - 1]
                           .elevation /
                       ElevAmount -
                   ElevPlayer;
         else if (TileX + 1 < MapAreaSize)
-          Elev2 = Engine.GetCurrentMapArea()
+          Elev2 = engine.GetCurrentMapArea()
                           .tiles[TileXI + 1][TileYI]
                           .elevation /
                       ElevAmount -
                   ElevPlayer;
         else if (TileY - 1 >= 0)
-          Elev2 = Engine.GetCurrentMapArea()
+          Elev2 = engine.GetCurrentMapArea()
                           .tiles[TileXI][TileYI - 1]
                           .elevation /
                       ElevAmount -
@@ -680,7 +680,7 @@ void cGameWorldRenderer::RenderRoof() {
 
         if (TileX + 1 >= 0 && TileY >= 0 && TileX + 1 < MapAreaSize &&
             TileY < MapAreaSize)
-          Elev3 = Engine.GetCurrentMapArea()
+          Elev3 = engine.GetCurrentMapArea()
                           .tiles[TileXI + 1][TileYI]
                           .elevation /
                       ElevAmount -
@@ -708,29 +708,29 @@ void cGameWorldRenderer::RenderRoof() {
             B = 0.5f;
         }
 
-        auto TileX0 = OffsetX + X * Engine.tileSize;
+        auto TileX0 = OffsetX + X * engine.tileSize;
         auto TileY0 = Elev0;
-        auto TileZ0 = OffsetY + Y * Engine.tileSize;
-        auto TileX1 = OffsetX + X * Engine.tileSize;
+        auto TileZ0 = OffsetY + Y * engine.tileSize;
+        auto TileX1 = OffsetX + X * engine.tileSize;
         auto TileY1 = Elev1;
-        auto TileZ1 = OffsetY + Y * Engine.tileSize - Engine.tileSize;
-        auto TileX2 = OffsetX + X * Engine.tileSize + Engine.tileSize;
+        auto TileZ1 = OffsetY + Y * engine.tileSize - engine.tileSize;
+        auto TileX2 = OffsetX + X * engine.tileSize + engine.tileSize;
         auto TileY2 = Elev2;
-        auto TileZ2 = OffsetY + Y * Engine.tileSize - Engine.tileSize;
-        auto TileX3 = OffsetX + X * Engine.tileSize + Engine.tileSize;
+        auto TileZ2 = OffsetY + Y * engine.tileSize - engine.tileSize;
+        auto TileX3 = OffsetX + X * engine.tileSize + engine.tileSize;
         auto TileY3 = Elev3;
-        auto TileZ3 = OffsetY + Y * Engine.tileSize;
+        auto TileZ3 = OffsetY + Y * engine.tileSize;
 
-        TileY0 = PlanetShaper.GetNewY(TileY0,
+        TileY0 = planetShaper.GetNewY(TileY0,
                                              static_cast<float>(TileXI),
                                              static_cast<float>(TileYI));
-        TileY1 = PlanetShaper.GetNewY(TileY1,
+        TileY1 = planetShaper.GetNewY(TileY1,
                                              static_cast<float>(TileXI),
                                              static_cast<float>(TileYI) - 1);
-        TileY2 = PlanetShaper.GetNewY(TileY2,
+        TileY2 = planetShaper.GetNewY(TileY2,
                                              static_cast<float>(TileXI) + 1,
                                              static_cast<float>(TileYI) - 1);
-        TileY3 = PlanetShaper.GetNewY(TileY3,
+        TileY3 = planetShaper.GetNewY(TileY3,
                                              static_cast<float>(TileXI) + 1,
                                              static_cast<float>(TileYI));
 
@@ -739,11 +739,11 @@ void cGameWorldRenderer::RenderRoof() {
         glDisable(GL_TEXTURE_2D);
 
 
-if (Engine.GetCurrentMapArea()
+if (engine.GetCurrentMapArea()
         .tiles[TileXI][TileYI]
         .roof != nullptr) {
 
-    auto& roof = Engine.GetCurrentMapArea()
+    auto& roof = engine.GetCurrentMapArea()
             .tiles[TileXI][TileYI]
             .roof;
 
@@ -751,12 +751,12 @@ if (Engine.GetCurrentMapArea()
   auto RoofObject = roof->objectType;
   auto opacity = 1.0f;
 
-  if (Engine.objectsContent.objectDescriptions.count(RoofObject))
-      opacity = Engine.objectsContent.objectDescriptions.at(RoofObject).opacity;
+  if (engine.objectsContent.objectDescriptions.count(RoofObject))
+      opacity = engine.objectsContent.objectDescriptions.at(RoofObject).opacity;
 
-  Engine.DrawModel(RoofObject, TileX0 + Engine.tileSize / 2,
+  engine.DrawModel(RoofObject, TileX0 + engine.tileSize / 2,
                    (TileY0 + TileY1 + TileY2 + TileY3) / 4.0f,
-                   TileZ0 - Engine.tileSize / 2, roof->rotation,
+                   TileZ0 - engine.tileSize / 2, roof->rotation,
                    roof->scaling, opacity);
 
 }

@@ -19,7 +19,7 @@ class cSceneMainMenu : public cSceneBase {
   void DoMouseUp(Uint8 mouseButton) override {}
 
  private:
-  cUtilities Utilities;
+  cUtilities utilities;
   cPalette palette;
 };
 
