@@ -499,7 +499,7 @@ void cGameWorldRenderer::RenderSunRaysAndActors() {
           TileY3 = planetShaper.GetNewY(TileY3,
                                                static_cast<float>(TileXI) + 1,
                                                static_cast<float>(TileYI));
-        if ((TileXI + TileYI) % 6 == 0) {
+        if ((TileXI + TileYI) % 16 == 0) {
           auto sunx = -500.0f;
           auto suny = 500.0f;
           auto sunz = -500.0f;
@@ -508,7 +508,7 @@ void cGameWorldRenderer::RenderSunRaysAndActors() {
           if (alpha >= 0.5f)
               alpha = 0.5f - (alpha - 0.5f);
 
-          alpha /= 2.0f;
+          alpha /= 6.0f;
 
                       glBegin(GL_LINE_STRIP);
                       glColor4f(1.0f, 1.0f, 0.0f, alpha);

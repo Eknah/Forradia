@@ -107,7 +107,7 @@ void cGui::Render() {
   engine.DrawString("System [F3]", {255, 255, 255, 255},
                     boundsButtonSystem.x + boundsButtonSystem.width / 2,
                     boundsButtonSystem.y + boundsButtonSystem.height / 2, true);
-  engine.FillRectangle({0, 150, 255, 100}, boundsTextBox.x, boundsTextBox.y,
+  engine.FillRectangle({0, 150, 255, 20}, boundsTextBox.x, boundsTextBox.y,
                        boundsTextBox.width, boundsTextBox.height);
   engine.DrawRectangle({255, 255, 255, 100}, boundsTextBox.x, boundsTextBox.y,
                        boundsTextBox.width, boundsTextBox.height);
