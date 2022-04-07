@@ -252,6 +252,7 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
 
         glBegin(GL_QUADS);
 
+        //glColor3f(R, G, B);
         glColor3f(R, G, B);
 
         glTexCoord2f(0, 0);
@@ -268,7 +269,8 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
         if (WaterAnimIndex0 > 0) {
           glBegin(GL_QUADS);
 
-          glColor3f(R, G, B);
+            glColor3f(R, G, B);
+//          glColor3f(R, G, B);
 
           glTexCoord2f(0, 0);
           glVertex3f(TileX0, TileY0 + WaterWaveHeight0, TileZ0);
