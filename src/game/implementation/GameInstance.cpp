@@ -1,0 +1,60 @@
+// Copyright (C) 2022  Andreas Åkerberg
+// This code is licensed under MIT license (see LICENSE for details)
+
+#include <utility>
+#include "GameInstance.h"
+#include "../engine/Engine.h"
+#include "../engine/SceneGameStart.h"
+#include "../engine/Inventory.h"
+#include "implementation/scenes/SceneMainMenu.h"
+#include "implementation/scenes/ScenePrimary.h"
+#include "implementation/content/DefaultMapGenerator.h"
+#include "implementation/content/ValleyMapGenerator.h"
+
+namespace Forradia {
+
+void cGameInstance::StartGame() {
+  const int mapAreaSize = 150;
+  auto planetMap = MakeUPtr<cPlanetWorldMap>(mapAreaSize, 1, 1);
+
+  cEngine engine;
+  cObjectsContent objectsContent;
+  cScenesCollection scenesCollection;
+  cInventory startingInventory;
+
+  //auto defaultMapGen = MakeSPtr<cDefaultMapGenerator>(engine, planetMap);
+  auto defaultMapGen = MakeSPtr<cValleyMapGenerator>(engine, planetMap);
+  auto worldMapGens = UMap<int, UMap<int, SPtr<iMapGenerator>>>();
+  worldMapGens[0][0] = defaultMapGen;
+  worldMapGens[1][0] = defaultMapGen;
+  planetMap->GenerateWorldMap(worldMapGens);
+
+  startingInventory.AddMany({"ObjectWoodaxe",
+                            "ObjectSaw"});
+
+  objectsContent.AddMany({{"ObjectTree1", ObjectMovementBlock},
+                          {"ObjectTree2", ObjectMovementBlock},
+                          {"ObjectCaveWallBlock", ObjectMovementBlock},
+                          {"ObjectTallGrass", ObjectNoShadow},
+                          {"ObjectWoodFence", ObjectNoShadow | ObjectMovementBlock},
+                          {"ObjectWoodWall", ObjectNoShadow | ObjectMovementBlock},
+                          {"ObjectRoof", ObjectNoShadow}});
+
+  objectsContent.SetOpacity("ObjectRoof", 0.5f);
+
+  scenesCollection.AddMany({{"SceneGameStart",
+                             MakeSPtr<cSceneGameStart>(engine,
+                             "SceneGameStartBackground",
+                             "SceneForradiaLogo",
+                             "Press to start",
+                             "SceneMainMenu")},
+
+                            {"SceneMainMenu", MakeSPtr<cSceneMainMenu>(engine)},
+
+                            {"ScenePrimary", MakeSPtr<cScenePrimary>(engine)}});
+
+  engine.Run(std::move(scenesCollection), GetId("SceneGameStart"), std::move(planetMap),
+             startingInventory, objectsContent);
+}
+
+}  // namespace Forradia

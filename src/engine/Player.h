@@ -2,11 +2,11 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "implementation/functionality/actor/cActor.h"
-#include "implementation/functionality/actor/modules/cModuleInventory.h"
-#include "implementation/functionality/actor/modules/cModuleJumping.h"
-#include "implementation/functionality/actor/modules/cModuleMovement.h"
-#include "implementation/functionality/actor/modules/cModuleObjectUsage.h"
+#include "implementation/functionality/actor/Actor.h"
+#include "implementation/functionality/actor/modules/ModuleInventory.h"
+#include "implementation/functionality/actor/modules/ModuleJumping.h"
+#include "implementation/functionality/actor/modules/ModuleMovement.h"
+#include "implementation/functionality/actor/modules/ModuleObjectUsage.h"
 
 namespace Forradia {
 

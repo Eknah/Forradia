@@ -8,7 +8,7 @@
 #include "../engine/Point2F.h"
 #include "../engine/Point3.h"
 #include "../engine/Point2.h"
-#include "framework/world_structure/cMob.h"
+#include "framework/world_structure/Mob.h"
 #include "../engine/Tile.h"
 
 namespace Forradia {

@@ -5,9 +5,9 @@
 #include <string>
 #include <vector>
 #include "../engine/Aliases.h"
-#include "implementation/functionality/actor/cActor.h"
+#include "implementation/functionality/actor/Actor.h"
 #include "../engine/eObjectFlags.h"
-#include "framework/world_structure/cObject.h"
+#include "framework/world_structure/Object.h"
 
 namespace Forradia {
 

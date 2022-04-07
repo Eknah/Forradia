@@ -7,7 +7,7 @@
 #include <vector>
 #include <tuple>
 #include "../engine/Aliases.h"
-#include "framework/cSceneBase.h"
+#include "framework/SceneBase.h"
 
 namespace Forradia {
 

@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Engine.h"
-#include "../game/implementation/functionality/actor/modules/cModuleMovementData.h"
+#include "../game/implementation/functionality/actor/modules/ModuleMovementData.h"
 
 namespace Forradia {
 

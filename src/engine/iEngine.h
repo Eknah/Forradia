@@ -11,7 +11,7 @@
 #include "MouseHandler.h"
 #include "TextGraphics.h"
 #include "Vector3.h"
-#include "implementation/content/cObjectsContent.h"
+#include "implementation/content/ObjectsContent.h"
 #include "iCustomCursor.h"
 #include "iFpsCounter.h"
 #include "iFullscreenController.h"

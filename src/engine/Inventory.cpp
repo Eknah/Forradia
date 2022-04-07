@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Inventory.h"
-#include "../game/framework/world_structure/cObject.h"
+#include "../game/framework/world_structure/Object.h"
 
 namespace Forradia {
 
