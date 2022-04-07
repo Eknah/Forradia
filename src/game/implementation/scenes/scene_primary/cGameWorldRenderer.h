@@ -19,7 +19,7 @@ class cGameWorldRenderer {
 
  private:
   void RenderTilesAndObjects();
-  void RenderActors();
+  void RenderSunRaysAndActors();
   void RenderRoof();
 
   const cEngine &engine;

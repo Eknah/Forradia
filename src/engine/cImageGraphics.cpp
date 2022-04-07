@@ -5,44 +5,44 @@
 
 namespace Forradia {
 
-void cImageGraphics::DrawImage(std::string ImageName, float X, float Y, float Width,
-                        float Height) const {
-    DrawImage(GetId(ImageName), X, Y, Width, Height);
+void cImageGraphics::DrawImage(std::string imageName, float x, float y, float width,
+                        float height) const {
+    DrawImage(GetId(imageName), x, y, width, height);
   }
 
-void cImageGraphics::DrawImage(int ImageNameId, float X, float Y, float Width,
-                        float Height) const {
+void cImageGraphics::DrawImage(int imageNameId, float x, float y, float width,
+                        float height) const {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
     glOrtho(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f);
 
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, engine.imageLoader.images[ImageNameId]);
+    glBindTexture(GL_TEXTURE_2D, engine.imageLoader.images[imageNameId]);
 
     glBegin(GL_QUADS);
 
     glColor3f(1.0f, 1.0f, 1.0f);
 
     glTexCoord2f(0, 0);
-    glVertex2f(X, Y);
+    glVertex2f(x, y);
     glTexCoord2f(0, 1);
-    glVertex2f(X, Y + Height);
+    glVertex2f(x, y + height);
     glTexCoord2f(1, 1);
-    glVertex2f(X + Width, Y + Height);
+    glVertex2f(x + width, y + height);
     glTexCoord2f(1, 0);
-    glVertex2f(X + Width, Y);
+    glVertex2f(x + width, y);
 
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
   }
 
-cSizeF cImageGraphics::GetImageSizeF(std::string ImageName) const {
+cSizeF cImageGraphics::GetImageSizeF(std::string imageName) const {
       auto canvasSize = utilities.GetCanvasSize();
 
       glBindTexture(GL_TEXTURE_2D,
-                    engine.imageLoader.images.at(GetId(ImageName)));
+                    engine.imageLoader.images.at(GetId(imageName)));
 
       int w, h;
       int mipLevel = 0;

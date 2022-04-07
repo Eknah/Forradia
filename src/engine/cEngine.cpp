@@ -6,16 +6,16 @@
 
 namespace Forradia {
 
-void cEngine::Run(cScenesCollection scenesCollection_, int startScene_,
-                  UPtr<cPlanetWorldMap> world_,
-                  cInventory startingInventory_,
-                  cObjectsContent objectsContent_) {
+void cEngine::Run(cScenesCollection _scenesCollection, int _startScene,
+                  UPtr<cPlanetWorldMap> _world,
+                  cInventory _startingInventory,
+                  cObjectsContent _objectsContent) {
     using std::move;
 
     InitializeGL();
 
-    world = move(world_);
-    objectsContent = objectsContent_;
+    world = move(_world);
+    objectsContent = _objectsContent;
 
     cPoint3 playerWorldPos = {
         world->worldMapWidth/2,
@@ -38,8 +38,8 @@ void cEngine::Run(cScenesCollection scenesCollection_, int startScene_,
 
     GetPlayer().GetModule<cModuleMovementData>().worldMapCoord = playerWorldPos;
     GetPlayer().GetModule<cModuleMovementData>().position = GetCurrentMapArea().spawnPos;
-    GetPlayer().GetModule<cModuleInventory>().inventory = startingInventory_;
-    sceneManager.Initialize(move(scenesCollection_), startScene_);
+    GetPlayer().GetModule<cModuleInventory>().inventory = _startingInventory;
+    sceneManager.Initialize(move(_scenesCollection), _startScene);
     modelLoader.LoadModels();
     imageLoader.LoadImages();
     textGraphics.Initialize();

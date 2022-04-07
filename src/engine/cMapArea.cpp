@@ -6,13 +6,13 @@
 
 namespace Forradia {
 
-cMapArea::cMapArea(const iEngine &Engine, int Size_, int WorldX, int WorldY, int WorldZ)
-    : size(Size_), worldCoord({WorldX, WorldY, WorldZ}) {
+cMapArea::cMapArea(const iEngine &engine, int _size, int worldx, int worldy, int worldz)
+    : size(_size), worldCoord({worldx, worldy, worldz}) {
   for (auto x = 0; x < size; x++) {
     tiles.push_back(std::vector<cTile>());
 
     for (auto y = 0; y < size; y++)
-      tiles[x].push_back(cTile(Engine));
+      tiles[x].push_back(cTile(engine));
   }
 }
 

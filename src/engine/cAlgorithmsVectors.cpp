@@ -10,11 +10,11 @@ namespace Forradia {
 
 bool cAlgorithmsVectors::InTriangle(cVector3 point, cVector3 tri1, cVector3 tri2,
                        cVector3 tri3) {
-  bool within_tri_prisim = SameSide(point, tri1, tri2, tri3) &&
+  bool withinTriPrisim = SameSide(point, tri1, tri2, tri3) &&
                            SameSide(point, tri2, tri1, tri3) &&
                            SameSide(point, tri3, tri1, tri2);
 
-  if (!within_tri_prisim)
+  if (!withinTriPrisim)
     return false;
 
   cVector3 n = GenTriNormal(tri1, tri2, tri3);
@@ -41,9 +41,9 @@ cVector3 cAlgorithmsVectors::GenTriNormal(cVector3 t1, cVector3 t2, cVector3 t3)
   cVector3 u = t2 - t1;
   cVector3 v = t3 - t1;
 
-  cVector3 Normal = math3D.Cross(u, v);
+  cVector3 normal = math3D.Cross(u, v);
 
-  return Normal;
+  return normal;
 }
 
 }  // namespace Forradia

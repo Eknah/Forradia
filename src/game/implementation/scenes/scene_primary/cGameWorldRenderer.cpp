@@ -51,7 +51,7 @@ void cGameWorldRenderer::Render() {
   glTranslatef(0.0, -2 + 2.0, 0.0);
 
   RenderTilesAndObjects();
-  RenderActors();
+  RenderSunRaysAndActors();
   RenderRoof();
 
   glPopMatrix();
@@ -284,6 +284,7 @@ void cGameWorldRenderer::RenderTilesAndObjects() {
 
 
 
+
         auto HoveredX = camera.GetHoveredTile().x;
         auto HoveredY = camera.GetHoveredTile().y;
 
@@ -360,7 +361,7 @@ glEnable(GL_TEXTURE_2D);
     }
 }
 
-void cGameWorldRenderer::RenderActors() {
+void cGameWorldRenderer::RenderSunRaysAndActors() {
     auto MapAreaSize = engine.world->mapAreaSize;
     auto ElevAmount = 5.0f;
     auto PlayerXInt = static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
@@ -498,6 +499,23 @@ void cGameWorldRenderer::RenderActors() {
           TileY3 = planetShaper.GetNewY(TileY3,
                                                static_cast<float>(TileXI) + 1,
                                                static_cast<float>(TileYI));
+        if ((TileXI + TileYI) % 6 == 0) {
+          auto sunx = -500.0f;
+          auto suny = 500.0f;
+          auto sunz = -500.0f;
+
+          auto alpha = ((Ticks() + TileXI*TileYI) % 1000)/1000.0f;
+          if (alpha >= 0.5f)
+              alpha = 0.5f - (alpha - 0.5f);
+
+          alpha /= 2.0f;
+
+                      glBegin(GL_LINE_STRIP);
+                      glColor4f(1.0f, 1.0f, 0.0f, alpha);
+                      glVertex3f(TileX0, TileY0, TileZ0);
+                      glVertex3f(sunx, suny, sunz);
+                      glEnd();
+        }
 
         if (engine.GetCurrentMapArea().tiles[TileXI][TileYI].actor !=
             nullptr) {
