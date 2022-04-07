@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "QuestCaveMapGenerator.h"
-#include "framework/world_structure/Object.h"
+#include "framework/worldStructure/Object.h"
 
 namespace Forradia {
 

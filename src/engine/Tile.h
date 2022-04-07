@@ -7,7 +7,7 @@
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/Actor.h"
 #include "../engine/eObjectFlags.h"
-#include "framework/world_structure/Object.h"
+#include "framework/worldStructure/Object.h"
 
 namespace Forradia {
 

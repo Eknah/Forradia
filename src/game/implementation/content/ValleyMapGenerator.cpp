@@ -4,7 +4,7 @@
 #include <memory>
 #include "ValleyMapGenerator.h"
 #include "../engine/PlanetWorldMap.h"
-#include "framework/world_structure/Object.h"
+#include "framework/worldStructure/Object.h"
 
 namespace Forradia {
 

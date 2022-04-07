@@ -2,10 +2,10 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "scene_primary/Camera.h"
-#include "scene_primary/GameWorldRenderer.h"
-#include "scene_primary/MobsEngine.h"
-#include "scene_primary/gui/Gui.h"
+#include "scenePrimary/Camera.h"
+#include "scenePrimary/GameWorldRenderer.h"
+#include "scenePrimary/MobsEngine.h"
+#include "scenePrimary/gui/Gui.h"
 
 namespace Forradia {
 
