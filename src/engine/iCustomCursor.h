@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "cUtilities.h"
+#include "Utilities.h"
 #include "eCursorTypes.h"
 
 namespace Forradia {

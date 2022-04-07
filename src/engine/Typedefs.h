@@ -3,7 +3,7 @@
 
 #pragma once
 #include "../engine/Aliases.h"
-#include "../engine/cSDL_Deleter.h"
+#include "../engine/SDL_Deleter.h"
 
 namespace Forradia {
 

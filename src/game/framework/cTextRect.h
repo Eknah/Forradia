@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/cRectF.h"
+#include "../engine/RectF.h"
 #include <string>
 
 namespace Forradia {

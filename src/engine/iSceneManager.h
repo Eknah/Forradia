@@ -3,7 +3,7 @@
 
 #pragma once
 #include <string>
-#include "cScenesCollection.h"
+#include "ScenesCollection.h"
 
 namespace Forradia {
 

@@ -3,7 +3,7 @@
 
 #include <memory>
 #include "cValleyMapGenerator.h"
-#include "../engine/cPlanetWorldMap.h"
+#include "../engine/PlanetWorldMap.h"
 #include "framework/world_structure/cObject.h"
 
 namespace Forradia {

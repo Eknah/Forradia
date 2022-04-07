@@ -4,7 +4,7 @@
 #pragma once
 
 #include <string>
-#include "../engine/cPoint2F.h"
+#include "../engine/Point2F.h"
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/cActor.h"
 #include "implementation/functionality/actor/modules/cModuleMovementData.h"

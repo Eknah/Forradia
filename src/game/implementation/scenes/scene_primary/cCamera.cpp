@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include "cCamera.h"
-#include "../engine/cEngine.h"
+#include "../engine/Engine.h"
 #include "implementation/functionality/actor/modules/cModuleMovementData.h"
 
 namespace Forradia {

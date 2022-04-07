@@ -4,13 +4,13 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <string>
-#include "../engine/cMapArea.h"
+#include "../engine/MapArea.h"
 #include "Typedefs.h"
-#include "cImageLoader.h"
-#include "cModelLoader.h"
-#include "cMouseHandler.h"
-#include "cTextGraphics.h"
-#include "cVector3.h"
+#include "ImageLoader.h"
+#include "ModelLoader.h"
+#include "MouseHandler.h"
+#include "TextGraphics.h"
+#include "Vector3.h"
 #include "implementation/content/cObjectsContent.h"
 #include "iCustomCursor.h"
 #include "iFpsCounter.h"
@@ -18,8 +18,8 @@
 #include "iGameLoop.h"
 #include "iKeyboardHandler.h"
 #include "iSceneManager.h"
-#include "cPlayer.h"
-#include "cPlanetWorldMap.h"
+#include "Player.h"
+#include "PlanetWorldMap.h"
 
 namespace Forradia {
 

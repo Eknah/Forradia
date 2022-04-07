@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "cGuiWindowMall.h"
-#include "../engine/cEngine.h"
+#include "../engine/Engine.h"
 
 namespace Forradia {
 

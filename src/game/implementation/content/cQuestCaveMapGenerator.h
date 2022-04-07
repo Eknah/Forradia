@@ -2,9 +2,9 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/cRandom.h"
-#include "../engine/cMapArea.h"
-#include "../engine/cPoint2.h"
+#include "../engine/Random.h"
+#include "../engine/MapArea.h"
+#include "../engine/Point2.h"
 
 namespace Forradia {
 

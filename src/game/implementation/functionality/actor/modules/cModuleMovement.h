@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/cPoint2F.h"
+#include "../engine/Point2F.h"
 #include "../engine/iModule.h"
 
 namespace Forradia {

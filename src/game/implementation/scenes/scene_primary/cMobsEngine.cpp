@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <utility>
 #include "cMobsEngine.h"
-#include "../engine/cEngine.h"
+#include "../engine/Engine.h"
 #include "implementation/functionality/actor/modules/cModuleMovementData.h"
 
 namespace Forradia {

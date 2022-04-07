@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <GL/glu.h>
-#include "../engine/cUtilities.h"
+#include "../engine/Utilities.h"
 
 namespace Forradia {
 

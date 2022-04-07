@@ -3,9 +3,9 @@
 
 #pragma once
 #include <string>
-#include "../engine/cEngine.h"
-#include "../engine/cRectF.h"
-#include "../engine/cUtilities.h"
+#include "../engine/Engine.h"
+#include "../engine/RectF.h"
+#include "../engine/Utilities.h"
 
 namespace Forradia {
 

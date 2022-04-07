@@ -4,7 +4,7 @@
 #include <memory>
 #include "cDefaultMapGenerator.h"
 #include "cQuestCaveMapGenerator.h"
-#include "../engine/cPlanetWorldMap.h"
+#include "../engine/PlanetWorldMap.h"
 #include "framework/world_structure/cObject.h"
 
 namespace Forradia {

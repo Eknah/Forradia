@@ -4,8 +4,8 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "../engine/cEngine.h"
-#include "../engine/cUtilities.h"
+#include "../engine/Engine.h"
+#include "../engine/Utilities.h"
 #include "cGuiMinimap.h"
 #include "framework/cGuiWindowBase.h"
 

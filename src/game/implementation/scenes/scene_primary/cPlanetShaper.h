@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/cEngine.h"
+#include "../engine/Engine.h"
 
 namespace Forradia {
 

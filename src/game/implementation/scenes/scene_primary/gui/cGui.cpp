@@ -3,7 +3,7 @@
 
 #include <memory>
 #include "cGui.h"
-#include "../engine/cEngine.h"
+#include "../engine/Engine.h"
 #include "cGuiWindowInventory.h"
 #include "cGuiWindowMall.h"
 

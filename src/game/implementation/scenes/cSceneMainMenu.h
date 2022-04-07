@@ -2,8 +2,8 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/cUtilities.h"
-#include "../engine/cPalette.h"
+#include "../engine/Utilities.h"
+#include "../engine/Palette.h"
 #include "framework/cSceneBase.h"
 
 namespace Forradia {

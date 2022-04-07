@@ -2,8 +2,8 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/cRandom.h"
-#include "../engine/cMapArea.h"
+#include "../engine/Random.h"
+#include "../engine/MapArea.h"
 #include "../engine/iMapGenerator.h"
 
 namespace Forradia {

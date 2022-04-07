@@ -3,9 +3,9 @@
 
 #include <utility>
 #include "cGameInstance.h"
-#include "../engine/cEngine.h"
-#include "../engine/cSceneGameStart.h"
-#include "../engine/cInventory.h"
+#include "../engine/Engine.h"
+#include "../engine/SceneGameStart.h"
+#include "../engine/Inventory.h"
 #include "implementation/scenes/cSceneMainMenu.h"
 #include "implementation/scenes/cScenePrimary.h"
 #include "implementation/content/cDefaultMapGenerator.h"

@@ -4,8 +4,8 @@
 #pragma once
 #include <string>
 #include "../engine/Aliases.h"
-#include "../engine/cPoint2F.h"
-#include "../engine/cPoint3.h"
+#include "../engine/Point2F.h"
+#include "../engine/Point3.h"
 #include "../engine/iModule.h"
 
 namespace Forradia {
