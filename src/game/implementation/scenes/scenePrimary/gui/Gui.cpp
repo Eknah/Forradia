@@ -13,30 +13,30 @@ void Gui::Initialize() {
   windows.clear();
   windows.insert(
       {"Inventory", std::make_unique<GuiWindowInventory>(
-                        engine, "Inventory", RectF{0.1f, 0.1f, 0.2f, 0.7f})});
+                        e, "Inventory", RectF{0.1f, 0.1f, 0.2f, 0.7f})});
   windows.insert(
       {"Mall", std::make_unique<GuiWindowMall>(
-                        engine, "Mall", RectF{0.2f, 0.1f, 0.7f, 0.6f})});
+                        e, "Mall", RectF{0.2f, 0.1f, 0.7f, 0.6f})});
 }
 
 void Gui::Update() {
   auto mousePositionF = utilities.GetMousePositionF();
 
   if (boundsButtonInventory.ContainsPoint(mousePositionF))
-    engine.customCursor.cursorType = CursorTypes::Hovering;
+    e.customCursor.cursorType = CursorTypes::Hovering;
 
   if (boundsButtonCharacter.ContainsPoint(mousePositionF))
-    engine.customCursor.cursorType = CursorTypes::Hovering;
+    e.customCursor.cursorType = CursorTypes::Hovering;
 
   if (boundsButtonSystem.ContainsPoint(mousePositionF))
-    engine.customCursor.cursorType = CursorTypes::Hovering;
+    e.customCursor.cursorType = CursorTypes::Hovering;
 
   auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
 
   auto mallIconBounds = RectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
   if (mallIconBounds.ContainsPoint(mousePositionF))
-    engine.customCursor.cursorType = CursorTypes::Hovering;
+    e.customCursor.cursorType = CursorTypes::Hovering;
 
   for (auto &[key, window] : windows)
     window->Update();
@@ -54,68 +54,68 @@ void Gui::Render() {
   auto mallIconBounds = RectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
   if (mallIconBounds.ContainsPoint(MousePositionF))
-    engine.DrawImage("GuiIconMallHovered", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
+    e.DrawImage("GuiIconMallHovered", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
   else
-      engine.DrawImage("GuiIconMall", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
+      e.DrawImage("GuiIconMall", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
 
   if (boundsButtonInventory.ContainsPoint(MousePositionF))
-    engine.FillRectangle({100, 200, 255, 100}, boundsButtonInventory.x,
+    e.FillRectangle({100, 200, 255, 100}, boundsButtonInventory.x,
                          boundsButtonInventory.y, boundsButtonInventory.width,
                          boundsButtonInventory.height);
   else
-    engine.FillRectangle({0, 150, 255, 100}, boundsButtonInventory.x,
+    e.FillRectangle({0, 150, 255, 100}, boundsButtonInventory.x,
                          boundsButtonInventory.y, boundsButtonInventory.width,
                          boundsButtonInventory.height);
 
-  engine.DrawRectangle({255, 255, 255, 100}, boundsButtonInventory.x,
+  e.DrawRectangle({255, 255, 255, 100}, boundsButtonInventory.x,
                        boundsButtonInventory.y, boundsButtonInventory.width,
                        boundsButtonInventory.height);
-  engine.DrawString("Inventory [F2]", {255, 255, 255, 255},
+  e.DrawString("Inventory [F2]", {255, 255, 255, 255},
                     boundsButtonInventory.x + boundsButtonInventory.width / 2,
                     boundsButtonInventory.y + boundsButtonInventory.height / 2,
                     true);
 
   if (boundsButtonCharacter.ContainsPoint(MousePositionF))
-    engine.FillRectangle({100, 200, 255, 100}, boundsButtonCharacter.x,
+    e.FillRectangle({100, 200, 255, 100}, boundsButtonCharacter.x,
                          boundsButtonCharacter.y, boundsButtonCharacter.width,
                          boundsButtonCharacter.height);
   else
-    engine.FillRectangle({0, 150, 255, 100}, boundsButtonCharacter.x,
+    e.FillRectangle({0, 150, 255, 100}, boundsButtonCharacter.x,
                          boundsButtonCharacter.y, boundsButtonCharacter.width,
                          boundsButtonCharacter.height);
 
-  engine.DrawRectangle({255, 255, 255, 100}, boundsButtonCharacter.x,
+  e.DrawRectangle({255, 255, 255, 100}, boundsButtonCharacter.x,
                        boundsButtonCharacter.y, boundsButtonCharacter.width,
                        boundsButtonCharacter.height);
-  engine.DrawString("Character [F1]", {255, 255, 255, 255},
+  e.DrawString("Character [F1]", {255, 255, 255, 255},
                     boundsButtonCharacter.x + boundsButtonCharacter.width / 2,
                     boundsButtonCharacter.y + boundsButtonCharacter.height / 2,
                     true);
 
   if (boundsButtonSystem.ContainsPoint(MousePositionF))
-    engine.FillRectangle({100, 200, 255, 100}, boundsButtonSystem.x,
+    e.FillRectangle({100, 200, 255, 100}, boundsButtonSystem.x,
                          boundsButtonSystem.y, boundsButtonSystem.width,
                          boundsButtonSystem.height);
   else
-    engine.FillRectangle({0, 150, 255, 100}, boundsButtonSystem.x,
+    e.FillRectangle({0, 150, 255, 100}, boundsButtonSystem.x,
                          boundsButtonSystem.y, boundsButtonSystem.width,
                          boundsButtonSystem.height);
 
-  engine.DrawRectangle({255, 255, 255, 100}, boundsButtonSystem.x,
+  e.DrawRectangle({255, 255, 255, 100}, boundsButtonSystem.x,
                        boundsButtonSystem.y, boundsButtonSystem.width,
                        boundsButtonSystem.height);
-  engine.DrawString("System [F3]", {255, 255, 255, 255},
+  e.DrawString("System [F3]", {255, 255, 255, 255},
                     boundsButtonSystem.x + boundsButtonSystem.width / 2,
                     boundsButtonSystem.y + boundsButtonSystem.height / 2, true);
-  engine.FillRectangle({0, 150, 255, 20}, boundsTextBox.x, boundsTextBox.y,
+  e.FillRectangle({0, 150, 255, 20}, boundsTextBox.x, boundsTextBox.y,
                        boundsTextBox.width, boundsTextBox.height);
-  engine.DrawRectangle({255, 255, 255, 100}, boundsTextBox.x, boundsTextBox.y,
+  e.DrawRectangle({255, 255, 255, 100}, boundsTextBox.x, boundsTextBox.y,
                        boundsTextBox.width, boundsTextBox.height);
 
   auto TextBoxTextX = boundsTextBox.x + textBoxMargin;
   auto TextBoxTextY = boundsTextBox.y + textBoxMargin;
 
-  engine.DrawString(textBoxText.at(0), {255, 255, 255, 255}, TextBoxTextX,
+  e.DrawString(textBoxText.at(0), {255, 255, 255, 255}, TextBoxTextX,
                     TextBoxTextY);
 
   for (auto &[Key, Window] : windows)

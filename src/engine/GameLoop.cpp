@@ -9,7 +9,7 @@ void GameLoop::Run() {
     bool quit = false;
     SDL_Event event;
 
-    SDL_SetEventFilter((SDL_EventFilter)EventFilter, &engine);
+    SDL_SetEventFilter((SDL_EventFilter)EventFilter, &e);
 
     while (!quit) {
       ResetForNewFrame();
@@ -23,47 +23,47 @@ void GameLoop::Run() {
         }
 
         case SDL_KEYDOWN: {
-          engine.keyboardHandler.DoKeyDown(event.key.keysym.sym);
+          e.keyboardHandler.DoKeyDown(event.key.keysym.sym);
 
-          engine.fullscreenController.UpdateFullscreenToggling();
+          e.fullscreenController.UpdateFullscreenToggling();
 
           break;
         }
 
         case SDL_KEYUP: {
-          engine.keyboardHandler.DoKeyUp(event.key.keysym.sym);
+          e.keyboardHandler.DoKeyUp(event.key.keysym.sym);
 
           break;
         }
 
         case SDL_MOUSEBUTTONDOWN: {
-          engine.sceneManager.GetCurrentScene()->DoMouseDown(
+          e.sceneManager.GetCurrentScene()->DoMouseDown(
               event.button.button);
 
           if (event.button.button == SDL_BUTTON_LEFT) {
-            engine.mouseHandler.leftButtonDown = true;
-              engine.mouseHandler.SetLeftButtonBeenFired();
+            e.mouseHandler.leftButtonDown = true;
+              e.mouseHandler.SetLeftButtonBeenFired();
           } else if (event.button.button == SDL_BUTTON_RIGHT) {
-            engine.mouseHandler.rightButtonDown = true;
-              engine.mouseHandler.SetRightButtonBeenFired();
+            e.mouseHandler.rightButtonDown = true;
+              e.mouseHandler.SetRightButtonBeenFired();
           }
 
           break;
         }
 
         case SDL_MOUSEBUTTONUP: {
-          engine.sceneManager.GetCurrentScene()->DoMouseUp(event.button.button);
+          e.sceneManager.GetCurrentScene()->DoMouseUp(event.button.button);
 
           if (event.button.button == SDL_BUTTON_LEFT)
-            engine.mouseHandler.leftButtonDown = false;
+            e.mouseHandler.leftButtonDown = false;
           else if (event.button.button == SDL_BUTTON_RIGHT)
-            engine.mouseHandler.rightButtonDown = false;
+            e.mouseHandler.rightButtonDown = false;
 
           break;
         }
 
         case SDL_MOUSEWHEEL: {
-          *engine.mouseHandler.wheelAmount = static_cast<float>(event.wheel.y);
+          *e.mouseHandler.wheelAmount = static_cast<float>(event.wheel.y);
 
           break;
         }
@@ -76,24 +76,24 @@ void GameLoop::Run() {
   }
 
 void GameLoop::ResetForNewFrame() {
-      engine.keyboardHandler.ResetForNewFrame();
-      engine.mouseHandler.ResetForNewFrame();
-      engine.customCursor.ResetForNewFrame();
+      e.keyboardHandler.ResetForNewFrame();
+      e.mouseHandler.ResetForNewFrame();
+      e.customCursor.ResetForNewFrame();
   }
 
 void GameLoop::Update() {
-    engine.sceneManager.GetCurrentScene()->Update();
-    engine.fpsCounter.Update();
+    e.sceneManager.GetCurrentScene()->Update();
+    e.fpsCounter.Update();
   }
 
 void GameLoop::Render() {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    engine.sceneManager.GetCurrentScene()->Render();
-    engine.fpsCounter.Render();
-    engine.customCursor.Render();
+    e.sceneManager.GetCurrentScene()->Render();
+    e.fpsCounter.Render();
+    e.customCursor.Render();
 
-    SDL_GL_SwapWindow(engine.window.get());
+    SDL_GL_SwapWindow(e.window.get());
   }
 
 int GameLoop::EventFilter(void *pthis, const SDL_Event *event) {

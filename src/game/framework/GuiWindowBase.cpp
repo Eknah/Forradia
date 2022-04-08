@@ -10,12 +10,12 @@ void GuiWindowBase::Render() {
   if (!visible)
     return;
 
-  engine.FillRectangle(palette.mediumBlue, bounds.x, bounds.y, bounds.width,
+  e.FillRectangle(palette.mediumBlue, bounds.x, bounds.y, bounds.width,
                        bounds.height);
-  engine.DrawRectangle(palette.black, bounds.x, bounds.y, bounds.width,
+  e.DrawRectangle(palette.black, bounds.x, bounds.y, bounds.width,
                        bounds.height);
-  engine.DrawString(title, palette.black, bounds.x + margin, bounds.y + margin);
-  engine.DrawLine(palette.black, bounds.x, bounds.y + titleBarHeight,
+  e.DrawString(title, palette.black, bounds.x + margin, bounds.y + margin);
+  e.DrawLine(palette.black, bounds.x, bounds.y + titleBarHeight,
                   bounds.x + bounds.width, bounds.y + titleBarHeight);
 
   RenderDerived();

@@ -9,7 +9,7 @@ namespace Forradia {
 
 class CustomCursor : public ICustomCursor {
  public:
-  explicit CustomCursor(IEngine &engine) : ICustomCursor(engine) {}
+  explicit CustomCursor(IEngine &e) : ICustomCursor(e) {}
 
   void Initialize() override;
 

@@ -12,7 +12,7 @@ void
 ValleyMapGenerator::GenerateMapArea(
         int worldX, int worldY, int worldZ) const {
   worldMap->areas[worldX][worldY][worldZ] =
-      MakeUPtr<MapArea>(engine, worldMap->mapAreaSize, worldX, worldY, worldZ);
+      MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldX, worldY, worldZ);
 
   auto mapArea = worldMap->areas[worldX][worldY][worldZ].get();
 
@@ -457,7 +457,7 @@ ValleyMapGenerator::GenerateMobs(MapArea *mapArea) const {
             GetId("GroundTypeWater") &&
         mapArea->tiles[tileX][tileY].actor == nullptr) {
       mapArea->tiles[tileX][tileY].actor =
-          std::make_unique<Mob>(engine,
+          std::make_unique<Mob>(e,
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRabbit");
@@ -481,7 +481,7 @@ ValleyMapGenerator::GenerateMobs(MapArea *mapArea) const {
             GetId("GroundTypeWater") &&
         mapArea->tiles[tileX][tileY].actor == nullptr) {
       mapArea->tiles[tileX][tileY].actor =
-          std::make_unique<Mob>(engine,
+          std::make_unique<Mob>(e,
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRat");
@@ -505,7 +505,7 @@ ValleyMapGenerator::GenerateMobs(MapArea *mapArea) const {
             GetId("GroundTypeWater") &&
         mapArea->tiles[tileX][tileY].actor == nullptr) {
       mapArea->tiles[tileX][tileY].actor =
-          std::make_unique<Mob>(engine,
+          std::make_unique<Mob>(e,
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobPinkSlime");

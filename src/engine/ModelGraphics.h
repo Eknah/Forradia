@@ -10,7 +10,7 @@ namespace Forradia {
 
 class ModelGraphics {
  public:
-  explicit ModelGraphics(IEngine &engine) : engine(engine) {}
+  explicit ModelGraphics(IEngine &_e) : e(_e) {}
 
   // ---- Drawing operations ----
 
@@ -23,7 +23,7 @@ class ModelGraphics {
                  float opacity = 1.0f) const;
 
  private:
-  IEngine &engine;
+  IEngine &e;
 
   float modelScaling = 0.1f;
 };

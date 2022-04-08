@@ -8,9 +8,9 @@
 
 namespace Forradia {
 
-Actor::Actor(const IEngine &engine_, float x, float y,
+Actor::Actor(const IEngine &_e, float x, float y,
                std::string modelName_) :
-    engine(engine_), modelName(modelName_),
+    e(_e), modelName(modelName_),
     actorId(currentActorId++) {
     AddIfNotExists<ModuleMovementData>();
     GetModule<ModuleMovementData>().position = {x, y};
@@ -39,7 +39,7 @@ int Actor::GetAnimatedModelId() const {
             modelNameAnimated.append(std::to_string(animIndex));
         }
 
-        if (engine.modelLoader.ModelExists(modelNameAnimated))
+        if (e.modelLoader.ModelExists(modelNameAnimated))
             return GetId(modelNameAnimated);
         else
             return GetId(modelName);

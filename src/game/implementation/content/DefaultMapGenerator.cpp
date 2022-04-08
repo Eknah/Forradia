@@ -13,7 +13,7 @@ void
 DefaultMapGenerator::GenerateMapArea(
         int worldx, int worldy, int worldZ) const {
   worldMap->areas[worldx][worldy][worldZ] =
-      MakeUPtr<MapArea>(engine, worldMap->mapAreaSize, worldx, worldy, worldZ);
+      MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldx, worldy, worldZ);
 
   auto mapArea = worldMap->areas[worldx][worldy][worldZ].get();
 
@@ -30,7 +30,7 @@ DefaultMapGenerator::GenerateMapArea(
   GeneratePinkFlowers(mapArea);
   GenerateTallGrass(mapArea);
   GenerateMobs(mapArea);
-  GenerateQuestCaves(engine, mapArea, worldMap);
+  GenerateQuestCaves(e, mapArea, worldMap);
 }
 
 void
@@ -417,7 +417,7 @@ DefaultMapGenerator::GenerateMobs(MapArea *mapArea) const {
             GetId("GroundTypeWater") &&
         mapArea->tiles[tileX][tileY].actor == nullptr) {
       mapArea->tiles[tileX][tileY].actor =
-          std::make_unique<Mob>(engine,
+          std::make_unique<Mob>(e,
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRabbit");
@@ -441,7 +441,7 @@ DefaultMapGenerator::GenerateMobs(MapArea *mapArea) const {
             GetId("GroundTypeWater") &&
         mapArea->tiles[tileX][tileY].actor == nullptr) {
       mapArea->tiles[tileX][tileY].actor =
-          std::make_unique<Mob>(engine,
+          std::make_unique<Mob>(e,
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRat");

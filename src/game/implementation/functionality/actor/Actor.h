@@ -14,13 +14,13 @@ class IEngine;
 
 class Actor {
  public:
-  explicit Actor(const IEngine &_engine) : engine(_engine),
+  explicit Actor(const IEngine &_e) : e(_e),
     actorId(currentActorId++) {}
 
-  Actor(const IEngine &_engine, float x, float y, std::string _modelName);
+  Actor(const IEngine &_e, float x, float y, std::string _modelName);
 
-  Actor(const IEngine &_engine, std::string _modelName) :
-      engine(_engine), modelName(_modelName),
+  Actor(const IEngine &_e, std::string _modelName) :
+      e(_e), modelName(_modelName),
       actorId(currentActorId++) {}
 
   void ResetForNewFrame() const;
@@ -55,7 +55,7 @@ class Actor {
 
  private:
 
-  const IEngine &engine;
+  const IEngine &e;
 
   inline static int currentActorId = 0;
 
@@ -70,7 +70,7 @@ T &Actor::GetModule() const {
 template <class T>
 void Actor::AddModule() {
   auto &Type = typeid(T);
-  modules.insert({Type.hash_code(), MakeUPtr<T>(engine, this)});
+  modules.insert({Type.hash_code(), MakeUPtr<T>(e, this)});
 }
 
 template <class T>

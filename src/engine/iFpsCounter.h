@@ -10,13 +10,13 @@ class IEngine;
 
 class IFpsCounter {
  public:
-  explicit IFpsCounter(IEngine &_engine) : engine(_engine) {}
+  explicit IFpsCounter(IEngine &_e) : e(_e) {}
 
   virtual void Update() = 0;
   virtual void Render() = 0;
 
  protected:
-  IEngine &engine;
+  IEngine &e;
   Palette palette;
 
   int framesCount = 0;

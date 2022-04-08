@@ -19,7 +19,7 @@ void ModelGraphics::DrawModel(int ModelNameId, float X, float Y, float Z,
 
     glBegin(GL_TRIANGLES);
 
-    auto &Model = engine.modelLoader.models[ModelNameId];
+    auto &Model = e.modelLoader.models[ModelNameId];
 
     for (auto &Mesh : Model.loadedMeshes) {
       glColor4f(Mesh.meshMaterial.kd.x, Mesh.meshMaterial.kd.y,

@@ -15,11 +15,11 @@ void FpsCounter::Update() {
   }
 
 void FpsCounter::Render() {
-    engine.FillRectangle(palette.mediumBlueSemiTrans, posx - width / 2,
+    e.FillRectangle(palette.mediumBlueSemiTrans, posx - width / 2,
                          posy - height / 2, width, height);
-    engine.DrawRectangle(palette.whiteSemiTrans, posx - width / 2,
+    e.DrawRectangle(palette.whiteSemiTrans, posx - width / 2,
                          posy - height / 2, width, height);
-    engine.DrawString("Fps: " + std::to_string(fps), palette.white, posx, posy,
+    e.DrawString("Fps: " + std::to_string(fps), palette.white, posx, posy,
                       true);
   }
 

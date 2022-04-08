@@ -11,9 +11,9 @@ namespace Forradia {
 
 class ScenePrimary : public SceneBase {
  public:
-  explicit ScenePrimary(const Engine &_engine)
-      : SceneBase(_engine), gui(_engine), camera(_engine), mobsEngine(_engine),
-        gameWorldRenderer(_engine, camera) {}
+  explicit ScenePrimary(const Engine &_e)
+      : SceneBase(_e), gui(_e), camera(_e), mobsEngine(_e),
+        gameWorldRenderer(_e, camera) {}
 
   void Enter() override;
   void Update() override;

@@ -28,7 +28,7 @@ class DefaultMapGenerator : public IMapGenerator {
   void GeneratePinkFlowers(MapArea *mapArea) const;
   void GenerateTallGrass(MapArea *mapArea) const;
   void GenerateMobs(MapArea *mapArea) const;
-  void GenerateQuestCaves(const IEngine &engine, MapArea *mapArea,
+  void GenerateQuestCaves(const IEngine &e, MapArea *mapArea,
                           const UPtr<PlanetWorldMap> &worldMap) const;
   int DistToPlayerStartingPos(MapArea *mapArea, int tileX, int tileY) const;
 

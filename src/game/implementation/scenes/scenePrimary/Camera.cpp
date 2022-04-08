@@ -27,7 +27,7 @@ void Camera::Update(int rotationDirection, float zoomChange) {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   //gluPerspective(45, 1.333, 0.5, 100);
-  gluPerspective(engine.fov, 1.333, 0.5, 100);
+  gluPerspective(e.fov, 1.333, 0.5, 100);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
@@ -43,12 +43,12 @@ void Camera::Update(int rotationDirection, float zoomChange) {
   cameraX = static_cast<float>(cos(angleRadians)) * cameraDist;
   cameraZ = -static_cast<float>(sin(angleRadians)) * cameraDist;
 
-  gluLookAt(cameraX-engine.tileSize/2,
+  gluLookAt(cameraX-e.tileSize/2,
             cameraHeight*(zoomEx - 0.5f),
-            cameraZ-engine.tileSize/2,
-            -engine.tileSize/2,
+            cameraZ-e.tileSize/2,
+            -e.tileSize/2,
             -1,
-            -engine.tileSize/2,
+            -e.tileSize/2,
             0,
             1,
             0);
@@ -88,26 +88,26 @@ void Camera::Update(int rotationDirection, float zoomChange) {
 }
 
 Point2 Camera::GetHoveredTile() const {
-  float subStepX = engine.GetPlayer().GetModule<ModuleMovementData>().position.x -
-          static_cast<int>(engine.GetPlayer().GetModule<ModuleMovementData>().position.x);
+  float subStepX = e.GetPlayer().GetModule<ModuleMovementData>().position.x -
+          static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.x);
 
-  float subStepY = engine.GetPlayer().GetModule<ModuleMovementData>().position.y -
-          static_cast<int>(engine.GetPlayer().GetModule<ModuleMovementData>().position.y);
+  float subStepY = e.GetPlayer().GetModule<ModuleMovementData>().position.y -
+          static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.y);
 
   auto offsetX = -static_cast<float>(2 * renderDistance + 1)
-          / 2.0f * engine.tileSize - subStepX * engine.tileSize;
+          / 2.0f * e.tileSize - subStepX * e.tileSize;
   auto offsetY = -static_cast<float>(2 * renderDistance - 1)
-          / 2.0f * engine.tileSize - subStepY * engine.tileSize;
-  auto mapx = engine.GetPlayer().GetModule<ModuleMovementData>().position.x - renderDistance +
-              (rayCastingX - offsetX) / engine.tileSize;
-  auto mapy = engine.GetPlayer().GetModule<ModuleMovementData>().position.y - renderDistance +
-              (rayCastingZ - offsetY) / engine.tileSize + 1;
+          / 2.0f * e.tileSize - subStepY * e.tileSize;
+  auto mapx = e.GetPlayer().GetModule<ModuleMovementData>().position.x - renderDistance +
+              (rayCastingX - offsetX) / e.tileSize;
+  auto mapy = e.GetPlayer().GetModule<ModuleMovementData>().position.y - renderDistance +
+              (rayCastingZ - offsetY) / e.tileSize + 1;
 
   return {static_cast<int>(mapx), static_cast<int>(mapy)};
 }
 
 int Camera::GetRenderDistance() const {
-  auto &mapArea = engine.GetCurrentMapArea();
+  auto &mapArea = e.GetCurrentMapArea();
 
   if (mapArea.IsUnderground())
     return renderDistanceCave;
@@ -119,12 +119,12 @@ void Camera::UpdateCameraMovement() {
   auto mousePosition = utilities.GetMousePositionI();
   auto deltaMouseX = mousePosition.x - previousMousePosition.x;
 
-  if (engine.mouseHandler.rightButtonDown)
+  if (e.mouseHandler.rightButtonDown)
     lookingAngle -= deltaMouseX / 5.0f;
 
   auto deltaMouseY = mousePosition.y - previousMousePosition.y;
 
-  if (engine.mouseHandler.rightButtonDown) {
+  if (e.mouseHandler.rightButtonDown) {
     cameraHeight += deltaMouseY / 100.0f;
     cameraHeight = std::max(std::min(cameraHeight, 2.0f), -1.0f);
   }

@@ -11,7 +11,7 @@ class IEngine;
 
 class ICustomCursor {
  public:
-  explicit ICustomCursor(IEngine &_engine) : engine(_engine) {}
+  explicit ICustomCursor(IEngine &_e) : e(_e) {}
 
   virtual void Initialize() = 0;
   virtual void ResetForNewFrame() = 0;
@@ -20,7 +20,7 @@ class ICustomCursor {
   CursorTypes cursorType = CursorTypes::Default;
 
  protected:
-  IEngine &engine;
+  IEngine &e;
   Utilities utilities;
 
   int cursorSize = 40;

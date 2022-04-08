@@ -10,8 +10,8 @@ class Actor;
 
 class IModule {
  public:
-  IModule(const IEngine &_engine, Actor *_parentActor)
-      : engine(_engine), parentActor(_parentActor) {}
+  IModule(const IEngine &_e, Actor *_parentActor)
+      : e(_e), parentActor(_parentActor) {}
 
   virtual void ResetForNewFrame() = 0;
   virtual void Update() = 0;
@@ -19,7 +19,7 @@ class IModule {
   Actor &GetParentActor();
 
  protected:
-  const IEngine &engine;
+  const IEngine &e;
 
  private:
   Actor *parentActor;

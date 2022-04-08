@@ -8,12 +8,12 @@ namespace Forradia {
 
 class PlanetShaper {
  public:
-  explicit PlanetShaper(const Engine &_engine) : engine(_engine) {}
+  explicit PlanetShaper(const Engine &_e) : e(_e) {}
 
   float GetNewY(float y, float tilex, float tiley);
 
  private:
-  const Engine &engine;
+  const Engine &e;
 };
 
 }  // namespace Forradia

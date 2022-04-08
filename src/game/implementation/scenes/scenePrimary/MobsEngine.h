@@ -10,12 +10,12 @@ class Engine;
 
 class MobsEngine {
  public:
-  explicit MobsEngine(const Engine &_engine) : engine(_engine) {}
+  explicit MobsEngine(const Engine &_e) : e(_e) {}
 
   void Update();
 
  private:
-  const Engine &engine;
+  const Engine &e;
 
   Random random;
 };

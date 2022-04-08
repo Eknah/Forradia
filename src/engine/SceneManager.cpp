@@ -19,7 +19,7 @@ void SceneManager::SwitchToScene(
           std::string newScene) const {
     *currentScene = GetId(newScene);
     scenesCollection.scenes.at(*currentScene)->Enter();
-    engine.gameLoop.ResetForNewFrame();
+    e.gameLoop.ResetForNewFrame();
   }
 
 }  // namespace Forradia

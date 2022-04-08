@@ -6,24 +6,24 @@
 namespace Forradia {
 
 void SceneGameStart::Update() {
-    if (engine.keyboardHandler.keysBeenFired->size() > 0)
-      engine.sceneManager.SwitchToScene(switchToSceneName);
+    if (e.keyboardHandler.keysBeenFired->size() > 0)
+      e.sceneManager.SwitchToScene(switchToSceneName);
 
-    if (engine.mouseHandler.GetLeftButtonBeenFired()
-            || engine.mouseHandler.GetRightButtonBeenFired())
-        engine.sceneManager.SwitchToScene(switchToSceneName);
+    if (e.mouseHandler.GetLeftButtonBeenFired()
+            || e.mouseHandler.GetRightButtonBeenFired())
+        e.sceneManager.SwitchToScene(switchToSceneName);
   }
 
 void SceneGameStart::Render() {
-    engine.DrawImage(imageNameBackground, 0, 0, 1, 1);
+    e.DrawImage(imageNameBackground, 0, 0, 1, 1);
 
-    auto logoSizeF = engine.GetImageSizeF(imageNameLogo);
+    auto logoSizeF = e.GetImageSizeF(imageNameLogo);
 
-    engine.DrawImage(imageNameLogo, 0.5f - logoSizeF.width / 2.0f,
+    e.DrawImage(imageNameLogo, 0.5f - logoSizeF.width / 2.0f,
                      0.25f - logoSizeF.height / 2.0f,
                      logoSizeF.width,
                      logoSizeF.height);
-    engine.DrawString(text, {255, 255, 255, 255}, 0.5f, 0.5f, true);
+    e.DrawString(text, {255, 255, 255, 255}, 0.5f, 0.5f, true);
   }
 
 }  // namespace Forradia

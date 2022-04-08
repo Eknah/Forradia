@@ -9,7 +9,7 @@ namespace Forradia {
 
 class GameLoop : public IGameLoop {
  public:
-  explicit GameLoop(IEngine &engine) : IGameLoop(engine) {}
+  explicit GameLoop(IEngine &e) : IGameLoop(e) {}
 
   // Before loop:
   // Initializes game loop variables

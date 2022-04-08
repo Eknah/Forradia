@@ -12,8 +12,8 @@ void ScenePrimary::Enter() {
 }
 
 void ScenePrimary::Update() {
-  auto &keys = engine.keyboardHandler.keysBeingPressed;
-  auto &player = engine.GetPlayer();
+  auto &keys = e.keyboardHandler.keysBeingPressed;
+  auto &player = e.GetPlayer();
 
   player.ResetForNewFrame();
 
@@ -36,29 +36,29 @@ void ScenePrimary::Update() {
   auto turnLeft = keys->count(SDLK_q);
 
   if (turnRight) {
-    camera.Update(GetId("Right"), *engine.mouseHandler.wheelAmount);
+    camera.Update(GetId("Right"), *e.mouseHandler.wheelAmount);
     player.GetModule<ModuleMovement>().UpdateRotation(camera.lookingAngle);
   } else if (turnLeft) {
-    camera.Update(GetId("Left"), *engine.mouseHandler.wheelAmount);
+    camera.Update(GetId("Left"), *e.mouseHandler.wheelAmount);
     player.GetModule<ModuleMovement>().UpdateRotation(camera.lookingAngle);
   } else {
-    camera.Update(0, *engine.mouseHandler.wheelAmount);
+    camera.Update(0, *e.mouseHandler.wheelAmount);
   }
 
-  if (engine.keyboardHandler.keysBeenFired->count(SDLK_F2))
+  if (e.keyboardHandler.keysBeenFired->count(SDLK_F2))
     gui.windows.at("Inventory")->visible =
         !gui.windows.at("Inventory")->visible;
 
   camera.UpdateCameraMovement();
 
-  if (engine.mouseHandler.rightButtonDown)
+  if (e.mouseHandler.rightButtonDown)
     *player.GetModule<ModuleMovementData>().facingAngle = camera.lookingAngle;
 
-  if (engine.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
-    engine.GetPlayer().GetModule<ModuleJumping>().Jump();
+  if (e.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
+    e.GetPlayer().GetModule<ModuleJumping>().Jump();
 
-  if (engine.mouseHandler.rightButtonDown)
-    engine.customCursor.cursorType = CursorTypes::Hidden;
+  if (e.mouseHandler.rightButtonDown)
+    e.customCursor.cursorType = CursorTypes::Hidden;
 
   player.Update();
   mobsEngine.Update();
@@ -71,20 +71,20 @@ void ScenePrimary::Render() {
 }
 
 void ScenePrimary::DoMouseDown(Uint8 mouseButton) {
-  if (engine.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed !=
+  if (e.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed !=
       nullptr) {
     auto hovered = camera.GetHoveredTile();
 
-    if (engine.GetCurrentMapArea().tiles[hovered.x][hovered.y].objects.size() >
+    if (e.GetCurrentMapArea().tiles[hovered.x][hovered.y].objects.size() >
         0)
-      engine.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed->UseOn(
-          engine.GetCurrentMapArea().tiles[hovered.x][hovered.y].objects.at(
-              engine.GetCurrentMapArea()
+      e.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed->UseOn(
+          e.GetCurrentMapArea().tiles[hovered.x][hovered.y].objects.at(
+              e.GetCurrentMapArea()
                   .tiles[hovered.x][hovered.y]
                   .objects.size() -
               1));
 
-    engine.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed
+    e.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed
             = nullptr;
 
     return;
@@ -97,7 +97,7 @@ void ScenePrimary::DoMouseDown(Uint8 mouseButton) {
 
   switch (mouseButton) {
   case SDL_BUTTON_LEFT: {
-    engine.GetPlayer().GetModule<ModuleMovementData>().moveDestination = {
+    e.GetPlayer().GetModule<ModuleMovementData>().moveDestination = {
         camera.GetHoveredTile().x + 0.5f, camera.GetHoveredTile().y + 0.5f};
     break;
   }

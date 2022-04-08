@@ -18,7 +18,7 @@ void ImageGraphics::DrawImage(int imageNameId, float x, float y, float width,
     glOrtho(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f);
 
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, engine.imageLoader.images[imageNameId]);
+    glBindTexture(GL_TEXTURE_2D, e.imageLoader.images[imageNameId]);
 
     glBegin(GL_QUADS);
 
@@ -42,7 +42,7 @@ SizeF ImageGraphics::GetImageSizeF(std::string imageName) const {
       auto canvasSize = utilities.GetCanvasSize();
 
       glBindTexture(GL_TEXTURE_2D,
-                    engine.imageLoader.images.at(GetId(imageName)));
+                    e.imageLoader.images.at(GetId(imageName)));
 
       int w, h;
       int mipLevel = 0;

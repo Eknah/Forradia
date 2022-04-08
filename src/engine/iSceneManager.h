@@ -11,7 +11,7 @@ class IEngine;
 
 class ISceneManager {
  public:
-  explicit ISceneManager(const IEngine &_engine) : engine(_engine) {}
+  explicit ISceneManager(const IEngine &_e) : e(_e) {}
 
   virtual void Initialize(ScenesCollection _scenes, int startScene) = 0;
 
@@ -19,7 +19,7 @@ class ISceneManager {
 
   virtual void SwitchToScene(std::string newScene) const = 0;
  protected:
-  const IEngine &engine;
+  const IEngine &e;
   ScenesCollection scenesCollection;
   const UPtr<int> currentScene = MakeUPtr<int>(-1);
 };

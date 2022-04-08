@@ -6,14 +6,14 @@
 namespace Forradia {
 
 void FullscreenController::UpdateFullscreenToggling() {
-    if (engine.keyboardHandler.keysBeenFired->count(SDLK_RETURN) > 0 &&
-        engine.keyboardHandler.keysBeingPressed->count(SDLK_LALT) > 0)
+    if (e.keyboardHandler.keysBeenFired->count(SDLK_RETURN) > 0 &&
+        e.keyboardHandler.keysBeingPressed->count(SDLK_LALT) > 0)
       ToggleFullscreen();
   }
 
 void FullscreenController::ToggleFullscreen() {
     fullscreenOn = !fullscreenOn;
-    SDL_SetWindowFullscreen(engine.window.get(),
+    SDL_SetWindowFullscreen(e.window.get(),
                             fullscreenOn ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
   }
 

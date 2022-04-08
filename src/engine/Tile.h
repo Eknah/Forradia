@@ -15,7 +15,7 @@ class IEngine;
 
 class Tile {
  public:
-  explicit Tile(const IEngine &_engine) : engine(_engine) {}
+  explicit Tile(const IEngine &_e) : e(_e) {}
 
   // Get info about tile
 
@@ -32,7 +32,7 @@ class Tile {
   std::unordered_map<std::string, std::string> properties;
 
  private:
-  const IEngine &engine;
+  const IEngine &e;
 };
 
 }  // namespace Forradia

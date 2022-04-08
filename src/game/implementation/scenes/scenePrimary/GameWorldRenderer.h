@@ -11,8 +11,8 @@ namespace Forradia {
 
 class GameWorldRenderer {
  public:
-  GameWorldRenderer(const Engine &_engine, const Camera &_camera)
-      : engine(_engine), background(_engine), planetShaper(_engine),
+  GameWorldRenderer(const Engine &_e, const Camera &_camera)
+      : e(_e), background(_e), planetShaper(_e),
         camera(_camera) {}
 
   void Render();
@@ -22,7 +22,7 @@ class GameWorldRenderer {
   void RenderSunRaysAndActors();
   void RenderRoof();
 
-  const Engine &engine;
+  const Engine &e;
   Background background;
   const Camera &camera;
   PlanetShaper planetShaper;

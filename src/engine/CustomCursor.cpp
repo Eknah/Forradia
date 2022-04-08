@@ -19,12 +19,12 @@ void CustomCursor::Render() {
 
     switch (cursorType) {
     case CursorTypes::Default: {
-      engine.DrawImage("CursorDefault", mousePosF.x, mousePosF.y,
+      e.DrawImage("CursorDefault", mousePosF.x, mousePosF.y,
                        cursorSizeF.width, cursorSizeF.height);
       break;
     }
     case CursorTypes::Hovering: {
-      engine.DrawImage("CursorHoveringClickable", mousePosF.x, mousePosF.y,
+      e.DrawImage("CursorHoveringClickable", mousePosF.x, mousePosF.y,
                        cursorSizeF.width, cursorSizeF.height);
       break;
     }

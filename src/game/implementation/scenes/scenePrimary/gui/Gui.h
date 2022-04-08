@@ -13,8 +13,8 @@ namespace Forradia {
 
 class Gui {
  public:
-  explicit Gui(const Engine &_engine) :
-        engine(_engine), guiMinimap(_engine) {}
+  explicit Gui(const Engine &_e) :
+        e(_e), guiMinimap(_e) {}
 
   void Initialize();
   void Update();
@@ -25,7 +25,7 @@ class Gui {
   UMap<std::string, UPtr<GuiWindowBase>> windows;
 
  private:
-  const Engine &engine;
+  const Engine &e;
 
   GuiMinimap guiMinimap;
 

@@ -9,7 +9,7 @@ namespace Forradia {
 
 class FpsCounter : public IFpsCounter {
  public:
-  explicit FpsCounter(IEngine &engine) : IFpsCounter(engine) {}
+  explicit FpsCounter(IEngine &e) : IFpsCounter(e) {}
 
   void Update() override;
 

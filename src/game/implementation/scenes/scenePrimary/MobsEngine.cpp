@@ -11,25 +11,25 @@ namespace Forradia {
 
 void MobsEngine::Update() {
   for (unsigned int i = 0;
-       i < engine.GetCurrentMapArea().mobActorsMirror.size(); i++) {
-    if (i >= engine.GetCurrentMapArea().mobActorsMirror.size())
+       i < e.GetCurrentMapArea().mobActorsMirror.size(); i++) {
+    if (i >= e.GetCurrentMapArea().mobActorsMirror.size())
       break;
 
     SPtr<Mob> mobPtr = std::dynamic_pointer_cast<Mob>(
-        engine.GetCurrentMapArea().mobActorsMirror.at(i).get());
+        e.GetCurrentMapArea().mobActorsMirror.at(i).get());
 
     if (mobPtr == nullptr)
       continue;
 
     Actor &actor =
-        *engine.GetCurrentMapArea().mobActorsMirror.at(i).get().get();
+        *e.GetCurrentMapArea().mobActorsMirror.at(i).get().get();
 
-    if (actor.actorId == engine.GetPlayer().actorId)
+    if (actor.actorId == e.GetPlayer().actorId)
       continue;
 
     Mob &mob = *mobPtr;
 
-    if (mob.actorId == engine.GetPlayer().actorId)
+    if (mob.actorId == e.GetPlayer().actorId)
       continue;
 
     if (Ticks() > mob.GetModule<ModuleMovementData>().tickLastMove + mob.GetModule<ModuleMovementData>().moveSpeed) {
@@ -43,10 +43,10 @@ void MobsEngine::Update() {
 
         destinationX =
             std::min(std::max(destinationX, 0.0f),
-                     static_cast<float>(engine.world->mapAreaSize) - 1.0f);
+                     static_cast<float>(e.world->mapAreaSize) - 1.0f);
         destinationY =
             std::min(std::max(destinationY, 0.0f),
-                     static_cast<float>(engine.world->mapAreaSize) - 1.0f);
+                     static_cast<float>(e.world->mapAreaSize) - 1.0f);
 
         mob.GetModule<ModuleMovementData>().moveDestination = {destinationX, destinationY};
       }
@@ -76,27 +76,27 @@ void MobsEngine::Update() {
       auto oldXI = static_cast<int>(mob.GetModule<ModuleMovementData>().position.x);
       auto oldYI = static_cast<int>(mob.GetModule<ModuleMovementData>().position.y);
 
-      if (newXI >= 0 && newYI >= 0 && newXI < engine.world->mapAreaSize &&
-          newYI < engine.world->mapAreaSize) {
-        if (engine.GetCurrentMapArea().tiles[newXI][newYI].groundType !=
+      if (newXI >= 0 && newYI >= 0 && newXI < e.world->mapAreaSize &&
+          newYI < e.world->mapAreaSize) {
+        if (e.GetCurrentMapArea().tiles[newXI][newYI].groundType !=
             GetId("GroundTypeWater")) {
-          if (engine.GetCurrentMapArea().tiles[newXI][newYI].actor == nullptr ||
+          if (e.GetCurrentMapArea().tiles[newXI][newYI].actor == nullptr ||
               (newXI == oldXI && newYI == oldYI)) {
-            engine.GetCurrentMapArea().tiles[oldXI][oldYI].actor->GetModule<ModuleMovementData>().position = {
+            e.GetCurrentMapArea().tiles[oldXI][oldYI].actor->GetModule<ModuleMovementData>().position = {
                 newX, newY};
 
             if (newXI != oldXI || newYI != oldYI) {
-              engine.GetCurrentMapArea().tiles[newXI][newYI].actor = std::move(
-                  engine.GetCurrentMapArea().tiles[oldXI][oldYI].actor);
-              engine.GetCurrentMapArea().tiles[oldXI][oldYI].actor = nullptr;
+              e.GetCurrentMapArea().tiles[newXI][newYI].actor = std::move(
+                  e.GetCurrentMapArea().tiles[oldXI][oldYI].actor);
+              e.GetCurrentMapArea().tiles[oldXI][oldYI].actor = nullptr;
             }
 
-            engine.GetCurrentMapArea().mobActorsMirror.erase(
-                engine.GetCurrentMapArea().mobActorsMirror.begin() + i);
-            engine.GetCurrentMapArea().mobActorsMirror.push_back(
-                std::ref(engine.GetCurrentMapArea().tiles[newXI][newYI].actor));
+            e.GetCurrentMapArea().mobActorsMirror.erase(
+                e.GetCurrentMapArea().mobActorsMirror.begin() + i);
+            e.GetCurrentMapArea().mobActorsMirror.push_back(
+                std::ref(e.GetCurrentMapArea().tiles[newXI][newYI].actor));
 
-          } else if (engine.GetCurrentMapArea().tiles[newXI][newYI].actor !=
+          } else if (e.GetCurrentMapArea().tiles[newXI][newYI].actor !=
                          nullptr &&
                      (newXI != oldXI || newYI != oldYI)) {
             mob.GetModule<ModuleMovementData>().moveDestination = {-1, -1};

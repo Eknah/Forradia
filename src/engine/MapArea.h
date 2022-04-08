@@ -17,7 +17,7 @@ class IEngine;
 
 class MapArea {
  public:
-  MapArea(const IEngine &engine, int _size, int worldx, int worldy, int worldz);
+  MapArea(const IEngine &e, int _size, int worldx, int worldy, int worldz);
 
   Actor& AddActor(UPtr<Actor> actor, int tilex, int tiley);
 

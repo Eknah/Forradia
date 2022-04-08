@@ -9,12 +9,12 @@ namespace Forradia {
 
 class GuiMinimap {
  public:
-  explicit GuiMinimap(const Engine &_engine) : engine(_engine) {}
+  explicit GuiMinimap(const Engine &_e) : e(_e) {}
 
   void Render();
 
  private:
-  const Engine &engine;
+  const Engine &e;
 
   const int minimapSize = 250;
   Palette palette;

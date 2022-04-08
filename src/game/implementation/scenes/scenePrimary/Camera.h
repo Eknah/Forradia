@@ -13,7 +13,7 @@ class Engine;
 
 class Camera {
  public:
-  explicit Camera(const Engine &_engine) : engine(_engine) {}
+  explicit Camera(const Engine &_e) : e(_e) {}
 
   void Update(int rotationDirection, float zoomChange);
   void UpdateCameraMovement();
@@ -31,7 +31,7 @@ class Camera {
   int GetRenderDistance() const;
 
  private:
-  const Engine &engine;
+  const Engine &e;
   Utilities utilities;
 
   Point2 previousMousePosition = {-1, -1};

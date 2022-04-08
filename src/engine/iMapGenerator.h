@@ -11,15 +11,15 @@ class PlanetWorldMap;
 
 class IMapGenerator {
  public:
-  IMapGenerator(const IEngine &Engine_, const UPtr<PlanetWorldMap> &_worldMap)
-      : engine(Engine_), worldMap(_worldMap) {}
+  IMapGenerator(const IEngine &_e, const UPtr<PlanetWorldMap> &_worldMap)
+      : e(_e), worldMap(_worldMap) {}
 
   // Core map area generation
 
   virtual void GenerateMapArea(int WorldX, int WorldY, int WorldZ) const = 0;
 
  protected:
-  const IEngine &engine;
+  const IEngine &e;
   const UPtr<PlanetWorldMap> &worldMap;
 };
 

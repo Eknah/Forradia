@@ -12,7 +12,7 @@ class Engine;
 
 class SceneBase {
  public:
-  explicit SceneBase(const Engine &_engine) : engine(_engine) {}
+  explicit SceneBase(const Engine &_e) : e(_e) {}
 
   // To implement in child
 
@@ -23,7 +23,7 @@ class SceneBase {
   virtual void DoMouseUp(Uint8 MouseButton) = 0;
 
  protected:
-  const Engine &engine;
+  const Engine &e;
 
   std::vector<TextRect> sceneButtons;
 };
