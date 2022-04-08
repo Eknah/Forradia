@@ -23,20 +23,20 @@ cPoint2 cUtilities::GetMousePositionI() {
   }
 
 cPoint2F cUtilities::GetMousePositionF() {
-    auto mouse_position = GetMousePositionI();
+    auto mousePosition = GetMousePositionI();
     auto canvas_size = GetCanvasSize();
-    auto mouse_x_f = static_cast<float>(mouse_position.x) / canvas_size.width;
-    auto mouse_y_f = static_cast<float>(mouse_position.y) / canvas_size.height;
+    auto mousexF = static_cast<float>(mousePosition.x) / canvas_size.width;
+    auto mouseyF = static_cast<float>(mousePosition.y) / canvas_size.height;
 
-    return {mouse_x_f, mouse_y_f};
+    return {mousexF, mouseyF};
   }
 
 cSizeF cUtilities::ConvertToFloat(int value) {
-    auto canvas_size = GetCanvasSize();
-    auto result_width = static_cast<float>(value) / canvas_size.width;
-    auto result_height = static_cast<float>(value) / canvas_size.height;
+    auto canvasSize = GetCanvasSize();
+    auto resultWidth = static_cast<float>(value) / canvasSize.width;
+    auto resultHeight = static_cast<float>(value) / canvasSize.height;
 
-    return {result_width, result_height};
+    return {resultWidth, resultHeight};
   }
 
 }  // namespace Forradia

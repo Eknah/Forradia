@@ -103,10 +103,10 @@ int cGameLoop::EventFilter(void *pthis, const SDL_Event *event) {
     if (!do_handle_event)
       return 1;
 
-    iEngine *Engine = reinterpret_cast<iEngine *>(pthis);
+    iEngine *engine = reinterpret_cast<iEngine *>(pthis);
 
-    Engine->gameLoop.Update();
-    Engine->gameLoop.Render();
+    engine->gameLoop.Update();
+    engine->gameLoop.Render();
 
     return 1;
   }

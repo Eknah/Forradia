@@ -20,26 +20,26 @@ void cGui::Initialize() {
 }
 
 void cGui::Update() {
-  auto MousePositionF = utilities.GetMousePositionF();
+  auto mousePositionF = utilities.GetMousePositionF();
 
-  if (boundsButtonInventory.ContainsPoint(MousePositionF))
+  if (boundsButtonInventory.ContainsPoint(mousePositionF))
     engine.customCursor.cursorType = eCursorTypes::Hovering;
 
-  if (boundsButtonCharacter.ContainsPoint(MousePositionF))
+  if (boundsButtonCharacter.ContainsPoint(mousePositionF))
     engine.customCursor.cursorType = eCursorTypes::Hovering;
 
-  if (boundsButtonSystem.ContainsPoint(MousePositionF))
+  if (boundsButtonSystem.ContainsPoint(mousePositionF))
     engine.customCursor.cursorType = eCursorTypes::Hovering;
 
   auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
 
   auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
-  if (mallIconBounds.ContainsPoint(MousePositionF))
+  if (mallIconBounds.ContainsPoint(mousePositionF))
     engine.customCursor.cursorType = eCursorTypes::Hovering;
 
-  for (auto &[Key, Window] : windows)
-    Window->Update();
+  for (auto &[key, window] : windows)
+    window->Update();
 }
 
 void cGui::Render() {
@@ -122,17 +122,17 @@ void cGui::Render() {
     Window->Render();
 }
 
-bool cGui::DoMouseDown(Uint8 MouseButton) {
-  for (auto &[Key, Window] : windows) {
-    auto ClickedInWindow = Window->DoMouseDown(MouseButton);
+bool cGui::DoMouseDown(Uint8 mouseButton) {
+  for (auto &[key, window] : windows) {
+    auto clickedInWindow = window->DoMouseDown(mouseButton);
 
-    if (ClickedInWindow)
+    if (clickedInWindow)
       return true;
   }
 
-  auto MousePositionF = utilities.GetMousePositionF();
+  auto mousePositionF = utilities.GetMousePositionF();
 
-  if (boundsButtonInventory.ContainsPoint(MousePositionF)) {
+  if (boundsButtonInventory.ContainsPoint(mousePositionF)) {
     windows.at("Inventory")->visible = !windows.at("Inventory")->visible;
 
     return true;
@@ -142,7 +142,7 @@ bool cGui::DoMouseDown(Uint8 MouseButton) {
 
   auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
-  if (mallIconBounds.ContainsPoint(MousePositionF)) {
+  if (mallIconBounds.ContainsPoint(mousePositionF)) {
       windows.at("Mall")->visible = !windows.at("Mall")->visible;
 
       return true;
@@ -152,8 +152,8 @@ bool cGui::DoMouseDown(Uint8 MouseButton) {
 }
 
 void cGui::DoMouseUp() {
-  for (auto &[Key, Window] : windows)
-    Window->DoMouseUp();
+  for (auto &[key, window] : windows)
+    window->DoMouseUp();
 }
 
 }  // namespace Forradia

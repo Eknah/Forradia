@@ -25,39 +25,39 @@ void cGuiWindowBase::Update() {
   if (!isBeingMoved)
     return;
 
-  auto MousePosF = utilities.GetMousePositionF();
-  auto DeltaMouseX = MousePosF.x - startMoveMousePosition.x;
-  auto DeltaMouseY = MousePosF.y - startMoveMousePosition.y;
+  auto mousePosF = utilities.GetMousePositionF();
+  auto deltaMouseX = mousePosF.x - startMoveMousePosition.x;
+  auto deltaMouseY = mousePosF.y - startMoveMousePosition.y;
 
-  bounds.x = startMovePosition.x + DeltaMouseX;
-  bounds.y = startMovePosition.y + DeltaMouseY;
+  bounds.x = startMovePosition.x + deltaMouseX;
+  bounds.y = startMovePosition.y + deltaMouseY;
 }
 
 cRectF cGuiWindowBase::GetInteriorBounds() {
-  auto X = bounds.x + margin;
-  auto Y = bounds.y + titleBarHeight + margin;
-  auto Width = bounds.width - 2 * margin;
-  auto Height = bounds.height - titleBarHeight - 2 * margin;
+  auto x = bounds.x + margin;
+  auto y = bounds.y + titleBarHeight + margin;
+  auto width = bounds.width - 2 * margin;
+  auto height = bounds.height - titleBarHeight - 2 * margin;
 
-  return {X, Y, Width, Height};
+  return {x, y, width, height};
 }
 
-bool cGuiWindowBase::DoMouseDown(Uint8 MouseButton) {
+bool cGuiWindowBase::DoMouseDown(Uint8 mouseButton) {
   if (!visible)
     return false;
 
-  auto MousePosF = utilities.GetMousePositionF();
-  auto TitleBarBounds = GetTitleBarBounds();
+  auto mousePosF = utilities.GetMousePositionF();
+  auto titleBarBounds = GetTitleBarBounds();
 
-  if (TitleBarBounds.ContainsPoint(MousePosF)) {
+  if (titleBarBounds.ContainsPoint(mousePosF)) {
     isBeingMoved = true;
     startMovePosition = {bounds.x, bounds.y};
-    startMoveMousePosition = {MousePosF.x, MousePosF.y};
+    startMoveMousePosition = {mousePosF.x, mousePosF.y};
   }
 
-  DoMouseDownDerived(MouseButton);
+  DoMouseDownDerived(mouseButton);
 
-  if (bounds.ContainsPoint(MousePosF))
+  if (bounds.ContainsPoint(mousePosF))
     return true;
 
   return false;
@@ -67,6 +67,8 @@ cRectF cGuiWindowBase::GetTitleBarBounds() {
   return {bounds.x, bounds.y, bounds.width, titleBarHeight};
 }
 
-void cGuiWindowBase::DoMouseUp() { isBeingMoved = false; }
+void cGuiWindowBase::DoMouseUp() {
+    isBeingMoved = false;
+}
 
 }  // namespace Forradia

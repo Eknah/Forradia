@@ -18,8 +18,8 @@ class cScenePrimary : public cSceneBase {
   void Enter() override;
   void Update() override;
   void Render() override;
-  void DoMouseDown(Uint8 MouseButton) override;
-  void DoMouseUp(Uint8 MouseButton) override;
+  void DoMouseDown(Uint8 mouseButton) override;
+  void DoMouseUp(Uint8 mouseButton) override;
 
  private:
   cCamera camera;

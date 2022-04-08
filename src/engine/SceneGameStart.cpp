@@ -17,12 +17,12 @@ void cSceneGameStart::Update() {
 void cSceneGameStart::Render() {
     engine.DrawImage(imageNameBackground, 0, 0, 1, 1);
 
-    auto LogoSizeF = engine.GetImageSizeF(imageNameLogo);
+    auto logoSizeF = engine.GetImageSizeF(imageNameLogo);
 
-    engine.DrawImage(imageNameLogo, 0.5f - LogoSizeF.width / 2.0f,
-                     0.25f - LogoSizeF.height / 2.0f,
-                     LogoSizeF.width,
-                     LogoSizeF.height);
+    engine.DrawImage(imageNameLogo, 0.5f - logoSizeF.width / 2.0f,
+                     0.25f - logoSizeF.height / 2.0f,
+                     logoSizeF.width,
+                     logoSizeF.height);
     engine.DrawString(text, {255, 255, 255, 255}, 0.5f, 0.5f, true);
   }
 

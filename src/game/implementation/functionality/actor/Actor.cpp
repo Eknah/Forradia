@@ -8,39 +8,39 @@
 
 namespace Forradia {
 
-cActor::cActor(const iEngine &Engine_, float X, float Y,
-               std::string ModelName_) :
-    engine(Engine_), modelName(ModelName_),
+cActor::cActor(const iEngine &engine_, float x, float y,
+               std::string modelName_) :
+    engine(engine_), modelName(modelName_),
     actorId(currentActorId++) {
     AddIfNotExists<cModuleMovementData>();
-    GetModule<cModuleMovementData>().position = {X, Y};
+    GetModule<cModuleMovementData>().position = {x, y};
 }
 
 void cActor::ResetForNewFrame() const {
-  for (auto &[Key, Module] : modules)
-    Module->ResetForNewFrame();
+  for (auto &[key, module] : modules)
+    module->ResetForNewFrame();
 }
 
 void cActor::Update() const {
-  for (auto &[Key, Module] : modules)
-    Module->Update();
+  for (auto &[key, module] : modules)
+    module->Update();
 }
 
 int cActor::GetAnimatedModelId() const {
     if (!HasModule<cModuleMovementData>()) {
         return GetId(modelName);
     } else {
-        auto ModelNameAnimated = modelName;
+        auto modelNameAnimated = modelName;
 
         if (GetModule<cModuleMovementData>().isWalking) {
-          auto AnimIndex = ((Ticks() + actorId*10) % 300) / 75;
+          auto animIndex = ((Ticks() + actorId*10) % 300) / 75;
 
-          if (AnimIndex > 0)
-            ModelNameAnimated.append(std::to_string(AnimIndex));
+          if (animIndex > 0)
+            modelNameAnimated.append(std::to_string(animIndex));
         }
 
-        if (engine.modelLoader.ModelExists(ModelNameAnimated))
-            return GetId(ModelNameAnimated);
+        if (engine.modelLoader.ModelExists(modelNameAnimated))
+            return GetId(modelNameAnimated);
         else
             return GetId(modelName);
     }

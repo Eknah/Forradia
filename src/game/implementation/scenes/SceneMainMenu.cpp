@@ -24,15 +24,15 @@ void cSceneMainMenu::Update() {
 void cSceneMainMenu::Render() {
   engine.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
 
-  auto CanvasSize = utilities.GetCanvasSize();
+  auto canvasSize = utilities.GetCanvasSize();
 
-  auto LogoSizeF = engine.GetImageSizeF("SceneForradiaLogo");
+  auto logoSizeF = engine.GetImageSizeF("SceneForradiaLogo");
 
   engine.DrawImage("SceneForradiaLogo",
-                   0.5f - LogoSizeF.width / 4.0f,
-                   0.15f - LogoSizeF.height / 4.0f,
-                   LogoSizeF.width/2,
-                   LogoSizeF.height/2);
+                   0.5f - logoSizeF.width / 4.0f,
+                   0.15f - logoSizeF.height / 4.0f,
+                   logoSizeF.width/2,
+                   logoSizeF.height/2);
 
   for (auto& button : sceneButtons) {
     engine.FillRectangle(palette.wheat, button.bounds.x - button.bounds.width/2, button.bounds.y - button.bounds.height/2, button.bounds.width, button.bounds.height);

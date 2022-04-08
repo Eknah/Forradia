@@ -9,7 +9,7 @@ namespace Forradia {
 void cGuiWindowMall::RenderDerived() {
 }
 
-void cGuiWindowMall::DoMouseDownDerived(Uint8 MouseButton) {
+void cGuiWindowMall::DoMouseDownDerived(Uint8 mouseButton) {
 }
 
 }  // namespace Forradia

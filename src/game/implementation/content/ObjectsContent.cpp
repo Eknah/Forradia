@@ -8,20 +8,20 @@
 
 namespace Forradia {
 
-void cObjectsContent::Add(std::string ObjectName,
-                          cObjectDescription Description) {
-  objectDescriptions.insert({GetId(ObjectName), Description});
+void cObjectsContent::Add(std::string objectName,
+                          cObjectDescription description) {
+  objectDescriptions.insert({GetId(objectName), description});
 }
 
-void cObjectsContent::Add(std::string ObjectName,
-                          char Flags) {
-    objectDescriptions.insert({GetId(ObjectName),
-                               cObjectDescription(Flags)});
+void cObjectsContent::Add(std::string objectName,
+                          char flags) {
+    objectDescriptions.insert({GetId(objectName),
+                               cObjectDescription(flags)});
 }
 
 void cObjectsContent::AddMany(std::vector<std::tuple<std::string, char>>
-         Descriptions) {
-    for (auto& desc : Descriptions) {
+         descriptions) {
+    for (auto& desc : descriptions) {
         auto objectName = std::get<0>(desc);
         auto flags = std::get<1>(desc);
 
@@ -30,20 +30,20 @@ void cObjectsContent::AddMany(std::vector<std::tuple<std::string, char>>
     }
 }
 
-void cObjectsContent::SetOpacity(std::string ObjectName, float opacity) {
-    objectDescriptions.at(GetId(ObjectName)).opacity = opacity;
+void cObjectsContent::SetOpacity(std::string objectName, float opacity) {
+    objectDescriptions.at(GetId(objectName)).opacity = opacity;
 }
 
-bool cObjectsContent::IsMovable(int ObjectType) const {
-  if (objectDescriptions.count(ObjectType))
-    return objectDescriptions.at(ObjectType).flags & ObjectMovable;
+bool cObjectsContent::IsMovable(int objectType) const {
+  if (objectDescriptions.count(objectType))
+    return objectDescriptions.at(objectType).flags & ObjectMovable;
 
   return false;
 }
 
-bool cObjectsContent::BlocksMovement(int ObjectType) const {
-  if (objectDescriptions.count(ObjectType))
-    return objectDescriptions.at(ObjectType).flags & ObjectMovementBlock;
+bool cObjectsContent::BlocksMovement(int objectType) const {
+  if (objectDescriptions.count(objectType))
+    return objectDescriptions.at(objectType).flags & ObjectMovementBlock;
 
   return false;
 }

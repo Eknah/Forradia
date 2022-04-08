@@ -12,15 +12,15 @@ void cModuleJumping::ResetForNewFrame() {}
 
 void cModuleJumping::Update() {
   if (isJumping) {
-    auto DeltaTicks = Ticks() - tickStartJumping;
-    auto JumpHeight =
-        std::pow(((((-std::pow((((DeltaTicks - jumpDuration / 2.0f))), 2.0f) +
+    auto deltaTicks = Ticks() - tickStartJumping;
+    auto jumpHeight =
+        std::pow(((((-std::pow((((deltaTicks - jumpDuration / 2.0f))), 2.0f) +
                      250000.0f)))) /
                      250000.0f,
                  3.0f) *
         maxJumpHeight;
 
-    GetParentActor().GetModule<cModuleMovementData>().positionZ = JumpHeight;
+    GetParentActor().GetModule<cModuleMovementData>().positionZ = jumpHeight;
   }
 
   if (Ticks() > tickStartJumping + jumpDuration) {

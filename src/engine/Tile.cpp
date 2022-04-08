@@ -7,12 +7,12 @@
 
 namespace Forradia {
 
-bool cTile::HasObjectWithFlag(eObjectFlags Flag) {
+bool cTile::HasObjectWithFlag(eObjectFlags flag) {
     for (auto &Object : objects) {
         if (engine.objectsContent.objectDescriptions.count(Object->objectType)) {
             auto objFlags = engine.objectsContent.objectDescriptions.at(Object->objectType).flags;
 
-            if (objFlags & Flag)
+            if (objFlags & flag)
                 return true;
         }
     }
@@ -20,9 +20,9 @@ bool cTile::HasObjectWithFlag(eObjectFlags Flag) {
     return false;
 }
 
-bool cTile::HasObjectOfType(std::string ObjectName) {
+bool cTile::HasObjectOfType(std::string objectName) {
   for (auto &Object : objects)
-    if (Object->objectType == GetId(ObjectName))
+    if (Object->objectType == GetId(objectName))
       return true;
 
   return false;

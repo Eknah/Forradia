@@ -10,104 +10,104 @@
 namespace Forradia {
 
 void cMobsEngine::Update() {
-  for (unsigned int I = 0;
-       I < engine.GetCurrentMapArea().mobActorsMirror.size(); I++) {
-    if (I >= engine.GetCurrentMapArea().mobActorsMirror.size())
+  for (unsigned int i = 0;
+       i < engine.GetCurrentMapArea().mobActorsMirror.size(); i++) {
+    if (i >= engine.GetCurrentMapArea().mobActorsMirror.size())
       break;
 
-    SPtr<cMob> MobPtr = std::dynamic_pointer_cast<cMob>(
-        engine.GetCurrentMapArea().mobActorsMirror.at(I).get());
+    SPtr<cMob> mobPtr = std::dynamic_pointer_cast<cMob>(
+        engine.GetCurrentMapArea().mobActorsMirror.at(i).get());
 
-    if (MobPtr == nullptr)
+    if (mobPtr == nullptr)
       continue;
 
-    cActor &Actor =
-        *engine.GetCurrentMapArea().mobActorsMirror.at(I).get().get();
+    cActor &actor =
+        *engine.GetCurrentMapArea().mobActorsMirror.at(i).get().get();
 
-    if (Actor.actorId == engine.GetPlayer().actorId)
+    if (actor.actorId == engine.GetPlayer().actorId)
       continue;
 
-    cMob &Mob = *MobPtr;
+    cMob &mob = *mobPtr;
 
-    if (Mob.actorId == engine.GetPlayer().actorId)
+    if (mob.actorId == engine.GetPlayer().actorId)
       continue;
 
-    if (Ticks() > Mob.GetModule<cModuleMovementData>().tickLastMove + Mob.GetModule<cModuleMovementData>().moveSpeed) {
-      Mob.GetModule<cModuleMovementData>().tickLastMove = Ticks();
+    if (Ticks() > mob.GetModule<cModuleMovementData>().tickLastMove + mob.GetModule<cModuleMovementData>().moveSpeed) {
+      mob.GetModule<cModuleMovementData>().tickLastMove = Ticks();
 
-      if (Mob.GetModule<cModuleMovementData>().moveDestination.x == -1 || Mob.GetModule<cModuleMovementData>().moveDestination.y == -1) {
-        auto DestinationX =
-            Mob.GetModule<cModuleMovementData>().position.x + random.Next() % 15 - random.Next() % 15;
-        auto DestinationY =
-            Mob.GetModule<cModuleMovementData>().position.y + random.Next() % 15 - random.Next() % 15;
+      if (mob.GetModule<cModuleMovementData>().moveDestination.x == -1 || mob.GetModule<cModuleMovementData>().moveDestination.y == -1) {
+        auto destinationX =
+            mob.GetModule<cModuleMovementData>().position.x + random.Next() % 15 - random.Next() % 15;
+        auto destinationY =
+            mob.GetModule<cModuleMovementData>().position.y + random.Next() % 15 - random.Next() % 15;
 
-        DestinationX =
-            std::min(std::max(DestinationX, 0.0f),
+        destinationX =
+            std::min(std::max(destinationX, 0.0f),
                      static_cast<float>(engine.world->mapAreaSize) - 1.0f);
-        DestinationY =
-            std::min(std::max(DestinationY, 0.0f),
+        destinationY =
+            std::min(std::max(destinationY, 0.0f),
                      static_cast<float>(engine.world->mapAreaSize) - 1.0f);
 
-        Mob.GetModule<cModuleMovementData>().moveDestination = {DestinationX, DestinationY};
+        mob.GetModule<cModuleMovementData>().moveDestination = {destinationX, destinationY};
       }
 
-      auto DeltaX = Mob.GetModule<cModuleMovementData>().moveDestination.x - Mob.GetModule<cModuleMovementData>().position.x;
-      auto DeltaY = Mob.GetModule<cModuleMovementData>().moveDestination.y - Mob.GetModule<cModuleMovementData>().position.y;
-      auto Distance = std::sqrt(DeltaX * DeltaX + DeltaY * DeltaY);
+      auto deltaX = mob.GetModule<cModuleMovementData>().moveDestination.x - mob.GetModule<cModuleMovementData>().position.x;
+      auto deltaY = mob.GetModule<cModuleMovementData>().moveDestination.y - mob.GetModule<cModuleMovementData>().position.y;
+      auto distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
 
-      if (Distance < 1) {
-        Mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+      if (distance < 1) {
+        mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
 
         continue;
       }
 
-      auto PiF = static_cast<float>(M_PI);
+      auto piF = static_cast<float>(M_PI);
 
-      *Mob.GetModule<cModuleMovementData>().facingAngle =
-          static_cast<float>(std::atan2(-DeltaX, -DeltaY)) / PiF * 180.0f;
+      *mob.GetModule<cModuleMovementData>().facingAngle =
+          static_cast<float>(std::atan2(-deltaX, -deltaY)) / piF * 180.0f;
 
-      auto Angle = *Mob.GetModule<cModuleMovementData>().facingAngle / 180.0f * PiF - PiF / 2 + PiF;
-      auto DX = -std::cos(Angle) * Mob.GetModule<cModuleMovementData>().stepMultiplier;
-      auto DY = std::sin(Angle) * Mob.GetModule<cModuleMovementData>().stepMultiplier;
-      auto NewX = static_cast<float>(Mob.GetModule<cModuleMovementData>().position.x + DX * Mob.GetModule<cModuleMovementData>().stepSize);
-      auto NewY = static_cast<float>(Mob.GetModule<cModuleMovementData>().position.y + DY * Mob.GetModule<cModuleMovementData>().stepSize);
-      auto NewXI = static_cast<int>(NewX);
-      auto NewYI = static_cast<int>(NewY);
-      auto OldXI = static_cast<int>(Mob.GetModule<cModuleMovementData>().position.x);
-      auto OldYI = static_cast<int>(Mob.GetModule<cModuleMovementData>().position.y);
+      auto angle = *mob.GetModule<cModuleMovementData>().facingAngle / 180.0f * piF - piF / 2 + piF;
+      auto dx = -std::cos(angle) * mob.GetModule<cModuleMovementData>().stepMultiplier;
+      auto dy = std::sin(angle) * mob.GetModule<cModuleMovementData>().stepMultiplier;
+      auto newX = static_cast<float>(mob.GetModule<cModuleMovementData>().position.x + dx * mob.GetModule<cModuleMovementData>().stepSize);
+      auto newY = static_cast<float>(mob.GetModule<cModuleMovementData>().position.y + dy * mob.GetModule<cModuleMovementData>().stepSize);
+      auto newXI = static_cast<int>(newX);
+      auto newYI = static_cast<int>(newY);
+      auto oldXI = static_cast<int>(mob.GetModule<cModuleMovementData>().position.x);
+      auto oldYI = static_cast<int>(mob.GetModule<cModuleMovementData>().position.y);
 
-      if (NewXI >= 0 && NewYI >= 0 && NewXI < engine.world->mapAreaSize &&
-          NewYI < engine.world->mapAreaSize) {
-        if (engine.GetCurrentMapArea().tiles[NewXI][NewYI].groundType !=
+      if (newXI >= 0 && newYI >= 0 && newXI < engine.world->mapAreaSize &&
+          newYI < engine.world->mapAreaSize) {
+        if (engine.GetCurrentMapArea().tiles[newXI][newYI].groundType !=
             GetId("GroundTypeWater")) {
-          if (engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor == nullptr ||
-              (NewXI == OldXI && NewYI == OldYI)) {
-            engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor->GetModule<cModuleMovementData>().position = {
-                NewX, NewY};
+          if (engine.GetCurrentMapArea().tiles[newXI][newYI].actor == nullptr ||
+              (newXI == oldXI && newYI == oldYI)) {
+            engine.GetCurrentMapArea().tiles[oldXI][oldYI].actor->GetModule<cModuleMovementData>().position = {
+                newX, newY};
 
-            if (NewXI != OldXI || NewYI != OldYI) {
-              engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor = std::move(
-                  engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor);
-              engine.GetCurrentMapArea().tiles[OldXI][OldYI].actor = nullptr;
+            if (newXI != oldXI || newYI != oldYI) {
+              engine.GetCurrentMapArea().tiles[newXI][newYI].actor = std::move(
+                  engine.GetCurrentMapArea().tiles[oldXI][oldYI].actor);
+              engine.GetCurrentMapArea().tiles[oldXI][oldYI].actor = nullptr;
             }
 
             engine.GetCurrentMapArea().mobActorsMirror.erase(
-                engine.GetCurrentMapArea().mobActorsMirror.begin() + I);
+                engine.GetCurrentMapArea().mobActorsMirror.begin() + i);
             engine.GetCurrentMapArea().mobActorsMirror.push_back(
-                std::ref(engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor));
+                std::ref(engine.GetCurrentMapArea().tiles[newXI][newYI].actor));
 
-          } else if (engine.GetCurrentMapArea().tiles[NewXI][NewYI].actor !=
+          } else if (engine.GetCurrentMapArea().tiles[newXI][newYI].actor !=
                          nullptr &&
-                     (NewXI != OldXI || NewYI != OldYI)) {
-            Mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+                     (newXI != oldXI || newYI != oldYI)) {
+            mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
           }
 
         } else {
-          Mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+          mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
         }
 
       } else {
-        Mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+        mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
       }
     }
   }

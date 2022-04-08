@@ -5,9 +5,9 @@
 
 namespace Forradia {
 
-cMob::cMob(const iEngine &Engine, float X, float Y,
-           std::string ModelName) :
-    cActor(Engine, X, Y, ModelName) {
+cMob::cMob(const iEngine &engine, float x, float y,
+           std::string modelName) :
+    cActor(engine, x, y, modelName) {
     AddIfNotExists<cModuleMovementData>();
     GetModule<cModuleMovementData>().isWalking = true;
 }

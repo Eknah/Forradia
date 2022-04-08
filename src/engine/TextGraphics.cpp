@@ -8,16 +8,16 @@ namespace Forradia {
 void cTextGraphics::Initialize() {
     TTF_Init();
 
-    auto FontPath = std::string(SDL_GetBasePath());
-    FontPath.append(defaultFontPath);
+    auto fontPath = std::string(SDL_GetBasePath());
+    fontPath.append(defaultFontPath);
 
     defaultFont = UPtrEx<TTF_Font, cSDL_Deleter>(
-        TTF_OpenFont(FontPath.c_str(), defaultFontSize));
+        TTF_OpenFont(fontPath.c_str(), defaultFontSize));
   }
 
-void cTextGraphics::DrawString(std::string Text, SDL_Color Color, float X, float Y,
-                         bool CenterAlign) const {
-    GLuint Texture;
+void cTextGraphics::DrawString(std::string text, SDL_Color color, float x, float y,
+                         bool centerAlign) const {
+    GLuint texture;
 
     glEnable(GL_TEXTURE_2D);
 
@@ -25,50 +25,50 @@ void cTextGraphics::DrawString(std::string Text, SDL_Color Color, float X, float
     glPushMatrix();
     glLoadIdentity();
 
-    glGenTextures(1, &Texture);
-    glBindTexture(GL_TEXTURE_2D, Texture);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
 
-    auto FontSurface =
-        TTF_RenderText_Blended(defaultFont.get(), Text.c_str(), Color);
+    auto fontSurface =
+        TTF_RenderText_Blended(defaultFont.get(), text.c_str(), color);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, FontSurface->w, FontSurface->h, 0,
-                 GL_BGRA, GL_UNSIGNED_BYTE, FontSurface->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fontSurface->w, fontSurface->h, 0,
+                 GL_BGRA, GL_UNSIGNED_BYTE, fontSurface->pixels);
 
-    auto CanvasSize = utilities.GetCanvasSize();
+    auto canvasSize = utilities.GetCanvasSize();
 
-    auto Width = static_cast<float>(FontSurface->w)
-            / CanvasSize.width * scaling;
+    auto width = static_cast<float>(fontSurface->w)
+            / canvasSize.width * scaling;
 
-    auto Height = static_cast<float>(FontSurface->h)
-            / CanvasSize.height * scaling;
+    auto height = static_cast<float>(fontSurface->h)
+            / canvasSize.height * scaling;
 
-    glColor4f(Color.r / 255.0f, Color.g / 255.0f, Color.b / 255.0f,
-              Color.a / 255.0f);
+    glColor4f(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f,
+              color.a / 255.0f);
 
-    if (CenterAlign) {
-      X -= Width / 2;
-      Y -= Height / 2;
+    if (centerAlign) {
+      x -= width / 2;
+      y -= height / 2;
     }
 
     glBegin(GL_QUADS);
     {
       glTexCoord2f(0, 1);
-      glVertex2f(X, Y + Height);
+      glVertex2f(x, y + height);
       glTexCoord2f(1, 1);
-      glVertex2f(X + Width, Y + Height);
+      glVertex2f(x + width, y + height);
       glTexCoord2f(1, 0);
-      glVertex2f(X + Width, Y);
+      glVertex2f(x + width, y);
       glTexCoord2f(0, 0);
-      glVertex2f(X, Y);
+      glVertex2f(x, y);
     }
 
     glEnd();
 
-    glDeleteTextures(1, &Texture);
-    SDL_FreeSurface(FontSurface);
+    glDeleteTextures(1, &texture);
+    SDL_FreeSurface(fontSurface);
 
     glDisable(GL_TEXTURE_2D);
   }

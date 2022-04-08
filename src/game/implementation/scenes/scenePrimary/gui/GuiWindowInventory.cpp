@@ -7,83 +7,83 @@
 namespace Forradia {
 
 void cGuiWindowInventory::RenderDerived() {
-  auto CanvasSize = utilities.GetCanvasSize();
-  auto AspectRatio = static_cast<float>(CanvasSize.width) / CanvasSize.height;
-  auto BoundsInterior = GetInteriorBounds();
+  auto canvasSize = utilities.GetCanvasSize();
+  auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
+  auto boundsInterior = GetInteriorBounds();
 
-  engine.FillRectangle(palette.wheat, BoundsInterior.x, BoundsInterior.y,
-                       BoundsInterior.width, BoundsInterior.height);
+  engine.FillRectangle(palette.wheat, boundsInterior.x, boundsInterior.y,
+                       boundsInterior.width, boundsInterior.height);
 
-  auto SlotSize = BoundsInterior.width / numSlotCols - margin;
-  auto NumSlotRows =
-      BoundsInterior.height / ((SlotSize + margin) * AspectRatio);
-  auto I = 0;
+  auto slotSize = boundsInterior.width / numSlotCols - margin;
+  auto numSlotRows =
+      boundsInterior.height / ((slotSize + margin) * aspectRatio);
+  auto i = 0;
 
 
-  for (auto Y = 0; Y < NumSlotRows; Y++) {
-    for (auto X = 0; X < numSlotCols; X++) {
-      auto XPos = BoundsInterior.x + X * (SlotSize + margin);
-      auto YPos = BoundsInterior.y + Y * (SlotSize * AspectRatio + margin);
+  for (auto y = 0; y < numSlotRows; y++) {
+    for (auto x = 0; x < numSlotCols; x++) {
+      auto xpos = boundsInterior.x + x * (slotSize + margin);
+      auto ypos = boundsInterior.y + y * (slotSize * aspectRatio + margin);
 
       if (engine.GetPlayer().GetModule<cModuleInventory>()
-              .inventory.objects.count(I) > 0) {
+              .inventory.objects.count(i) > 0) {
         if (engine.GetPlayer().GetModule<cModuleObjectUsage>()
                 .objectBeingUsed ==
-            engine.GetPlayer().GetModule<cModuleInventory>().inventory.objects.at(I))
-          engine.DrawImage("ObjectSelected", XPos, YPos, SlotSize,
-                           SlotSize * AspectRatio);
+            engine.GetPlayer().GetModule<cModuleInventory>().inventory.objects.at(i))
+          engine.DrawImage("ObjectSelected", xpos, ypos, slotSize,
+                           slotSize * aspectRatio);
         else
-          engine.DrawImage("ObjectBackgroundShadow", XPos, YPos, SlotSize,
-                           SlotSize * AspectRatio);
+          engine.DrawImage("ObjectBackgroundShadow", xpos, ypos, slotSize,
+                           slotSize * aspectRatio);
 
         engine.DrawImage(engine.GetPlayer().GetModule<cModuleInventory>()
-                             .inventory.objects.at(I)
+                             .inventory.objects.at(i)
                              ->objectType,
-                         XPos, YPos, SlotSize, SlotSize * AspectRatio);
+                         xpos, ypos, slotSize, slotSize * aspectRatio);
       }
 
-      I++;
+      i++;
     }
   }
 }
 
-void cGuiWindowInventory::DoMouseDownDerived(Uint8 MouseButton) {
-  if (MouseButton != SDL_BUTTON_RIGHT)
+void cGuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton) {
+  if (mouseButton != SDL_BUTTON_RIGHT)
     return;
 
   engine.GetPlayer().GetModule<cModuleObjectUsage>().objectBeingUsed = nullptr;
 
-  auto CanvasSize = utilities.GetCanvasSize();
-  auto AspectRatio = static_cast<float>(CanvasSize.width) / CanvasSize.height;
-  auto BoundsInterior = GetInteriorBounds();
+  auto canvasSize = utilities.GetCanvasSize();
+  auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
+  auto boundsInterior = GetInteriorBounds();
 
-  auto SlotSize = BoundsInterior.width / numSlotCols - margin;
-  auto NumSlotRows =
-      BoundsInterior.height / ((SlotSize + margin) * AspectRatio);
-  auto I = 0;
+  auto slotSize = boundsInterior.width / numSlotCols - margin;
+  auto numSlotRows =
+      boundsInterior.height / ((slotSize + margin) * aspectRatio);
+  auto i = 0;
 
-  auto MousePosition = utilities.GetMousePositionI();
-  auto MouseXRel = static_cast<float>(MousePosition.x) / CanvasSize.width;
-  auto MouseYRel = static_cast<float>(MousePosition.y) / CanvasSize.height;
+  auto mousePosition = utilities.GetMousePositionI();
+  auto mouseXRel = static_cast<float>(mousePosition.x) / canvasSize.width;
+  auto mouseYRel = static_cast<float>(mousePosition.y) / canvasSize.height;
 
-  for (auto Y = 0; Y < NumSlotRows; Y++) {
-    for (auto X = 0; X < numSlotCols; X++) {
-      auto XPos = BoundsInterior.x + X * (SlotSize + margin);
-      auto YPos = BoundsInterior.y + Y * (SlotSize * AspectRatio + margin);
+  for (auto y = 0; y < numSlotRows; y++) {
+    for (auto x = 0; x < numSlotCols; x++) {
+      auto xpos = boundsInterior.x + x * (slotSize + margin);
+      auto ypos = boundsInterior.y + y * (slotSize * aspectRatio + margin);
 
       if (engine.GetPlayer().GetModule<cModuleInventory>()
-              .inventory.objects.count(I) > 0) {
-        if (MouseXRel >= XPos && MouseYRel >= YPos &&
-            MouseXRel < XPos + SlotSize &&
-            MouseYRel < YPos + SlotSize * AspectRatio) {
+              .inventory.objects.count(i) > 0) {
+        if (mouseXRel >= xpos && mouseYRel >= ypos &&
+            mouseXRel < xpos + slotSize &&
+            mouseYRel < ypos + slotSize * aspectRatio) {
           engine.GetPlayer().GetModule<cModuleObjectUsage>().objectBeingUsed =
               engine.GetPlayer().GetModule<cModuleInventory>().inventory
-                  .objects.at(I);
+                  .objects.at(i);
           return;
         }
       }
 
-      I++;
+      i++;
     }
   }
 }

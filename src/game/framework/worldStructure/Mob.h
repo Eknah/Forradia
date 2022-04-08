@@ -15,7 +15,7 @@ class iEngine;
 
 class cMob : public cActor {
  public:
-  cMob(const iEngine &engine, float X, float Y,
+  cMob(const iEngine &engine, float x, float y,
        std::string modelName);
 };
 
