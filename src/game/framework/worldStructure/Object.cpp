@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-cObject::cObject(std::string objectTypeName, bool randomScaling,
+Object::Object(std::string objectTypeName, bool randomScaling,
                  bool randomRotation, float _rotation)
     : objectType(GetId(objectTypeName)) {
     if (randomRotation)
@@ -16,7 +16,7 @@ cObject::cObject(std::string objectTypeName, bool randomScaling,
     scaling = 0.6f + static_cast<float>(random.Next() % 8) / 10.0f;
 }
 
-void cObject::UseOn(const std::shared_ptr<cObject> &other) {
+void Object::UseOn(const std::shared_ptr<Object> &other) {
   if (objectType == GetId("ObjectWoodaxe") &&
       (other->objectType == GetId("ObjectTree1") ||
        other->objectType == GetId("ObjectTree2")))
@@ -27,7 +27,7 @@ void cObject::UseOn(const std::shared_ptr<cObject> &other) {
     other->TransformInto("ObjectWoodplank");
 }
 
-void cObject::TransformInto(std::string objectName) {
+void Object::TransformInto(std::string objectName) {
   objectType = GetId(objectName);
 }
 

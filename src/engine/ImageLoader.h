@@ -12,7 +12,7 @@
 
 namespace Forradia {
 
-class cImageLoader {
+class ImageLoader {
  public:
   void LoadImages();
 

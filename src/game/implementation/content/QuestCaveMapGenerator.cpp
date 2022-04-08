@@ -6,34 +6,34 @@
 
 namespace Forradia {
 
-void cQuestCaveMapGenerator::GenerateQuestCaveMapArea(
-    cMapArea *mapArea, cPoint2 entranceLocation) {
+void QuestCaveMapGenerator::GenerateQuestCaveMapArea(
+    MapArea *mapArea, Point2 entranceLocation) {
   ClearToCaveFloor(mapArea);
   GenerateCaveWalls(mapArea);
   GeneratePath(mapArea, entranceLocation);
 
   mapArea->tiles[entranceLocation.x][entranceLocation.y].properties["WarpToFloor"] = "0";
   mapArea->tiles[entranceLocation.x][entranceLocation.y].objects.push_back(
-      MakeSPtr<cObject>("ObjectQuestCaveEntrance"));
+      MakeSPtr<Object>("ObjectQuestCaveEntrance"));
 }
 
-void cQuestCaveMapGenerator::ClearToCaveFloor(cMapArea *mapArea) {
+void QuestCaveMapGenerator::ClearToCaveFloor(MapArea *mapArea) {
   for (auto tileY = 0; tileY < mapArea->size; tileY++)
     for (auto tileX = 0; tileX < mapArea->size; tileX++)
 
       mapArea->tiles[tileX][tileY].groundType = GetId("GroundTypeCaveFloor");
 }
 
-void cQuestCaveMapGenerator::GenerateCaveWalls(cMapArea *mapArea) {
+void QuestCaveMapGenerator::GenerateCaveWalls(MapArea *mapArea) {
   for (auto tileY = 0; tileY < mapArea->size; tileY++)
     for (auto tileX = 0; tileX < mapArea->size; tileX++)
 
       mapArea->tiles[tileX][tileY].objects.push_back(
-          MakeSPtr<cObject>("ObjectCaveWallBlock", false));
+          MakeSPtr<Object>("ObjectCaveWallBlock", false));
 }
 
-void cQuestCaveMapGenerator::GeneratePath(cMapArea *mapArea,
-                                          cPoint2 entranceLocation) {
+void QuestCaveMapGenerator::GeneratePath(MapArea *mapArea,
+                                          Point2 entranceLocation) {
   for (auto tileY = entranceLocation.y - 3; tileY <= entranceLocation.y + 3;
        tileY++)
     for (auto tileX = entranceLocation.x - 3; tileX <= entranceLocation.x + 3;

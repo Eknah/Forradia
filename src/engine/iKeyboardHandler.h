@@ -8,7 +8,7 @@
 
 namespace Forradia {
 
-class iKeyboardHandler {
+class IKeyboardHandler {
  public:
   virtual void ResetForNewFrame() const = 0;
   virtual void DoKeyDown(SDL_Keycode key) const = 0;

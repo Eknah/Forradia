@@ -4,20 +4,20 @@
 #pragma once
 #include <string>
 #include <utility>
-#include "iEngine.h"
-#include "iSceneManager.h"
+#include "IEngine.h"
+#include "ISceneManager.h"
 
 namespace Forradia {
 
-class cSceneManager : public iSceneManager {
+class SceneManager : public ISceneManager {
  public:
-    explicit cSceneManager(const iEngine &engine) :
-          iSceneManager(engine) {}
+    explicit SceneManager(const IEngine &engine) :
+          ISceneManager(engine) {}
 
-  void Initialize(cScenesCollection scenes,
+  void Initialize(ScenesCollection scenes,
                          int startScene) override;
 
-  SPtr<cSceneBase> &GetCurrentScene() override;
+  SPtr<SceneBase> &GetCurrentScene() override;
 
   void SwitchToScene(
           std::string newScene) const override;

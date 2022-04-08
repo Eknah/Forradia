@@ -2,15 +2,15 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "iEngine.h"
-#include "iFullscreenController.h"
+#include "IEngine.h"
+#include "IFullscreenController.h"
 
 namespace Forradia {
 
-class cFullscreenController : public iFullscreenController {
+class FullscreenController : public IFullscreenController {
  public:
-  explicit cFullscreenController(const iEngine &engine) :
-        iFullscreenController(engine) {}
+  explicit FullscreenController(const IEngine &engine) :
+        IFullscreenController(engine) {}
 
   void UpdateFullscreenToggling() override;
 

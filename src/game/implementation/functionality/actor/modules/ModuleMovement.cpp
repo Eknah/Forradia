@@ -4,72 +4,72 @@
 #include <utility>
 #include "ModuleMovement.h"
 #include "../engine/Aliases.h"
-#include "../engine/iEngine.h"
+#include "../engine/IEngine.h"
 #include "implementation/functionality/actor/Actor.h"
 #include "ModuleMovementData.h"
 
 namespace Forradia {
 
-cModuleMovement::cModuleMovement(const iEngine &engine_,
-                                 cActor *parentActor_)
-    : iModule(engine_, parentActor_) {
-    GetParentActor().AddIfNotExists<cModuleMovementData>();
+ModuleMovement::ModuleMovement(const IEngine &engine_,
+                                 Actor *parentActor_)
+    : IModule(engine_, parentActor_) {
+    GetParentActor().AddIfNotExists<ModuleMovementData>();
 }
 
-void cModuleMovement::ResetForNewFrame() {
-  facingAngleRotated = *GetParentActor().GetModule<cModuleMovementData>().facingAngle;
+void ModuleMovement::ResetForNewFrame() {
+  facingAngleRotated = *GetParentActor().GetModule<ModuleMovementData>().facingAngle;
 }
 
-void cModuleMovement::Update() {
+void ModuleMovement::Update() {
   UpdateDirectionalMovement();
   UpdateDestinationMovement();
 }
 
-void cModuleMovement::UpdateRotation(float newFacingAngle) {
-  *GetParentActor().GetModule<cModuleMovementData>().facingAngle = newFacingAngle;
+void ModuleMovement::UpdateRotation(float newFacingAngle) {
+  *GetParentActor().GetModule<ModuleMovementData>().facingAngle = newFacingAngle;
 }
 
-void cModuleMovement::UpdateDirectionalMovement() {
-  if (!(Ticks() > GetParentActor().GetModule<cModuleMovementData>().tickLastMove + GetParentActor().GetModule<cModuleMovementData>().moveSpeed &&
+void ModuleMovement::UpdateDirectionalMovement() {
+  if (!(Ticks() > GetParentActor().GetModule<ModuleMovementData>().tickLastMove + GetParentActor().GetModule<ModuleMovementData>().moveSpeed &&
         (instruction.tryMoveForward || instruction.tryMoveRight ||
          instruction.tryMoveBack || instruction.tryMoveLeft)))
     return;
 
-  GetParentActor().GetModule<cModuleMovementData>().isWalking = true;
+  GetParentActor().GetModule<ModuleMovementData>().isWalking = true;
 
-  auto newX = GetParentActor().GetModule<cModuleMovementData>().position.x;
-  auto newY = GetParentActor().GetModule<cModuleMovementData>().position.y;
+  auto newX = GetParentActor().GetModule<ModuleMovementData>().position.x;
+  auto newY = GetParentActor().GetModule<ModuleMovementData>().position.y;
   auto angle = 0.0f;
   auto piF = static_cast<float>(M_PI);
 
   if (instruction.tryMoveForward) {
-    angle = *GetParentActor().GetModule<cModuleMovementData>().facingAngle / 180.0f * piF - piF / 2.0f +
+    angle = *GetParentActor().GetModule<ModuleMovementData>().facingAngle / 180.0f * piF - piF / 2.0f +
             0.0f * piF / 2.0f;
   }
 
   if (instruction.tryMoveLeft) {
-    angle = *GetParentActor().GetModule<cModuleMovementData>().facingAngle / 180.0f * piF - piF / 2.0f +
+    angle = *GetParentActor().GetModule<ModuleMovementData>().facingAngle / 180.0f * piF - piF / 2.0f +
             1.0f * piF / 2.0f;
-    *GetParentActor().GetModule<cModuleMovementData>().facingAngle = *GetParentActor().GetModule<cModuleMovementData>().facingAngle + 1 * 90.0f;
+    *GetParentActor().GetModule<ModuleMovementData>().facingAngle = *GetParentActor().GetModule<ModuleMovementData>().facingAngle + 1 * 90.0f;
   }
 
   if (instruction.tryMoveBack) {
-    angle = *GetParentActor().GetModule<cModuleMovementData>().facingAngle / 180.0f * piF - piF / 2.0f +
+    angle = *GetParentActor().GetModule<ModuleMovementData>().facingAngle / 180.0f * piF - piF / 2.0f +
             2.0f * piF / 2.0f;
   }
 
   if (instruction.tryMoveRight) {
-    angle = *GetParentActor().GetModule<cModuleMovementData>().facingAngle / 180.0f * piF - piF / 2.0f +
+    angle = *GetParentActor().GetModule<ModuleMovementData>().facingAngle / 180.0f * piF - piF / 2.0f +
             3.0f * piF / 2.0f;
-    *GetParentActor().GetModule<cModuleMovementData>().facingAngle = *GetParentActor().GetModule<cModuleMovementData>().facingAngle
+    *GetParentActor().GetModule<ModuleMovementData>().facingAngle = *GetParentActor().GetModule<ModuleMovementData>().facingAngle
             + 3.0f * 90.0f;
   }
 
-  auto dx = -std::cos(angle) * GetParentActor().GetModule<cModuleMovementData>().stepMultiplier;
-  auto dy = std::sin(angle) * GetParentActor().GetModule<cModuleMovementData>().stepMultiplier;
+  auto dx = -std::cos(angle) * GetParentActor().GetModule<ModuleMovementData>().stepMultiplier;
+  auto dy = std::sin(angle) * GetParentActor().GetModule<ModuleMovementData>().stepMultiplier;
 
-  newX += dx * GetParentActor().GetModule<cModuleMovementData>().stepSize;
-  newY += dy * GetParentActor().GetModule<cModuleMovementData>().stepSize;
+  newX += dx * GetParentActor().GetModule<ModuleMovementData>().stepSize;
+  newY += dy * GetParentActor().GetModule<ModuleMovementData>().stepSize;
 
   if (newX < 0)
     newX += engine.GetCurrentMapArea().size;
@@ -100,15 +100,15 @@ void cModuleMovement::UpdateDirectionalMovement() {
 
   if (!engine.GetCurrentMapArea()
            .tiles[newXRoundedI][newYRoundedI]
-          .HasObjectWithFlag(ObjectMovementBlock)
+          .HasObjectWithFlag(ObjObstacle)
           && engine.GetCurrentMapArea()
           .tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
           && !tileHasMob) {
-      auto oldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().position.x);
-      auto oldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().position.y);
+      auto oldXI = static_cast<int>(GetParentActor().GetModule<ModuleMovementData>().position.x);
+      auto oldYI = static_cast<int>(GetParentActor().GetModule<ModuleMovementData>().position.y);
 
-    GetParentActor().GetModule<cModuleMovementData>().position.x = newXRounded;
-    GetParentActor().GetModule<cModuleMovementData>().position.y = newYRounded;
+    GetParentActor().GetModule<ModuleMovementData>().position.x = newXRounded;
+    GetParentActor().GetModule<ModuleMovementData>().position.y = newYRounded;
 
     if (newXRoundedI != oldXI || newYRoundedI != oldYI) {
   engine.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor
@@ -119,22 +119,22 @@ void cModuleMovement::UpdateDirectionalMovement() {
 
   if (engine.GetCurrentMapArea().tiles
           [static_cast<int>(newX)][static_cast<int>(newY)].properties.count("WarpToFloor") > 0) {
-    auto angle = *GetParentActor().GetModule<cModuleMovementData>().facingAngle
+    auto angle = *GetParentActor().GetModule<ModuleMovementData>().facingAngle
             / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
-    auto dx = -static_cast<float>(std::cos(angle)) * GetParentActor().GetModule<cModuleMovementData>().stepMultiplier;
-    auto dy = static_cast<float>(std::sin(angle)) * GetParentActor().GetModule<cModuleMovementData>().stepMultiplier;
+    auto dx = -static_cast<float>(std::cos(angle)) * GetParentActor().GetModule<ModuleMovementData>().stepMultiplier;
+    auto dy = static_cast<float>(std::sin(angle)) * GetParentActor().GetModule<ModuleMovementData>().stepMultiplier;
 
     auto newXOld = newX;
     auto newYOld = newY;
 
-    newX += dx * GetParentActor().GetModule<cModuleMovementData>().stepSize * 10;
-    newY += dy * GetParentActor().GetModule<cModuleMovementData>().stepSize * 10;
+    newX += dx * GetParentActor().GetModule<ModuleMovementData>().stepSize * 10;
+    newY += dy * GetParentActor().GetModule<ModuleMovementData>().stepSize * 10;
 
-    auto oldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().position.x);
-    auto oldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().position.y);
+    auto oldXI = static_cast<int>(GetParentActor().GetModule<ModuleMovementData>().position.x);
+    auto oldYI = static_cast<int>(GetParentActor().GetModule<ModuleMovementData>().position.y);
 
-    GetParentActor().GetModule<cModuleMovementData>().position.x = newX;
-    GetParentActor().GetModule<cModuleMovementData>().position.y = newY;
+    GetParentActor().GetModule<ModuleMovementData>().position.x = newX;
+    GetParentActor().GetModule<ModuleMovementData>().position.y = newY;
 
     auto coord = engine.GetCurrentMapArea().worldCoord;
     coord.z = std::stoi(engine.GetCurrentMapArea().tiles
@@ -144,38 +144,38 @@ void cModuleMovement::UpdateDirectionalMovement() {
             = std::move(engine.GetCurrentMapArea().tiles[newXOld][newYOld].actor);
     engine.GetCurrentMapArea().tiles[newXOld][newYOld].actor = nullptr;
 
-    GetParentActor().GetModule<cModuleMovementData>().worldMapCoord.z =
+    GetParentActor().GetModule<ModuleMovementData>().worldMapCoord.z =
         std::stoi(engine.GetCurrentMapArea().tiles
             [static_cast<int>(newXOld)][static_cast<int>(newYOld)].properties.at("WarpToFloor"));
   }
 
-  GetParentActor().GetModule<cModuleMovementData>().tickLastMove = Ticks();
+  GetParentActor().GetModule<ModuleMovementData>().tickLastMove = Ticks();
 }
 
-void cModuleMovement::UpdateDestinationMovement() {
-  if (!(Ticks() > GetParentActor().GetModule<cModuleMovementData>().tickLastMove + GetParentActor().GetModule<cModuleMovementData>().moveSpeed && GetParentActor().GetModule<cModuleMovementData>().moveDestination.x != -1 &&
-        GetParentActor().GetModule<cModuleMovementData>().moveDestination.y != -1))
+void ModuleMovement::UpdateDestinationMovement() {
+  if (!(Ticks() > GetParentActor().GetModule<ModuleMovementData>().tickLastMove + GetParentActor().GetModule<ModuleMovementData>().moveSpeed && GetParentActor().GetModule<ModuleMovementData>().moveDestination.x != -1 &&
+        GetParentActor().GetModule<ModuleMovementData>().moveDestination.y != -1))
     return;
 
-  auto dx = GetParentActor().GetModule<cModuleMovementData>().moveDestination.x - GetParentActor().GetModule<cModuleMovementData>().position.x;
-  auto dy = GetParentActor().GetModule<cModuleMovementData>().moveDestination.y - GetParentActor().GetModule<cModuleMovementData>().position.y;
+  auto dx = GetParentActor().GetModule<ModuleMovementData>().moveDestination.x - GetParentActor().GetModule<ModuleMovementData>().position.x;
+  auto dy = GetParentActor().GetModule<ModuleMovementData>().moveDestination.y - GetParentActor().GetModule<ModuleMovementData>().position.y;
   auto absDx = std::abs(dx);
   auto absDy = std::abs(dy);
   auto piF = static_cast<float>(M_PI);
 
-  if (absDx < GetParentActor().GetModule<cModuleMovementData>().stepMultiplier && absDy < GetParentActor().GetModule<cModuleMovementData>().stepMultiplier) {
-    GetParentActor().GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+  if (absDx < GetParentActor().GetModule<ModuleMovementData>().stepMultiplier && absDy < GetParentActor().GetModule<ModuleMovementData>().stepMultiplier) {
+    GetParentActor().GetModule<ModuleMovementData>().moveDestination = {-1, -1};
   } else {
-    GetParentActor().GetModule<cModuleMovementData>().isWalking = true;
-    *GetParentActor().GetModule<cModuleMovementData>().facingAngle
+    GetParentActor().GetModule<ModuleMovementData>().isWalking = true;
+    *GetParentActor().GetModule<ModuleMovementData>().facingAngle
             = static_cast<float>(std::atan2(-dx, -dy)) / piF * 180.0f;
 
-    auto angle = *GetParentActor().GetModule<cModuleMovementData>().facingAngle / 180.0f * piF - piF / 2 +
+    auto angle = *GetParentActor().GetModule<ModuleMovementData>().facingAngle / 180.0f * piF - piF / 2 +
                  0 * piF / 2;
-    auto dx = -static_cast<float>(std::cos(angle)) * GetParentActor().GetModule<cModuleMovementData>().stepMultiplier;
-    auto dy = static_cast<float>(std::sin(angle)) * GetParentActor().GetModule<cModuleMovementData>().stepMultiplier;
-    auto newX = GetParentActor().GetModule<cModuleMovementData>().position.x + dx * GetParentActor().GetModule<cModuleMovementData>().stepSize;
-    auto newY = GetParentActor().GetModule<cModuleMovementData>().position.y + dy * GetParentActor().GetModule<cModuleMovementData>().stepSize;
+    auto dx = -static_cast<float>(std::cos(angle)) * GetParentActor().GetModule<ModuleMovementData>().stepMultiplier;
+    auto dy = static_cast<float>(std::sin(angle)) * GetParentActor().GetModule<ModuleMovementData>().stepMultiplier;
+    auto newX = GetParentActor().GetModule<ModuleMovementData>().position.x + dx * GetParentActor().GetModule<ModuleMovementData>().stepSize;
+    auto newY = GetParentActor().GetModule<ModuleMovementData>().position.y + dy * GetParentActor().GetModule<ModuleMovementData>().stepSize;
 
     if (newX < 0)
       newX += engine.GetCurrentMapArea().size;
@@ -202,15 +202,15 @@ void cModuleMovement::UpdateDestinationMovement() {
 
     if (!engine.GetCurrentMapArea()
              .tiles[newXRoundedI][newYRoundedI]
-            .HasObjectWithFlag(ObjectMovementBlock)
+            .HasObjectWithFlag(ObjObstacle)
             && engine.GetCurrentMapArea()
             .tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
             && !tileHasMob) {
-        auto oldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().position.x);
-        auto oldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().position.y);
+        auto oldXI = static_cast<int>(GetParentActor().GetModule<ModuleMovementData>().position.x);
+        auto oldYI = static_cast<int>(GetParentActor().GetModule<ModuleMovementData>().position.y);
 
-      GetParentActor().GetModule<cModuleMovementData>().position.x = newXRounded;
-      GetParentActor().GetModule<cModuleMovementData>().position.y = newYRounded;
+      GetParentActor().GetModule<ModuleMovementData>().position.x = newXRounded;
+      GetParentActor().GetModule<ModuleMovementData>().position.y = newYRounded;
 
         if (newXRoundedI != oldXI || newYRoundedI != oldYI) {
       engine.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor
@@ -221,22 +221,22 @@ void cModuleMovement::UpdateDestinationMovement() {
 
     if (engine.GetCurrentMapArea().tiles
             [static_cast<int>(newX)][static_cast<int>(newY)].properties.count("WarpToFloor") > 0) {
-        auto angle = *GetParentActor().GetModule<cModuleMovementData>().facingAngle
+        auto angle = *GetParentActor().GetModule<ModuleMovementData>().facingAngle
                 / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
-        auto dx = -static_cast<float>(std::cos(angle)) * GetParentActor().GetModule<cModuleMovementData>().stepMultiplier;
-        auto dy = static_cast<float>(std::sin(angle)) * GetParentActor().GetModule<cModuleMovementData>().stepMultiplier;
+        auto dx = -static_cast<float>(std::cos(angle)) * GetParentActor().GetModule<ModuleMovementData>().stepMultiplier;
+        auto dy = static_cast<float>(std::sin(angle)) * GetParentActor().GetModule<ModuleMovementData>().stepMultiplier;
 
         auto newXOld = newX;
         auto newYOld = newY;
 
-        newX += dx * GetParentActor().GetModule<cModuleMovementData>().stepSize * 10;
-        newY += dy * GetParentActor().GetModule<cModuleMovementData>().stepSize * 10;
+        newX += dx * GetParentActor().GetModule<ModuleMovementData>().stepSize * 10;
+        newY += dy * GetParentActor().GetModule<ModuleMovementData>().stepSize * 10;
 
-        auto oldXI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().position.x);
-        auto oldYI = static_cast<int>(GetParentActor().GetModule<cModuleMovementData>().position.y);
+        auto oldXI = static_cast<int>(GetParentActor().GetModule<ModuleMovementData>().position.x);
+        auto oldYI = static_cast<int>(GetParentActor().GetModule<ModuleMovementData>().position.y);
 
-        GetParentActor().GetModule<cModuleMovementData>().position.x = newX;
-        GetParentActor().GetModule<cModuleMovementData>().position.y = newY;
+        GetParentActor().GetModule<ModuleMovementData>().position.x = newX;
+        GetParentActor().GetModule<ModuleMovementData>().position.y = newY;
 
         auto coord = engine.GetCurrentMapArea().worldCoord;
         coord.z = std::stoi(engine.GetCurrentMapArea().tiles
@@ -246,13 +246,13 @@ void cModuleMovement::UpdateDestinationMovement() {
                 = std::move(engine.GetCurrentMapArea().tiles[newXOld][newYOld].actor);
         engine.GetCurrentMapArea().tiles[newXOld][newYOld].actor = nullptr;
 
-        GetParentActor().GetModule<cModuleMovementData>().worldMapCoord.z =
+        GetParentActor().GetModule<ModuleMovementData>().worldMapCoord.z =
             std::stoi(engine.GetCurrentMapArea().tiles
                 [static_cast<int>(newXOld)][static_cast<int>(newYOld)].properties.at("WarpToFloor"));
     }
   }
 
-  GetParentActor().GetModule<cModuleMovementData>().tickLastMove = Ticks();
+  GetParentActor().GetModule<ModuleMovementData>().tickLastMove = Ticks();
 }
 
 }  // namespace Forradia

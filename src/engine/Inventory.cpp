@@ -6,16 +6,16 @@
 
 namespace Forradia {
 
-void cInventory::Add(std::string objectName) {
+void Inventory::Add(std::string objectName) {
     for (auto i = 0; i <= objects.size(); i++) {
         if (objects.count(i) == 0) {
-            objects.insert({i, MakeSPtr<cObject>(objectName)});
+            objects.insert({i, MakeSPtr<Object>(objectName)});
             return;
         }
     }
 }
 
-void cInventory::AddMany(std::vector<std::string> objectNames) {
+void Inventory::AddMany(std::vector<std::string> objectNames) {
     for (auto& name : objectNames) {
         Add(name);
     }

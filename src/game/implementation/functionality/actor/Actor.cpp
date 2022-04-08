@@ -3,36 +3,36 @@
 
 #include "Actor.h"
 #include "modules/ModuleMovement.h"
-#include "../engine/iEngine.h"
+#include "../engine/IEngine.h"
 #include "modules/ModuleMovementData.h"
 
 namespace Forradia {
 
-cActor::cActor(const iEngine &engine_, float x, float y,
+Actor::Actor(const IEngine &engine_, float x, float y,
                std::string modelName_) :
     engine(engine_), modelName(modelName_),
     actorId(currentActorId++) {
-    AddIfNotExists<cModuleMovementData>();
-    GetModule<cModuleMovementData>().position = {x, y};
+    AddIfNotExists<ModuleMovementData>();
+    GetModule<ModuleMovementData>().position = {x, y};
 }
 
-void cActor::ResetForNewFrame() const {
+void Actor::ResetForNewFrame() const {
   for (auto &[key, module] : modules)
     module->ResetForNewFrame();
 }
 
-void cActor::Update() const {
+void Actor::Update() const {
   for (auto &[key, module] : modules)
     module->Update();
 }
 
-int cActor::GetAnimatedModelId() const {
-    if (!HasModule<cModuleMovementData>()) {
+int Actor::GetAnimatedModelId() const {
+    if (!HasModule<ModuleMovementData>()) {
         return GetId(modelName);
     } else {
         auto modelNameAnimated = modelName;
 
-        if (GetModule<cModuleMovementData>().isWalking) {
+        if (GetModule<ModuleMovementData>().isWalking) {
           auto animIndex = ((Ticks() + actorId*10) % 300) / 75;
 
           if (animIndex > 0)

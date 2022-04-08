@@ -9,9 +9,9 @@
 
 namespace Forradia {
 
-class cGuiWindowBase {
+class GuiWindowBase {
  public:
-  cGuiWindowBase(const cEngine &_engine, std::string _tile, cRectF _bounds)
+  GuiWindowBase(const Engine &_engine, std::string _tile, RectF _bounds)
       : engine(_engine), title(_tile), bounds(_bounds) {}
 
   // Looped operations
@@ -31,7 +31,7 @@ class cGuiWindowBase {
  protected:
   // Internal helpers
 
-  cRectF GetInteriorBounds();
+  RectF GetInteriorBounds();
 
   // To implement in child
 
@@ -42,17 +42,17 @@ class cGuiWindowBase {
 
   const float margin = 0.008f;
 
-  const cEngine &engine;
+  const Engine &engine;
 
  private:
   // Internal helpers
 
-  cRectF GetTitleBarBounds();
+  RectF GetTitleBarBounds();
 
   // Composition
 
-  cPalette palette;
-  cUtilities utilities;
+  Palette palette;
+  Utilities utilities;
 
   // Basic data
 
@@ -61,7 +61,7 @@ class cGuiWindowBase {
 
   // Dimensions
 
-  cRectF bounds;
+  RectF bounds;
 
   // Window movement
 

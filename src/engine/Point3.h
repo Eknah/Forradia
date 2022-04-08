@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-class cPoint3 {
+class Point3 {
  public:
   int x = 0;
   int y = 0;

@@ -7,29 +7,29 @@
 
 namespace Forradia {
 
-void cScenePrimary::Enter() {
+void ScenePrimary::Enter() {
     gui.Initialize();
 }
 
-void cScenePrimary::Update() {
+void ScenePrimary::Update() {
   auto &keys = engine.keyboardHandler.keysBeingPressed;
   auto &player = engine.GetPlayer();
 
   player.ResetForNewFrame();
 
-  auto instruction = cModuleMovement::MovementInstruction();
+  auto instruction = ModuleMovement::MovementInstruction();
 
   instruction.tryMoveForward = keys->count(SDLK_w);
   instruction.tryMoveRight = keys->count(SDLK_d);
   instruction.tryMoveBack = keys->count(SDLK_s);
   instruction.tryMoveLeft = keys->count(SDLK_a);
 
-  player.GetModule<cModuleMovement>().instruction = instruction;
+  player.GetModule<ModuleMovement>().instruction = instruction;
 
   if (instruction.tryMoveForward || instruction.tryMoveRight ||
       instruction.tryMoveBack || instruction.tryMoveLeft) {
-    *player.GetModule<cModuleMovementData>().facingAngle = camera.lookingAngle;
-    player.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+    *player.GetModule<ModuleMovementData>().facingAngle = camera.lookingAngle;
+    player.GetModule<ModuleMovementData>().moveDestination = {-1, -1};
   }
 
   auto turnRight = keys->count(SDLK_e);
@@ -37,10 +37,10 @@ void cScenePrimary::Update() {
 
   if (turnRight) {
     camera.Update(GetId("Right"), *engine.mouseHandler.wheelAmount);
-    player.GetModule<cModuleMovement>().UpdateRotation(camera.lookingAngle);
+    player.GetModule<ModuleMovement>().UpdateRotation(camera.lookingAngle);
   } else if (turnLeft) {
     camera.Update(GetId("Left"), *engine.mouseHandler.wheelAmount);
-    player.GetModule<cModuleMovement>().UpdateRotation(camera.lookingAngle);
+    player.GetModule<ModuleMovement>().UpdateRotation(camera.lookingAngle);
   } else {
     camera.Update(0, *engine.mouseHandler.wheelAmount);
   }
@@ -52,39 +52,39 @@ void cScenePrimary::Update() {
   camera.UpdateCameraMovement();
 
   if (engine.mouseHandler.rightButtonDown)
-    *player.GetModule<cModuleMovementData>().facingAngle = camera.lookingAngle;
+    *player.GetModule<ModuleMovementData>().facingAngle = camera.lookingAngle;
 
   if (engine.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
-    engine.GetPlayer().GetModule<cModuleJumping>().Jump();
+    engine.GetPlayer().GetModule<ModuleJumping>().Jump();
 
   if (engine.mouseHandler.rightButtonDown)
-    engine.customCursor.cursorType = eCursorTypes::Hidden;
+    engine.customCursor.cursorType = CursorTypes::Hidden;
 
   player.Update();
   mobsEngine.Update();
   gui.Update();
 }
 
-void cScenePrimary::Render() {
+void ScenePrimary::Render() {
   gameWorldRenderer.Render();
   gui.Render();
 }
 
-void cScenePrimary::DoMouseDown(Uint8 mouseButton) {
-  if (engine.GetPlayer().GetModule<cModuleObjectUsage>().objectBeingUsed !=
+void ScenePrimary::DoMouseDown(Uint8 mouseButton) {
+  if (engine.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed !=
       nullptr) {
     auto hovered = camera.GetHoveredTile();
 
     if (engine.GetCurrentMapArea().tiles[hovered.x][hovered.y].objects.size() >
         0)
-      engine.GetPlayer().GetModule<cModuleObjectUsage>().objectBeingUsed->UseOn(
+      engine.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed->UseOn(
           engine.GetCurrentMapArea().tiles[hovered.x][hovered.y].objects.at(
               engine.GetCurrentMapArea()
                   .tiles[hovered.x][hovered.y]
                   .objects.size() -
               1));
 
-    engine.GetPlayer().GetModule<cModuleObjectUsage>().objectBeingUsed
+    engine.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed
             = nullptr;
 
     return;
@@ -97,7 +97,7 @@ void cScenePrimary::DoMouseDown(Uint8 mouseButton) {
 
   switch (mouseButton) {
   case SDL_BUTTON_LEFT: {
-    engine.GetPlayer().GetModule<cModuleMovementData>().moveDestination = {
+    engine.GetPlayer().GetModule<ModuleMovementData>().moveDestination = {
         camera.GetHoveredTile().x + 0.5f, camera.GetHoveredTile().y + 0.5f};
     break;
   }
@@ -107,7 +107,7 @@ void cScenePrimary::DoMouseDown(Uint8 mouseButton) {
   }
 }
 
-void cScenePrimary::DoMouseUp(Uint8 MouseButton) {
+void ScenePrimary::DoMouseUp(Uint8 MouseButton) {
     gui.DoMouseUp();
 }
 

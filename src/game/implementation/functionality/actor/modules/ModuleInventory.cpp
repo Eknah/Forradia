@@ -6,12 +6,12 @@
 
 namespace Forradia {
 
-void cModuleInventory::ResetForNewFrame() {}
+void ModuleInventory::ResetForNewFrame() {}
 
-void cModuleInventory::Update() {}
+void ModuleInventory::Update() {}
 
-void cModuleInventory::Add(int position, std::string objectName) {
-  inventory.objects.insert({position, MakeSPtr<cObject>(objectName)});
+void ModuleInventory::Add(int position, std::string objectName) {
+  inventory.objects.insert({position, MakeSPtr<Object>(objectName)});
 }
 
 }  // namespace Forradia

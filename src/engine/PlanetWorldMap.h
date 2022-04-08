@@ -7,11 +7,11 @@
 
 namespace Forradia {
 
-class iMapGenerator;
+class IMapGenerator;
 
-class cPlanetWorldMap {
+class PlanetWorldMap {
  public:
-  explicit cPlanetWorldMap(int _mapAreaSize,
+  explicit PlanetWorldMap(int _mapAreaSize,
                      int _worldMapWidth,
                      int _worldMapHeight) :
         mapAreaSize(_mapAreaSize), worldMapWidth(_worldMapWidth),
@@ -19,10 +19,10 @@ class cPlanetWorldMap {
 
   // Core
 
-    void GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>> genAreas);
-    cRect GetBounds();
+    void GenerateWorldMap(UMap<int, UMap<int, SPtr<IMapGenerator>>> genAreas);
+    Rect GetBounds();
 
-  UPtr<cMapArea>& GetArea(cPoint3 pos);
+  UPtr<MapArea>& GetArea(Point3 pos);
 
   // Basic data
 
@@ -32,7 +32,7 @@ class cPlanetWorldMap {
 
   // Core world map data structures
 
-  UMap<int, UMap<int, UMap<int, UPtr<cMapArea>>>> areas;
+  UMap<int, UMap<int, UMap<int, UPtr<MapArea>>>> areas;
 };
 
 }  // namespace Forradia

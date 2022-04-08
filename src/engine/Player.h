@@ -10,9 +10,9 @@
 
 namespace Forradia {
 
-class cPlayer : public cActor {
+class Player : public Actor {
  public:
-  explicit cPlayer(iEngine &engine);
+  explicit Player(IEngine &engine);
 };
 
 }  // namespace Forradia

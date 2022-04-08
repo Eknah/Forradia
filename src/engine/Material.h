@@ -11,12 +11,12 @@
 
 namespace Forradia {
 
-class cMaterial {
+class Material {
  public:
   std::string name;
-  cVector3 ka;
-  cVector3 kd;
-  cVector3 ks;
+  Vector3 ka;
+  Vector3 kd;
+  Vector3 ks;
   float ns = 0.0f;
   float ni = 0.0f;
   float d = 0.0f;

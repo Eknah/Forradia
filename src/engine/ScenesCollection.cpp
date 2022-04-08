@@ -5,11 +5,11 @@
 
 namespace Forradia {
 
-void cScenesCollection::Add(std::string sceneName, SPtr<cSceneBase> scene) {
+void ScenesCollection::Add(std::string sceneName, SPtr<SceneBase> scene) {
     scenes.insert({GetId(sceneName), std::move(scene)});
   }
 
-void cScenesCollection::AddMany(std::vector<std::tuple<std::string, SPtr<cSceneBase>>> scenes_) {
+void ScenesCollection::AddMany(std::vector<std::tuple<std::string, SPtr<SceneBase>>> scenes_) {
     for (auto& entry : scenes_) {
         auto name = std::get<0>(entry);
         auto scene = std::get<1>(entry);

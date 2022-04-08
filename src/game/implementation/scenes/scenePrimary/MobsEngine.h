@@ -6,18 +6,18 @@
 
 namespace Forradia {
 
-class cEngine;
+class Engine;
 
-class cMobsEngine {
+class MobsEngine {
  public:
-  explicit cMobsEngine(const cEngine &_engine) : engine(_engine) {}
+  explicit MobsEngine(const Engine &_engine) : engine(_engine) {}
 
   void Update();
 
  private:
-  const cEngine &engine;
+  const Engine &engine;
 
-  cRandom random;
+  Random random;
 };
 
 }  // namespace Forradia

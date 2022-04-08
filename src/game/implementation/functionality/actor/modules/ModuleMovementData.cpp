@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-void cModuleMovementData::ResetForNewFrame() {
+void ModuleMovementData::ResetForNewFrame() {
     isWalking = false;
 }
 

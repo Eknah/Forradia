@@ -12,16 +12,16 @@
 
 namespace Forradia {
 
-class cMesh {
+class Mesh {
  public:
-  cMesh() {}
-  cMesh(std::vector<cVertex> _vertices, std::vector<unsigned int> _indices)
+  Mesh() {}
+  Mesh(std::vector<Vertex> _vertices, std::vector<unsigned int> _indices)
       : vertices(_vertices), indices(_indices) {}
 
   std::string meshName;
-  std::vector<cVertex> vertices;
+  std::vector<Vertex> vertices;
   std::vector<unsigned int> indices;
-  cMaterial meshMaterial;
+  Material meshMaterial;
 };
 
 }  // namespace Forradia

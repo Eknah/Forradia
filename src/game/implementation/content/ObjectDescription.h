@@ -2,18 +2,18 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/eObjectFlags.h"
+#include "../engine/ObjectFlags.h"
 
 namespace Forradia {
 
-class cObjectDescription {
+class ObjectDescription {
  public:
-  cObjectDescription() = default;
-  explicit cObjectDescription(char _flags)
+  ObjectDescription() = default;
+  explicit ObjectDescription(char _flags)
       : flags(_flags) {}
 
   // Description parameters
-  char flags = ObjectNone;
+  char flags = ObjNone;
   float opacity = 1.0f;
 };
 

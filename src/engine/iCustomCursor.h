@@ -3,25 +3,25 @@
 
 #pragma once
 #include "Utilities.h"
-#include "eCursorTypes.h"
+#include "CursorTypes.h"
 
 namespace Forradia {
 
-class iEngine;
+class IEngine;
 
-class iCustomCursor {
+class ICustomCursor {
  public:
-  explicit iCustomCursor(iEngine &_engine) : engine(_engine) {}
+  explicit ICustomCursor(IEngine &_engine) : engine(_engine) {}
 
   virtual void Initialize() = 0;
   virtual void ResetForNewFrame() = 0;
   virtual void Render() = 0;
 
-  eCursorTypes cursorType = eCursorTypes::Default;
+  CursorTypes cursorType = CursorTypes::Default;
 
  protected:
-  iEngine &engine;
-  cUtilities utilities;
+  IEngine &engine;
+  Utilities utilities;
 
   int cursorSize = 40;
 };

@@ -6,33 +6,33 @@
 #include <vector>
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/Actor.h"
-#include "../engine/eObjectFlags.h"
+#include "../engine/ObjectFlags.h"
 #include "framework/worldStructure/Object.h"
 
 namespace Forradia {
 
-class iEngine;
+class IEngine;
 
-class cTile {
+class Tile {
  public:
-  explicit cTile(const iEngine &_engine) : engine(_engine) {}
+  explicit Tile(const IEngine &_engine) : engine(_engine) {}
 
   // Get info about tile
 
-  bool HasObjectWithFlag(eObjectFlags flag);
+  bool HasObjectWithFlag(ObjectFlags flag);
   bool HasObjectOfType(std::string objectName);
 
   // Core tile data structure
 
   int groundType = 0;
-  std::vector<SPtr<cObject>> objects;
-  SPtr<cObject> roof;
+  std::vector<SPtr<Object>> objects;
+  SPtr<Object> roof;
   int elevation = 0;
-  SPtr<cActor> actor = nullptr;
+  SPtr<Actor> actor = nullptr;
   std::unordered_map<std::string, std::string> properties;
 
  private:
-  const iEngine &engine;
+  const IEngine &engine;
 };
 
 }  // namespace Forradia

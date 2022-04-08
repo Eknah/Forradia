@@ -4,14 +4,14 @@
 #pragma once
 #include <string>
 #include "../engine/Aliases.h"
-#include "../engine/iModule.h"
+#include "../engine/IModule.h"
 #include "../engine/Inventory.h"
 
 namespace Forradia {
 
-class cModuleInventory : public iModule {
+class ModuleInventory : public IModule {
  public:
-  using iModule::iModule;
+  using IModule::IModule;
 
   void ResetForNewFrame() override;
   void Update() override;
@@ -23,7 +23,7 @@ class cModuleInventory : public iModule {
   // Collection structure
 
   //UMap<int, SPtr<cObject>> Objects;
-  cInventory inventory;
+  Inventory inventory;
 };
 
 }  // namespace Forradia

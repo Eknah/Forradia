@@ -5,23 +5,23 @@
 
 namespace Forradia {
 
-void cSDL_Deleter::operator()(SDL_Window *p) const {
+void SDL_Deleter::operator()(SDL_Window *p) const {
     SDL_DestroyWindow(p);
 }
 
-void cSDL_Deleter::operator()(SDL_Renderer *p) const {
+void SDL_Deleter::operator()(SDL_Renderer *p) const {
     SDL_DestroyRenderer(p);
 }
 
-void cSDL_Deleter::operator()(SDL_Texture *p) const {
+void SDL_Deleter::operator()(SDL_Texture *p) const {
     SDL_DestroyTexture(p);
 }
 
-void cSDL_Deleter::operator()(SDL_Surface *p) const {
+void SDL_Deleter::operator()(SDL_Surface *p) const {
     SDL_FreeSurface(p);
 }
 
-void cSDL_Deleter::operator()(TTF_Font *p) const {
+void SDL_Deleter::operator()(TTF_Font *p) const {
     TTF_CloseFont(p);
 }
 

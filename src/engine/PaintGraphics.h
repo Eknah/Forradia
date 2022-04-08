@@ -9,7 +9,7 @@
 
 namespace Forradia {
 
-class cPaintGraphics {
+class PaintGraphics {
  public:
   // ---- Drawing operations ----
 
@@ -26,7 +26,7 @@ class cPaintGraphics {
   // ---- Drawing operations generalization ----
 
   void RenderShape(GLenum geometryType,
-                          const std::vector<cPoint2F> &vertices,
+                          const std::vector<Point2F> &vertices,
                           SDL_Color color) const;
 };
 

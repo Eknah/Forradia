@@ -11,11 +11,11 @@
 
 namespace Forradia {
 
-class iEngine;
+class IEngine;
 
-class cMob : public cActor {
+class Mob : public Actor {
  public:
-  cMob(const iEngine &engine, float x, float y,
+  Mob(const IEngine &engine, float x, float y,
        std::string modelName);
 };
 

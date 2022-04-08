@@ -8,9 +8,9 @@
 
 namespace Forradia {
 
-void cModuleJumping::ResetForNewFrame() {}
+void ModuleJumping::ResetForNewFrame() {}
 
-void cModuleJumping::Update() {
+void ModuleJumping::Update() {
   if (isJumping) {
     auto deltaTicks = Ticks() - tickStartJumping;
     auto jumpHeight =
@@ -20,16 +20,16 @@ void cModuleJumping::Update() {
                  3.0f) *
         maxJumpHeight;
 
-    GetParentActor().GetModule<cModuleMovementData>().positionZ = jumpHeight;
+    GetParentActor().GetModule<ModuleMovementData>().positionZ = jumpHeight;
   }
 
   if (Ticks() > tickStartJumping + jumpDuration) {
-    GetParentActor().GetModule<cModuleMovementData>().positionZ = 0.0f;
+    GetParentActor().GetModule<ModuleMovementData>().positionZ = 0.0f;
     isJumping = false;
   }
 }
 
-void cModuleJumping::Jump() {
+void ModuleJumping::Jump() {
   isJumping = true;
   tickStartJumping = Ticks();
 }

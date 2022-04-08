@@ -5,31 +5,31 @@
 
 namespace Forradia {
 
-void cPaintGraphics::FillRectangle(SDL_Color Color, float X, float Y, float Width,
+void PaintGraphics::FillRectangle(SDL_Color Color, float X, float Y, float Width,
                             float Height) const {
-    std::vector<cPoint2F> vertices = {
+    std::vector<Point2F> vertices = {
         {X, Y}, {X, Y + Height}, {X + Width, Y + Height}, {X + Width, Y}};
 
     RenderShape(GL_QUADS, vertices, Color);
   }
 
-void cPaintGraphics::DrawRectangle(SDL_Color Color, float X, float Y, float Width,
+void PaintGraphics::DrawRectangle(SDL_Color Color, float X, float Y, float Width,
                             float Height) const {
-    std::vector<cPoint2F> vertices = {
+    std::vector<Point2F> vertices = {
         {X, Y}, {X, Y + Height}, {X + Width, Y + Height}, {X + Width, Y}};
 
     RenderShape(GL_LINE_LOOP, vertices, Color);
   }
 
-void cPaintGraphics::DrawLine(SDL_Color Color, float X0, float Y0, float X1,
+void PaintGraphics::DrawLine(SDL_Color Color, float X0, float Y0, float X1,
                        float Y1) const {
-    std::vector<cPoint2F> vertices = {{X0, Y0}, {X1, Y1}};
+    std::vector<Point2F> vertices = {{X0, Y0}, {X1, Y1}};
 
     RenderShape(GL_LINE_STRIP, vertices, Color);
   }
 
-void cPaintGraphics::RenderShape(GLenum GeometryType,
-                          const std::vector<cPoint2F> &Vertices,
+void PaintGraphics::RenderShape(GLenum GeometryType,
+                          const std::vector<Point2F> &Vertices,
                           SDL_Color Color) const {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

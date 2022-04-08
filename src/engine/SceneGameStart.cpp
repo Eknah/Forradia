@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-void cSceneGameStart::Update() {
+void SceneGameStart::Update() {
     if (engine.keyboardHandler.keysBeenFired->size() > 0)
       engine.sceneManager.SwitchToScene(switchToSceneName);
 
@@ -14,7 +14,7 @@ void cSceneGameStart::Update() {
         engine.sceneManager.SwitchToScene(switchToSceneName);
   }
 
-void cSceneGameStart::Render() {
+void SceneGameStart::Render() {
     engine.DrawImage(imageNameBackground, 0, 0, 1, 1);
 
     auto logoSizeF = engine.GetImageSizeF(imageNameLogo);

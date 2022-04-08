@@ -8,11 +8,11 @@
 
 namespace Forradia {
 
-cModel3D::~cModel3D() {
+Model3D::~Model3D() {
     loadedMeshes.clear();
 }
 
-bool cModel3D::LoadFile(std::string Path) {
+bool Model3D::LoadFile(std::string Path) {
     if (Path.substr(Path.size() - 4, 4) != ".obj")
       return false;
 
@@ -25,15 +25,15 @@ bool cModel3D::LoadFile(std::string Path) {
     loadedVertices.clear();
     loadedIndices.clear();
 
-    std::vector<cVector3> Positions;
-    std::vector<cVector2> TCoords;
-    std::vector<cVector3> Normals;
-    std::vector<cVertex> Vertices;
+    std::vector<Vector3> Positions;
+    std::vector<Vector2> TCoords;
+    std::vector<Vector3> Normals;
+    std::vector<Vertex> Vertices;
     std::vector<unsigned int> Indices;
     std::vector<std::string> MeshMatNames;
     bool listening = false;
     std::string meshname;
-    cMesh tempMesh;
+    Mesh tempMesh;
     std::string curline;
 
     while (std::getline(file, curline)) {
@@ -48,7 +48,7 @@ bool cModel3D::LoadFile(std::string Path) {
             meshname = "unnamed";
         } else {
           if (!Indices.empty() && !Vertices.empty()) {
-            tempMesh = cMesh(Vertices, Indices);
+            tempMesh = Mesh(Vertices, Indices);
             tempMesh.meshName = meshname;
             loadedMeshes.push_back(tempMesh);
             Vertices.clear();
@@ -66,7 +66,7 @@ bool cModel3D::LoadFile(std::string Path) {
 
       if (FirstToken(curline) == "v") {
         std::vector<std::string> spos;
-        cVector3 vpos;
+        Vector3 vpos;
         Split(Tail(curline), &spos, " ");
         vpos.x = std::stof(spos[0]);
         vpos.y = std::stof(spos[1]);
@@ -76,7 +76,7 @@ bool cModel3D::LoadFile(std::string Path) {
 
       if (FirstToken(curline) == "vt") {
         std::vector<std::string> stex;
-        cVector2 vtex;
+        Vector2 vtex;
         Split(Tail(curline), &stex, " ");
         vtex.x = std::stof(stex[0]);
         vtex.y = std::stof(stex[1]);
@@ -85,7 +85,7 @@ bool cModel3D::LoadFile(std::string Path) {
 
       if (FirstToken(curline) == "vn") {
         std::vector<std::string> snor;
-        cVector3 vnor;
+        Vector3 vnor;
         Split(Tail(curline), &snor, " ");
         vnor.x = std::stof(snor[0]);
         vnor.y = std::stof(snor[1]);
@@ -94,7 +94,7 @@ bool cModel3D::LoadFile(std::string Path) {
       }
 
       if (FirstToken(curline) == "f") {
-        std::vector<cVertex> vVerts;
+        std::vector<Vertex> vVerts;
         GenVerticesFromRawOBJ(&vVerts, Positions, TCoords, Normals, curline);
 
         for (unsigned int i = 0; i < vVerts.size(); i++) {
@@ -119,7 +119,7 @@ bool cModel3D::LoadFile(std::string Path) {
         MeshMatNames.push_back(Tail(curline));
 
         if (!Indices.empty() && !Vertices.empty()) {
-          tempMesh = cMesh(Vertices, Indices);
+          tempMesh = Mesh(Vertices, Indices);
           tempMesh.meshName = meshname;
           int i = 2;
 
@@ -147,7 +147,7 @@ bool cModel3D::LoadFile(std::string Path) {
     }
 
     if (!Indices.empty() && !Vertices.empty()) {
-      tempMesh = cMesh(Vertices, Indices);
+      tempMesh = Mesh(Vertices, Indices);
       tempMesh.meshName = meshname;
       loadedMeshes.push_back(tempMesh);
     }
@@ -171,13 +171,13 @@ bool cModel3D::LoadFile(std::string Path) {
       return true;
   }
 
-void cModel3D::GenVerticesFromRawOBJ(std::vector<cVertex> *oVerts,
-                                    const std::vector<cVector3> &iPositions,
-                                    const std::vector<cVector2> &iTCoords,
-                                    const std::vector<cVector3> &iNormals,
+void Model3D::GenVerticesFromRawOBJ(std::vector<Vertex> *oVerts,
+                                    const std::vector<Vector3> &iPositions,
+                                    const std::vector<Vector2> &iTCoords,
+                                    const std::vector<Vector3> &iNormals,
                                     std::string icurline) {
     std::vector<std::string> sface, svert;
-    cVertex vVert;
+    Vertex vVert;
     Split(Tail(icurline), &sface, " ");
     bool noNormal = false;
 
@@ -202,7 +202,7 @@ void cModel3D::GenVerticesFromRawOBJ(std::vector<cVertex> *oVerts,
       switch (vtype) {
       case 1: {
         vVert.position = GetElement(iPositions, svert[0]);
-        vVert.textureCoordinate = cVector2(0, 0);
+        vVert.textureCoordinate = Vector2(0, 0);
         noNormal = true;
         oVerts->push_back(vVert);
 
@@ -218,7 +218,7 @@ void cModel3D::GenVerticesFromRawOBJ(std::vector<cVertex> *oVerts,
       }
       case 3: {
         vVert.position = GetElement(iPositions, svert[0]);
-        vVert.textureCoordinate = cVector2(0, 0);
+        vVert.textureCoordinate = Vector2(0, 0);
         vVert.normal = GetElement(iNormals, svert[2]);
         oVerts->push_back(vVert);
 
@@ -239,18 +239,18 @@ void cModel3D::GenVerticesFromRawOBJ(std::vector<cVertex> *oVerts,
     }
 
     if (noNormal) {
-      cVector3 A = (*oVerts)[0].position - (*oVerts)[1].position;
-      cVector3 B = (*oVerts)[2].position - (*oVerts)[1].position;
+      Vector3 A = (*oVerts)[0].position - (*oVerts)[1].position;
+      Vector3 B = (*oVerts)[2].position - (*oVerts)[1].position;
 
-      cVector3 Normal = math3D.Cross(A, B);
+      Vector3 Normal = math3D.Cross(A, B);
 
       for (unsigned int i = 0; i < oVerts->size(); i++)
         (*oVerts)[i].normal = Normal;
     }
   }
 
-void cModel3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
-                                  const std::vector<cVertex> &iVerts) {
+void Model3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
+                                  const std::vector<Vertex> &iVerts) {
     if (iVerts.size() < 3)
       return;
 
@@ -262,19 +262,19 @@ void cModel3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
       return;
     }
 
-    std::vector<cVertex> tVerts = iVerts;
+    std::vector<Vertex> tVerts = iVerts;
 
     while (true) {
       for (unsigned int i = 0; i < tVerts.size(); i++) {
-        cVertex pPrev;
+        Vertex pPrev;
 
         if (i == 0)
           pPrev = tVerts[tVerts.size() - 1];
         else
           pPrev = tVerts[i - 1];
 
-        cVertex pCur = tVerts[i];
-        cVertex pNext;
+        Vertex pCur = tVerts[i];
+        Vertex pNext;
 
         if (i == tVerts.size() - 1)
           pNext = tVerts[0];
@@ -305,7 +305,7 @@ void cModel3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
               oIndices->push_back(j);
           }
 
-          cVector3 tempVec;
+          Vector3 tempVec;
           for (unsigned int j = 0; j < tVerts.size(); j++) {
             if (tVerts[j].position != pCur.position &&
                 tVerts[j].position != pPrev.position &&
@@ -377,7 +377,7 @@ void cModel3D::VertexTriangluation(std::vector<unsigned int> *oIndices,
     }
   }
 
-bool cModel3D::LoadMaterials(std::string path) {
+bool Model3D::LoadMaterials(std::string path) {
     if (path.substr(path.size() - 4, path.size()) != ".mtl")
       return false;
 
@@ -386,7 +386,7 @@ bool cModel3D::LoadMaterials(std::string path) {
     if (!file.is_open())
       return false;
 
-    cMaterial tempMaterial;
+    Material tempMaterial;
 
     bool listening = false;
 
@@ -404,7 +404,7 @@ bool cModel3D::LoadMaterials(std::string path) {
         } else {
           loadedMaterials.push_back(tempMaterial);
 
-          tempMaterial = cMaterial();
+          tempMaterial = Material();
 
           if (curline.size() > 7)
             tempMaterial.name = Tail(curline);

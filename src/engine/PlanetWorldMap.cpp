@@ -2,11 +2,11 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "PlanetWorldMap.h"
-#include "../engine/iMapGenerator.h"
+#include "../engine/IMapGenerator.h"
 
 namespace Forradia {
 
-void cPlanetWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>> GenAreas) {
+void PlanetWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<IMapGenerator>>> GenAreas) {
     for (auto& [X, Remain] : GenAreas) {
         for (auto& [Y, Gen] : Remain) {
             Gen->GenerateMapArea(X, Y, 0);
@@ -14,7 +14,7 @@ void cPlanetWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<iMapGenerator>>>
     }
 }
 
-cRect cPlanetWorldMap::GetBounds() {
+Rect PlanetWorldMap::GetBounds() {
     auto minx = std::numeric_limits<int>::max();
     auto miny = std::numeric_limits<int>::max();
     auto maxx = std::numeric_limits<int>::min();
@@ -38,7 +38,7 @@ cRect cPlanetWorldMap::GetBounds() {
     return {minx, miny, maxx - minx, maxy - miny};
 }
 
-UPtr<cMapArea>& cPlanetWorldMap::GetArea(cPoint3 Pos) {
+UPtr<MapArea>& PlanetWorldMap::GetArea(Point3 Pos) {
     return areas[Pos.x][Pos.y][Pos.z];
 }
 

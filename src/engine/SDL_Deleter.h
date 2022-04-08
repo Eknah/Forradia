@@ -7,7 +7,7 @@
 
 namespace Forradia {
 
-class cSDL_Deleter {
+class SDL_Deleter {
  public:
   void operator()(SDL_Window *p) const;
   void operator()(SDL_Renderer *p) const;

@@ -10,17 +10,17 @@
 
 namespace Forradia {
 
-class cMath3D {
+class Math3D {
  public:
-  cVector3 Cross(const cVector3 a, const cVector3 b);
+  Vector3 Cross(const Vector3 a, const Vector3 b);
 
-  float Magnitude(const cVector3 in);
+  float Magnitude(const Vector3 in);
 
-  float Dot(const cVector3 a, const cVector3 b);
+  float Dot(const Vector3 a, const Vector3 b);
 
-  float AngleBetween(const cVector3 a, const cVector3 b);
+  float AngleBetween(const Vector3 a, const Vector3 b);
 
-  cVector3 Proj(const cVector3 a, const cVector3 b);
+  Vector3 Proj(const Vector3 a, const Vector3 b);
 };
 
 }  // namespace Forradia

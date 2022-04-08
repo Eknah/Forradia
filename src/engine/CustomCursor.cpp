@@ -5,25 +5,25 @@
 
 namespace Forradia {
 
-void cCustomCursor::Initialize() {
+void CustomCursor::Initialize() {
     SDL_ShowCursor(0);
 }
 
-void cCustomCursor::ResetForNewFrame() {
-  cursorType = eCursorTypes::Default;
+void CustomCursor::ResetForNewFrame() {
+  cursorType = CursorTypes::Default;
 }
 
-void cCustomCursor::Render() {
+void CustomCursor::Render() {
     auto mousePosF = utilities.GetMousePositionF();
     auto cursorSizeF = utilities.ConvertToFloat(cursorSize);
 
     switch (cursorType) {
-    case eCursorTypes::Default: {
+    case CursorTypes::Default: {
       engine.DrawImage("CursorDefault", mousePosF.x, mousePosF.y,
                        cursorSizeF.width, cursorSizeF.height);
       break;
     }
-    case eCursorTypes::Hovering: {
+    case CursorTypes::Hovering: {
       engine.DrawImage("CursorHoveringClickable", mousePosF.x, mousePosF.y,
                        cursorSizeF.width, cursorSizeF.height);
       break;

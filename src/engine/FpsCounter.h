@@ -2,14 +2,14 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/iEngine.h"
-#include "iFpsCounter.h"
+#include "../engine/IEngine.h"
+#include "IFpsCounter.h"
 
 namespace Forradia {
 
-class cFpsCounter : public iFpsCounter {
+class FpsCounter : public IFpsCounter {
  public:
-  explicit cFpsCounter(iEngine &engine) : iFpsCounter(engine) {}
+  explicit FpsCounter(IEngine &engine) : IFpsCounter(engine) {}
 
   void Update() override;
 

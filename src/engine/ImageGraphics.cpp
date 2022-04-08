@@ -5,12 +5,12 @@
 
 namespace Forradia {
 
-void cImageGraphics::DrawImage(std::string imageName, float x, float y, float width,
+void ImageGraphics::DrawImage(std::string imageName, float x, float y, float width,
                         float height) const {
     DrawImage(GetId(imageName), x, y, width, height);
   }
 
-void cImageGraphics::DrawImage(int imageNameId, float x, float y, float width,
+void ImageGraphics::DrawImage(int imageNameId, float x, float y, float width,
                         float height) const {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -38,7 +38,7 @@ void cImageGraphics::DrawImage(int imageNameId, float x, float y, float width,
     glDisable(GL_TEXTURE_2D);
   }
 
-cSizeF cImageGraphics::GetImageSizeF(std::string imageName) const {
+SizeF ImageGraphics::GetImageSizeF(std::string imageName) const {
       auto canvasSize = utilities.GetCanvasSize();
 
       glBindTexture(GL_TEXTURE_2D,

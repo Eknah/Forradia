@@ -6,7 +6,7 @@
 
 namespace Forradia {
 
-class cMouseHandler {
+class MouseHandler {
  public:
   // Game loop related
 

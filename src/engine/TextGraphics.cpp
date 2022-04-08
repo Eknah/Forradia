@@ -5,17 +5,17 @@
 
 namespace Forradia {
 
-void cTextGraphics::Initialize() {
+void TextGraphics::Initialize() {
     TTF_Init();
 
     auto fontPath = std::string(SDL_GetBasePath());
     fontPath.append(defaultFontPath);
 
-    defaultFont = UPtrEx<TTF_Font, cSDL_Deleter>(
+    defaultFont = UPtrEx<TTF_Font, SDL_Deleter>(
         TTF_OpenFont(fontPath.c_str(), defaultFontSize));
   }
 
-void cTextGraphics::DrawString(std::string text, SDL_Color color, float x, float y,
+void TextGraphics::DrawString(std::string text, SDL_Color color, float x, float y,
                          bool centerAlign) const {
     GLuint texture;
 

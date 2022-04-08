@@ -2,14 +2,14 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "iCustomCursor.h"
-#include "iEngine.h"
+#include "ICustomCursor.h"
+#include "IEngine.h"
 
 namespace Forradia {
 
-class cCustomCursor : public iCustomCursor {
+class CustomCursor : public ICustomCursor {
  public:
-  explicit cCustomCursor(iEngine &engine) : iCustomCursor(engine) {}
+  explicit CustomCursor(IEngine &engine) : ICustomCursor(engine) {}
 
   void Initialize() override;
 

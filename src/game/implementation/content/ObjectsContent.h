@@ -7,15 +7,15 @@
 #include <vector>
 #include "../engine/Aliases.h"
 #include "ObjectDescription.h"
-#include "../engine/eObjectFlags.h"
+#include "../engine/ObjectFlags.h"
 
 namespace Forradia {
 
-class cObjectsContent {
+class ObjectsContent {
  public:
   // Collection operations
 
-  void Add(std::string objectName, cObjectDescription description);
+  void Add(std::string objectName, ObjectDescription description);
   void Add(std::string objectName, char flags);
   void AddMany(std::vector<std::tuple<std::string, char>>
            descriptions);
@@ -29,7 +29,7 @@ class cObjectsContent {
 
   // Collection structure
 
-  UMap<int, cObjectDescription> objectDescriptions;
+  UMap<int, ObjectDescription> objectDescriptions;
 };
 
 }  // namespace Forradia

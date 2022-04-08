@@ -9,11 +9,11 @@
 
 namespace Forradia {
 
-class cEngine;
+class Engine;
 
-class cCamera {
+class Camera {
  public:
-  explicit cCamera(const cEngine &_engine) : engine(_engine) {}
+  explicit Camera(const Engine &_engine) : engine(_engine) {}
 
   void Update(int rotationDirection, float zoomChange);
   void UpdateCameraMovement();
@@ -25,16 +25,16 @@ class cCamera {
   float rayCastingY = 0.0f;
   float rayCastingZ = 0.0f;
 
-  cPoint2 GetHoveredTile() const;
+  Point2 GetHoveredTile() const;
   float cameraHeight = 0.0f;
 
   int GetRenderDistance() const;
 
  private:
-  const cEngine &engine;
-  cUtilities utilities;
+  const Engine &engine;
+  Utilities utilities;
 
-  cPoint2 previousMousePosition = {-1, -1};
+  Point2 previousMousePosition = {-1, -1};
   int renderDistance = 80;
   int renderDistanceCave = 15;
   unsigned int tickLastUpdate = 0;

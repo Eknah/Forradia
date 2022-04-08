@@ -2,14 +2,14 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/iEngine.h"
-#include "../engine/iGameLoop.h"
+#include "../engine/IEngine.h"
+#include "../engine/IGameLoop.h"
 
 namespace Forradia {
 
-class cGameLoop : public iGameLoop {
+class GameLoop : public IGameLoop {
  public:
-  explicit cGameLoop(iEngine &engine) : iGameLoop(engine) {}
+  explicit GameLoop(IEngine &engine) : IGameLoop(engine) {}
 
   // Before loop:
   // Initializes game loop variables

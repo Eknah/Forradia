@@ -6,18 +6,18 @@
 
 namespace Forradia {
 
-class iEngine;
+class IEngine;
 
-class iFpsCounter {
+class IFpsCounter {
  public:
-  explicit iFpsCounter(iEngine &_engine) : engine(_engine) {}
+  explicit IFpsCounter(IEngine &_engine) : engine(_engine) {}
 
   virtual void Update() = 0;
   virtual void Render() = 0;
 
  protected:
-  iEngine &engine;
-  cPalette palette;
+  IEngine &engine;
+  Palette palette;
 
   int framesCount = 0;
   int fps = 0;

@@ -8,7 +8,7 @@
 
 namespace Forradia {
 
-void cAlgorithmsStrings::Split(const std::string &in, std::vector<std::string> *out,
+void AlgorithmsStrings::Split(const std::string &in, std::vector<std::string> *out,
                     std::string token) {
     out->clear();
 
@@ -36,7 +36,7 @@ void cAlgorithmsStrings::Split(const std::string &in, std::vector<std::string> *
     }
   }
 
-std::string cAlgorithmsStrings::Tail(const std::string &in) {
+std::string AlgorithmsStrings::Tail(const std::string &in) {
   size_t tokenStart = in.find_first_not_of(" \t");
   size_t spaceStart = in.find_first_of(" \t", tokenStart);
   size_t tailStart = in.find_first_not_of(" \t", spaceStart);
@@ -50,7 +50,7 @@ std::string cAlgorithmsStrings::Tail(const std::string &in) {
   return "";
 }
 
-std::string cAlgorithmsStrings::FirstToken(const std::string &in) {
+std::string AlgorithmsStrings::FirstToken(const std::string &in) {
   if (!in.empty()) {
     size_t token_start = in.find_first_not_of(" \t");
     size_t token_end = in.find_first_of(" \t", token_start);

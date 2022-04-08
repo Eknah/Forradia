@@ -5,14 +5,14 @@
 
 namespace Forradia {
 
-cRandom::cRandom() {
+Random::Random() {
     if (!isInitialized) {
         mt = std::mt19937(device());
         isInitialized = true;
     }
 }
 
-int cRandom::Next() const {
+int Random::Next() const {
         return result(mt);
     }
 

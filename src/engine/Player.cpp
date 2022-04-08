@@ -5,11 +5,11 @@
 
 namespace Forradia {
 
-cPlayer::cPlayer(iEngine &engine) : cActor(engine, "Player") {
-    AddModule<cModuleJumping>();
-    AddModule<cModuleMovement>();
-    AddModule<cModuleInventory>();
-    AddModule<cModuleObjectUsage>();
+Player::Player(IEngine &engine) : Actor(engine, "Player") {
+    AddModule<ModuleJumping>();
+    AddModule<ModuleMovement>();
+    AddModule<ModuleInventory>();
+    AddModule<ModuleObjectUsage>();
   }
 
 }  // namespace Forradia

@@ -15,28 +15,28 @@
 
 namespace Forradia {
 
-class cModel3D : public cAlgorithmsVectors, cAlgorithmsStrings {
+class Model3D : public AlgorithmsVectors, AlgorithmsStrings {
  public:
-  cModel3D() {}
+  Model3D() {}
 
-  ~cModel3D();
+  ~Model3D();
 
   bool LoadFile(std::string path);
 
-  std::vector<cMesh> loadedMeshes;
-  std::vector<cVertex> loadedVertices;
+  std::vector<Mesh> loadedMeshes;
+  std::vector<Vertex> loadedVertices;
   std::vector<unsigned int> loadedIndices;
-  std::vector<cMaterial> loadedMaterials;
+  std::vector<Material> loadedMaterials;
 
  private:
-  void GenVerticesFromRawOBJ(std::vector<cVertex> *oVerts,
-                                    const std::vector<cVector3> &iPositions,
-                                    const std::vector<cVector2> &iTCoords,
-                                    const std::vector<cVector3> &iNormals,
+  void GenVerticesFromRawOBJ(std::vector<Vertex> *oVerts,
+                                    const std::vector<Vector3> &iPositions,
+                                    const std::vector<Vector2> &iTCoords,
+                                    const std::vector<Vector3> &iNormals,
                                     std::string icurline);
 
   void VertexTriangluation(std::vector<unsigned int> *oIndices,
-                                  const std::vector<cVertex> &iVerts);
+                                  const std::vector<Vertex> &iVerts);
 
   bool LoadMaterials(std::string path);
 
@@ -44,11 +44,11 @@ class cModel3D : public cAlgorithmsVectors, cAlgorithmsStrings {
   const T &GetElement(const std::vector<T> &elements,
                              const std::string &index);
 
-  cMath3D math3D;
+  Math3D math3D;
 };
 
 template <class T>
-const T &cModel3D::GetElement(const std::vector<T> &elements,
+const T &Model3D::GetElement(const std::vector<T> &elements,
                            const std::string &index) {
   unsigned int idx = std::stoi(index);
 

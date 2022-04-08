@@ -6,10 +6,10 @@
 
 namespace Forradia {
 
-void cGuiWindowMall::RenderDerived() {
+void GuiWindowMall::RenderDerived() {
 }
 
-void cGuiWindowMall::DoMouseDownDerived(Uint8 mouseButton) {
+void GuiWindowMall::DoMouseDownDerived(Uint8 mouseButton) {
 }
 
 }  // namespace Forradia

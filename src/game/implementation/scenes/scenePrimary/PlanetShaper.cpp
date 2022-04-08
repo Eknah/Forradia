@@ -7,11 +7,11 @@
 
 namespace Forradia {
 
-float cPlanetShaper::GetNewY(float y, float tileX, float tileY) {
+float PlanetShaper::GetNewY(float y, float tileX, float tileY) {
     return y;
   auto result = y;
-  auto dx = static_cast<int>(tileX) - engine.GetPlayer().GetModule<cModuleMovementData>().position.x;
-  auto dy = static_cast<int>(tileY) - engine.GetPlayer().GetModule<cModuleMovementData>().position.y;
+  auto dx = static_cast<int>(tileX) - engine.GetPlayer().GetModule<ModuleMovementData>().position.x;
+  auto dy = static_cast<int>(tileY) - engine.GetPlayer().GetModule<ModuleMovementData>().position.y;
   auto distance = dx * dx + dy * dy;
 
   result -= distance * 0.01f;

@@ -6,9 +6,9 @@
 
 namespace Forradia {
 
-class cRectF {
+class RectF {
  public:
-  bool ContainsPoint(cPoint2F point);
+  bool ContainsPoint(Point2F point);
 
   float x = 0.0f;
   float y = 0.0f;

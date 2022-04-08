@@ -6,10 +6,10 @@
 
 namespace Forradia {
 
-void cEngine::Run(cScenesCollection _scenesCollection, int _startScene,
-                  UPtr<cPlanetWorldMap> _world,
-                  cInventory _startingInventory,
-                  cObjectsContent _objectsContent) {
+void Engine::Run(ScenesCollection _scenesCollection, int _startScene,
+                  UPtr<PlanetWorldMap> _world,
+                  Inventory _startingInventory,
+                  ObjectsContent _objectsContent) {
     using std::move;
 
     InitializeGL();
@@ -17,28 +17,28 @@ void cEngine::Run(cScenesCollection _scenesCollection, int _startScene,
     world = move(_world);
     objectsContent = _objectsContent;
 
-    cPoint3 playerWorldPos = {
+    Point3 playerWorldPos = {
         world->worldMapWidth/2,
         world->worldMapHeight/2,
         0
     };
 
-    cPoint2F playerTilePos = world->GetArea(playerWorldPos)->spawnPos;
-    cPoint2 playerTilePosI = {
+    Point2F playerTilePos = world->GetArea(playerWorldPos)->spawnPos;
+    Point2 playerTilePosI = {
         static_cast<int>(playerTilePos.x),
         static_cast<int>(playerTilePos.y)
     };
 
     world->GetArea(playerWorldPos)->GetTile(playerTilePosI)
-            .actor = MakeUPtr<cPlayer>(*this);
+            .actor = MakeUPtr<Player>(*this);
 
-    playerPtrPtr = MakeUPtr<cPlayer*>(
-                static_cast<cPlayer*>(world->GetArea(playerWorldPos)
+    playerPtrPtr = MakeUPtr<Player*>(
+                static_cast<Player*>(world->GetArea(playerWorldPos)
                                       ->GetTile(playerTilePosI).actor.get()));
 
-    GetPlayer().GetModule<cModuleMovementData>().worldMapCoord = playerWorldPos;
-    GetPlayer().GetModule<cModuleMovementData>().position = GetCurrentMapArea().spawnPos;
-    GetPlayer().GetModule<cModuleInventory>().inventory = _startingInventory;
+    GetPlayer().GetModule<ModuleMovementData>().worldMapCoord = playerWorldPos;
+    GetPlayer().GetModule<ModuleMovementData>().position = GetCurrentMapArea().spawnPos;
+    GetPlayer().GetModule<ModuleInventory>().inventory = _startingInventory;
     sceneManager.Initialize(move(_scenesCollection), _startScene);
     modelLoader.LoadModels();
     imageLoader.LoadImages();
@@ -50,58 +50,58 @@ void cEngine::Run(cScenesCollection _scenesCollection, int _startScene,
     SDL_Quit();
   }
 
-void cEngine::DrawImage(std::string imageName, float x, float y, float width,
+void Engine::DrawImage(std::string imageName, float x, float y, float width,
                       float height) const {
   imageGraphics.DrawImage(imageName, x, y, width, height);
 }
 
-void cEngine::DrawImage(int imageNameHash, float x, float y, float width,
+void Engine::DrawImage(int imageNameHash, float x, float y, float width,
                         float height) const {
     imageGraphics.DrawImage(imageNameHash, x, y, width, height);
   }
 
-void cEngine::FillRectangle(SDL_Color color, float x, float y, float width,
+void Engine::FillRectangle(SDL_Color color, float x, float y, float width,
                             float height) const {
     paintGraphics.FillRectangle(color, x, y, width, height);
   }
 
-void cEngine::DrawRectangle(SDL_Color color, float x, float y, float width,
+void Engine::DrawRectangle(SDL_Color color, float x, float y, float width,
                             float height) const {
     paintGraphics.DrawRectangle(color, x, y, width, height);
   }
 
-void cEngine::DrawLine(SDL_Color color, float x0, float y0, float x1,
+void Engine::DrawLine(SDL_Color color, float x0, float y0, float x1,
                        float y1) const {
     paintGraphics.DrawLine(color, x0, y0, x1, y1);
   }
 
-void cEngine::DrawString(std::string message, SDL_Color color, float x, float y,
+void Engine::DrawString(std::string message, SDL_Color color, float x, float y,
                          bool centerAlign) const {
     textGraphics.DrawString(message, color, x, y, centerAlign);
   }
 
-void cEngine::DrawModel(std::string modelName, float x, float y, float z,
+void Engine::DrawModel(std::string modelName, float x, float y, float z,
                         float rotation,
                         float specificScaling, float Opacity) const {
     modelGraphics.DrawModel(modelName, x, y, z, rotation, specificScaling, Opacity);
   }
 
-void cEngine::DrawModel(int modelNameHash, float x, float y, float z,
+void Engine::DrawModel(int modelNameHash, float x, float y, float z,
                         float rotation,
                         float specificScaling, float Opacity) const {
     modelGraphics.DrawModel(modelNameHash, x, y, z, rotation, specificScaling, Opacity);
   }
 
-cSizeF cEngine::GetImageSizeF(std::string imageName) const {
+SizeF Engine::GetImageSizeF(std::string imageName) const {
     return imageGraphics.GetImageSizeF(imageName);
   }
 
-cMapArea& cEngine::GetCurrentMapArea() const {
+MapArea& Engine::GetCurrentMapArea() const {
     // return *WorldMap->MapAreas.at(Player.CurrentMapArea);
-    return *world->GetArea(GetPlayer().GetModule<cModuleMovementData>().worldMapCoord);
+    return *world->GetArea(GetPlayer().GetModule<ModuleMovementData>().worldMapCoord);
   }
 
-void cEngine::InitializeGL() {
+void Engine::InitializeGL() {
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -115,7 +115,7 @@ void cEngine::InitializeGL() {
                          defaultWindowSize.height,
                          SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN |
                              SDL_WINDOW_FULLSCREEN_DESKTOP),
-        cSDL_Deleter());
+        SDL_Deleter());
 
     fullscreenController.ToggleFullscreen();
     SDL_SetWindowResizable(window.get(), SDL_TRUE);

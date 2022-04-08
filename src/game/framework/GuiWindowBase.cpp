@@ -6,7 +6,7 @@
 
 namespace Forradia {
 
-void cGuiWindowBase::Render() {
+void GuiWindowBase::Render() {
   if (!visible)
     return;
 
@@ -21,7 +21,7 @@ void cGuiWindowBase::Render() {
   RenderDerived();
 }
 
-void cGuiWindowBase::Update() {
+void GuiWindowBase::Update() {
   if (!isBeingMoved)
     return;
 
@@ -33,7 +33,7 @@ void cGuiWindowBase::Update() {
   bounds.y = startMovePosition.y + deltaMouseY;
 }
 
-cRectF cGuiWindowBase::GetInteriorBounds() {
+RectF GuiWindowBase::GetInteriorBounds() {
   auto x = bounds.x + margin;
   auto y = bounds.y + titleBarHeight + margin;
   auto width = bounds.width - 2 * margin;
@@ -42,7 +42,7 @@ cRectF cGuiWindowBase::GetInteriorBounds() {
   return {x, y, width, height};
 }
 
-bool cGuiWindowBase::DoMouseDown(Uint8 mouseButton) {
+bool GuiWindowBase::DoMouseDown(Uint8 mouseButton) {
   if (!visible)
     return false;
 
@@ -63,11 +63,11 @@ bool cGuiWindowBase::DoMouseDown(Uint8 mouseButton) {
   return false;
 }
 
-cRectF cGuiWindowBase::GetTitleBarBounds() {
+RectF GuiWindowBase::GetTitleBarBounds() {
   return {bounds.x, bounds.y, bounds.width, titleBarHeight};
 }
 
-void cGuiWindowBase::DoMouseUp() {
+void GuiWindowBase::DoMouseUp() {
     isBeingMoved = false;
 }
 

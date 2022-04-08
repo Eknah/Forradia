@@ -5,17 +5,17 @@
 
 namespace Forradia {
 
-void cSceneManager::Initialize(cScenesCollection scenes,
+void SceneManager::Initialize(ScenesCollection scenes,
                          int startScene) {
     scenesCollection = std::move(scenes);
     *currentScene = startScene;
   }
 
-SPtr<cSceneBase> &cSceneManager::GetCurrentScene() {
+SPtr<SceneBase> &SceneManager::GetCurrentScene() {
     return scenesCollection.scenes.at(*currentScene);
   }
 
-void cSceneManager::SwitchToScene(
+void SceneManager::SwitchToScene(
           std::string newScene) const {
     *currentScene = GetId(newScene);
     scenesCollection.scenes.at(*currentScene)->Enter();

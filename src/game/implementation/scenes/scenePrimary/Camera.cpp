@@ -8,7 +8,7 @@
 
 namespace Forradia {
 
-void cCamera::Update(int rotationDirection, float zoomChange) {
+void Camera::Update(int rotationDirection, float zoomChange) {
   if (Ticks() > tickLastUpdate + updateSpeed) {
     if (rotationDirection == GetId("Right"))
       lookingAngle -= rotationAmount;
@@ -87,26 +87,26 @@ void cCamera::Update(int rotationDirection, float zoomChange) {
   rayCastingZ = static_cast<float>(posz);
 }
 
-cPoint2 cCamera::GetHoveredTile() const {
-  float subStepX = engine.GetPlayer().GetModule<cModuleMovementData>().position.x -
-          static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.x);
+Point2 Camera::GetHoveredTile() const {
+  float subStepX = engine.GetPlayer().GetModule<ModuleMovementData>().position.x -
+          static_cast<int>(engine.GetPlayer().GetModule<ModuleMovementData>().position.x);
 
-  float subStepY = engine.GetPlayer().GetModule<cModuleMovementData>().position.y -
-          static_cast<int>(engine.GetPlayer().GetModule<cModuleMovementData>().position.y);
+  float subStepY = engine.GetPlayer().GetModule<ModuleMovementData>().position.y -
+          static_cast<int>(engine.GetPlayer().GetModule<ModuleMovementData>().position.y);
 
   auto offsetX = -static_cast<float>(2 * renderDistance + 1)
           / 2.0f * engine.tileSize - subStepX * engine.tileSize;
   auto offsetY = -static_cast<float>(2 * renderDistance - 1)
           / 2.0f * engine.tileSize - subStepY * engine.tileSize;
-  auto mapx = engine.GetPlayer().GetModule<cModuleMovementData>().position.x - renderDistance +
+  auto mapx = engine.GetPlayer().GetModule<ModuleMovementData>().position.x - renderDistance +
               (rayCastingX - offsetX) / engine.tileSize;
-  auto mapy = engine.GetPlayer().GetModule<cModuleMovementData>().position.y - renderDistance +
+  auto mapy = engine.GetPlayer().GetModule<ModuleMovementData>().position.y - renderDistance +
               (rayCastingZ - offsetY) / engine.tileSize + 1;
 
   return {static_cast<int>(mapx), static_cast<int>(mapy)};
 }
 
-int cCamera::GetRenderDistance() const {
+int Camera::GetRenderDistance() const {
   auto &mapArea = engine.GetCurrentMapArea();
 
   if (mapArea.IsUnderground())
@@ -115,7 +115,7 @@ int cCamera::GetRenderDistance() const {
     return renderDistance;
 }
 
-void cCamera::UpdateCameraMovement() {
+void Camera::UpdateCameraMovement() {
   auto mousePosition = utilities.GetMousePositionI();
   auto deltaMouseX = mousePosition.x - previousMousePosition.x;
 

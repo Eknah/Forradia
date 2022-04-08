@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-class cRect {
+class Rect {
  public:
 
   int x = 0;

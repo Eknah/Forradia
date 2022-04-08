@@ -7,16 +7,16 @@
 
 namespace Forradia {
 
-class cGuiWindowMall : public cGuiWindowBase {
+class GuiWindowMall : public GuiWindowBase {
  public:
-  using cGuiWindowBase::cGuiWindowBase;
+  using GuiWindowBase::GuiWindowBase;
 
   void RenderDerived() override;
   void DoMouseDownDerived(Uint8 mouseButton) override;
 
  private:
-  cUtilities utilities;
-  cPalette palette;
+  Utilities utilities;
+  Palette palette;
 };
 
 }  // namespace Forradia

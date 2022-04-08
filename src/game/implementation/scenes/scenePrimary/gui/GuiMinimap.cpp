@@ -6,7 +6,7 @@
 
 namespace Forradia {
 
-void cGuiMinimap::Render() {
+void GuiMinimap::Render() {
   auto minimapSizeF = utilities.ConvertToFloat(minimapSize);
 
   engine.FillRectangle(palette.mediumBlue, 0, 0, minimapSizeF.width,

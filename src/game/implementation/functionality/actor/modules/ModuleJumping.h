@@ -2,13 +2,13 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/iModule.h"
+#include "../engine/IModule.h"
 
 namespace Forradia {
 
-class cModuleJumping : public iModule {
+class ModuleJumping : public IModule {
  public:
-  using iModule::iModule;
+  using IModule::IModule;
 
   void ResetForNewFrame() override;
   void Update() override;

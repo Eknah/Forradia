@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-class cSize {
+class Size {
  public:
   int width = 0;
   int height = 0;

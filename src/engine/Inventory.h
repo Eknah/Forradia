@@ -9,14 +9,14 @@
 
 namespace Forradia {
 
-class cObject;
+class Object;
 
-class cInventory {
+class Inventory {
 public:
     void Add(std::string objectName);
     void AddMany(std::vector<std::string> objectNames);
 
-    UMap<int, SPtr<cObject>> objects;
+    UMap<int, SPtr<Object>> objects;
 };
 
 }  // namespace Forradia

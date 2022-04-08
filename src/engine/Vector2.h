@@ -9,10 +9,10 @@
 
 namespace Forradia {
 
-class cVector2 {
+class Vector2 {
  public:
-  cVector2() = default;
-  cVector2(float _x, float _y) : x(_x), y(_y) {}
+  Vector2() = default;
+  Vector2(float _x, float _y) : x(_x), y(_y) {}
 
   float x = 0.0f;
   float y = 0.0f;

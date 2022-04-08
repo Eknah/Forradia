@@ -6,12 +6,12 @@
 
 namespace Forradia {
 
-class iEngine;
-class cPlanetWorldMap;
+class IEngine;
+class PlanetWorldMap;
 
-class iMapGenerator {
+class IMapGenerator {
  public:
-  iMapGenerator(const iEngine &Engine_, const UPtr<cPlanetWorldMap> &_worldMap)
+  IMapGenerator(const IEngine &Engine_, const UPtr<PlanetWorldMap> &_worldMap)
       : engine(Engine_), worldMap(_worldMap) {}
 
   // Core map area generation
@@ -19,8 +19,8 @@ class iMapGenerator {
   virtual void GenerateMapArea(int WorldX, int WorldY, int WorldZ) const = 0;
 
  protected:
-  const iEngine &engine;
-  const UPtr<cPlanetWorldMap> &worldMap;
+  const IEngine &engine;
+  const UPtr<PlanetWorldMap> &worldMap;
 };
 
 }  // namespace Forradia

@@ -8,14 +8,14 @@
 #include "../engine/Random.h"
 namespace Forradia {
 
-class cObject {
+class Object {
  public:
-  explicit cObject(std::string objectTypeName, bool randomScaling = true,
+  explicit Object(std::string objectTypeName, bool randomScaling = true,
                    bool randomRotation = true, float _rotation = 0);
 
   // Object usage
 
-  void UseOn(const std::shared_ptr<cObject> &other);
+  void UseOn(const std::shared_ptr<Object> &other);
 
   // Core
 
@@ -29,7 +29,7 @@ class cObject {
  private:
   void TransformInto(std::string objectName);
 
-  cRandom random;
+  Random random;
 };
 
 }  // namespace Forradia

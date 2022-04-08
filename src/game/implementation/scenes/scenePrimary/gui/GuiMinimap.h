@@ -7,18 +7,18 @@
 
 namespace Forradia {
 
-class cGuiMinimap {
+class GuiMinimap {
  public:
-  explicit cGuiMinimap(const cEngine &_engine) : engine(_engine) {}
+  explicit GuiMinimap(const Engine &_engine) : engine(_engine) {}
 
   void Render();
 
  private:
-  const cEngine &engine;
+  const Engine &engine;
 
   const int minimapSize = 250;
-  cPalette palette;
-  cUtilities utilities;
+  Palette palette;
+  Utilities utilities;
 };
 
 }  // namespace Forradia

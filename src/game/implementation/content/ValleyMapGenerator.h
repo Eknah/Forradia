@@ -4,34 +4,34 @@
 #pragma once
 #include "../engine/Random.h"
 #include "../engine/MapArea.h"
-#include "../engine/iMapGenerator.h"
+#include "../engine/IMapGenerator.h"
 
 namespace Forradia {
 
-class cValleyMapGenerator : public iMapGenerator {
+class ValleyMapGenerator : public IMapGenerator {
  public:
-  using iMapGenerator::iMapGenerator;
+  using IMapGenerator::IMapGenerator;
 
   void GenerateMapArea(int worldX, int worldY, int worldZ) const override;
 
  private:
-  void ClearToGrass(cMapArea *mapArea) const;
-  void GeneratePlayerStartingPosition(cMapArea *mapArea) const;
-  void GenerateElevation(cMapArea *mapArea) const;
-  void GenerateRock(cMapArea *mapArea) const;
-  void GenerateRivers(cMapArea *mapArea) const;
-  void GenerateVillage(cMapArea *mapArea) const;
-  void GenerateTrees(cMapArea *mapArea) const;
-  void GenerateBushes(cMapArea *mapArea) const;
-  void GenerateSmallStones(cMapArea *mapArea) const;
-  void GeneratePinkFlowers(cMapArea *mapArea) const;
-  void GenerateTallGrass(cMapArea *mapArea) const;
-  void GenerateMobs(cMapArea *mapArea) const;
+  void ClearToGrass(MapArea *mapArea) const;
+  void GeneratePlayerStartingPosition(MapArea *mapArea) const;
+  void GenerateElevation(MapArea *mapArea) const;
+  void GenerateRock(MapArea *mapArea) const;
+  void GenerateRivers(MapArea *mapArea) const;
+  void GenerateVillage(MapArea *mapArea) const;
+  void GenerateTrees(MapArea *mapArea) const;
+  void GenerateBushes(MapArea *mapArea) const;
+  void GenerateSmallStones(MapArea *mapArea) const;
+  void GeneratePinkFlowers(MapArea *mapArea) const;
+  void GenerateTallGrass(MapArea *mapArea) const;
+  void GenerateMobs(MapArea *mapArea) const;
 
-  int DistToPlayerStartingPos(cMapArea *mapArea, int tileX, int tileY) const;
+  int DistToPlayerStartingPos(MapArea *mapArea, int tileX, int tileY) const;
 
   const int playerStartingAreaSize = 4;
-  cRandom random;
+  Random random;
   int villageSize = 17;
 };
 

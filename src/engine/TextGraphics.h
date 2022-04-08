@@ -10,7 +10,7 @@
 
 namespace Forradia {
 
-class cTextGraphics {
+class TextGraphics {
  public:
   void Initialize();
 
@@ -24,8 +24,8 @@ class cTextGraphics {
   const int defaultFontSize = 20;
   const float scaling = 0.8f;
 
-  std::unique_ptr<TTF_Font, cSDL_Deleter> defaultFont;
-  cUtilities utilities;
+  std::unique_ptr<TTF_Font, SDL_Deleter> defaultFont;
+  Utilities utilities;
 };
 
 }  // namespace Forradia

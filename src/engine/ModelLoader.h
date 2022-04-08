@@ -8,13 +8,13 @@
 
 namespace Forradia {
 
-class cModelLoader {
+class ModelLoader {
  public:
   void LoadModels();
 
   bool ModelExists(std::string modelName) const;
 
-  UMap<int, Forradia::cModel3D> models;
+  UMap<int, Forradia::Model3D> models;
   UMap<int, std::string> modelNames;
 
  private:

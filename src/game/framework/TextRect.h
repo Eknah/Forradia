@@ -8,9 +8,9 @@
 namespace Forradia {
 
 
-class cTextRect {
+class TextRect {
  public:
-    cRectF bounds = {0, 0, 0, 0};
+    RectF bounds = {0, 0, 0, 0};
     std::string text;
 };
 

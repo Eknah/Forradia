@@ -11,12 +11,12 @@
 
 namespace Forradia {
 
-class cUtilities {
+class Utilities {
  public:
-  cSize GetCanvasSize() const;
-  cPoint2 GetMousePositionI();
-  cPoint2F GetMousePositionF();
-  cSizeF ConvertToFloat(int value);
+  Size GetCanvasSize() const;
+  Point2 GetMousePositionI();
+  Point2F GetMousePositionF();
+  SizeF ConvertToFloat(int value);
 };
 
 }  // namespace Forradia

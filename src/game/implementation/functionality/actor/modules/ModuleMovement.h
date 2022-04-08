@@ -3,11 +3,11 @@
 
 #pragma once
 #include "../engine/Point2F.h"
-#include "../engine/iModule.h"
+#include "../engine/IModule.h"
 
 namespace Forradia {
 
-class cModuleMovement : public iModule {
+class ModuleMovement : public IModule {
  public:
   class MovementInstruction {
    public:
@@ -17,7 +17,7 @@ class cModuleMovement : public iModule {
     bool tryMoveLeft = false;
   };
 
-  cModuleMovement(const iEngine &_engine, cActor *_parentActor);
+  ModuleMovement(const IEngine &_engine, Actor *_parentActor);
 
   //using iModule::iModule;
 

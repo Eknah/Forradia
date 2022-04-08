@@ -4,46 +4,46 @@
 #include "ObjectsContent.h"
 #include "../engine/Aliases.h"
 #include "ObjectDescription.h"
-#include "../engine/eObjectFlags.h"
+#include "../engine/ObjectFlags.h"
 
 namespace Forradia {
 
-void cObjectsContent::Add(std::string objectName,
-                          cObjectDescription description) {
+void ObjectsContent::Add(std::string objectName,
+                          ObjectDescription description) {
   objectDescriptions.insert({GetId(objectName), description});
 }
 
-void cObjectsContent::Add(std::string objectName,
+void ObjectsContent::Add(std::string objectName,
                           char flags) {
     objectDescriptions.insert({GetId(objectName),
-                               cObjectDescription(flags)});
+                               ObjectDescription(flags)});
 }
 
-void cObjectsContent::AddMany(std::vector<std::tuple<std::string, char>>
+void ObjectsContent::AddMany(std::vector<std::tuple<std::string, char>>
          descriptions) {
     for (auto& desc : descriptions) {
         auto objectName = std::get<0>(desc);
         auto flags = std::get<1>(desc);
 
         objectDescriptions.insert({GetId(objectName),
-                                   cObjectDescription(flags)});
+                                   ObjectDescription(flags)});
     }
 }
 
-void cObjectsContent::SetOpacity(std::string objectName, float opacity) {
+void ObjectsContent::SetOpacity(std::string objectName, float opacity) {
     objectDescriptions.at(GetId(objectName)).opacity = opacity;
 }
 
-bool cObjectsContent::IsMovable(int objectType) const {
+bool ObjectsContent::IsMovable(int objectType) const {
   if (objectDescriptions.count(objectType))
-    return objectDescriptions.at(objectType).flags & ObjectMovable;
+    return objectDescriptions.at(objectType).flags & ObjMovable;
 
   return false;
 }
 
-bool cObjectsContent::BlocksMovement(int objectType) const {
+bool ObjectsContent::BlocksMovement(int objectType) const {
   if (objectDescriptions.count(objectType))
-    return objectDescriptions.at(objectType).flags & ObjectMovementBlock;
+    return objectDescriptions.at(objectType).flags & ObjObstacle;
 
   return false;
 }

@@ -8,11 +8,11 @@
 
 namespace Forradia {
 
-class cEngine;
+class Engine;
 
-class cSceneBase {
+class SceneBase {
  public:
-  explicit cSceneBase(const cEngine &_engine) : engine(_engine) {}
+  explicit SceneBase(const Engine &_engine) : engine(_engine) {}
 
   // To implement in child
 
@@ -23,9 +23,9 @@ class cSceneBase {
   virtual void DoMouseUp(Uint8 MouseButton) = 0;
 
  protected:
-  const cEngine &engine;
+  const Engine &engine;
 
-  std::vector<cTextRect> sceneButtons;
+  std::vector<TextRect> sceneButtons;
 };
 
 }  // namespace Forradia

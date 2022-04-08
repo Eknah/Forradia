@@ -11,7 +11,7 @@
 
 namespace Forradia {
 
-class cAlgorithmsStrings {
+class AlgorithmsStrings {
  public:
   void Split(const std::string &in, std::vector<std::string> *out,
                     std::string token);

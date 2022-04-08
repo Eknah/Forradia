@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-cSize cUtilities::GetCanvasSize() const {
+Size Utilities::GetCanvasSize() const {
     GLint viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
     auto canvas_width = viewport[2];
@@ -14,7 +14,7 @@ cSize cUtilities::GetCanvasSize() const {
     return {canvas_width, canvas_height};
   }
 
-cPoint2 cUtilities::GetMousePositionI() {
+Point2 Utilities::GetMousePositionI() {
     auto x = 0;
     auto y = 0;
     SDL_GetMouseState(&x, &y);
@@ -22,7 +22,7 @@ cPoint2 cUtilities::GetMousePositionI() {
     return {x, y};
   }
 
-cPoint2F cUtilities::GetMousePositionF() {
+Point2F Utilities::GetMousePositionF() {
     auto mousePosition = GetMousePositionI();
     auto canvas_size = GetCanvasSize();
     auto mousexF = static_cast<float>(mousePosition.x) / canvas_size.width;
@@ -31,7 +31,7 @@ cPoint2F cUtilities::GetMousePositionF() {
     return {mousexF, mouseyF};
   }
 
-cSizeF cUtilities::ConvertToFloat(int value) {
+SizeF Utilities::ConvertToFloat(int value) {
     auto canvasSize = GetCanvasSize();
     auto resultWidth = static_cast<float>(value) / canvasSize.width;
     auto resultHeight = static_cast<float>(value) / canvasSize.height;

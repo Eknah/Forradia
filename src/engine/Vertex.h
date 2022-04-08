@@ -10,11 +10,11 @@
 
 namespace Forradia {
 
-class cVertex {
+class Vertex {
  public:
-  cVector3 position;
-  cVector3 normal;
-  cVector2 textureCoordinate;
+  Vector3 position;
+  Vector3 normal;
+  Vector2 textureCoordinate;
 };
 
 }  // namespace Forradia

@@ -9,10 +9,10 @@
 namespace Forradia {
 
 void
-cValleyMapGenerator::GenerateMapArea(
+ValleyMapGenerator::GenerateMapArea(
         int worldX, int worldY, int worldZ) const {
   worldMap->areas[worldX][worldY][worldZ] =
-      MakeUPtr<cMapArea>(engine, worldMap->mapAreaSize, worldX, worldY, worldZ);
+      MakeUPtr<MapArea>(engine, worldMap->mapAreaSize, worldX, worldY, worldZ);
 
   auto mapArea = worldMap->areas[worldX][worldY][worldZ].get();
 
@@ -31,7 +31,7 @@ cValleyMapGenerator::GenerateMapArea(
 }
 
 void
-cValleyMapGenerator::ClearToGrass(cMapArea *mapArea) const {
+ValleyMapGenerator::ClearToGrass(MapArea *mapArea) const {
   for (auto tileY = 0; tileY < mapArea->size; tileY++)
     for (auto tileX = 0; tileX < mapArea->size; tileX++)
 
@@ -39,14 +39,14 @@ cValleyMapGenerator::ClearToGrass(cMapArea *mapArea) const {
 }
 
 void
-cValleyMapGenerator::GeneratePlayerStartingPosition
-(cMapArea *mapArea) const {
+ValleyMapGenerator::GeneratePlayerStartingPosition
+(MapArea *mapArea) const {
     mapArea->spawnPos = {static_cast<float>(mapArea->size/2),
                          static_cast<float>(mapArea->size/2)};
 }
 
 void
-cValleyMapGenerator::GenerateElevation(cMapArea *mapArea) const {
+ValleyMapGenerator::GenerateElevation(MapArea *mapArea) const {
   for (auto y = 0; y < mapArea->size; y++) {
       for (auto x = 0; x < mapArea->size; x++) {
         auto dxLeft = x;
@@ -102,7 +102,7 @@ cValleyMapGenerator::GenerateElevation(cMapArea *mapArea) const {
 }
 
 void
-cValleyMapGenerator::GenerateRock(cMapArea *mapArea) const {
+ValleyMapGenerator::GenerateRock(MapArea *mapArea) const {
   for (auto i = 0; i < 30; i++) {
 
       auto centerTileX = 0;
@@ -137,7 +137,7 @@ cValleyMapGenerator::GenerateRock(cMapArea *mapArea) const {
 }
 
 void
-cValleyMapGenerator::GenerateRivers(cMapArea *mapArea) const {
+ValleyMapGenerator::GenerateRivers(MapArea *mapArea) const {
     for (auto i = 0; i < 6; i++) {
         float xstart = random.Next() % mapArea->size;
         float ystart = random.Next() % mapArea->size;
@@ -173,7 +173,7 @@ cValleyMapGenerator::GenerateRivers(cMapArea *mapArea) const {
 }
 
 void
-cValleyMapGenerator::GenerateTrees(cMapArea *mapArea) const {
+ValleyMapGenerator::GenerateTrees(MapArea *mapArea) const {
   for (auto i = 0; i < 30; i++) {
     auto tileX = random.Next() % mapArea->size;
     auto tileY = random.Next() % mapArea->size;
@@ -190,7 +190,7 @@ cValleyMapGenerator::GenerateTrees(cMapArea *mapArea) const {
             GetId("GroundTypeGrass"))
           if (mapArea->tiles[tileX][tileY].objects.size() == 0)
             mapArea->tiles[tileX][tileY].objects.push_back(
-                MakeSPtr<cObject>("ObjectTree1"));
+                MakeSPtr<Object>("ObjectTree1"));
       }
 
       tileX += random.Next() % 7 - random.Next() % 7;
@@ -213,7 +213,7 @@ cValleyMapGenerator::GenerateTrees(cMapArea *mapArea) const {
             GetId("GroundTypeGrass"))
           if (mapArea->tiles[tileX][tileY].objects.size() == 0)
             mapArea->tiles[tileX][tileY].objects.push_back(
-                MakeSPtr<cObject>("ObjectTree2"));
+                MakeSPtr<Object>("ObjectTree2"));
       }
 
       tileX += random.Next() % 7 - random.Next() % 7;
@@ -223,7 +223,7 @@ cValleyMapGenerator::GenerateTrees(cMapArea *mapArea) const {
 }
 
 void
-cValleyMapGenerator::GenerateVillage(cMapArea *mapArea) const {
+ValleyMapGenerator::GenerateVillage(MapArea *mapArea) const {
 
     auto xCenter = mapArea->size/2;
     auto yCenter = mapArea->size/2;
@@ -267,32 +267,32 @@ cValleyMapGenerator::GenerateVillage(cMapArea *mapArea) const {
         if (y == yCenter) continue;
 
         mapArea->tiles[xStart + 1][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectBush1"));
+                    MakeSPtr<Object>("ObjectBush1"));
 
         mapArea->tiles[xEnd - 1][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectBush1"));
+                    MakeSPtr<Object>("ObjectBush1"));
 
         mapArea->tiles[xStart][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodFence", false, false, 180));
+                    MakeSPtr<Object>("ObjectWoodFence", false, false, 180));
 
         mapArea->tiles[xEnd][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodFence", false, false, 0));
+                    MakeSPtr<Object>("ObjectWoodFence", false, false, 0));
     }
 
     for (auto x = xStart; x <= xEnd; x++) {
         if (x == xCenter) continue;
 
         mapArea->tiles[x][yStart + 1].objects.push_back(
-                    MakeSPtr<cObject>("ObjectBush1"));
+                    MakeSPtr<Object>("ObjectBush1"));
 
         mapArea->tiles[x][yEnd - 1].objects.push_back(
-                    MakeSPtr<cObject>("ObjectBush1"));
+                    MakeSPtr<Object>("ObjectBush1"));
 
         mapArea->tiles[x][yStart].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodFence", false, false, 90));
+                    MakeSPtr<Object>("ObjectWoodFence", false, false, 90));
 
         mapArea->tiles[x][yEnd].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodFence", false, false, 270));
+                    MakeSPtr<Object>("ObjectWoodFence", false, false, 270));
     }
 
     auto houseWidth = 4;
@@ -313,7 +313,7 @@ cValleyMapGenerator::GenerateVillage(cMapArea *mapArea) const {
 
     for (auto y = houseyStart; y <= houseyEnd; y++) {
         for (auto x = housexStart; x <= housexEnd; x++) {
-            mapArea->tiles[x][y].roof = MakeSPtr<cObject>("ObjectRoof", false, false);
+            mapArea->tiles[x][y].roof = MakeSPtr<Object>("ObjectRoof", false, false);
             mapArea->tiles[x][y].groundType = GetId("GroundTypeWoodfloor");
         }
     }
@@ -321,21 +321,21 @@ cValleyMapGenerator::GenerateVillage(cMapArea *mapArea) const {
     for (auto y = houseyStart; y <= houseyEnd; y++) {
 
         mapArea->tiles[housexStart][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodWall", false, false, 180));
+                    MakeSPtr<Object>("ObjectWoodWall", false, false, 180));
 
         mapArea->tiles[housexEnd][y].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodWall", false, false, 0));
+                    MakeSPtr<Object>("ObjectWoodWall", false, false, 0));
     }
 
     for (auto x = housexStart; x <= housexEnd; x++) {
         if (x != housexCenter)
             mapArea->tiles[x][houseyStart].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodWall", false, false, 90));
+                    MakeSPtr<Object>("ObjectWoodWall", false, false, 90));
 
 
 
         mapArea->tiles[x][houseyEnd].objects.push_back(
-                    MakeSPtr<cObject>("ObjectWoodWall", false, false, 270));
+                    MakeSPtr<Object>("ObjectWoodWall", false, false, 270));
     }
 
     for (auto y = houseyStart - 1; y != yCenter; y--) {
@@ -352,26 +352,26 @@ cValleyMapGenerator::GenerateVillage(cMapArea *mapArea) const {
     }
 
     mapArea->tiles[anvilx][anvily].objects.push_back(
-                MakeSPtr<cObject>("ObjectLargeAnvil", false));
+                MakeSPtr<Object>("ObjectLargeAnvil", false));
 
     mapArea->tiles[xCenter + 1][yCenter - villageSize/2].objects.push_back(
-                MakeSPtr<cObject>("ObjectStreetLantern", false));
+                MakeSPtr<Object>("ObjectStreetLantern", false));
 
     mapArea->tiles[xCenter + 1][yCenter + villageSize/2].objects.push_back(
-                MakeSPtr<cObject>("ObjectStreetLantern", false));
+                MakeSPtr<Object>("ObjectStreetLantern", false));
 
     mapArea->tiles[xCenter + villageSize/2][yCenter + 1].objects.push_back(
-                MakeSPtr<cObject>("ObjectStreetLantern", false));
+                MakeSPtr<Object>("ObjectStreetLantern", false));
 
     mapArea->tiles[xCenter - villageSize/2][yCenter + 1].objects.push_back(
-                MakeSPtr<cObject>("ObjectStreetLantern", false));
+                MakeSPtr<Object>("ObjectStreetLantern", false));
 
 }
 
 
 
 int
-cValleyMapGenerator::DistToPlayerStartingPos(cMapArea *mapArea, int tileX,
+ValleyMapGenerator::DistToPlayerStartingPos(MapArea *mapArea, int tileX,
                                                   int tileY) const {
   auto DX = mapArea->spawnPos.x - tileX;
   auto DY = mapArea->spawnPos.y - tileY;
@@ -382,7 +382,7 @@ cValleyMapGenerator::DistToPlayerStartingPos(cMapArea *mapArea, int tileX,
 
 
 void
-cValleyMapGenerator::GenerateBushes(cMapArea *mapArea) const {
+ValleyMapGenerator::GenerateBushes(MapArea *mapArea) const {
   for (auto i = 0; i < 200; i++) {
     auto tileX = random.Next() % mapArea->size;
     auto tileY = random.Next() % mapArea->size;
@@ -393,12 +393,12 @@ cValleyMapGenerator::GenerateBushes(cMapArea *mapArea) const {
     if (mapArea->tiles[tileX][tileY].groundType == GetId("GroundTypeGrass"))
       if (mapArea->tiles[tileX][tileY].objects.size() == 0)
         mapArea->tiles[tileX][tileY].objects.push_back(
-            MakeSPtr<cObject>("ObjectBush1"));
+            MakeSPtr<Object>("ObjectBush1"));
   }
 }
 
 void
-cValleyMapGenerator::GenerateSmallStones(cMapArea *mapArea) const {
+ValleyMapGenerator::GenerateSmallStones(MapArea *mapArea) const {
   for (auto i = 0; i < 200; i++) {
     auto tileX = random.Next() % mapArea->size;
     auto tileY = random.Next() % mapArea->size;
@@ -409,12 +409,12 @@ cValleyMapGenerator::GenerateSmallStones(cMapArea *mapArea) const {
     if (mapArea->tiles[tileX][tileY].groundType != GetId("GroundTypeWater"))
       if (mapArea->tiles[tileX][tileY].objects.size() == 0)
         mapArea->tiles[tileX][tileY].objects.push_back(
-            MakeSPtr<cObject>("ObjectSmallStone"));
+            MakeSPtr<Object>("ObjectSmallStone"));
   }
 }
 
 void
-cValleyMapGenerator::GeneratePinkFlowers(cMapArea *mapArea) const {
+ValleyMapGenerator::GeneratePinkFlowers(MapArea *mapArea) const {
   for (auto i = 0; i < 100; i++) {
     auto tileX = random.Next() % mapArea->size;
     auto tileY = random.Next() % mapArea->size;
@@ -422,12 +422,12 @@ cValleyMapGenerator::GeneratePinkFlowers(cMapArea *mapArea) const {
     if (mapArea->tiles[tileX][tileY].groundType == GetId("GroundTypeGrass"))
       if (mapArea->tiles[tileX][tileY].objects.size() == 0)
         mapArea->tiles[tileX][tileY].objects.push_back(
-            MakeSPtr<cObject>("ObjectPinkFlower"));
+            MakeSPtr<Object>("ObjectPinkFlower"));
   }
 }
 
 void
-cValleyMapGenerator::GenerateTallGrass(cMapArea *mapArea) const {
+ValleyMapGenerator::GenerateTallGrass(MapArea *mapArea) const {
   for (auto i = 0; i < 6000; i++) {
     auto tileX = random.Next() % mapArea->size;
     auto tileY = random.Next() % mapArea->size;
@@ -435,13 +435,13 @@ cValleyMapGenerator::GenerateTallGrass(cMapArea *mapArea) const {
     if (mapArea->tiles[tileX][tileY].groundType == GetId("GroundTypeGrass"))
       if (mapArea->tiles[tileX][tileY].objects.size() == 0)
         mapArea->tiles[tileX][tileY].objects.push_back(
-            MakeSPtr<cObject>("ObjectTallGrass"));
+            MakeSPtr<Object>("ObjectTallGrass"));
   }
 }
 
 
 void
-cValleyMapGenerator::GenerateMobs(cMapArea *mapArea) const {
+ValleyMapGenerator::GenerateMobs(MapArea *mapArea) const {
   for (auto i = 0; i < 100; i++) {
     auto tileX = random.Next() % mapArea->size;
     auto tileY = random.Next() % mapArea->size;
@@ -457,7 +457,7 @@ cValleyMapGenerator::GenerateMobs(cMapArea *mapArea) const {
             GetId("GroundTypeWater") &&
         mapArea->tiles[tileX][tileY].actor == nullptr) {
       mapArea->tiles[tileX][tileY].actor =
-          std::make_unique<cMob>(engine,
+          std::make_unique<Mob>(engine,
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRabbit");
@@ -481,7 +481,7 @@ cValleyMapGenerator::GenerateMobs(cMapArea *mapArea) const {
             GetId("GroundTypeWater") &&
         mapArea->tiles[tileX][tileY].actor == nullptr) {
       mapArea->tiles[tileX][tileY].actor =
-          std::make_unique<cMob>(engine,
+          std::make_unique<Mob>(engine,
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRat");
@@ -505,7 +505,7 @@ cValleyMapGenerator::GenerateMobs(cMapArea *mapArea) const {
             GetId("GroundTypeWater") &&
         mapArea->tiles[tileX][tileY].actor == nullptr) {
       mapArea->tiles[tileX][tileY].actor =
-          std::make_unique<cMob>(engine,
+          std::make_unique<Mob>(engine,
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobPinkSlime");

@@ -5,12 +5,12 @@
 
 namespace Forradia {
 
-void cModelGraphics::DrawModel(std::string ModelName, float X, float Y, float Z,
+void ModelGraphics::DrawModel(std::string ModelName, float X, float Y, float Z,
                         float Rotation, float SpecificScaling, float Opacity) const {
     DrawModel(GetId(ModelName), X, Y, Z, Rotation, SpecificScaling, Opacity);
   }
 
-void cModelGraphics::DrawModel(int ModelNameId, float X, float Y, float Z,
+void ModelGraphics::DrawModel(int ModelNameId, float X, float Y, float Z,
                         float Rotation, float SpecificScaling, float Opacity) const {
 
     glTranslatef(X, Y, Z);

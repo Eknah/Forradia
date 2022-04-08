@@ -4,11 +4,11 @@
 #pragma once
 #include <SDL2/SDL_keycode.h>
 #include <set>
-#include "iKeyboardHandler.h"
+#include "IKeyboardHandler.h"
 
 namespace Forradia {
 
-class cKeyboardHandler : public iKeyboardHandler {
+class KeyboardHandler : public IKeyboardHandler {
  public:
   void ResetForNewFrame() const override;
 

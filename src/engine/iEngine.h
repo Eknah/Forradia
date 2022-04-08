@@ -12,25 +12,23 @@
 #include "TextGraphics.h"
 #include "Vector3.h"
 #include "implementation/content/ObjectsContent.h"
-#include "iCustomCursor.h"
-#include "iFpsCounter.h"
-#include "iFullscreenController.h"
-#include "iGameLoop.h"
-#include "iKeyboardHandler.h"
-#include "iSceneManager.h"
+#include "ICustomCursor.h"
+#include "IFpsCounter.h"
+#include "IFullscreenController.h"
+#include "IGameLoop.h"
+#include "IKeyboardHandler.h"
+#include "ISceneManager.h"
 #include "Player.h"
 #include "PlanetWorldMap.h"
 
 namespace Forradia {
 
-class F_MapArea;
-
-class iEngine {
+class IEngine {
  public:
-  iEngine(iKeyboardHandler* _keyboardHandler, iCustomCursor* _customCursor,
-          iFpsCounter* _fpsCounter,
-          iFullscreenController* _fullscreenController, iGameLoop* _gameLoop,
-          iSceneManager* _sceneManager)
+  IEngine(IKeyboardHandler* _keyboardHandler, ICustomCursor* _customCursor,
+          IFpsCounter* _fpsCounter,
+          IFullscreenController* _fullscreenController, IGameLoop* _gameLoop,
+          ISceneManager* _sceneManager)
       : keyboardHandler(*_keyboardHandler), customCursor(*_customCursor),
         fpsCounter(*_fpsCounter), fullscreenController(*_fullscreenController),
         gameLoop(*_gameLoop), sceneManager(*_sceneManager) {}
@@ -59,30 +57,30 @@ class iEngine {
                                 float specificScaling = 1.0f,
                          float opacity = 1.0f) const = 0;
 
-  virtual cSizeF GetImageSizeF(std::string imageName) const = 0;
+  virtual SizeF GetImageSizeF(std::string imageName) const = 0;
 
-  virtual cMapArea& GetCurrentMapArea() const = 0;
+  virtual MapArea& GetCurrentMapArea() const = 0;
 
-  cPlayer &GetPlayer() const;
+  Player &GetPlayer() const;
 
   WindowPtr window;
 
-  iKeyboardHandler &keyboardHandler;
-  iCustomCursor &customCursor;
-  iFpsCounter &fpsCounter;
-  iFullscreenController &fullscreenController;
-  iGameLoop &gameLoop;
-  iSceneManager &sceneManager;
+  IKeyboardHandler &keyboardHandler;
+  ICustomCursor &customCursor;
+  IFpsCounter &fpsCounter;
+  IFullscreenController &fullscreenController;
+  IGameLoop &gameLoop;
+  ISceneManager &sceneManager;
 
-  cMouseHandler mouseHandler;
-  cImageLoader imageLoader;
-  cModelLoader modelLoader;
-  cTextGraphics textGraphics;
-  cObjectsContent objectsContent;
+  MouseHandler mouseHandler;
+  ImageLoader imageLoader;
+  ModelLoader modelLoader;
+  TextGraphics textGraphics;
+  ObjectsContent objectsContent;
 
-  UPtr<cPlanetWorldMap> world;
+  UPtr<PlanetWorldMap> world;
 
-  UPtr<cPlayer*> playerPtrPtr;
+  UPtr<Player*> playerPtrPtr;
 };
 
 }  // namespace Forradia

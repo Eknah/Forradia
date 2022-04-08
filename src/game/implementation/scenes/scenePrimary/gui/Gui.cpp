@@ -9,40 +9,40 @@
 
 namespace Forradia {
 
-void cGui::Initialize() {
+void Gui::Initialize() {
   windows.clear();
   windows.insert(
-      {"Inventory", std::make_unique<cGuiWindowInventory>(
-                        engine, "Inventory", cRectF{0.1f, 0.1f, 0.2f, 0.7f})});
+      {"Inventory", std::make_unique<GuiWindowInventory>(
+                        engine, "Inventory", RectF{0.1f, 0.1f, 0.2f, 0.7f})});
   windows.insert(
-      {"Mall", std::make_unique<cGuiWindowMall>(
-                        engine, "Mall", cRectF{0.2f, 0.1f, 0.7f, 0.6f})});
+      {"Mall", std::make_unique<GuiWindowMall>(
+                        engine, "Mall", RectF{0.2f, 0.1f, 0.7f, 0.6f})});
 }
 
-void cGui::Update() {
+void Gui::Update() {
   auto mousePositionF = utilities.GetMousePositionF();
 
   if (boundsButtonInventory.ContainsPoint(mousePositionF))
-    engine.customCursor.cursorType = eCursorTypes::Hovering;
+    engine.customCursor.cursorType = CursorTypes::Hovering;
 
   if (boundsButtonCharacter.ContainsPoint(mousePositionF))
-    engine.customCursor.cursorType = eCursorTypes::Hovering;
+    engine.customCursor.cursorType = CursorTypes::Hovering;
 
   if (boundsButtonSystem.ContainsPoint(mousePositionF))
-    engine.customCursor.cursorType = eCursorTypes::Hovering;
+    engine.customCursor.cursorType = CursorTypes::Hovering;
 
   auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
 
-  auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
+  auto mallIconBounds = RectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
   if (mallIconBounds.ContainsPoint(mousePositionF))
-    engine.customCursor.cursorType = eCursorTypes::Hovering;
+    engine.customCursor.cursorType = CursorTypes::Hovering;
 
   for (auto &[key, window] : windows)
     window->Update();
 }
 
-void cGui::Render() {
+void Gui::Render() {
   guiMinimap.Render();
 
   auto MousePositionF = utilities.GetMousePositionF();
@@ -51,7 +51,7 @@ void cGui::Render() {
 
   auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
 
-  auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
+  auto mallIconBounds = RectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
   if (mallIconBounds.ContainsPoint(MousePositionF))
     engine.DrawImage("GuiIconMallHovered", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
@@ -122,7 +122,7 @@ void cGui::Render() {
     Window->Render();
 }
 
-bool cGui::DoMouseDown(Uint8 mouseButton) {
+bool Gui::DoMouseDown(Uint8 mouseButton) {
   for (auto &[key, window] : windows) {
     auto clickedInWindow = window->DoMouseDown(mouseButton);
 
@@ -140,7 +140,7 @@ bool cGui::DoMouseDown(Uint8 mouseButton) {
 
   auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
 
-  auto mallIconBounds = cRectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
+  auto mallIconBounds = RectF {1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height};
 
   if (mallIconBounds.ContainsPoint(mousePositionF)) {
       windows.at("Mall")->visible = !windows.at("Mall")->visible;
@@ -151,7 +151,7 @@ bool cGui::DoMouseDown(Uint8 mouseButton) {
   return false;
 }
 
-void cGui::DoMouseUp() {
+void Gui::DoMouseUp() {
   for (auto &[key, window] : windows)
     window->DoMouseUp();
 }

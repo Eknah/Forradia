@@ -9,37 +9,37 @@
 
 namespace Forradia {
 
-void cMobsEngine::Update() {
+void MobsEngine::Update() {
   for (unsigned int i = 0;
        i < engine.GetCurrentMapArea().mobActorsMirror.size(); i++) {
     if (i >= engine.GetCurrentMapArea().mobActorsMirror.size())
       break;
 
-    SPtr<cMob> mobPtr = std::dynamic_pointer_cast<cMob>(
+    SPtr<Mob> mobPtr = std::dynamic_pointer_cast<Mob>(
         engine.GetCurrentMapArea().mobActorsMirror.at(i).get());
 
     if (mobPtr == nullptr)
       continue;
 
-    cActor &actor =
+    Actor &actor =
         *engine.GetCurrentMapArea().mobActorsMirror.at(i).get().get();
 
     if (actor.actorId == engine.GetPlayer().actorId)
       continue;
 
-    cMob &mob = *mobPtr;
+    Mob &mob = *mobPtr;
 
     if (mob.actorId == engine.GetPlayer().actorId)
       continue;
 
-    if (Ticks() > mob.GetModule<cModuleMovementData>().tickLastMove + mob.GetModule<cModuleMovementData>().moveSpeed) {
-      mob.GetModule<cModuleMovementData>().tickLastMove = Ticks();
+    if (Ticks() > mob.GetModule<ModuleMovementData>().tickLastMove + mob.GetModule<ModuleMovementData>().moveSpeed) {
+      mob.GetModule<ModuleMovementData>().tickLastMove = Ticks();
 
-      if (mob.GetModule<cModuleMovementData>().moveDestination.x == -1 || mob.GetModule<cModuleMovementData>().moveDestination.y == -1) {
+      if (mob.GetModule<ModuleMovementData>().moveDestination.x == -1 || mob.GetModule<ModuleMovementData>().moveDestination.y == -1) {
         auto destinationX =
-            mob.GetModule<cModuleMovementData>().position.x + random.Next() % 15 - random.Next() % 15;
+            mob.GetModule<ModuleMovementData>().position.x + random.Next() % 15 - random.Next() % 15;
         auto destinationY =
-            mob.GetModule<cModuleMovementData>().position.y + random.Next() % 15 - random.Next() % 15;
+            mob.GetModule<ModuleMovementData>().position.y + random.Next() % 15 - random.Next() % 15;
 
         destinationX =
             std::min(std::max(destinationX, 0.0f),
@@ -48,33 +48,33 @@ void cMobsEngine::Update() {
             std::min(std::max(destinationY, 0.0f),
                      static_cast<float>(engine.world->mapAreaSize) - 1.0f);
 
-        mob.GetModule<cModuleMovementData>().moveDestination = {destinationX, destinationY};
+        mob.GetModule<ModuleMovementData>().moveDestination = {destinationX, destinationY};
       }
 
-      auto deltaX = mob.GetModule<cModuleMovementData>().moveDestination.x - mob.GetModule<cModuleMovementData>().position.x;
-      auto deltaY = mob.GetModule<cModuleMovementData>().moveDestination.y - mob.GetModule<cModuleMovementData>().position.y;
+      auto deltaX = mob.GetModule<ModuleMovementData>().moveDestination.x - mob.GetModule<ModuleMovementData>().position.x;
+      auto deltaY = mob.GetModule<ModuleMovementData>().moveDestination.y - mob.GetModule<ModuleMovementData>().position.y;
       auto distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
 
       if (distance < 1) {
-        mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+        mob.GetModule<ModuleMovementData>().moveDestination = {-1, -1};
 
         continue;
       }
 
       auto piF = static_cast<float>(M_PI);
 
-      *mob.GetModule<cModuleMovementData>().facingAngle =
+      *mob.GetModule<ModuleMovementData>().facingAngle =
           static_cast<float>(std::atan2(-deltaX, -deltaY)) / piF * 180.0f;
 
-      auto angle = *mob.GetModule<cModuleMovementData>().facingAngle / 180.0f * piF - piF / 2 + piF;
-      auto dx = -std::cos(angle) * mob.GetModule<cModuleMovementData>().stepMultiplier;
-      auto dy = std::sin(angle) * mob.GetModule<cModuleMovementData>().stepMultiplier;
-      auto newX = static_cast<float>(mob.GetModule<cModuleMovementData>().position.x + dx * mob.GetModule<cModuleMovementData>().stepSize);
-      auto newY = static_cast<float>(mob.GetModule<cModuleMovementData>().position.y + dy * mob.GetModule<cModuleMovementData>().stepSize);
+      auto angle = *mob.GetModule<ModuleMovementData>().facingAngle / 180.0f * piF - piF / 2 + piF;
+      auto dx = -std::cos(angle) * mob.GetModule<ModuleMovementData>().stepMultiplier;
+      auto dy = std::sin(angle) * mob.GetModule<ModuleMovementData>().stepMultiplier;
+      auto newX = static_cast<float>(mob.GetModule<ModuleMovementData>().position.x + dx * mob.GetModule<ModuleMovementData>().stepSize);
+      auto newY = static_cast<float>(mob.GetModule<ModuleMovementData>().position.y + dy * mob.GetModule<ModuleMovementData>().stepSize);
       auto newXI = static_cast<int>(newX);
       auto newYI = static_cast<int>(newY);
-      auto oldXI = static_cast<int>(mob.GetModule<cModuleMovementData>().position.x);
-      auto oldYI = static_cast<int>(mob.GetModule<cModuleMovementData>().position.y);
+      auto oldXI = static_cast<int>(mob.GetModule<ModuleMovementData>().position.x);
+      auto oldYI = static_cast<int>(mob.GetModule<ModuleMovementData>().position.y);
 
       if (newXI >= 0 && newYI >= 0 && newXI < engine.world->mapAreaSize &&
           newYI < engine.world->mapAreaSize) {
@@ -82,7 +82,7 @@ void cMobsEngine::Update() {
             GetId("GroundTypeWater")) {
           if (engine.GetCurrentMapArea().tiles[newXI][newYI].actor == nullptr ||
               (newXI == oldXI && newYI == oldYI)) {
-            engine.GetCurrentMapArea().tiles[oldXI][oldYI].actor->GetModule<cModuleMovementData>().position = {
+            engine.GetCurrentMapArea().tiles[oldXI][oldYI].actor->GetModule<ModuleMovementData>().position = {
                 newX, newY};
 
             if (newXI != oldXI || newYI != oldYI) {
@@ -99,15 +99,15 @@ void cMobsEngine::Update() {
           } else if (engine.GetCurrentMapArea().tiles[newXI][newYI].actor !=
                          nullptr &&
                      (newXI != oldXI || newYI != oldYI)) {
-            mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+            mob.GetModule<ModuleMovementData>().moveDestination = {-1, -1};
           }
 
         } else {
-          mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+          mob.GetModule<ModuleMovementData>().moveDestination = {-1, -1};
         }
 
       } else {
-        mob.GetModule<cModuleMovementData>().moveDestination = {-1, -1};
+        mob.GetModule<ModuleMovementData>().moveDestination = {-1, -1};
       }
     }
   }

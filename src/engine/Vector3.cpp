@@ -8,28 +8,28 @@
 
 namespace Forradia {
 
-bool cVector3::operator==(const cVector3 &other) const {
+bool Vector3::operator==(const Vector3 &other) const {
   return (this->x == other.x && this->y == other.y && this->z == other.z);
 }
 
-bool cVector3::operator!=(const cVector3 &other) const {
+bool Vector3::operator!=(const Vector3 &other) const {
   return !(this->x == other.x && this->y == other.y && this->z == other.z);
 }
 
-cVector3 cVector3::operator+(const cVector3 &right) const {
-  return cVector3(this->x + right.x, this->y + right.y, this->z + right.z);
+Vector3 Vector3::operator+(const Vector3 &right) const {
+  return Vector3(this->x + right.x, this->y + right.y, this->z + right.z);
 }
 
-cVector3 cVector3::operator-(const cVector3 &right) const {
-  return cVector3(this->x - right.x, this->y - right.y, this->z - right.z);
+Vector3 Vector3::operator-(const Vector3 &right) const {
+  return Vector3(this->x - right.x, this->y - right.y, this->z - right.z);
 }
 
-cVector3 cVector3::operator*(const float &other) const {
-  return cVector3(this->x * other, this->y * other, this->z * other);
+Vector3 Vector3::operator*(const float &other) const {
+  return Vector3(this->x * other, this->y * other, this->z * other);
 }
 
-cVector3 cVector3::operator/(const float &other) const {
-  return cVector3(this->x / other, this->y / other, this->z / other);
+Vector3 Vector3::operator/(const float &other) const {
+  return Vector3(this->x / other, this->y / other, this->z / other);
 }
 
 }  // namespace Forradia

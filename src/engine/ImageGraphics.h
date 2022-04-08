@@ -4,13 +4,13 @@
 #pragma once
 #include <string>
 #include "../engine/Aliases.h"
-#include "../engine/iEngine.h"
+#include "../engine/IEngine.h"
 
 namespace Forradia {
 
-class cImageGraphics {
+class ImageGraphics {
  public:
-  explicit cImageGraphics(iEngine &engine) : engine(engine) {}
+  explicit ImageGraphics(IEngine &engine) : engine(engine) {}
 
   // ---- Drawing operations ----
 
@@ -20,11 +20,11 @@ class cImageGraphics {
   void DrawImage(int ImageNameId, float X, float Y, float Width,
                         float Height) const;
 
-  cSizeF GetImageSizeF(std::string ImageName) const;
+  SizeF GetImageSizeF(std::string ImageName) const;
 
  private:
-  iEngine &engine;
-  cUtilities utilities;
+  IEngine &engine;
+  Utilities utilities;
 };
 
 }  // namespace Forradia

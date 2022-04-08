@@ -5,8 +5,8 @@
 
 namespace Forradia {
 
-void cModuleObjectUsage::ResetForNewFrame() {}
+void ModuleObjectUsage::ResetForNewFrame() {}
 
-void cModuleObjectUsage::Update() {}
+void ModuleObjectUsage::Update() {}
 
 }  // namespace Forradia

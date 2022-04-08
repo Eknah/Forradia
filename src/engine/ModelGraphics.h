@@ -4,13 +4,13 @@
 #pragma once
 #include <string>
 #include "../engine/Aliases.h"
-#include "../engine/iEngine.h"
+#include "../engine/IEngine.h"
 
 namespace Forradia {
 
-class cModelGraphics {
+class ModelGraphics {
  public:
-  explicit cModelGraphics(iEngine &engine) : engine(engine) {}
+  explicit ModelGraphics(IEngine &engine) : engine(engine) {}
 
   // ---- Drawing operations ----
 
@@ -23,7 +23,7 @@ class cModelGraphics {
                  float opacity = 1.0f) const;
 
  private:
-  iEngine &engine;
+  IEngine &engine;
 
   float modelScaling = 0.1f;
 };

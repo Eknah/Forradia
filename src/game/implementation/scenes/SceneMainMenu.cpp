@@ -6,13 +6,13 @@
 
 namespace Forradia {
 
-void cSceneMainMenu::Enter() {
+void SceneMainMenu::Enter() {
     sceneButtons.clear();
     sceneButtons.push_back({{0.5f, 0.4f, 0.1f, 0.05f}, "Client"});
     sceneButtons.push_back({{0.5f, 0.47f, 0.1f, 0.05f}, "Server"});
 }
 
-void cSceneMainMenu::Update() {
+void SceneMainMenu::Update() {
   if (engine.keyboardHandler.keysBeenFired->size() > 0)
     engine.sceneManager.SwitchToScene("ScenePrimary");
 
@@ -21,7 +21,7 @@ void cSceneMainMenu::Update() {
       engine.sceneManager.SwitchToScene("ScenePrimary");
 }
 
-void cSceneMainMenu::Render() {
+void SceneMainMenu::Render() {
   engine.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
 
   auto canvasSize = utilities.GetCanvasSize();

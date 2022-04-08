@@ -15,21 +15,21 @@
 #include "ModelGraphics.h"
 #include "PaintGraphics.h"
 #include "SceneManager.h"
-#include "iEngine.h"
+#include "IEngine.h"
 
 namespace Forradia {
 
-class cEngine : public iEngine {
+class Engine : public IEngine {
  public:
   // ---- Ctor ----
   // Give needed references to this engine to all sub components
 
-  cEngine()
+  Engine()
       : gameLoopImplemented(*this), modelGraphics(*this),
         fpsCounterImplemented(*this), customCursorImplemented(*this),
         imageGraphics(*this), fullscreenControllerImplemented(*this),
         sceneManagerImplemented(*this),
-        iEngine(&keyboardHandlerImplemented, &customCursorImplemented,
+        IEngine(&keyboardHandlerImplemented, &customCursorImplemented,
                 &fpsCounterImplemented, &fullscreenControllerImplemented,
                 &gameLoopImplemented, &sceneManagerImplemented) {}
 
@@ -37,10 +37,10 @@ class cEngine : public iEngine {
   // Runs game loop until user exists program
   // Cleans up SDL
 
-  void Run(cScenesCollection scenesCollection_, int startScene_,
-                  UPtr<cPlanetWorldMap> world_,
-                  cInventory startingInventory_,
-                  cObjectsContent objectsContent_);
+  void Run(ScenesCollection scenesCollection_, int startScene_,
+                  UPtr<PlanetWorldMap> world_,
+                  Inventory startingInventory_,
+                  ObjectsContent objectsContent_);
 
   // ---- Drawing operations ----
 
@@ -72,18 +72,18 @@ class cEngine : public iEngine {
 
   // ---- Helper functions ----
 
-  cSizeF GetImageSizeF(std::string imageName) const override;
+  SizeF GetImageSizeF(std::string imageName) const override;
 
-  cMapArea& GetCurrentMapArea() const override;
+  MapArea& GetCurrentMapArea() const override;
 
   // ---- Public members ----
 
-  cKeyboardHandler keyboardHandlerImplemented;
-  cCustomCursor customCursorImplemented;
-  cFpsCounter fpsCounterImplemented;
-  cFullscreenController fullscreenControllerImplemented;
-  cGameLoop gameLoopImplemented;
-  cSceneManager sceneManagerImplemented;
+  KeyboardHandler keyboardHandlerImplemented;
+  CustomCursor customCursorImplemented;
+  FpsCounter fpsCounterImplemented;
+  FullscreenController fullscreenControllerImplemented;
+  GameLoop gameLoopImplemented;
+  SceneManager sceneManagerImplemented;
 
   float tileSize = 0.5f;
   float fov = 60.0f;
@@ -98,12 +98,12 @@ class cEngine : public iEngine {
 
   // ---- Private members ----
 
-  cImageGraphics imageGraphics;
-  cPaintGraphics paintGraphics;
-  cModelGraphics modelGraphics;
+  ImageGraphics imageGraphics;
+  PaintGraphics paintGraphics;
+  ModelGraphics modelGraphics;
 
   const std::string title = "Forradia";
-  const cSize defaultWindowSize = {800, 600};
+  const Size defaultWindowSize = {800, 600};
 };
 
 }  // namespace Forradia

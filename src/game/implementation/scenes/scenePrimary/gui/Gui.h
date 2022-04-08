@@ -11,9 +11,9 @@
 
 namespace Forradia {
 
-class cGui {
+class Gui {
  public:
-  explicit cGui(const cEngine &_engine) :
+  explicit Gui(const Engine &_engine) :
         engine(_engine), guiMinimap(_engine) {}
 
   void Initialize();
@@ -22,18 +22,18 @@ class cGui {
   bool DoMouseDown(Uint8 mouseButton);
   void DoMouseUp();
 
-  UMap<std::string, UPtr<cGuiWindowBase>> windows;
+  UMap<std::string, UPtr<GuiWindowBase>> windows;
 
  private:
-  const cEngine &engine;
+  const Engine &engine;
 
-  cGuiMinimap guiMinimap;
+  GuiMinimap guiMinimap;
 
   std::vector<std::string> textBoxText = {"You have entered Forradia"};
 
   const float textBoxMargin = 0.005f;
 
-  cUtilities utilities;
+  Utilities utilities;
 
   const float buttonWidth = 0.15f;
   const float buttonHeight = 0.03f;
@@ -42,14 +42,14 @@ class cGui {
 
   const int buttonMallSize = 100;
 
-  cRectF boundsButtonInventory = {0.5f - buttonWidth / 2, 1.0f - buttonHeight,
+  RectF boundsButtonInventory = {0.5f - buttonWidth / 2, 1.0f - buttonHeight,
                                   buttonWidth, buttonHeight};
-  cRectF boundsButtonCharacter = {0.5f - buttonWidth / 2 - buttonWidth,
+  RectF boundsButtonCharacter = {0.5f - buttonWidth / 2 - buttonWidth,
                                   1.0f - buttonHeight, buttonWidth,
                                   buttonHeight};
-  cRectF boundsButtonSystem = {0.5f - buttonWidth / 2 + buttonWidth,
+  RectF boundsButtonSystem = {0.5f - buttonWidth / 2 + buttonWidth,
                                1.0f - buttonHeight, buttonWidth, buttonHeight};
-  cRectF boundsTextBox = {0.5f - textBoxWidth / 2,
+  RectF boundsTextBox = {0.5f - textBoxWidth / 2,
                           1.0f - buttonHeight - textBoxHeight, textBoxWidth,
                           textBoxHeight};
 };

@@ -3,20 +3,20 @@
 
 #pragma once
 #include "../engine/Aliases.h"
-#include "../engine/iModule.h"
+#include "../engine/IModule.h"
 
 namespace Forradia {
 
-class cObject;
+class Object;
 
-class cModuleObjectUsage : public iModule {
+class ModuleObjectUsage : public IModule {
  public:
-  using iModule::iModule;
+  using IModule::IModule;
 
   void ResetForNewFrame() override;
   void Update() override;
 
-  SPtr<cObject> objectBeingUsed = nullptr;
+  SPtr<Object> objectBeingUsed = nullptr;
 };
 
 }  // namespace Forradia

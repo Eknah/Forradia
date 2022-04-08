@@ -8,9 +8,9 @@
 
 namespace Forradia {
 
-class cSceneMainMenu : public cSceneBase {
+class SceneMainMenu : public SceneBase {
  public:
-  using cSceneBase::cSceneBase;
+  using SceneBase::SceneBase;
 
   void Enter() override;
   void Update() override;
@@ -19,8 +19,8 @@ class cSceneMainMenu : public cSceneBase {
   void DoMouseUp(Uint8 mouseButton) override {}
 
  private:
-  cUtilities utilities;
-  cPalette palette;
+  Utilities utilities;
+  Palette palette;
 };
 
 }  // namespace Forradia

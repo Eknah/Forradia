@@ -5,10 +5,11 @@
 
 namespace Forradia {
 
-enum class eCursorTypes {
-    Default,
-    Hovering,
-    Hidden
+enum ObjectFlags : char {
+    ObjNone = 0,
+    ObjObstacle = 1,
+    ObjMovable = 2,
+    ObjNoShadow = 4
 };
 
 }  // namespace Forradia

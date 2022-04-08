@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-void cImageLoader::LoadImages() {
+void ImageLoader::LoadImages() {
     images.clear();
     imageNames.clear();
 
@@ -29,7 +29,7 @@ void cImageLoader::LoadImages() {
 
 
       auto surface =
-          SurfacePtr(IMG_Load(file.path().string().c_str()), cSDL_Deleter());
+          SurfacePtr(IMG_Load(file.path().string().c_str()), SDL_Deleter());
       auto textureId = GLuint(images.size());
 
 //    for (auto i = 0; i < surface->w*surface->h*4; i+= 4) {

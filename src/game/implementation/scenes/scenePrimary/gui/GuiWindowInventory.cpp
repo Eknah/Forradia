@@ -6,7 +6,7 @@
 
 namespace Forradia {
 
-void cGuiWindowInventory::RenderDerived() {
+void GuiWindowInventory::RenderDerived() {
   auto canvasSize = utilities.GetCanvasSize();
   auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
   auto boundsInterior = GetInteriorBounds();
@@ -25,18 +25,18 @@ void cGuiWindowInventory::RenderDerived() {
       auto xpos = boundsInterior.x + x * (slotSize + margin);
       auto ypos = boundsInterior.y + y * (slotSize * aspectRatio + margin);
 
-      if (engine.GetPlayer().GetModule<cModuleInventory>()
+      if (engine.GetPlayer().GetModule<ModuleInventory>()
               .inventory.objects.count(i) > 0) {
-        if (engine.GetPlayer().GetModule<cModuleObjectUsage>()
+        if (engine.GetPlayer().GetModule<ModuleObjectUsage>()
                 .objectBeingUsed ==
-            engine.GetPlayer().GetModule<cModuleInventory>().inventory.objects.at(i))
+            engine.GetPlayer().GetModule<ModuleInventory>().inventory.objects.at(i))
           engine.DrawImage("ObjectSelected", xpos, ypos, slotSize,
                            slotSize * aspectRatio);
         else
           engine.DrawImage("ObjectBackgroundShadow", xpos, ypos, slotSize,
                            slotSize * aspectRatio);
 
-        engine.DrawImage(engine.GetPlayer().GetModule<cModuleInventory>()
+        engine.DrawImage(engine.GetPlayer().GetModule<ModuleInventory>()
                              .inventory.objects.at(i)
                              ->objectType,
                          xpos, ypos, slotSize, slotSize * aspectRatio);
@@ -47,11 +47,11 @@ void cGuiWindowInventory::RenderDerived() {
   }
 }
 
-void cGuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton) {
+void GuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton) {
   if (mouseButton != SDL_BUTTON_RIGHT)
     return;
 
-  engine.GetPlayer().GetModule<cModuleObjectUsage>().objectBeingUsed = nullptr;
+  engine.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed = nullptr;
 
   auto canvasSize = utilities.GetCanvasSize();
   auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
@@ -71,13 +71,13 @@ void cGuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton) {
       auto xpos = boundsInterior.x + x * (slotSize + margin);
       auto ypos = boundsInterior.y + y * (slotSize * aspectRatio + margin);
 
-      if (engine.GetPlayer().GetModule<cModuleInventory>()
+      if (engine.GetPlayer().GetModule<ModuleInventory>()
               .inventory.objects.count(i) > 0) {
         if (mouseXRel >= xpos && mouseYRel >= ypos &&
             mouseXRel < xpos + slotSize &&
             mouseYRel < ypos + slotSize * aspectRatio) {
-          engine.GetPlayer().GetModule<cModuleObjectUsage>().objectBeingUsed =
-              engine.GetPlayer().GetModule<cModuleInventory>().inventory
+          engine.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed =
+              engine.GetPlayer().GetModule<ModuleInventory>().inventory
                   .objects.at(i);
           return;
         }

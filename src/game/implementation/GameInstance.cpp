@@ -13,18 +13,18 @@
 
 namespace Forradia {
 
-void cGameInstance::StartGame() {
+void GameInstance::StartGame() {
   const int mapAreaSize = 150;
-  auto planetMap = MakeUPtr<cPlanetWorldMap>(mapAreaSize, 1, 1);
+  auto planetMap = MakeUPtr<PlanetWorldMap>(mapAreaSize, 1, 1);
 
-  cEngine engine;
-  cObjectsContent objectsContent;
-  cScenesCollection scenesCollection;
-  cInventory startingInventory;
+  Engine engine;
+  ObjectsContent objectsContent;
+  ScenesCollection scenesCollection;
+  Inventory startingInventory;
 
   //auto defaultMapGen = MakeSPtr<cDefaultMapGenerator>(engine, planetMap);
-  auto defaultMapGen = MakeSPtr<cValleyMapGenerator>(engine, planetMap);
-  auto worldMapGens = UMap<int, UMap<int, SPtr<iMapGenerator>>>();
+  auto defaultMapGen = MakeSPtr<ValleyMapGenerator>(engine, planetMap);
+  auto worldMapGens = UMap<int, UMap<int, SPtr<IMapGenerator>>>();
   worldMapGens[0][0] = defaultMapGen;
   worldMapGens[1][0] = defaultMapGen;
   planetMap->GenerateWorldMap(worldMapGens);
@@ -32,26 +32,26 @@ void cGameInstance::StartGame() {
   startingInventory.AddMany({"ObjectWoodaxe",
                             "ObjectSaw"});
 
-  objectsContent.AddMany({{"ObjectTree1", ObjectMovementBlock},
-                          {"ObjectTree2", ObjectMovementBlock},
-                          {"ObjectCaveWallBlock", ObjectMovementBlock},
-                          {"ObjectTallGrass", ObjectNoShadow},
-                          {"ObjectWoodFence", ObjectNoShadow | ObjectMovementBlock},
-                          {"ObjectWoodWall", ObjectNoShadow | ObjectMovementBlock},
-                          {"ObjectRoof", ObjectNoShadow}});
+  objectsContent.AddMany({{"ObjectTree1", ObjObstacle},
+                          {"ObjectTree2", ObjObstacle},
+                          {"ObjectCaveWallBlock", ObjObstacle},
+                          {"ObjectTallGrass", ObjNoShadow},
+                          {"ObjectWoodFence", ObjNoShadow | ObjObstacle},
+                          {"ObjectWoodWall", ObjNoShadow | ObjObstacle},
+                          {"ObjectRoof", ObjNoShadow}});
 
   objectsContent.SetOpacity("ObjectRoof", 0.5f);
 
   scenesCollection.AddMany({{"SceneGameStart",
-                             MakeSPtr<cSceneGameStart>(engine,
+                             MakeSPtr<SceneGameStart>(engine,
                              "SceneGameStartBackground",
                              "SceneForradiaLogo",
                              "Press to start",
                              "SceneMainMenu")},
 
-                            {"SceneMainMenu", MakeSPtr<cSceneMainMenu>(engine)},
+                            {"SceneMainMenu", MakeSPtr<SceneMainMenu>(engine)},
 
-                            {"ScenePrimary", MakeSPtr<cScenePrimary>(engine)}});
+                            {"ScenePrimary", MakeSPtr<ScenePrimary>(engine)}});
 
   engine.Run(std::move(scenesCollection), GetId("SceneGameStart"), std::move(planetMap),
              startingInventory, objectsContent);

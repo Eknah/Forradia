@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-void cGameLoop::Run() {
+void GameLoop::Run() {
     bool quit = false;
     SDL_Event event;
 
@@ -75,18 +75,18 @@ void cGameLoop::Run() {
     }
   }
 
-void cGameLoop::ResetForNewFrame() {
+void GameLoop::ResetForNewFrame() {
       engine.keyboardHandler.ResetForNewFrame();
       engine.mouseHandler.ResetForNewFrame();
       engine.customCursor.ResetForNewFrame();
   }
 
-void cGameLoop::Update() {
+void GameLoop::Update() {
     engine.sceneManager.GetCurrentScene()->Update();
     engine.fpsCounter.Update();
   }
 
-void cGameLoop::Render() {
+void GameLoop::Render() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     engine.sceneManager.GetCurrentScene()->Render();
@@ -96,14 +96,14 @@ void cGameLoop::Render() {
     SDL_GL_SwapWindow(engine.window.get());
   }
 
-int cGameLoop::EventFilter(void *pthis, const SDL_Event *event) {
+int GameLoop::EventFilter(void *pthis, const SDL_Event *event) {
     auto do_handle_event = event->type == SDL_WINDOWEVENT &&
                            event->window.event == SDL_WINDOWEVENT_SIZE_CHANGED;
 
     if (!do_handle_event)
       return 1;
 
-    iEngine *engine = reinterpret_cast<iEngine *>(pthis);
+    IEngine *engine = reinterpret_cast<IEngine *>(pthis);
 
     engine->gameLoop.Update();
     engine->gameLoop.Render();

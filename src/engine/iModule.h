@@ -5,24 +5,24 @@
 
 namespace Forradia {
 
-class iEngine;
-class cActor;
+class IEngine;
+class Actor;
 
-class iModule {
+class IModule {
  public:
-  iModule(const iEngine &_engine, cActor *_parentActor)
+  IModule(const IEngine &_engine, Actor *_parentActor)
       : engine(_engine), parentActor(_parentActor) {}
 
   virtual void ResetForNewFrame() = 0;
   virtual void Update() = 0;
 
-  cActor &GetParentActor();
+  Actor &GetParentActor();
 
  protected:
-  const iEngine &engine;
+  const IEngine &engine;
 
  private:
-  cActor *parentActor;
+  Actor *parentActor;
 };
 
 }  // namespace Forradia

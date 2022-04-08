@@ -5,17 +5,17 @@
 
 namespace Forradia {
 
-class iEngine;
+class IEngine;
 
-class iFullscreenController {
+class IFullscreenController {
  public:
-  explicit iFullscreenController(const iEngine &_engine) : engine(_engine) {}
+  explicit IFullscreenController(const IEngine &_engine) : engine(_engine) {}
 
   virtual void UpdateFullscreenToggling() = 0;
   virtual void ToggleFullscreen() = 0;
 
  protected:
-  const iEngine &engine;
+  const IEngine &engine;
   bool fullscreenOn = true;
 };
 

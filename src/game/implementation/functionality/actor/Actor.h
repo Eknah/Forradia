@@ -6,20 +6,20 @@
 #include "../engine/Aliases.h"
 #include "../engine/Point2F.h"
 #include "../engine/Point3.h"
-#include "../engine/iModule.h"
+#include "../engine/IModule.h"
 
 namespace Forradia {
 
-class iEngine;
+class IEngine;
 
-class cActor {
+class Actor {
  public:
-  explicit cActor(const iEngine &_engine) : engine(_engine),
+  explicit Actor(const IEngine &_engine) : engine(_engine),
     actorId(currentActorId++) {}
 
-  cActor(const iEngine &_engine, float x, float y, std::string _modelName);
+  Actor(const IEngine &_engine, float x, float y, std::string _modelName);
 
-  cActor(const iEngine &_engine, std::string _modelName) :
+  Actor(const IEngine &_engine, std::string _modelName) :
       engine(_engine), modelName(_modelName),
       actorId(currentActorId++) {}
 
@@ -49,37 +49,37 @@ class cActor {
   int actorId = -1;
   std::string modelName;
 
-  virtual ~cActor() {}  // Just to make class polymorphic
+  virtual ~Actor() {}  // Just to make class polymorphic
 
  protected:
 
  private:
 
-  const iEngine &engine;
+  const IEngine &engine;
 
   inline static int currentActorId = 0;
 
-  UMap<size_t, UPtr<iModule>> modules;
+  UMap<size_t, UPtr<IModule>> modules;
 };
 
 template <class T>
-T &cActor::GetModule() const {
+T &Actor::GetModule() const {
   return static_cast<T &>(*modules.at(typeid(T).hash_code()));
 }
 
 template <class T>
-void cActor::AddModule() {
+void Actor::AddModule() {
   auto &Type = typeid(T);
   modules.insert({Type.hash_code(), MakeUPtr<T>(engine, this)});
 }
 
 template <class T>
-bool cActor::HasModule() const {
+bool Actor::HasModule() const {
   return modules.count(typeid(T).hash_code()) > 0;
 }
 
 template <class T>
-void cActor::AddIfNotExists() {
+void Actor::AddIfNotExists() {
     if (!HasModule<T>()) {
         AddModule<T>();
     }

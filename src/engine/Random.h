@@ -7,9 +7,9 @@
 
 namespace Forradia {
 
-class cRandom {
+class Random {
  public:
-    cRandom();
+    Random();
 
     int Next() const;
 
