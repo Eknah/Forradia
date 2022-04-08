@@ -5,9 +5,9 @@
 
 namespace Forradia {
 
-Mob::Mob(const IEngine &engine, float x, float y,
+Mob::Mob(const IEngine &e, float x, float y,
            std::string modelName) :
-    Actor(engine, x, y, modelName) {
+    Actor(e, x, y, modelName) {
     AddIfNotExists<ModuleMovementData>();
     GetModule<ModuleMovementData>().isWalking = true;
 }

@@ -5,7 +5,7 @@
 
 namespace Forradia {
 
-Player::Player(IEngine &engine) : Actor(engine, "Player") {
+Player::Player(IEngine &e) : Actor(e, "Player") {
     AddModule<ModuleJumping>();
     AddModule<ModuleMovement>();
     AddModule<ModuleInventory>();

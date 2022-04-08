@@ -15,7 +15,7 @@ class IEngine;
 
 class Mob : public Actor {
  public:
-  Mob(const IEngine &engine, float x, float y,
+  Mob(const IEngine &e, float x, float y,
        std::string modelName);
 };
 

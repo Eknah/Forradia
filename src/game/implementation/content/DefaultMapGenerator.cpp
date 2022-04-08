@@ -453,7 +453,7 @@ DefaultMapGenerator::GenerateMobs(MapArea *mapArea) const {
 
 void
 DefaultMapGenerator::
-GenerateQuestCaves(const IEngine &engine,
+GenerateQuestCaves(const IEngine &e,
                    MapArea *mapArea,
                    const UPtr<PlanetWorldMap>&worldMap) const {
   QuestCaveMapGenerator questCaveMapGenerator;
@@ -473,7 +473,7 @@ GenerateQuestCaves(const IEngine &engine,
       mapArea->tiles[tileX][tileY].properties["WarpToFloor"] = std::to_string(floor);
 
       worldMap->areas[mapArea->worldCoord.x][mapArea->worldCoord.y][floor] =
-          std::make_unique<MapArea>(engine, worldMap->mapAreaSize,
+          std::make_unique<MapArea>(e, worldMap->mapAreaSize,
                                      mapArea->worldCoord.x,
                                      mapArea->worldCoord.y,
                                      floor);

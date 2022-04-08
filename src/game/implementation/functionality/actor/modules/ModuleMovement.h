@@ -17,7 +17,7 @@ class ModuleMovement : public IModule {
     bool tryMoveLeft = false;
   };
 
-  ModuleMovement(const IEngine &_engine, Actor *_parentActor);
+  ModuleMovement(const IEngine &_e, Actor *_parentActor);
 
   //using iModule::iModule;
 

@@ -10,9 +10,9 @@
 
 namespace Forradia {
 
-ModuleMovement::ModuleMovement(const IEngine &engine_,
+ModuleMovement::ModuleMovement(const IEngine &_e,
                                  Actor *parentActor_)
-    : IModule(engine_, parentActor_) {
+    : IModule(_e, parentActor_) {
     GetParentActor().AddIfNotExists<ModuleMovementData>();
 }
 

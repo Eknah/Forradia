@@ -17,13 +17,13 @@ void GameInstance::StartGame() {
   const int mapAreaSize = 150;
   auto planetMap = MakeUPtr<PlanetWorldMap>(mapAreaSize, 1, 1);
 
-  Engine engine;
+  Engine e;
   ObjectsContent objectsContent;
   ScenesCollection scenesCollection;
   Inventory startingInventory;
 
   //auto defaultMapGen = MakeSPtr<cDefaultMapGenerator>(engine, planetMap);
-  auto defaultMapGen = MakeSPtr<ValleyMapGenerator>(engine, planetMap);
+  auto defaultMapGen = MakeSPtr<ValleyMapGenerator>(e, planetMap);
   auto worldMapGens = UMap<int, UMap<int, SPtr<IMapGenerator>>>();
   worldMapGens[0][0] = defaultMapGen;
   worldMapGens[1][0] = defaultMapGen;
@@ -43,17 +43,17 @@ void GameInstance::StartGame() {
   objectsContent.SetOpacity("ObjectRoof", 0.5f);
 
   scenesCollection.AddMany({{"SceneGameStart",
-                             MakeSPtr<SceneGameStart>(engine,
+                             MakeSPtr<SceneGameStart>(e,
                              "SceneGameStartBackground",
                              "SceneForradiaLogo",
                              "Press to start",
                              "SceneMainMenu")},
 
-                            {"SceneMainMenu", MakeSPtr<SceneMainMenu>(engine)},
+                            {"SceneMainMenu", MakeSPtr<SceneMainMenu>(e)},
 
-                            {"ScenePrimary", MakeSPtr<ScenePrimary>(engine)}});
+                            {"ScenePrimary", MakeSPtr<ScenePrimary>(e)}});
 
-  engine.Run(std::move(scenesCollection), GetId("SceneGameStart"), std::move(planetMap),
+  e.Run(std::move(scenesCollection), GetId("SceneGameStart"), std::move(planetMap),
              startingInventory, objectsContent);
 }
 

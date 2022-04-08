@@ -12,7 +12,7 @@ namespace Forradia {
 
 class Player : public Actor {
  public:
-  explicit Player(IEngine &engine);
+  explicit Player(IEngine &e);
 };
 
 }  // namespace Forradia

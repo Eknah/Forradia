@@ -11,8 +11,8 @@ namespace Forradia {
 
 class SceneManager : public ISceneManager {
  public:
-    explicit SceneManager(const IEngine &engine) :
-          ISceneManager(engine) {}
+    explicit SceneManager(const IEngine &e) :
+          ISceneManager(e) {}
 
   void Initialize(ScenesCollection scenes,
                          int startScene) override;
