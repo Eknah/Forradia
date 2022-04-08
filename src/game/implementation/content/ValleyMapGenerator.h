@@ -19,6 +19,7 @@ class cValleyMapGenerator : public iMapGenerator {
   void GeneratePlayerStartingPosition(cMapArea *mapArea) const;
   void GenerateElevation(cMapArea *mapArea) const;
   void GenerateRock(cMapArea *mapArea) const;
+  void GenerateRivers(cMapArea *mapArea) const;
   void GenerateVillage(cMapArea *mapArea) const;
   void GenerateTrees(cMapArea *mapArea) const;
   void GenerateBushes(cMapArea *mapArea) const;

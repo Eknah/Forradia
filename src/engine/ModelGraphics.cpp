@@ -22,10 +22,10 @@ void cModelGraphics::DrawModel(int ModelNameId, float X, float Y, float Z,
     auto &Model = engine.modelLoader.models[ModelNameId];
 
     for (auto &Mesh : Model.loadedMeshes) {
-//      glColor4f(Mesh.meshMaterial.kd.x, Mesh.meshMaterial.kd.y,
-//                Mesh.meshMaterial.kd.z, Opacity);
-        glColor4f(Mesh.meshMaterial.kd.x, Mesh.meshMaterial.kd.z,
-                  Mesh.meshMaterial.kd.y, Opacity);
+      glColor4f(Mesh.meshMaterial.kd.x, Mesh.meshMaterial.kd.y,
+                Mesh.meshMaterial.kd.z, Opacity);
+//        glColor4f(Mesh.meshMaterial.kd.x, Mesh.meshMaterial.kd.z,
+//                  Mesh.meshMaterial.kd.y, Opacity);
 
       for (auto &Vector : Mesh.vertices) {
         auto XVec = X + modelScaling * Vector.position.x * SpecificScaling;

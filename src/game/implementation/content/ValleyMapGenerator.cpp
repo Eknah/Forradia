@@ -20,6 +20,7 @@ cValleyMapGenerator::GenerateMapArea(
   GeneratePlayerStartingPosition(MapArea);
   GenerateElevation(MapArea);
   GenerateRock(MapArea);
+  GenerateRivers(MapArea);
   GenerateTrees(MapArea);
   GenerateBushes(MapArea);
   GenerateSmallStones(MapArea);
@@ -136,6 +137,42 @@ cValleyMapGenerator::GenerateRock(cMapArea *MapArea) const {
 }
 
 void
+cValleyMapGenerator::GenerateRivers(cMapArea *MapArea) const {
+    for (auto i = 0; i < 6; i++) {
+        float xstart = random.Next() % MapArea->size;
+        float ystart = random.Next() % MapArea->size;
+
+        float xdest = MapArea->size/2;
+        float ydest = MapArea->size/2;
+
+        auto dx = xdest - xstart;
+        auto dy = ydest - ystart;
+
+        auto numSteps = std::max(std::abs(dx), std::abs(dy));
+        auto xstep = dx/numSteps;
+        auto ystep = dy/numSteps;
+
+        auto angleStart = std::atan2(dy, dx);
+
+        for (auto j = 0.0f; j < numSteps; j += 0.1f) {
+            auto x = xstart + j*xstep;
+            auto y = ystart + j*ystep;
+
+            auto angle = angleStart + std::cos(j*M_PI/10.0f);
+
+            x += std::cos(angle)*4.0f;
+            y += std::sin(angle)*4.0f;
+
+            auto xi = static_cast<int>(x);
+            auto yi = static_cast<int>(y);
+
+            if (xi >= 0 && yi >= 0 && xi < MapArea->size && yi < MapArea->size)
+                MapArea->tiles[xi][yi].groundType = GetId("GroundTypeWater");
+        }
+    }
+}
+
+void
 cValleyMapGenerator::GenerateTrees(cMapArea *MapArea) const {
   for (auto I = 0; I < 30; I++) {
     auto TileX = random.Next() % MapArea->size;
@@ -198,7 +235,7 @@ cValleyMapGenerator::GenerateVillage(cMapArea *MapArea) const {
     for (auto y = yStart; y <= yEnd; y++)  {
 
         for (auto x = xStart; x <= xEnd; x++)  {
-            //MapArea->tiles[x][y].groundType = GetId("GroundTypeTrail");
+            MapArea->tiles[x][y].groundType = GetId("GroundTypeGrass");
             MapArea->tiles[x][y].objects.clear();
         }
     }

@@ -32,11 +32,12 @@ void cImageLoader::LoadImages() {
           SurfacePtr(IMG_Load(file.path().string().c_str()), cSDL_Deleter());
       auto textureId = GLuint(images.size());
 
-    for (auto i = 0; i < surface->w*surface->h*4; i+= 4) {
-        auto p = (Uint8 *)surface->pixels;
-        p[i + 2] = p[i + 1];
-        p[i + 1] = 0;
-    }
+//    for (auto i = 0; i < surface->w*surface->h*4; i+= 4) {
+//        auto p = (Uint8 *)surface->pixels;
+//        auto temp = p[i + 2];
+//        p[i + 2] = p[i + 1];
+//        p[i + 1] = temp;
+//    }
 
       glGenTextures(1, &textureId);
       glBindTexture(GL_TEXTURE_2D, textureId);
