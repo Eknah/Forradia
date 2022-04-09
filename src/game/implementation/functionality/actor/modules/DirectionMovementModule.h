@@ -17,8 +17,6 @@ class DirectionMovementModule : public IModule {
   void Update() override;
 
   char moveInstruction;
-
-
 };
 
 }  // namespace Forradia

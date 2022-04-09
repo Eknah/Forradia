@@ -29,27 +29,56 @@ void DirectionMovementModule::Update() {
     auto angle = 0.0f;
     auto piF = static_cast<float>(M_PI);
 
-    if (moveInstruction & DirForward) {
-      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle / 180.0f * piF - piF / 2.0f +
-              0.0f * piF / 2.0f;
-    }
-
-    if (moveInstruction & DirLeft) {
-      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle / 180.0f * piF - piF / 2.0f +
-              1.0f * piF / 2.0f;
-      *GetParentActor().GetModule<MovementDataModule>().facingAngle = *GetParentActor().GetModule<MovementDataModule>().facingAngle + 1 * 90.0f;
-    }
-
-    if (moveInstruction & DirBack) {
-      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle / 180.0f * piF - piF / 2.0f +
-              2.0f * piF / 2.0f;
-    }
-
-    if (moveInstruction & DirRight) {
-      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle / 180.0f * piF - piF / 2.0f +
-              3.0f * piF / 2.0f;
-      *GetParentActor().GetModule<MovementDataModule>().facingAngle = *GetParentActor().GetModule<MovementDataModule>().facingAngle
-              + 3.0f * 90.0f;
+    if (moveInstruction & DirForward && moveInstruction & DirLeft) {
+      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+                  180.0f * piF -
+              piF / 2.0f + 0.5f * piF / 2.0f;
+      *GetParentActor().GetModule<MovementDataModule>().facingAngle =
+          *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+          0.5 * 90.0f;
+    } else if (moveInstruction & DirLeft && moveInstruction & DirBack) {
+      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+                  180.0f * piF -
+              piF / 2.0f + 1.5f * piF / 2.0f;
+      *GetParentActor().GetModule<MovementDataModule>().facingAngle =
+          *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+          1.5 * 90.0f;
+    } else if (moveInstruction & DirBack && moveInstruction & DirRight) {
+      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+                  180.0f * piF -
+              piF / 2.0f + 2.5f * piF / 2.0f;
+      *GetParentActor().GetModule<MovementDataModule>().facingAngle =
+          *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+          2.5 * 90.0f;
+    } else if (moveInstruction & DirRight && moveInstruction & DirForward) {
+      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+                  180.0f * piF -
+              piF / 2.0f + 3.5f * piF / 2.0f;
+      *GetParentActor().GetModule<MovementDataModule>().facingAngle =
+          *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+          3.5f * 90.0f;
+    } else if (moveInstruction & DirForward) {
+      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+                  180.0f * piF -
+              piF / 2.0f + 0.0f * piF / 2.0f;
+    } else if (moveInstruction & DirLeft) {
+      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+                  180.0f * piF -
+              piF / 2.0f + 1.0f * piF / 2.0f;
+      *GetParentActor().GetModule<MovementDataModule>().facingAngle =
+          *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+          1 * 90.0f;
+    } else if (moveInstruction & DirBack) {
+      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+                  180.0f * piF -
+              piF / 2.0f + 2.0f * piF / 2.0f;
+    } else if (moveInstruction & DirRight) {
+      angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+                  180.0f * piF -
+              piF / 2.0f + 3.0f * piF / 2.0f;
+      *GetParentActor().GetModule<MovementDataModule>().facingAngle =
+          *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+          3.0f * 90.0f;
     }
 
     auto dx = -std::cos(angle) * GetParentActor().GetModule<MovementDataModule>().stepMultiplier;
