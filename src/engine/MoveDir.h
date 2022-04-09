@@ -1,12 +1,16 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "ModuleMovementData.h"
+#pragma once
 
 namespace Forradia {
 
-void ModuleMovementData::ResetForNewFrame() {
-    isWalking = false;
-}
+enum MoveDir : char {
+    DirNone = 0,
+    DirForward = 1,
+    DirRight = 2,
+    DirBack = 4,
+    DirLeft = 8
+};
 
 }  // namespace Forradia

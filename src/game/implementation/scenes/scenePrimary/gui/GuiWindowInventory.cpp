@@ -25,18 +25,18 @@ void GuiWindowInventory::RenderDerived() {
       auto xpos = boundsInterior.x + x * (slotSize + margin);
       auto ypos = boundsInterior.y + y * (slotSize * aspectRatio + margin);
 
-      if (e.GetPlayer().GetModule<ModuleInventory>()
+      if (e.GetPlayer().GetModule<InventoryModule>()
               .inventory.objects.count(i) > 0) {
-        if (e.GetPlayer().GetModule<ModuleObjectUsage>()
+        if (e.GetPlayer().GetModule<ObjectUsageModule>()
                 .objectBeingUsed ==
-            e.GetPlayer().GetModule<ModuleInventory>().inventory.objects.at(i))
+            e.GetPlayer().GetModule<InventoryModule>().inventory.objects.at(i))
           e.DrawImage("ObjectSelected", xpos, ypos, slotSize,
                            slotSize * aspectRatio);
         else
           e.DrawImage("ObjectBackgroundShadow", xpos, ypos, slotSize,
                            slotSize * aspectRatio);
 
-        e.DrawImage(e.GetPlayer().GetModule<ModuleInventory>()
+        e.DrawImage(e.GetPlayer().GetModule<InventoryModule>()
                              .inventory.objects.at(i)
                              ->objectType,
                          xpos, ypos, slotSize, slotSize * aspectRatio);
@@ -51,7 +51,7 @@ void GuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton) {
   if (mouseButton != SDL_BUTTON_RIGHT)
     return;
 
-  e.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed = nullptr;
+  e.GetPlayer().GetModule<ObjectUsageModule>().objectBeingUsed = nullptr;
 
   auto canvasSize = utilities.GetCanvasSize();
   auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
@@ -71,13 +71,13 @@ void GuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton) {
       auto xpos = boundsInterior.x + x * (slotSize + margin);
       auto ypos = boundsInterior.y + y * (slotSize * aspectRatio + margin);
 
-      if (e.GetPlayer().GetModule<ModuleInventory>()
+      if (e.GetPlayer().GetModule<InventoryModule>()
               .inventory.objects.count(i) > 0) {
         if (mouseXRel >= xpos && mouseYRel >= ypos &&
             mouseXRel < xpos + slotSize &&
             mouseYRel < ypos + slotSize * aspectRatio) {
-          e.GetPlayer().GetModule<ModuleObjectUsage>().objectBeingUsed =
-              e.GetPlayer().GetModule<ModuleInventory>().inventory
+          e.GetPlayer().GetModule<ObjectUsageModule>().objectBeingUsed =
+              e.GetPlayer().GetModule<InventoryModule>().inventory
                   .objects.at(i);
           return;
         }

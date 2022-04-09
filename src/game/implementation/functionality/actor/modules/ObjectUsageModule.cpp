@@ -1,12 +1,12 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "ModuleObjectUsage.h"
+#include "ObjectUsageModule.h"
 
 namespace Forradia {
 
-void ModuleObjectUsage::ResetForNewFrame() {}
+void ObjectUsageModule::ResetForNewFrame() {}
 
-void ModuleObjectUsage::Update() {}
+void ObjectUsageModule::Update() {}
 
 }  // namespace Forradia

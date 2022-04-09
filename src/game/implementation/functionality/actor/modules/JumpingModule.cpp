@@ -1,16 +1,16 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "ModuleJumping.h"
+#include "JumpingModule.h"
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/Actor.h"
-#include "implementation/functionality/actor/modules/ModuleMovementData.h"
+#include "implementation/functionality/actor/modules/MovementDataModule.h"
 
 namespace Forradia {
 
-void ModuleJumping::ResetForNewFrame() {}
+void JumpingModule::ResetForNewFrame() {}
 
-void ModuleJumping::Update() {
+void JumpingModule::Update() {
   if (isJumping) {
     auto deltaTicks = Ticks() - tickStartJumping;
     auto jumpHeight =
@@ -20,16 +20,16 @@ void ModuleJumping::Update() {
                  3.0f) *
         maxJumpHeight;
 
-    GetParentActor().GetModule<ModuleMovementData>().positionZ = jumpHeight;
+    GetParentActor().GetModule<MovementDataModule>().positionZ = jumpHeight;
   }
 
   if (Ticks() > tickStartJumping + jumpDuration) {
-    GetParentActor().GetModule<ModuleMovementData>().positionZ = 0.0f;
+    GetParentActor().GetModule<MovementDataModule>().positionZ = 0.0f;
     isJumping = false;
   }
 }
 
-void ModuleJumping::Jump() {
+void JumpingModule::Jump() {
   isJumping = true;
   tickStartJumping = Ticks();
 }

@@ -2,21 +2,23 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/Aliases.h"
+#include "../engine/Point2F.h"
 #include "../engine/IModule.h"
+#include "../engine/MoveDir.h"
 
 namespace Forradia {
 
-class Object;
-
-class ModuleObjectUsage : public IModule {
+class DirectionMovementModule : public IModule {
  public:
-  using IModule::IModule;
 
-  void ResetForNewFrame() override;
+  DirectionMovementModule(const IEngine &_e, Actor *_parentActor);
+
+  void ResetForNewFrame() override {};
   void Update() override;
 
-  SPtr<Object> objectBeingUsed = nullptr;
+  char moveInstruction;
+
+
 };
 
 }  // namespace Forradia

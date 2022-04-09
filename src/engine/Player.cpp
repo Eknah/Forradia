@@ -6,10 +6,11 @@
 namespace Forradia {
 
 Player::Player(IEngine &e) : Actor(e, "Player") {
-    AddModule<ModuleJumping>();
-    AddModule<ModuleMovement>();
-    AddModule<ModuleInventory>();
-    AddModule<ModuleObjectUsage>();
+    AddModule<JumpingModule>();
+    AddModule<DestMovementModule>();
+    AddModule<DirectionMovementModule>();
+    AddModule<InventoryModule>();
+    AddModule<ObjectUsageModule>();
   }
 
 }  // namespace Forradia

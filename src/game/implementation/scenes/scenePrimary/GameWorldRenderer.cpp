@@ -4,7 +4,7 @@
 #include <string>
 #include "GameWorldRenderer.h"
 #include "../engine/Engine.h"
-#include "implementation/functionality/actor/modules/ModuleMovementData.h"
+#include "implementation/functionality/actor/modules/MovementDataModule.h"
 
 namespace Forradia {
 
@@ -60,7 +60,7 @@ void GameWorldRenderer::Render() {
 
 void GameWorldRenderer::RenderTilesAndObjects() {
     auto mapAreaSize = e.world->mapAreaSize;
-    auto& movementData = e.GetPlayer().GetModule<ModuleMovementData>();
+    auto& movementData = e.GetPlayer().GetModule<MovementDataModule>();
     auto& tiles = e.GetCurrentMapArea().tiles;
 
     auto elevAmount = 5.0f;
@@ -366,8 +366,8 @@ glEnable(GL_TEXTURE_2D);
 void GameWorldRenderer::RenderSunRaysAndActors() {
     auto mapAreaSize = e.world->mapAreaSize;
     auto elevAmount = 5.0f;
-    auto playerXInt = static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.x);
-    auto playerYInt = static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.y);
+    auto playerXInt = static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.x);
+    auto playerYInt = static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.y);
     auto elevPlayer0 =
         e.GetCurrentMapArea().tiles[playerXInt][playerYInt].elevation /
         elevAmount;
@@ -381,19 +381,19 @@ void GameWorldRenderer::RenderSunRaysAndActors() {
     auto elevPlayer3 =
         e.GetCurrentMapArea().tiles[playerXInt][playerYInt + 1].elevation /
         elevAmount;
-    auto elevX = e.GetPlayer().GetModule<ModuleMovementData>().position.x - playerXInt;
-    auto elevY = e.GetPlayer().GetModule<ModuleMovementData>().position.y - playerYInt;
+    auto elevX = e.GetPlayer().GetModule<MovementDataModule>().position.x - playerXInt;
+    auto elevY = e.GetPlayer().GetModule<MovementDataModule>().position.y - playerYInt;
     auto elevPlayer = (elevPlayer0 + (elevPlayer1 - elevPlayer0) * elevX +
                        elevPlayer3 + (elevPlayer2 - elevPlayer3) * elevX +
                        elevPlayer0 + (elevPlayer3 - elevPlayer0) * elevY +
                        elevPlayer1 + (elevPlayer2 - elevPlayer1) * elevY) /
                       4.0f;
 
-    float subStepX = e.GetPlayer().GetModule<ModuleMovementData>().position.x -
-            static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.x);
+    float subStepX = e.GetPlayer().GetModule<MovementDataModule>().position.x -
+            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.x);
 
-    float subStepY = e.GetPlayer().GetModule<ModuleMovementData>().position.y -
-            static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.y);
+    float subStepY = e.GetPlayer().GetModule<MovementDataModule>().position.y -
+            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.y);
 
     auto offsetX = -static_cast<float>(2.0f * camera.GetRenderDistance() + 1.0f)
             / 2.0f * e.tileSize - subStepX * e.tileSize;
@@ -409,10 +409,10 @@ void GameWorldRenderer::RenderSunRaysAndActors() {
               camera.GetRenderDistance() * camera.GetRenderDistance())
             continue;
 
-          auto tileX = e.GetPlayer().GetModule<ModuleMovementData>().position.x
+          auto tileX = e.GetPlayer().GetModule<MovementDataModule>().position.x
                   - camera.GetRenderDistance() + x;
 
-          auto tileY = e.GetPlayer().GetModule<ModuleMovementData>().position.y
+          auto tileY = e.GetPlayer().GetModule<MovementDataModule>().position.y
                   - camera.GetRenderDistance() + y;
 
           if (tileX < 0 || tileY < 0 || tileX >= mapAreaSize ||
@@ -523,17 +523,17 @@ void GameWorldRenderer::RenderSunRaysAndActors() {
             nullptr) {
           auto subxpos = (e.GetCurrentMapArea()
                               .tiles[tileXI][tileYI]
-                              .actor->GetModule<ModuleMovementData>().position.x -
+                              .actor->GetModule<MovementDataModule>().position.x -
                           static_cast<int>(e.GetCurrentMapArea()
                                   .tiles[tileXI][tileYI]
-                                  .actor->GetModule<ModuleMovementData>().position.x)) *
+                                  .actor->GetModule<MovementDataModule>().position.x)) *
                          e.tileSize;
           auto subypos = (e.GetCurrentMapArea()
                               .tiles[tileXI][tileYI]
-                              .actor->GetModule<ModuleMovementData>().position.y -
+                              .actor->GetModule<MovementDataModule>().position.y -
                           static_cast<int>(e.GetCurrentMapArea()
                                   .tiles[tileXI][tileYI]
-                                  .actor->GetModule<ModuleMovementData>().position.y)) *
+                                  .actor->GetModule<MovementDataModule>().position.y)) *
                          e.tileSize;
 
           glEnable(GL_TEXTURE_2D);
@@ -576,11 +576,11 @@ void GameWorldRenderer::RenderSunRaysAndActors() {
                            .actor->GetAnimatedModelId(), tileX0 + subxpos,
                            modelYPos  + e.GetCurrentMapArea()
                                                       .tiles[tileXI][tileYI]
-                                                      .actor->GetModule<ModuleMovementData>().positionZ,
+                                                      .actor->GetModule<MovementDataModule>().positionZ,
                            tileZ0 - e.tileSize + subypos,
                            *e.GetCurrentMapArea()
                                .tiles[tileXI][tileYI]
-                               .actor->GetModule<ModuleMovementData>().facingAngle);
+                               .actor->GetModule<MovementDataModule>().facingAngle);
         }
       }
     }
@@ -598,8 +598,8 @@ void GameWorldRenderer::RenderRoof() {
     auto mapAreaSize = e.world->mapAreaSize;
 
     auto elevAmount = 5.0f;
-    auto playerXInt = static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.x);
-    auto playerYInt = static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.y);
+    auto playerXInt = static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.x);
+    auto playerYInt = static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.y);
     auto elevPlayer0 =
         e.GetCurrentMapArea().tiles[playerXInt][playerYInt].elevation /
         elevAmount;
@@ -613,19 +613,19 @@ void GameWorldRenderer::RenderRoof() {
     auto elevPlayer3 =
         e.GetCurrentMapArea().tiles[playerXInt][playerYInt + 1].elevation /
         elevAmount;
-    auto elevX = e.GetPlayer().GetModule<ModuleMovementData>().position.x - playerXInt;
-    auto elevY = e.GetPlayer().GetModule<ModuleMovementData>().position.y - playerYInt;
+    auto elevX = e.GetPlayer().GetModule<MovementDataModule>().position.x - playerXInt;
+    auto elevY = e.GetPlayer().GetModule<MovementDataModule>().position.y - playerYInt;
     auto elevPlayer = (elevPlayer0 + (elevPlayer1 - elevPlayer0) * elevX +
                        elevPlayer3 + (elevPlayer2 - elevPlayer3) * elevX +
                        elevPlayer0 + (elevPlayer3 - elevPlayer0) * elevY +
                        elevPlayer1 + (elevPlayer2 - elevPlayer1) * elevY) /
                       4.0f;
 
-    float subStepX = e.GetPlayer().GetModule<ModuleMovementData>().position.x -
-            static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.x);
+    float subStepX = e.GetPlayer().GetModule<MovementDataModule>().position.x -
+            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.x);
 
-    float subStepY = e.GetPlayer().GetModule<ModuleMovementData>().position.y -
-            static_cast<int>(e.GetPlayer().GetModule<ModuleMovementData>().position.y);
+    float subStepY = e.GetPlayer().GetModule<MovementDataModule>().position.y -
+            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.y);
 
     auto offsetX = -static_cast<float>(2.0f * camera.GetRenderDistance() + 1.0f)
             / 2.0f * e.tileSize - subStepX * e.tileSize;
@@ -641,10 +641,10 @@ void GameWorldRenderer::RenderRoof() {
             camera.GetRenderDistance() * camera.GetRenderDistance())
           continue;
 
-        auto tileX = e.GetPlayer().GetModule<ModuleMovementData>().position.x
+        auto tileX = e.GetPlayer().GetModule<MovementDataModule>().position.x
                 - camera.GetRenderDistance() + x;
 
-        auto tileY = e.GetPlayer().GetModule<ModuleMovementData>().position.y
+        auto tileY = e.GetPlayer().GetModule<MovementDataModule>().position.y
                 - camera.GetRenderDistance() + y;
 
         if (tileX < 0 || tileY < 0 || tileX >= mapAreaSize ||

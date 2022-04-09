@@ -9,7 +9,7 @@
 
 namespace Forradia {
 
-class ModuleMovementData : public IModule {
+class MovementDataModule : public IModule {
  public:
   using IModule::IModule;
 

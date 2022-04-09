@@ -8,8 +8,8 @@ namespace Forradia {
 Mob::Mob(const IEngine &e, float x, float y,
            std::string modelName) :
     Actor(e, x, y, modelName) {
-    AddIfNotExists<ModuleMovementData>();
-    GetModule<ModuleMovementData>().isWalking = true;
+    AddIfNotExists<MovementDataModule>();
+    GetModule<MovementDataModule>().isWalking = true;
 }
 
 }

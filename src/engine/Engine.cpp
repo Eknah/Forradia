@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Engine.h"
-#include "../game/implementation/functionality/actor/modules/ModuleMovementData.h"
+#include "../game/implementation/functionality/actor/modules/MovementDataModule.h"
 
 namespace Forradia {
 
@@ -36,9 +36,9 @@ void Engine::Run(ScenesCollection _scenesCollection, int _startScene,
                 static_cast<Player*>(world->GetArea(playerWorldPos)
                                       ->GetTile(playerTilePosI).actor.get()));
 
-    GetPlayer().GetModule<ModuleMovementData>().worldMapCoord = playerWorldPos;
-    GetPlayer().GetModule<ModuleMovementData>().position = GetCurrentMapArea().spawnPos;
-    GetPlayer().GetModule<ModuleInventory>().inventory = _startingInventory;
+    GetPlayer().GetModule<MovementDataModule>().worldMapCoord = playerWorldPos;
+    GetPlayer().GetModule<MovementDataModule>().position = GetCurrentMapArea().spawnPos;
+    GetPlayer().GetModule<InventoryModule>().inventory = _startingInventory;
     sceneManager.Initialize(move(_scenesCollection), _startScene);
     modelLoader.LoadModels();
     imageLoader.LoadImages();
@@ -98,7 +98,7 @@ SizeF Engine::GetImageSizeF(std::string imageName) const {
 
 MapArea& Engine::GetCurrentMapArea() const {
     // return *WorldMap->MapAreas.at(Player.CurrentMapArea);
-    return *world->GetArea(GetPlayer().GetModule<ModuleMovementData>().worldMapCoord);
+    return *world->GetArea(GetPlayer().GetModule<MovementDataModule>().worldMapCoord);
   }
 
 void Engine::InitializeGL() {
