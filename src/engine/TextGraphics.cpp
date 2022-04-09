@@ -17,6 +17,9 @@ void TextGraphics::Initialize() {
 
 void TextGraphics::DrawString(std::string text, SDL_Color color, float x, float y,
                          bool centerAlign) const {
+    if (text == "")
+        return;
+
     GLuint texture;
 
     glEnable(GL_TEXTURE_2D);

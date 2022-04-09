@@ -13,7 +13,6 @@ void GameWorldRenderer::Render() {
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  //gluPerspective(45, 1.333, 0.5, 100);
   gluPerspective(e.fov, 1.333, 0.5, 100);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -249,10 +248,9 @@ void GameWorldRenderer::RenderTilesAndObjects() {
         tileY3 = planetShaper.GetNewY(tileY3,
                                              static_cast<float>(tileXI) + 1,
                                              static_cast<float>(tileYI));
-
+glDisable(GL_CULL_FACE);
         glBegin(GL_QUADS);
 
-        //glColor3f(R, G, B);
         glColor3f(r, g, b);
 
         glTexCoord2f(0, 0);
@@ -270,7 +268,6 @@ void GameWorldRenderer::RenderTilesAndObjects() {
           glBegin(GL_QUADS);
 
             glColor3f(r, g, b);
-//          glColor3f(R, G, B);
 
           glTexCoord2f(0, 0);
           glVertex3f(tileX0, tileY0 + waterWaveHeight0, tileZ0);
@@ -310,7 +307,7 @@ void GameWorldRenderer::RenderTilesAndObjects() {
 
           glEnd();
         }
-
+glEnable(GL_CULL_FACE);
         for (auto &Object :
              tiles[tileXI][tileYI].objects) {
 
@@ -342,9 +339,9 @@ glEnable(GL_TEXTURE_2D);
 
 }
 
+
+
                 glDisable(GL_TEXTURE_2D);
-
-
 
 
           auto tileObject = Object->objectType;

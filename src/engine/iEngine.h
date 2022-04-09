@@ -81,6 +81,12 @@ class IEngine {
   UPtr<PlanetWorldMap> world;
 
   UPtr<Player*> playerPtrPtr;
+
+  //char *text = nullptr;
+  std::string text;
+  char *composition;
+  Sint32 cursor = 0;
+  Sint32 selection_len = 0;
 };
 
 }  // namespace Forradia

@@ -27,6 +27,16 @@ void GameLoop::Run() {
 
           e.fullscreenController.UpdateFullscreenToggling();
 
+          if (event.key.keysym.sym == SDLK_RETURN) {
+              if (SDL_IsTextInputActive()) {
+                  SDL_StopTextInput();
+                  e.text.clear();
+                  e.cursor = 0;
+              } else {
+                  SDL_StartTextInput();
+              }
+          }
+
           break;
         }
 
@@ -48,6 +58,24 @@ void GameLoop::Run() {
               e.mouseHandler.SetRightButtonBeenFired();
           }
 
+          break;
+        }
+        case SDL_TEXTINPUT: {
+          /* Add new text onto the end of our text */
+          //strcat(e.text, event.text.text);
+          e.text.append(event.text.text);
+          e.cursor++;
+          break;
+        }
+        case SDL_TEXTEDITING: {
+          /*
+          Update the composition text.
+          Update the cursor position.
+          Update the selection length (if any).
+          */
+          e.composition = event.edit.text;
+          e.cursor = event.edit.start;
+          e.selection_len = event.edit.length;
           break;
         }
 

@@ -9,6 +9,7 @@ namespace Forradia {
 
 void ScenePrimary::Enter() {
     gui.Initialize();
+    gui.console.Print("You have entered Forradia");
 }
 
 void ScenePrimary::Update() {
@@ -17,50 +18,53 @@ void ScenePrimary::Update() {
 
   player.ResetForNewFrame();
 
-  char moveInstruction = DirNone;
+  if (!SDL_IsTextInputActive()) {
+    char moveInstruction = DirNone;
 
-  if (keys->count(SDLK_w))
+    if (keys->count(SDLK_w))
       moveInstruction |= DirForward;
 
-  if (keys->count(SDLK_d))
+    if (keys->count(SDLK_d))
       moveInstruction |= DirRight;
 
-  if (keys->count(SDLK_s))
+    if (keys->count(SDLK_s))
       moveInstruction |= DirBack;
 
-  if (keys->count(SDLK_a))
+    if (keys->count(SDLK_a))
       moveInstruction |= DirLeft;
 
-  player.GetModule<DirectionMovementModule>().moveInstruction = moveInstruction;
+    player.GetModule<DirectionMovementModule>().moveInstruction =
+        moveInstruction;
 
-  if (moveInstruction & DirForward || moveInstruction & DirRight ||
-      moveInstruction & DirBack || moveInstruction & DirLeft) {
-    *player.GetModule<MovementDataModule>().facingAngle = camera.lookingAngle;
-    player.GetModule<MovementDataModule>().moveDestination = {-1, -1};
+    if (moveInstruction & DirForward || moveInstruction & DirRight ||
+        moveInstruction & DirBack || moveInstruction & DirLeft) {
+      *player.GetModule<MovementDataModule>().facingAngle = camera.lookingAngle;
+      player.GetModule<MovementDataModule>().moveDestination = {-1, -1};
+    }
+
+    auto turnRight = keys->count(SDLK_e);
+    auto turnLeft = keys->count(SDLK_q);
+
+    if (turnRight) {
+      camera.Update(GetId("Right"), *e.mouseHandler.wheelAmount);
+    } else if (turnLeft) {
+      camera.Update(GetId("Left"), *e.mouseHandler.wheelAmount);
+    } else {
+      camera.Update(0, *e.mouseHandler.wheelAmount);
+    }
+
+    if (e.keyboardHandler.keysBeenFired->count(SDLK_F2))
+      gui.windows.at("Inventory")->visible =
+          !gui.windows.at("Inventory")->visible;
+
+    if (e.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
+      e.GetPlayer().GetModule<JumpingModule>().Jump();
   }
-
-  auto turnRight = keys->count(SDLK_e);
-  auto turnLeft = keys->count(SDLK_q);
-
-  if (turnRight) {
-    camera.Update(GetId("Right"), *e.mouseHandler.wheelAmount);
-  } else if (turnLeft) {
-    camera.Update(GetId("Left"), *e.mouseHandler.wheelAmount);
-  } else {
-    camera.Update(0, *e.mouseHandler.wheelAmount);
-  }
-
-  if (e.keyboardHandler.keysBeenFired->count(SDLK_F2))
-    gui.windows.at("Inventory")->visible =
-        !gui.windows.at("Inventory")->visible;
-
   camera.UpdateCameraMovement();
 
   if (e.mouseHandler.rightButtonDown)
     *player.GetModule<MovementDataModule>().facingAngle = camera.lookingAngle;
 
-  if (e.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
-    e.GetPlayer().GetModule<JumpingModule>().Jump();
 
   if (e.mouseHandler.rightButtonDown)
     e.customCursor.cursorType = CursorTypes::Hidden;
@@ -68,6 +72,10 @@ void ScenePrimary::Update() {
   player.Update();
   mobsEngine.Update();
   gui.Update();
+
+  if (e.keyboardHandler.keysBeenFired->count(SDLK_RETURN)) {
+      gui.console.ToggleInput();
+  }
 }
 
 void ScenePrimary::Render() {

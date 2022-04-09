@@ -107,16 +107,7 @@ void Gui::Render() {
   e.DrawString("System [F3]", {255, 255, 255, 255},
                     boundsButtonSystem.x + boundsButtonSystem.width / 2,
                     boundsButtonSystem.y + boundsButtonSystem.height / 2, true);
-  e.FillRectangle({0, 150, 255, 20}, boundsTextBox.x, boundsTextBox.y,
-                       boundsTextBox.width, boundsTextBox.height);
-  e.DrawRectangle({255, 255, 255, 100}, boundsTextBox.x, boundsTextBox.y,
-                       boundsTextBox.width, boundsTextBox.height);
-
-  auto TextBoxTextX = boundsTextBox.x + textBoxMargin;
-  auto TextBoxTextY = boundsTextBox.y + textBoxMargin;
-
-  e.DrawString(textBoxText.at(0), {255, 255, 255, 255}, TextBoxTextX,
-                    TextBoxTextY);
+    console.Render();
 
   for (auto &[Key, Window] : windows)
     Window->Render();
