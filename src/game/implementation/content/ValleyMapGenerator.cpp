@@ -5,6 +5,7 @@
 #include "ValleyMapGenerator.h"
 #include "../engine/PlanetWorldMap.h"
 #include "framework/worldStructure/Object.h"
+#include "QuestCaveMapGenerator.h"
 
 namespace Forradia {
 
@@ -28,6 +29,7 @@ ValleyMapGenerator::GenerateMapArea(
   GenerateTallGrass(mapArea);
   GenerateVillage(mapArea);
   GenerateMobs(mapArea);
+  GenerateQuestCaves(e, mapArea, worldMap);
 }
 
 void
@@ -515,5 +517,42 @@ ValleyMapGenerator::GenerateMobs(MapArea *mapArea) const {
   }
 }
 
+void
+ValleyMapGenerator::
+GenerateQuestCaves(const IEngine &e,
+                   MapArea *mapArea,
+                   const UPtr<PlanetWorldMap>&worldMap) const {
+  QuestCaveMapGenerator questCaveMapGenerator;
+
+  for (auto floor = -1; floor >= -20; floor--) {
+    auto tileX = random.Next() % 94 + 3;
+    auto tileY = random.Next() % 94 + 3;
+
+    if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
+      continue;
+
+    if (mapArea->tiles[tileX][tileY].groundType !=
+        GetId("GroundTypeWater")) {
+      mapArea->tiles[tileX][tileY].objects.push_back(
+          MakeSPtr<Object>("ObjectQuestCaveEntrance"));
+      //MapArea->Tiles[tileX][tileY].WarpToFloor = Floor;
+      mapArea->tiles[tileX][tileY].properties["WarpToFloor"] = std::to_string(floor);
+
+      worldMap->areas[mapArea->worldCoord.x][mapArea->worldCoord.y][floor] =
+          std::make_unique<MapArea>(e, worldMap->mapAreaSize,
+                                     mapArea->worldCoord.x,
+                                     mapArea->worldCoord.y,
+                                     floor);
+
+      auto &questCaveMapArea =
+          worldMap->areas
+              [mapArea->worldCoord.x][mapArea->worldCoord.y][floor];
+
+      questCaveMapGenerator.GenerateQuestCaveMapArea(
+                  questCaveMapArea.get(),
+                  {tileX, tileY});
+    }
+  }
+}
 
 }  // namespace Forradia
