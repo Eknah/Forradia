@@ -18,8 +18,8 @@ class GameWorldRenderer {
   void Render();
 
  private:
-  void RenderAllExceptRoof();
-  void RenderRoof();
+  void RenderAllExceptRoofAndRays();
+  void RenderRoofAndRays();
 
   const Engine &e;
   Background background;

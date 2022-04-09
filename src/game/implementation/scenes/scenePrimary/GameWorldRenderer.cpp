@@ -49,14 +49,14 @@ void GameWorldRenderer::Render() {
   glPushMatrix();
   glTranslatef(0.0, -2 + 2.0, 0.0);
 
-  RenderAllExceptRoof();
-  RenderRoof();
+  RenderAllExceptRoofAndRays();
+  RenderRoofAndRays();
 
   glPopMatrix();
   glDisable(GL_DEPTH_TEST);
 }
 
-void GameWorldRenderer::RenderAllExceptRoof() {
+void GameWorldRenderer::RenderAllExceptRoofAndRays() {
     auto mapAreaSize = e.world->mapAreaSize;
     auto& movementData = e.GetPlayer().GetModule<MovementDataModule>();
     auto& tiles = e.GetCurrentMapArea().tiles;
@@ -341,24 +341,12 @@ glEnable(GL_CULL_FACE);
                 dropShadow = false;
 
                 if (dropShadow) {
-glEnable(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D,
-                          e.imageLoader.images.at(GetId("TileShadow")));
 
-            glBegin(GL_QUADS);
+                     glDisable(GL_TEXTURE_2D);
 
-            glColor3f(r, g, b);
-
-            glTexCoord2f(0, 0);
-            glVertex3f(tileX0, tileY0, tileZ0);
-            glTexCoord2f(1, 0);
-            glVertex3f(tileX1, tileY1, tileZ1);
-            glTexCoord2f(1, 1);
-            glVertex3f(tileX2, tileY2, tileZ2);
-            glTexCoord2f(0, 1);
-            glVertex3f(tileX3, tileY3, tileZ3);
-
-            glEnd();
+                    e.DrawModel("Shadow", tileX0 + e.tileSize / 2,
+                                (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
+                                tileZ0 - e.tileSize / 2, 0, 1.5f, 1.0f);
 
 }
 
@@ -400,33 +388,7 @@ glEnable(GL_TEXTURE_2D);
                                   .actor->GetModule<MovementDataModule>().position.y)) *
                          e.tileSize;
 
-          glEnable(GL_TEXTURE_2D);
 
-          glBindTexture(GL_TEXTURE_2D,
-                        e.imageLoader.images.at(GetId("TileShadow")));
-
-          glBegin(GL_QUADS);
-
-          glColor3f(1, 1, 1);
-
-          glTexCoord2f(0, 0);
-          glVertex3f(tileX0 - e.tileSize/2 + subxpos,
-                     tileY0 + 0.05f,
-                     tileZ0 - e.tileSize/2 + subypos);
-          glTexCoord2f(1, 0);
-          glVertex3f(tileX1 - e.tileSize/2 + subxpos,
-                     tileY1 + 0.05f,
-                     tileZ1 - e.tileSize/2 + subypos);
-          glTexCoord2f(1, 1);
-          glVertex3f(tileX2 - e.tileSize/2 + subxpos,
-                     tileY2 + 0.05f,
-                     tileZ2 - e.tileSize/2 + subypos);
-          glTexCoord2f(0, 1);
-          glVertex3f(tileX3 - e.tileSize/2 + subxpos,
-                     tileY3 + 0.05f,
-                     tileZ3 - e.tileSize/2 + subypos);
-
-          glEnd();
 
           glDisable(GL_TEXTURE_2D);
 
@@ -434,6 +396,12 @@ glEnable(GL_TEXTURE_2D);
           auto modelYPos1 = tileY0 + (tileY3 - tileY0)*subxpos/e.tileSize;
           auto modelYPos = modelYPos0
                   + (modelYPos1 - modelYPos0)*subypos/e.tileSize;
+
+          e.DrawModel("Shadow", tileX0 + subxpos,
+                      modelYPos  + e.GetCurrentMapArea()
+                                                 .tiles[tileXI][tileYI]
+                                                 .actor->GetModule<MovementDataModule>().positionZ,
+                      tileZ0 - e.tileSize + subypos, 0, 1.0f, 1.0f);
 
           e.DrawModel(e.GetCurrentMapArea()
                            .tiles[tileXI][tileYI]
@@ -448,23 +416,6 @@ glEnable(GL_TEXTURE_2D);
         }
 
 
-        if ((tileXI + tileYI) % 16 == 0) {
-        auto sunx = -500.0f;
-        auto suny = 500.0f;
-        auto sunz = -500.0f;
-
-        auto alpha = ((Ticks() + tileXI*tileYI) % 1000)/1000.0f;
-        if (alpha >= 0.5f)
-            alpha = 0.5f - (alpha - 0.5f);
-
-        alpha /= 2.0f;
-
-                    glBegin(GL_LINE_STRIP);
-                    glColor4f(1.0f, 1.0f, 0.0f, alpha);
-                    glVertex3f(tileX0, tileY0, tileZ0);
-                    glVertex3f(sunx, suny, sunz);
-                    glEnd();
-      }
 
       }
     }
@@ -473,7 +424,7 @@ glEnable(GL_TEXTURE_2D);
 
 
 
-void GameWorldRenderer::RenderRoof() {
+void GameWorldRenderer::RenderRoofAndRays() {
 
     auto mapAreaSize = e.world->mapAreaSize;
 
@@ -660,6 +611,29 @@ if (e.GetCurrentMapArea()
                    roof->scaling, opacity);
 
 }
+
+glDisable(GL_TEXTURE_2D);
+        if ((tileXI + tileYI) % 16 == 0) {
+        auto sunx = -500.0f;
+        auto suny = 500.0f;
+        auto sunz = -500.0f;
+
+        auto alpha = ((Ticks() + tileXI*tileYI*10) % 1000)/1000.0f;
+        if (alpha >= 0.5f)
+            alpha = 0.5f - (alpha - 0.5f);
+
+        alpha /= 10.0f;
+       glDisable(GL_CULL_FACE);
+                    glBegin(GL_QUADS);
+                    glColor4f(1.0f, 1.0f, 0.0f, alpha);
+                    glVertex3f(tileX0, tileY0, tileZ0);
+                    glVertex3f(sunx, suny, sunz);
+                    glVertex3f(sunx + 0.1f, suny, sunz);
+                    glVertex3f(tileX0 + 0.1f, tileY0, tileZ0 + 0.1f);
+                    glEnd();
+                    glEnable(GL_CULL_FACE);
+
+      }
 
       }
     }

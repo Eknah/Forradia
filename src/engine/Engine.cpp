@@ -82,8 +82,8 @@ void Engine::DrawString(std::string message, SDL_Color color, float x, float y,
 
 void Engine::DrawModel(std::string modelName, float x, float y, float z,
                         float rotation,
-                        float specificScaling, float Opacity) const {
-    modelGraphics.DrawModel(modelName, x, y, z, rotation, specificScaling, Opacity);
+                        float specificScaling, float opacity) const {
+    modelGraphics.DrawModel(modelName, x, y, z, rotation, specificScaling, opacity);
   }
 
 void Engine::DrawModel(int modelNameHash, float x, float y, float z,
