@@ -37,6 +37,24 @@ void GameLoop::Run() {
               }
           }
 
+          if (SDL_IsTextInputActive()) {
+            if (event.key.keysym.sym == SDLK_LEFT) {
+              e.cursor = std::max(0, e.cursor - 1);
+            } else if (event.key.keysym.sym == SDLK_RIGHT) {
+              e.cursor =
+                  std::min(static_cast<int>(e.text.size()), e.cursor + 1);
+            } else if (event.key.keysym.sym == SDLK_BACKSPACE) {
+              if (e.cursor > 0) {
+                e.text.erase(e.cursor - 1, 1);
+                e.cursor = std::max(0, e.cursor - 1);
+              }
+            } else if (event.key.keysym.sym == SDLK_DELETE) {
+                if (e.cursor < e.text.size()) {
+                  e.text.erase(e.cursor, 1);
+                }
+              }
+          }
+
           break;
         }
 
