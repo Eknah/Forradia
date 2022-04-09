@@ -46,13 +46,17 @@ void Console::Render() {
 
 }
 
-void Console::AttemptWriteCharacter(char c) {
-    if (inputActive) {
-        inputText += c;
-    }
-}
-
 void Console::ToggleInput() {
+
+    if (inputActive) {
+        if (e.text.substr(0, 5) == "/echo") {
+            auto toPrint = e.text.substr(5);
+            Print(toPrint);
+        } else if (e.text.substr(0, 5) == "/quit") {
+            e.gameLoop.quit = true;
+        }
+    }
+
     inputActive = !inputActive;
 }
 

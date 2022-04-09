@@ -6,7 +6,7 @@
 namespace Forradia {
 
 void GameLoop::Run() {
-    bool quit = false;
+
     SDL_Event event;
 
     SDL_SetEventFilter((SDL_EventFilter)EventFilter, &e);
@@ -30,10 +30,10 @@ void GameLoop::Run() {
           if (event.key.keysym.sym == SDLK_RETURN) {
               if (SDL_IsTextInputActive()) {
                   SDL_StopTextInput();
-                  e.text.clear();
-                  e.cursor = 0;
               } else {
                   SDL_StartTextInput();
+                  e.text.clear();
+                  e.cursor = 0;
               }
           }
 

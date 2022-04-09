@@ -14,7 +14,6 @@ class Console {
   void Render();
   void Print(std::string message);
   void ToggleInput();
-  void AttemptWriteCharacter(char c);
 
  private:
   const Engine &e;

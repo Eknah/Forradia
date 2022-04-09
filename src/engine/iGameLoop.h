@@ -18,6 +18,8 @@ class IGameLoop {
   virtual void Render() = 0;
   virtual void ResetForNewFrame() = 0;
 
+    bool quit = false;
+
  protected:
   IEngine &e;
 };

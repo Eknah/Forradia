@@ -39,6 +39,7 @@ class GameLoop : public IGameLoop {
   // Enables game updating and rendering during window resize.
 
   static int EventFilter(void *pthis, const SDL_Event *event);
+
 };
 
 }  // namespace Forradia
