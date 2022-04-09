@@ -18,8 +18,7 @@ class GameWorldRenderer {
   void Render();
 
  private:
-  void RenderTilesAndObjects();
-  void RenderSunRaysAndActors();
+  void RenderAllExceptRoof();
   void RenderRoof();
 
   const Engine &e;

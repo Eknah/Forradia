@@ -12,6 +12,7 @@ void ImageGraphics::DrawImage(std::string imageName, float x, float y, float wid
 
 void ImageGraphics::DrawImage(int imageNameId, float x, float y, float width,
                         float height) const {
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
@@ -36,6 +37,7 @@ void ImageGraphics::DrawImage(int imageNameId, float x, float y, float width,
     glEnd();
 
     glDisable(GL_TEXTURE_2D);
+
   }
 
 SizeF ImageGraphics::GetImageSizeF(std::string imageName) const {

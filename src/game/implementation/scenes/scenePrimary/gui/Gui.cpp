@@ -43,6 +43,7 @@ void Gui::Update() {
 }
 
 void Gui::Render() {
+
   guiMinimap.Render();
 
   auto MousePositionF = utilities.GetMousePositionF();
@@ -111,6 +112,8 @@ void Gui::Render() {
 
   for (auto &[Key, Window] : windows)
     Window->Render();
+
+
 }
 
 bool Gui::DoMouseDown(Uint8 mouseButton) {

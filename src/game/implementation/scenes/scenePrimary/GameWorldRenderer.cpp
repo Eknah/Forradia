@@ -49,15 +49,14 @@ void GameWorldRenderer::Render() {
   glPushMatrix();
   glTranslatef(0.0, -2 + 2.0, 0.0);
 
-  RenderTilesAndObjects();
-  RenderSunRaysAndActors();
+  RenderAllExceptRoof();
   RenderRoof();
 
   glPopMatrix();
   glDisable(GL_DEPTH_TEST);
 }
 
-void GameWorldRenderer::RenderTilesAndObjects() {
+void GameWorldRenderer::RenderAllExceptRoof() {
     auto mapAreaSize = e.world->mapAreaSize;
     auto& movementData = e.GetPlayer().GetModule<MovementDataModule>();
     auto& tiles = e.GetCurrentMapArea().tiles;
@@ -100,6 +99,9 @@ void GameWorldRenderer::RenderTilesAndObjects() {
       for (auto x = 0; x < 2 * camera.GetRenderDistance() + 1; x++) {
         auto dx = x - camera.GetRenderDistance();
         auto dy = y - camera.GetRenderDistance();
+
+
+
 
         if (dx * dx + dy * dy >=
             camera.GetRenderDistance() * camera.GetRenderDistance())
@@ -248,7 +250,20 @@ void GameWorldRenderer::RenderTilesAndObjects() {
         tileY3 = planetShaper.GetNewY(tileY3,
                                              static_cast<float>(tileXI) + 1,
                                              static_cast<float>(tileYI));
-glDisable(GL_CULL_FACE);
+
+
+
+
+//        glVertex4f Pclip = M * vec4(p, 1.);
+//                return abs(Pclip.x) < Pclip.w &&
+//                       abs(Pclip.y) < Pclip.w &&
+//                       0 < Pclip.z &&
+//                       Pclip.z < Pclip.w;
+
+
+//glDisable(GL_CULL_FACE);
+glEnable(GL_CULL_FACE);
+        glCullFace(GL_FRONT);
         glBegin(GL_QUADS);
 
         glColor3f(r, g, b);
@@ -307,9 +322,17 @@ glDisable(GL_CULL_FACE);
 
           glEnd();
         }
-glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+//glEnable(GL_CULL_FACE);
         for (auto &Object :
              tiles[tileXI][tileYI].objects) {
+
+
+
+
+
+
+
 
             auto dropShadow = true;
 
@@ -341,6 +364,8 @@ glEnable(GL_TEXTURE_2D);
 
 
 
+
+
                 glDisable(GL_TEXTURE_2D);
 
 
@@ -356,165 +381,7 @@ glEnable(GL_TEXTURE_2D);
                              tileZ0 - e.tileSize / 2, Object->rotation,
                              Object->scaling, opacity);
         }
-      }
-    }
-}
 
-void GameWorldRenderer::RenderSunRaysAndActors() {
-    auto mapAreaSize = e.world->mapAreaSize;
-    auto elevAmount = 5.0f;
-    auto playerXInt = static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.x);
-    auto playerYInt = static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.y);
-    auto elevPlayer0 =
-        e.GetCurrentMapArea().tiles[playerXInt][playerYInt].elevation /
-        elevAmount;
-    auto elevPlayer1 =
-        e.GetCurrentMapArea().tiles[playerXInt + 1][playerYInt].elevation /
-        elevAmount;
-    auto elevPlayer2 = e.GetCurrentMapArea()
-                           .tiles[playerXInt + 1][playerYInt + 1]
-                           .elevation /
-                       elevAmount;
-    auto elevPlayer3 =
-        e.GetCurrentMapArea().tiles[playerXInt][playerYInt + 1].elevation /
-        elevAmount;
-    auto elevX = e.GetPlayer().GetModule<MovementDataModule>().position.x - playerXInt;
-    auto elevY = e.GetPlayer().GetModule<MovementDataModule>().position.y - playerYInt;
-    auto elevPlayer = (elevPlayer0 + (elevPlayer1 - elevPlayer0) * elevX +
-                       elevPlayer3 + (elevPlayer2 - elevPlayer3) * elevX +
-                       elevPlayer0 + (elevPlayer3 - elevPlayer0) * elevY +
-                       elevPlayer1 + (elevPlayer2 - elevPlayer1) * elevY) /
-                      4.0f;
-
-    float subStepX = e.GetPlayer().GetModule<MovementDataModule>().position.x -
-            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.x);
-
-    float subStepY = e.GetPlayer().GetModule<MovementDataModule>().position.y -
-            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.y);
-
-    auto offsetX = -static_cast<float>(2.0f * camera.GetRenderDistance() + 1.0f)
-            / 2.0f * e.tileSize - subStepX * e.tileSize;
-    auto offsetY = -static_cast<float>(2.0f * camera.GetRenderDistance() - 1.0f)
-            / 2.0f * e.tileSize - subStepY * e.tileSize;
-
-    for (auto y = 0; y < 2 * camera.GetRenderDistance() + 1; y++) {
-      for (auto x = 0; x < 2 * camera.GetRenderDistance() + 1; x++) {
-          auto dx = x - camera.GetRenderDistance();
-          auto dy = y - camera.GetRenderDistance();
-
-          if (dx * dx + dy * dy >=
-              camera.GetRenderDistance() * camera.GetRenderDistance())
-            continue;
-
-          auto tileX = e.GetPlayer().GetModule<MovementDataModule>().position.x
-                  - camera.GetRenderDistance() + x;
-
-          auto tileY = e.GetPlayer().GetModule<MovementDataModule>().position.y
-                  - camera.GetRenderDistance() + y;
-
-          if (tileX < 0 || tileY < 0 || tileX >= mapAreaSize ||
-              tileY >= mapAreaSize)
-            continue;
-
-          auto tileXI = static_cast<int>(tileX);
-          auto tileYI = static_cast<int>(tileY);
-
-          auto elev0 = 0.0f;
-          auto elev1 = 0.0f;
-          auto elev2 = 0.0f;
-          auto elev3 = 0.0f;
-
-          if (tileX >= 0 && tileY >= 0 && tileX < mapAreaSize &&
-              tileY < mapAreaSize)
-            elev0 =
-                e.GetCurrentMapArea().tiles[tileXI][tileYI].elevation /
-                    elevAmount -
-                elevPlayer;
-
-          if (tileX >= 0 && tileY - 1 >= 0 && tileX < mapAreaSize &&
-              tileY - 1 < mapAreaSize)
-            elev1 = e.GetCurrentMapArea()
-                            .tiles[tileXI][tileYI - 1]
-                            .elevation /
-                        elevAmount -
-                    elevPlayer;
-          else
-            elev1 = elev0;
-
-          if (tileX + 1 >= 0 && tileY - 1 >= 0 && tileX + 1 < mapAreaSize &&
-              tileY - 1 < mapAreaSize)
-            elev2 = e.GetCurrentMapArea()
-                            .tiles[tileXI + 1][tileYI - 1]
-                            .elevation /
-                        elevAmount -
-                    elevPlayer;
-          else if (tileX + 1 < mapAreaSize)
-            elev2 = e.GetCurrentMapArea()
-                            .tiles[tileXI + 1][tileYI]
-                            .elevation /
-                        elevAmount -
-                    elevPlayer;
-          else if (tileY - 1 >= 0)
-            elev2 = e.GetCurrentMapArea()
-                            .tiles[tileXI][tileYI - 1]
-                            .elevation /
-                        elevAmount -
-                    elevPlayer;
-          else
-            elev2 = elev0;
-
-          if (tileX + 1 >= 0 && tileY >= 0 && tileX + 1 < mapAreaSize &&
-              tileY < mapAreaSize)
-            elev3 = e.GetCurrentMapArea()
-                            .tiles[tileXI + 1][tileYI]
-                            .elevation /
-                        elevAmount -
-                    elevPlayer;
-          else
-            elev3 = elev0;
-
-          auto tileX0 = offsetX + x * e.tileSize;
-          auto tileY0 = elev0;
-          auto tileZ0 = offsetY + y * e.tileSize;
-          auto tileX1 = offsetX + x * e.tileSize;
-          auto tileY1 = elev1;
-          auto tileZ1 = offsetY + y * e.tileSize - e.tileSize;
-          auto tileX2 = offsetX + x * e.tileSize + e.tileSize;
-          auto tileY2 = elev2;
-          auto tileZ2 = offsetY + y * e.tileSize - e.tileSize;
-          auto tileX3 = offsetX + x * e.tileSize + e.tileSize;
-          auto tileY3 = elev3;
-          auto tileZ3 = offsetY + y * e.tileSize;
-
-          tileY0 = planetShaper.GetNewY(tileY0,
-                                               static_cast<float>(tileXI),
-                                               static_cast<float>(tileYI));
-          tileY1 = planetShaper.GetNewY(tileY1,
-                                               static_cast<float>(tileXI),
-                                               static_cast<float>(tileYI) - 1);
-          tileY2 = planetShaper.GetNewY(tileY2,
-                                               static_cast<float>(tileXI) + 1,
-                                               static_cast<float>(tileYI) - 1);
-          tileY3 = planetShaper.GetNewY(tileY3,
-                                               static_cast<float>(tileXI) + 1,
-                                               static_cast<float>(tileYI));
-        if ((tileXI + tileYI) % 16 == 0) {
-          auto sunx = -500.0f;
-          auto suny = 500.0f;
-          auto sunz = -500.0f;
-
-          auto alpha = ((Ticks() + tileXI*tileYI) % 1000)/1000.0f;
-          if (alpha >= 0.5f)
-              alpha = 0.5f - (alpha - 0.5f);
-
-          alpha /= 6.0f;
-
-                      glBegin(GL_LINE_STRIP);
-                      glColor4f(1.0f, 1.0f, 0.0f, alpha);
-                      glVertex3f(tileX0, tileY0, tileZ0);
-                      glVertex3f(sunx, suny, sunz);
-                      glEnd();
-        }
 
         if (e.GetCurrentMapArea().tiles[tileXI][tileYI].actor !=
             nullptr) {
@@ -579,6 +446,26 @@ void GameWorldRenderer::RenderSunRaysAndActors() {
                                .tiles[tileXI][tileYI]
                                .actor->GetModule<MovementDataModule>().facingAngle);
         }
+
+
+        if ((tileXI + tileYI) % 16 == 0) {
+        auto sunx = -500.0f;
+        auto suny = 500.0f;
+        auto sunz = -500.0f;
+
+        auto alpha = ((Ticks() + tileXI*tileYI) % 1000)/1000.0f;
+        if (alpha >= 0.5f)
+            alpha = 0.5f - (alpha - 0.5f);
+
+        alpha /= 2.0f;
+
+                    glBegin(GL_LINE_STRIP);
+                    glColor4f(1.0f, 1.0f, 0.0f, alpha);
+                    glVertex3f(tileX0, tileY0, tileZ0);
+                    glVertex3f(sunx, suny, sunz);
+                    glEnd();
+      }
+
       }
     }
 }
@@ -586,12 +473,8 @@ void GameWorldRenderer::RenderSunRaysAndActors() {
 
 
 
-
-
-
-
-
 void GameWorldRenderer::RenderRoof() {
+
     auto mapAreaSize = e.world->mapAreaSize;
 
     auto elevAmount = 5.0f;
@@ -780,6 +663,7 @@ if (e.GetCurrentMapArea()
 
       }
     }
+
 }
 
 
