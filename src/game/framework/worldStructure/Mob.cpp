@@ -2,14 +2,15 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Mob.h"
+#include "implementation/functionality/actor/modules/MovementDataModule.h"
+#include "implementation/functionality/actor/modules/MobAIMovementModule.h"
 
 namespace Forradia {
 
 Mob::Mob(const IEngine &e, float x, float y,
            std::string modelName) :
     Actor(e, x, y, modelName) {
-    AddIfNotExists<MovementDataModule>();
-    GetModule<MovementDataModule>().isWalking = true;
+    AddIfNotExists<MobAIMovementModule>();
 }
 
 }

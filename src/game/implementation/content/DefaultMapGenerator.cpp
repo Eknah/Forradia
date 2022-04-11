@@ -421,8 +421,8 @@ DefaultMapGenerator::GenerateMobs(MapArea *mapArea) const {
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRabbit");
-      mapArea->mobActorsMirror.push_back(
-                  std::ref(mapArea->tiles[tileX][tileY].actor));
+      mapArea->mobActorsMirror.insert({mapArea->tiles[tileX][tileY].actor->actorId,
+                  std::ref(mapArea->tiles[tileX][tileY].actor)});
     }
   }
 
@@ -445,8 +445,8 @@ DefaultMapGenerator::GenerateMobs(MapArea *mapArea) const {
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRat");
-      mapArea->mobActorsMirror.push_back(
-                  std::ref(mapArea->tiles[tileX][tileY].actor));
+      mapArea->mobActorsMirror.insert({mapArea->tiles[tileX][tileY].actor->actorId,
+                  std::ref(mapArea->tiles[tileX][tileY].actor)});
     }
   }
 }

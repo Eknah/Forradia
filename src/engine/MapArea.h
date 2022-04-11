@@ -32,7 +32,7 @@ class MapArea {
 
   // Map structure of tiles and mobs
   std::vector<std::vector<Tile>> tiles;
-  std::vector<std::reference_wrapper<SPtr<Actor>>> mobActorsMirror;
+  UMap<int, std::reference_wrapper<SPtr<Actor>>> mobActorsMirror;
 };
 
 }  // namespace Forradia

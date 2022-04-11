@@ -618,7 +618,7 @@ glDisable(GL_TEXTURE_2D);
         auto suny = 500.0f;
         auto sunz = -500.0f;
 
-        auto alpha = ((Ticks() + tileXI*tileYI*10) % 1000)/1000.0f;
+        auto alpha = ((Ticks() + tileXI*tileYI*100) % 1000)/1000.0f;
         if (alpha >= 0.5f)
             alpha = 0.5f - (alpha - 0.5f);
 

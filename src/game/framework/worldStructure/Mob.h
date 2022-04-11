@@ -7,7 +7,6 @@
 #include "../engine/Point2F.h"
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/Actor.h"
-#include "implementation/functionality/actor/modules/MovementDataModule.h"
 
 namespace Forradia {
 

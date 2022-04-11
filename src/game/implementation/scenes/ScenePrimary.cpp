@@ -69,6 +69,10 @@ void ScenePrimary::Update() {
   if (e.mouseHandler.rightButtonDown)
     e.customCursor.cursorType = CursorTypes::Hidden;
 
+  for (auto& [key, mobActor] : e.GetCurrentMapArea().mobActorsMirror) {
+      mobActor.get()->Update();
+  }
+
   player.Update();
   mobsEngine.Update();
   gui.Update();

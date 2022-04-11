@@ -3,6 +3,7 @@
 
 #include "WarpMovementModule.h"
 #include "../engine/IEngine.h"
+#include "MovementDataModule.h"
 
 namespace Forradia {
 

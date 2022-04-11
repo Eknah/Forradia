@@ -463,8 +463,8 @@ ValleyMapGenerator::GenerateMobs(MapArea *mapArea) const {
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRabbit");
-      mapArea->mobActorsMirror.push_back(
-                  std::ref(mapArea->tiles[tileX][tileY].actor));
+      mapArea->mobActorsMirror.insert({mapArea->tiles[tileX][tileY].actor->actorId,
+                  std::ref(mapArea->tiles[tileX][tileY].actor)});
     }
   }
 
@@ -487,8 +487,8 @@ ValleyMapGenerator::GenerateMobs(MapArea *mapArea) const {
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobRat");
-      mapArea->mobActorsMirror.push_back(
-                  std::ref(mapArea->tiles[tileX][tileY].actor));
+      mapArea->mobActorsMirror.insert({mapArea->tiles[tileX][tileY].actor->actorId,
+                  std::ref(mapArea->tiles[tileX][tileY].actor)});
     }
   }
 
@@ -511,8 +511,8 @@ ValleyMapGenerator::GenerateMobs(MapArea *mapArea) const {
                                  static_cast<float>(tileX),
                                  static_cast<float>(tileY),
                                  "MobPinkSlime");
-      mapArea->mobActorsMirror.push_back(
-                  std::ref(mapArea->tiles[tileX][tileY].actor));
+      mapArea->mobActorsMirror.insert({mapArea->tiles[tileX][tileY].actor->actorId,
+                  std::ref(mapArea->tiles[tileX][tileY].actor)});
     }
   }
 }
@@ -530,6 +530,16 @@ GenerateQuestCaves(const IEngine &e,
 
     if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
       continue;
+
+    auto xCenter = mapArea->size/2;
+    auto yCenter = mapArea->size/2;
+    auto xStartVillage = xCenter - villageSize/2;
+    auto yStartVillage = xCenter - villageSize/2;
+    auto xEndVillage = xStartVillage + villageSize;
+    auto yEndVillage = yStartVillage + villageSize;
+
+    if (tileX >= xStartVillage && tileY >= yStartVillage && tileX <= xEndVillage && tileY <= yEndVillage)
+        continue;
 
     if (mapArea->tiles[tileX][tileY].groundType !=
         GetId("GroundTypeWater")) {
