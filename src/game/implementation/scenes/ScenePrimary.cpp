@@ -74,7 +74,6 @@ void ScenePrimary::Update() {
   }
 
   player.Update();
-  mobsEngine.Update();
   gui.Update();
 
   if (e.keyboardHandler.keysBeenFired->count(SDLK_RETURN)) {
