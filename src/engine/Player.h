@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "implementation/functionality/actor/Actor.h"
+#include "../engine/Actor.h"
 #include "../engine/InventoryModule.h"
 #include "implementation/functionality/actor/modules/JumpingModule.h"
 #include "implementation/functionality/actor/modules/DestMovementModule.h"

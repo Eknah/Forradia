@@ -15,16 +15,15 @@ namespace Forradia
 
     class Actor
     {
+
     public:
-        explicit Actor(const IEngine& _e) : e(_e),
-            actorId(currentActorId++)
+
+        explicit Actor(const IEngine& _e) : e(_e), actorId(currentActorId++)
         {}
 
         Actor(const IEngine& _e, float x, float y, std::string _modelName);
 
-        Actor(const IEngine& _e, std::string _modelName) :
-            e(_e), modelName(_modelName),
-            actorId(currentActorId++)
+        Actor(const IEngine& _e, std::string _modelName) :  e(_e), modelName(_modelName), actorId(currentActorId++)
         {}
 
         void ResetForNewFrame() const;
@@ -47,11 +46,7 @@ namespace Forradia
         int actorId = -1;
         std::string modelName;
 
-        virtual ~Actor() {}  // Just to make class polymorphic
-
         const IEngine& e;
-
-    protected:
 
     private:
 

@@ -10,14 +10,18 @@ namespace Forradia
 
     class MobAIMovementModule : public IModule
     {
+
     public:
+
         MobAIMovementModule(const IEngine& _e, Actor* _parentActor);
 
         void ResetForNewFrame() override {};
         void Update() override;
 
     private:
+
         Random rnd;
+
     };
 
 }  // namespace Forradia

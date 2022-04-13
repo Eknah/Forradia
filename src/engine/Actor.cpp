@@ -2,9 +2,9 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Actor.h"
-#include "modules/DestMovementModule.h"
+#include "implementation/functionality/actor/modules/DestMovementModule.h"
 #include "../engine/IEngine.h"
-#include "modules/CoreMovementModule.h"
+#include "implementation/functionality/actor/modules/CoreMovementModule.h"
 
 namespace Forradia
 {

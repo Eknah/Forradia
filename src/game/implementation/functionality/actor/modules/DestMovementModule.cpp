@@ -5,7 +5,7 @@
 #include "DestMovementModule.h"
 #include "../engine/Aliases.h"
 #include "../engine/IEngine.h"
-#include "implementation/functionality/actor/Actor.h"
+#include "../engine/Actor.h"
 #include "CoreMovementModule.h"
 #include "WarpMovementModule.h"
 

@@ -10,40 +10,36 @@ namespace Forradia
 
     void WarpMovementModule::WarpIfStandOnPortal()
     {
-        auto newX = GetParentActor().GetModule<CoreMovementModule>().position.x;
-        auto newY = GetParentActor().GetModule<CoreMovementModule>().position.y;
+        auto& coreMovement = GetParentActor().GetModule<CoreMovementModule>();
 
-        if (e.GetCurrMapArea().tiles
-            [static_cast<int>(newX)][static_cast<int>(newY)].properties.count("WarpToFloor") > 0)
+        auto newx = coreMovement.position.x;
+        auto newy = coreMovement.position.y;
+
+        if (e.GetCurrMapArea().tiles[CInt(newx)][CInt(newy)].properties.count("WarpToFloor") > 0)
         {
-            auto angle = *GetParentActor().GetModule<CoreMovementModule>().facingAngle
-                / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
-            auto dx = -static_cast<float>(std::cos(angle)) * GetParentActor().GetModule<CoreMovementModule>().stepMultiplier;
-            auto dy = static_cast<float>(std::sin(angle)) * GetParentActor().GetModule<CoreMovementModule>().stepMultiplier;
+            auto angle = *coreMovement.facingAngle / 180.0f * M_PI - M_PI / 2 + 0 * M_PI / 2;
+            auto dx = -std::cos(angle) * coreMovement.stepMultiplier;
+            auto dy = std::sin(angle) * coreMovement.stepMultiplier;
 
-            auto newXOld = newX;
-            auto newYOld = newY;
+            auto newXOld = newx;
+            auto newYOld = newy;
 
-            newX += dx * GetParentActor().GetModule<CoreMovementModule>().stepSize * 10;
-            newY += dy * GetParentActor().GetModule<CoreMovementModule>().stepSize * 10;
+            newx += dx * coreMovement.stepSize * 10;
+            newy += dy * coreMovement.stepSize * 10;
 
-            auto oldXI = static_cast<int>(GetParentActor().GetModule<CoreMovementModule>().position.x);
-            auto oldYI = static_cast<int>(GetParentActor().GetModule<CoreMovementModule>().position.y);
+            auto oldXI = CInt(coreMovement.position.x);
+            auto oldYI = CInt(coreMovement.position.y);
 
-            GetParentActor().GetModule<CoreMovementModule>().position.x = newX;
-            GetParentActor().GetModule<CoreMovementModule>().position.y = newY;
+            coreMovement.position.x = newx;
+            coreMovement.position.y = newy;
 
             auto coord = e.GetCurrMapArea().worldCoord;
-            coord.z = std::stoi(e.GetCurrMapArea().tiles
-                [static_cast<int>(newXOld)][static_cast<int>(newYOld)].properties.at("WarpToFloor"));
+            coord.z = std::stoi(e.GetCurrMapArea().tiles[CInt(newXOld)][CInt(newYOld)].properties.at("WarpToFloor"));
 
-            e.world->GetArea(coord)->tiles[newX][newY].actor
-                = std::move(e.GetCurrMapArea().tiles[newXOld][newYOld].actor);
+            e.world->GetArea(coord)->tiles[newx][newy].actor = std::move(e.GetCurrMapArea().tiles[newXOld][newYOld].actor);
             e.GetCurrMapArea().tiles[newXOld][newYOld].actor = nullptr;
 
-            GetParentActor().GetModule<CoreMovementModule>().worldMapCoord.z =
-                std::stoi(e.GetCurrMapArea().tiles
-                    [static_cast<int>(newXOld)][static_cast<int>(newYOld)].properties.at("WarpToFloor"));
+            coreMovement.worldMapCoord.z = std::stoi(e.GetCurrMapArea().tiles[CInt(newXOld)][CInt(newYOld)].properties.at("WarpToFloor"));
         }
     }
 

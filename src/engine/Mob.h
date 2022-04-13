@@ -6,7 +6,7 @@
 #include <string>
 #include "../engine/Point2F.h"
 #include "../engine/Aliases.h"
-#include "implementation/functionality/actor/Actor.h"
+#include "../engine/Actor.h"
 
 namespace Forradia {
 

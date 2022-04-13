@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "../engine/Aliases.h"
-#include "implementation/functionality/actor/Actor.h"
+#include "../engine/Actor.h"
 #include "../engine/ObjectFlags.h"
 #include "framework/worldStructure/Object.h"
 

@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "CoreMovementModule.h"
-#include "implementation/functionality/actor/Actor.h"
+#include "../engine/Actor.h"
 #include "../engine/IEngine.h"
 #include "implementation/functionality/actor/modules/WarpMovementModule.h"
 

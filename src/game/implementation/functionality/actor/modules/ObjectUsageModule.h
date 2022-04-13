@@ -11,14 +11,16 @@ class Object;
 
 class ObjectUsageModule : public IModule
 {
+
  public:
+
   using IModule::IModule;
 
   void ResetForNewFrame() override;
   void Update() override;
 
-
   SPtr<Object> objectBeingUsed = nullptr;
+
 };
 
 }  // namespace Forradia
