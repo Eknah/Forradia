@@ -6,7 +6,7 @@
 #include <tuple>
 #include <vector>
 #include "../engine/Aliases.h"
-#include "ObjectDescriber.h"
+#include "../engine/ObjectDescriber.h"
 #include "../engine/ObjectFlags.h"
 
 namespace Forradia
