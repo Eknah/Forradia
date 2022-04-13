@@ -25,7 +25,7 @@ class TextGraphics {
   const float scaling = 0.8f;
 
   std::unique_ptr<TTF_Font, SDL_Deleter> defaultFont;
-  Utilities utilities;
+  Utilities utils;
 };
 
 }  // namespace Forradia

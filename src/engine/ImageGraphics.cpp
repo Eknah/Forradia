@@ -41,7 +41,7 @@ void ImageGraphics::DrawImage(int imageNameId, float x, float y, float width,
   }
 
 SizeF ImageGraphics::GetImageSizeF(std::string imageName) const {
-      auto canvasSize = utilities.GetCanvasSize();
+      auto canvasSize = utils.GetCanvasSize();
 
       glBindTexture(GL_TEXTURE_2D,
                     e.imageLoader.images.at(GetId(imageName)));

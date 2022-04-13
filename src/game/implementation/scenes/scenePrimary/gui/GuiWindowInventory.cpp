@@ -9,7 +9,7 @@ namespace Forradia
 
     void GuiWindowInventory::RenderDerived()
     {
-        auto canvasSize = utilities.GetCanvasSize();
+        auto canvasSize = utils.GetCanvasSize();
         auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
         auto boundsInterior = GetInteriorBounds();
 
@@ -59,7 +59,7 @@ namespace Forradia
 
         e.GetPlayer().GetModule<ObjectUsageModule>().objectBeingUsed = nullptr;
 
-        auto canvasSize = utilities.GetCanvasSize();
+        auto canvasSize = utils.GetCanvasSize();
         auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
         auto boundsInterior = GetInteriorBounds();
 
@@ -68,7 +68,7 @@ namespace Forradia
             boundsInterior.height / ((slotSize + margin) * aspectRatio);
         auto i = 0;
 
-        auto mousePosition = utilities.GetMousePosI();
+        auto mousePosition = utils.GetMousePosI();
         auto mouseXRel = static_cast<float>(mousePosition.x) / canvasSize.width;
         auto mouseYRel = static_cast<float>(mousePosition.y) / canvasSize.height;
 

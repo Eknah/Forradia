@@ -36,7 +36,7 @@ namespace Forradia
 
         const float textBoxMargin = 0.005f;
 
-        Utilities utilities;
+        Utilities utils;
 
         const float buttonWidth = 0.15f;
         const float buttonHeight = 0.03f;

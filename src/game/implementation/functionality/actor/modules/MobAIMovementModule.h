@@ -17,7 +17,7 @@ namespace Forradia
         void Update() override;
 
     private:
-        Random random;
+        Random rnd;
     };
 
 }  // namespace Forradia

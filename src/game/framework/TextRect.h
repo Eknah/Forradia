@@ -4,16 +4,16 @@
 #pragma once
 #include "../engine/RectF.h"
 #include <string>
+#include "../engine/Aliases.h"
 
 namespace Forradia
 {
-
 
     class TextRect
     {
     public:
         RectF bounds = { 0, 0, 0, 0 };
-        std::string text;
+        String text;
     };
 
 }  // namespace Forradia

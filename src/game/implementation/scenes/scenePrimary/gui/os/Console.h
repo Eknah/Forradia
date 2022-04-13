@@ -37,7 +37,7 @@ namespace Forradia
 
         std::vector<std::string> textBoxText = {};
 
-        Utilities utilities;
+        Utilities utils;
         FileSystem fileSystem;
     };
 

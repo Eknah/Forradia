@@ -49,8 +49,8 @@ namespace Forradia
 
         for (auto i = 0; i < 20; i++)
         {
-            auto direction = random.Next() % 4;
-            auto numSteps = 4 + random.Next() % 20;
+            auto direction = rnd.Next() % 4;
+            auto numSteps = 4 + rnd.Next() % 20;
 
             for (auto j = 0; j < numSteps; j++)
             {

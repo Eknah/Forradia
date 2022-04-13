@@ -9,7 +9,7 @@ namespace Forradia
 
     void GuiMinimap::Render()
     {
-        auto minimapSizeF = utilities.ConvertToFloat(minimapSize);
+        auto minimapSizeF = utils.ConvertToFloat(minimapSize);
 
         e.FillRectangle(palette.mediumBlueSemiTrans, 0, 0, minimapSizeF.width,
             minimapSizeF.height);

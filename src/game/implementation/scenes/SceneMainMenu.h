@@ -21,7 +21,7 @@ namespace Forradia
         void DoMouseUp(Uint8 mouseButton) override {}
 
     private:
-        Utilities utilities;
+        Utilities utils;
         Palette palette;
     };
 

@@ -21,7 +21,7 @@ namespace Forradia
 
         void Render();
         void Update();
-        bool DoMouseDown(Uint8 MouseButton);
+        bool DoMouseDown(Uint8 button);
         void DoMouseUp();
 
         bool visible = false;
@@ -30,7 +30,7 @@ namespace Forradia
 
         RectF GetInteriorBounds();
 
-        virtual void DoMouseDownDerived(Uint8 MouseButton) = 0;
+        virtual void DoMouseDownDerived(Uint8 button) = 0;
         virtual void RenderDerived() = 0;
 
         const Engine& e;
@@ -38,17 +38,17 @@ namespace Forradia
 
     private:
 
-        RectF GetTitleBarBounds();
+        RectF GetTopBarBounds();
 
         Palette palette;
-        Utilities utilities;
+        Utilities utils;
         String title;
         RectF bounds;
         bool isBeingMoved = false;
-        SDL_FPoint startMovePosition = { -1, -1 };
-        SDL_FPoint startMoveMousePosition = { -1, -1 };
+        SDL_FPoint startMovePos = { -1, -1 };
+        SDL_FPoint startMoveMousePos = { -1, -1 };
 
-        const float titleBarHeight = 0.04f;
+        const float topBarHeight = 0.04f;
     };
 
 }  // namespace Forradia

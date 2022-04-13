@@ -26,7 +26,7 @@ namespace Forradia
     private:
         Camera camera;
         Gui gui;
-        Utilities utilities;
+        Utilities utils;
         GameWorldRenderer gameWorldRenderer;
     };
 

@@ -5,6 +5,7 @@
 #include "SDL2/SDL.h"
 #include "TextRect.h"
 #include <vector>
+#include "../engine/Aliases.h"
 
 namespace Forradia
 {
@@ -20,14 +21,14 @@ namespace Forradia
         virtual void Enter() = 0;
         virtual void Update() = 0;
         virtual void Render() = 0;
-        virtual void DoMouseDown(Uint8 MouseButton) = 0;
-        virtual void DoMouseUp(Uint8 MouseButton) = 0;
+        virtual void DoMouseDown(Uint8 button) = 0;
+        virtual void DoMouseUp(Uint8 button) = 0;
 
     protected:
 
         const Engine& e;
 
-        std::vector<TextRect> sceneButtons;
+        List<TextRect> sceneButtons;
     };
 
 }  // namespace Forradia

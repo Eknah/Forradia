@@ -69,7 +69,7 @@ namespace Forradia
 
         glGetDoublev(GL_PROJECTION_MATRIX, projection);
 
-        auto mousePosition = utilities.GetMousePosI();
+        auto mousePosition = utils.GetMousePosI();
 
         GLfloat winX, winY, winZ;  // Holds Our X, Y and Z Coordinates
 
@@ -122,7 +122,7 @@ namespace Forradia
 
     void Camera::UpdateCameraMovement()
     {
-        auto mousePosition = utilities.GetMousePosI();
+        auto mousePosition = utils.GetMousePosI();
         auto deltaMouseX = mousePosition.x - previousMousePosition.x;
 
         if (e.mouseHandler.rightButtonDown)

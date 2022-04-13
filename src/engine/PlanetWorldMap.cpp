@@ -9,7 +9,7 @@ namespace Forradia {
 void PlanetWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<IMapGenerator>>> GenAreas) {
     for (auto& [X, Remain] : GenAreas) {
         for (auto& [Y, Gen] : Remain) {
-            Gen->GenerateMapArea(X, Y, 0);
+            Gen->GenerateMapArea({X, Y, 0});
         }
     }
 }

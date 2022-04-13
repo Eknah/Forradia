@@ -40,7 +40,7 @@ void TextGraphics::DrawString(std::string text, SDL_Color color, float x, float 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, fontSurface->w, fontSurface->h, 0,
                  GL_BGRA, GL_UNSIGNED_BYTE, fontSurface->pixels);
 
-    auto canvasSize = utilities.GetCanvasSize();
+    auto canvasSize = utils.GetCanvasSize();
 
     auto width = static_cast<float>(fontSurface->w)
             / canvasSize.width * scaling * specificScaling;

@@ -20,7 +20,7 @@ namespace Forradia
 
         const int minimapSize = 250;
         Palette palette;
-        Utilities utilities;
+        Utilities utils;
     };
 
 }  // namespace Forradia

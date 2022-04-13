@@ -16,7 +16,7 @@ class IMapGenerator {
 
   // Core map area generation
 
-  virtual void GenerateMapArea(int WorldX, int WorldY, int WorldZ) const = 0;
+  virtual void GenerateMapArea(Point3 worldPos) const = 0;
 
  protected:
   const IEngine &e;

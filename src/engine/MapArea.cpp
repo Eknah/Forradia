@@ -6,8 +6,8 @@
 
 namespace Forradia {
 
-MapArea::MapArea(const IEngine &e, int _size, int worldx, int worldy, int worldz)
-    : size(_size), worldCoord({worldx, worldy, worldz}) {
+MapArea::MapArea(const IEngine &e, int _size, Point3 worldPos)
+    : size(_size), worldCoord(worldPos) {
   for (auto x = 0; x < size; x++) {
     tiles.push_back(std::vector<Tile>());
 

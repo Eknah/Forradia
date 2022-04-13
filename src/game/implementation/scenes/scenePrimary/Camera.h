@@ -34,7 +34,7 @@ namespace Forradia
 
     private:
         const Engine& e;
-        Utilities utilities;
+        Utilities utils;
 
         Point2 previousMousePosition = { -1, -1 };
         int renderDistance = 80;

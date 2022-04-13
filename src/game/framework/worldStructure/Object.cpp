@@ -9,11 +9,11 @@ namespace Forradia
     Object::Object(String objectTypeName, bool randomScaling, bool randomRotation, float _rotation) : objectType(GetId(objectTypeName))
     {
         if (randomRotation)
-            rotation = CFloat(random.Next() % 360);
+            rotation = CFloat(rnd.Next() % 360);
         else rotation = _rotation;
 
         if (randomScaling)
-            scaling = 0.6f + CFloat(random.Next() % 8) / 10.0f;
+            scaling = 0.6f + CFloat(rnd.Next() % 8) / 10.0f;
     }
 
     void Object::UseOn(const SPtr<Object>& other)

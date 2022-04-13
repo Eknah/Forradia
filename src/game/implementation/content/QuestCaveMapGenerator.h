@@ -19,7 +19,7 @@ namespace Forradia
         void GenerateCaveWalls(MapArea* mapArea);
         void GeneratePath(MapArea* mapArea, Point2 entranceLocation);
 
-        Random random;
+        Random rnd;
     };
 
 }  // namespace Forradia

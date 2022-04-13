@@ -19,7 +19,7 @@ namespace Forradia
     private:
         const int numSlotCols = 4;
 
-        Utilities utilities;
+        Utilities utils;
         Palette palette;
     };
 

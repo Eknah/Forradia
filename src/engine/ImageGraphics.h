@@ -24,7 +24,7 @@ class ImageGraphics {
 
  private:
   IEngine &e;
-  Utilities utilities;
+  Utilities utils;
 };
 
 }  // namespace Forradia

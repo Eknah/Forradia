@@ -21,7 +21,7 @@ class ICustomCursor {
 
  protected:
   IEngine &e;
-  Utilities utilities;
+  Utilities utils;
 
   int cursorSize = 40;
 };

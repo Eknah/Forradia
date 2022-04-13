@@ -10,12 +10,12 @@
 namespace Forradia
 {
 
-    void DefaultMapGenerator::GenerateMapArea(int worldx, int worldy, int worldZ) const
+    void DefaultMapGenerator::GenerateMapArea(Point3 worldPos) const
     {
-        worldMap->areas[worldx][worldy][worldZ] =
-            MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldx, worldy, worldZ);
+        worldMap->areas[worldPos.x][worldPos.y][worldPos.z] =
+            MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldPos);
 
-        auto mapArea = worldMap->areas[worldx][worldy][worldZ].get();
+        auto mapArea = worldMap->GetArea(worldPos).get();
 
         ClearToGrass(mapArea);
         GeneratePlayerStartingPosition(mapArea);
@@ -35,26 +35,26 @@ namespace Forradia
 
     void DefaultMapGenerator::ClearToGrass(MapArea* mapArea) const
     {
-        for (auto tileY = 0; tileY < mapArea->size; tileY++)
-            for (auto tileX = 0; tileX < mapArea->size; tileX++)
-                mapArea->tiles[tileX][tileY].groundType = GetId("GroundTypeGrass");
+        for (auto y = 0; y < mapArea->size; y++)
+            for (auto x = 0; x < mapArea->size; x++)
+                mapArea->tiles[x][y].groundType = GetId("GroundTypeGrass");
     }
 
     void DefaultMapGenerator::GeneratePlayerStartingPosition(MapArea* mapArea) const
     {
         mapArea->spawnPos.x = static_cast<float>(
-            random.Next() % mapArea->size);
+            rnd.Next() % mapArea->size);
         mapArea->spawnPos.y = static_cast<float>(
-            random.Next() % mapArea->size);
+            rnd.Next() % mapArea->size);
     }
 
     void DefaultMapGenerator::GenerateElevation(MapArea* mapArea) const
     {
         for (auto i = 0; i < 40; i++)
         {
-            auto centerTileX = random.Next() % mapArea->size;
-            auto centerTileY = random.Next() % mapArea->size;
-            auto maxR = 4 + random.Next() % 12;
+            auto centerTileX = rnd.Next() % mapArea->size;
+            auto centerTileY = rnd.Next() % mapArea->size;
+            auto maxR = 4 + rnd.Next() % 12;
 
             for (auto r = maxR; r >= 0; r -= 3)
             {
@@ -110,9 +110,9 @@ namespace Forradia
     {
         for (auto i = 0; i < 20; i++)
         {
-            auto centerTileX = random.Next() % mapArea->size;
-            auto centerTileY = random.Next() % mapArea->size;
-            auto R = 5 + random.Next() % 13;
+            auto centerTileX = rnd.Next() % mapArea->size;
+            auto centerTileY = rnd.Next() % mapArea->size;
+            auto R = 5 + rnd.Next() % 13;
 
             for (auto tileY = centerTileY - R; tileY <= centerTileY + R; tileY++)
             {
@@ -158,9 +158,9 @@ namespace Forradia
     {
         for (auto i = 0; i < 30; i++)
         {
-            auto centerTileX = random.Next() % mapArea->size;
-            auto centerTileY = random.Next() % mapArea->size;
-            auto r = 4 + random.Next() % 5;
+            auto centerTileX = rnd.Next() % mapArea->size;
+            auto centerTileY = rnd.Next() % mapArea->size;
+            auto r = 4 + rnd.Next() % 5;
 
             for (auto j = 0; j < r; j++)
             {
@@ -227,9 +227,9 @@ namespace Forradia
     {
         for (auto i = 0; i < 30; i++)
         {
-            auto centerTileX = random.Next() % mapArea->size;
-            auto centerTileY = random.Next() % mapArea->size;
-            auto r = 2 + random.Next() % 3;
+            auto centerTileX = rnd.Next() % mapArea->size;
+            auto centerTileY = rnd.Next() % mapArea->size;
+            auto r = 2 + rnd.Next() % 3;
 
             for (auto j = 0; j < r; j++)
             {
@@ -294,9 +294,9 @@ namespace Forradia
     {
         for (auto i = 0; i < 10; i++)
         {
-            auto centerTileX = random.Next() % mapArea->size;
-            auto centerTileY = random.Next() % mapArea->size;
-            auto r = 5 + random.Next() % 13;
+            auto centerTileX = rnd.Next() % mapArea->size;
+            auto centerTileY = rnd.Next() % mapArea->size;
+            auto r = 5 + rnd.Next() % 13;
 
             for (auto tileY = centerTileY - r; tileY <= centerTileY + r; tileY++)
             {
@@ -323,9 +323,9 @@ namespace Forradia
     {
         for (auto i = 0; i < 30; i++)
         {
-            auto tileX = random.Next() % mapArea->size;
-            auto tileY = random.Next() % mapArea->size;
-            auto numTrees = 15 + random.Next() % 15;
+            auto tileX = rnd.Next() % mapArea->size;
+            auto tileY = rnd.Next() % mapArea->size;
+            auto numTrees = 15 + rnd.Next() % 15;
 
             for (auto j = 0; j < numTrees; j++)
             {
@@ -343,15 +343,15 @@ namespace Forradia
                                 MakeSPtr<Object>("ObjectTree1"));
                 }
 
-                tileX += random.Next() % 7 - random.Next() % 7;
-                tileY += random.Next() % 7 - random.Next() % 7;
+                tileX += rnd.Next() % 7 - rnd.Next() % 7;
+                tileY += rnd.Next() % 7 - rnd.Next() % 7;
             }
         }
         for (auto i = 0; i < 30; i++)
         {
-            auto tileX = random.Next() % mapArea->size;
-            auto tileY = random.Next() % mapArea->size;
-            auto numTrees = 15 + random.Next() % 15;
+            auto tileX = rnd.Next() % mapArea->size;
+            auto tileY = rnd.Next() % mapArea->size;
+            auto numTrees = 15 + rnd.Next() % 15;
 
             for (auto j = 0; j < numTrees; j++)
             {
@@ -369,8 +369,8 @@ namespace Forradia
                                 MakeSPtr<Object>("ObjectTree2"));
                 }
 
-                tileX += random.Next() % 7 - random.Next() % 7;
-                tileY += random.Next() % 7 - random.Next() % 7;
+                tileX += rnd.Next() % 7 - rnd.Next() % 7;
+                tileY += rnd.Next() % 7 - rnd.Next() % 7;
             }
         }
     }
@@ -379,8 +379,8 @@ namespace Forradia
     {
         for (auto i = 0; i < 200; i++)
         {
-            auto tileX = random.Next() % mapArea->size;
-            auto tileY = random.Next() % mapArea->size;
+            auto tileX = rnd.Next() % mapArea->size;
+            auto tileY = rnd.Next() % mapArea->size;
 
             if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
                 continue;
@@ -396,8 +396,8 @@ namespace Forradia
     {
         for (auto i = 0; i < 200; i++)
         {
-            auto tileX = random.Next() % mapArea->size;
-            auto tileY = random.Next() % mapArea->size;
+            auto tileX = rnd.Next() % mapArea->size;
+            auto tileY = rnd.Next() % mapArea->size;
 
             if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
                 continue;
@@ -413,8 +413,8 @@ namespace Forradia
     {
         for (auto i = 0; i < 100; i++)
         {
-            auto tileX = random.Next() % mapArea->size;
-            auto tileY = random.Next() % mapArea->size;
+            auto tileX = rnd.Next() % mapArea->size;
+            auto tileY = rnd.Next() % mapArea->size;
 
             if (mapArea->tiles[tileX][tileY].groundType == GetId("GroundTypeGrass"))
                 if (mapArea->tiles[tileX][tileY].objects.size() == 0)
@@ -427,8 +427,8 @@ namespace Forradia
     {
         for (auto i = 0; i < 1000; i++)
         {
-            auto tileX = random.Next() % mapArea->size;
-            auto tileY = random.Next() % mapArea->size;
+            auto tileX = rnd.Next() % mapArea->size;
+            auto tileY = rnd.Next() % mapArea->size;
 
             if (mapArea->tiles[tileX][tileY].groundType == GetId("GroundTypeGrass"))
                 if (mapArea->tiles[tileX][tileY].objects.size() == 0)
@@ -451,8 +451,8 @@ namespace Forradia
     {
         for (auto i = 0; i < 200; i++)
         {
-            auto tileX = random.Next() % mapArea->size;
-            auto tileY = random.Next() % mapArea->size;
+            auto tileX = rnd.Next() % mapArea->size;
+            auto tileY = rnd.Next() % mapArea->size;
 
             if (tileX == static_cast<int>(mapArea->spawnPos.x)
                 && tileY == static_cast<int>(mapArea->spawnPos.y))
@@ -477,8 +477,8 @@ namespace Forradia
 
         for (auto i = 0; i < 200; i++)
         {
-            auto tileX = random.Next() % mapArea->size;
-            auto tileY = random.Next() % mapArea->size;
+            auto tileX = rnd.Next() % mapArea->size;
+            auto tileY = rnd.Next() % mapArea->size;
 
             if (tileX == static_cast<int>(mapArea->spawnPos.x)
                 && tileY == static_cast<int>(mapArea->spawnPos.y))
@@ -511,8 +511,8 @@ namespace Forradia
 
         for (auto floor = -1; floor >= -20; floor--)
         {
-            auto tileX = random.Next() % 94 + 3;
-            auto tileY = random.Next() % 94 + 3;
+            auto tileX = rnd.Next() % 94 + 3;
+            auto tileY = rnd.Next() % 94 + 3;
 
             if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
                 continue;
@@ -526,10 +526,7 @@ namespace Forradia
                 mapArea->tiles[tileX][tileY].properties["WarpToFloor"] = std::to_string(floor);
 
                 worldMap->areas[mapArea->worldCoord.x][mapArea->worldCoord.y][floor] =
-                    std::make_unique<MapArea>(e, worldMap->mapAreaSize,
-                        mapArea->worldCoord.x,
-                        mapArea->worldCoord.y,
-                        floor);
+                    std::make_unique<MapArea>(e, worldMap->mapAreaSize, Point3 { mapArea->worldCoord.x, mapArea->worldCoord.y, floor });
 
                 auto& questCaveMapArea =
                     worldMap->areas

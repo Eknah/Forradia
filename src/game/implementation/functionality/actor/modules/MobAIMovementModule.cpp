@@ -37,9 +37,9 @@ namespace Forradia
             {
 
                 auto destinationX =
-                    mob.GetModule<MovementDataModule>().position.x + random.Next() % 15 - random.Next() % 15;
+                    mob.GetModule<MovementDataModule>().position.x + rnd.Next() % 15 - rnd.Next() % 15;
                 auto destinationY =
-                    mob.GetModule<MovementDataModule>().position.y + random.Next() % 15 - random.Next() % 15;
+                    mob.GetModule<MovementDataModule>().position.y + rnd.Next() % 15 - rnd.Next() % 15;
 
                 destinationX =
                     std::min(std::max(destinationX, 0.0f),

@@ -23,7 +23,7 @@ namespace Forradia
 
     void Gui::Update()
     {
-        auto mousePositionF = utilities.GetMousePosF();
+        auto mousePositionF = utils.GetMousePosF();
 
         if (boundsButtonInventory.ContainsPoint(mousePositionF))
             e.customCursor.cursorType = CursorTypes::Hovering;
@@ -34,7 +34,7 @@ namespace Forradia
         if (boundsButtonSystem.ContainsPoint(mousePositionF))
             e.customCursor.cursorType = CursorTypes::Hovering;
 
-        auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
+        auto mallIconSize = utils.ConvertToFloat(buttonMallSize);
 
         auto mallIconBounds = RectF{ 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height };
 
@@ -50,11 +50,11 @@ namespace Forradia
 
         guiMinimap.Render();
 
-        auto MousePositionF = utilities.GetMousePosF();
+        auto MousePositionF = utils.GetMousePosF();
 
 
 
-        auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
+        auto mallIconSize = utils.ConvertToFloat(buttonMallSize);
 
         auto mallIconBounds = RectF{ 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height };
 
@@ -130,7 +130,7 @@ namespace Forradia
                 return true;
         }
 
-        auto mousePositionF = utilities.GetMousePosF();
+        auto mousePositionF = utils.GetMousePosF();
 
         if (boundsButtonInventory.ContainsPoint(mousePositionF))
         {
@@ -139,7 +139,7 @@ namespace Forradia
             return true;
         }
 
-        auto mallIconSize = utilities.ConvertToFloat(buttonMallSize);
+        auto mallIconSize = utils.ConvertToFloat(buttonMallSize);
 
         auto mallIconBounds = RectF{ 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height };
 

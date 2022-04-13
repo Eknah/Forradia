@@ -28,7 +28,7 @@ namespace Forradia
     {
         e.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
 
-        auto canvasSize = utilities.GetCanvasSize();
+        auto canvasSize = utils.GetCanvasSize();
 
         auto logoSizeF = e.GetImageSizeF("SceneForradiaLogo");
 

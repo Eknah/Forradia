@@ -28,7 +28,7 @@ namespace Forradia
 
         void TransformInto(String objectName);
 
-        Random random;
+        Random rnd;
 
     };
 

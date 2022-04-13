@@ -14,7 +14,7 @@ namespace Forradia
         e.FillRectangle(palette.mediumBlue, bounds.x, bounds.y, bounds.width, bounds.height);
         e.DrawRectangle(palette.black, bounds.x, bounds.y, bounds.width, bounds.height);
         e.DrawString(title, palette.black, bounds.x + margin, bounds.y + margin);
-        e.DrawLine(palette.black, bounds.x, bounds.y + titleBarHeight, bounds.x + bounds.width, bounds.y + titleBarHeight);
+        e.DrawLine(palette.black, bounds.x, bounds.y + topBarHeight, bounds.x + bounds.width, bounds.y + topBarHeight);
 
         RenderDerived();
     }
@@ -23,48 +23,48 @@ namespace Forradia
     {
         if (!isBeingMoved) return;
 
-        auto mousePosF = utilities.GetMousePosF();
-        auto deltaMouseX = mousePosF.x - startMoveMousePosition.x;
-        auto deltaMouseY = mousePosF.y - startMoveMousePosition.y;
+        auto mousePosF = utils.GetMousePosF();
+        auto deltaMouseX = mousePosF.x - startMoveMousePos.x;
+        auto deltaMouseY = mousePosF.y - startMoveMousePos.y;
 
-        bounds.x = startMovePosition.x + deltaMouseX;
-        bounds.y = startMovePosition.y + deltaMouseY;
+        bounds.x = startMovePos.x + deltaMouseX;
+        bounds.y = startMovePos.y + deltaMouseY;
     }
 
     RectF GuiWindowBase::GetInteriorBounds()
     {
         auto x = bounds.x + margin;
-        auto y = bounds.y + titleBarHeight + margin;
+        auto y = bounds.y + topBarHeight + margin;
         auto width = bounds.width - 2 * margin;
-        auto height = bounds.height - titleBarHeight - 2 * margin;
+        auto height = bounds.height - topBarHeight - 2 * margin;
 
         return { x, y, width, height };
     }
 
-    bool GuiWindowBase::DoMouseDown(Uint8 mouseButton)
+    bool GuiWindowBase::DoMouseDown(Uint8 button)
     {
         if (!visible) return false;
 
-        auto mousePosF = utilities.GetMousePosF();
-        auto titleBarBounds = GetTitleBarBounds();
+        auto mousePosF = utils.GetMousePosF();
+        auto titleBarBounds = GetTopBarBounds();
 
         if (titleBarBounds.ContainsPoint(mousePosF))
         {
             isBeingMoved = true;
-            startMovePosition = { bounds.x, bounds.y };
-            startMoveMousePosition = { mousePosF.x, mousePosF.y };
+            startMovePos = { bounds.x, bounds.y };
+            startMoveMousePos = { mousePosF.x, mousePosF.y };
         }
 
-        DoMouseDownDerived(mouseButton);
+        DoMouseDownDerived(button);
 
         if (bounds.ContainsPoint(mousePosF)) return true;
 
         return false;
     }
 
-    RectF GuiWindowBase::GetTitleBarBounds()
+    RectF GuiWindowBase::GetTopBarBounds()
     {
-        return { bounds.x, bounds.y, bounds.width, titleBarHeight };
+        return { bounds.x, bounds.y, bounds.width, topBarHeight };
     }
 
     void GuiWindowBase::DoMouseUp()

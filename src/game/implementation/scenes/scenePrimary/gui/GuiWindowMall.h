@@ -17,7 +17,7 @@ namespace Forradia
         void DoMouseDownDerived(Uint8 mouseButton) override;
 
     private:
-        Utilities utilities;
+        Utilities utils;
         Palette palette;
     };
 
