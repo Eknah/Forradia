@@ -49,11 +49,11 @@ namespace Forradia
 
         virtual ~Actor() {}  // Just to make class polymorphic
 
+        const IEngine& e;
+
     protected:
 
     private:
-
-        const IEngine& e;
 
         inline static int currentActorId = 0;
 

@@ -95,35 +95,7 @@ namespace Forradia
         auto newXRounded = newX;
         auto newYRounded = newY;
 
-        auto newXRoundedI = CInt(newXRounded);
-        auto newYRoundedI = CInt(newYRounded);
-
-        auto tileHasMob = false;
-
-        if (e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor != nullptr)
-        {
-            if (e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor->actorId != e.GetPlayer().actorId)
-                tileHasMob = true;
-        }
-
-        if (!e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].HasObjectWithFlag(FlagObstacle)
-            && e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
-            && !tileHasMob)
-        {
-            auto oldXI = CInt(movementData.position.x);
-            auto oldYI = CInt(movementData.position.y);
-
-            movementData.position.x = newXRounded;
-            movementData.position.y = newYRounded;
-
-            if (newXRoundedI != oldXI || newYRoundedI != oldYI)
-            {
-                e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor = std::move(e.GetCurrentMapArea().tiles[oldXI][oldYI].actor);
-                e.GetCurrentMapArea().tiles[oldXI][oldYI].actor = nullptr;
-            }
-        }
-
-        GetParentActor().GetModule<WarpMovementModule>().WarpIfStandOnPortal();
+        movementData.TryMoveToTile(newXRounded, newYRounded);
         movementData.tickLastMove = Ticks();
     }
 

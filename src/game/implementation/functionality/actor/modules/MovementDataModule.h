@@ -17,6 +17,7 @@ namespace Forradia
 
         void ResetForNewFrame() override;
         void Update() override {};
+        void TryMoveToTile(float newxRounded, float newyRounded);
 
         Point3 worldMapCoord = { 1, 1, 0 };
         Point2F position = { 50.0f, 50.0f };
