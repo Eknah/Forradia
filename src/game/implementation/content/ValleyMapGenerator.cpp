@@ -59,6 +59,7 @@ namespace Forradia
                 auto elevHorizontal = std::max(dxLeft, dxRight);
                 auto elevVertical = std::max(dyTop, dyBottom);
                 auto elev = std::max(std::max(elevHorizontal, elevVertical), 86) * 5 - 40;
+                elev = std::min(elev, 440);
 
                 mapArea->tiles[x][y].elevation = elev / 1.5f;
 
