@@ -20,12 +20,11 @@ namespace Forradia
         auto planetMap = MakeUPtr<PlanetWorldMap>(mapAreaSize, 1, 1);
 
         Engine e;
-        ObjectsContent objectsContent;
+        ObjectsBehaviour objectsBehaviour;
         ScenesCollection scenesCollection;
         Inventory startingInventory;
 
         auto defaultMapGen = MakeSPtr<DefaultMapGenerator>(e, planetMap);
-        //auto defaultMapGen = MakeSPtr<ValleyMapGenerator>(e, planetMap);
         auto worldMapGens = UMap<int, UMap<int, SPtr<IMapGenerator>>>();
         worldMapGens[0][0] = defaultMapGen;
         worldMapGens[1][0] = defaultMapGen;
@@ -34,15 +33,15 @@ namespace Forradia
         startingInventory.AddMany({ "ObjectWoodaxe",
                                   "ObjectSaw" });
 
-        objectsContent.AddMany({ {"ObjectTree1", ObjObstacle},
-                                {"ObjectTree2", ObjObstacle},
-                                {"ObjectCaveWallBlock", ObjObstacle},
-                                {"ObjectTallGrass", ObjNoShadow},
-                                {"ObjectWoodFence", ObjNoShadow | ObjObstacle},
-                                {"ObjectWoodWall", ObjNoShadow | ObjObstacle},
-                                {"ObjectRoof", ObjNoShadow} });
+        objectsBehaviour.AddMany({ {"ObjectTree1", FlagObstacle},
+                                {"ObjectTree2", FlagObstacle},
+                                {"ObjectCaveWallBlock", FlagObstacle},
+                                {"ObjectTallGrass", FlagNoShadow},
+                                {"ObjectWoodFence", FlagNoShadow | FlagObstacle},
+                                {"ObjectWoodWall", FlagNoShadow | FlagObstacle},
+                                {"ObjectRoof", FlagNoShadow} });
 
-        objectsContent.SetOpacity("ObjectRoof", 0.5f);
+        objectsBehaviour.SetOpacity("ObjectRoof", 0.5f);
 
         scenesCollection.AddMany({ {"SceneGameStart",
                                    MakeSPtr<SceneGameStart>(e,
@@ -56,7 +55,7 @@ namespace Forradia
                                   {"ScenePrimary", MakeSPtr<ScenePrimary>(e)} });
 
         e.Run(std::move(scenesCollection), GetId("SceneGameStart"), std::move(planetMap),
-            startingInventory, objectsContent);
+            startingInventory, objectsBehaviour);
     }
 
 }  // namespace Forradia

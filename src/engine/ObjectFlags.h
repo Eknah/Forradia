@@ -6,10 +6,10 @@
 namespace Forradia {
 
 enum ObjectFlags : char {
-    ObjNone = 0,
-    ObjObstacle = 1,
-    ObjMovable = 2,
-    ObjNoShadow = 4
+    FlagNone = 0,
+    FlagObstacle = 1,
+    FlagMovable = 2,
+    FlagNoShadow = 4
 };
 
 }  // namespace Forradia

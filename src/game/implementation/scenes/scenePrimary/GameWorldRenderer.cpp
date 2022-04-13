@@ -366,8 +366,8 @@ namespace Forradia
 
                     auto dropShadow = true;
 
-                    if (e.objectsContent.objectDescriptions.count(Object->objectType))
-                        if (e.objectsContent.objectDescriptions.at(Object->objectType).flags & ObjNoShadow)
+                    if (e.objectsContent.objectDescribers.count(Object->objectType))
+                        if (e.objectsContent.objectDescribers.at(Object->objectType).flags & FlagNoShadow)
                             dropShadow = false;
 
                     if (dropShadow)
@@ -391,8 +391,8 @@ namespace Forradia
                     auto tileObject = Object->objectType;
                     auto opacity = 1.0f;
 
-                    if (e.objectsContent.objectDescriptions.count(tileObject))
-                        opacity = e.objectsContent.objectDescriptions.at(tileObject).opacity;
+                    if (e.objectsContent.objectDescribers.count(tileObject))
+                        opacity = e.objectsContent.objectDescribers.at(tileObject).opacity;
 
                     if (tileObject != 0)
                         e.DrawModel(tileObject, tileX0 + e.tileSize / 2,
@@ -643,8 +643,8 @@ namespace Forradia
                     auto roofObject = roof->objectType;
                     auto opacity = 1.0f;
 
-                    if (e.objectsContent.objectDescriptions.count(roofObject))
-                        opacity = e.objectsContent.objectDescriptions.at(roofObject).opacity;
+                    if (e.objectsContent.objectDescribers.count(roofObject))
+                        opacity = e.objectsContent.objectDescribers.at(roofObject).opacity;
 
                     e.DrawModel(roofObject, tileX0 + e.tileSize / 2,
                         (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,

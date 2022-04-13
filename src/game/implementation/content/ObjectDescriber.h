@@ -7,16 +7,17 @@
 namespace Forradia
 {
 
-    class ObjectDescription
+    class ObjectDescriber
     {
-    public:
-        ObjectDescription() = default;
-        explicit ObjectDescription(char _flags) : flags(_flags)
-        {}
 
-        // Description parameters
-        char flags = ObjNone;
+    public:
+
+        ObjectDescriber() = default;
+        explicit ObjectDescriber(char _flags) : flags(_flags) {}
+
+        char flags = FlagNone;
         float opacity = 1.0f;
+
     };
 
 }  // namespace Forradia

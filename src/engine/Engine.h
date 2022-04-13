@@ -40,7 +40,7 @@ class Engine : public IEngine {
   void Run(ScenesCollection scenesCollection_, int startScene_,
                   UPtr<PlanetWorldMap> world_,
                   Inventory startingInventory_,
-                  ObjectsContent objectsContent_);
+                  ObjectsBehaviour objectsContent_);
 
   // ---- Drawing operations ----
 

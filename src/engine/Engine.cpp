@@ -9,7 +9,7 @@ namespace Forradia {
 void Engine::Run(ScenesCollection _scenesCollection, int _startScene,
                   UPtr<PlanetWorldMap> _world,
                   Inventory _startingInventory,
-                  ObjectsContent _objectsContent) {
+                  ObjectsBehaviour _objectsContent) {
     using std::move;
 
     InitializeGL();

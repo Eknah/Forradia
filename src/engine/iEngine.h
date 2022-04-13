@@ -11,7 +11,7 @@
 #include "MouseHandler.h"
 #include "TextGraphics.h"
 #include "Vector3.h"
-#include "implementation/content/ObjectsContent.h"
+#include "implementation/content/ObjectsBehaviour.h"
 #include "ICustomCursor.h"
 #include "IFpsCounter.h"
 #include "IFullscreenController.h"
@@ -76,7 +76,7 @@ class IEngine {
   ImageLoader imageLoader;
   ModelLoader modelLoader;
   TextGraphics textGraphics;
-  ObjectsContent objectsContent;
+  ObjectsBehaviour objectsContent;
 
   UPtr<PlanetWorldMap> world;
 

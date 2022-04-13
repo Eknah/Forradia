@@ -9,8 +9,8 @@ namespace Forradia {
 
 bool Tile::HasObjectWithFlag(ObjectFlags flag) {
     for (auto &Object : objects) {
-        if (e.objectsContent.objectDescriptions.count(Object->objectType)) {
-            auto objFlags = e.objectsContent.objectDescriptions.at(Object->objectType).flags;
+        if (e.objectsContent.objectDescribers.count(Object->objectType)) {
+            auto objFlags = e.objectsContent.objectDescribers.at(Object->objectType).flags;
 
             if (objFlags & flag)
                 return true;

@@ -46,11 +46,6 @@ inline int GetId(std::string text)
 }
 constexpr auto Ticks = &SDL_GetTicks;
 
-using String = std::string;
-
-template <typename T>
-using List = std::vector<T>;
-
 inline float CFloat(int val)
 {
     return static_cast<float>(val);
@@ -60,5 +55,17 @@ inline int CInt(float val)
 {
     return static_cast<int>(val);
 }
+
+// Common types
+
+using String = std::string;
+
+template <typename T>
+using List = std::vector<T>;
+
+template <typename T, typename U>
+using Tuple = std::tuple<T, U>;
+
+
 
 }  // namespace Forradia

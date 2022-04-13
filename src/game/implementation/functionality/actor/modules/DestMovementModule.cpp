@@ -75,7 +75,7 @@ namespace Forradia
 
             if (!e.GetCurrentMapArea()
                 .tiles[newXRoundedI][newYRoundedI]
-                .HasObjectWithFlag(ObjObstacle)
+                .HasObjectWithFlag(FlagObstacle)
                 && e.GetCurrentMapArea()
                 .tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
                 && !tileHasMob)
