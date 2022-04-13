@@ -4,6 +4,7 @@
 #pragma once
 #include "../engine/IEngine.h"
 #include "IFpsCounter.h"
+#include "Timer.h"
 
 namespace Forradia {
 
@@ -14,6 +15,10 @@ class FpsCounter : public IFpsCounter {
   void Update() override;
 
   void Render() override;
+
+  private:
+    Timer timer = Timer(MakeUPtr<int>(1000));
+
 };
 
 }  // namespace Forradia

@@ -21,7 +21,6 @@ class IFpsCounter {
 
   int framesCount = 0;
   int fps = 0;
-  unsigned int tickLastUpdate = 0;
   const float width = 0.07f;
   const float height = 0.03f;
   const float posx = 0.97f;

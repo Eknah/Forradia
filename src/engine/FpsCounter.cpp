@@ -7,10 +7,10 @@ namespace Forradia {
 
 void FpsCounter::Update() {
     framesCount++;
-    if (Ticks() > tickLastUpdate + 1000) {
+    if (timer.HasFinished()) {
       fps = framesCount;
       framesCount = 0;
-      tickLastUpdate = Ticks();
+      timer.Reset();
     }
   }
 

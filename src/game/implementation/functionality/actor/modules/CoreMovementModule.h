@@ -6,6 +6,7 @@
 #include "../engine/Aliases.h"
 #include "../engine/Point2F.h"
 #include "../engine/Point3.h"
+#include "../engine/Timer.h"
 
 namespace Forradia
 {
@@ -13,7 +14,11 @@ namespace Forradia
     class CoreMovementModule : public IModule
     {
     public:
-        using IModule::IModule;
+        //using IModule::IModule;
+        CoreMovementModule(const IEngine& _e, Actor* _parentActor) : IModule(_e, _parentActor), timer(UPtr<int>(&moveSpeed))
+        {
+
+        }
 
         void ResetForNewFrame() override;
         void Update() override {};
@@ -25,11 +30,12 @@ namespace Forradia
         UPtr<float> facingAngle = MakeUPtr<float>(0.0f);
 
         Point2F destination = { -1, -1 };
-        unsigned int tickLastMove = 0;
         int moveSpeed = 30;
         float stepSize = 3.0f;
         float stepMultiplier = 0.1f;
         bool isWalking = false;
+
+        Timer timer;
 
     };
 

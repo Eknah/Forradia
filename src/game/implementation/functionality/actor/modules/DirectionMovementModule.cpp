@@ -24,7 +24,7 @@ namespace Forradia
         auto& actor = GetParentActor();
         auto& coreMovement = actor.GetModule<CoreMovementModule>();
 
-        if (Ticks() < coreMovement.tickLastMove + coreMovement.moveSpeed) return;
+        if (!coreMovement.timer.HasFinished()) return;
         if (!(moveInstruction & DirForward || moveInstruction & DirRight || moveInstruction & DirBack || moveInstruction & DirLeft))
             return;
 
@@ -97,7 +97,7 @@ namespace Forradia
 
         coreMovement.TryMoveToTile(newXRounded, newYRounded);
 
-        coreMovement.tickLastMove = Ticks();
+        coreMovement.timer.Reset();
     }
 
 

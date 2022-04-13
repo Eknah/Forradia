@@ -14,7 +14,7 @@ namespace Forradia
 
     bool Timer::HasFinished()
     {
-        return Ticks() > startTime + duration;
+        return Ticks() > startTime + *durationPtr;
     }
 
     int Timer::GetPassedTicks()

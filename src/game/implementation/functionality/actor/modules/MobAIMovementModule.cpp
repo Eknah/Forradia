@@ -29,9 +29,9 @@ namespace Forradia
 
         mob.GetModule<CoreMovementModule>().isWalking = true;
 
-        if (Ticks() > mob.GetModule<CoreMovementModule>().tickLastMove + mob.GetModule<CoreMovementModule>().moveSpeed)
+        if (mob.GetModule<CoreMovementModule>().timer.HasFinished())
         {
-            mob.GetModule<CoreMovementModule>().tickLastMove = Ticks();
+            mob.GetModule<CoreMovementModule>().timer.Reset();
 
             if (mob.GetModule<CoreMovementModule>().destination.x == -1 || mob.GetModule<CoreMovementModule>().destination.y == -1)
             {

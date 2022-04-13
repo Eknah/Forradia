@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "Aliases.h"
 
 namespace Forradia
 {
@@ -11,7 +12,7 @@ namespace Forradia
     {
 
     public:
-        Timer(int _duration) : duration(_duration) {}
+        Timer(UPtr<int> _duration) : durationPtr(std::move(_duration)) {}
 
         void Reset();
         bool HasFinished();
@@ -19,7 +20,7 @@ namespace Forradia
 
     private:
 
-        int duration = 0;
+        UPtr<int> durationPtr = nullptr;
         int startTime = 0;
 
     };

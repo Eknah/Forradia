@@ -3,7 +3,8 @@
 
 #pragma once
 #include "../engine/IModule.h"
-#include "framework/Timer.h"
+#include "../engine/Timer.h"
+#include "../engine/Aliases.h"
 
 namespace Forradia
 {
@@ -23,11 +24,10 @@ namespace Forradia
     private:
 
         bool isJumping = false;
-        unsigned int tickStartJumping = 0;
         float maxJumpHeight = 1.0f;
 
-        const int jumpDuration = 600;
-        Timer timer = Timer(jumpDuration);
+        int jumpDuration = 600;
+        Timer timer = Timer(UPtr<int>(&jumpDuration));
 
     };
 
