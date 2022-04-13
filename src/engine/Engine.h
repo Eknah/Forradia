@@ -60,7 +60,7 @@ class Engine : public IEngine {
                        float y1) const override;
 
   void DrawString(std::string message, SDL_Color color, float x, float y,
-                         bool centerAlign = false) const override;
+                         bool centerAlign = false, float specificScaling = 1.0f) const override;
 
   void DrawModel(std::string modelName, float x, float y, float z,
                         float rotation = 0.0f,

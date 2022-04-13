@@ -4,17 +4,19 @@
 #pragma once
 #include "../engine/ObjectFlags.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class ObjectDescription {
- public:
-  ObjectDescription() = default;
-  explicit ObjectDescription(char _flags)
-      : flags(_flags) {}
+    class ObjectDescription
+    {
+    public:
+        ObjectDescription() = default;
+        explicit ObjectDescription(char _flags) : flags(_flags)
+        {}
 
-  // Description parameters
-  char flags = ObjNone;
-  float opacity = 1.0f;
-};
+        // Description parameters
+        char flags = ObjNone;
+        float opacity = 1.0f;
+    };
 
 }  // namespace Forradia

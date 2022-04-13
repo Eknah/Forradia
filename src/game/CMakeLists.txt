@@ -6,15 +6,19 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(GLOB_RECURSE all_files
-     "../*.h"
-     "../*.cpp"
+     "../engine/*.h"
+     "../engine/*.cpp"
+     "framework/*.h"
+     "framework/*.cpp" 
+     "implementation/*.h"
+     "implementation/*.cpp"
 )
 
 link_directories(./lib C:/SDL2/lib/x86 C:/GLEW/lib/Release/Win32 C:/freeglut/lib)
 
 add_executable(
     Forradia
-    ../Main.cpp
+    ../Main.cpp 
     ${all_files}
 )
 

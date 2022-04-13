@@ -3,18 +3,20 @@
 
 #pragma once
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Engine;
+    class Engine;
 
-class Background {
- public:
-  explicit Background(const Engine &_e) : e(_e) {}
+    class Background
+    {
+    public:
+        explicit Background(const Engine& _e) : e(_e) {}
 
-  void Render(float zoom);
+        void Render(float zoom);
 
- private:
-  const Engine &e;
-};
+    private:
+        const Engine& e;
+    };
 
 }  // namespace Forradia

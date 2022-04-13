@@ -4,71 +4,73 @@
 #include "GuiWindowBase.h"
 #include "../engine/Engine.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-void GuiWindowBase::Render() {
-  if (!visible)
-    return;
+    void GuiWindowBase::Render()
+    {
+        if (!visible)
+            return;
 
-  e.FillRectangle(palette.mediumBlue, bounds.x, bounds.y, bounds.width,
-                       bounds.height);
-  e.DrawRectangle(palette.black, bounds.x, bounds.y, bounds.width,
-                       bounds.height);
-  e.DrawString(title, palette.black, bounds.x + margin, bounds.y + margin);
-  e.DrawLine(palette.black, bounds.x, bounds.y + titleBarHeight,
-                  bounds.x + bounds.width, bounds.y + titleBarHeight);
+        e.FillRectangle(palette.mediumBlue, bounds.x, bounds.y, bounds.width, bounds.height);
+        e.DrawRectangle(palette.black, bounds.x, bounds.y, bounds.width, bounds.height);
+        e.DrawString(title, palette.black, bounds.x + margin, bounds.y + margin);
+        e.DrawLine(palette.black, bounds.x, bounds.y + titleBarHeight, bounds.x + bounds.width, bounds.y + titleBarHeight);
 
-  RenderDerived();
-}
+        RenderDerived();
+    }
 
-void GuiWindowBase::Update() {
-  if (!isBeingMoved)
-    return;
+    void GuiWindowBase::Update()
+    {
+        if (!isBeingMoved) return;
 
-  auto mousePosF = utilities.GetMousePositionF();
-  auto deltaMouseX = mousePosF.x - startMoveMousePosition.x;
-  auto deltaMouseY = mousePosF.y - startMoveMousePosition.y;
+        auto mousePosF = utilities.GetMousePosF();
+        auto deltaMouseX = mousePosF.x - startMoveMousePosition.x;
+        auto deltaMouseY = mousePosF.y - startMoveMousePosition.y;
 
-  bounds.x = startMovePosition.x + deltaMouseX;
-  bounds.y = startMovePosition.y + deltaMouseY;
-}
+        bounds.x = startMovePosition.x + deltaMouseX;
+        bounds.y = startMovePosition.y + deltaMouseY;
+    }
 
-RectF GuiWindowBase::GetInteriorBounds() {
-  auto x = bounds.x + margin;
-  auto y = bounds.y + titleBarHeight + margin;
-  auto width = bounds.width - 2 * margin;
-  auto height = bounds.height - titleBarHeight - 2 * margin;
+    RectF GuiWindowBase::GetInteriorBounds()
+    {
+        auto x = bounds.x + margin;
+        auto y = bounds.y + titleBarHeight + margin;
+        auto width = bounds.width - 2 * margin;
+        auto height = bounds.height - titleBarHeight - 2 * margin;
 
-  return {x, y, width, height};
-}
+        return { x, y, width, height };
+    }
 
-bool GuiWindowBase::DoMouseDown(Uint8 mouseButton) {
-  if (!visible)
-    return false;
+    bool GuiWindowBase::DoMouseDown(Uint8 mouseButton)
+    {
+        if (!visible) return false;
 
-  auto mousePosF = utilities.GetMousePositionF();
-  auto titleBarBounds = GetTitleBarBounds();
+        auto mousePosF = utilities.GetMousePosF();
+        auto titleBarBounds = GetTitleBarBounds();
 
-  if (titleBarBounds.ContainsPoint(mousePosF)) {
-    isBeingMoved = true;
-    startMovePosition = {bounds.x, bounds.y};
-    startMoveMousePosition = {mousePosF.x, mousePosF.y};
-  }
+        if (titleBarBounds.ContainsPoint(mousePosF))
+        {
+            isBeingMoved = true;
+            startMovePosition = { bounds.x, bounds.y };
+            startMoveMousePosition = { mousePosF.x, mousePosF.y };
+        }
 
-  DoMouseDownDerived(mouseButton);
+        DoMouseDownDerived(mouseButton);
 
-  if (bounds.ContainsPoint(mousePosF))
-    return true;
+        if (bounds.ContainsPoint(mousePosF)) return true;
 
-  return false;
-}
+        return false;
+    }
 
-RectF GuiWindowBase::GetTitleBarBounds() {
-  return {bounds.x, bounds.y, bounds.width, titleBarHeight};
-}
+    RectF GuiWindowBase::GetTitleBarBounds()
+    {
+        return { bounds.x, bounds.y, bounds.width, titleBarHeight };
+    }
 
-void GuiWindowBase::DoMouseUp() {
-    isBeingMoved = false;
-}
+    void GuiWindowBase::DoMouseUp()
+    {
+        isBeingMoved = false;
+    }
 
 }  // namespace Forradia

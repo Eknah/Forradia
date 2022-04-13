@@ -5,20 +5,22 @@
 #include "../engine/Engine.h"
 #include "../engine/Utilities.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class GuiMinimap {
- public:
-  explicit GuiMinimap(const Engine &_e) : e(_e) {}
+    class GuiMinimap
+    {
+    public:
+        explicit GuiMinimap(const Engine& _e) : e(_e) {}
 
-  void Render();
+        void Render();
 
- private:
-  const Engine &e;
+    private:
+        const Engine& e;
 
-  const int minimapSize = 250;
-  Palette palette;
-  Utilities utilities;
-};
+        const int minimapSize = 250;
+        Palette palette;
+        Utilities utilities;
+    };
 
 }  // namespace Forradia

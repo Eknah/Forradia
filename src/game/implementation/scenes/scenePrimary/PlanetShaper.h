@@ -4,16 +4,18 @@
 #pragma once
 #include "../engine/Engine.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class PlanetShaper {
- public:
-  explicit PlanetShaper(const Engine &_e) : e(_e) {}
+    class PlanetShaper
+    {
+    public:
+        explicit PlanetShaper(const Engine& _e) : e(_e) {}
 
-  float GetNewY(float y, float tilex, float tiley);
+        float GetNewY(float y, float tilex, float tiley);
 
- private:
-  const Engine &e;
-};
+    private:
+        const Engine& e;
+    };
 
 }  // namespace Forradia

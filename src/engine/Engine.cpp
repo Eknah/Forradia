@@ -76,8 +76,8 @@ void Engine::DrawLine(SDL_Color color, float x0, float y0, float x1,
   }
 
 void Engine::DrawString(std::string message, SDL_Color color, float x, float y,
-                         bool centerAlign) const {
-    textGraphics.DrawString(message, color, x, y, centerAlign);
+                         bool centerAlign, float specificScaling) const {
+    textGraphics.DrawString(message, color, x, y, centerAlign, specificScaling);
   }
 
 void Engine::DrawModel(std::string modelName, float x, float y, float z,

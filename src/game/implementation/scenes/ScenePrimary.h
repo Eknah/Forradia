@@ -6,25 +6,28 @@
 #include "scenePrimary/GameWorldRenderer.h"
 #include "scenePrimary/gui/Gui.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class ScenePrimary : public SceneBase {
- public:
-  explicit ScenePrimary(const Engine &_e)
-      : SceneBase(_e), gui(_e), camera(_e),
-        gameWorldRenderer(_e, camera) {}
+    class ScenePrimary : public SceneBase
+    {
+    public:
+        explicit ScenePrimary(const Engine& _e)
+            : SceneBase(_e), gui(_e), camera(_e),
+            gameWorldRenderer(_e, camera)
+        {}
 
-  void Enter() override;
-  void Update() override;
-  void Render() override;
-  void DoMouseDown(Uint8 mouseButton) override;
-  void DoMouseUp(Uint8 mouseButton) override;
+        void Enter() override;
+        void Update() override;
+        void Render() override;
+        void DoMouseDown(Uint8 mouseButton) override;
+        void DoMouseUp(Uint8 mouseButton) override;
 
- private:
-  Camera camera;
-  Gui gui;
-  Utilities utilities;
-  GameWorldRenderer gameWorldRenderer;
-};
+    private:
+        Camera camera;
+        Gui gui;
+        Utilities utilities;
+        GameWorldRenderer gameWorldRenderer;
+    };
 
 }  // namespace Forradia

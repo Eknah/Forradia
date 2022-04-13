@@ -3,32 +3,32 @@
 
 #include "Object.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-Object::Object(std::string objectTypeName, bool randomScaling,
-                 bool randomRotation, float _rotation)
-    : objectType(GetId(objectTypeName)) {
-    if (randomRotation)
-  rotation = static_cast<float>(random.Next() % 360);
-    else rotation = _rotation;
+    Object::Object(String objectTypeName, bool randomScaling, bool randomRotation, float _rotation) : objectType(GetId(objectTypeName))
+    {
+        if (randomRotation)
+            rotation = CFloat(random.Next() % 360);
+        else rotation = _rotation;
 
-    if (randomScaling)
-    scaling = 0.6f + static_cast<float>(random.Next() % 8) / 10.0f;
-}
+        if (randomScaling)
+            scaling = 0.6f + CFloat(random.Next() % 8) / 10.0f;
+    }
 
-void Object::UseOn(const std::shared_ptr<Object> &other) {
-  if (objectType == GetId("ObjectWoodaxe") &&
-      (other->objectType == GetId("ObjectTree1") ||
-       other->objectType == GetId("ObjectTree2")))
-    other->TransformInto("ObjectFelledTree");
+    void Object::UseOn(const SPtr<Object>& other)
+    {
+        if (objectType == GetId("ObjectWoodaxe") &&
+            (other->objectType == GetId("ObjectTree1") || other->objectType == GetId("ObjectTree2")))
+                other->TransformInto("ObjectFelledTree");
 
-  if (objectType == GetId("ObjectSaw") &&
-      other->objectType == GetId("ObjectFelledTree"))
-    other->TransformInto("ObjectWoodplank");
-}
+        if (objectType == GetId("ObjectSaw") && other->objectType == GetId("ObjectFelledTree"))
+            other->TransformInto("ObjectWoodplank");
+    }
 
-void Object::TransformInto(std::string objectName) {
-  objectType = GetId(objectName);
-}
+    void Object::TransformInto(String objectName)
+    {
+        objectType = GetId(objectName);
+    }
 
 }  // namespace Forradia

@@ -9,27 +9,28 @@
 #include "ObjectDescription.h"
 #include "../engine/ObjectFlags.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class ObjectsContent {
- public:
-  // Collection operations
+    class ObjectsContent
+    {
+    public:
+        // Collection operations
 
-  void Add(std::string objectName, ObjectDescription description);
-  void Add(std::string objectName, char flags);
-  void AddMany(std::vector<std::tuple<std::string, char>>
-           descriptions);
+        void Add(std::string objectName, ObjectDescription description);
+        void Add(std::string objectName, char flags);
+        void AddMany(std::vector<std::tuple<std::string, char>> descriptions);
 
-  void SetOpacity(std::string objectName, float opacity);
+        void SetOpacity(std::string objectName, float opacity);
 
-  // Get info about an object
+        // Get info about an object
 
-  bool IsMovable(int objectType) const;
-  bool BlocksMovement(int objectType) const;
+        bool IsMovable(int objectType) const;
+        bool BlocksMovement(int objectType) const;
 
-  // Collection structure
+        // Collection structure
 
-  UMap<int, ObjectDescription> objectDescriptions;
-};
+        UMap<int, ObjectDescription> objectDescriptions;
+    };
 
 }  // namespace Forradia

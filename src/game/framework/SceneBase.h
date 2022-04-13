@@ -6,26 +6,28 @@
 #include "TextRect.h"
 #include <vector>
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Engine;
+    class Engine;
 
-class SceneBase {
- public:
-  explicit SceneBase(const Engine &_e) : e(_e) {}
+    class SceneBase
+    {
+    public:
 
-  // To implement in child
+        explicit SceneBase(const Engine& _e) : e(_e) {}
 
-  virtual void Enter() = 0;
-  virtual void Update() = 0;
-  virtual void Render() = 0;
-  virtual void DoMouseDown(Uint8 MouseButton) = 0;
-  virtual void DoMouseUp(Uint8 MouseButton) = 0;
+        virtual void Enter() = 0;
+        virtual void Update() = 0;
+        virtual void Render() = 0;
+        virtual void DoMouseDown(Uint8 MouseButton) = 0;
+        virtual void DoMouseUp(Uint8 MouseButton) = 0;
 
- protected:
-  const Engine &e;
+    protected:
 
-  std::vector<TextRect> sceneButtons;
-};
+        const Engine& e;
+
+        std::vector<TextRect> sceneButtons;
+    };
 
 }  // namespace Forradia

@@ -7,23 +7,25 @@
 #include "../engine/IModule.h"
 #include "../engine/Inventory.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class InventoryModule : public IModule {
- public:
-  using IModule::IModule;
+    class InventoryModule : public IModule
+    {
+    public:
+        using IModule::IModule;
 
-  void ResetForNewFrame() override;
-  void Update() override;
+        void ResetForNewFrame() override;
+        void Update() override;
 
-  // Collection operations
+        // Collection operations
 
-  void Add(int position, std::string objectName);
+        void Add(int position, std::string objectName);
 
-  // Collection structure
+        // Collection structure
 
-  //UMap<int, SPtr<cObject>> Objects;
-  Inventory inventory;
-};
+        //UMap<int, SPtr<cObject>> Objects;
+        Inventory inventory;
+    };
 
 }  // namespace Forradia

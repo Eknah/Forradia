@@ -5,15 +5,17 @@
 #include "../engine/Point2F.h"
 #include "../engine/IModule.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class DestMovementModule : public IModule {
- public:
-  DestMovementModule(const IEngine &_e, Actor *_parentActor);
+    class DestMovementModule : public IModule
+    {
+    public:
+        DestMovementModule(const IEngine& _e, Actor* _parentActor);
 
-  void ResetForNewFrame() override {};
-  void Update() override;
+        void ResetForNewFrame() override {};
+        void Update() override;
 
-};
+    };
 
 }  // namespace Forradia

@@ -1,19 +1,21 @@
-// Copyright (C) 2022  Andreas Ã…kerberg
+// Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
-#include "../engine/RectF.h"
+
 #include <string>
+#include <vector>
+#include "File.h"
 
 namespace Forradia
 {
 
 
-    class TextRect
+    class Texty : public File
     {
     public:
-        RectF bounds = { 0, 0, 0, 0 };
-        std::string text;
+        Texty(Console& _console);
+
     };
 
 }  // namespace Forradia

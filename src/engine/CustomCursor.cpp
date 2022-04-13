@@ -14,7 +14,7 @@ void CustomCursor::ResetForNewFrame() {
 }
 
 void CustomCursor::Render() {
-    auto mousePosF = utilities.GetMousePositionF();
+    auto mousePosF = utilities.GetMousePosF();
     auto cursorSizeF = utilities.ConvertToFloat(cursorSize);
 
     switch (cursorType) {

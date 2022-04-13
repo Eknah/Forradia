@@ -6,17 +6,19 @@
 #include "../engine/IModule.h"
 #include "../engine/MoveDir.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class DirectionMovementModule : public IModule {
- public:
+    class DirectionMovementModule : public IModule
+    {
+    public:
 
-  DirectionMovementModule(const IEngine &_e, Actor *_parentActor);
+        DirectionMovementModule(const IEngine& _e, Actor* _parentActor);
 
-  void ResetForNewFrame() override {};
-  void Update() override;
+        void ResetForNewFrame() override {};
+        void Update() override;
 
-  char moveInstruction;
-};
+        char moveInstruction;
+    };
 
 }  // namespace Forradia

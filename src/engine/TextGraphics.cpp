@@ -16,7 +16,7 @@ void TextGraphics::Initialize() {
   }
 
 void TextGraphics::DrawString(std::string text, SDL_Color color, float x, float y,
-                         bool centerAlign) const {
+                         bool centerAlign, float specificScaling) const {
     if (text == "")
         return;
 
@@ -43,10 +43,10 @@ void TextGraphics::DrawString(std::string text, SDL_Color color, float x, float 
     auto canvasSize = utilities.GetCanvasSize();
 
     auto width = static_cast<float>(fontSurface->w)
-            / canvasSize.width * scaling;
+            / canvasSize.width * scaling * specificScaling;
 
     auto height = static_cast<float>(fontSurface->h)
-            / canvasSize.height * scaling;
+            / canvasSize.height * scaling * specificScaling;
 
     glColor4f(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f,
               color.a / 255.0f);

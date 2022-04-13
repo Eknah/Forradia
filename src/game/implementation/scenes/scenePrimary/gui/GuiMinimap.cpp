@@ -4,15 +4,17 @@
 #include "GuiMinimap.h"
 #include "../engine/Engine.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-void GuiMinimap::Render() {
-  auto minimapSizeF = utilities.ConvertToFloat(minimapSize);
+    void GuiMinimap::Render()
+    {
+        auto minimapSizeF = utilities.ConvertToFloat(minimapSize);
 
-  e.FillRectangle(palette.mediumBlue, 0, 0, minimapSizeF.width,
-                       minimapSizeF.height);
-  e.DrawRectangle(palette.black, 0, 0, minimapSizeF.width,
-                       minimapSizeF.height);
-}
+        e.FillRectangle(palette.mediumBlueSemiTrans, 0, 0, minimapSizeF.width,
+            minimapSizeF.height);
+        e.DrawRectangle(palette.black, 0, 0, minimapSizeF.width,
+            minimapSizeF.height);
+    }
 
 }  // namespace Forradia

@@ -2,34 +2,34 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <memory>
 #include <string>
 #include "../engine/Aliases.h"
 #include "../engine/Random.h"
-namespace Forradia {
 
-class Object {
- public:
-  explicit Object(std::string objectTypeName, bool randomScaling = true,
-                   bool randomRotation = true, float _rotation = 0);
+namespace Forradia
+{
 
-  // Object usage
+    class Object
+    {
 
-  void UseOn(const std::shared_ptr<Object> &other);
+    public:
 
-  // Core
+        explicit Object(String objectTypeName, bool randomScaling = true, bool randomRotation = true, float _rotation = 0.0f);
 
-  int objectType = 0;
+        void UseOn(const SPtr<Object>& other);
 
-  // Rendering
+        int objectType = 0;
+        float rotation = 0.0f;
+        float scaling = 1.0f;
 
-  float rotation = 0.0f;
-  float scaling = 1.0f;
+    private:
 
- private:
-  void TransformInto(std::string objectName);
+        void TransformInto(String objectName);
 
-  Random random;
-};
+        Random random;
+
+    };
 
 }  // namespace Forradia

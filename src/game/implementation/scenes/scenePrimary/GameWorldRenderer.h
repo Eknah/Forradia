@@ -7,31 +7,34 @@
 #include "Camera.h"
 #include "PlanetShaper.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class GameWorldRenderer {
- public:
-  GameWorldRenderer(const Engine &_e, const Camera &_camera)
-      : e(_e), background(_e), planetShaper(_e),
-        camera(_camera) {}
+    class GameWorldRenderer
+    {
+    public:
+        GameWorldRenderer(const Engine& _e, const Camera& _camera)
+            : e(_e), background(_e), planetShaper(_e),
+            camera(_camera)
+        {}
 
-  void Render();
+        void Render();
 
- private:
-  void RenderAllExceptRoofAndRays();
-  void RenderRoofAndRays();
+    private:
+        void RenderAllExceptRoofAndRays();
+        void RenderRoofAndRays();
 
-  const Engine &e;
-  Background background;
-  const Camera &camera;
-  PlanetShaper planetShaper;
-  const int groundTypeWaterId = GetId("GroundTypeWater");
-  const int groundTypeWaterAnimatedId[4] = {
-    GetId("GroundTypeWater"),
-    GetId("GroundTypeWater1"),
-    GetId("GroundTypeWater2"),
-    GetId("GroundTypeWater3")
-  };
-};
+        const Engine& e;
+        Background background;
+        const Camera& camera;
+        PlanetShaper planetShaper;
+        const int groundTypeWaterId = GetId("GroundTypeWater");
+        const int groundTypeWaterAnimatedId[4] = {
+          GetId("GroundTypeWater"),
+          GetId("GroundTypeWater1"),
+          GetId("GroundTypeWater2"),
+          GetId("GroundTypeWater3")
+        };
+    };
 
 }  // namespace Forradia

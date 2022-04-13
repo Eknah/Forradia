@@ -6,32 +6,37 @@
 #include "implementation/functionality/actor/Actor.h"
 #include "implementation/functionality/actor/modules/MovementDataModule.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-void JumpingModule::ResetForNewFrame() {}
+    void JumpingModule::ResetForNewFrame() {}
 
-void JumpingModule::Update() {
-  if (isJumping) {
-    auto deltaTicks = Ticks() - tickStartJumping;
-    auto jumpHeight =
-        std::pow(((((-std::pow((((deltaTicks - jumpDuration / 2.0f))), 2.0f) +
-                     250000.0f)))) /
-                     250000.0f,
-                 3.0f) *
-        maxJumpHeight;
+    void JumpingModule::Update()
+    {
+        if (isJumping)
+        {
+            auto deltaTicks = Ticks() - tickStartJumping;
+            auto jumpHeight =
+                std::pow(((((-std::pow((((deltaTicks - jumpDuration / 2.0f))), 2.0f) +
+                    250000.0f)))) /
+                    250000.0f,
+                    3.0f) *
+                maxJumpHeight;
 
-    GetParentActor().GetModule<MovementDataModule>().positionZ = jumpHeight;
-  }
+            GetParentActor().GetModule<MovementDataModule>().positionZ = jumpHeight;
+        }
 
-  if (Ticks() > tickStartJumping + jumpDuration) {
-    GetParentActor().GetModule<MovementDataModule>().positionZ = 0.0f;
-    isJumping = false;
-  }
-}
+        if (Ticks() > tickStartJumping + jumpDuration)
+        {
+            GetParentActor().GetModule<MovementDataModule>().positionZ = 0.0f;
+            isJumping = false;
+        }
+    }
 
-void JumpingModule::Jump() {
-  isJumping = true;
-  tickStartJumping = Ticks();
-}
+    void JumpingModule::Jump()
+    {
+        isJumping = true;
+        tickStartJumping = Ticks();
+    }
 
 }  // namespace Forradia

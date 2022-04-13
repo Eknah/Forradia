@@ -14,7 +14,7 @@ Size Utilities::GetCanvasSize() const {
     return {canvas_width, canvas_height};
   }
 
-Point2 Utilities::GetMousePositionI() {
+Point2 Utilities::GetMousePosI() {
     auto x = 0;
     auto y = 0;
     SDL_GetMouseState(&x, &y);
@@ -22,8 +22,8 @@ Point2 Utilities::GetMousePositionI() {
     return {x, y};
   }
 
-Point2F Utilities::GetMousePositionF() {
-    auto mousePosition = GetMousePositionI();
+Point2F Utilities::GetMousePosF() {
+    auto mousePosition = GetMousePosI();
     auto canvas_size = GetCanvasSize();
     auto mousexF = static_cast<float>(mousePosition.x) / canvas_size.width;
     auto mouseyF = static_cast<float>(mousePosition.y) / canvas_size.height;

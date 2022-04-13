@@ -46,7 +46,7 @@ class IEngine {
                                float y1) const = 0;
 
   virtual void DrawString(std::string message, SDL_Color color, float x,
-                                 float y, bool centerAlign = false) const = 0;
+                                 float y, bool centerAlign = false, float specificScaling = 1.0f) const = 0;
 
   virtual void DrawModel(std::string modelName, float x, float y,
                                 float z, float rotation = 0.0f,

@@ -2,72 +2,53 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <string>
 #include "../engine/Engine.h"
 #include "../engine/RectF.h"
 #include "../engine/Utilities.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class GuiWindowBase {
- public:
-  GuiWindowBase(const Engine &_e, std::string _tile, RectF _bounds)
-      : e(_e), title(_tile), bounds(_bounds) {}
+    class GuiWindowBase
+    {
 
-  // Looped operations
+    public:
 
-  void Render();
-  void Update();
+        GuiWindowBase(const Engine& _e, String _tile, RectF _bounds) : e(_e), title(_tile), bounds(_bounds)
+        {}
 
-  // Fired by events
+        void Render();
+        void Update();
+        bool DoMouseDown(Uint8 MouseButton);
+        void DoMouseUp();
 
-  bool DoMouseDown(Uint8 MouseButton);
-  void DoMouseUp();
+        bool visible = false;
 
-  // Basic data
+    protected:
 
-  bool visible = false;
+        RectF GetInteriorBounds();
 
- protected:
-  // Internal helpers
+        virtual void DoMouseDownDerived(Uint8 MouseButton) = 0;
+        virtual void RenderDerived() = 0;
 
-  RectF GetInteriorBounds();
+        const Engine& e;
+        const float margin = 0.008f;
 
-  // To implement in child
+    private:
 
-  virtual void DoMouseDownDerived(Uint8 MouseButton) = 0;
-  virtual void RenderDerived() = 0;
+        RectF GetTitleBarBounds();
 
-  // Basic data
+        Palette palette;
+        Utilities utilities;
+        String title;
+        RectF bounds;
+        bool isBeingMoved = false;
+        SDL_FPoint startMovePosition = { -1, -1 };
+        SDL_FPoint startMoveMousePosition = { -1, -1 };
 
-  const float margin = 0.008f;
-
-  const Engine &e;
-
- private:
-  // Internal helpers
-
-  RectF GetTitleBarBounds();
-
-  // Composition
-
-  Palette palette;
-  Utilities utilities;
-
-  // Basic data
-
-  std::string title;
-  const float titleBarHeight = 0.04f;
-
-  // Dimensions
-
-  RectF bounds;
-
-  // Window movement
-
-  bool isBeingMoved = false;
-  SDL_FPoint startMovePosition = {-1, -1};
-  SDL_FPoint startMoveMousePosition = {-1, -1};
-};
+        const float titleBarHeight = 0.04f;
+    };
 
 }  // namespace Forradia

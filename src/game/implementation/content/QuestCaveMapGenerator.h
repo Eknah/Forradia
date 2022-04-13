@@ -6,18 +6,20 @@
 #include "../engine/MapArea.h"
 #include "../engine/Point2.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class QuestCaveMapGenerator {
- public:
-  void GenerateQuestCaveMapArea(MapArea *mapArea, Point2 entranceLocation);
+    class QuestCaveMapGenerator
+    {
+    public:
+        void GenerateQuestCaveMapArea(MapArea* mapArea, Point2 entranceLocation);
 
- private:
-  void ClearToCaveFloor(MapArea *mapArea);
-  void GenerateCaveWalls(MapArea *mapArea);
-  void GeneratePath(MapArea *mapArea, Point2 entranceLocation);
+    private:
+        void ClearToCaveFloor(MapArea* mapArea);
+        void GenerateCaveWalls(MapArea* mapArea);
+        void GeneratePath(MapArea* mapArea, Point2 entranceLocation);
 
-  Random random;
-};
+        Random random;
+    };
 
 }  // namespace Forradia

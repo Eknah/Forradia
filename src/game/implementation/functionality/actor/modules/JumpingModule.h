@@ -4,22 +4,24 @@
 #pragma once
 #include "../engine/IModule.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class JumpingModule : public IModule {
- public:
-  using IModule::IModule;
+    class JumpingModule : public IModule
+    {
+    public:
+        using IModule::IModule;
 
-  void ResetForNewFrame() override;
-  void Update() override;
-  void Jump();
+        void ResetForNewFrame() override;
+        void Update() override;
+        void Jump();
 
 
- private:
-  bool isJumping = false;
-  int jumpDuration = 600;
-  unsigned int tickStartJumping = 0;
-  float maxJumpHeight = 1.0f;
-};
+    private:
+        bool isJumping = false;
+        int jumpDuration = 600;
+        unsigned int tickStartJumping = 0;
+        float maxJumpHeight = 1.0f;
+    };
 
 }  // namespace Forradia

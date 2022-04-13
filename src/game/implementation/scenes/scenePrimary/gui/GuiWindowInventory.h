@@ -5,20 +5,22 @@
 #include "../engine/Utilities.h"
 #include "framework/GuiWindowBase.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class GuiWindowInventory : public GuiWindowBase {
- public:
-  using GuiWindowBase::GuiWindowBase;
+    class GuiWindowInventory : public GuiWindowBase
+    {
+    public:
+        using GuiWindowBase::GuiWindowBase;
 
-  void RenderDerived() override;
-  void DoMouseDownDerived(Uint8 mouseButton) override;
+        void RenderDerived() override;
+        void DoMouseDownDerived(Uint8 mouseButton) override;
 
- private:
-  const int numSlotCols = 4;
+    private:
+        const int numSlotCols = 4;
 
-  Utilities utilities;
-  Palette palette;
-};
+        Utilities utilities;
+        Palette palette;
+    };
 
 }  // namespace Forradia

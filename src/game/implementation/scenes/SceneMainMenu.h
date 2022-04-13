@@ -6,21 +6,23 @@
 #include "../engine/Palette.h"
 #include "framework/SceneBase.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class SceneMainMenu : public SceneBase {
- public:
-  using SceneBase::SceneBase;
+    class SceneMainMenu : public SceneBase
+    {
+    public:
+        using SceneBase::SceneBase;
 
-  void Enter() override;
-  void Update() override;
-  void Render() override;
-  void DoMouseDown(Uint8 mouseButton) override {};
-  void DoMouseUp(Uint8 mouseButton) override {}
+        void Enter() override;
+        void Update() override;
+        void Render() override;
+        void DoMouseDown(Uint8 mouseButton) override {};
+        void DoMouseUp(Uint8 mouseButton) override {}
 
- private:
-  Utilities utilities;
-  Palette palette;
-};
+    private:
+        Utilities utilities;
+        Palette palette;
+    };
 
 }  // namespace Forradia

@@ -5,18 +5,20 @@
 #include "../engine/Engine.h"
 #include "implementation/functionality/actor/modules/MovementDataModule.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-float PlanetShaper::GetNewY(float y, float tileX, float tileY) {
-    return y;
-  auto result = y;
-  auto dx = static_cast<int>(tileX) - e.GetPlayer().GetModule<MovementDataModule>().position.x;
-  auto dy = static_cast<int>(tileY) - e.GetPlayer().GetModule<MovementDataModule>().position.y;
-  auto distance = dx * dx + dy * dy;
+    float PlanetShaper::GetNewY(float y, float tileX, float tileY)
+    {
+        return y;
+        auto result = y;
+        auto dx = static_cast<int>(tileX) - e.GetPlayer().GetModule<MovementDataModule>().position.x;
+        auto dy = static_cast<int>(tileY) - e.GetPlayer().GetModule<MovementDataModule>().position.y;
+        auto distance = dx * dx + dy * dy;
 
-  result -= distance * 0.01f;
+        result -= distance * 0.01f;
 
-  return result;
-}
+        return result;
+    }
 
 }  // namespace Forradia

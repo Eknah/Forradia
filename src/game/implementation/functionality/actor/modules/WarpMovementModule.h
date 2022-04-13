@@ -4,16 +4,18 @@
 #pragma once
 #include "../engine/IModule.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class WarpMovementModule : public IModule {
- public:
-  using IModule::IModule;
+    class WarpMovementModule : public IModule
+    {
+    public:
+        using IModule::IModule;
 
-  void ResetForNewFrame() override {};
-  void Update() override {};
-  void WarpIfStandOnPortal();
+        void ResetForNewFrame() override {};
+        void Update() override {};
+        void WarpIfStandOnPortal();
 
-};
+    };
 
 }  // namespace Forradia

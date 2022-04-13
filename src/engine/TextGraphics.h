@@ -17,7 +17,7 @@ class TextGraphics {
   // --- Drawing operations ---
 
   void DrawString(std::string text, SDL_Color color, float x, float y,
-                         bool centerAlign = false) const;
+                         bool centerAlign = false, float specificScaling = 1.0f) const;
 
  private:
   const std::string defaultFontPath = "/Resources/Fonts/PixeloidSans.ttf";

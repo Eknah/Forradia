@@ -5,17 +5,19 @@
 #include "../engine/IModule.h"
 #include "../engine/Random.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class MobAIMovementModule : public IModule {
- public:
-  MobAIMovementModule(const IEngine &_e, Actor *_parentActor);
+    class MobAIMovementModule : public IModule
+    {
+    public:
+        MobAIMovementModule(const IEngine& _e, Actor* _parentActor);
 
-  void ResetForNewFrame() override {};
-  void Update() override;
+        void ResetForNewFrame() override {};
+        void Update() override;
 
-private:
-  Random random;
-};
+    private:
+        Random random;
+    };
 
 }  // namespace Forradia

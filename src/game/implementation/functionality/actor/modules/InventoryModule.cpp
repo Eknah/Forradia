@@ -4,14 +4,16 @@
 #include "InventoryModule.h"
 #include "framework/worldStructure/Object.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-void InventoryModule::ResetForNewFrame() {}
+    void InventoryModule::ResetForNewFrame() {}
 
-void InventoryModule::Update() {}
+    void InventoryModule::Update() {}
 
-void InventoryModule::Add(int position, std::string objectName) {
-  inventory.objects.insert({position, MakeSPtr<Object>(objectName)});
-}
+    void InventoryModule::Add(int position, std::string objectName)
+    {
+        inventory.objects.insert({ position, MakeSPtr<Object>(objectName) });
+    }
 
 }  // namespace Forradia
