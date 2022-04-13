@@ -6,6 +6,7 @@
 #include <GL/freeglut.h>
 #include <GL/glu.h>
 #include "../engine/Utilities.h"
+#include "../engine/Timer.h"
 
 namespace Forradia
 {
@@ -15,7 +16,7 @@ namespace Forradia
     class Camera
     {
     public:
-        explicit Camera(const Engine& _e) : e(_e) {}
+        explicit Camera(const Engine& _e) : e(_e), timer(UPtr<int>(&updateSpeed)) {}
 
         void Update(int rotationDirection, float zoomChange);
         void UpdateCameraMovement();
@@ -43,6 +44,8 @@ namespace Forradia
         int updateSpeed = 20;
         float rotationAmount = 5.0f;
         float zoomMultiplier = 8.0;
+
+        Timer timer;
     };
 
 }  // namespace Forradia

@@ -20,105 +20,88 @@ namespace Forradia
     {
         auto& actor = GetParentActor();
         auto& mob = actor;
+        auto& coreMovement = mob.GetModule<CoreMovementModule>();
 
-        if (actor.actorId == e.GetPlayer().actorId)
-            return;
+        if (actor.actorId == e.GetPlayer().actorId) return;
+        if (mob.actorId == e.GetPlayer().actorId) return;
 
-        if (mob.actorId == e.GetPlayer().actorId)
-            return;
+        coreMovement.isWalking = true;
 
-        mob.GetModule<CoreMovementModule>().isWalking = true;
-
-        if (mob.GetModule<CoreMovementModule>().timer.HasFinished())
+        if (coreMovement.timer.HasFinished())
         {
-            mob.GetModule<CoreMovementModule>().timer.Reset();
+            coreMovement.timer.Reset();
 
-            if (mob.GetModule<CoreMovementModule>().destination.x == -1 || mob.GetModule<CoreMovementModule>().destination.y == -1)
+            if (coreMovement.destination.x == -1 || coreMovement.destination.y == -1)
             {
 
-                auto destinationX =
-                    mob.GetModule<CoreMovementModule>().position.x + rnd.Next() % 15 - rnd.Next() % 15;
-                auto destinationY =
-                    mob.GetModule<CoreMovementModule>().position.y + rnd.Next() % 15 - rnd.Next() % 15;
+                auto destinationX = coreMovement.position.x + rnd.Next() % 15 - rnd.Next() % 15;
+                auto destinationY = coreMovement.position.y + rnd.Next() % 15 - rnd.Next() % 15;
 
-                destinationX =
-                    std::min(std::max(destinationX, 0.0f),
-                        static_cast<float>(e.world->mapAreaSize) - 1.0f);
-                destinationY =
-                    std::min(std::max(destinationY, 0.0f),
-                        static_cast<float>(e.world->mapAreaSize) - 1.0f);
+                destinationX = std::min(std::max(destinationX, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
+                destinationY = std::min(std::max(destinationY, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
 
                 GetParentActor().GetModule<CoreMovementModule>().destination = { destinationX, destinationY };
             }
 
-            auto deltaX = mob.GetModule<CoreMovementModule>().destination.x - mob.GetModule<CoreMovementModule>().position.x;
-            auto deltaY = mob.GetModule<CoreMovementModule>().destination.y - mob.GetModule<CoreMovementModule>().position.y;
+            auto deltaX = coreMovement.destination.x - coreMovement.position.x;
+            auto deltaY = coreMovement.destination.y - coreMovement.position.y;
             auto distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
 
             if (distance < 1)
             {
-                mob.GetModule<CoreMovementModule>().destination = { -1, -1 };
+                coreMovement.destination = { -1, -1 };
 
                 return;
             }
 
-            auto piF = static_cast<float>(M_PI);
+            auto piF = CFloat(M_PI);
 
-            *mob.GetModule<CoreMovementModule>().facingAngle =
-                static_cast<float>(std::atan2(-deltaX, -deltaY)) / piF * 180.0f;
+            *coreMovement.facingAngle = std::atan2(-deltaX, -deltaY) / piF * 180.0f;
 
-            auto angle = *mob.GetModule<CoreMovementModule>().facingAngle / 180.0f * piF - piF / 2 + piF;
-            auto dx = -std::cos(angle) * mob.GetModule<CoreMovementModule>().stepMultiplier;
-            auto dy = std::sin(angle) * mob.GetModule<CoreMovementModule>().stepMultiplier;
-            auto newX = static_cast<float>(mob.GetModule<CoreMovementModule>().position.x + dx * mob.GetModule<CoreMovementModule>().stepSize);
-            auto newY = static_cast<float>(mob.GetModule<CoreMovementModule>().position.y + dy * mob.GetModule<CoreMovementModule>().stepSize);
-            auto newXI = static_cast<int>(newX);
-            auto newYI = static_cast<int>(newY);
-            auto oldXI = static_cast<int>(mob.GetModule<CoreMovementModule>().position.x);
-            auto oldYI = static_cast<int>(mob.GetModule<CoreMovementModule>().position.y);
+            auto angle = *coreMovement.facingAngle / 180.0f * piF - piF / 2 + piF;
+            auto dx = -std::cos(angle) * coreMovement.stepMultiplier;
+            auto dy = std::sin(angle) * coreMovement.stepMultiplier;
+            auto newX = coreMovement.position.x + dx * coreMovement.stepSize;
+            auto newY = coreMovement.position.y + dy * coreMovement.stepSize;
+            auto newXI = CInt(newX);
+            auto newYI = CInt(newY);
+            auto oldXI = CInt(coreMovement.position.x);
+            auto oldYI = CInt(coreMovement.position.y);
 
-            if (newXI >= 0 && newYI >= 0 && newXI < e.world->mapAreaSize &&
-                newYI < e.world->mapAreaSize)
+            if (newXI >= 0 && newYI >= 0 && newXI < e.world->mapAreaSize && newYI < e.world->mapAreaSize)
             {
-                if (e.GetCurrMapArea().tiles[newXI][newYI].groundType !=
-                    GetId("GroundTypeWater"))
+                if (e.GetCurrMapArea().tiles[newXI][newYI].groundType != GetId("GroundTypeWater"))
                 {
-                    if (e.GetCurrMapArea().tiles[newXI][newYI].actor == nullptr ||
-                        (newXI == oldXI && newYI == oldYI))
+                    if (e.GetCurrMapArea().tiles[newXI][newYI].actor == nullptr || (newXI == oldXI && newYI == oldYI))
                     {
-                        e.GetCurrMapArea().tiles[oldXI][oldYI].actor->GetModule<CoreMovementModule>().position = {
-                            newX, newY };
+                        e.GetCurrMapArea().tiles[oldXI][oldYI].actor->GetModule<CoreMovementModule>().position = {newX, newY };
 
                         if (newXI != oldXI || newYI != oldYI)
                         {
-                            e.GetCurrMapArea().tiles[newXI][newYI].actor = std::move(
-                                e.GetCurrMapArea().tiles[oldXI][oldYI].actor);
+                            e.GetCurrMapArea().tiles[newXI][newYI].actor = std::move(e.GetCurrMapArea().tiles[oldXI][oldYI].actor);
                             e.GetCurrMapArea().tiles[oldXI][oldYI].actor = nullptr;
                         }
 
                         e.GetCurrMapArea().mobActorsMirror.erase(mob.actorId);
 
-                        e.GetCurrMapArea().mobActorsMirror.insert({ e.GetCurrMapArea().tiles[newXI][newYI].actor->actorId,
-                            std::ref(e.GetCurrMapArea().tiles[newXI][newYI].actor) });
+                        e.GetCurrMapArea().mobActorsMirror.insert({ e.GetCurrMapArea().tiles[newXI][newYI].actor->actorId, std::ref(e.GetCurrMapArea().tiles[newXI][newYI].actor) });
 
                     }
-                    else if (e.GetCurrMapArea().tiles[newXI][newYI].actor !=
-                        nullptr &&
-                        (newXI != oldXI || newYI != oldYI))
+                    else if (e.GetCurrMapArea().tiles[newXI][newYI].actor != nullptr && (newXI != oldXI || newYI != oldYI))
                     {
-                        mob.GetModule<CoreMovementModule>().destination = { -1, -1 };
+                        coreMovement.destination = { -1, -1 };
                     }
 
                 }
                 else
                 {
-                    mob.GetModule<CoreMovementModule>().destination = { -1, -1 };
+                    coreMovement.destination = { -1, -1 };
                 }
 
             }
             else
             {
-                mob.GetModule<CoreMovementModule>().destination = { -1, -1 };
+                coreMovement.destination = { -1, -1 };
             }
         }
     }

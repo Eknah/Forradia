@@ -14,11 +14,8 @@ namespace Forradia
     class CoreMovementModule : public IModule
     {
     public:
-        //using IModule::IModule;
-        CoreMovementModule(const IEngine& _e, Actor* _parentActor) : IModule(_e, _parentActor), timer(UPtr<int>(&moveSpeed))
-        {
-
-        }
+        
+        CoreMovementModule(const IEngine& _e, Actor* _parentActor) : IModule(_e, _parentActor), timer(UPtr<int>(&moveSpeed)) {}
 
         void ResetForNewFrame() override;
         void Update() override {};

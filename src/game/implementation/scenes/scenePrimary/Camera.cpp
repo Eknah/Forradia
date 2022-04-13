@@ -11,14 +11,14 @@ namespace Forradia
 
     void Camera::Update(int rotationDirection, float zoomChange)
     {
-        if (Ticks() > tickLastUpdate + updateSpeed)
+        if (timer.HasFinished())
         {
             if (rotationDirection == GetId("Right"))
                 lookingAngle -= rotationAmount;
             else if (rotationDirection == GetId("Left"))
                 lookingAngle += rotationAmount;
 
-            tickLastUpdate = Ticks();
+            timer.Reset();
         }
 
         zoomAmount += zoomChange * zoomMultiplier / 100.0f;

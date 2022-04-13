@@ -23,7 +23,7 @@ namespace Forradia
         auto& actor = GetParentActor();
         auto& coreMovement = actor.GetModule<CoreMovementModule>();
 
-        if (Ticks() < !coreMovement.timer.HasFinished()) return;
+        if (!coreMovement.timer.HasFinished()) return;
         if (coreMovement.destination.IsUndefined()) return;
 
         auto dx = coreMovement.destination.x - coreMovement.position.x;
