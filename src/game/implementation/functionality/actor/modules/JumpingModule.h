@@ -3,13 +3,16 @@
 
 #pragma once
 #include "../engine/IModule.h"
+#include "framework/Timer.h"
 
 namespace Forradia
 {
 
     class JumpingModule : public IModule
     {
+
     public:
+
         using IModule::IModule;
 
         void ResetForNewFrame() override;
@@ -18,10 +21,14 @@ namespace Forradia
 
 
     private:
+
         bool isJumping = false;
-        int jumpDuration = 600;
         unsigned int tickStartJumping = 0;
         float maxJumpHeight = 1.0f;
+
+        const int jumpDuration = 600;
+        Timer timer = Timer(jumpDuration);
+
     };
 
 }  // namespace Forradia

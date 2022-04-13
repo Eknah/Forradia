@@ -13,22 +13,19 @@ namespace Forradia
 
     void JumpingModule::Update()
     {
+        auto& posz = GetParentActor().GetModule<CoreMovementModule>().positionZ;
+
         if (isJumping)
         {
-            auto deltaTicks = Ticks() - tickStartJumping;
-            auto jumpHeight =
-                std::pow(((((-std::pow((((deltaTicks - jumpDuration / 2.0f))), 2.0f) +
-                    250000.0f)))) /
-                    250000.0f,
-                    3.0f) *
-                maxJumpHeight;
+            auto deltaTicks = timer.GetPassedTicks();
+            auto jumpHeight = std::pow(((((-std::pow((((deltaTicks - jumpDuration / 2.0f))), 2.0f) + 250000.0f)))) / 250000.0f, 3.0f) * maxJumpHeight;
 
-            GetParentActor().GetModule<CoreMovementModule>().positionZ = jumpHeight;
+            posz = jumpHeight;
         }
 
-        if (Ticks() > tickStartJumping + jumpDuration)
+        if (timer.HasFinished())
         {
-            GetParentActor().GetModule<CoreMovementModule>().positionZ = 0.0f;
+            posz = 0.0f;
             isJumping = false;
         }
     }
@@ -36,7 +33,7 @@ namespace Forradia
     void JumpingModule::Jump()
     {
         isJumping = true;
-        tickStartJumping = Ticks();
+        timer.Reset();
     }
 
 }  // namespace Forradia
