@@ -12,9 +12,7 @@
 namespace Forradia
 {
 
-    DirectionMovementModule::DirectionMovementModule(const IEngine& _e,
-        Actor* parentActor_)
-        : IModule(_e, parentActor_)
+    DirectionMovementModule::DirectionMovementModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
     {
         GetParentActor().AddIfNotExists<MovementDataModule>();
         GetParentActor().AddIfNotExists<WarpMovementModule>();
@@ -22,90 +20,93 @@ namespace Forradia
 
     void DirectionMovementModule::Update()
     {
-        if (!(Ticks() > GetParentActor().GetModule<MovementDataModule>().tickLastMove + GetParentActor().GetModule<MovementDataModule>().moveSpeed &&
-            (moveInstruction & DirForward || moveInstruction & DirRight ||
-                moveInstruction & DirBack || moveInstruction & DirLeft)))
+
+        auto& actor = GetParentActor();
+        auto& movementData = actor.GetModule<MovementDataModule>();
+
+        if (Ticks() < movementData.tickLastMove + movementData.moveSpeed) return;
+        if (!(moveInstruction & DirForward || moveInstruction & DirRight || moveInstruction & DirBack || moveInstruction & DirLeft))
             return;
 
-        GetParentActor().GetModule<MovementDataModule>().isWalking = true;
+        movementData.isWalking = true;
 
-        auto newX = GetParentActor().GetModule<MovementDataModule>().position.x;
-        auto newY = GetParentActor().GetModule<MovementDataModule>().position.y;
+        auto newX = movementData.position.x;
+        auto newY = movementData.position.y;
         auto angle = 0.0f;
         auto piF = static_cast<float>(M_PI);
 
         if (moveInstruction & DirForward && moveInstruction & DirLeft)
         {
-            angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+            angle = *movementData.facingAngle /
                 180.0f * piF -
                 piF / 2.0f + 0.5f * piF / 2.0f;
-            *GetParentActor().GetModule<MovementDataModule>().facingAngle =
-                *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+            *movementData.facingAngle =
+                *movementData.facingAngle +
                 0.5 * 90.0f;
         }
         else if (moveInstruction & DirLeft && moveInstruction & DirBack)
         {
-            angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+            angle = *movementData.facingAngle /
                 180.0f * piF -
                 piF / 2.0f + 1.5f * piF / 2.0f;
-            *GetParentActor().GetModule<MovementDataModule>().facingAngle =
-                *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+            *movementData.facingAngle =
+                *movementData.facingAngle +
                 1.5 * 90.0f;
         }
         else if (moveInstruction & DirBack && moveInstruction & DirRight)
         {
-            angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+            angle = *movementData.facingAngle /
                 180.0f * piF -
                 piF / 2.0f + 2.5f * piF / 2.0f;
-            *GetParentActor().GetModule<MovementDataModule>().facingAngle =
-                *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+            *movementData.facingAngle =
+                *movementData.facingAngle +
                 2.5 * 90.0f;
         }
         else if (moveInstruction & DirRight && moveInstruction & DirForward)
         {
-            angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+            angle = *movementData.facingAngle /
                 180.0f * piF -
                 piF / 2.0f + 3.5f * piF / 2.0f;
-            *GetParentActor().GetModule<MovementDataModule>().facingAngle =
-                *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+            *movementData.facingAngle =
+                *movementData.facingAngle +
                 3.5f * 90.0f;
         }
         else if (moveInstruction & DirForward)
         {
-            angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+            angle = *movementData.facingAngle /
                 180.0f * piF -
                 piF / 2.0f + 0.0f * piF / 2.0f;
         }
         else if (moveInstruction & DirLeft)
         {
-            angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+            angle = *movementData.facingAngle /
                 180.0f * piF -
                 piF / 2.0f + 1.0f * piF / 2.0f;
-            *GetParentActor().GetModule<MovementDataModule>().facingAngle =
-                *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+            *movementData.facingAngle =
+                *movementData.facingAngle +
                 1 * 90.0f;
         }
         else if (moveInstruction & DirBack)
         {
-            angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+            angle = *movementData.facingAngle /
                 180.0f * piF -
                 piF / 2.0f + 2.0f * piF / 2.0f;
         }
         else if (moveInstruction & DirRight)
         {
-            angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle /
+            angle = *movementData.facingAngle /
                 180.0f * piF -
                 piF / 2.0f + 3.0f * piF / 2.0f;
-            *GetParentActor().GetModule<MovementDataModule>().facingAngle =
-                *GetParentActor().GetModule<MovementDataModule>().facingAngle +
+            *movementData.facingAngle =
+                *movementData.facingAngle +
                 3.0f * 90.0f;
         }
 
-        auto dx = -std::cos(angle) * GetParentActor().GetModule<MovementDataModule>().stepMultiplier;
-        auto dy = std::sin(angle) * GetParentActor().GetModule<MovementDataModule>().stepMultiplier;
+        auto dx = -std::cos(angle) * movementData.stepMultiplier;
+        auto dy = std::sin(angle) * movementData.stepMultiplier;
 
-        newX += dx * GetParentActor().GetModule<MovementDataModule>().stepSize;
-        newY += dy * GetParentActor().GetModule<MovementDataModule>().stepSize;
+        newX += dx * movementData.stepSize;
+        newY += dy * movementData.stepSize;
 
         if (newX < 0)
             newX += e.GetCurrentMapArea().size;
@@ -142,11 +143,11 @@ namespace Forradia
             .tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
             && !tileHasMob)
         {
-            auto oldXI = static_cast<int>(GetParentActor().GetModule<MovementDataModule>().position.x);
-            auto oldYI = static_cast<int>(GetParentActor().GetModule<MovementDataModule>().position.y);
+            auto oldXI = static_cast<int>(movementData.position.x);
+            auto oldYI = static_cast<int>(movementData.position.y);
 
-            GetParentActor().GetModule<MovementDataModule>().position.x = newXRounded;
-            GetParentActor().GetModule<MovementDataModule>().position.y = newYRounded;
+            movementData.position.x = newXRounded;
+            movementData.position.y = newYRounded;
 
             if (newXRoundedI != oldXI || newYRoundedI != oldYI)
             {
@@ -157,8 +158,7 @@ namespace Forradia
         }
 
         GetParentActor().GetModule<WarpMovementModule>().WarpIfStandOnPortal();
-
-        GetParentActor().GetModule<MovementDataModule>().tickLastMove = Ticks();
+        movementData.tickLastMove = Ticks();
     }
 
 

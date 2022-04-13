@@ -18,7 +18,7 @@ link_directories(./lib C:/SDL2/lib/x86 C:/GLEW/lib/Release/Win32 C:/freeglut/lib
 
 add_executable(
     Forradia
-    ../Main.cpp 
+    ../Main.cpp
     ${all_files}
 ) 
 

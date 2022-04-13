@@ -20,32 +20,34 @@ namespace Forradia
 
     void DestMovementModule::Update()
     {
-        if (!(Ticks() > GetParentActor().GetModule<MovementDataModule>().tickLastMove + GetParentActor().GetModule<MovementDataModule>().moveSpeed && GetParentActor().GetModule<MovementDataModule>().moveDestination.x != -1 &&
-            GetParentActor().GetModule<MovementDataModule>().moveDestination.y != -1))
-            return;
+        auto& actor = GetParentActor();
+        auto& movementData = actor.GetModule<MovementDataModule>();
 
-        auto dx = GetParentActor().GetModule<MovementDataModule>().moveDestination.x - GetParentActor().GetModule<MovementDataModule>().position.x;
-        auto dy = GetParentActor().GetModule<MovementDataModule>().moveDestination.y - GetParentActor().GetModule<MovementDataModule>().position.y;
+        if (Ticks() < movementData.tickLastMove + movementData.moveSpeed) return;
+        if (movementData.moveDestination.IsUndefined()) return;
+
+        auto dx = movementData.moveDestination.x - movementData.position.x;
+        auto dy = movementData.moveDestination.y - movementData.position.y;
         auto absDx = std::abs(dx);
         auto absDy = std::abs(dy);
         auto piF = static_cast<float>(M_PI);
 
-        if (absDx < GetParentActor().GetModule<MovementDataModule>().stepMultiplier && absDy < GetParentActor().GetModule<MovementDataModule>().stepMultiplier)
+        if (absDx < movementData.stepMultiplier && absDy < movementData.stepMultiplier)
         {
-            GetParentActor().GetModule<MovementDataModule>().moveDestination = { -1, -1 };
+            movementData.moveDestination = { -1, -1 };
         }
         else
         {
-            GetParentActor().GetModule<MovementDataModule>().isWalking = true;
-            *GetParentActor().GetModule<MovementDataModule>().facingAngle
+            movementData.isWalking = true;
+            *movementData.facingAngle
                 = static_cast<float>(std::atan2(-dx, -dy)) / piF * 180.0f;
 
-            auto angle = *GetParentActor().GetModule<MovementDataModule>().facingAngle / 180.0f * piF - piF / 2 +
+            auto angle = *movementData.facingAngle / 180.0f * piF - piF / 2 +
                 0 * piF / 2;
-            auto dx = -static_cast<float>(std::cos(angle)) * GetParentActor().GetModule<MovementDataModule>().stepMultiplier;
-            auto dy = static_cast<float>(std::sin(angle)) * GetParentActor().GetModule<MovementDataModule>().stepMultiplier;
-            auto newX = GetParentActor().GetModule<MovementDataModule>().position.x + dx * GetParentActor().GetModule<MovementDataModule>().stepSize;
-            auto newY = GetParentActor().GetModule<MovementDataModule>().position.y + dy * GetParentActor().GetModule<MovementDataModule>().stepSize;
+            auto dx = -static_cast<float>(std::cos(angle)) * movementData.stepMultiplier;
+            auto dy = static_cast<float>(std::sin(angle)) * movementData.stepMultiplier;
+            auto newX = movementData.position.x + dx * movementData.stepSize;
+            auto newY = movementData.position.y + dy * movementData.stepSize;
 
             if (newX < 0)
                 newX += e.GetCurrentMapArea().size;
@@ -78,11 +80,11 @@ namespace Forradia
                 .tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
                 && !tileHasMob)
             {
-                auto oldXI = static_cast<int>(GetParentActor().GetModule<MovementDataModule>().position.x);
-                auto oldYI = static_cast<int>(GetParentActor().GetModule<MovementDataModule>().position.y);
+                auto oldXI = static_cast<int>(movementData.position.x);
+                auto oldYI = static_cast<int>(movementData.position.y);
 
-                GetParentActor().GetModule<MovementDataModule>().position.x = newXRounded;
-                GetParentActor().GetModule<MovementDataModule>().position.y = newYRounded;
+                movementData.position.x = newXRounded;
+                movementData.position.y = newYRounded;
 
                 if (newXRoundedI != oldXI || newYRoundedI != oldYI)
                 {
@@ -92,10 +94,10 @@ namespace Forradia
                 }
             }
 
-            GetParentActor().GetModule<WarpMovementModule>().WarpIfStandOnPortal();
+            actor.GetModule<WarpMovementModule>().WarpIfStandOnPortal();
         }
 
-        GetParentActor().GetModule<MovementDataModule>().tickLastMove = Ticks();
+        movementData.tickLastMove = Ticks();
     }
 
 }  // namespace Forradia
