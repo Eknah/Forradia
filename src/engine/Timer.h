@@ -21,7 +21,7 @@ namespace Forradia
     private:
 
         UPtr<int> durationPtr = nullptr;
-        int startTime = 0;
+        Uint32 startTime = 0;
 
     };
 

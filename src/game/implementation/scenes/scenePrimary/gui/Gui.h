@@ -41,8 +41,6 @@ namespace Forradia
         const float buttonWidth = 0.15f;
         const float buttonHeight = 0.03f;
 
-        const int buttonMallSize = 100;
-
         RectF boundsButtonInventory = { 0.5f - buttonWidth / 2, 1.0f - buttonHeight,
                                         buttonWidth, buttonHeight };
         RectF boundsButtonCharacter = { 0.5f - buttonWidth / 2 - buttonWidth,

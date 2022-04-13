@@ -27,27 +27,26 @@ namespace Forradia
 
         if (coreMovement.timer.HasFinished())
         {
-            coreMovement.timer.Reset();
 
-            if (coreMovement.destination.x == -1 || coreMovement.destination.y == -1)
+            if (coreMovement.dest.x == -1 || coreMovement.dest.y == -1)
             {
 
-                auto destinationX = coreMovement.position.x + rnd.Next() % 15 - rnd.Next() % 15;
-                auto destinationY = coreMovement.position.y + rnd.Next() % 15 - rnd.Next() % 15;
+                auto destx = coreMovement.position.x + rnd.Next() % 15 - rnd.Next() % 15;
+                auto desty = coreMovement.position.y + rnd.Next() % 15 - rnd.Next() % 15;
 
-                destinationX = std::min(std::max(destinationX, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
-                destinationY = std::min(std::max(destinationY, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
+                destx = std::min(std::max(destx, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
+                desty = std::min(std::max(desty, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
 
-                GetParentActor().GetModule<CoreMovementModule>().destination = { destinationX, destinationY };
+                coreMovement.dest = { destx, desty };
             }
 
-            auto deltaX = coreMovement.destination.x - coreMovement.position.x;
-            auto deltaY = coreMovement.destination.y - coreMovement.position.y;
-            auto distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
+            auto deltaX = coreMovement.dest.x - coreMovement.position.x;
+            auto deltaY = coreMovement.dest.y - coreMovement.position.y;
+            auto distance = deltaX * deltaX + deltaY * deltaY;
 
-            if (distance < 1)
+            if (distance < 1.0f)
             {
-                coreMovement.destination = { -1, -1 };
+                coreMovement.dest = { -1, -1 };
 
                 return;
             }
@@ -72,34 +71,35 @@ namespace Forradia
                 {
                     if (e.GetCurrMapArea().tiles[newXI][newYI].actor == nullptr || (newXI == oldXI && newYI == oldYI))
                     {
+
+                        coreMovement.timer.Reset();
                         e.GetCurrMapArea().tiles[oldXI][oldYI].actor->GetModule<CoreMovementModule>().position = {newX, newY };
 
                         if (newXI != oldXI || newYI != oldYI)
                         {
                             e.GetCurrMapArea().tiles[newXI][newYI].actor = std::move(e.GetCurrMapArea().tiles[oldXI][oldYI].actor);
                             e.GetCurrMapArea().tiles[oldXI][oldYI].actor = nullptr;
+                            e.GetCurrMapArea().mobActorsMirror.erase(mob.actorId);
+                            e.GetCurrMapArea().mobActorsMirror.insert({ e.GetCurrMapArea().tiles[newXI][newYI].actor->actorId, std::ref(e.GetCurrMapArea().tiles[newXI][newYI].actor) });
+
                         }
-
-                        e.GetCurrMapArea().mobActorsMirror.erase(mob.actorId);
-
-                        e.GetCurrMapArea().mobActorsMirror.insert({ e.GetCurrMapArea().tiles[newXI][newYI].actor->actorId, std::ref(e.GetCurrMapArea().tiles[newXI][newYI].actor) });
 
                     }
                     else if (e.GetCurrMapArea().tiles[newXI][newYI].actor != nullptr && (newXI != oldXI || newYI != oldYI))
                     {
-                        coreMovement.destination = { -1, -1 };
+                        coreMovement.dest = { -1, -1 };
                     }
 
                 }
                 else
                 {
-                    coreMovement.destination = { -1, -1 };
+                    coreMovement.dest = { -1, -1 };
                 }
 
             }
             else
             {
-                coreMovement.destination = { -1, -1 };
+                coreMovement.dest = { -1, -1 };
             }
         }
     }

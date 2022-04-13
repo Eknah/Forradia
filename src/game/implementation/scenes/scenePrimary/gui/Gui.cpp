@@ -5,7 +5,6 @@
 #include "Gui.h"
 #include "../engine/Engine.h"
 #include "GuiWindowInventory.h"
-#include "GuiWindowMall.h"
 
 namespace Forradia
 {
@@ -16,9 +15,6 @@ namespace Forradia
         windows.insert(
             { "Inventory", std::make_unique<GuiWindowInventory>(
                               e, "Inventory", RectF{0.1f, 0.1f, 0.2f, 0.7f}) });
-        windows.insert(
-            { "Mall", std::make_unique<GuiWindowMall>(
-                              e, "Mall", RectF{0.2f, 0.1f, 0.7f, 0.6f}) });
     }
 
     void Gui::Update()
@@ -34,13 +30,6 @@ namespace Forradia
         if (boundsButtonSystem.ContainsPoint(mousePositionF))
             e.customCursor.cursorType = CursorTypes::Hovering;
 
-        auto mallIconSize = utils.ConvertToFloat(buttonMallSize);
-
-        auto mallIconBounds = RectF{ 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height };
-
-        if (mallIconBounds.ContainsPoint(mousePositionF))
-            e.customCursor.cursorType = CursorTypes::Hovering;
-
         for (auto& [key, window] : windows)
             window->Update();
     }
@@ -51,17 +40,6 @@ namespace Forradia
         guiMinimap.Render();
 
         auto MousePositionF = utils.GetMousePosF();
-
-
-
-        auto mallIconSize = utils.ConvertToFloat(buttonMallSize);
-
-        auto mallIconBounds = RectF{ 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height };
-
-        if (mallIconBounds.ContainsPoint(MousePositionF))
-            e.DrawImage("GuiIconMallHovered", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
-        else
-            e.DrawImage("GuiIconMall", 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height);
 
         if (boundsButtonInventory.ContainsPoint(MousePositionF))
             e.FillRectangle({ 100, 200, 255, 100 }, boundsButtonInventory.x,
@@ -135,17 +113,6 @@ namespace Forradia
         if (boundsButtonInventory.ContainsPoint(mousePositionF))
         {
             windows.at("Inventory")->visible = !windows.at("Inventory")->visible;
-
-            return true;
-        }
-
-        auto mallIconSize = utils.ConvertToFloat(buttonMallSize);
-
-        auto mallIconBounds = RectF{ 1.0f - mallIconSize.width, 0.0f, mallIconSize.width, mallIconSize.height };
-
-        if (mallIconBounds.ContainsPoint(mousePositionF))
-        {
-            windows.at("Mall")->visible = !windows.at("Mall")->visible;
 
             return true;
         }

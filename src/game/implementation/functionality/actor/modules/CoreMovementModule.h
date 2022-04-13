@@ -26,7 +26,7 @@ namespace Forradia
         float positionZ = 0.0f;
         UPtr<float> facingAngle = MakeUPtr<float>(0.0f);
 
-        Point2F destination = { -1, -1 };
+        Point2F dest = { -1, -1 };
         int moveSpeed = 30;
         float stepSize = 3.0f;
         float stepMultiplier = 0.1f;

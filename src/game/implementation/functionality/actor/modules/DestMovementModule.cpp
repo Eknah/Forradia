@@ -24,16 +24,16 @@ namespace Forradia
         auto& coreMovement = actor.GetModule<CoreMovementModule>();
 
         if (!coreMovement.timer.HasFinished()) return;
-        if (coreMovement.destination.IsUndefined()) return;
+        if (coreMovement.dest.IsUndefined()) return;
 
-        auto dx = coreMovement.destination.x - coreMovement.position.x;
-        auto dy = coreMovement.destination.y - coreMovement.position.y;
+        auto dx = coreMovement.dest.x - coreMovement.position.x;
+        auto dy = coreMovement.dest.y - coreMovement.position.y;
         auto absdx = std::abs(dx);
         auto absdy = std::abs(dy);
 
         if (absdx < coreMovement.stepMultiplier && absdy < coreMovement.stepMultiplier)
         {
-            coreMovement.destination.MakeUndefined();
+            coreMovement.dest.MakeUndefined();
         }
         else
         {
