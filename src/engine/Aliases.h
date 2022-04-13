@@ -56,4 +56,9 @@ inline float CFloat(int val)
     return static_cast<float>(val);
 }
 
+inline int CInt(float val)
+{
+    return static_cast<int>(val);
+}
+
 }  // namespace Forradia
