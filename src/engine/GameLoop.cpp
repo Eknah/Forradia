@@ -76,12 +76,15 @@ namespace Forradia
                         }
                     }
 
+                    e.sceneManager.GetCurrentScene()->DoKeyDown(event.key.keysym.sym);
+
                     break;
                 }
 
                 case SDL_KEYUP:
                 {
                     e.keyboardHandler.DoKeyUp(event.key.keysym.sym);
+                    e.sceneManager.GetCurrentScene()->DoKeyUp(event.key.keysym.sym);
 
                     break;
                 }
@@ -106,19 +109,12 @@ namespace Forradia
                 }
                 case SDL_TEXTINPUT:
                 {
-                    /* Add new text onto the end of our text */
-                    //strcat(e.text, event.text.text);
                     e.text.append(event.text.text);
                     e.cursor++;
                     break;
                 }
                 case SDL_TEXTEDITING:
                 {
-                    /*
-                    Update the composition text.
-                    Update the cursor position.
-                    Update the selection length (if any).
-                    */
                     e.composition = event.edit.text;
                     e.cursor = event.edit.start;
                     e.selection_len = event.edit.length;

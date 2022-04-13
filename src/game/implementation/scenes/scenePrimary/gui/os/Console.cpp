@@ -110,4 +110,16 @@ namespace Forradia
         return e.text.substr(0, text.length()) == text;
     }
 
+    void Console::DoKeyDown(SDL_Keycode key)
+    {
+        if (key == SDLK_q && e.keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) > 0)
+        {
+            if (fileSystem.runningProgram != nullptr)
+            {
+                Print("Exiting program: " + fileSystem.runningProgram->name);
+                fileSystem.runningProgram = nullptr;
+            }
+        }
+    }
+
 }  // namespace Forradia

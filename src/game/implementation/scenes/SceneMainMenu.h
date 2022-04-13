@@ -19,6 +19,8 @@ namespace Forradia
         void Render() override;
         void DoMouseDown(Uint8 mouseButton) override {};
         void DoMouseUp(Uint8 mouseButton) override {}
+        void DoKeyDown(SDL_Keycode key) override {}
+        void DoKeyUp(SDL_Keycode key) override {}
 
     private:
         Utilities utils;

@@ -21,7 +21,7 @@ namespace Forradia
 
         player.ResetForNewFrame();
 
-        if (!SDL_IsTextInputActive())
+        if (!SDL_IsTextInputActive() && e.keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) == 0)
         {
             char moveInstruction = DirNone;
 
@@ -144,6 +144,11 @@ namespace Forradia
     void ScenePrimary::DoMouseUp(Uint8 MouseButton)
     {
         gui.DoMouseUp();
+    }
+
+    void ScenePrimary::DoKeyDown(SDL_Keycode key)
+    {
+        gui.DoKeyDown(key);
     }
 
 }  // namespace Forradia

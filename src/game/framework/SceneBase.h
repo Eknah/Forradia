@@ -23,6 +23,8 @@ namespace Forradia
         virtual void Render() = 0;
         virtual void DoMouseDown(Uint8 button) = 0;
         virtual void DoMouseUp(Uint8 button) = 0;
+        virtual void DoKeyDown(SDL_Keycode key) = 0;
+        virtual void DoKeyUp(SDL_Keycode key) = 0;
 
     protected:
 

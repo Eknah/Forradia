@@ -6,16 +6,6 @@
 namespace Forradia
 {
 
-    void SceneGameStart::Update()
-    {
-        if (e.keyboardHandler.keysBeenFired->size() > 0)
-            e.sceneManager.SwitchToScene(switchToSceneName);
-
-        if (e.mouseHandler.GetLeftButtonBeenFired()
-            || e.mouseHandler.GetRightButtonBeenFired())
-            e.sceneManager.SwitchToScene(switchToSceneName);
-    }
-
     void SceneGameStart::Render()
     {
         e.DrawImage(imageNameBackground, 0, 0, 1, 1);
@@ -27,6 +17,16 @@ namespace Forradia
             logoSizeF.w,
             logoSizeF.h);
         e.DrawString(text, { 255, 255, 255, 255 }, 0.5f, 0.5f, true);
+    }
+
+    void SceneGameStart::DoMouseDown(Uint8 mouseButton)
+    {
+        e.sceneManager.SwitchToScene(switchToSceneName);
+    }
+
+    void SceneGameStart::DoKeyDown(SDL_Keycode key)
+    {
+        e.sceneManager.SwitchToScene(switchToSceneName);
     }
 
 }  // namespace Forradia

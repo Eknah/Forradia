@@ -22,6 +22,7 @@ namespace Forradia
         void Print(String message);
         void ToggleInput();
         void Clear();
+        void DoKeyDown(SDL_Keycode key);
 
     private:
         

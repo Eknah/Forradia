@@ -126,4 +126,9 @@ namespace Forradia
             window->DoMouseUp();
     }
 
+    void Gui::DoKeyDown(SDL_Keycode key)
+    {
+        console.DoKeyDown(key);
+    }
+
 }  // namespace Forradia
