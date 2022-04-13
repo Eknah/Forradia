@@ -43,8 +43,8 @@ namespace Forradia
             if (moveInstruction & DirForward || moveInstruction & DirRight ||
                 moveInstruction & DirBack || moveInstruction & DirLeft)
             {
-                *player.GetModule<MovementDataModule>().facingAngle = camera.lookingAngle;
-                player.GetModule<MovementDataModule>().moveDestination = { -1, -1 };
+                *player.GetModule<CoreMovementModule>().facingAngle = camera.lookingAngle;
+                player.GetModule<CoreMovementModule>().destination = { -1, -1 };
             }
 
             auto turnRight = keys->count(SDLK_e);
@@ -73,7 +73,7 @@ namespace Forradia
         camera.UpdateCameraMovement();
 
         if (e.mouseHandler.rightButtonDown)
-            *player.GetModule<MovementDataModule>().facingAngle = camera.lookingAngle;
+            *player.GetModule<CoreMovementModule>().facingAngle = camera.lookingAngle;
 
 
         if (e.mouseHandler.rightButtonDown)
@@ -130,7 +130,7 @@ namespace Forradia
         {
         case SDL_BUTTON_LEFT:
         {
-            e.GetPlayer().GetModule<MovementDataModule>().moveDestination = {
+            e.GetPlayer().GetModule<CoreMovementModule>().destination = {
                 camera.GetHoveredTile().x + 0.5f, camera.GetHoveredTile().y + 0.5f };
             break;
         }

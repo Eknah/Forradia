@@ -61,7 +61,7 @@ namespace Forradia
     void GameWorldRenderer::RenderAllExceptRoofAndRays()
     {
         auto mapAreaSize = e.world->mapAreaSize;
-        auto& movementData = e.GetPlayer().GetModule<MovementDataModule>();
+        auto& movementData = e.GetPlayer().GetModule<CoreMovementModule>();
         auto& tiles = e.GetCurrentMapArea().tiles;
 
         auto elevAmount = 5.0f;
@@ -407,17 +407,17 @@ namespace Forradia
                 {
                     auto subxpos = (e.GetCurrentMapArea()
                         .tiles[tileXI][tileYI]
-                        .actor->GetModule<MovementDataModule>().position.x -
+                        .actor->GetModule<CoreMovementModule>().position.x -
                         static_cast<int>(e.GetCurrentMapArea()
                             .tiles[tileXI][tileYI]
-                            .actor->GetModule<MovementDataModule>().position.x)) *
+                            .actor->GetModule<CoreMovementModule>().position.x)) *
                         e.tileSize;
                     auto subypos = (e.GetCurrentMapArea()
                         .tiles[tileXI][tileYI]
-                        .actor->GetModule<MovementDataModule>().position.y -
+                        .actor->GetModule<CoreMovementModule>().position.y -
                         static_cast<int>(e.GetCurrentMapArea()
                             .tiles[tileXI][tileYI]
-                            .actor->GetModule<MovementDataModule>().position.y)) *
+                            .actor->GetModule<CoreMovementModule>().position.y)) *
                         e.tileSize;
 
 
@@ -432,7 +432,7 @@ namespace Forradia
                     e.DrawModel("Shadow", tileX0 + subxpos,
                         modelYPos + e.GetCurrentMapArea()
                         .tiles[tileXI][tileYI]
-                        .actor->GetModule<MovementDataModule>().positionZ,
+                        .actor->GetModule<CoreMovementModule>().positionZ,
                         tileZ0 - e.tileSize + subypos, 0, 1.0f, 1.0f);
 
                     e.DrawModel(e.GetCurrentMapArea()
@@ -440,11 +440,11 @@ namespace Forradia
                         .actor->GetAnimatedModelId(), tileX0 + subxpos,
                         modelYPos + e.GetCurrentMapArea()
                         .tiles[tileXI][tileYI]
-                        .actor->GetModule<MovementDataModule>().positionZ,
+                        .actor->GetModule<CoreMovementModule>().positionZ,
                         tileZ0 - e.tileSize + subypos,
                         *e.GetCurrentMapArea()
                         .tiles[tileXI][tileYI]
-                        .actor->GetModule<MovementDataModule>().facingAngle);
+                        .actor->GetModule<CoreMovementModule>().facingAngle);
                 }
 
 
@@ -462,8 +462,8 @@ namespace Forradia
         auto mapAreaSize = e.world->mapAreaSize;
 
         auto elevAmount = 5.0f;
-        auto playerXInt = static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.x);
-        auto playerYInt = static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.y);
+        auto playerXInt = static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.x);
+        auto playerYInt = static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.y);
         auto elevPlayer0 =
             e.GetCurrentMapArea().tiles[playerXInt][playerYInt].elevation /
             elevAmount;
@@ -477,19 +477,19 @@ namespace Forradia
         auto elevPlayer3 =
             e.GetCurrentMapArea().tiles[playerXInt][playerYInt + 1].elevation /
             elevAmount;
-        auto elevX = e.GetPlayer().GetModule<MovementDataModule>().position.x - playerXInt;
-        auto elevY = e.GetPlayer().GetModule<MovementDataModule>().position.y - playerYInt;
+        auto elevX = e.GetPlayer().GetModule<CoreMovementModule>().position.x - playerXInt;
+        auto elevY = e.GetPlayer().GetModule<CoreMovementModule>().position.y - playerYInt;
         auto elevPlayer = (elevPlayer0 + (elevPlayer1 - elevPlayer0) * elevX +
             elevPlayer3 + (elevPlayer2 - elevPlayer3) * elevX +
             elevPlayer0 + (elevPlayer3 - elevPlayer0) * elevY +
             elevPlayer1 + (elevPlayer2 - elevPlayer1) * elevY) /
             4.0f;
 
-        float subStepX = e.GetPlayer().GetModule<MovementDataModule>().position.x -
-            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.x);
+        float subStepX = e.GetPlayer().GetModule<CoreMovementModule>().position.x -
+            static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.x);
 
-        float subStepY = e.GetPlayer().GetModule<MovementDataModule>().position.y -
-            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.y);
+        float subStepY = e.GetPlayer().GetModule<CoreMovementModule>().position.y -
+            static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.y);
 
         auto offsetX = -static_cast<float>(2.0f * camera.GetRenderDistance() + 1.0f)
             / 2.0f * e.tileSize - subStepX * e.tileSize;
@@ -507,10 +507,10 @@ namespace Forradia
                     camera.GetRenderDistance() * camera.GetRenderDistance())
                     continue;
 
-                auto tileX = e.GetPlayer().GetModule<MovementDataModule>().position.x
+                auto tileX = e.GetPlayer().GetModule<CoreMovementModule>().position.x
                     - camera.GetRenderDistance() + x;
 
-                auto tileY = e.GetPlayer().GetModule<MovementDataModule>().position.y
+                auto tileY = e.GetPlayer().GetModule<CoreMovementModule>().position.y
                     - camera.GetRenderDistance() + y;
 
                 if (tileX < 0 || tileY < 0 || tileX >= mapAreaSize ||

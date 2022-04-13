@@ -14,38 +14,36 @@ namespace Forradia
 
     DestMovementModule::DestMovementModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
     {
-        GetParentActor().AddIfNotExists<MovementDataModule>();
+        GetParentActor().AddIfNotExists<CoreMovementModule>();
         GetParentActor().AddIfNotExists<WarpMovementModule>();
     }
 
     void DestMovementModule::Update()
     {
         auto& actor = GetParentActor();
-        auto& movementData = actor.GetModule<MovementDataModule>();
+        auto& movementData = actor.GetModule<CoreMovementModule>();
 
         if (Ticks() < movementData.tickLastMove + movementData.moveSpeed) return;
-        if (movementData.moveDestination.IsUndefined()) return;
+        if (movementData.destination.IsUndefined()) return;
 
-        auto dx = movementData.moveDestination.x - movementData.position.x;
-        auto dy = movementData.moveDestination.y - movementData.position.y;
-        auto absDx = std::abs(dx);
-        auto absDy = std::abs(dy);
-        auto piF = static_cast<float>(M_PI);
+        auto dx = movementData.destination.x - movementData.position.x;
+        auto dy = movementData.destination.y - movementData.position.y;
+        auto absdx = std::abs(dx);
+        auto absdy = std::abs(dy);
 
-        if (absDx < movementData.stepMultiplier && absDy < movementData.stepMultiplier)
+        if (absdx < movementData.stepMultiplier && absdy < movementData.stepMultiplier)
         {
-            movementData.moveDestination = { -1, -1 };
+            movementData.destination.MakeUndefined();
         }
         else
         {
+            auto piF = CFloat(M_PI);
             movementData.isWalking = true;
-            *movementData.facingAngle
-                = static_cast<float>(std::atan2(-dx, -dy)) / piF * 180.0f;
+            *movementData.facingAngle = CFloat(std::atan2(-dx, -dy)) / piF * 180.0f;
 
-            auto angle = *movementData.facingAngle / 180.0f * piF - piF / 2 +
-                0 * piF / 2;
-            auto dx = -static_cast<float>(std::cos(angle)) * movementData.stepMultiplier;
-            auto dy = static_cast<float>(std::sin(angle)) * movementData.stepMultiplier;
+            auto angle = *movementData.facingAngle / 180.0f * piF - piF / 2 + 0 * piF / 2;
+            auto dx = -std::cos(angle) * movementData.stepMultiplier;
+            auto dy = std::sin(angle) * movementData.stepMultiplier;
             auto newX = movementData.position.x + dx * movementData.stepSize;
             auto newY = movementData.position.y + dy * movementData.stepSize;
 
@@ -60,36 +58,30 @@ namespace Forradia
 
             auto newXRounded = newX;
             auto newYRounded = newY;
-            auto newXRoundedI = static_cast<int>(newXRounded);
-            auto newYRoundedI = static_cast<int>(newYRounded);
+            auto newXRoundedI = CInt(newXRounded);
+            auto newYRoundedI = CInt(newYRounded);
 
             auto tileHasMob = false;
 
-            if (e.GetCurrentMapArea()
-                .tiles[newXRoundedI][newYRoundedI].actor != nullptr)
+            if (e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor != nullptr)
             {
-                if (e.GetCurrentMapArea()
-                    .tiles[newXRoundedI][newYRoundedI].actor->actorId != e.GetPlayer().actorId)
+                if (e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor->actorId != e.GetPlayer().actorId)
                     tileHasMob = true;
             }
 
-            if (!e.GetCurrentMapArea()
-                .tiles[newXRoundedI][newYRoundedI]
-                .HasObjectWithFlag(FlagObstacle)
-                && e.GetCurrentMapArea()
-                .tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
+            if (!e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].HasObjectWithFlag(FlagObstacle)
+                && e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
                 && !tileHasMob)
             {
-                auto oldXI = static_cast<int>(movementData.position.x);
-                auto oldYI = static_cast<int>(movementData.position.y);
+                auto oldXI = CInt(movementData.position.x);
+                auto oldYI = CInt(movementData.position.y);
 
                 movementData.position.x = newXRounded;
                 movementData.position.y = newYRounded;
 
                 if (newXRoundedI != oldXI || newYRoundedI != oldYI)
                 {
-                    e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor
-                        = std::move(e.GetCurrentMapArea().tiles[oldXI][oldYI].actor);
+                    e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor = std::move(e.GetCurrentMapArea().tiles[oldXI][oldYI].actor);
                     e.GetCurrentMapArea().tiles[oldXI][oldYI].actor = nullptr;
                 }
             }

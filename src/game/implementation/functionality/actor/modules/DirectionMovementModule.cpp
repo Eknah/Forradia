@@ -14,7 +14,7 @@ namespace Forradia
 
     DirectionMovementModule::DirectionMovementModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
     {
-        GetParentActor().AddIfNotExists<MovementDataModule>();
+        GetParentActor().AddIfNotExists<CoreMovementModule>();
         GetParentActor().AddIfNotExists<WarpMovementModule>();
     }
 
@@ -22,7 +22,7 @@ namespace Forradia
     {
 
         auto& actor = GetParentActor();
-        auto& movementData = actor.GetModule<MovementDataModule>();
+        auto& movementData = actor.GetModule<CoreMovementModule>();
 
         if (Ticks() < movementData.tickLastMove + movementData.moveSpeed) return;
         if (!(moveInstruction & DirForward || moveInstruction & DirRight || moveInstruction & DirBack || moveInstruction & DirLeft))
@@ -33,73 +33,45 @@ namespace Forradia
         auto newX = movementData.position.x;
         auto newY = movementData.position.y;
         auto angle = 0.0f;
-        auto piF = static_cast<float>(M_PI);
+        auto piF = CFloat(M_PI);
 
         if (moveInstruction & DirForward && moveInstruction & DirLeft)
         {
-            angle = *movementData.facingAngle /
-                180.0f * piF -
-                piF / 2.0f + 0.5f * piF / 2.0f;
-            *movementData.facingAngle =
-                *movementData.facingAngle +
-                0.5 * 90.0f;
+            angle = *movementData.facingAngle / 180.0f * piF - piF / 2.0f + 0.5f * piF / 2.0f;
+            *movementData.facingAngle = *movementData.facingAngle + 0.5 * 90.0f;
         }
         else if (moveInstruction & DirLeft && moveInstruction & DirBack)
         {
-            angle = *movementData.facingAngle /
-                180.0f * piF -
-                piF / 2.0f + 1.5f * piF / 2.0f;
-            *movementData.facingAngle =
-                *movementData.facingAngle +
-                1.5 * 90.0f;
+            angle = *movementData.facingAngle / 180.0f * piF - piF / 2.0f + 1.5f * piF / 2.0f;
+            *movementData.facingAngle = *movementData.facingAngle + 1.5 * 90.0f;
         }
         else if (moveInstruction & DirBack && moveInstruction & DirRight)
         {
-            angle = *movementData.facingAngle /
-                180.0f * piF -
-                piF / 2.0f + 2.5f * piF / 2.0f;
-            *movementData.facingAngle =
-                *movementData.facingAngle +
-                2.5 * 90.0f;
+            angle = *movementData.facingAngle / 180.0f * piF - piF / 2.0f + 2.5f * piF / 2.0f;
+            *movementData.facingAngle = *movementData.facingAngle + 2.5 * 90.0f;
         }
         else if (moveInstruction & DirRight && moveInstruction & DirForward)
         {
-            angle = *movementData.facingAngle /
-                180.0f * piF -
-                piF / 2.0f + 3.5f * piF / 2.0f;
-            *movementData.facingAngle =
-                *movementData.facingAngle +
-                3.5f * 90.0f;
+            angle = *movementData.facingAngle / 180.0f * piF - piF / 2.0f + 3.5f * piF / 2.0f;
+            *movementData.facingAngle = *movementData.facingAngle + 3.5f * 90.0f;
         }
         else if (moveInstruction & DirForward)
         {
-            angle = *movementData.facingAngle /
-                180.0f * piF -
-                piF / 2.0f + 0.0f * piF / 2.0f;
+            angle = *movementData.facingAngle / 180.0f * piF - piF / 2.0f + 0.0f * piF / 2.0f;
         }
         else if (moveInstruction & DirLeft)
         {
-            angle = *movementData.facingAngle /
-                180.0f * piF -
-                piF / 2.0f + 1.0f * piF / 2.0f;
-            *movementData.facingAngle =
-                *movementData.facingAngle +
-                1 * 90.0f;
+            angle = *movementData.facingAngle / 180.0f * piF - piF / 2.0f + 1.0f * piF / 2.0f;
+            *movementData.facingAngle = *movementData.facingAngle + 1 * 90.0f;
         }
         else if (moveInstruction & DirBack)
         {
-            angle = *movementData.facingAngle /
-                180.0f * piF -
-                piF / 2.0f + 2.0f * piF / 2.0f;
+            angle = *movementData.facingAngle / 180.0f * piF - piF / 2.0f + 2.0f * piF / 2.0f;
         }
         else if (moveInstruction & DirRight)
         {
-            angle = *movementData.facingAngle /
-                180.0f * piF -
-                piF / 2.0f + 3.0f * piF / 2.0f;
-            *movementData.facingAngle =
-                *movementData.facingAngle +
-                3.0f * 90.0f;
+            angle = *movementData.facingAngle / 180.0f * piF - piF / 2.0f + 3.0f * piF / 2.0f;
+            *movementData.facingAngle = *movementData.facingAngle + 3.0f * 90.0f;
         }
 
         auto dx = -std::cos(angle) * movementData.stepMultiplier;
@@ -123,36 +95,30 @@ namespace Forradia
         auto newXRounded = newX;
         auto newYRounded = newY;
 
-        auto newXRoundedI = static_cast<int>(newXRounded);
-        auto newYRoundedI = static_cast<int>(newYRounded);
+        auto newXRoundedI = CInt(newXRounded);
+        auto newYRoundedI = CInt(newYRounded);
 
         auto tileHasMob = false;
 
-        if (e.GetCurrentMapArea()
-            .tiles[newXRoundedI][newYRoundedI].actor != nullptr)
+        if (e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor != nullptr)
         {
-            if (e.GetCurrentMapArea()
-                .tiles[newXRoundedI][newYRoundedI].actor->actorId != e.GetPlayer().actorId)
+            if (e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor->actorId != e.GetPlayer().actorId)
                 tileHasMob = true;
         }
 
-        if (!e.GetCurrentMapArea()
-            .tiles[newXRoundedI][newYRoundedI]
-            .HasObjectWithFlag(FlagObstacle)
-            && e.GetCurrentMapArea()
-            .tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
+        if (!e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].HasObjectWithFlag(FlagObstacle)
+            && e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].groundType != GetId("GroundTypeWater")
             && !tileHasMob)
         {
-            auto oldXI = static_cast<int>(movementData.position.x);
-            auto oldYI = static_cast<int>(movementData.position.y);
+            auto oldXI = CInt(movementData.position.x);
+            auto oldYI = CInt(movementData.position.y);
 
             movementData.position.x = newXRounded;
             movementData.position.y = newYRounded;
 
             if (newXRoundedI != oldXI || newYRoundedI != oldYI)
             {
-                e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor
-                    = std::move(e.GetCurrentMapArea().tiles[oldXI][oldYI].actor);
+                e.GetCurrentMapArea().tiles[newXRoundedI][newYRoundedI].actor = std::move(e.GetCurrentMapArea().tiles[oldXI][oldYI].actor);
                 e.GetCurrentMapArea().tiles[oldXI][oldYI].actor = nullptr;
             }
         }

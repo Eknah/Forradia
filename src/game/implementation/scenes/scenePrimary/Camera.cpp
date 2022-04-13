@@ -92,19 +92,19 @@ namespace Forradia
 
     Point2 Camera::GetHoveredTile() const
     {
-        float subStepX = e.GetPlayer().GetModule<MovementDataModule>().position.x -
-            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.x);
+        float subStepX = e.GetPlayer().GetModule<CoreMovementModule>().position.x -
+            static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.x);
 
-        float subStepY = e.GetPlayer().GetModule<MovementDataModule>().position.y -
-            static_cast<int>(e.GetPlayer().GetModule<MovementDataModule>().position.y);
+        float subStepY = e.GetPlayer().GetModule<CoreMovementModule>().position.y -
+            static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.y);
 
         auto offsetX = -static_cast<float>(2 * renderDistance + 1)
             / 2.0f * e.tileSize - subStepX * e.tileSize;
         auto offsetY = -static_cast<float>(2 * renderDistance - 1)
             / 2.0f * e.tileSize - subStepY * e.tileSize;
-        auto mapx = e.GetPlayer().GetModule<MovementDataModule>().position.x - renderDistance +
+        auto mapx = e.GetPlayer().GetModule<CoreMovementModule>().position.x - renderDistance +
             (rayCastingX - offsetX) / e.tileSize;
-        auto mapy = e.GetPlayer().GetModule<MovementDataModule>().position.y - renderDistance +
+        auto mapy = e.GetPlayer().GetModule<CoreMovementModule>().position.y - renderDistance +
             (rayCastingZ - offsetY) / e.tileSize + 1;
 
         return { static_cast<int>(mapx), static_cast<int>(mapy) };

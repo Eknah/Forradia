@@ -10,7 +10,7 @@
 namespace Forradia
 {
 
-    class MovementDataModule : public IModule
+    class CoreMovementModule : public IModule
     {
     public:
         using IModule::IModule;
@@ -23,7 +23,7 @@ namespace Forradia
         float positionZ = 0.0f;
         UPtr<float> facingAngle = MakeUPtr<float>(0.0f);
 
-        Point2F moveDestination = { -1, -1 };
+        Point2F destination = { -1, -1 };
         unsigned int tickLastMove = 0;
         int moveSpeed = 30;
         float stepSize = 3.0f;

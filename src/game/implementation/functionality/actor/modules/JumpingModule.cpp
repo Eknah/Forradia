@@ -23,12 +23,12 @@ namespace Forradia
                     3.0f) *
                 maxJumpHeight;
 
-            GetParentActor().GetModule<MovementDataModule>().positionZ = jumpHeight;
+            GetParentActor().GetModule<CoreMovementModule>().positionZ = jumpHeight;
         }
 
         if (Ticks() > tickStartJumping + jumpDuration)
         {
-            GetParentActor().GetModule<MovementDataModule>().positionZ = 0.0f;
+            GetParentActor().GetModule<CoreMovementModule>().positionZ = 0.0f;
             isJumping = false;
         }
     }

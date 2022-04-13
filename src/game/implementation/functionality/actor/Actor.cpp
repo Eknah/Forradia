@@ -14,8 +14,8 @@ namespace Forradia
         e(_e), modelName(modelName_),
         actorId(currentActorId++)
     {
-        AddIfNotExists<MovementDataModule>();
-        GetModule<MovementDataModule>().position = { x, y };
+        AddIfNotExists<CoreMovementModule>();
+        GetModule<CoreMovementModule>().position = { x, y };
     }
 
     void Actor::ResetForNewFrame() const
@@ -32,7 +32,7 @@ namespace Forradia
 
     int Actor::GetAnimatedModelId() const
     {
-        if (!HasModule<MovementDataModule>())
+        if (!HasModule<CoreMovementModule>())
         {
             return GetId(modelName);
         }
@@ -40,7 +40,7 @@ namespace Forradia
         {
             auto modelNameAnimated = modelName;
 
-            if (GetModule<MovementDataModule>().isWalking)
+            if (GetModule<CoreMovementModule>().isWalking)
             {
                 auto animIndex = ((Ticks() + actorId * 10) % 300) / 75;
 

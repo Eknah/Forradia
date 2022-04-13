@@ -10,6 +10,7 @@ class Point2F {
   Point2F(float _x, float y) : x(_x), y(y) {}
 
   bool IsUndefined();
+  void MakeUndefined();
 
   float x = 0.0f;
   float y = 0.0f;

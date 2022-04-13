@@ -9,4 +9,10 @@ bool Point2F::IsUndefined() {
     return x == -1.0f && y == -1.0f;
   }
 
+void Point2F::MakeUndefined()
+{
+    x = -1.0f;
+    y = -1.0f;
+}
+
 }  // namespace Forradia
