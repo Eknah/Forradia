@@ -53,24 +53,29 @@ namespace Forradia
         SDL_Quit();
     }
 
-    void Engine::DrawImage(std::string imageName, float x, float y, float width, float height) const
+    void Engine::DrawImage(std::string imageName, float x, float y, float w, float h) const
     {
-        imageGraphics.DrawImage(imageName, x, y, width, height);
+        imageGraphics.DrawImage(imageName, x, y, w, h);
     }
 
-    void Engine::DrawImage(int imageNameHash, float x, float y, float width, float height) const
+    void Engine::DrawImage(int imageNameHash, float x, float y, float w, float h) const
     {
-        imageGraphics.DrawImage(imageNameHash, x, y, width, height);
+        imageGraphics.DrawImage(imageNameHash, x, y, w, h);
     }
 
-    void Engine::FillRect(SDL_Color color, float x, float y, float width, float height) const
+    void Engine::FillRect(SDL_Color color, float x, float y, float w, float h) const
     {
-        paintGraphics.FillRect(color, x, y, width, height);
+        paintGraphics.FillRect(color, x, y, w, h);
     }
 
-    void Engine::DrawRect(SDL_Color color, float x, float y, float width, float height) const
+    void Engine::DrawRect(SDL_Color color, float x, float y, float w, float h) const
     {
-        paintGraphics.DrawRect(color, x, y, width, height);
+        paintGraphics.DrawRect(color, x, y, w, h);
+    }
+
+    void Engine::DrawLine(SDL_Color color, LineF line) const
+    {
+        paintGraphics.DrawLine(color, line);
     }
 
     void Engine::DrawLine(SDL_Color color, float x0, float y0, float x1, float y1) const
@@ -91,6 +96,16 @@ namespace Forradia
     void Engine::DrawModel(int modelNameHash, float x, float y, float z, float rotation, float specificScaling, float Opacity) const
     {
         modelGraphics.DrawModel(modelNameHash, x, y, z, rotation, specificScaling, Opacity);
+    }
+
+    void Engine::FillRect(SDL_Color color, RectF rect) const
+    {
+        paintGraphics.FillRect(color, rect);
+    }
+
+    void Engine::DrawRect(SDL_Color color, RectF rect) const
+    {
+        paintGraphics.DrawRect(color, rect);
     }
 
     SizeF Engine::GetImageSizeF(std::string imageName) const
@@ -115,8 +130,8 @@ namespace Forradia
 
         window = WindowPtr(
             SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
-                SDL_WINDOWPOS_UNDEFINED, defaultWindowSize.width,
-                defaultWindowSize.height,
+                SDL_WINDOWPOS_UNDEFINED, defaultWindowSize.w,
+                defaultWindowSize.h,
                 SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN |
                 SDL_WINDOW_FULLSCREEN_DESKTOP),
             SDL_Deleter());

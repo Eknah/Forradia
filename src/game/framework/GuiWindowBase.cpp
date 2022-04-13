@@ -11,10 +11,10 @@ namespace Forradia
     {
         if (!visible) return;
 
-        e.FillRect(palette.mediumBlue, bounds.x, bounds.y, bounds.width, bounds.height);
-        e.DrawRect(palette.black, bounds.x, bounds.y, bounds.width, bounds.height);
+        e.FillRect(palette.mediumBlue, bounds.x, bounds.y, bounds.w, bounds.h);
+        e.DrawRect(palette.black, bounds.x, bounds.y, bounds.w, bounds.h);
         e.DrawString(title, palette.black, bounds.x + margin, bounds.y + margin);
-        e.DrawLine(palette.black, bounds.x, bounds.y + topBarHeight, bounds.x + bounds.width, bounds.y + topBarHeight);
+        e.DrawLine(palette.black, bounds.x, bounds.y + topBarHeight, bounds.x + bounds.w, bounds.y + topBarHeight);
 
         RenderDerived();
     }
@@ -35,8 +35,8 @@ namespace Forradia
     {
         auto x = bounds.x + margin;
         auto y = bounds.y + topBarHeight + margin;
-        auto width = bounds.width - 2 * margin;
-        auto height = bounds.height - topBarHeight - 2 * margin;
+        auto width = bounds.w - 2 * margin;
+        auto height = bounds.h - topBarHeight - 2 * margin;
 
         return { x, y, width, height };
     }
@@ -64,7 +64,7 @@ namespace Forradia
 
     RectF GuiWindowBase::GetTopBarBounds()
     {
-        return { bounds.x, bounds.y, bounds.width, topBarHeight };
+        return { bounds.x, bounds.y, bounds.w, topBarHeight };
     }
 
     void GuiWindowBase::DoMouseUp()

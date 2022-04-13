@@ -33,14 +33,14 @@ namespace Forradia
         auto logoSizeF = e.GetImageSizeF("SceneForradiaLogo");
 
         e.DrawImage("SceneForradiaLogo",
-            0.5f - logoSizeF.width / 4.0f,
-            0.15f - logoSizeF.height / 4.0f,
-            logoSizeF.width / 2,
-            logoSizeF.height / 2);
+            0.5f - logoSizeF.w / 4.0f,
+            0.15f - logoSizeF.h / 4.0f,
+            logoSizeF.w / 2,
+            logoSizeF.h / 2);
 
         for (auto& button : sceneButtons)
         {
-            e.FillRect(palette.wheat, button.bounds.x - button.bounds.width / 2, button.bounds.y - button.bounds.height / 2, button.bounds.width, button.bounds.height);
+            e.FillRect(palette.wheat, button.bounds.x - button.bounds.w / 2, button.bounds.y - button.bounds.h / 2, button.bounds.w, button.bounds.h);
             e.DrawString(button.text, palette.black, button.bounds.x, button.bounds.y, true);
         }
     }

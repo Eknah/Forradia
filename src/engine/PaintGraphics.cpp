@@ -6,6 +6,16 @@
 namespace Forradia
 {
 
+
+    void PaintGraphics::FillRect(SDL_Color color, RectF rect) const
+    {
+        FillRect(color, rect.x, rect.y, rect.w, rect.h);
+    }
+    void PaintGraphics::DrawRect(SDL_Color color, RectF rect) const
+    {
+        DrawRect(color, rect.x, rect.y, rect.w, rect.h);
+    }
+
     void PaintGraphics::FillRect(SDL_Color Color, float X, float Y, float Width, float Height) const
     {
         std::vector<Point2F> vertices = {
@@ -20,6 +30,11 @@ namespace Forradia
             {X, Y}, {X, Y + Height}, {X + Width, Y + Height}, {X + Width, Y} };
 
         RenderShape(GL_LINE_LOOP, vertices, Color);
+    }
+
+    void PaintGraphics::DrawLine(SDL_Color color, LineF line) const
+    {
+        DrawLine(color, line.x0, line.y0, line.x1, line.y1);
     }
 
     void PaintGraphics::DrawLine(SDL_Color Color, float X0, float Y0, float X1, float Y1) const

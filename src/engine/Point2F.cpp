@@ -17,4 +17,12 @@ namespace Forradia
         y = -1.0f;
     }
 
+    Point2F Point2F::Translate(float dx, float dy)
+    {
+        x += dx;
+        y += dy;
+
+        return *this;
+    }
+
 }  // namespace Forradia

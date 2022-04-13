@@ -10,15 +10,15 @@ namespace Forradia
     void InventoryWindow::RenderDerived()
     {
         auto canvasSize = utils.GetCanvasSize();
-        auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
+        auto aspectRatio = static_cast<float>(canvasSize.w) / canvasSize.h;
         auto boundsInterior = GetInteriorBounds();
 
         e.FillRect(palette.wheat, boundsInterior.x, boundsInterior.y,
-            boundsInterior.width, boundsInterior.height);
+            boundsInterior.w, boundsInterior.h);
 
-        auto slotSize = boundsInterior.width / numSlotCols - margin;
+        auto slotSize = boundsInterior.w / numSlotCols - margin;
         auto numSlotRows =
-            boundsInterior.height / ((slotSize + margin) * aspectRatio);
+            boundsInterior.h / ((slotSize + margin) * aspectRatio);
         auto i = 0;
 
 
@@ -60,17 +60,17 @@ namespace Forradia
         e.GetPlayer().GetModule<ObjectUsageModule>().objectBeingUsed = nullptr;
 
         auto canvasSize = utils.GetCanvasSize();
-        auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
+        auto aspectRatio = static_cast<float>(canvasSize.w) / canvasSize.h;
         auto boundsInterior = GetInteriorBounds();
 
-        auto slotSize = boundsInterior.width / numSlotCols - margin;
+        auto slotSize = boundsInterior.w / numSlotCols - margin;
         auto numSlotRows =
-            boundsInterior.height / ((slotSize + margin) * aspectRatio);
+            boundsInterior.h / ((slotSize + margin) * aspectRatio);
         auto i = 0;
 
         auto mousePosition = utils.GetMousePosI();
-        auto mouseXRel = static_cast<float>(mousePosition.x) / canvasSize.width;
-        auto mouseYRel = static_cast<float>(mousePosition.y) / canvasSize.height;
+        auto mouseXRel = static_cast<float>(mousePosition.x) / canvasSize.w;
+        auto mouseYRel = static_cast<float>(mousePosition.y) / canvasSize.h;
 
         for (auto y = 0; y < numSlotRows; y++)
         {

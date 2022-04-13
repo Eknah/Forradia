@@ -23,10 +23,10 @@ namespace Forradia
 
         int framesCount = 0;
         int fps = 0;
-        const float width = 0.07f;
-        const float height = 0.03f;
+        const float w = 0.07f;
+        const float h = 0.03f;
         const float posx = 0.97f;
-        const float posy = 1.0f - height / 2;
+        const float posy = 1.0f - h / 2;
     };
 
 }  // namespace Forradia

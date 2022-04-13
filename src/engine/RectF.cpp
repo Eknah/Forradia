@@ -8,11 +8,41 @@ namespace Forradia
 
     bool RectF::ContainsPoint(Point2F point)
     {
-        if (point.x >= x && point.y >= y && point.x < x + width &&
-            point.y < y + height)
+        if (point.x >= x && point.y >= y && point.x < x + w &&
+            point.y < y + h)
             return true;
 
         return false;
+    }
+
+    RectF RectF::Copy()
+    {
+        return *this;
+    }
+
+    RectF RectF::Translate(float dx, float dy)
+    {
+        x += dx;
+        y += dy;
+
+        return *this;
+    }
+
+    RectF RectF::SetHeight(float newh)
+    {
+        h = newh;
+
+        return *this;
+    }
+
+    LineF RectF::GetTopEdge()
+    {
+        return {x, y, x + w, y};
+    }
+
+    Point2F RectF::GetTopLeftCorner()
+    {
+        return {x, y};
     }
 
 }  // namespace Forradia

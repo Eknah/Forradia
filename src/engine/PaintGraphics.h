@@ -6,6 +6,8 @@
 #include <SDL2/SDL_pixels.h>
 #include <vector>
 #include "../engine/Point2F.h"
+#include "RectF.h"
+#include "LineF.h"
 
 namespace Forradia
 {
@@ -14,10 +16,11 @@ namespace Forradia
     public:
         // ---- Drawing operations ----
 
-        void FillRect(SDL_Color color, float x, float y, float width, float Height) const;
-
-        void DrawRect(SDL_Color color, float x, float y, float width, float height) const;
-
+        void FillRect(SDL_Color color, RectF rect) const;
+        void DrawRect(SDL_Color color, RectF rect) const;
+        void FillRect(SDL_Color color, float x, float y, float w, float Height) const;
+        void DrawRect(SDL_Color color, float x, float y, float w, float h) const;
+        void DrawLine(SDL_Color color, LineF line) const;
         void DrawLine(SDL_Color color, float x0, float y0, float x1, float y1) const;
 
     private:

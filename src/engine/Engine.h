@@ -47,21 +47,17 @@ namespace Forradia
 
         // ---- Drawing operations ----
 
-        void DrawImage(std::string imageName, float x, float y, float width, float height) const override;
-
-        void DrawImage(int imageNameHash, float x, float y, float width, float height) const override;
-
-        void FillRect(SDL_Color color, float x, float y, float width, float height) const override;
-
-        void DrawRect(SDL_Color color, float x, float y, float width, float height) const override;
-
+        void DrawImage(std::string imageName, float x, float y, float w, float h) const override;
+        void DrawImage(int imageNameHash, float x, float y, float w, float h) const override;
+        void FillRect(SDL_Color color, float x, float y, float w, float h) const override;
+        void DrawRect(SDL_Color color, float x, float y, float w, float h) const override;
+        void DrawLine(SDL_Color color, LineF line) const override;
         void DrawLine(SDL_Color color, float x0, float y0, float x1, float y1) const override;
-
         void DrawString(std::string message, SDL_Color color, float x, float y, bool centerAlign = false, float specificScaling = 1.0f) const override;
-
         void DrawModel(std::string modelName, float x, float y, float z, float rotation = 0.0f, float specificScaling = 1.0f, float Opacity = 1.0f) const override;
-
         void DrawModel(int ModelNameHash, float x, float y, float z, float rotation = 0.0f, float specificScaling = 1.0f, float Opacity = 1.0f) const override;
+        void FillRect(SDL_Color color, RectF rect) const override;
+        void DrawRect(SDL_Color color, RectF rect) const override;
 
         // ---- Helper functions ----
 

@@ -11,21 +11,22 @@ namespace Forradia
     void Console::Render()
     {
 
-        auto inTextLineHeight = 0.025f;
+        e.FillRect(palette.mediumBlueSemiTrans, bounds);
+        e.DrawRect(palette.wheat, bounds);
 
-        e.FillRect(palette.mediumBlueSemiTrans, bounds.x, bounds.y, bounds.width, bounds.height);
-        e.DrawRect(palette.wheat, bounds.x, bounds.y, bounds.width, bounds.height);
+        auto inputBounds = bounds.Copy().Translate(0.0f, bounds.h - inputLineHeight).SetHeight(inputLineHeight);
 
         if (inputActive)
-            e.FillRect(palette.mediumBlue, bounds.x, bounds.y + bounds.height - inTextLineHeight, bounds.width, inTextLineHeight);
+            e.FillRect(palette.mediumBlue, inputBounds);
 
-        e.DrawLine(palette.wheat, bounds.x, bounds.y + bounds.height - inTextLineHeight, bounds.x + bounds.width, bounds.y + bounds.height - inTextLineHeight);
+        e.DrawLine(palette.wheat, inputBounds.GetTopEdge());
 
         if (inputActive)
         {
             auto textPrinted = e.text;
             textPrinted.insert(e.cursor, "|");
-            e.DrawString(std::string(textPrinted), palette.white, bounds.x + 0.005f, bounds.y + bounds.height - inTextLineHeight);
+            //e.DrawString(String(textPrinted), palette.white, inputBounds.GetTopLeftCorner().Translate(0.005f, 0.0f));
+            e.DrawString(String(textPrinted), palette.white, bounds.x + 0.005f, bounds.y + bounds.h - inputLineHeight);
         }
 
         auto textboxTextX = bounds.x + margin;
@@ -39,7 +40,7 @@ namespace Forradia
             textToPrint = fileSystem.runningProgram->outputText;
 
         auto lineHeight = 0.02f;
-        auto numShownLines = CInt(bounds.height / lineHeight);
+        auto numShownLines = CInt(bounds.h / lineHeight);
         auto startline = std::max(CInt(textToPrint.size() + 1 - numShownLines), 0);
         auto endline = std::min(startline + numShownLines - 2, CInt(textToPrint.size() - 1));
 
@@ -66,7 +67,7 @@ namespace Forradia
             {
                 if (InputBeginsWith("echo"))
                 {
-                    auto toPrint = e.text.substr(4);
+                    auto toPrint = e.text.substr(5);
                     Print(toPrint);
                 }
                 else if (InputBeginsWith("quit"))

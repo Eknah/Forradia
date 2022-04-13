@@ -54,8 +54,8 @@ namespace Forradia
         glGetTexLevelParameteriv(GL_TEXTURE_2D, mipLevel, GL_TEXTURE_WIDTH, &w);
         glGetTexLevelParameteriv(GL_TEXTURE_2D, mipLevel, GL_TEXTURE_HEIGHT, &h);
 
-        auto imageWidth = static_cast<float>(w) / canvasSize.width;
-        auto imageHeight = static_cast<float>(h) / canvasSize.height;
+        auto imageWidth = static_cast<float>(w) / canvasSize.w;
+        auto imageHeight = static_cast<float>(h) / canvasSize.h;
 
         return { imageWidth, imageHeight };
     }

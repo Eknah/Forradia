@@ -14,6 +14,8 @@ namespace Forradia
         bool IsUndefined();
         void MakeUndefined();
 
+        Point2F Translate(float dx, float dy);
+
         float x = 0.0f;
         float y = 0.0f;
     };

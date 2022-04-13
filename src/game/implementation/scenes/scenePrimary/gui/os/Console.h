@@ -33,6 +33,8 @@ namespace Forradia
         const float height = 0.15f;
         const float margin = 0.005f;
 
+        float inputLineHeight = 0.025f;
+
         String inputText;
         bool inputActive = false;
         RectF bounds = { 0.5f - width / 2, 1.0f - 0.03f - height, width, height };

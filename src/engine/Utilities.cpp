@@ -29,8 +29,8 @@ namespace Forradia
     {
         auto mousePosition = GetMousePosI();
         auto canvas_size = GetCanvasSize();
-        auto mousexF = static_cast<float>(mousePosition.x) / canvas_size.width;
-        auto mouseyF = static_cast<float>(mousePosition.y) / canvas_size.height;
+        auto mousexF = static_cast<float>(mousePosition.x) / canvas_size.w;
+        auto mouseyF = static_cast<float>(mousePosition.y) / canvas_size.h;
 
         return { mousexF, mouseyF };
     }
@@ -38,8 +38,8 @@ namespace Forradia
     SizeF Utilities::ConvertToFloat(int value)
     {
         auto canvasSize = GetCanvasSize();
-        auto resultWidth = static_cast<float>(value) / canvasSize.width;
-        auto resultHeight = static_cast<float>(value) / canvasSize.height;
+        auto resultWidth = static_cast<float>(value) / canvasSize.w;
+        auto resultHeight = static_cast<float>(value) / canvasSize.h;
 
         return { resultWidth, resultHeight };
     }

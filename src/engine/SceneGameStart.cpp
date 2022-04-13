@@ -22,10 +22,10 @@ namespace Forradia
 
         auto logoSizeF = e.GetImageSizeF(imageNameLogo);
 
-        e.DrawImage(imageNameLogo, 0.5f - logoSizeF.width / 2.0f,
-            0.25f - logoSizeF.height / 2.0f,
-            logoSizeF.width,
-            logoSizeF.height);
+        e.DrawImage(imageNameLogo, 0.5f - logoSizeF.w / 2.0f,
+            0.25f - logoSizeF.h / 2.0f,
+            logoSizeF.w,
+            logoSizeF.h);
         e.DrawString(text, { 255, 255, 255, 255 }, 0.5f, 0.5f, true);
     }
 

@@ -43,53 +43,53 @@ namespace Forradia
 
         if (boundsInventoryBtn.ContainsPoint(MousePositionF))
             e.FillRect({ 100, 200, 255, 100 }, boundsInventoryBtn.x,
-                boundsInventoryBtn.y, boundsInventoryBtn.width,
-                boundsInventoryBtn.height);
+                boundsInventoryBtn.y, boundsInventoryBtn.w,
+                boundsInventoryBtn.h);
         else
             e.FillRect({ 0, 150, 255, 100 }, boundsInventoryBtn.x,
-                boundsInventoryBtn.y, boundsInventoryBtn.width,
-                boundsInventoryBtn.height);
+                boundsInventoryBtn.y, boundsInventoryBtn.w,
+                boundsInventoryBtn.h);
 
         e.DrawRect({ 255, 255, 255, 100 }, boundsInventoryBtn.x,
-            boundsInventoryBtn.y, boundsInventoryBtn.width,
-            boundsInventoryBtn.height);
+            boundsInventoryBtn.y, boundsInventoryBtn.w,
+            boundsInventoryBtn.h);
         e.DrawString("Inventory [F2]", { 255, 255, 255, 255 },
-            boundsInventoryBtn.x + boundsInventoryBtn.width / 2,
-            boundsInventoryBtn.y + boundsInventoryBtn.height / 2,
+            boundsInventoryBtn.x + boundsInventoryBtn.w / 2,
+            boundsInventoryBtn.y + boundsInventoryBtn.h / 2,
             true);
 
         if (boundsCharacterBtn.ContainsPoint(MousePositionF))
             e.FillRect({ 100, 200, 255, 100 }, boundsCharacterBtn.x,
-                boundsCharacterBtn.y, boundsCharacterBtn.width,
-                boundsCharacterBtn.height);
+                boundsCharacterBtn.y, boundsCharacterBtn.w,
+                boundsCharacterBtn.h);
         else
             e.FillRect({ 0, 150, 255, 100 }, boundsCharacterBtn.x,
-                boundsCharacterBtn.y, boundsCharacterBtn.width,
-                boundsCharacterBtn.height);
+                boundsCharacterBtn.y, boundsCharacterBtn.w,
+                boundsCharacterBtn.h);
 
         e.DrawRect({ 255, 255, 255, 100 }, boundsCharacterBtn.x,
-            boundsCharacterBtn.y, boundsCharacterBtn.width,
-            boundsCharacterBtn.height);
+            boundsCharacterBtn.y, boundsCharacterBtn.w,
+            boundsCharacterBtn.h);
         e.DrawString("Character [F1]", { 255, 255, 255, 255 },
-            boundsCharacterBtn.x + boundsCharacterBtn.width / 2,
-            boundsCharacterBtn.y + boundsCharacterBtn.height / 2,
+            boundsCharacterBtn.x + boundsCharacterBtn.w / 2,
+            boundsCharacterBtn.y + boundsCharacterBtn.h / 2,
             true);
 
         if (boundsSystemBtn.ContainsPoint(MousePositionF))
             e.FillRect({ 100, 200, 255, 100 }, boundsSystemBtn.x,
-                boundsSystemBtn.y, boundsSystemBtn.width,
-                boundsSystemBtn.height);
+                boundsSystemBtn.y, boundsSystemBtn.w,
+                boundsSystemBtn.h);
         else
             e.FillRect({ 0, 150, 255, 100 }, boundsSystemBtn.x,
-                boundsSystemBtn.y, boundsSystemBtn.width,
-                boundsSystemBtn.height);
+                boundsSystemBtn.y, boundsSystemBtn.w,
+                boundsSystemBtn.h);
 
         e.DrawRect({ 255, 255, 255, 100 }, boundsSystemBtn.x,
-            boundsSystemBtn.y, boundsSystemBtn.width,
-            boundsSystemBtn.height);
+            boundsSystemBtn.y, boundsSystemBtn.w,
+            boundsSystemBtn.h);
         e.DrawString("System [F3]", { 255, 255, 255, 255 },
-            boundsSystemBtn.x + boundsSystemBtn.width / 2,
-            boundsSystemBtn.y + boundsSystemBtn.height / 2, true);
+            boundsSystemBtn.x + boundsSystemBtn.w / 2,
+            boundsSystemBtn.y + boundsSystemBtn.h / 2, true);
         console.Render();
 
         for (auto& [Key, Window] : windows)

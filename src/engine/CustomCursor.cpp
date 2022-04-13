@@ -26,13 +26,13 @@ namespace Forradia
         case CursorTypes::Default:
         {
             e.DrawImage("CursorDefault", mousePosF.x, mousePosF.y,
-                cursorSizeF.width, cursorSizeF.height);
+                cursorSizeF.w, cursorSizeF.h);
             break;
         }
         case CursorTypes::Hovering:
         {
             e.DrawImage("CursorHoveringClickable", mousePosF.x, mousePosF.y,
-                cursorSizeF.width, cursorSizeF.height);
+                cursorSizeF.w, cursorSizeF.h);
             break;
         }
         }

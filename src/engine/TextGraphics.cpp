@@ -46,10 +46,10 @@ namespace Forradia
         auto canvasSize = utils.GetCanvasSize();
 
         auto width = static_cast<float>(fontSurface->w)
-            / canvasSize.width * scaling * specificScaling;
+            / canvasSize.w * scaling * specificScaling;
 
         auto height = static_cast<float>(fontSurface->h)
-            / canvasSize.height * scaling * specificScaling;
+            / canvasSize.h * scaling * specificScaling;
 
         glColor4f(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f,
             color.a / 255.0f);

@@ -36,17 +36,17 @@ namespace Forradia
             gameLoop(*_gameLoop), sceneManager(*_sceneManager)
         {}
 
-        virtual void DrawImage(std::string imageName, float x, float y, float width, float height) const = 0;
-        virtual void DrawImage(int imageNameHash, float x, float y, float width, float height) const = 0;
-
-        virtual void FillRect(SDL_Color color, float x, float y, float width, float height) const = 0;
-        virtual void DrawRect(SDL_Color color, float X, float Y, float width, float height) const = 0;
+        virtual void DrawImage(std::string imageName, float x, float y, float w, float h) const = 0;
+        virtual void DrawImage(int imageNameHash, float x, float y, float w, float h) const = 0;
+        virtual void FillRect(SDL_Color color, float x, float y, float w, float h) const = 0;
+        virtual void DrawRect(SDL_Color color, float X, float Y, float w, float h) const = 0;
+        virtual void DrawLine(SDL_Color color, LineF line) const = 0;
         virtual void DrawLine(SDL_Color color, float x0, float y0, float x1, float y1) const = 0;
-
         virtual void DrawString(std::string message, SDL_Color color, float x, float y, bool centerAlign = false, float specificScaling = 1.0f) const = 0;
-
         virtual void DrawModel(std::string modelName, float x, float y, float z, float rotation = 0.0f, float specificScaling = 1.0f, float Opacity = 1.0f) const = 0;
         virtual void DrawModel(int modelNameHash, float x, float y, float z, float rotation = 0.0f, float specificScaling = 1.0f, float opacity = 1.0f) const = 0;
+        virtual void FillRect(SDL_Color color, RectF rect) const = 0;
+        virtual void DrawRect(SDL_Color color, RectF rect) const = 0;
 
         virtual SizeF GetImageSizeF(std::string imageName) const = 0;
 
