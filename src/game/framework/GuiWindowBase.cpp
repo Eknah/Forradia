@@ -9,8 +9,7 @@ namespace Forradia
 
     void GuiWindowBase::Render()
     {
-        if (!visible)
-            return;
+        if (!visible) return;
 
         e.FillRectangle(palette.mediumBlue, bounds.x, bounds.y, bounds.width, bounds.height);
         e.DrawRectangle(palette.black, bounds.x, bounds.y, bounds.width, bounds.height);
