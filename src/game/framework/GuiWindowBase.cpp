@@ -11,8 +11,8 @@ namespace Forradia
     {
         if (!visible) return;
 
-        e.FillRectangle(palette.mediumBlue, bounds.x, bounds.y, bounds.width, bounds.height);
-        e.DrawRectangle(palette.black, bounds.x, bounds.y, bounds.width, bounds.height);
+        e.FillRect(palette.mediumBlue, bounds.x, bounds.y, bounds.width, bounds.height);
+        e.DrawRect(palette.black, bounds.x, bounds.y, bounds.width, bounds.height);
         e.DrawString(title, palette.black, bounds.x + margin, bounds.y + margin);
         e.DrawLine(palette.black, bounds.x, bounds.y + topBarHeight, bounds.x + bounds.width, bounds.y + topBarHeight);
 

@@ -6,7 +6,7 @@
 #include <vector>
 #include "../engine/Engine.h"
 #include "../engine/Utilities.h"
-#include "GuiMinimap.h"
+#include "Minimap.h"
 #include "framework/GuiWindowBase.h"
 #include "os/Console.h"
 
@@ -16,8 +16,8 @@ namespace Forradia
     class Gui
     {
     public:
-        explicit Gui(const Engine& _e) :
-            e(_e), guiMinimap(_e), console(_e)
+
+        explicit Gui(const Engine& _e) : e(_e), minimap(_e), console(_e)
         {}
 
         void Initialize();
@@ -26,28 +26,21 @@ namespace Forradia
         bool DoMouseDown(Uint8 mouseButton);
         void DoMouseUp();
 
-        UMap<std::string, UPtr<GuiWindowBase>> windows;
+        UMap<String, UPtr<GuiWindowBase>> windows;
         Console console;
 
     private:
+
         const Engine& e;
 
-        GuiMinimap guiMinimap;
-
-        const float textBoxMargin = 0.005f;
-
+        Minimap minimap;
+        const float margin = 0.005f;
         Utilities utils;
-
-        const float buttonWidth = 0.15f;
-        const float buttonHeight = 0.03f;
-
-        RectF boundsButtonInventory = { 0.5f - buttonWidth / 2, 1.0f - buttonHeight,
-                                        buttonWidth, buttonHeight };
-        RectF boundsButtonCharacter = { 0.5f - buttonWidth / 2 - buttonWidth,
-                                        1.0f - buttonHeight, buttonWidth,
-                                        buttonHeight };
-        RectF boundsButtonSystem = { 0.5f - buttonWidth / 2 + buttonWidth,
-                                     1.0f - buttonHeight, buttonWidth, buttonHeight };
+        const float btnWidth = 0.15f;
+        const float btnHeight = 0.03f;
+        RectF boundsInventoryBtn = { 0.5f - btnWidth / 2, 1.0f - btnHeight, btnWidth, btnHeight };
+        RectF boundsCharacterBtn = { 0.5f - btnWidth / 2 - btnWidth, 1.0f - btnHeight, btnWidth, btnHeight };
+        RectF boundsSystemBtn = { 0.5f - btnWidth / 2 + btnWidth, 1.0f - btnHeight, btnWidth, btnHeight };
 
     };
 

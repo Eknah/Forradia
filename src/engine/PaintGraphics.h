@@ -14,9 +14,9 @@ namespace Forradia
     public:
         // ---- Drawing operations ----
 
-        void FillRectangle(SDL_Color color, float x, float y, float width, float Height) const;
+        void FillRect(SDL_Color color, float x, float y, float width, float Height) const;
 
-        void DrawRectangle(SDL_Color color, float x, float y, float width, float height) const;
+        void DrawRect(SDL_Color color, float x, float y, float width, float height) const;
 
         void DrawLine(SDL_Color color, float x0, float y0, float x1, float y1) const;
 

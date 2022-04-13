@@ -8,10 +8,10 @@
 namespace Forradia
 {
 
-    class GuiMinimap
+    class Minimap
     {
     public:
-        explicit GuiMinimap(const Engine& _e) : e(_e) {}
+        explicit Minimap(const Engine& _e) : e(_e) {}
 
         void Render();
 

@@ -6,7 +6,7 @@
 namespace Forradia
 {
 
-    void PaintGraphics::FillRectangle(SDL_Color Color, float X, float Y, float Width, float Height) const
+    void PaintGraphics::FillRect(SDL_Color Color, float X, float Y, float Width, float Height) const
     {
         std::vector<Point2F> vertices = {
             {X, Y}, {X, Y + Height}, {X + Width, Y + Height}, {X + Width, Y} };
@@ -14,7 +14,7 @@ namespace Forradia
         RenderShape(GL_QUADS, vertices, Color);
     }
 
-    void PaintGraphics::DrawRectangle(SDL_Color Color, float X, float Y, float Width, float Height) const
+    void PaintGraphics::DrawRect(SDL_Color Color, float X, float Y, float Width, float Height) const
     {
         std::vector<Point2F> vertices = {
             {X, Y}, {X, Y + Height}, {X + Width, Y + Height}, {X + Width, Y} };

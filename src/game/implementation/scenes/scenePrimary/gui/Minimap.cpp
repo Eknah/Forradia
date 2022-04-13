@@ -1,19 +1,19 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "GuiMinimap.h"
+#include "Minimap.h"
 #include "../engine/Engine.h"
 
 namespace Forradia
 {
 
-    void GuiMinimap::Render()
+    void Minimap::Render()
     {
         auto minimapSizeF = utils.ConvertToFloat(minimapSize);
 
-        e.FillRectangle(palette.mediumBlueSemiTrans, 0, 0, minimapSizeF.width,
+        e.FillRect(palette.mediumBlueSemiTrans, 0, 0, minimapSizeF.width,
             minimapSizeF.height);
-        e.DrawRectangle(palette.black, 0, 0, minimapSizeF.width,
+        e.DrawRect(palette.black, 0, 0, minimapSizeF.width,
             minimapSizeF.height);
     }
 

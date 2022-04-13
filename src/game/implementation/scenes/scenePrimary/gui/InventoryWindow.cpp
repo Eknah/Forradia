@@ -1,19 +1,19 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "GuiWindowInventory.h"
+#include "InventoryWindow.h"
 #include "../engine/Engine.h"
 
 namespace Forradia
 {
 
-    void GuiWindowInventory::RenderDerived()
+    void InventoryWindow::RenderDerived()
     {
         auto canvasSize = utils.GetCanvasSize();
         auto aspectRatio = static_cast<float>(canvasSize.width) / canvasSize.height;
         auto boundsInterior = GetInteriorBounds();
 
-        e.FillRectangle(palette.wheat, boundsInterior.x, boundsInterior.y,
+        e.FillRect(palette.wheat, boundsInterior.x, boundsInterior.y,
             boundsInterior.width, boundsInterior.height);
 
         auto slotSize = boundsInterior.width / numSlotCols - margin;
@@ -52,7 +52,7 @@ namespace Forradia
         }
     }
 
-    void GuiWindowInventory::DoMouseDownDerived(Uint8 mouseButton)
+    void InventoryWindow::DoMouseDownDerived(Uint8 mouseButton)
     {
         if (mouseButton != SDL_BUTTON_RIGHT)
             return;

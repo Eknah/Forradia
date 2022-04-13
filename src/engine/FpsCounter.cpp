@@ -19,9 +19,9 @@ namespace Forradia
 
     void FpsCounter::Render()
     {
-        e.FillRectangle(palette.mediumBlueSemiTrans, posx - width / 2,
+        e.FillRect(palette.mediumBlueSemiTrans, posx - width / 2,
             posy - height / 2, width, height);
-        e.DrawRectangle(palette.whiteSemiTrans, posx - width / 2,
+        e.DrawRect(palette.whiteSemiTrans, posx - width / 2,
             posy - height / 2, width, height);
         e.DrawString("Fps: " + std::to_string(fps), palette.white, posx, posy,
             true);

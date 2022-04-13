@@ -63,14 +63,14 @@ namespace Forradia
         imageGraphics.DrawImage(imageNameHash, x, y, width, height);
     }
 
-    void Engine::FillRectangle(SDL_Color color, float x, float y, float width, float height) const
+    void Engine::FillRect(SDL_Color color, float x, float y, float width, float height) const
     {
-        paintGraphics.FillRectangle(color, x, y, width, height);
+        paintGraphics.FillRect(color, x, y, width, height);
     }
 
-    void Engine::DrawRectangle(SDL_Color color, float x, float y, float width, float height) const
+    void Engine::DrawRect(SDL_Color color, float x, float y, float width, float height) const
     {
-        paintGraphics.DrawRectangle(color, x, y, width, height);
+        paintGraphics.DrawRect(color, x, y, width, height);
     }
 
     void Engine::DrawLine(SDL_Color color, float x0, float y0, float x1, float y1) const

@@ -39,8 +39,8 @@ namespace Forradia
         virtual void DrawImage(std::string imageName, float x, float y, float width, float height) const = 0;
         virtual void DrawImage(int imageNameHash, float x, float y, float width, float height) const = 0;
 
-        virtual void FillRectangle(SDL_Color color, float x, float y, float width, float height) const = 0;
-        virtual void DrawRectangle(SDL_Color color, float X, float Y, float width, float height) const = 0;
+        virtual void FillRect(SDL_Color color, float x, float y, float width, float height) const = 0;
+        virtual void DrawRect(SDL_Color color, float X, float Y, float width, float height) const = 0;
         virtual void DrawLine(SDL_Color color, float x0, float y0, float x1, float y1) const = 0;
 
         virtual void DrawString(std::string message, SDL_Color color, float x, float y, bool centerAlign = false, float specificScaling = 1.0f) const = 0;

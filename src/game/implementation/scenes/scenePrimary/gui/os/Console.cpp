@@ -11,47 +11,45 @@ namespace Forradia
     void Console::Render()
     {
 
-        auto inputTextLineHeight = 0.025f;
-        e.FillRectangle({ 0, 50, 100, 200 }, boundsTextBox.x, boundsTextBox.y,
-            boundsTextBox.width, boundsTextBox.height);
-        e.DrawRectangle({ 255, 255, 255, 100 }, boundsTextBox.x, boundsTextBox.y,
-            boundsTextBox.width, boundsTextBox.height);
+        auto inTextLineHeight = 0.025f;
+
+        e.FillRect(palette.mediumBlueSemiTrans, bounds.x, bounds.y, bounds.width, bounds.height);
+        e.DrawRect(palette.wheat, bounds.x, bounds.y, bounds.width, bounds.height);
 
         if (inputActive)
-            e.FillRectangle({ 0, 150, 255, 100 }, boundsTextBox.x, boundsTextBox.y + boundsTextBox.height - inputTextLineHeight, boundsTextBox.width, inputTextLineHeight);
+            e.FillRect(palette.mediumBlue, bounds.x, bounds.y + bounds.height - inTextLineHeight, bounds.width, inTextLineHeight);
 
-        e.DrawLine({ 255, 255, 255, 100 }, boundsTextBox.x, boundsTextBox.y + boundsTextBox.height - inputTextLineHeight, boundsTextBox.x + boundsTextBox.width, boundsTextBox.y + boundsTextBox.height - inputTextLineHeight);
+        e.DrawLine(palette.wheat, bounds.x, bounds.y + bounds.height - inTextLineHeight, bounds.x + bounds.width, bounds.y + bounds.height - inTextLineHeight);
 
         if (inputActive)
         {
             auto textPrinted = e.text;
             textPrinted.insert(e.cursor, "|");
-            e.DrawString(std::string(textPrinted), { 255, 255, 255, 255 },
-                boundsTextBox.x + 0.005f,
-                boundsTextBox.y + boundsTextBox.height -
-                inputTextLineHeight);
+            e.DrawString(std::string(textPrinted), palette.white, bounds.x + 0.005f, bounds.y + bounds.height - inTextLineHeight);
         }
-        auto TextBoxTextX = boundsTextBox.x + textBoxMargin;
-        auto TextBoxTextY = boundsTextBox.y + textBoxMargin;
 
-        std::vector<std::string> textToPrint;
+        auto textboxTextX = bounds.x + margin;
+        auto textBoxTextY = bounds.y + margin;
+
+        List<String> textToPrint;
+
         if (fileSystem.runningProgram == nullptr)
             textToPrint = textBoxText;
         else
             textToPrint = fileSystem.runningProgram->outputText;
 
         auto lineHeight = 0.02f;
-        auto numShownLines = static_cast<int>(boundsTextBox.height / lineHeight);
-        auto startLine = std::max(static_cast<int>(textToPrint.size() + 1 - numShownLines), 0);
-        auto endLine = std::min(startLine + numShownLines - 2, static_cast<int>(textToPrint.size() - 1));
+        auto numShownLines = CInt(bounds.height / lineHeight);
+        auto startline = std::max(CInt(textToPrint.size() + 1 - numShownLines), 0);
+        auto endline = std::min(startline + numShownLines - 2, CInt(textToPrint.size() - 1));
 
-        auto y = TextBoxTextY;
-        for (auto i = startLine; i <= endLine; i++)
+        auto y = textBoxTextY;
+
+        for (auto i = startline; i <= endline; i++)
         {
-            e.DrawString(textToPrint.at(i), { 255, 255, 210, 255 }, TextBoxTextX, y, false, 0.7f);
+            e.DrawString(textToPrint.at(i), palette.wheat, textboxTextX, y, false, 0.7f);
             y += lineHeight;
         }
-
 
     }
 
@@ -66,28 +64,28 @@ namespace Forradia
             }
             else
             {
-                if (e.text.substr(0, 4) == "echo")
+                if (InputBeginsWith("echo"))
                 {
                     auto toPrint = e.text.substr(4);
                     Print(toPrint);
                 }
-                else if (e.text.substr(0, 4) == "quit")
+                else if (InputBeginsWith("quit"))
                 {
                     e.gameLoop.quit = true;
                 }
-                else if (e.text.substr(0, 4) == "list")
+                else if (InputBeginsWith("list"))
                 {
                     fileSystem.PrintCurrentDirectory();
                 }
-                else if (e.text.substr(0, 5) == "clear")
+                else if (InputBeginsWith("clear"))
                 {
                     textBoxText.clear();
                 }
-                else if (e.text.substr(0, 4) == "move")
+                else if (InputBeginsWith("move"))
                 {
                     fileSystem.MoveToFolder(e.text.substr(5));
                 }
-                else if (e.text.substr(0, 3) == "run")
+                else if (InputBeginsWith("run"))
                 {
                     fileSystem.RunProgram(e.text.substr(4));
                 }
@@ -97,7 +95,7 @@ namespace Forradia
         inputActive = !inputActive;
     }
 
-    void Console::Print(std::string message)
+    void Console::Print(String message)
     {
         textBoxText.push_back(message);
     }
@@ -105,6 +103,11 @@ namespace Forradia
     void Console::Clear()
     {
         textBoxText.clear();
+    }
+
+    bool Console::InputBeginsWith(String text)
+    {
+        return e.text.substr(0, text.length()) == text;
     }
 
 }  // namespace Forradia

@@ -4,7 +4,7 @@
 #include <memory>
 #include "Gui.h"
 #include "../engine/Engine.h"
-#include "GuiWindowInventory.h"
+#include "InventoryWindow.h"
 
 namespace Forradia
 {
@@ -13,7 +13,7 @@ namespace Forradia
     {
         windows.clear();
         windows.insert(
-            { "Inventory", std::make_unique<GuiWindowInventory>(
+            { "Inventory", std::make_unique<InventoryWindow>(
                               e, "Inventory", RectF{0.1f, 0.1f, 0.2f, 0.7f}) });
     }
 
@@ -21,13 +21,13 @@ namespace Forradia
     {
         auto mousePositionF = utils.GetMousePosF();
 
-        if (boundsButtonInventory.ContainsPoint(mousePositionF))
+        if (boundsInventoryBtn.ContainsPoint(mousePositionF))
             e.customCursor.cursorType = CursorTypes::Hovering;
 
-        if (boundsButtonCharacter.ContainsPoint(mousePositionF))
+        if (boundsCharacterBtn.ContainsPoint(mousePositionF))
             e.customCursor.cursorType = CursorTypes::Hovering;
 
-        if (boundsButtonSystem.ContainsPoint(mousePositionF))
+        if (boundsSystemBtn.ContainsPoint(mousePositionF))
             e.customCursor.cursorType = CursorTypes::Hovering;
 
         for (auto& [key, window] : windows)
@@ -37,59 +37,59 @@ namespace Forradia
     void Gui::Render()
     {
 
-        guiMinimap.Render();
+        minimap.Render();
 
         auto MousePositionF = utils.GetMousePosF();
 
-        if (boundsButtonInventory.ContainsPoint(MousePositionF))
-            e.FillRectangle({ 100, 200, 255, 100 }, boundsButtonInventory.x,
-                boundsButtonInventory.y, boundsButtonInventory.width,
-                boundsButtonInventory.height);
+        if (boundsInventoryBtn.ContainsPoint(MousePositionF))
+            e.FillRect({ 100, 200, 255, 100 }, boundsInventoryBtn.x,
+                boundsInventoryBtn.y, boundsInventoryBtn.width,
+                boundsInventoryBtn.height);
         else
-            e.FillRectangle({ 0, 150, 255, 100 }, boundsButtonInventory.x,
-                boundsButtonInventory.y, boundsButtonInventory.width,
-                boundsButtonInventory.height);
+            e.FillRect({ 0, 150, 255, 100 }, boundsInventoryBtn.x,
+                boundsInventoryBtn.y, boundsInventoryBtn.width,
+                boundsInventoryBtn.height);
 
-        e.DrawRectangle({ 255, 255, 255, 100 }, boundsButtonInventory.x,
-            boundsButtonInventory.y, boundsButtonInventory.width,
-            boundsButtonInventory.height);
+        e.DrawRect({ 255, 255, 255, 100 }, boundsInventoryBtn.x,
+            boundsInventoryBtn.y, boundsInventoryBtn.width,
+            boundsInventoryBtn.height);
         e.DrawString("Inventory [F2]", { 255, 255, 255, 255 },
-            boundsButtonInventory.x + boundsButtonInventory.width / 2,
-            boundsButtonInventory.y + boundsButtonInventory.height / 2,
+            boundsInventoryBtn.x + boundsInventoryBtn.width / 2,
+            boundsInventoryBtn.y + boundsInventoryBtn.height / 2,
             true);
 
-        if (boundsButtonCharacter.ContainsPoint(MousePositionF))
-            e.FillRectangle({ 100, 200, 255, 100 }, boundsButtonCharacter.x,
-                boundsButtonCharacter.y, boundsButtonCharacter.width,
-                boundsButtonCharacter.height);
+        if (boundsCharacterBtn.ContainsPoint(MousePositionF))
+            e.FillRect({ 100, 200, 255, 100 }, boundsCharacterBtn.x,
+                boundsCharacterBtn.y, boundsCharacterBtn.width,
+                boundsCharacterBtn.height);
         else
-            e.FillRectangle({ 0, 150, 255, 100 }, boundsButtonCharacter.x,
-                boundsButtonCharacter.y, boundsButtonCharacter.width,
-                boundsButtonCharacter.height);
+            e.FillRect({ 0, 150, 255, 100 }, boundsCharacterBtn.x,
+                boundsCharacterBtn.y, boundsCharacterBtn.width,
+                boundsCharacterBtn.height);
 
-        e.DrawRectangle({ 255, 255, 255, 100 }, boundsButtonCharacter.x,
-            boundsButtonCharacter.y, boundsButtonCharacter.width,
-            boundsButtonCharacter.height);
+        e.DrawRect({ 255, 255, 255, 100 }, boundsCharacterBtn.x,
+            boundsCharacterBtn.y, boundsCharacterBtn.width,
+            boundsCharacterBtn.height);
         e.DrawString("Character [F1]", { 255, 255, 255, 255 },
-            boundsButtonCharacter.x + boundsButtonCharacter.width / 2,
-            boundsButtonCharacter.y + boundsButtonCharacter.height / 2,
+            boundsCharacterBtn.x + boundsCharacterBtn.width / 2,
+            boundsCharacterBtn.y + boundsCharacterBtn.height / 2,
             true);
 
-        if (boundsButtonSystem.ContainsPoint(MousePositionF))
-            e.FillRectangle({ 100, 200, 255, 100 }, boundsButtonSystem.x,
-                boundsButtonSystem.y, boundsButtonSystem.width,
-                boundsButtonSystem.height);
+        if (boundsSystemBtn.ContainsPoint(MousePositionF))
+            e.FillRect({ 100, 200, 255, 100 }, boundsSystemBtn.x,
+                boundsSystemBtn.y, boundsSystemBtn.width,
+                boundsSystemBtn.height);
         else
-            e.FillRectangle({ 0, 150, 255, 100 }, boundsButtonSystem.x,
-                boundsButtonSystem.y, boundsButtonSystem.width,
-                boundsButtonSystem.height);
+            e.FillRect({ 0, 150, 255, 100 }, boundsSystemBtn.x,
+                boundsSystemBtn.y, boundsSystemBtn.width,
+                boundsSystemBtn.height);
 
-        e.DrawRectangle({ 255, 255, 255, 100 }, boundsButtonSystem.x,
-            boundsButtonSystem.y, boundsButtonSystem.width,
-            boundsButtonSystem.height);
+        e.DrawRect({ 255, 255, 255, 100 }, boundsSystemBtn.x,
+            boundsSystemBtn.y, boundsSystemBtn.width,
+            boundsSystemBtn.height);
         e.DrawString("System [F3]", { 255, 255, 255, 255 },
-            boundsButtonSystem.x + boundsButtonSystem.width / 2,
-            boundsButtonSystem.y + boundsButtonSystem.height / 2, true);
+            boundsSystemBtn.x + boundsSystemBtn.width / 2,
+            boundsSystemBtn.y + boundsSystemBtn.height / 2, true);
         console.Render();
 
         for (auto& [Key, Window] : windows)
@@ -110,7 +110,7 @@ namespace Forradia
 
         auto mousePositionF = utils.GetMousePosF();
 
-        if (boundsButtonInventory.ContainsPoint(mousePositionF))
+        if (boundsInventoryBtn.ContainsPoint(mousePositionF))
         {
             windows.at("Inventory")->visible = !windows.at("Inventory")->visible;
 

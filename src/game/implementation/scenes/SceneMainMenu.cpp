@@ -40,7 +40,7 @@ namespace Forradia
 
         for (auto& button : sceneButtons)
         {
-            e.FillRectangle(palette.wheat, button.bounds.x - button.bounds.width / 2, button.bounds.y - button.bounds.height / 2, button.bounds.width, button.bounds.height);
+            e.FillRect(palette.wheat, button.bounds.x - button.bounds.width / 2, button.bounds.y - button.bounds.height / 2, button.bounds.width, button.bounds.height);
             e.DrawString(button.text, palette.black, button.bounds.x, button.bounds.y, true);
         }
     }
