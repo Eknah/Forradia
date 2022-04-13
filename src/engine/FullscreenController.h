@@ -5,16 +5,19 @@
 #include "IEngine.h"
 #include "IFullscreenController.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class FullscreenController : public IFullscreenController {
- public:
-  explicit FullscreenController(const IEngine &e) :
-        IFullscreenController(e) {}
+    class FullscreenController : public IFullscreenController
+    {
+    public:
+        explicit FullscreenController(const IEngine& e) :
+            IFullscreenController(e)
+        {}
 
-  void UpdateFullscreenToggling() override;
+        void UpdateFullscreenToggling() override;
 
-  void ToggleFullscreen() override;
-};
+        void ToggleFullscreen() override;
+    };
 
 }  // namespace Forradia

@@ -3,25 +3,27 @@
 
 #pragma once
 
-namespace Forradia {
+namespace Forradia
+{
 
-class IEngine;
+    class IEngine;
 
-class IGameLoop {
- public:
-  explicit IGameLoop(IEngine &_e) : e(_e) {}
+    class IGameLoop
+    {
+    public:
+        explicit IGameLoop(IEngine& _e) : e(_e) {}
 
-  virtual void Run() = 0;
+        virtual void Run() = 0;
 
-  // Looped functions
-  virtual void Update() = 0;
-  virtual void Render() = 0;
-  virtual void ResetForNewFrame() = 0;
+        // Looped functions
+        virtual void Update() = 0;
+        virtual void Render() = 0;
+        virtual void ResetForNewFrame() = 0;
 
-    bool quit = false;
+        bool quit = false;
 
- protected:
-  IEngine &e;
-};
+    protected:
+        IEngine& e;
+    };
 
 }  // namespace Forradia

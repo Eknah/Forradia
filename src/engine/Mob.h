@@ -8,14 +8,15 @@
 #include "../engine/Aliases.h"
 #include "../engine/Actor.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class IEngine;
+    class IEngine;
 
-class Mob : public Actor {
- public:
-  Mob(const IEngine &e, float x, float y,
-       std::string modelName);
-};
+    class Mob : public Actor
+    {
+    public:
+        Mob(const IEngine& e, float x, float y, std::string modelName);
+    };
 
 }  // namespace Forradia

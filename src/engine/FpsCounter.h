@@ -6,19 +6,21 @@
 #include "IFpsCounter.h"
 #include "Timer.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class FpsCounter : public IFpsCounter {
- public:
-  explicit FpsCounter(IEngine &e) : IFpsCounter(e) {}
+    class FpsCounter : public IFpsCounter
+    {
+    public:
+        explicit FpsCounter(IEngine& e) : IFpsCounter(e) {}
 
-  void Update() override;
+        void Update() override;
 
-  void Render() override;
+        void Render() override;
 
-  private:
-    Timer timer = Timer(MakeUPtr<int>(1000));
+    private:
+        Timer timer = Timer(MakeUPtr<int>(1000));
 
-};
+    };
 
 }  // namespace Forradia

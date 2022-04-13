@@ -3,12 +3,14 @@
 
 #pragma once
 
-namespace Forradia {
+namespace Forradia
+{
 
-enum class CursorTypes {
-    Default,
-    Hovering,
-    Hidden
-};
+    enum class CursorTypes
+    {
+        Default,
+        Hovering,
+        Hidden
+    };
 
 }  // namespace Forradia

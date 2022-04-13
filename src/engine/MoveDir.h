@@ -3,14 +3,16 @@
 
 #pragma once
 
-namespace Forradia {
+namespace Forradia
+{
 
-enum MoveDir : char {
-    DirNone = 0,
-    DirForward = 1,
-    DirRight = 2,
-    DirBack = 4,
-    DirLeft = 8
-};
+    enum MoveDir : char
+    {
+        DirNone = 0,
+        DirForward = 1,
+        DirRight = 2,
+        DirBack = 4,
+        DirLeft = 8
+    };
 
 }  // namespace Forradia

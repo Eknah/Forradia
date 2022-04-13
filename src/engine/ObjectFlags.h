@@ -3,13 +3,15 @@
 
 #pragma once
 
-namespace Forradia {
+namespace Forradia
+{
 
-enum ObjectFlags : char {
-    FlagNone = 0,
-    FlagObstacle = 1,
-    FlagMovable = 2,
-    FlagNoShadow = 4
-};
+    enum ObjectFlags : char
+    {
+        FlagNone = 0,
+        FlagObstacle = 1,
+        FlagMovable = 2,
+        FlagNoShadow = 4
+    };
 
 }  // namespace Forradia

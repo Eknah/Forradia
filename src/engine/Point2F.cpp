@@ -3,16 +3,18 @@
 
 #include "Point2F.h"
 
-namespace Forradia {
-
-bool Point2F::IsUndefined() {
-    return x == -1.0f && y == -1.0f;
-  }
-
-void Point2F::MakeUndefined()
+namespace Forradia
 {
-    x = -1.0f;
-    y = -1.0f;
-}
+
+    bool Point2F::IsUndefined()
+    {
+        return x == -1.0f && y == -1.0f;
+    }
+
+    void Point2F::MakeUndefined()
+    {
+        x = -1.0f;
+        y = -1.0f;
+    }
 
 }  // namespace Forradia

@@ -3,17 +3,19 @@
 
 #pragma once
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Point2F {
- public:
-  Point2F(float _x, float y) : x(_x), y(y) {}
+    class Point2F
+    {
+    public:
+        Point2F(float _x, float y) : x(_x), y(y) {}
 
-  bool IsUndefined();
-  void MakeUndefined();
+        bool IsUndefined();
+        void MakeUndefined();
 
-  float x = 0.0f;
-  float y = 0.0f;
-};
+        float x = 0.0f;
+        float y = 0.0f;
+    };
 
 }  // namespace Forradia

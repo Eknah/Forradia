@@ -3,10 +3,12 @@
 
 #include "IEngine.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-Player &IEngine::GetPlayer() const {
-    return **playerPtrPtr;
-}
+    Player& IEngine::GetPlayer() const
+    {
+        return **playerPtrPtr;
+    }
 
 }  // namespace Forradia

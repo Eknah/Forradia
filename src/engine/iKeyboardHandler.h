@@ -6,19 +6,21 @@
 #include <set>
 #include "Aliases.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class IKeyboardHandler {
- public:
-  virtual void ResetForNewFrame() const = 0;
-  virtual void DoKeyDown(SDL_Keycode key) const = 0;
-  virtual void DoKeyUp(SDL_Keycode key) const = 0;
+    class IKeyboardHandler
+    {
+    public:
+        virtual void ResetForNewFrame() const = 0;
+        virtual void DoKeyDown(SDL_Keycode key) const = 0;
+        virtual void DoKeyUp(SDL_Keycode key) const = 0;
 
-  const UPtr<std::set<SDL_Keycode>> keysBeingPressed
-  = MakeUPtr<std::set<SDL_Keycode>>();
+        const UPtr<std::set<SDL_Keycode>> keysBeingPressed
+            = MakeUPtr<std::set<SDL_Keycode>>();
 
-  const UPtr<std::set<SDL_Keycode>> keysBeenFired
-  = MakeUPtr<std::set<SDL_Keycode>>();
-};
+        const UPtr<std::set<SDL_Keycode>> keysBeenFired
+            = MakeUPtr<std::set<SDL_Keycode>>();
+    };
 
 }  // namespace Forradia

@@ -5,17 +5,19 @@
 #include "ICustomCursor.h"
 #include "IEngine.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class CustomCursor : public ICustomCursor {
- public:
-  explicit CustomCursor(IEngine &e) : ICustomCursor(e) {}
+    class CustomCursor : public ICustomCursor
+    {
+    public:
+        explicit CustomCursor(IEngine& e) : ICustomCursor(e) {}
 
-  void Initialize() override;
+        void Initialize() override;
 
-  void ResetForNewFrame() override;
+        void ResetForNewFrame() override;
 
-  void Render() override;
-};
+        void Render() override;
+    };
 
 }  // namespace Forradia

@@ -8,19 +8,21 @@
 #include "Vector3.h"
 #include <math.h>
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Math3D {
- public:
-  Vector3 Cross(const Vector3 a, const Vector3 b);
+    class Math3D
+    {
+    public:
+        Vector3 Cross(const Vector3 a, const Vector3 b);
 
-  float Magnitude(const Vector3 in);
+        float Magnitude(const Vector3 in);
 
-  float Dot(const Vector3 a, const Vector3 b);
+        float Dot(const Vector3 a, const Vector3 b);
 
-  float AngleBetween(const Vector3 a, const Vector3 b);
+        float AngleBetween(const Vector3 a, const Vector3 b);
 
-  Vector3 Proj(const Vector3 a, const Vector3 b);
-};
+        Vector3 Proj(const Vector3 a, const Vector3 b);
+    };
 
 }  // namespace Forradia

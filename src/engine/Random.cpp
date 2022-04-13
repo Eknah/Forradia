@@ -3,16 +3,20 @@
 
 #include "Random.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-Random::Random() {
-    if (!isInitialized) {
-        mt = std::mt19937(device());
-        isInitialized = true;
+    Random::Random()
+    {
+        if (!isInitialized)
+        {
+            mt = std::mt19937(device());
+            isInitialized = true;
+        }
     }
-}
 
-int Random::Next() const {
+    int Random::Next() const
+    {
         return result(mt);
     }
 

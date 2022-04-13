@@ -5,34 +5,34 @@
 #include "../engine/MapArea.h"
 #include "Rect.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class IMapGenerator;
+    class IMapGenerator;
 
-class PlanetWorldMap {
- public:
-  explicit PlanetWorldMap(int _mapAreaSize,
-                     int _worldMapWidth,
-                     int _worldMapHeight) :
-        mapAreaSize(_mapAreaSize), worldMapWidth(_worldMapWidth),
-        worldMapHeight(_worldMapHeight) {}
+    class PlanetWorldMap
+    {
+    public:
+        explicit PlanetWorldMap(int _mapAreaSize, int _worldMapWidth, int _worldMapHeight) :
+        mapAreaSize(_mapAreaSize), worldMapWidth(_worldMapWidth), worldMapHeight(_worldMapHeight)
+        {}
 
-  // Core
+        // Core
 
-    void GenerateWorldMap(UMap<int, UMap<int, SPtr<IMapGenerator>>> genAreas);
-    Rect GetBounds();
+        void GenerateWorldMap(UMap<int, UMap<int, SPtr<IMapGenerator>>> genAreas);
+        Rect GetBounds();
 
-  UPtr<MapArea>& GetArea(Point3 pos);
+        UPtr<MapArea>& GetArea(Point3 pos);
 
-  // Basic data
+        // Basic data
 
-  int mapAreaSize = -1;
-  int worldMapWidth = -1;
-  int worldMapHeight = -1;
+        int mapAreaSize = -1;
+        int worldMapWidth = -1;
+        int worldMapHeight = -1;
 
-  // Core world map data structures
+        // Core world map data structures
 
-  UMap<int, UMap<int, UMap<int, UPtr<MapArea>>>> areas;
-};
+        UMap<int, UMap<int, UMap<int, UPtr<MapArea>>>> areas;
+    };
 
 }  // namespace Forradia

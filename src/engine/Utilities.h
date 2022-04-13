@@ -9,14 +9,16 @@
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Utilities {
- public:
-  Size GetCanvasSize() const;
-  Point2 GetMousePosI();
-  Point2F GetMousePosF();
-  SizeF ConvertToFloat(int value);
-};
+    class Utilities
+    {
+    public:
+        Size GetCanvasSize() const;
+        Point2 GetMousePosI();
+        Point2F GetMousePosF();
+        SizeF ConvertToFloat(int value);
+    };
 
 }  // namespace Forradia

@@ -10,18 +10,21 @@
 #include "Material.h"
 #include "Vertex.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Mesh {
- public:
-  Mesh() {}
-  Mesh(std::vector<Vertex> _vertices, std::vector<unsigned int> _indices)
-      : vertices(_vertices), indices(_indices) {}
+    class Mesh
+    {
+    public:
+        Mesh() {}
+        Mesh(std::vector<Vertex> _vertices, std::vector<unsigned int> _indices)
+            : vertices(_vertices), indices(_indices)
+        {}
 
-  std::string meshName;
-  std::vector<Vertex> vertices;
-  std::vector<unsigned int> indices;
-  Material meshMaterial;
-};
+        std::string meshName;
+        std::vector<Vertex> vertices;
+        std::vector<unsigned int> indices;
+        Material meshMaterial;
+    };
 
 }  // namespace Forradia

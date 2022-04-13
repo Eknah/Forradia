@@ -11,28 +11,31 @@
 #include "../engine/Mob.h"
 #include "../engine/Tile.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class IEngine;
+    class IEngine;
 
-class MapArea {
- public:
-  MapArea(const IEngine &e, int _size, Point3 worldPos);
+    class MapArea
+    {
+    public:
 
-  Actor& AddActor(UPtr<Actor> actor, int tilex, int tiley);
+        MapArea(const IEngine& e, int _size, Point3 worldPos);
 
-  bool IsUnderground();
+        Actor& AddActor(UPtr<Actor> actor, int tilex, int tiley);
 
-  Tile &GetTile(Point2 Pos);
+        bool IsUnderground();
 
-  // Basic data
-  Point3 worldCoord = {-1, -1, -1};
-  Point2F spawnPos = {-1, -1};
-  int size = -1;
+        Tile& GetTile(Point2 Pos);
 
-  // Map structure of tiles and mobs
-  std::vector<std::vector<Tile>> tiles;
-  UMap<int, std::reference_wrapper<SPtr<Actor>>> mobActorsMirror;
-};
+        // Basic data
+        Point3 worldCoord = { -1, -1, -1 };
+        Point2F spawnPos = { -1, -1 };
+        int size = -1;
+
+        // Map structure of tiles and mobs
+        std::vector<std::vector<Tile>> tiles;
+        UMap<int, std::reference_wrapper<SPtr<Actor>>> mobActorsMirror;
+    };
 
 }  // namespace Forradia

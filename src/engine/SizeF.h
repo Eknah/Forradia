@@ -3,12 +3,14 @@
 
 #pragma once
 
-namespace Forradia {
+namespace Forradia
+{
 
-class SizeF {
- public:
-  float width = 0.0f;
-  float height = 0.0f;
-};
+    class SizeF
+    {
+    public:
+        float width = 0.0f;
+        float height = 0.0f;
+    };
 
 }  // namespace Forradia

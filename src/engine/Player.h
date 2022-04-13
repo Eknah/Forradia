@@ -9,11 +9,13 @@
 #include "implementation/functionality/actor/modules/DirectionMovementModule.h"
 #include "implementation/functionality/actor/modules/ObjectUsageModule.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Player : public Actor {
- public:
-  explicit Player(IEngine &e);
-};
+    class Player : public Actor
+    {
+    public:
+        explicit Player(IEngine& e);
+    };
 
 }  // namespace Forradia

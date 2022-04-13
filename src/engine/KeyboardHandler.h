@@ -6,15 +6,17 @@
 #include <set>
 #include "IKeyboardHandler.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class KeyboardHandler : public IKeyboardHandler {
- public:
-  void ResetForNewFrame() const override;
+    class KeyboardHandler : public IKeyboardHandler
+    {
+    public:
+        void ResetForNewFrame() const override;
 
-  void DoKeyDown(SDL_Keycode key) const override;
+        void DoKeyDown(SDL_Keycode key) const override;
 
-  void DoKeyUp(SDL_Keycode key) const override;
-};
+        void DoKeyUp(SDL_Keycode key) const override;
+    };
 
 }  // namespace Forradia

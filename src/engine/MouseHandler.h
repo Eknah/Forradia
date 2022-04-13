@@ -4,25 +4,27 @@
 #pragma once
 #include "Aliases.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class MouseHandler {
- public:
-  // Game loop related
+    class MouseHandler
+    {
+    public:
+        // Game loop related
 
-  void ResetForNewFrame() const;
-  bool GetLeftButtonBeenFired() const;
-  bool GetRightButtonBeenFired() const;
-  void SetLeftButtonBeenFired();
-  void SetRightButtonBeenFired();
+        void ResetForNewFrame() const;
+        bool GetLeftButtonBeenFired() const;
+        bool GetRightButtonBeenFired() const;
+        void SetLeftButtonBeenFired();
+        void SetRightButtonBeenFired();
 
-  UPtr<float> wheelAmount = MakeUPtr<float>(0.0f);
-  bool leftButtonDown = false;
-  bool rightButtonDown = false;
+        UPtr<float> wheelAmount = MakeUPtr<float>(0.0f);
+        bool leftButtonDown = false;
+        bool rightButtonDown = false;
 
- private:
-  UPtr<bool> leftButtonBeenFired = MakeUPtr<bool>(false);
-  UPtr<bool> rightButtonBeenFired = MakeUPtr<bool>(false);
-};
+    private:
+        UPtr<bool> leftButtonBeenFired = MakeUPtr<bool>(false);
+        UPtr<bool> rightButtonBeenFired = MakeUPtr<bool>(false);
+    };
 
 }  // namespace Forradia

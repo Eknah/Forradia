@@ -32,6 +32,8 @@ namespace Forradia
 
     void JumpingModule::Jump()
     {
+        if (isJumping) return;
+
         isJumping = true;
         timer.Reset();
     }

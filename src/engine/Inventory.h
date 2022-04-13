@@ -7,16 +7,18 @@
 #include <memory>
 #include "Aliases.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Object;
+    class Object;
 
-class Inventory {
-public:
-    void Add(std::string objectName);
-    void AddMany(std::vector<std::string> objectNames);
+    class Inventory
+    {
+    public:
+        void Add(std::string objectName);
+        void AddMany(std::vector<std::string> objectNames);
 
-    UMap<int, SPtr<Object>> objects;
-};
+        UMap<int, SPtr<Object>> objects;
+    };
 
 }  // namespace Forradia

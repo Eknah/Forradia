@@ -8,13 +8,15 @@
 #include "Vector2.h"
 #include "Vector3.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Vertex {
- public:
-  Vector3 position;
-  Vector3 normal;
-  Vector2 textureCoordinate;
-};
+    class Vertex
+    {
+    public:
+        Vector3 position;
+        Vector3 normal;
+        Vector2 textureCoordinate;
+    };
 
 }  // namespace Forradia

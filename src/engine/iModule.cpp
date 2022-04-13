@@ -3,10 +3,12 @@
 
 #include "IModule.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-Actor &IModule::GetParentActor() {
-    return *parentActor;
-}
+    Actor& IModule::GetParentActor()
+    {
+        return *parentActor;
+    }
 
 }  // namespace Forradia

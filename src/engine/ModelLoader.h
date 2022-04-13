@@ -6,20 +6,22 @@
 #include <string>
 #include "Model3D.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class ModelLoader {
- public:
-  void LoadModels();
+    class ModelLoader
+    {
+    public:
+        void LoadModels();
 
-  bool ModelExists(std::string modelName) const;
+        bool ModelExists(std::string modelName) const;
 
-  UMap<int, Forradia::Model3D> models;
-  UMap<int, std::string> modelNames;
+        UMap<int, Forradia::Model3D> models;
+        UMap<int, std::string> modelNames;
 
- private:
-  const std::string modelsPath = "/Resources/Models";
-  const std::string modelNameExtension = ".obj";
-};
+    private:
+        const std::string modelsPath = "/Resources/Models";
+        const std::string modelNameExtension = ".obj";
+    };
 
 }  // namespace Forradia

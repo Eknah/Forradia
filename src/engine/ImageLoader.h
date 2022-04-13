@@ -10,18 +10,20 @@
 #include "Typedefs.h"
 #include "SDL_Deleter.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class ImageLoader {
- public:
-  void LoadImages();
+    class ImageLoader
+    {
+    public:
+        void LoadImages();
 
-  UMap<int, GLuint> images;
-  UMap<int, std::string> imageNames;
+        UMap<int, GLuint> images;
+        UMap<int, std::string> imageNames;
 
- private:
-  const std::string imagesPath = "/Resources/Images";
-  const std::string imageNameExtension = ".png";
-};
+    private:
+        const std::string imagesPath = "/Resources/Images";
+        const std::string imageNameExtension = ".png";
+    };
 
 }  // namespace Forradia

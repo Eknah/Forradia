@@ -9,16 +9,18 @@
 #include "../engine/Aliases.h"
 #include "framework/SceneBase.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class ScenesCollection {
- public:
-  // Collection operations
-  void Add(std::string sceneName, SPtr<SceneBase> scene);
-  void AddMany(std::vector<std::tuple<std::string, SPtr<SceneBase>>> _scenes);
+    class ScenesCollection
+    {
+    public:
+        // Collection operations
+        void Add(std::string sceneName, SPtr<SceneBase> scene);
+        void AddMany(std::vector<std::tuple<std::string, SPtr<SceneBase>>> _scenes);
 
-  // Collection structure
-  UMap<int, SPtr<SceneBase>> scenes;
-};
+        // Collection structure
+        UMap<int, SPtr<SceneBase>> scenes;
+    };
 
 }  // namespace Forradia

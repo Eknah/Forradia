@@ -9,30 +9,32 @@
 #include "../engine/ObjectFlags.h"
 #include "framework/worldStructure/Object.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class IEngine;
+    class IEngine;
 
-class Tile {
- public:
-  explicit Tile(const IEngine &_e) : e(_e) {}
+    class Tile
+    {
+    public:
+        explicit Tile(const IEngine& _e) : e(_e) {}
 
-  // Get info about tile
+        // Get info about tile
 
-  bool HasObjectWithFlag(ObjectFlags flag);
-  bool HasObjectOfType(std::string objectName);
+        bool HasObjectWithFlag(ObjectFlags flag);
+        bool HasObjectOfType(std::string objectName);
 
-  // Core tile data structure
+        // Core tile data structure
 
-  int groundType = 0;
-  std::vector<SPtr<Object>> objects;
-  SPtr<Object> roof;
-  int elevation = 0;
-  SPtr<Actor> actor = nullptr;
-  std::unordered_map<std::string, std::string> properties;
+        int groundType = 0;
+        std::vector<SPtr<Object>> objects;
+        SPtr<Object> roof;
+        int elevation = 0;
+        SPtr<Actor> actor = nullptr;
+        std::unordered_map<std::string, std::string> properties;
 
- private:
-  const IEngine &e;
-};
+    private:
+        const IEngine& e;
+    };
 
 }  // namespace Forradia

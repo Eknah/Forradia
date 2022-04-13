@@ -3,19 +3,23 @@
 
 #include "KeyboardHandler.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-void KeyboardHandler::ResetForNewFrame() const {
-      keysBeenFired->clear();
-  }
+    void KeyboardHandler::ResetForNewFrame() const
+    {
+        keysBeenFired->clear();
+    }
 
-void KeyboardHandler::DoKeyDown(SDL_Keycode key) const {
-    keysBeingPressed->insert(key);
-    keysBeenFired->insert(key);
-  }
+    void KeyboardHandler::DoKeyDown(SDL_Keycode key) const
+    {
+        keysBeingPressed->insert(key);
+        keysBeenFired->insert(key);
+    }
 
-void KeyboardHandler::DoKeyUp(SDL_Keycode key) const {
-      keysBeingPressed->erase(key);
-  }
+    void KeyboardHandler::DoKeyUp(SDL_Keycode key) const
+    {
+        keysBeingPressed->erase(key);
+    }
 
 }  // namespace Forradia

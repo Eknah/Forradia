@@ -3,20 +3,22 @@
 
 #pragma once
 
-namespace Forradia {
+namespace Forradia
+{
 
-class IEngine;
+    class IEngine;
 
-class IFullscreenController {
- public:
-  explicit IFullscreenController(const IEngine &_e) : e(_e) {}
+    class IFullscreenController
+    {
+    public:
+        explicit IFullscreenController(const IEngine& _e) : e(_e) {}
 
-  virtual void UpdateFullscreenToggling() = 0;
-  virtual void ToggleFullscreen() = 0;
+        virtual void UpdateFullscreenToggling() = 0;
+        virtual void ToggleFullscreen() = 0;
 
- protected:
-  const IEngine &e;
-  bool fullscreenOn = true;
-};
+    protected:
+        const IEngine& e;
+        bool fullscreenOn = true;
+    };
 
 }  // namespace Forradia

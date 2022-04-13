@@ -3,14 +3,16 @@
 
 #include "RectF.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-bool RectF::ContainsPoint(Point2F point) {
-    if (point.x >= x && point.y >= y && point.x < x + width &&
-        point.y < y + height)
-      return true;
+    bool RectF::ContainsPoint(Point2F point)
+    {
+        if (point.x >= x && point.y >= y && point.x < x + width &&
+            point.y < y + height)
+            return true;
 
-    return false;
-  }
+        return false;
+    }
 
 }  // namespace Forradia

@@ -3,23 +3,25 @@
 
 #include "SceneManager.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-void SceneManager::Initialize(ScenesCollection scenes,
-                         int startScene) {
-    scenesCollection = std::move(scenes);
-    *currentScene = startScene;
-  }
+    void SceneManager::Initialize(ScenesCollection scenes, int startScene)
+    {
+        scenesCollection = std::move(scenes);
+        *currentScene = startScene;
+    }
 
-SPtr<SceneBase> &SceneManager::GetCurrentScene() {
-    return scenesCollection.scenes.at(*currentScene);
-  }
+    SPtr<SceneBase>& SceneManager::GetCurrentScene()
+    {
+        return scenesCollection.scenes.at(*currentScene);
+    }
 
-void SceneManager::SwitchToScene(
-          std::string newScene) const {
-    *currentScene = GetId(newScene);
-    scenesCollection.scenes.at(*currentScene)->Enter();
-    e.gameLoop.ResetForNewFrame();
-  }
+    void SceneManager::SwitchToScene(std::string newScene) const
+    {
+        *currentScene = GetId(newScene);
+        scenesCollection.scenes.at(*currentScene)->Enter();
+        e.gameLoop.ResetForNewFrame();
+    }
 
 }  // namespace Forradia

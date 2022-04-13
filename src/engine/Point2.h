@@ -3,12 +3,14 @@
 
 #pragma once
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Point2 {
- public:
-  int x = 0;
-  int y = 0;
-};
+    class Point2
+    {
+    public:
+        int x = 0;
+        int y = 0;
+    };
 
 }  // namespace Forradia

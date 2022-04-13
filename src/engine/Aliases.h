@@ -10,61 +10,62 @@
 #include <vector>
 #include <utility>
 
-namespace Forradia {
-
-template <typename T, typename U>
-using UMap = std::unordered_map<T, U>;
-
-// Pointer related
-
-template <typename T>
-using UPtr = std::unique_ptr<T>;
-
-template <typename T, typename U>
-using UPtrEx = std::unique_ptr<T, U>;
-
-template <typename T>
-using SPtr = std::shared_ptr<T>;
-
-template <typename T, typename... Args>
-inline std::unique_ptr<T> MakeUPtr(Args &&...args)
+namespace Forradia
 {
-  return std::make_unique<T>(std::forward<Args>(args)...);
-}
 
-template <typename T, typename... Args>
-inline std::shared_ptr<T> MakeSPtr(Args &&...args)
-{
-  return std::make_shared<T>(std::forward<Args>(args)...);
-}
+    template <typename T, typename U>
+    using UMap = std::unordered_map<T, U>;
 
-// Commonly used
+    // Pointer related
 
-inline int GetId(std::string text)
-{
-  return static_cast<int>(std::hash<std::string>{}(text));
-}
-constexpr auto Ticks = &SDL_GetTicks;
+    template <typename T>
+    using UPtr = std::unique_ptr<T>;
 
-inline float CFloat(int val)
-{
-    return static_cast<float>(val);
-}
+    template <typename T, typename U>
+    using UPtrEx = std::unique_ptr<T, U>;
 
-inline int CInt(float val)
-{
-    return static_cast<int>(val);
-}
+    template <typename T>
+    using SPtr = std::shared_ptr<T>;
 
-// Common types
+    template <typename T, typename... Args>
+    inline std::unique_ptr<T> MakeUPtr(Args &&...args)
+    {
+        return std::make_unique<T>(std::forward<Args>(args)...);
+    }
 
-using String = std::string;
+    template <typename T, typename... Args>
+    inline std::shared_ptr<T> MakeSPtr(Args &&...args)
+    {
+        return std::make_shared<T>(std::forward<Args>(args)...);
+    }
 
-template <typename T>
-using List = std::vector<T>;
+    // Commonly used
 
-template <typename T, typename U>
-using Tuple = std::tuple<T, U>;
+    inline int GetId(std::string text)
+    {
+        return static_cast<int>(std::hash<std::string>{}(text));
+    }
+    constexpr auto Ticks = &SDL_GetTicks;
+
+    inline float CFloat(int val)
+    {
+        return static_cast<float>(val);
+    }
+
+    inline int CInt(float val)
+    {
+        return static_cast<int>(val);
+    }
+
+    // Common types
+
+    using String = std::string;
+
+    template <typename T>
+    using List = std::vector<T>;
+
+    template <typename T, typename U>
+    using Tuple = std::tuple<T, U>;
 
 
 

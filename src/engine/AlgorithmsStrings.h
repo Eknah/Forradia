@@ -9,15 +9,16 @@
 #include <string>
 #include "../engine/Aliases.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class AlgorithmsStrings {
- public:
-  void Split(const std::string &in, std::vector<std::string> *out,
-                    std::string token);
+    class AlgorithmsStrings
+    {
+    public:
+        void Split(const std::string& in, std::vector<std::string>* out, std::string token);
 
-  std::string Tail(const std::string &in);
+        std::string Tail(const std::string& in);
 
-  std::string FirstToken(const std::string &in);
-};
+        std::string FirstToken(const std::string& in);
+    };
 }  // namespace Forradia

@@ -8,24 +8,25 @@
 #include "../engine/SDL_Deleter.h"
 #include "../engine/Utilities.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class TextGraphics {
- public:
-  void Initialize();
+    class TextGraphics
+    {
+    public:
+        void Initialize();
 
-  // --- Drawing operations ---
+        // --- Drawing operations ---
 
-  void DrawString(std::string text, SDL_Color color, float x, float y,
-                         bool centerAlign = false, float specificScaling = 1.0f) const;
+        void DrawString(std::string text, SDL_Color color, float x, float y, bool centerAlign = false, float specificScaling = 1.0f) const;
 
- private:
-  const std::string defaultFontPath = "/Resources/Fonts/PixeloidSans.ttf";
-  const int defaultFontSize = 20;
-  const float scaling = 0.8f;
+    private:
+        const std::string defaultFontPath = "/Resources/Fonts/PixeloidSans.ttf";
+        const int defaultFontSize = 20;
+        const float scaling = 0.8f;
 
-  std::unique_ptr<TTF_Font, SDL_Deleter> defaultFont;
-  Utilities utils;
-};
+        std::unique_ptr<TTF_Font, SDL_Deleter> defaultFont;
+        Utilities utils;
+    };
 
 }  // namespace Forradia

@@ -7,15 +7,17 @@
 #pragma once
 #include "Vector2.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Vector2 {
- public:
-  Vector2() = default;
-  Vector2(float _x, float _y) : x(_x), y(_y) {}
+    class Vector2
+    {
+    public:
+        Vector2() = default;
+        Vector2(float _x, float _y) : x(_x), y(_y) {}
 
-  float x = 0.0f;
-  float y = 0.0f;
-};
+        float x = 0.0f;
+        float y = 0.0f;
+    };
 
 }  // namespace Forradia

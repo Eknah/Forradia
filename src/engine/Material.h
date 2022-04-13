@@ -9,24 +9,26 @@
 #include "Aliases.h"
 #include "Vector3.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class Material {
- public:
-  std::string name;
-  Vector3 ka;
-  Vector3 kd;
-  Vector3 ks;
-  float ns = 0.0f;
-  float ni = 0.0f;
-  float d = 0.0f;
-  int illum = 0;
-  std::string mapKa;
-  std::string mapKd;
-  std::string mapKs;
-  std::string mapNs;
-  std::string mapD;
-  std::string mapBump;
-};
+    class Material
+    {
+    public:
+        std::string name;
+        Vector3 ka;
+        Vector3 kd;
+        Vector3 ks;
+        float ns = 0.0f;
+        float ni = 0.0f;
+        float d = 0.0f;
+        int illum = 0;
+        std::string mapKa;
+        std::string mapKd;
+        std::string mapKs;
+        std::string mapNs;
+        std::string mapD;
+        std::string mapBump;
+    };
 
 }  // namespace Forradia

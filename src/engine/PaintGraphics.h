@@ -7,27 +7,23 @@
 #include <vector>
 #include "../engine/Point2F.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class PaintGraphics {
- public:
-  // ---- Drawing operations ----
+    class PaintGraphics {
+    public:
+        // ---- Drawing operations ----
 
-  void FillRectangle(SDL_Color color, float x, float y, float width,
-                            float Height) const;
+        void FillRectangle(SDL_Color color, float x, float y, float width, float Height) const;
 
-  void DrawRectangle(SDL_Color color, float x, float y, float width,
-                            float height) const;
+        void DrawRectangle(SDL_Color color, float x, float y, float width, float height) const;
 
-  void DrawLine(SDL_Color color, float x0, float y0, float x1,
-                       float y1) const;
+        void DrawLine(SDL_Color color, float x0, float y0, float x1, float y1) const;
 
- private:
-  // ---- Drawing operations generalization ----
+    private:
+        // ---- Drawing operations generalization ----
 
-  void RenderShape(GLenum geometryType,
-                          const std::vector<Point2F> &vertices,
-                          SDL_Color color) const;
-};
+        void RenderShape(GLenum geometryType, const std::vector<Point2F>& vertices, SDL_Color color) const;
+    };
 
 }  // namespace Forradia

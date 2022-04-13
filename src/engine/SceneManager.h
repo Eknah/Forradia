@@ -7,20 +7,21 @@
 #include "IEngine.h"
 #include "ISceneManager.h"
 
-namespace Forradia {
+namespace Forradia
+{
 
-class SceneManager : public ISceneManager {
- public:
-    explicit SceneManager(const IEngine &e) :
-          ISceneManager(e) {}
+    class SceneManager : public ISceneManager
+    {
+    public:
+        explicit SceneManager(const IEngine& e) :
+            ISceneManager(e)
+        {}
 
-  void Initialize(ScenesCollection scenes,
-                         int startScene) override;
+        void Initialize(ScenesCollection scenes, int startScene) override;
 
-  SPtr<SceneBase> &GetCurrentScene() override;
+        SPtr<SceneBase>& GetCurrentScene() override;
 
-  void SwitchToScene(
-          std::string newScene) const override;
-};
+        void SwitchToScene(std::string newScene) const override;
+    };
 
 }  // namespace Forradia
