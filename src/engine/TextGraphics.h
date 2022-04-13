@@ -18,6 +18,7 @@ namespace Forradia
 
         // --- Drawing operations ---
 
+        void DrawString(std::string text, SDL_Color color, Point2F point, bool centerAlign = false, float specificScaling = 1.0f) const;
         void DrawString(std::string text, SDL_Color color, float x, float y, bool centerAlign = false, float specificScaling = 1.0f) const;
 
     private:

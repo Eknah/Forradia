@@ -25,8 +25,7 @@ namespace Forradia
         {
             auto textPrinted = e.text;
             textPrinted.insert(e.cursor, "|");
-            //e.DrawString(String(textPrinted), palette.white, inputBounds.GetTopLeftCorner().Translate(0.005f, 0.0f));
-            e.DrawString(String(textPrinted), palette.white, bounds.x + 0.005f, bounds.y + bounds.h - inputLineHeight);
+            e.DrawString(textPrinted, palette.white, inputBounds.GetTopLeftCorner().Translate(0.005f, 0.0f));
         }
 
         auto textboxTextX = bounds.x + margin;

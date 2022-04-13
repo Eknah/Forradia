@@ -17,6 +17,11 @@ namespace Forradia
             TTF_OpenFont(fontPath.c_str(), defaultFontSize));
     }
 
+    void TextGraphics::DrawString(std::string text, SDL_Color color, Point2F point, bool centerAlign, float specificScaling) const
+    {
+        DrawString(text, color, point.x, point.y, centerAlign, specificScaling);
+    }
+
     void TextGraphics::DrawString(std::string text, SDL_Color color, float x, float y,
         bool centerAlign, float specificScaling) const
     {
