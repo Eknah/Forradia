@@ -11,7 +11,9 @@ namespace Forradia
 
     class ValleyMapGenerator : public IMapGenerator
     {
+
     public:
+
         using IMapGenerator::IMapGenerator;
 
         void GenerateMapArea(Point3 worldPos) const override;
@@ -29,14 +31,14 @@ namespace Forradia
         void GeneratePinkFlowers(MapArea* mapArea) const;
         void GenerateTallGrass(MapArea* mapArea) const;
         void GenerateMobs(MapArea* mapArea) const;
-        void GenerateQuestCaves(const IEngine& e, MapArea* mapArea,
-            const UPtr<PlanetWorldMap>& worldMap) const;
+        void GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const;
 
         int DistToPlayerStartingPos(MapArea* mapArea, int tileX, int tileY) const;
 
-        const int playerStartingAreaSize = 4;
+        const int playerStartAreaSize = 4;
         Random rnd;
         int villageSize = 17;
+
     };
 
 }  // namespace Forradia

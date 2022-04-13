@@ -12,9 +12,7 @@
 namespace Forradia
 {
 
-    DestMovementModule::DestMovementModule(const IEngine& _e,
-        Actor* parentActor_)
-        : IModule(_e, parentActor_)
+    DestMovementModule::DestMovementModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
     {
         GetParentActor().AddIfNotExists<MovementDataModule>();
         GetParentActor().AddIfNotExists<WarpMovementModule>();

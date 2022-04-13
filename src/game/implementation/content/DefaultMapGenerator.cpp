@@ -13,8 +13,7 @@ namespace Forradia
 
     void DefaultMapGenerator::GenerateMapArea(Point3 worldPos) const
     {
-        worldMap->areas[worldPos.x][worldPos.y][worldPos.z] =
-            MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldPos);
+        worldMap->areas[worldPos.x][worldPos.y][worldPos.z] = MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldPos);
 
         auto mapArea = worldMap->GetArea(worldPos).get();
 
@@ -99,7 +98,7 @@ namespace Forradia
                     if (mapArea->tiles[x][y + 1].elevation > 0) continue;
                     if (mapArea->tiles[x - 1][y + 1].elevation > 0) continue;
                     if (mapArea->tiles[x + 1][y - 1].elevation > 0) continue;
-                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartingAreaSize) continue;
+                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
                     mapArea->tiles[x][y].groundType = GetId("GroundTypeWater");
                 }
@@ -270,7 +269,7 @@ namespace Forradia
                 if (x >= 0 && y >= 0 && x < mapArea->size &&
                     y < mapArea->size)
                 {
-                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartingAreaSize) continue;
+                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
                     if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
                         if (mapArea->tiles[x][y].objects.size() == 0)
@@ -292,7 +291,7 @@ namespace Forradia
                 if (x >= 0 && y >= 0 && x < mapArea->size &&
                     y < mapArea->size)
                 {
-                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartingAreaSize) continue;
+                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
                     if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
                         if (mapArea->tiles[x][y].objects.size() == 0)
@@ -312,7 +311,7 @@ namespace Forradia
             auto x = rnd.Next() % mapArea->size;
             auto y = rnd.Next() % mapArea->size;
 
-            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartingAreaSize) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
             if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
                 if (mapArea->tiles[x][y].objects.size() == 0)
@@ -327,7 +326,7 @@ namespace Forradia
             auto x = rnd.Next() % mapArea->size;
             auto y = rnd.Next() % mapArea->size;
 
-            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartingAreaSize) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
             if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater"))
                 if (mapArea->tiles[x][y].objects.size() == 0)
@@ -378,7 +377,7 @@ namespace Forradia
             auto y = rnd.Next() % mapArea->size;
 
             if (x == CInt(mapArea->spawnPos.x)  && y == CInt(mapArea->spawnPos.y)) continue;
-            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartingAreaSize) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
             if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
             {
@@ -393,7 +392,7 @@ namespace Forradia
             auto y = rnd.Next() % mapArea->size;
 
             if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
-            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartingAreaSize) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
             if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
             {
@@ -412,7 +411,7 @@ namespace Forradia
             auto x = rnd.Next() % 94 + 3;
             auto y = rnd.Next() % 94 + 3;
 
-            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartingAreaSize) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
             if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater"))
             {

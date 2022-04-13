@@ -7,45 +7,38 @@
 namespace Forradia
 {
 
-    void QuestCaveMapGenerator::GenerateQuestCaveMapArea(MapArea* mapArea, Point2 entranceLocation)
+    void QuestCaveMapGenerator::GenerateQuestCaveMapArea(MapArea* mapArea, Point2 entranceLoc)
     {
         ClearToCaveFloor(mapArea);
         GenerateCaveWalls(mapArea);
-        GeneratePath(mapArea, entranceLocation);
+        GeneratePath(mapArea, entranceLoc);
 
-        mapArea->tiles[entranceLocation.x][entranceLocation.y].properties["WarpToFloor"] = "0";
-        mapArea->tiles[entranceLocation.x][entranceLocation.y].objects.push_back(
-            MakeSPtr<Object>("ObjectQuestCaveEntrance"));
+        mapArea->tiles[entranceLoc.x][entranceLoc.y].properties["WarpToFloor"] = "0";
+        mapArea->tiles[entranceLoc.x][entranceLoc.y].objects.push_back(MakeSPtr<Object>("ObjectQuestCaveEntrance"));
     }
 
     void QuestCaveMapGenerator::ClearToCaveFloor(MapArea* mapArea)
     {
-        for (auto tileY = 0; tileY < mapArea->size; tileY++)
-            for (auto tileX = 0; tileX < mapArea->size; tileX++)
-
-                mapArea->tiles[tileX][tileY].groundType = GetId("GroundTypeCaveFloor");
+        for (auto y = 0; y < mapArea->size; y++)
+            for (auto x = 0; x < mapArea->size; x++)
+                mapArea->tiles[x][y].groundType = GetId("GroundTypeCaveFloor");
     }
 
     void QuestCaveMapGenerator::GenerateCaveWalls(MapArea* mapArea)
     {
-        for (auto tileY = 0; tileY < mapArea->size; tileY++)
-            for (auto tileX = 0; tileX < mapArea->size; tileX++)
-
-                mapArea->tiles[tileX][tileY].objects.push_back(
-                    MakeSPtr<Object>("ObjectCaveWallBlock", false));
+        for (auto y = 0; y < mapArea->size; y++)
+            for (auto x = 0; x < mapArea->size; x++)
+                mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectCaveWallBlock", false));
     }
 
-    void QuestCaveMapGenerator::GeneratePath(MapArea* mapArea, Point2 entranceLocation)
+    void QuestCaveMapGenerator::GeneratePath(MapArea* mapArea, Point2 entranceLoc)
     {
-        for (auto tileY = entranceLocation.y - 3; tileY <= entranceLocation.y + 3;
-            tileY++)
-            for (auto tileX = entranceLocation.x - 3; tileX <= entranceLocation.x + 3;
-                tileX++)
+        for (auto y = entranceLoc.y - 3; y <= entranceLoc.y + 3; y++)
+            for (auto x = entranceLoc.x - 3; x <= entranceLoc.x + 3; x++)
+                mapArea->tiles[x][y].objects.clear();
 
-                mapArea->tiles[tileX][tileY].objects.clear();
-
-        auto tileX = entranceLocation.x;
-        auto tileY = entranceLocation.y;
+        auto x = entranceLoc.x;
+        auto y = entranceLoc.y;
 
         for (auto i = 0; i < 20; i++)
         {
@@ -54,14 +47,13 @@ namespace Forradia
 
             for (auto j = 0; j < numSteps; j++)
             {
-                for (auto xx = tileX - 1; xx <= tileX + 1; xx++)
+                for (auto xx = x - 1; xx <= x + 1; xx++)
                 {
-                    for (auto yy = tileY - 1; yy <= tileY + 1; yy++)
+                    for (auto yy = y - 1; yy <= y + 1; yy++)
                     {
                         if (xx >= 0 && yy >= 0 && xx < mapArea->size && yy < mapArea->size)
                             if (mapArea->tiles[xx][yy].objects.size() > 0)
-                                if (!mapArea->tiles[xx][yy].HasObjectOfType(
-                                    "ObjectQuestCaveEntrance"))
+                                if (!mapArea->tiles[xx][yy].HasObjectOfType("ObjectQuestCaveEntrance"))
                                     mapArea->tiles[xx][yy].objects.clear();
                     }
                 }
@@ -70,26 +62,22 @@ namespace Forradia
                 {
                 case 0:
                 {
-                    tileX++;
-
+                    x++;
                     break;
                 }
                 case 1:
                 {
-                    tileY++;
-
+                    y++;
                     break;
                 }
                 case 2:
                 {
-                    tileX--;
-
+                    x--;
                     break;
                 }
                 case 3:
                 {
-                    tileY--;
-
+                    y--;
                     break;
                 }
                 }

@@ -13,10 +13,9 @@ namespace Forradia
     void
         ValleyMapGenerator::GenerateMapArea(Point3 worldPos) const
     {
-        worldMap->areas[worldPos.x][worldPos.y][worldPos.z] =
-            MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldPos);
+        worldMap->areas[worldPos.x][worldPos.y][worldPos.z] =  MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldPos);
 
-        auto mapArea = worldMap->areas[worldPos.x][worldPos.y][worldPos.z].get();
+        auto mapArea = worldMap->GetArea(worldPos).get();
 
         ClearToGrass(mapArea);
         GeneratePlayerStartingPosition(mapArea);
@@ -33,8 +32,7 @@ namespace Forradia
         GenerateQuestCaves(e, mapArea, worldMap);
     }
 
-    void
-        ValleyMapGenerator::ClearToGrass(MapArea* mapArea) const
+    void ValleyMapGenerator::ClearToGrass(MapArea* mapArea) const
     {
         for (auto tileY = 0; tileY < mapArea->size; tileY++)
             for (auto tileX = 0; tileX < mapArea->size; tileX++)
@@ -42,16 +40,12 @@ namespace Forradia
                 mapArea->tiles[tileX][tileY].groundType = GetId("GroundTypeGrass");
     }
 
-    void
-        ValleyMapGenerator::GeneratePlayerStartingPosition
-        (MapArea* mapArea) const
+    void ValleyMapGenerator::GeneratePlayerStartingPosition(MapArea* mapArea) const
     {
-        mapArea->spawnPos = { static_cast<float>(mapArea->size / 2),
-                             static_cast<float>(mapArea->size / 2) };
+        mapArea->spawnPos = { CFloat(mapArea->size / 2), CFloat(mapArea->size / 2) };
     }
 
-    void
-        ValleyMapGenerator::GenerateElevation(MapArea* mapArea) const
+    void ValleyMapGenerator::GenerateElevation(MapArea* mapArea) const
     {
         for (auto y = 0; y < mapArea->size; y++)
         {
@@ -71,91 +65,77 @@ namespace Forradia
             }
         }
 
-
-
-
-
         for (auto i = 0; i < 60; i++)
         {
             auto centerTileX = 0;
             auto centerTileY = 0;
-            auto maxR = 4 + rnd.Next() % 6;
+            auto maxr = 4 + rnd.Next() % 6;
 
             do
             {
                 centerTileX = rnd.Next() % mapArea->size;
                 centerTileY = rnd.Next() % mapArea->size;
-                maxR = 1 + rnd.Next() % 6;
+                maxr = 1 + rnd.Next() % 6;
             } while (std::abs(centerTileX - mapArea->size / 2) < villageSize / 2
                 || std::abs(centerTileY - mapArea->size / 2) < villageSize / 2);
 
-            for (auto r = maxR; r >= 0; r--)
+            for (auto r = maxr; r >= 0; r--)
             {
-                for (auto tileY = centerTileY - r; tileY <= centerTileY + r; tileY++)
+                for (auto y = centerTileY - r; y <= centerTileY + r; y++)
                 {
-                    for (auto tileX = centerTileX - r; tileX <= centerTileX + r; tileX++)
+                    for (auto x = centerTileX - r; x <= centerTileX + r; x++)
                     {
-                        auto dx = tileX - centerTileX;
-                        auto dy = tileY - centerTileY;
+                        auto dx = x - centerTileX;
+                        auto dy = y - centerTileY;
 
-                        if (dx * dx + dy * dy >= r * r)
-                            continue;
-                        if (tileX < 0 || tileY < 0 || tileX >= mapArea->size ||
-                            tileY >= mapArea->size)
-                            continue;
+                        if (dx * dx + dy * dy >= r * r) continue;
+                        if (x < 0 || y < 0 || x >= mapArea->size || y >= mapArea->size) continue;
 
-                        mapArea->tiles[tileX][tileY].elevation += 5;
+                        mapArea->tiles[x][y].elevation += 5;
                     }
                 }
             }
         }
 
-
-
     }
 
-    void
-        ValleyMapGenerator::GenerateRock(MapArea* mapArea) const
+    void ValleyMapGenerator::GenerateRock(MapArea* mapArea) const
     {
         for (auto i = 0; i < 30; i++)
         {
 
-            auto centerTileX = 0;
-            auto centerTileY = 0;
+            auto centerx = 0;
+            auto centery = 0;
             auto r = 0;
 
             do
             {
-                centerTileX = rnd.Next() % mapArea->size;
-                centerTileY = rnd.Next() % mapArea->size;
+
+                centerx = rnd.Next() % mapArea->size;
+                centery = rnd.Next() % mapArea->size;
                 r = 5 + rnd.Next() % 13;
-            } while (std::abs(centerTileX - mapArea->size / 2) < villageSize / 2 + r
-                || std::abs(centerTileY - mapArea->size / 2) < villageSize / 2 + r);
+
+            } while (std::abs(centerx - mapArea->size / 2) < villageSize / 2 + r  || std::abs(centery - mapArea->size / 2) < villageSize / 2 + r);
 
 
-            for (auto tileY = centerTileY - r; tileY <= centerTileY + r; tileY++)
+            for (auto y = centery - r; y <= centery + r; y++)
             {
-                for (auto tileX = centerTileX - r; tileX <= centerTileX + r; tileX++)
+                for (auto x = centerx - r; x <= centerx + r; x++)
                 {
-                    auto dx = tileX - centerTileX;
-                    auto dy = tileY - centerTileY;
+                    auto dx = x - centerx;
+                    auto dy = y - centery;
 
-                    if (dx * dx + dy * dy >= r * r)
-                        continue;
-                    if (tileX < 0 || tileY < 0 || tileX >= mapArea->size ||
-                        tileY >= mapArea->size)
-                        continue;
-                    if (mapArea->tiles[tileX][tileY].elevation < 150)
-                        continue;
+                    if (dx * dx + dy * dy >= r * r) continue;
+                    if (x < 0 || y < 0 || x >= mapArea->size || y >= mapArea->size) continue;
+                    if (mapArea->tiles[x][y].elevation < 150) continue;
 
-                    mapArea->tiles[tileX][tileY].groundType = GetId("GroundTypeRock");
+                    mapArea->tiles[x][y].groundType = GetId("GroundTypeRock");
                 }
             }
         }
     }
 
-    void
-        ValleyMapGenerator::GenerateRivers(MapArea* mapArea) const
+    void ValleyMapGenerator::GenerateRivers(MapArea* mapArea) const
     {
         for (auto i = 0; i < 6; i++)
         {
@@ -184,8 +164,8 @@ namespace Forradia
                 x += std::cos(angle) * 4.0f;
                 y += std::sin(angle) * 4.0f;
 
-                auto xi = static_cast<int>(x);
-                auto yi = static_cast<int>(y);
+                auto xi = CInt(x);
+                auto yi = CInt(y);
 
                 if (xi >= 0 && yi >= 0 && xi < mapArea->size && yi < mapArea->size)
                     mapArea->tiles[xi][yi].groundType = GetId("GroundTypeWater");
@@ -193,88 +173,74 @@ namespace Forradia
         }
     }
 
-    void
-        ValleyMapGenerator::GenerateTrees(MapArea* mapArea) const
+    void ValleyMapGenerator::GenerateTrees(MapArea* mapArea) const
     {
         for (auto i = 0; i < 30; i++)
         {
-            auto tileX = rnd.Next() % mapArea->size;
-            auto tileY = rnd.Next() % mapArea->size;
+            auto x = rnd.Next() % mapArea->size;
+            auto y = rnd.Next() % mapArea->size;
             auto numTrees = 15 + rnd.Next() % 15;
 
             for (auto j = 0; j < numTrees; j++)
             {
-                if (tileX >= 0 && tileY >= 0 && tileX < mapArea->size &&
-                    tileY < mapArea->size)
+                if (x >= 0 && y >= 0 && x < mapArea->size && y < mapArea->size)
                 {
-                    if (DistToPlayerStartingPos(mapArea, tileX, tileY) <
-                        playerStartingAreaSize)
-                        continue;
+                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
-                    if (mapArea->tiles[tileX][tileY].groundType ==
-                        GetId("GroundTypeGrass"))
-                        if (mapArea->tiles[tileX][tileY].objects.size() == 0)
-                            mapArea->tiles[tileX][tileY].objects.push_back(
-                                MakeSPtr<Object>("ObjectTree1"));
+                    if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
+                        if (mapArea->tiles[x][y].objects.size() == 0)
+                            mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTree1"));
                 }
 
-                tileX += rnd.Next() % 7 - rnd.Next() % 7;
-                tileY += rnd.Next() % 7 - rnd.Next() % 7;
+                x += rnd.Next() % 7 - rnd.Next() % 7;
+                y += rnd.Next() % 7 - rnd.Next() % 7;
             }
         }
         for (auto i = 0; i < 30; i++)
         {
-            auto tileX = rnd.Next() % mapArea->size;
-            auto tileY = rnd.Next() % mapArea->size;
+            auto x = rnd.Next() % mapArea->size;
+            auto y = rnd.Next() % mapArea->size;
             auto numTrees = 15 + rnd.Next() % 15;
 
             for (auto j = 0; j < numTrees; j++)
             {
-                if (tileX >= 0 && tileY >= 0 && tileX < mapArea->size &&
-                    tileY < mapArea->size)
+                if (x >= 0 && y >= 0 && x < mapArea->size && y < mapArea->size)
                 {
-                    if (DistToPlayerStartingPos(mapArea, tileX, tileY) <
-                        playerStartingAreaSize)
-                        continue;
+                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
-                    if (mapArea->tiles[tileX][tileY].groundType ==
-                        GetId("GroundTypeGrass"))
-                        if (mapArea->tiles[tileX][tileY].objects.size() == 0)
-                            mapArea->tiles[tileX][tileY].objects.push_back(
-                                MakeSPtr<Object>("ObjectTree2"));
+                    if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
+                        if (mapArea->tiles[x][y].objects.size() == 0)
+                            mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTree2"));
                 }
 
-                tileX += rnd.Next() % 7 - rnd.Next() % 7;
-                tileY += rnd.Next() % 7 - rnd.Next() % 7;
+                x += rnd.Next() % 7 - rnd.Next() % 7;
+                y += rnd.Next() % 7 - rnd.Next() % 7;
             }
         }
     }
 
-    void
-        ValleyMapGenerator::GenerateVillage(MapArea* mapArea) const
+    void ValleyMapGenerator::GenerateVillage(MapArea* mapArea) const
     {
 
-        auto xCenter = mapArea->size / 2;
-        auto yCenter = mapArea->size / 2;
-        auto xStart = xCenter - villageSize / 2;
-        auto yStart = xCenter - villageSize / 2;
-        auto xEnd = xStart + villageSize;
-        auto yEnd = yStart + villageSize;
+        auto xcenter = mapArea->size / 2;
+        auto ycenter = mapArea->size / 2;
+        auto xstart = xcenter - villageSize / 2;
+        auto ystart = xcenter - villageSize / 2;
+        auto xend = xstart + villageSize;
+        auto yend = ystart + villageSize;
 
-        for (auto y = yStart; y <= yEnd; y++)
+        for (auto y = ystart; y <= yend; y++)
         {
-
-            for (auto x = xStart; x <= xEnd; x++)
+            for (auto x = xstart; x <= xend; x++)
             {
                 mapArea->tiles[x][y].groundType = GetId("GroundTypeGrass");
                 mapArea->tiles[x][y].objects.clear();
             }
         }
 
-        for (auto y = yCenter - 1; y <= yCenter + 1; y++)
+        for (auto y = ycenter - 1; y <= ycenter + 1; y++)
         {
-
-            for (auto x = xCenter - 1; x <= xCenter + 1; x++)
+            for (auto x = xcenter - 1; x <= xcenter + 1; x++)
             {
                 mapArea->tiles[x][y].groundType = GetId("GroundTypeCobblestone");
             }
@@ -282,112 +248,93 @@ namespace Forradia
 
         for (auto y = 0; y < mapArea->size; y++)
         {
-            mapArea->tiles[xCenter][y].objects.clear();
-            mapArea->tiles[xCenter][y].groundType = GetId("GroundTypeTrail");
+            mapArea->tiles[xcenter][y].objects.clear();
+            mapArea->tiles[xcenter][y].groundType = GetId("GroundTypeTrail");
         }
 
         for (auto x = 0; x < mapArea->size; x++)
         {
-            mapArea->tiles[x][yCenter].objects.clear();
-            mapArea->tiles[x][yCenter].groundType = GetId("GroundTypeTrail");
+            mapArea->tiles[x][ycenter].objects.clear();
+            mapArea->tiles[x][ycenter].groundType = GetId("GroundTypeTrail");
         }
 
-        for (auto y = yStart; y <= yEnd; y++)
-            mapArea->tiles[xCenter][y].groundType = GetId("GroundTypeCobblestone");
+        for (auto y = ystart; y <= yend; y++)
+            mapArea->tiles[xcenter][y].groundType = GetId("GroundTypeCobblestone");
 
-        for (auto x = xStart; x <= xEnd; x++)
-            mapArea->tiles[x][yCenter].groundType = GetId("GroundTypeCobblestone");
+        for (auto x = xstart; x <= xend; x++)
+            mapArea->tiles[x][ycenter].groundType = GetId("GroundTypeCobblestone");
 
-        for (auto y = yStart; y <= yEnd; y++)
+        for (auto y = ystart; y <= yend; y++)
         {
-            if (y == yCenter) continue;
+            if (y == ycenter) continue;
 
-            mapArea->tiles[xStart + 1][y].objects.push_back(
-                MakeSPtr<Object>("ObjectBush1"));
-
-            mapArea->tiles[xEnd - 1][y].objects.push_back(
-                MakeSPtr<Object>("ObjectBush1"));
-
-            mapArea->tiles[xStart][y].objects.push_back(
-                MakeSPtr<Object>("ObjectWoodFence", false, false, 180));
-
-            mapArea->tiles[xEnd][y].objects.push_back(
-                MakeSPtr<Object>("ObjectWoodFence", false, false, 0));
+            mapArea->tiles[xstart + 1][y].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
+            mapArea->tiles[xend - 1][y].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
+            mapArea->tiles[xstart][y].objects.push_back(MakeSPtr<Object>("ObjectWoodFence", false, false, 180));
+            mapArea->tiles[xend][y].objects.push_back(MakeSPtr<Object>("ObjectWoodFence", false, false, 0));
         }
 
-        for (auto x = xStart; x <= xEnd; x++)
+        for (auto x = xstart; x <= xend; x++)
         {
-            if (x == xCenter) continue;
+            if (x == xcenter) continue;
 
-            mapArea->tiles[x][yStart + 1].objects.push_back(
-                MakeSPtr<Object>("ObjectBush1"));
-
-            mapArea->tiles[x][yEnd - 1].objects.push_back(
-                MakeSPtr<Object>("ObjectBush1"));
-
-            mapArea->tiles[x][yStart].objects.push_back(
-                MakeSPtr<Object>("ObjectWoodFence", false, false, 90));
-
-            mapArea->tiles[x][yEnd].objects.push_back(
-                MakeSPtr<Object>("ObjectWoodFence", false, false, 270));
+            mapArea->tiles[x][ystart + 1].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
+            mapArea->tiles[x][yend - 1].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
+            mapArea->tiles[x][ystart].objects.push_back(MakeSPtr<Object>("ObjectWoodFence", false, false, 90));
+            mapArea->tiles[x][yend].objects.push_back(MakeSPtr<Object>("ObjectWoodFence", false, false, 270));
         }
 
         auto houseWidth = 4;
         auto houseDepth = 3;
 
-        auto housexCenter = xCenter + 5;
-        auto houseyCenter = yCenter + 5;
-        auto housexStart = housexCenter - houseWidth / 2;
-        auto houseyStart = houseyCenter - houseDepth / 2;
-        auto housexEnd = housexStart + houseWidth;
-        auto houseyEnd = houseyStart + houseDepth;
+        auto housexcenter = xcenter + 5;
+        auto houseycenter = ycenter + 5;
+        auto housexstart = housexcenter - houseWidth / 2;
+        auto houseystart = houseycenter - houseDepth / 2;
+        auto housexend = housexstart + houseWidth;
+        auto houseyend = houseystart + houseDepth;
 
-        for (auto y = houseyStart - 1; y <= houseyEnd + 1; y++)
+        for (auto y = houseystart - 1; y <= houseyend + 1; y++)
         {
-            for (auto x = housexStart - 1; x <= housexEnd + 1; x++)
+            for (auto x = housexstart - 1; x <= housexend + 1; x++)
             {
-                mapArea->tiles[x][y].elevation = mapArea->tiles[housexCenter][houseyCenter].elevation;
+                mapArea->tiles[x][y].elevation = mapArea->tiles[housexcenter][houseycenter].elevation;
             }
         }
 
-        for (auto y = houseyStart; y <= houseyEnd; y++)
+        for (auto y = houseystart; y <= houseyend; y++)
         {
-            for (auto x = housexStart; x <= housexEnd; x++)
+            for (auto x = housexstart; x <= housexend; x++)
             {
                 mapArea->tiles[x][y].roof = MakeSPtr<Object>("ObjectRoof", false, false);
                 mapArea->tiles[x][y].groundType = GetId("GroundTypeWoodfloor");
             }
         }
 
-        for (auto y = houseyStart; y <= houseyEnd; y++)
+        for (auto y = houseystart; y <= houseyend; y++)
         {
 
-            mapArea->tiles[housexStart][y].objects.push_back(
-                MakeSPtr<Object>("ObjectWoodWall", false, false, 180));
-
-            mapArea->tiles[housexEnd][y].objects.push_back(
-                MakeSPtr<Object>("ObjectWoodWall", false, false, 0));
+            mapArea->tiles[housexstart][y].objects.push_back(MakeSPtr<Object>("ObjectWoodWall", false, false, 180));
+            mapArea->tiles[housexend][y].objects.push_back(MakeSPtr<Object>("ObjectWoodWall", false, false, 0));
         }
 
-        for (auto x = housexStart; x <= housexEnd; x++)
+        for (auto x = housexstart; x <= housexend; x++)
         {
-            if (x != housexCenter)
-                mapArea->tiles[x][houseyStart].objects.push_back(
+            if (x != housexcenter)
+                mapArea->tiles[x][houseystart].objects.push_back(
                     MakeSPtr<Object>("ObjectWoodWall", false, false, 90));
 
-
-
-            mapArea->tiles[x][houseyEnd].objects.push_back(
+            mapArea->tiles[x][houseyend].objects.push_back(
                 MakeSPtr<Object>("ObjectWoodWall", false, false, 270));
         }
 
-        for (auto y = houseyStart - 1; y != yCenter; y--)
+        for (auto y = houseystart - 1; y != ycenter; y--)
         {
-            mapArea->tiles[housexCenter][y].groundType = GetId("GroundTypeCobblestone");
+            mapArea->tiles[housexcenter][y].groundType = GetId("GroundTypeCobblestone");
         }
 
-        auto anvilx = xCenter - 5;
-        auto anvily = yCenter - 5;
+        auto anvilx = xcenter - 5;
+        auto anvily = ycenter - 5;
 
         for (auto y = anvily - 2; y <= anvily + 2; y++)
         {
@@ -397,230 +344,160 @@ namespace Forradia
             }
         }
 
-        mapArea->tiles[anvilx][anvily].objects.push_back(
-            MakeSPtr<Object>("ObjectLargeAnvil", false));
+        mapArea->tiles[anvilx][anvily].objects.push_back(MakeSPtr<Object>("ObjectLargeAnvil", false));
 
-        mapArea->tiles[xCenter + 1][yCenter - villageSize / 2].objects.push_back(
-            MakeSPtr<Object>("ObjectStreetLantern", false));
-
-        mapArea->tiles[xCenter + 1][yCenter + villageSize / 2].objects.push_back(
-            MakeSPtr<Object>("ObjectStreetLantern", false));
-
-        mapArea->tiles[xCenter + villageSize / 2][yCenter + 1].objects.push_back(
-            MakeSPtr<Object>("ObjectStreetLantern", false));
-
-        mapArea->tiles[xCenter - villageSize / 2][yCenter + 1].objects.push_back(
-            MakeSPtr<Object>("ObjectStreetLantern", false));
+        mapArea->tiles[xcenter + 1][ycenter - villageSize / 2].objects.push_back(MakeSPtr<Object>("ObjectStreetLantern", false));
+        mapArea->tiles[xcenter + 1][ycenter + villageSize / 2].objects.push_back(MakeSPtr<Object>("ObjectStreetLantern", false));
+        mapArea->tiles[xcenter + villageSize / 2][ycenter + 1].objects.push_back(MakeSPtr<Object>("ObjectStreetLantern", false));
+        mapArea->tiles[xcenter - villageSize / 2][ycenter + 1].objects.push_back(MakeSPtr<Object>("ObjectStreetLantern", false));
 
     }
 
-
-
-    int
-        ValleyMapGenerator::DistToPlayerStartingPos(MapArea* mapArea, int tileX,
-            int tileY) const
+    int ValleyMapGenerator::DistToPlayerStartingPos(MapArea* mapArea, int tileX, int tileY) const
     {
-        auto DX = mapArea->spawnPos.x - tileX;
-        auto DY = mapArea->spawnPos.y - tileY;
-        auto Distance = std::sqrt(DX * DX + DY * DY);
+        auto dx = mapArea->spawnPos.x - tileX;
+        auto dy = mapArea->spawnPos.y - tileY;
+        auto distance = std::sqrt(dx * dx + dy * dy);
 
-        return static_cast<int>(Distance);
+        return CInt(distance);
     }
 
 
-    void
-        ValleyMapGenerator::GenerateBushes(MapArea* mapArea) const
+    void ValleyMapGenerator::GenerateBushes(MapArea* mapArea) const
     {
         for (auto i = 0; i < 200; i++)
         {
             auto tileX = rnd.Next() % mapArea->size;
             auto tileY = rnd.Next() % mapArea->size;
 
-            if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
-                continue;
+            if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartAreaSize) continue;
 
             if (mapArea->tiles[tileX][tileY].groundType == GetId("GroundTypeGrass"))
                 if (mapArea->tiles[tileX][tileY].objects.size() == 0)
-                    mapArea->tiles[tileX][tileY].objects.push_back(
-                        MakeSPtr<Object>("ObjectBush1"));
+                    mapArea->tiles[tileX][tileY].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
         }
     }
 
-    void
-        ValleyMapGenerator::GenerateSmallStones(MapArea* mapArea) const
+    void ValleyMapGenerator::GenerateSmallStones(MapArea* mapArea) const
     {
         for (auto i = 0; i < 200; i++)
         {
-            auto tileX = rnd.Next() % mapArea->size;
-            auto tileY = rnd.Next() % mapArea->size;
+            auto x = rnd.Next() % mapArea->size;
+            auto y = rnd.Next() % mapArea->size;
 
-            if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
-                continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
-            if (mapArea->tiles[tileX][tileY].groundType != GetId("GroundTypeWater"))
-                if (mapArea->tiles[tileX][tileY].objects.size() == 0)
-                    mapArea->tiles[tileX][tileY].objects.push_back(
-                        MakeSPtr<Object>("ObjectSmallStone"));
+            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater"))
+                if (mapArea->tiles[x][y].objects.size() == 0)
+                    mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectSmallStone"));
         }
     }
 
-    void
-        ValleyMapGenerator::GeneratePinkFlowers(MapArea* mapArea) const
+    void ValleyMapGenerator::GeneratePinkFlowers(MapArea* mapArea) const
     {
         for (auto i = 0; i < 100; i++)
         {
-            auto tileX = rnd.Next() % mapArea->size;
-            auto tileY = rnd.Next() % mapArea->size;
+            auto x = rnd.Next() % mapArea->size;
+            auto y = rnd.Next() % mapArea->size;
 
-            if (mapArea->tiles[tileX][tileY].groundType == GetId("GroundTypeGrass"))
-                if (mapArea->tiles[tileX][tileY].objects.size() == 0)
-                    mapArea->tiles[tileX][tileY].objects.push_back(
-                        MakeSPtr<Object>("ObjectPinkFlower"));
+            if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
+                if (mapArea->tiles[x][y].objects.size() == 0)
+                    mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectPinkFlower"));
         }
     }
 
-    void
-        ValleyMapGenerator::GenerateTallGrass(MapArea* mapArea) const
+    void ValleyMapGenerator::GenerateTallGrass(MapArea* mapArea) const
     {
         for (auto i = 0; i < 6000; i++)
         {
-            auto tileX = rnd.Next() % mapArea->size;
-            auto tileY = rnd.Next() % mapArea->size;
+            auto x = rnd.Next() % mapArea->size;
+            auto y = rnd.Next() % mapArea->size;
 
-            if (mapArea->tiles[tileX][tileY].groundType == GetId("GroundTypeGrass"))
-                if (mapArea->tiles[tileX][tileY].objects.size() == 0)
-                    mapArea->tiles[tileX][tileY].objects.push_back(
-                        MakeSPtr<Object>("ObjectTallGrass"));
+            if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
+                if (mapArea->tiles[x][y].objects.size() == 0)
+                    mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTallGrass"));
         }
     }
 
 
-    void
-        ValleyMapGenerator::GenerateMobs(MapArea* mapArea) const
+    void ValleyMapGenerator::GenerateMobs(MapArea* mapArea) const
     {
         for (auto i = 0; i < 100; i++)
         {
-            auto tileX = rnd.Next() % mapArea->size;
-            auto tileY = rnd.Next() % mapArea->size;
+            auto x = rnd.Next() % mapArea->size;
+            auto y = rnd.Next() % mapArea->size;
 
-            if (tileX == static_cast<int>(mapArea->spawnPos.x)
-                && tileY == static_cast<int>(mapArea->spawnPos.y))
-                continue;
+            if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
-            if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
-                continue;
-
-            if (mapArea->tiles[tileX][tileY].groundType !=
-                GetId("GroundTypeWater") &&
-                mapArea->tiles[tileX][tileY].actor == nullptr)
+            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
             {
-                mapArea->tiles[tileX][tileY].actor =
-                    std::make_unique<Mob>(e,
-                        static_cast<float>(tileX),
-                        static_cast<float>(tileY),
-                        "MobRabbit");
-                mapArea->mobActorsMirror.insert({ mapArea->tiles[tileX][tileY].actor->actorId,
-                            std::ref(mapArea->tiles[tileX][tileY].actor) });
+                mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobRabbit");
+                mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
             }
         }
 
         for (auto i = 0; i < 100; i++)
         {
-            auto tileX = rnd.Next() % mapArea->size;
-            auto tileY = rnd.Next() % mapArea->size;
+            auto x = rnd.Next() % mapArea->size;
+            auto y = rnd.Next() % mapArea->size;
 
-            if (tileX == static_cast<int>(mapArea->spawnPos.x)
-                && tileY == static_cast<int>(mapArea->spawnPos.y))
-                continue;
+            if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
-            if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
-                continue;
-
-            if (mapArea->tiles[tileX][tileY].groundType !=
-                GetId("GroundTypeWater") &&
-                mapArea->tiles[tileX][tileY].actor == nullptr)
+            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") &&  mapArea->tiles[x][y].actor == nullptr)
             {
-                mapArea->tiles[tileX][tileY].actor =
-                    std::make_unique<Mob>(e,
-                        static_cast<float>(tileX),
-                        static_cast<float>(tileY),
-                        "MobRat");
-                mapArea->mobActorsMirror.insert({ mapArea->tiles[tileX][tileY].actor->actorId,
-                            std::ref(mapArea->tiles[tileX][tileY].actor) });
+                mapArea->tiles[x][y].actor =  MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobRat");
+                mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
             }
         }
 
         for (auto i = 0; i < 100; i++)
         {
-            auto tileX = rnd.Next() % mapArea->size;
-            auto tileY = rnd.Next() % mapArea->size;
+            auto x = rnd.Next() % mapArea->size;
+            auto y = rnd.Next() % mapArea->size;
 
-            if (tileX == static_cast<int>(mapArea->spawnPos.x)
-                && tileY == static_cast<int>(mapArea->spawnPos.y))
-                continue;
+            if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
-            if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
-                continue;
-
-            if (mapArea->tiles[tileX][tileY].groundType !=
-                GetId("GroundTypeWater") &&
-                mapArea->tiles[tileX][tileY].actor == nullptr)
+            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
             {
-                mapArea->tiles[tileX][tileY].actor =
-                    std::make_unique<Mob>(e,
-                        static_cast<float>(tileX),
-                        static_cast<float>(tileY),
-                        "MobPinkSlime");
-                mapArea->mobActorsMirror.insert({ mapArea->tiles[tileX][tileY].actor->actorId,
-                            std::ref(mapArea->tiles[tileX][tileY].actor) });
+                mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobPinkSlime");
+                mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
             }
         }
     }
 
-    void
-        ValleyMapGenerator::
-        GenerateQuestCaves(const IEngine& e,
-            MapArea* mapArea,
-            const UPtr<PlanetWorldMap>& worldMap) const
+    void ValleyMapGenerator::GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const
     {
         QuestCaveMapGenerator questCaveMapGenerator;
 
         for (auto floor = -1; floor >= -20; floor--)
         {
-            auto tileX = rnd.Next() % 94 + 3;
-            auto tileY = rnd.Next() % 94 + 3;
+            auto x = rnd.Next() % 94 + 3;
+            auto y = rnd.Next() % 94 + 3;
 
-            if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartingAreaSize)
-                continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
-            auto xCenter = mapArea->size / 2;
-            auto yCenter = mapArea->size / 2;
-            auto xStartVillage = xCenter - villageSize / 2;
-            auto yStartVillage = xCenter - villageSize / 2;
-            auto xEndVillage = xStartVillage + villageSize;
-            auto yEndVillage = yStartVillage + villageSize;
+            auto xcenter = mapArea->size / 2;
+            auto ycenter = mapArea->size / 2;
+            auto xstartvillage = xcenter - villageSize / 2;
+            auto ystartvillage = xcenter - villageSize / 2;
+            auto xendvillage = xstartvillage + villageSize;
+            auto yendvillage = ystartvillage + villageSize;
 
-            if (tileX >= xStartVillage && tileY >= yStartVillage && tileX <= xEndVillage && tileY <= yEndVillage)
-                continue;
+            if (x >= xstartvillage && y >= ystartvillage && x <= xendvillage && y <= yendvillage) continue;
 
-            if (mapArea->tiles[tileX][tileY].groundType !=
-                GetId("GroundTypeWater"))
+            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater"))
             {
-                mapArea->tiles[tileX][tileY].objects.push_back(
-                    MakeSPtr<Object>("ObjectQuestCaveEntrance"));
-                //MapArea->Tiles[tileX][tileY].WarpToFloor = Floor;
-                mapArea->tiles[tileX][tileY].properties["WarpToFloor"] = std::to_string(floor);
+                mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectQuestCaveEntrance"));
+                mapArea->tiles[x][y].properties["WarpToFloor"] = std::to_string(floor);
 
-                worldMap->areas[mapArea->worldCoord.x][mapArea->worldCoord.y][floor] =
-                    std::make_unique<MapArea>(e, worldMap->mapAreaSize, Point3 { mapArea->worldCoord.x, mapArea->worldCoord.y, floor });
+                worldMap->areas[mapArea->worldCoord.x][mapArea->worldCoord.y][floor] = MakeUPtr<MapArea>(e, worldMap->mapAreaSize, Point3 { mapArea->worldCoord.x, mapArea->worldCoord.y, floor });
 
-                auto& questCaveMapArea =
-                    worldMap->areas
-                    [mapArea->worldCoord.x][mapArea->worldCoord.y][floor];
+                auto& questCaveMapArea =  worldMap->areas[mapArea->worldCoord.x][mapArea->worldCoord.y][floor];
 
-                questCaveMapGenerator.GenerateQuestCaveMapArea(
-                    questCaveMapArea.get(),
-                    { tileX, tileY });
+                questCaveMapGenerator.GenerateQuestCaveMapArea(questCaveMapArea.get(), { x, y });
             }
         }
     }

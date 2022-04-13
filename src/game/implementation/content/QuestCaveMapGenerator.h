@@ -11,15 +11,19 @@ namespace Forradia
 
     class QuestCaveMapGenerator
     {
+
     public:
-        void GenerateQuestCaveMapArea(MapArea* mapArea, Point2 entranceLocation);
+
+        void GenerateQuestCaveMapArea(MapArea* mapArea, Point2 entranceLoc);
 
     private:
+
         void ClearToCaveFloor(MapArea* mapArea);
         void GenerateCaveWalls(MapArea* mapArea);
-        void GeneratePath(MapArea* mapArea, Point2 entranceLocation);
+        void GeneratePath(MapArea* mapArea, Point2 entranceLoc);
 
         Random rnd;
+
     };
 
 }  // namespace Forradia

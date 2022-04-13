@@ -24,7 +24,7 @@ namespace Forradia
         ScenesCollection scenesCollection;
         Inventory startingInventory;
 
-        auto defaultMapGen = MakeSPtr<DefaultMapGenerator>(e, planetMap);
+        auto defaultMapGen = MakeSPtr<ValleyMapGenerator>(e, planetMap);
         auto worldMapGens = UMap<int, UMap<int, SPtr<IMapGenerator>>>();
         worldMapGens[0][0] = defaultMapGen;
         worldMapGens[1][0] = defaultMapGen;

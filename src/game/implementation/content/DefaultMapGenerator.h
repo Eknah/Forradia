@@ -34,7 +34,7 @@ namespace Forradia
         void GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const;
         int DistToPlayerStartingPos(MapArea* mapArea, int tileX, int tileY) const;
 
-        const int playerStartingAreaSize = 4;
+        const int playerStartAreaSize = 4;
         Random rnd;
 
     };

@@ -11,8 +11,7 @@ class PlanetWorldMap;
 
 class IMapGenerator {
  public:
-  IMapGenerator(const IEngine &_e, const UPtr<PlanetWorldMap> &_worldMap)
-      : e(_e), worldMap(_worldMap) {}
+  IMapGenerator(const IEngine &_e, const UPtr<PlanetWorldMap> &_worldMap) : e(_e), worldMap(_worldMap) {}
 
   // Core map area generation
 
