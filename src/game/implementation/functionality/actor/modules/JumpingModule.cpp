@@ -4,7 +4,7 @@
 #include "JumpingModule.h"
 #include "../engine/Aliases.h"
 #include "implementation/functionality/actor/Actor.h"
-#include "implementation/functionality/actor/modules/MovementDataModule.h"
+#include "implementation/functionality/actor/modules/CoreMovementModule.h"
 
 namespace Forradia
 {

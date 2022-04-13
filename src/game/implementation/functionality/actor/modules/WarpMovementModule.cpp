@@ -3,7 +3,7 @@
 
 #include "WarpMovementModule.h"
 #include "../engine/IEngine.h"
-#include "MovementDataModule.h"
+#include "CoreMovementModule.h"
 
 namespace Forradia
 {
@@ -13,7 +13,7 @@ namespace Forradia
         auto newX = GetParentActor().GetModule<CoreMovementModule>().position.x;
         auto newY = GetParentActor().GetModule<CoreMovementModule>().position.y;
 
-        if (e.GetCurrentMapArea().tiles
+        if (e.GetCurrMapArea().tiles
             [static_cast<int>(newX)][static_cast<int>(newY)].properties.count("WarpToFloor") > 0)
         {
             auto angle = *GetParentActor().GetModule<CoreMovementModule>().facingAngle
@@ -33,16 +33,16 @@ namespace Forradia
             GetParentActor().GetModule<CoreMovementModule>().position.x = newX;
             GetParentActor().GetModule<CoreMovementModule>().position.y = newY;
 
-            auto coord = e.GetCurrentMapArea().worldCoord;
-            coord.z = std::stoi(e.GetCurrentMapArea().tiles
+            auto coord = e.GetCurrMapArea().worldCoord;
+            coord.z = std::stoi(e.GetCurrMapArea().tiles
                 [static_cast<int>(newXOld)][static_cast<int>(newYOld)].properties.at("WarpToFloor"));
 
             e.world->GetArea(coord)->tiles[newX][newY].actor
-                = std::move(e.GetCurrentMapArea().tiles[newXOld][newYOld].actor);
-            e.GetCurrentMapArea().tiles[newXOld][newYOld].actor = nullptr;
+                = std::move(e.GetCurrMapArea().tiles[newXOld][newYOld].actor);
+            e.GetCurrMapArea().tiles[newXOld][newYOld].actor = nullptr;
 
             GetParentActor().GetModule<CoreMovementModule>().worldMapCoord.z =
-                std::stoi(e.GetCurrentMapArea().tiles
+                std::stoi(e.GetCurrMapArea().tiles
                     [static_cast<int>(newXOld)][static_cast<int>(newYOld)].properties.at("WarpToFloor"));
         }
     }

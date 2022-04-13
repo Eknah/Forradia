@@ -59,7 +59,7 @@ class IEngine {
 
   virtual SizeF GetImageSizeF(std::string imageName) const = 0;
 
-  virtual MapArea& GetCurrentMapArea() const = 0;
+  virtual MapArea& GetCurrMapArea() const = 0;
 
   Player &GetPlayer() const;
 

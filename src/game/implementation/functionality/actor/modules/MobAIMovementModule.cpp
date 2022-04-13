@@ -3,7 +3,7 @@
 
 #include "MobAIMovementModule.h"
 #include "../engine/IEngine.h"
-#include "MovementDataModule.h"
+#include "CoreMovementModule.h"
 #include <iostream>
 
 namespace Forradia
@@ -80,29 +80,29 @@ namespace Forradia
             if (newXI >= 0 && newYI >= 0 && newXI < e.world->mapAreaSize &&
                 newYI < e.world->mapAreaSize)
             {
-                if (e.GetCurrentMapArea().tiles[newXI][newYI].groundType !=
+                if (e.GetCurrMapArea().tiles[newXI][newYI].groundType !=
                     GetId("GroundTypeWater"))
                 {
-                    if (e.GetCurrentMapArea().tiles[newXI][newYI].actor == nullptr ||
+                    if (e.GetCurrMapArea().tiles[newXI][newYI].actor == nullptr ||
                         (newXI == oldXI && newYI == oldYI))
                     {
-                        e.GetCurrentMapArea().tiles[oldXI][oldYI].actor->GetModule<CoreMovementModule>().position = {
+                        e.GetCurrMapArea().tiles[oldXI][oldYI].actor->GetModule<CoreMovementModule>().position = {
                             newX, newY };
 
                         if (newXI != oldXI || newYI != oldYI)
                         {
-                            e.GetCurrentMapArea().tiles[newXI][newYI].actor = std::move(
-                                e.GetCurrentMapArea().tiles[oldXI][oldYI].actor);
-                            e.GetCurrentMapArea().tiles[oldXI][oldYI].actor = nullptr;
+                            e.GetCurrMapArea().tiles[newXI][newYI].actor = std::move(
+                                e.GetCurrMapArea().tiles[oldXI][oldYI].actor);
+                            e.GetCurrMapArea().tiles[oldXI][oldYI].actor = nullptr;
                         }
 
-                        e.GetCurrentMapArea().mobActorsMirror.erase(mob.actorId);
+                        e.GetCurrMapArea().mobActorsMirror.erase(mob.actorId);
 
-                        e.GetCurrentMapArea().mobActorsMirror.insert({ e.GetCurrentMapArea().tiles[newXI][newYI].actor->actorId,
-                            std::ref(e.GetCurrentMapArea().tiles[newXI][newYI].actor) });
+                        e.GetCurrMapArea().mobActorsMirror.insert({ e.GetCurrMapArea().tiles[newXI][newYI].actor->actorId,
+                            std::ref(e.GetCurrMapArea().tiles[newXI][newYI].actor) });
 
                     }
-                    else if (e.GetCurrentMapArea().tiles[newXI][newYI].actor !=
+                    else if (e.GetCurrMapArea().tiles[newXI][newYI].actor !=
                         nullptr &&
                         (newXI != oldXI || newYI != oldYI))
                     {

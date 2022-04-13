@@ -6,7 +6,7 @@
 #include "../engine/Aliases.h"
 #include "../engine/IEngine.h"
 #include "implementation/functionality/actor/Actor.h"
-#include "MovementDataModule.h"
+#include "CoreMovementModule.h"
 #include "WarpMovementModule.h"
 
 namespace Forradia
@@ -21,49 +21,49 @@ namespace Forradia
     void DestMovementModule::Update()
     {
         auto& actor = GetParentActor();
-        auto& movementData = actor.GetModule<CoreMovementModule>();
+        auto& coreMovement = actor.GetModule<CoreMovementModule>();
 
-        if (Ticks() < movementData.tickLastMove + movementData.moveSpeed) return;
-        if (movementData.destination.IsUndefined()) return;
+        if (Ticks() < coreMovement.tickLastMove + coreMovement.moveSpeed) return;
+        if (coreMovement.destination.IsUndefined()) return;
 
-        auto dx = movementData.destination.x - movementData.position.x;
-        auto dy = movementData.destination.y - movementData.position.y;
+        auto dx = coreMovement.destination.x - coreMovement.position.x;
+        auto dy = coreMovement.destination.y - coreMovement.position.y;
         auto absdx = std::abs(dx);
         auto absdy = std::abs(dy);
 
-        if (absdx < movementData.stepMultiplier && absdy < movementData.stepMultiplier)
+        if (absdx < coreMovement.stepMultiplier && absdy < coreMovement.stepMultiplier)
         {
-            movementData.destination.MakeUndefined();
+            coreMovement.destination.MakeUndefined();
         }
         else
         {
             auto piF = CFloat(M_PI);
-            movementData.isWalking = true;
-            *movementData.facingAngle = CFloat(std::atan2(-dx, -dy)) / piF * 180.0f;
+            coreMovement.isWalking = true;
+            *coreMovement.facingAngle = CFloat(std::atan2(-dx, -dy)) / piF * 180.0f;
 
-            auto angle = *movementData.facingAngle / 180.0f * piF - piF / 2 + 0 * piF / 2;
-            auto dx = -std::cos(angle) * movementData.stepMultiplier;
-            auto dy = std::sin(angle) * movementData.stepMultiplier;
-            auto newX = movementData.position.x + dx * movementData.stepSize;
-            auto newY = movementData.position.y + dy * movementData.stepSize;
+            auto angle = *coreMovement.facingAngle / 180.0f * piF - piF / 2 + 0 * piF / 2;
+            auto dx = -std::cos(angle) * coreMovement.stepMultiplier;
+            auto dy = std::sin(angle) * coreMovement.stepMultiplier;
+            auto newX = coreMovement.position.x + dx * coreMovement.stepSize;
+            auto newY = coreMovement.position.y + dy * coreMovement.stepSize;
 
             if (newX < 0)
-                newX += e.GetCurrentMapArea().size;
+                newX += e.GetCurrMapArea().size;
             if (newY < 0)
-                newY += e.GetCurrentMapArea().size;
-            if (newX >= e.GetCurrentMapArea().size)
-                newX -= e.GetCurrentMapArea().size;
-            if (newY >= e.GetCurrentMapArea().size)
-                newY -= e.GetCurrentMapArea().size;
+                newY += e.GetCurrMapArea().size;
+            if (newX >= e.GetCurrMapArea().size)
+                newX -= e.GetCurrMapArea().size;
+            if (newY >= e.GetCurrMapArea().size)
+                newY -= e.GetCurrMapArea().size;
 
             auto newXRounded = newX;
             auto newYRounded = newY;
 
-            movementData.TryMoveToTile(newXRounded, newYRounded);
+            coreMovement.TryMoveToTile(newXRounded, newYRounded);
 
         }
 
-        movementData.tickLastMove = Ticks();
+        coreMovement.tickLastMove = Ticks();
     }
 
 }  // namespace Forradia

@@ -3,7 +3,7 @@
 
 #include "ScenePrimary.h"
 #include "../engine/Engine.h"
-#include "implementation/functionality/actor/modules/MovementDataModule.h"
+#include "implementation/functionality/actor/modules/CoreMovementModule.h"
 
 namespace Forradia
 {
@@ -79,7 +79,7 @@ namespace Forradia
         if (e.mouseHandler.rightButtonDown)
             e.customCursor.cursorType = CursorTypes::Hidden;
 
-        for (auto& [key, mobActor] : e.GetCurrentMapArea().mobActorsMirror)
+        for (auto& [key, mobActor] : e.GetCurrMapArea().mobActorsMirror)
         {
             mobActor.get()->Update();
         }
@@ -106,11 +106,11 @@ namespace Forradia
         {
             auto hovered = camera.GetHoveredTile();
 
-            if (e.GetCurrentMapArea().tiles[hovered.x][hovered.y].objects.size() >
+            if (e.GetCurrMapArea().tiles[hovered.x][hovered.y].objects.size() >
                 0)
                 e.GetPlayer().GetModule<ObjectUsageModule>().objectBeingUsed->UseOn(
-                    e.GetCurrentMapArea().tiles[hovered.x][hovered.y].objects.at(
-                        e.GetCurrentMapArea()
+                    e.GetCurrMapArea().tiles[hovered.x][hovered.y].objects.at(
+                        e.GetCurrMapArea()
                         .tiles[hovered.x][hovered.y]
                         .objects.size() -
                         1));

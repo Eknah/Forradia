@@ -3,7 +3,7 @@
 
 #include "PlanetShaper.h"
 #include "../engine/Engine.h"
-#include "implementation/functionality/actor/modules/MovementDataModule.h"
+#include "implementation/functionality/actor/modules/CoreMovementModule.h"
 
 namespace Forradia
 {

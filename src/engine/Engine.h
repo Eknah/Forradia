@@ -74,7 +74,7 @@ class Engine : public IEngine {
 
   SizeF GetImageSizeF(std::string imageName) const override;
 
-  MapArea& GetCurrentMapArea() const override;
+  MapArea& GetCurrMapArea() const override;
 
   // ---- Public members ----
 

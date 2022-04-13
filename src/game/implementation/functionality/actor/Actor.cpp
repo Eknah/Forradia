@@ -4,7 +4,7 @@
 #include "Actor.h"
 #include "modules/DestMovementModule.h"
 #include "../engine/IEngine.h"
-#include "modules/MovementDataModule.h"
+#include "modules/CoreMovementModule.h"
 
 namespace Forradia
 {

@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Mob.h"
-#include "implementation/functionality/actor/modules/MovementDataModule.h"
+#include "implementation/functionality/actor/modules/CoreMovementModule.h"
 #include "implementation/functionality/actor/modules/MobAIMovementModule.h"
 
 namespace Forradia {

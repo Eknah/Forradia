@@ -11,6 +11,7 @@ namespace Forradia
 
     class DirectionMovementModule : public IModule
     {
+
     public:
 
         DirectionMovementModule(const IEngine& _e, Actor* _parentActor);
@@ -19,6 +20,7 @@ namespace Forradia
         void Update() override;
 
         char moveInstruction;
+
     };
 
 }  // namespace Forradia

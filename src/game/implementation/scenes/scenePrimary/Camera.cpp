@@ -4,7 +4,7 @@
 #include <algorithm>
 #include "Camera.h"
 #include "../engine/Engine.h"
-#include "implementation/functionality/actor/modules/MovementDataModule.h"
+#include "implementation/functionality/actor/modules/CoreMovementModule.h"
 
 namespace Forradia
 {
@@ -112,7 +112,7 @@ namespace Forradia
 
     int Camera::GetRenderDistance() const
     {
-        auto& mapArea = e.GetCurrentMapArea();
+        auto& mapArea = e.GetCurrMapArea();
 
         if (mapArea.IsUnderground())
             return renderDistanceCave;

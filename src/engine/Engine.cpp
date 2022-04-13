@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Engine.h"
-#include "../game/implementation/functionality/actor/modules/MovementDataModule.h"
+#include "../game/implementation/functionality/actor/modules/CoreMovementModule.h"
 
 namespace Forradia {
 
@@ -37,7 +37,7 @@ void Engine::Run(ScenesCollection _scenesCollection, int _startScene,
                                       ->GetTile(playerTilePosI).actor.get()));
 
     GetPlayer().GetModule<CoreMovementModule>().worldMapCoord = playerWorldPos;
-    GetPlayer().GetModule<CoreMovementModule>().position = GetCurrentMapArea().spawnPos;
+    GetPlayer().GetModule<CoreMovementModule>().position = GetCurrMapArea().spawnPos;
     GetPlayer().GetModule<InventoryModule>().inventory = _startingInventory;
     sceneManager.Initialize(move(_scenesCollection), _startScene);
     modelLoader.LoadModels();
@@ -96,7 +96,7 @@ SizeF Engine::GetImageSizeF(std::string imageName) const {
     return imageGraphics.GetImageSizeF(imageName);
   }
 
-MapArea& Engine::GetCurrentMapArea() const {
+MapArea& Engine::GetCurrMapArea() const {
     // return *WorldMap->MapAreas.at(Player.CurrentMapArea);
     return *world->GetArea(GetPlayer().GetModule<CoreMovementModule>().worldMapCoord);
   }

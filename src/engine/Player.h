@@ -3,7 +3,7 @@
 
 #pragma once
 #include "implementation/functionality/actor/Actor.h"
-#include "implementation/functionality/actor/modules/InventoryModule.h"
+#include "../engine/InventoryModule.h"
 #include "implementation/functionality/actor/modules/JumpingModule.h"
 #include "implementation/functionality/actor/modules/DestMovementModule.h"
 #include "implementation/functionality/actor/modules/DirectionMovementModule.h"
