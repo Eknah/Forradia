@@ -9,7 +9,7 @@
 namespace Forradia
 {
 
-    class QuestCaveMapGenerator
+    class QuestCaveMapGen
     {
 
     public:

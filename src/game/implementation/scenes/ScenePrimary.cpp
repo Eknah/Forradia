@@ -3,7 +3,7 @@
 
 #include "ScenePrimary.h"
 #include "../engine/Engine.h"
-#include "implementation/functionality/actor/modules/CoreMovementModule.h"
+#include "implementation/functionality/actor/modules/CoreMovmModule.h"
 
 namespace Forradia
 {
@@ -37,13 +37,13 @@ namespace Forradia
             if (keys->count(SDLK_a))
                 moveInstruction |= DirLeft;
 
-            player.GetModule<DirectionMovementModule>().moveInstruction = moveInstruction;
+            player.GetModule<DirectionMovmModule>().moveInstruction = moveInstruction;
 
             if (moveInstruction & DirForward || moveInstruction & DirRight ||
                 moveInstruction & DirBack || moveInstruction & DirLeft)
             {
-                *player.GetModule<CoreMovementModule>().facingAngle = cam.lookingAngle;
-                player.GetModule<CoreMovementModule>().dest = { -1, -1 };
+                *player.GetModule<CoreMovmModule>().facingAngle = cam.lookingAngle;
+                player.GetModule<CoreMovmModule>().dest = { -1, -1 };
             }
 
             auto turnRight = keys->count(SDLK_e);
@@ -68,7 +68,7 @@ namespace Forradia
         cam.UpdateRayCasting();
 
         if (e.mouseHandler.rightButtonDown)
-            *player.GetModule<CoreMovementModule>().facingAngle = cam.lookingAngle;
+            *player.GetModule<CoreMovmModule>().facingAngle = cam.lookingAngle;
 
         if (e.mouseHandler.rightButtonDown)
             e.customCursor.cursType = CursorTypes::Hidden;
@@ -85,7 +85,7 @@ namespace Forradia
 
     void ScenePrimary::Render()
     {
-        gameWorldRenderer.Render();
+        worldRenderer.Render();
         gui.Render();
     }
 
@@ -114,7 +114,7 @@ namespace Forradia
         {
         case SDL_BUTTON_LEFT:
         {
-            e.GetPlayer().GetModule<CoreMovementModule>().dest =
+            e.GetPlayer().GetModule<CoreMovmModule>().dest =
             {
                 cam.GetHoveredTile().x + 0.5f,
                 cam.GetHoveredTile().y + 0.5f

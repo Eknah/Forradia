@@ -8,8 +8,8 @@
 #include "../engine/Inventory.h"
 #include "implementation/scenes/SceneMainMenu.h"
 #include "implementation/scenes/ScenePrimary.h"
-#include "implementation/content/DefaultMapGenerator.h"
-#include "implementation/content/ValleyMapGenerator.h"
+#include "implementation/content/DefaultMapGen.h"
+#include "implementation/content/ValleyMapGen.h"
 
 namespace Forradia
 {
@@ -24,7 +24,7 @@ namespace Forradia
         ScenesCollection scenes;
         Inventory startInv;
 
-        auto defaultMapGen = MakeSPtr<ValleyMapGenerator>(e, planetMap);
+        auto defaultMapGen = MakeSPtr<ValleyMapGen>(e, planetMap);
         auto worldMapGens = UMap<int, UMap<int, SPtr<IMapGenerator>>>();
 
         worldMapGens[0][0] = defaultMapGen;

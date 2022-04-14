@@ -8,7 +8,7 @@
 namespace Forradia
 {
 
-    class InventoryWindow : public GuiWindowBase
+    class InventoryWin : public GuiWindowBase
     {
 
     public:

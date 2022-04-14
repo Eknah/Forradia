@@ -1,24 +1,24 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "MobAIMovementModule.h"
+#include "MobAIMovmModule.h"
 #include "../engine/IEngine.h"
-#include "CoreMovementModule.h"
+#include "CoreMovmModule.h"
 #include <iostream>
 
 namespace Forradia
 {
 
-    MobAIMovementModule::MobAIMovementModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
+    MobAIMovmModule::MobAIMovmModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
     {
-        GetParentActor().AddIfNotExists<CoreMovementModule>();
+        GetParentActor().AddIfNotExists<CoreMovmModule>();
     }
 
-    void MobAIMovementModule::Update()
+    void MobAIMovmModule::Update()
     {
         auto& actor = GetParentActor();
         auto& mob = actor;
-        auto& coreMovm = mob.GetModule<CoreMovementModule>();
+        auto& coreMovm = mob.GetModule<CoreMovmModule>();
 
         if (actor.actorId == e.GetPlayer().actorId) return;
         if (mob.actorId == e.GetPlayer().actorId) return;
@@ -73,7 +73,7 @@ namespace Forradia
                     {
 
                         coreMovm.timer.Reset();
-                        e.GetCurrMapArea().tiles[oldXI][oldYI].actor->GetModule<CoreMovementModule>().position = {newX, newY };
+                        e.GetCurrMapArea().tiles[oldXI][oldYI].actor->GetModule<CoreMovmModule>().position = {newX, newY };
 
                         if (newXI != oldXI || newYI != oldYI)
                         {

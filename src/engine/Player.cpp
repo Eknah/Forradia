@@ -9,8 +9,8 @@ namespace Forradia
     Player::Player(IEngine& e) : Actor(e, "Player")
     {
         AddModule<JumpingModule>();
-        AddModule<DestMovementModule>();
-        AddModule<DirectionMovementModule>();
+        AddModule<DestMovmModule>();
+        AddModule<DirectionMovmModule>();
         AddModule<InventoryModule>();
         AddModule<ObjectUsageModule>();
     }

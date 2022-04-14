@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Engine.h"
-#include "../game/implementation/functionality/actor/modules/CoreMovementModule.h"
+#include "../game/implementation/functionality/actor/modules/CoreMovmModule.h"
 
 namespace Forradia
 {
@@ -39,8 +39,8 @@ namespace Forradia
             static_cast<Player*>(world->GetArea(playerWorldPos)
                 ->GetTile(playerTilePosI).actor.get()));
 
-        GetPlayer().GetModule<CoreMovementModule>().worldMapCoord = playerWorldPos;
-        GetPlayer().GetModule<CoreMovementModule>().position = GetCurrMapArea().spawnPos;
+        GetPlayer().GetModule<CoreMovmModule>().worldMapCoord = playerWorldPos;
+        GetPlayer().GetModule<CoreMovmModule>().position = GetCurrMapArea().spawnPos;
         GetPlayer().GetModule<InventoryModule>().inventory = _startingInventory;
         sceneManager.Init(move(_scenesCollection), _startScene);
         modelLoader.LoadModels();
@@ -120,7 +120,7 @@ namespace Forradia
 
     MapArea& Engine::GetCurrMapArea() const
     {
-        return *world->GetArea(GetPlayer().GetModule<CoreMovementModule>().worldMapCoord);
+        return *world->GetArea(GetPlayer().GetModule<CoreMovmModule>().worldMapCoord);
     }
 
     void Engine::InitGL()

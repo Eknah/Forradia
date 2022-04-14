@@ -2,16 +2,16 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include <memory>
-#include "ValleyMapGenerator.h"
+#include "ValleyMapGen.h"
 #include "../engine/PlanetWorldMap.h"
 #include "framework/worldStructure/Object.h"
-#include "QuestCaveMapGenerator.h"
+#include "QuestCaveMapGen.h"
 
 namespace Forradia
 {
 
     void
-        ValleyMapGenerator::GenerateMapArea(Point3 worldPos) const
+        ValleyMapGen::GenerateMapArea(Point3 worldPos) const
     {
         worldMap->areas[worldPos.x][worldPos.y][worldPos.z] =  MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldPos);
 
@@ -32,7 +32,7 @@ namespace Forradia
         GenerateQuestCaves(e, mapArea, worldMap);
     }
 
-    void ValleyMapGenerator::ClearToGrass(MapArea* mapArea) const
+    void ValleyMapGen::ClearToGrass(MapArea* mapArea) const
     {
         for (auto tileY = 0; tileY < mapArea->size; tileY++)
             for (auto tileX = 0; tileX < mapArea->size; tileX++)
@@ -40,12 +40,12 @@ namespace Forradia
                 mapArea->tiles[tileX][tileY].groundType = GetId("GroundTypeGrass");
     }
 
-    void ValleyMapGenerator::GeneratePlayerStartingPosition(MapArea* mapArea) const
+    void ValleyMapGen::GeneratePlayerStartingPosition(MapArea* mapArea) const
     {
         mapArea->spawnPos = { CFloat(mapArea->size / 2), CFloat(mapArea->size / 2) };
     }
 
-    void ValleyMapGenerator::GenerateElevation(MapArea* mapArea) const
+    void ValleyMapGen::GenerateElevation(MapArea* mapArea) const
     {
         for (auto y = 0; y < mapArea->size; y++)
         {
@@ -100,7 +100,7 @@ namespace Forradia
 
     }
 
-    void ValleyMapGenerator::GenerateRock(MapArea* mapArea) const
+    void ValleyMapGen::GenerateRock(MapArea* mapArea) const
     {
         for (auto i = 0; i < 30; i++)
         {
@@ -136,7 +136,7 @@ namespace Forradia
         }
     }
 
-    void ValleyMapGenerator::GenerateRivers(MapArea* mapArea) const
+    void ValleyMapGen::GenerateRivers(MapArea* mapArea) const
     {
         for (auto i = 0; i < 6; i++)
         {
@@ -174,7 +174,7 @@ namespace Forradia
         }
     }
 
-    void ValleyMapGenerator::GenerateTrees(MapArea* mapArea) const
+    void ValleyMapGen::GenerateTrees(MapArea* mapArea) const
     {
         for (auto i = 0; i < 30; i++)
         {
@@ -220,7 +220,7 @@ namespace Forradia
         }
     }
 
-    void ValleyMapGenerator::GenerateVillage(MapArea* mapArea) const
+    void ValleyMapGen::GenerateVillage(MapArea* mapArea) const
     {
 
         auto xcenter = mapArea->size / 2;
@@ -354,7 +354,7 @@ namespace Forradia
 
     }
 
-    int ValleyMapGenerator::DistToPlayerStartingPos(MapArea* mapArea, int tileX, int tileY) const
+    int ValleyMapGen::DistToPlayerStartingPos(MapArea* mapArea, int tileX, int tileY) const
     {
         auto dx = mapArea->spawnPos.x - tileX;
         auto dy = mapArea->spawnPos.y - tileY;
@@ -364,7 +364,7 @@ namespace Forradia
     }
 
 
-    void ValleyMapGenerator::GenerateBushes(MapArea* mapArea) const
+    void ValleyMapGen::GenerateBushes(MapArea* mapArea) const
     {
         for (auto i = 0; i < 200; i++)
         {
@@ -379,7 +379,7 @@ namespace Forradia
         }
     }
 
-    void ValleyMapGenerator::GenerateSmallStones(MapArea* mapArea) const
+    void ValleyMapGen::GenerateSmallStones(MapArea* mapArea) const
     {
         for (auto i = 0; i < 200; i++)
         {
@@ -394,7 +394,7 @@ namespace Forradia
         }
     }
 
-    void ValleyMapGenerator::GeneratePinkFlowers(MapArea* mapArea) const
+    void ValleyMapGen::GeneratePinkFlowers(MapArea* mapArea) const
     {
         for (auto i = 0; i < 100; i++)
         {
@@ -407,7 +407,7 @@ namespace Forradia
         }
     }
 
-    void ValleyMapGenerator::GenerateTallGrass(MapArea* mapArea) const
+    void ValleyMapGen::GenerateTallGrass(MapArea* mapArea) const
     {
         for (auto i = 0; i < 6000; i++)
         {
@@ -421,7 +421,7 @@ namespace Forradia
     }
 
 
-    void ValleyMapGenerator::GenerateMobs(MapArea* mapArea) const
+    void ValleyMapGen::GenerateMobs(MapArea* mapArea) const
     {
         for (auto i = 0; i < 100; i++)
         {
@@ -469,9 +469,9 @@ namespace Forradia
         }
     }
 
-    void ValleyMapGenerator::GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const
+    void ValleyMapGen::GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const
     {
-        QuestCaveMapGenerator questCaveMapGenerator;
+        QuestCaveMapGen questCaveMapGen;
 
         for (auto floor = -1; floor >= -20; floor--)
         {
@@ -498,7 +498,7 @@ namespace Forradia
 
                 auto& questCaveMapArea =  worldMap->areas[mapArea->worldCoord.x][mapArea->worldCoord.y][floor];
 
-                questCaveMapGenerator.GenerateQuestCaveMapArea(questCaveMapArea.get(), { x, y });
+                questCaveMapGen.GenerateQuestCaveMapArea(questCaveMapArea.get(), { x, y });
             }
         }
     }

@@ -2,15 +2,15 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include <string>
-#include "GameWorldRenderer.h"
+#include "WorldRenderer.h"
 #include "../engine/Engine.h"
-#include "implementation/functionality/actor/modules/CoreMovementModule.h"
+#include "implementation/functionality/actor/modules/CoreMovmModule.h"
 #include "../engine/ColorF.h"
 
 namespace Forradia
 {
 
-    void GameWorldRenderer::Render()
+    void WorldRenderer::Render()
     {
 
         background.Render(cam.zoomAmount);
@@ -29,10 +29,10 @@ namespace Forradia
         glPopMatrix();
     }
 
-    void GameWorldRenderer::RenderAllExceptRoofAndRays()
+    void WorldRenderer::RenderAllExceptRoofAndRays()
     {
         auto mapAreaSz = e.world->mapAreaSize;
-        auto& movmData = e.GetPlayer().GetModule<CoreMovementModule>();
+        auto& movmData = e.GetPlayer().GetModule<CoreMovmModule>();
         auto& tiles = e.GetCurrMapArea().tiles;
         auto offset = CalcOffset();
         List<Point2> roofTiles;
@@ -230,8 +230,8 @@ namespace Forradia
 
                 if (e.GetCurrMapArea().tiles[tilexI][tileyI].actor != nullptr)
                 {
-                    auto subxpos = (e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovementModule>().position.x - CInt(e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovementModule>().position.x)) * e.cfg.tileSize;
-                    auto subypos = (e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovementModule>().position.y - CInt(e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovementModule>().position.y)) * e.cfg.tileSize;
+                    auto subxpos = (e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.x - CInt(e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.x)) * e.cfg.tileSize;
+                    auto subypos = (e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.y - CInt(e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.y)) * e.cfg.tileSize;
 
                     glDisable(GL_TEXTURE_2D);
 
@@ -253,9 +253,9 @@ namespace Forradia
                     (
                         e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetAnimatedModelId(),
                         tileX0 + subxpos,
-                        modelYPos + e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovementModule>().positionZ,
+                        modelYPos + e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().positionZ,
                         tileZ0 - e.cfg.tileSize + subypos,
-                        *e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovementModule>().facingAngle
+                        *e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().facingAngle
                     );
                 }
 
@@ -273,7 +273,7 @@ namespace Forradia
 
 
 
-    void GameWorldRenderer::RenderRoof(int x, int y)
+    void WorldRenderer::RenderRoof(int x, int y)
     {
 
         auto mapAreaSz = e.world->mapAreaSize;
@@ -284,8 +284,8 @@ namespace Forradia
 
         if (dx * dx + dy * dy >= cam.GetRenderDist() * cam.GetRenderDist()) return;
 
-        auto tileX = e.GetPlayer().GetModule<CoreMovementModule>().position.x - cam.GetRenderDist() + x;
-        auto tileY = e.GetPlayer().GetModule<CoreMovementModule>().position.y - cam.GetRenderDist() + y;
+        auto tileX = e.GetPlayer().GetModule<CoreMovmModule>().position.x - cam.GetRenderDist() + x;
+        auto tileY = e.GetPlayer().GetModule<CoreMovmModule>().position.y - cam.GetRenderDist() + y;
 
         if (tileX < 0 || tileY < 0 || tileX >= mapAreaSz || tileY >= mapAreaSz) return;
 
@@ -345,9 +345,9 @@ namespace Forradia
 
     }
 
-    float GameWorldRenderer::CalcPlayerElev()
+    float WorldRenderer::CalcPlayerElev()
     {
-        auto& movmData = e.GetPlayer().GetModule<CoreMovementModule>();
+        auto& movmData = e.GetPlayer().GetModule<CoreMovmModule>();
         auto& tiles = e.GetCurrMapArea().tiles;
 
         auto playerXInt = CInt(movmData.position.x);
@@ -369,9 +369,9 @@ namespace Forradia
             return elevPlayer;
     }
 
-    Point2F GameWorldRenderer::CalcOffset()
+    Point2F WorldRenderer::CalcOffset()
     {
-        auto& movmData = e.GetPlayer().GetModule<CoreMovementModule>();
+        auto& movmData = e.GetPlayer().GetModule<CoreMovmModule>();
 
         auto playerxI = CInt(movmData.position.x);
         auto playeryI = CInt(movmData.position.y);
@@ -385,7 +385,7 @@ namespace Forradia
         return {offsetx, offsety};
     }
 
-    std::array<float, 4> GameWorldRenderer::GetElevValues(int xI, int yI)
+    std::array<float, 4> WorldRenderer::GetElevValues(int xI, int yI)
     {
         auto mapAreaSz = e.world->mapAreaSize;
         auto& tiles = e.GetCurrMapArea().tiles;

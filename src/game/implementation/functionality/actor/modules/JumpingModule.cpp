@@ -4,7 +4,7 @@
 #include "JumpingModule.h"
 #include "../engine/Aliases.h"
 #include "../engine/Actor.h"
-#include "implementation/functionality/actor/modules/CoreMovementModule.h"
+#include "implementation/functionality/actor/modules/CoreMovmModule.h"
 
 namespace Forradia
 {
@@ -13,7 +13,7 @@ namespace Forradia
 
     void JumpingModule::Update()
     {
-        auto& posz = GetParentActor().GetModule<CoreMovementModule>().positionZ;
+        auto& posz = GetParentActor().GetModule<CoreMovmModule>().positionZ;
 
         if (isJumping)
         {

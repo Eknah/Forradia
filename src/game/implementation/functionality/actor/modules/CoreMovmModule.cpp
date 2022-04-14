@@ -1,20 +1,20 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "CoreMovementModule.h"
+#include "CoreMovmModule.h"
 #include "../engine/Actor.h"
 #include "../engine/IEngine.h"
-#include "implementation/functionality/actor/modules/WarpMovementModule.h"
+#include "implementation/functionality/actor/modules/WarpMovmModule.h"
 
 namespace Forradia
 {
 
-    void CoreMovementModule::ResetForNewFrame()
+    void CoreMovmModule::ResetForNewFrame()
     {
         isWalking = false;
     }
 
-    void CoreMovementModule::TryMoveToTile(float newxRounded, float newyRounded)
+    void CoreMovmModule::TryMoveToTile(float newxRounded, float newyRounded)
     {
         auto& actor = GetParentActor();
         auto& e = actor.e;
@@ -42,7 +42,7 @@ namespace Forradia
             }
         }
 
-        actor.GetModule<WarpMovementModule>().WarpIfStandOnPortal();
+        actor.GetModule<WarpMovmModule>().WarpIfStandOnPortal();
     }
 
 }  // namespace Forradia

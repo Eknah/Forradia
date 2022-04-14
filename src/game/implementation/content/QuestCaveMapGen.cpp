@@ -1,13 +1,13 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "QuestCaveMapGenerator.h"
+#include "QuestCaveMapGen.h"
 #include "framework/worldStructure/Object.h"
 
 namespace Forradia
 {
 
-    void QuestCaveMapGenerator::GenerateQuestCaveMapArea(MapArea* mapArea, Point2 entranceLoc)
+    void QuestCaveMapGen::GenerateQuestCaveMapArea(MapArea* mapArea, Point2 entranceLoc)
     {
         ClearToCaveFloor(mapArea);
         GenerateCaveWalls(mapArea);
@@ -17,21 +17,21 @@ namespace Forradia
         mapArea->tiles[entranceLoc.x][entranceLoc.y].objects.push_back(MakeSPtr<Object>("ObjectQuestCaveEntrance"));
     }
 
-    void QuestCaveMapGenerator::ClearToCaveFloor(MapArea* mapArea)
+    void QuestCaveMapGen::ClearToCaveFloor(MapArea* mapArea)
     {
         for (auto y = 0; y < mapArea->size; y++)
             for (auto x = 0; x < mapArea->size; x++)
                 mapArea->tiles[x][y].groundType = GetId("GroundTypeCaveFloor");
     }
 
-    void QuestCaveMapGenerator::GenerateCaveWalls(MapArea* mapArea)
+    void QuestCaveMapGen::GenerateCaveWalls(MapArea* mapArea)
     {
         for (auto y = 0; y < mapArea->size; y++)
             for (auto x = 0; x < mapArea->size; x++)
                 mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectCaveWallBlock", false));
     }
 
-    void QuestCaveMapGenerator::GeneratePath(MapArea* mapArea, Point2 entranceLoc)
+    void QuestCaveMapGen::GeneratePath(MapArea* mapArea, Point2 entranceLoc)
     {
         for (auto y = entranceLoc.y - 3; y <= entranceLoc.y + 3; y++)
             for (auto x = entranceLoc.x - 3; x <= entranceLoc.x + 3; x++)

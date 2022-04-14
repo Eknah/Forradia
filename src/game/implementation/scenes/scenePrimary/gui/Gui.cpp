@@ -4,7 +4,7 @@
 #include <memory>
 #include "Gui.h"
 #include "../engine/Engine.h"
-#include "InventoryWindow.h"
+#include "InventoryWin.h"
 
 namespace Forradia
 {
@@ -14,7 +14,7 @@ namespace Forradia
         windows.clear();
         windows.insert
         ({
-            "Inventory", std::make_unique<InventoryWindow>( e, "Inventory", RectF{0.1f, 0.1f, 0.2f, 0.7f})
+            "Inventory", std::make_unique<InventoryWin>( e, "Inventory", RectF{0.1f, 0.1f, 0.2f, 0.7f})
         });
     }
 

@@ -3,7 +3,7 @@
 
 #pragma once
 #include "scenePrimary/Camera.h"
-#include "scenePrimary/GameWorldRenderer.h"
+#include "scenePrimary/WorldRenderer.h"
 #include "scenePrimary/gui/Gui.h"
 
 namespace Forradia
@@ -14,7 +14,7 @@ namespace Forradia
 
     public:
 
-        explicit ScenePrimary(const Engine& _e) : SceneBase(_e), gui(_e), cam(_e), gameWorldRenderer(_e, cam)
+        explicit ScenePrimary(const Engine& _e) : SceneBase(_e), gui(_e), cam(_e), worldRenderer(_e, cam)
         {}
 
         void Enter() override;
@@ -30,7 +30,7 @@ namespace Forradia
         Camera cam;
         Gui gui;
         Utilities utils;
-        GameWorldRenderer gameWorldRenderer;
+        WorldRenderer worldRenderer;
 
     };
 

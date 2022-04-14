@@ -4,7 +4,7 @@
 #include <algorithm>
 #include "Camera.h"
 #include "../engine/Engine.h"
-#include "implementation/functionality/actor/modules/CoreMovementModule.h"
+#include "implementation/functionality/actor/modules/CoreMovmModule.h"
 
 namespace Forradia
 {
@@ -95,13 +95,13 @@ namespace Forradia
 
     Point2 Camera::GetHoveredTile() const
     {
-        float subStepX = e.GetPlayer().GetModule<CoreMovementModule>().position.x - CInt(e.GetPlayer().GetModule<CoreMovementModule>().position.x);
-        float subStepY = e.GetPlayer().GetModule<CoreMovementModule>().position.y - CInt(e.GetPlayer().GetModule<CoreMovementModule>().position.y);
+        float subStepX = e.GetPlayer().GetModule<CoreMovmModule>().position.x - CInt(e.GetPlayer().GetModule<CoreMovmModule>().position.x);
+        float subStepY = e.GetPlayer().GetModule<CoreMovmModule>().position.y - CInt(e.GetPlayer().GetModule<CoreMovmModule>().position.y);
 
         auto offsetX = -CFloat(2 * renderDistance + 1) / 2.0f * e.cfg.tileSize - subStepX * e.cfg.tileSize;
         auto offsetY = -CFloat(2 * renderDistance - 1) / 2.0f * e.cfg.tileSize - subStepY * e.cfg.tileSize;
-        auto mapx = e.GetPlayer().GetModule<CoreMovementModule>().position.x - renderDistance + (rayCastingX - offsetX) / e.cfg.tileSize;
-        auto mapy = e.GetPlayer().GetModule<CoreMovementModule>().position.y - renderDistance + (rayCastingZ - offsetY) / e.cfg.tileSize + 1;
+        auto mapx = e.GetPlayer().GetModule<CoreMovmModule>().position.x - renderDistance + (rayCastingX - offsetX) / e.cfg.tileSize;
+        auto mapy = e.GetPlayer().GetModule<CoreMovmModule>().position.y - renderDistance + (rayCastingZ - offsetY) / e.cfg.tileSize + 1;
 
         return { CInt(mapx), CInt(mapy) };
     }

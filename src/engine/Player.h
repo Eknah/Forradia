@@ -5,8 +5,8 @@
 #include "../engine/Actor.h"
 #include "../engine/InventoryModule.h"
 #include "implementation/functionality/actor/modules/JumpingModule.h"
-#include "implementation/functionality/actor/modules/DestMovementModule.h"
-#include "implementation/functionality/actor/modules/DirectionMovementModule.h"
+#include "implementation/functionality/actor/modules/DestMovmModule.h"
+#include "implementation/functionality/actor/modules/DirectionMovmModule.h"
 #include "implementation/functionality/actor/modules/ObjectUsageModule.h"
 
 namespace Forradia

@@ -11,12 +11,12 @@
 namespace Forradia
 {
 
-    class GameWorldRenderer
+    class WorldRenderer
     {
 
     public:
 
-        GameWorldRenderer(const Engine& _e, const Camera& _camera)
+        WorldRenderer(const Engine& _e, const Camera& _camera)
             : e(_e), background(_e), planetShaper(_e), cam(_camera)
         {}
 

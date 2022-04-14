@@ -1,16 +1,16 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "WarpMovementModule.h"
+#include "WarpMovmModule.h"
 #include "../engine/IEngine.h"
-#include "CoreMovementModule.h"
+#include "CoreMovmModule.h"
 
 namespace Forradia
 {
 
-    void WarpMovementModule::WarpIfStandOnPortal()
+    void WarpMovmModule::WarpIfStandOnPortal()
     {
-        auto& coreMovm = GetParentActor().GetModule<CoreMovementModule>();
+        auto& coreMovm = GetParentActor().GetModule<CoreMovmModule>();
 
         auto newx = coreMovm.position.x;
         auto newy = coreMovm.position.y;

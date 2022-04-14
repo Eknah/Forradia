@@ -8,12 +8,12 @@
 namespace Forradia
 {
 
-    class MobAIMovementModule : public IModule
+    class MobAIMovmModule : public IModule
     {
 
     public:
 
-        MobAIMovementModule(const IEngine& _e, Actor* _parentActor);
+        MobAIMovmModule(const IEngine& _e, Actor* _parentActor);
 
         void ResetForNewFrame() override {};
         void Update() override;

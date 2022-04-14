@@ -1,13 +1,13 @@
 // Copyright (C) 2022  Andreas Åkerberg
 // This code is licensed under MIT license (see LICENSE for details)
 
-#include "InventoryWindow.h"
+#include "InventoryWin.h"
 #include "../engine/Engine.h"
 
 namespace Forradia
 {
 
-    void InventoryWindow::RenderDerived()
+    void InventoryWin::RenderDerived()
     {
         auto& player = e.GetPlayer();
 
@@ -45,7 +45,7 @@ namespace Forradia
         }
     }
 
-    void InventoryWindow::DoMouseDownDerived(Uint8 mouseButton)
+    void InventoryWin::DoMouseDownDerived(Uint8 mouseButton)
     {
         if (mouseButton != SDL_BUTTON_RIGHT) return;
 

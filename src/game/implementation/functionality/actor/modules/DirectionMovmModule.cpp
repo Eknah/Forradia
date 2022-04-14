@@ -2,27 +2,27 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include <utility>
-#include "DirectionMovementModule.h"
+#include "DirectionMovmModule.h"
 #include "../engine/Aliases.h"
 #include "../engine/IEngine.h"
 #include "../engine/Actor.h"
-#include "CoreMovementModule.h"
-#include "WarpMovementModule.h"
+#include "CoreMovmModule.h"
+#include "WarpMovmModule.h"
 
 namespace Forradia
 {
 
-    DirectionMovementModule::DirectionMovementModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
+    DirectionMovmModule::DirectionMovmModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
     {
-        GetParentActor().AddIfNotExists<CoreMovementModule>();
-        GetParentActor().AddIfNotExists<WarpMovementModule>();
+        GetParentActor().AddIfNotExists<CoreMovmModule>();
+        GetParentActor().AddIfNotExists<WarpMovmModule>();
     }
 
-    void DirectionMovementModule::Update()
+    void DirectionMovmModule::Update()
     {
 
         auto& actor = GetParentActor();
-        auto& coreMovm = actor.GetModule<CoreMovementModule>();
+        auto& coreMovm = actor.GetModule<CoreMovmModule>();
 
         if (!coreMovm.timer.HasFinished()) return;
         if (!(moveInstruction & DirForward || moveInstruction & DirRight || moveInstruction & DirBack || moveInstruction & DirLeft))

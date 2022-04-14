@@ -2,26 +2,26 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include <utility>
-#include "DestMovementModule.h"
+#include "DestMovmModule.h"
 #include "../engine/Aliases.h"
 #include "../engine/IEngine.h"
 #include "../engine/Actor.h"
-#include "CoreMovementModule.h"
-#include "WarpMovementModule.h"
+#include "CoreMovmModule.h"
+#include "WarpMovmModule.h"
 
 namespace Forradia
 {
 
-    DestMovementModule::DestMovementModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
+    DestMovmModule::DestMovmModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
     {
-        GetParentActor().AddIfNotExists<CoreMovementModule>();
-        GetParentActor().AddIfNotExists<WarpMovementModule>();
+        GetParentActor().AddIfNotExists<CoreMovmModule>();
+        GetParentActor().AddIfNotExists<WarpMovmModule>();
     }
 
-    void DestMovementModule::Update()
+    void DestMovmModule::Update()
     {
         auto& actor = GetParentActor();
-        auto& coreMovm = actor.GetModule<CoreMovementModule>();
+        auto& coreMovm = actor.GetModule<CoreMovmModule>();
 
         if (!coreMovm.timer.HasFinished()) return;
         if (coreMovm.dest.IsUndefined()) return;

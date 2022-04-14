@@ -4,19 +4,22 @@
 #pragma once
 #include "../engine/Point2F.h"
 #include "../engine/IModule.h"
+#include "../engine/MoveDir.h"
 
 namespace Forradia
 {
 
-    class DestMovementModule : public IModule
+    class DirectionMovmModule : public IModule
     {
 
     public:
 
-        DestMovementModule(const IEngine& _e, Actor* _parentActor);
+        DirectionMovmModule(const IEngine& _e, Actor* _parentActor);
 
         void ResetForNewFrame() override {};
         void Update() override;
+
+        char moveInstruction;
 
     };
 

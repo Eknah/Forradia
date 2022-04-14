@@ -2,9 +2,9 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Actor.h"
-#include "implementation/functionality/actor/modules/DestMovementModule.h"
+#include "implementation/functionality/actor/modules/DestMovmModule.h"
 #include "../engine/IEngine.h"
-#include "implementation/functionality/actor/modules/CoreMovementModule.h"
+#include "implementation/functionality/actor/modules/CoreMovmModule.h"
 
 namespace Forradia
 {
@@ -14,8 +14,8 @@ namespace Forradia
         e(_e), modelName(modelName_),
         actorId(currentActorId++)
     {
-        AddIfNotExists<CoreMovementModule>();
-        GetModule<CoreMovementModule>().position = { x, y };
+        AddIfNotExists<CoreMovmModule>();
+        GetModule<CoreMovmModule>().position = { x, y };
     }
 
     void Actor::ResetForNewFrame() const
@@ -32,7 +32,7 @@ namespace Forradia
 
     int Actor::GetAnimatedModelId() const
     {
-        if (!HasModule<CoreMovementModule>())
+        if (!HasModule<CoreMovmModule>())
         {
             return GetId(modelName);
         }
@@ -40,7 +40,7 @@ namespace Forradia
         {
             auto modelNameAnimated = modelName;
 
-            if (GetModule<CoreMovementModule>().isWalking)
+            if (GetModule<CoreMovmModule>().isWalking)
             {
                 auto animIndex = ((Ticks() + actorId * 10) % 300) / 75;
 

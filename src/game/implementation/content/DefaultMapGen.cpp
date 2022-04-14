@@ -2,8 +2,8 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include <memory>
-#include "DefaultMapGenerator.h"
-#include "QuestCaveMapGenerator.h"
+#include "DefaultMapGen.h"
+#include "QuestCaveMapGen.h"
 #include "../engine/PlanetWorldMap.h"
 #include "framework/worldStructure/Object.h"
 #include "../engine/Aliases.h"
@@ -11,7 +11,7 @@
 namespace Forradia
 {
 
-    void DefaultMapGenerator::GenerateMapArea(Point3 worldPos) const
+    void DefaultMapGen::GenerateMapArea(Point3 worldPos) const
     {
         worldMap->areas[worldPos.x][worldPos.y][worldPos.z] = MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldPos);
 
@@ -33,20 +33,20 @@ namespace Forradia
         GenerateQuestCaves(e, mapArea, worldMap);
     }
 
-    void DefaultMapGenerator::ClearToGrass(MapArea* mapArea) const
+    void DefaultMapGen::ClearToGrass(MapArea* mapArea) const
     {
         for (auto y = 0; y < mapArea->size; y++)
             for (auto x = 0; x < mapArea->size; x++)
                 mapArea->tiles[x][y].groundType = GetId("GroundTypeGrass");
     }
 
-    void DefaultMapGenerator::GeneratePlayerStartingPosition(MapArea* mapArea) const
+    void DefaultMapGen::GeneratePlayerStartingPosition(MapArea* mapArea) const
     {
         mapArea->spawnPos.x = CFloat(rnd.Next() % mapArea->size);
         mapArea->spawnPos.y = CFloat(rnd.Next() % mapArea->size);
     }
 
-    void DefaultMapGenerator::GenerateElevation(MapArea* mapArea) const
+    void DefaultMapGen::GenerateElevation(MapArea* mapArea) const
     {
         for (auto i = 0; i < 40; i++)
         {
@@ -72,7 +72,7 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GenerateWater(MapArea* mapArea) const
+    void DefaultMapGen::GenerateWater(MapArea* mapArea) const
     {
         for (auto i = 0; i < 20; i++)
         {
@@ -106,7 +106,7 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GenerateSand(MapArea* mapArea) const
+    void DefaultMapGen::GenerateSand(MapArea* mapArea) const
     {
         for (auto i = 0; i < 30; i++)
         {
@@ -169,7 +169,7 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GenerateClay(MapArea* mapArea) const
+    void DefaultMapGen::GenerateClay(MapArea* mapArea) const
     {
         for (auto i = 0; i < 30; i++)
         {
@@ -231,7 +231,7 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GenerateRock(MapArea* mapArea) const
+    void DefaultMapGen::GenerateRock(MapArea* mapArea) const
     {
         for (auto i = 0; i < 10; i++)
         {
@@ -256,7 +256,7 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GenerateTrees(MapArea* mapArea) const
+    void DefaultMapGen::GenerateTrees(MapArea* mapArea) const
     {
         for (auto i = 0; i < 30; i++)
         {
@@ -304,7 +304,7 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GenerateBushes(MapArea* mapArea) const
+    void DefaultMapGen::GenerateBushes(MapArea* mapArea) const
     {
         for (auto i = 0; i < 200; i++)
         {
@@ -319,7 +319,7 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GenerateSmallStones(MapArea* mapArea) const
+    void DefaultMapGen::GenerateSmallStones(MapArea* mapArea) const
     {
         for (auto i = 0; i < 200; i++)
         {
@@ -334,7 +334,7 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GeneratePinkFlowers(MapArea* mapArea) const
+    void DefaultMapGen::GeneratePinkFlowers(MapArea* mapArea) const
     {
         for (auto i = 0; i < 100; i++)
         {
@@ -347,7 +347,7 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GenerateTallGrass(MapArea* mapArea) const
+    void DefaultMapGen::GenerateTallGrass(MapArea* mapArea) const
     {
         for (auto i = 0; i < 1000; i++)
         {
@@ -360,7 +360,7 @@ namespace Forradia
         }
     }
 
-    int DefaultMapGenerator::DistToPlayerStartingPos(MapArea* mapArea, int tileX, int tileY) const
+    int DefaultMapGen::DistToPlayerStartingPos(MapArea* mapArea, int tileX, int tileY) const
     {
         auto dx = mapArea->spawnPos.x - tileX;
         auto dy = mapArea->spawnPos.y - tileY;
@@ -369,7 +369,7 @@ namespace Forradia
         return CInt(distance);
     }
 
-    void DefaultMapGenerator::GenerateMobs(MapArea* mapArea) const
+    void DefaultMapGen::GenerateMobs(MapArea* mapArea) const
     {
         for (auto i = 0; i < 200; i++)
         {
@@ -402,9 +402,9 @@ namespace Forradia
         }
     }
 
-    void DefaultMapGenerator::GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const
+    void DefaultMapGen::GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const
     {
-        QuestCaveMapGenerator questCaveMapGenerator;
+        QuestCaveMapGen questCaveMapGen;
 
         for (auto floor = -1; floor >= -20; floor--)
         {
@@ -422,7 +422,7 @@ namespace Forradia
 
                 auto& questCaveMapArea = worldMap->areas[mapArea->worldCoord.x][mapArea->worldCoord.y][floor];
 
-                questCaveMapGenerator.GenerateQuestCaveMapArea(questCaveMapArea.get(), { x, y });
+                questCaveMapGen.GenerateQuestCaveMapArea(questCaveMapArea.get(), { x, y });
             }
         }
     }

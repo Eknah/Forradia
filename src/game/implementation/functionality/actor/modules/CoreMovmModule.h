@@ -11,11 +11,11 @@
 namespace Forradia
 {
 
-    class CoreMovementModule : public IModule
+    class CoreMovmModule : public IModule
     {
     public:
         
-        CoreMovementModule(const IEngine& _e, Actor* _parentActor) : IModule(_e, _parentActor), timer(UPtr<int>(&moveSpeed)) {}
+        CoreMovmModule(const IEngine& _e, Actor* _parentActor) : IModule(_e, _parentActor), timer(UPtr<int>(&moveSpeed)) {}
 
         void ResetForNewFrame() override;
         void Update() override {};
