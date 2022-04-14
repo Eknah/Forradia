@@ -25,7 +25,7 @@ namespace Forradia
         glTranslatef(0.0, -2 + 2.0, 0.0);
 
         RenderAllExceptRoofAndRays();
-        RenderRoofAndRays();
+        //RenderRoof();
     }
 
     void GameWorldRenderer::RenderAllExceptRoofAndRays()
@@ -34,6 +34,7 @@ namespace Forradia
         auto& movmData = e.GetPlayer().GetModule<CoreMovementModule>();
         auto& tiles = e.GetCurrMapArea().tiles;
         auto offset = CalcOffset();
+        List<Point2> roofTiles;
 
         for (auto y = 0; y < 2 * cam.GetRenderDist() + 1; y++)
         {
@@ -257,89 +258,89 @@ namespace Forradia
                     );
                 }
 
-
+                if (e.GetCurrMapArea().tiles[tilexI][tileyI].roof != nullptr)
+                    roofTiles.push_back({x, y});
 
             }
         }
+
+        for (auto& tile : roofTiles)
+            RenderRoof(tile.x, tile.y);
+
     }
 
 
 
 
-    void GameWorldRenderer::RenderRoofAndRays()
+    void GameWorldRenderer::RenderRoof(int x, int y)
     {
 
         auto mapAreaSz = e.world->mapAreaSize;
         auto offset = CalcOffset();
 
-        for (auto y = 0; y < 2 * cam.GetRenderDist() + 1; y++)
+        auto dx = x - cam.GetRenderDist();
+        auto dy = y - cam.GetRenderDist();
+
+        if (dx * dx + dy * dy >= cam.GetRenderDist() * cam.GetRenderDist()) return;
+
+        auto tileX = e.GetPlayer().GetModule<CoreMovementModule>().position.x - cam.GetRenderDist() + x;
+        auto tileY = e.GetPlayer().GetModule<CoreMovementModule>().position.y - cam.GetRenderDist() + y;
+
+        if (tileX < 0 || tileY < 0 || tileX >= mapAreaSz || tileY >= mapAreaSz) return;
+
+        auto tileXI = CInt(tileX);
+        auto tileYI = CInt(tileY);
+
+        auto elev = GetElevValues(tileXI, tileYI);
+
+        auto slope = elev[3] - elev[0] + elev[0] - elev[1];
+
+        auto tileX0 = offset.x + x * e.cfg.tileSize;
+        auto tileY0 = elev[0];
+        auto tileZ0 = offset.y + y * e.cfg.tileSize;
+        auto tileX1 = offset.x + x * e.cfg.tileSize;
+        auto tileY1 = elev[1];
+        auto tileZ1 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+        auto tileX2 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
+        auto tileY2 = elev[2];
+        auto tileZ2 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+        auto tileX3 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
+        auto tileY3 = elev[3];
+        auto tileZ3 = offset.y + y * e.cfg.tileSize;
+
+        tileY0 = planetShaper.GetNewY(tileY0, CFloat(tileXI), CFloat(tileYI));
+        tileY1 = planetShaper.GetNewY(tileY1, CFloat(tileXI), CFloat(tileYI) - 1);
+        tileY2 = planetShaper.GetNewY(tileY2, CFloat(tileXI) + 1, CFloat(tileYI) - 1);
+        tileY3 = planetShaper.GetNewY(tileY3, CFloat(tileXI) + 1, CFloat(tileYI));
+
+        glDisable(GL_TEXTURE_2D);
+
+        if (e.GetCurrMapArea().tiles[tileXI][tileYI].roof != nullptr)
         {
-            for (auto x = 0; x < 2 * cam.GetRenderDist() + 1; x++)
-            {
-                auto dx = x - cam.GetRenderDist();
-                auto dy = y - cam.GetRenderDist();
 
-                if (dx * dx + dy * dy >= cam.GetRenderDist() * cam.GetRenderDist()) continue;
+            auto& roof = e.GetCurrMapArea().tiles[tileXI][tileYI].roof;
+            auto roofObject = roof->objectType;
+            auto opacity = 1.0f;
 
-                auto tileX = e.GetPlayer().GetModule<CoreMovementModule>().position.x - cam.GetRenderDist() + x;
-                auto tileY = e.GetPlayer().GetModule<CoreMovementModule>().position.y - cam.GetRenderDist() + y;
+            if (e.objectsContent.objectDescribers.count(roofObject))
+                opacity = e.objectsContent.objectDescribers.at(roofObject).opacity;
 
-                if (tileX < 0 || tileY < 0 || tileX >= mapAreaSz || tileY >= mapAreaSz) continue;
+            e.DrawModel
+            (
+                roofObject,
+                tileX0 + e.cfg.tileSize / 2,
+                (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
+                tileZ0 - e.cfg.tileSize / 2,
+                roof->rotation,
+                roof->scaling,
+                opacity
+            );
 
-                auto tileXI = CInt(tileX);
-                auto tileYI = CInt(tileY);
-
-                auto elev = GetElevValues(tileXI, tileYI);
-
-                auto slope = elev[3] - elev[0] + elev[0] - elev[1];
-
-                auto tileX0 = offset.x + x * e.cfg.tileSize;
-                auto tileY0 = elev[0];
-                auto tileZ0 = offset.y + y * e.cfg.tileSize;
-                auto tileX1 = offset.x + x * e.cfg.tileSize;
-                auto tileY1 = elev[1];
-                auto tileZ1 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
-                auto tileX2 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
-                auto tileY2 = elev[2];
-                auto tileZ2 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
-                auto tileX3 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
-                auto tileY3 = elev[3];
-                auto tileZ3 = offset.y + y * e.cfg.tileSize;
-
-                tileY0 = planetShaper.GetNewY(tileY0, CFloat(tileXI), CFloat(tileYI));
-                tileY1 = planetShaper.GetNewY(tileY1, CFloat(tileXI), CFloat(tileYI) - 1);
-                tileY2 = planetShaper.GetNewY(tileY2, CFloat(tileXI) + 1, CFloat(tileYI) - 1);
-                tileY3 = planetShaper.GetNewY(tileY3, CFloat(tileXI) + 1, CFloat(tileYI));
-
-                glDisable(GL_TEXTURE_2D);
-
-                if (e.GetCurrMapArea().tiles[tileXI][tileYI].roof != nullptr)
-                {
-
-                    auto& roof = e.GetCurrMapArea().tiles[tileXI][tileYI].roof;
-                    auto roofObject = roof->objectType;
-                    auto opacity = 1.0f;
-
-                    if (e.objectsContent.objectDescribers.count(roofObject))
-                        opacity = e.objectsContent.objectDescribers.at(roofObject).opacity;
-
-                    e.DrawModel
-                    (
-                        roofObject,
-                        tileX0 + e.cfg.tileSize / 2,
-                        (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
-                        tileZ0 - e.cfg.tileSize / 2,
-                        roof->rotation,
-                        roof->scaling,
-                        opacity
-                    );
-
-                }
-
-                glDisable(GL_TEXTURE_2D);
-
-            }
         }
+
+        glDisable(GL_TEXTURE_2D);
+
+
 
     }
 

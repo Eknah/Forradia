@@ -45,12 +45,16 @@ namespace Forradia
 
         objsBehaviour.SetOpacity("ObjectRoof", 0.5f);
 
-        scenes.AddMany({ {"SceneGameStart",
-                        MakeSPtr<SceneGameStart>(e,
-                        "SceneGameStartBackground",
-                        "SceneForradiaLogo",
-                        "Press to start",
-                        "SceneMainMenu")},
+        auto gameStartScene = MakeSPtr<SceneGameStart>
+                            (
+                                e,
+                                "SceneGameStartBackground",
+                                "SceneForradiaLogo",
+                                "Press to start",
+                                "SceneMainMenu"
+                            );
+
+        scenes.AddMany({ {"SceneGameStart", gameStartScene},
 
                         {"SceneMainMenu", MakeSPtr<SceneMainMenu>(e)},
 
