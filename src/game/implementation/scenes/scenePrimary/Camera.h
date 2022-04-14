@@ -15,10 +15,14 @@ namespace Forradia
 
     class Camera
     {
+
     public:
+
         explicit Camera(const Engine& _e) : e(_e), timer(UPtr<int>(&updateSpeed)) {}
 
-        void Update(int rotationDirection, float zoomChange);
+        void Update();
+        void UpdateRotation(int rotationDirection);
+        void UpdateZoomChange(float zoomChange);
         void UpdateCameraMovement();
 
         float lookingAngle = 0.0f;
@@ -27,17 +31,16 @@ namespace Forradia
         float rayCastingX = 0.0f;
         float rayCastingY = 0.0f;
         float rayCastingZ = 0.0f;
-
-        Point2 GetHoveredTile() const;
         float cameraHeight = 0.0f;
 
         int GetRenderDistance() const;
+        Point2 GetHoveredTile() const;
 
     private:
         const Engine& e;
         Utilities utils;
 
-        Point2 previousMousePosition = { -1, -1 };
+        Point2 previousMousePos = { -1, -1 };
         int renderDistance = 80;
         int renderDistanceCave = 15;
         unsigned int tickLastUpdate = 0;
@@ -46,6 +49,7 @@ namespace Forradia
         float zoomMultiplier = 8.0;
 
         Timer timer;
+
     };
 
 }  // namespace Forradia

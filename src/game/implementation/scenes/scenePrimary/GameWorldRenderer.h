@@ -12,7 +12,9 @@ namespace Forradia
 
     class GameWorldRenderer
     {
+
     public:
+
         GameWorldRenderer(const Engine& _e, const Camera& _camera)
             : e(_e), background(_e), planetShaper(_e),
             camera(_camera)
@@ -23,18 +25,24 @@ namespace Forradia
     private:
         void RenderAllExceptRoofAndRays();
         void RenderRoofAndRays();
+        float CalcPlayerElev();
+        Point2F CalcOffset();
 
         const Engine& e;
         Background background;
         const Camera& camera;
         PlanetShaper planetShaper;
         const int groundTypeWaterId = GetId("GroundTypeWater");
-        const int groundTypeWaterAnimatedId[4] = {
+        float elevAmount = 5.0f;
+
+        const int animWaterId[4] =
+        {
           GetId("GroundTypeWater"),
           GetId("GroundTypeWater1"),
           GetId("GroundTypeWater2"),
           GetId("GroundTypeWater3")
         };
+
     };
 
 }  // namespace Forradia

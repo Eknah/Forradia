@@ -16,6 +16,7 @@
 #include "PaintGraphics.h"
 #include "SceneManager.h"
 #include "IEngine.h"
+#include "Configuration.h"
 
 namespace Forradia
 {
@@ -74,9 +75,7 @@ namespace Forradia
         FullscreenController fullscreenControllerImplemented;
         GameLoop gameLoopImplemented;
         SceneManager sceneManagerImplemented;
-
-        float tileSize = 0.5f;
-        float fov = 60.0f;
+        Configuration cfg;
 
     private:
         // Initializes SDL video module

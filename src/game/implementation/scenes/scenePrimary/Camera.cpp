@@ -8,29 +8,12 @@
 
 namespace Forradia
 {
-
-    void Camera::Update(int rotationDirection, float zoomChange)
+    void Camera::Update()
     {
-        if (timer.HasFinished())
-        {
-            if (rotationDirection == GetId("Right"))
-                lookingAngle -= rotationAmount;
-            else if (rotationDirection == GetId("Left"))
-                lookingAngle += rotationAmount;
-
-            timer.Reset();
-        }
-
-        zoomAmount += zoomChange * zoomMultiplier / 100.0f;
-        //ZoomAmount = std::min(std::max(ZoomAmount, 0.5f), 15.0f);
-        zoomAmount = std::min(std::max(zoomAmount, -3.0f), 15.0f);
-
-        // -----------Ray Casting----------------
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        //gluPerspective(45, 1.333, 0.5, 100);
-        gluPerspective(e.fov, 1.333, 0.5, 100);
+        gluPerspective(e.cfg.fov, 1.333, 0.5, 100);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
@@ -43,71 +26,80 @@ namespace Forradia
         auto zoomEx = std::max(zoom, 1.0f);
         glTranslatef(0.0f, -zoomEx - 1, -(zoomEx - 1.0f) * 4.0f);
 
-        cameraX = static_cast<float>(cos(angleRadians)) * cameraDist;
-        cameraZ = -static_cast<float>(sin(angleRadians)) * cameraDist;
+        cameraX = CFloat(cos(angleRadians)) * cameraDist;
+        cameraZ = -CFloat(sin(angleRadians)) * cameraDist;
 
-        gluLookAt(cameraX - e.tileSize / 2,
+        gluLookAt
+        (
+            cameraX - e.cfg.tileSize / 2,
             cameraHeight * (zoomEx - 0.5f),
-            cameraZ - e.tileSize / 2,
-            -e.tileSize / 2,
+            cameraZ - e.cfg.tileSize / 2,
+            -e.cfg.tileSize / 2,
             -1,
-            -e.tileSize / 2,
+            -e.cfg.tileSize / 2,
             0,
             1,
-            0);
+            0
+        );
 
-        GLint viewport[4];  // Where The Viewport Values Will Be Stored
+        GLint viewport[4];
+        GLdouble modelview[16];
+        GLdouble projection[16];
+        GLfloat winX;
+        GLfloat winY;
+        GLfloat winZ;
+        GLdouble posx;
+        GLdouble posy;
+        GLdouble posz;
 
         glGetIntegerv(GL_VIEWPORT, viewport);
-
-        GLdouble modelview[16];
-
         glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
-
-        GLdouble projection[16];  // Where The 16 Doubles Of The Projection Matrix Are
-                                  // To Be Stored
-
         glGetDoublev(GL_PROJECTION_MATRIX, projection);
 
-        auto mousePosition = utils.GetMousePosI();
+        auto mousePos = utils.GetMousePosI();
 
-        GLfloat winX, winY, winZ;  // Holds Our X, Y and Z Coordinates
+        winX = CFloat(mousePos.x);
+        winY = CFloat(mousePos.y);
+        winY = CFloat(viewport[3]) - winY;
 
-        winX = static_cast<float>(mousePosition.x);  // Holds The Mouse X Coordinate
-        winY = static_cast<float>(mousePosition.y);
-        winY = static_cast<float>(viewport[3]) - winY;
+        glReadPixels((GLint)winX, (GLint)winY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
+        gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posx, &posy, &posz);
 
-        glReadPixels((GLint)winX, (GLint)winY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT,
-            &winZ);
+        rayCastingX = CFloat(posx);
+        rayCastingY = CFloat(posy);
+        rayCastingZ = CFloat(posz);
+    }
 
-        GLdouble posx, posy, posz;
+    void Camera::UpdateRotation(int rotationDirection)
+    {
+        if (timer.HasFinished())
+        {
+            if (rotationDirection == GetId("Right"))
+                lookingAngle -= rotationAmount;
+            else if (rotationDirection == GetId("Left"))
+                lookingAngle += rotationAmount;
 
-        gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posx, &posy,
-            &posz);
+            timer.Reset();
+        }
+    }
 
-        rayCastingX = static_cast<float>(posx);
-        rayCastingY = static_cast<float>(posy);
-        rayCastingZ = static_cast<float>(posz);
+    void Camera::UpdateZoomChange(float zoomChange)
+    {
+        zoomAmount += zoomChange * zoomMultiplier / 100.0f;
+        zoomAmount = std::min(std::max(zoomAmount, -3.0f), 15.0f);
     }
 
     Point2 Camera::GetHoveredTile() const
     {
-        float subStepX = e.GetPlayer().GetModule<CoreMovementModule>().position.x -
-            static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.x);
+        float subStepX = e.GetPlayer().GetModule<CoreMovementModule>().position.x - CInt(e.GetPlayer().GetModule<CoreMovementModule>().position.x);
+        float subStepY = e.GetPlayer().GetModule<CoreMovementModule>().position.y - CInt(e.GetPlayer().GetModule<CoreMovementModule>().position.y);
 
-        float subStepY = e.GetPlayer().GetModule<CoreMovementModule>().position.y -
-            static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.y);
+        auto offsetX = -CFloat(2 * renderDistance + 1) / 2.0f * e.cfg.tileSize - subStepX * e.cfg.tileSize;
+        auto offsetY = -CFloat(2 * renderDistance - 1) / 2.0f * e.cfg.tileSize - subStepY * e.cfg.tileSize;
+        auto mapx = e.GetPlayer().GetModule<CoreMovementModule>().position.x - renderDistance + (rayCastingX - offsetX) / e.cfg.tileSize;
+        auto mapy = e.GetPlayer().GetModule<CoreMovementModule>().position.y - renderDistance + (rayCastingZ - offsetY) / e.cfg.tileSize + 1;
 
-        auto offsetX = -static_cast<float>(2 * renderDistance + 1)
-            / 2.0f * e.tileSize - subStepX * e.tileSize;
-        auto offsetY = -static_cast<float>(2 * renderDistance - 1)
-            / 2.0f * e.tileSize - subStepY * e.tileSize;
-        auto mapx = e.GetPlayer().GetModule<CoreMovementModule>().position.x - renderDistance +
-            (rayCastingX - offsetX) / e.tileSize;
-        auto mapy = e.GetPlayer().GetModule<CoreMovementModule>().position.y - renderDistance +
-            (rayCastingZ - offsetY) / e.tileSize + 1;
-
-        return { static_cast<int>(mapx), static_cast<int>(mapy) };
+        return { CInt(mapx), CInt(mapy) };
     }
 
     int Camera::GetRenderDistance() const
@@ -122,13 +114,12 @@ namespace Forradia
 
     void Camera::UpdateCameraMovement()
     {
-        auto mousePosition = utils.GetMousePosI();
-        auto deltaMouseX = mousePosition.x - previousMousePosition.x;
+        auto mousePos = utils.GetMousePosI();
+        auto deltaMouseX = mousePos.x - previousMousePos.x;
+        auto deltaMouseY = mousePos.y - previousMousePos.y;
 
         if (e.mouseHandler.rightButtonDown)
             lookingAngle -= deltaMouseX / 5.0f;
-
-        auto deltaMouseY = mousePosition.y - previousMousePosition.y;
 
         if (e.mouseHandler.rightButtonDown)
         {
@@ -136,7 +127,7 @@ namespace Forradia
             cameraHeight = std::max(std::min(cameraHeight, 2.0f), -1.0f);
         }
 
-        previousMousePosition = mousePosition;
+        previousMousePos = mousePos;
     }
 
 }  // namespace Forradia

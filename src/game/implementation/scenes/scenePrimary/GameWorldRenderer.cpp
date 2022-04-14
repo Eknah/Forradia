@@ -15,33 +15,34 @@ namespace Forradia
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(e.fov, 1.333, 0.5, 100);
+        gluPerspective(e.cfg.fov, 1.333, 0.5, 100);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
         auto cameraX = 0.0f;
         auto cameraZ = -1.0f;
-        auto angleRadians =
-            atan2(cameraZ, cameraX) + camera.lookingAngle / 180.0f * M_PI;
+        auto angleRadians = atan2(cameraZ, cameraX) + camera.lookingAngle / 180.0f * M_PI;
         auto cameraDist = 1;
         auto zoom = camera.zoomAmount;
-
-
         auto zoomEx = std::max(zoom, 1.0f);
+
         glTranslatef(0.0f, -zoomEx - 1, -(zoomEx - 1.0f) * 4.0f);
 
-        cameraX = static_cast<float>(cos(angleRadians)) * cameraDist;
-        cameraZ = -static_cast<float>(sin(angleRadians)) * cameraDist;
+        cameraX = CFloat(cos(angleRadians)) * cameraDist;
+        cameraZ = -CFloat(sin(angleRadians)) * cameraDist;
 
-        gluLookAt(cameraX - e.tileSize / 2,
+        gluLookAt
+        (
+            cameraX - e.cfg.tileSize / 2,
             camera.cameraHeight * (zoomEx - 0.5f),
-            cameraZ - e.tileSize / 2,
-            -e.tileSize / 2,
+            cameraZ - e.cfg.tileSize / 2,
+            -e.cfg.tileSize / 2,
             -1,
-            -e.tileSize / 2,
+            -e.cfg.tileSize / 2,
             0,
             1,
-            0);
+            0
+        );
 
         glEnable(GL_DEPTH_TEST);
         glDepthMask(GL_TRUE);
@@ -63,40 +64,8 @@ namespace Forradia
         auto mapAreaSize = e.world->mapAreaSize;
         auto& movementData = e.GetPlayer().GetModule<CoreMovementModule>();
         auto& tiles = e.GetCurrMapArea().tiles;
-
-        auto elevAmount = 5.0f;
-        auto playerXInt = static_cast<int>(movementData.position.x);
-        auto playerYInt = static_cast<int>(movementData.position.y);
-        auto elevPlayer0 =
-            tiles[playerXInt][playerYInt].elevation /
-            elevAmount;
-        auto elevPlayer1 =
-            tiles[playerXInt + 1][playerYInt].elevation /
-            elevAmount;
-        auto elevPlayer2 = tiles[playerXInt + 1][playerYInt + 1]
-            .elevation /
-            elevAmount;
-        auto elevPlayer3 =
-            tiles[playerXInt][playerYInt + 1].elevation /
-            elevAmount;
-        auto elevX = movementData.position.x - playerXInt;
-        auto elevY = movementData.position.y - playerYInt;
-        auto elevPlayer = (elevPlayer0 + (elevPlayer1 - elevPlayer0) * elevX +
-            elevPlayer3 + (elevPlayer2 - elevPlayer3) * elevX +
-            elevPlayer0 + (elevPlayer3 - elevPlayer0) * elevY +
-            elevPlayer1 + (elevPlayer2 - elevPlayer1) * elevY) /
-            4.0f;
-
-        float subStepX = movementData.position.x -
-            playerXInt;
-
-        float subStepY = movementData.position.y -
-            playerYInt;
-
-        auto offsetX = -static_cast<float>(2.0f * camera.GetRenderDistance() + 1.0f)
-            / 2.0f * e.tileSize - subStepX * e.tileSize;
-        auto offsetY = -static_cast<float>(2.0f * camera.GetRenderDistance() - 1.0f)
-            / 2.0f * e.tileSize - subStepY * e.tileSize;
+        auto elevPlayer = CalcPlayerElev();
+        auto offset = CalcOffset();
 
         for (auto y = 0; y < 2 * camera.GetRenderDistance() + 1; y++)
         {
@@ -105,28 +74,17 @@ namespace Forradia
                 auto dx = x - camera.GetRenderDistance();
                 auto dy = y - camera.GetRenderDistance();
 
+                if (dx * dx + dy * dy >= camera.GetRenderDistance() * camera.GetRenderDistance()) continue;
 
+                auto tileX = movementData.position.x - camera.GetRenderDistance() + x;
+                auto tileY = movementData.position.y - camera.GetRenderDistance() + y;
 
+                if (tileX < 0 || tileY < 0 || tileX >= mapAreaSize || tileY >= mapAreaSize) continue;
 
-                if (dx * dx + dy * dy >=
-                    camera.GetRenderDistance() * camera.GetRenderDistance())
-                    continue;
+                auto tileXI = CInt(tileX);
+                auto tileYI = CInt(tileY);
 
-                auto tileX = movementData.position.x
-                    - camera.GetRenderDistance() + x;
-
-                auto tileY = movementData.position.y
-                    - camera.GetRenderDistance() + y;
-
-                if (tileX < 0 || tileY < 0 || tileX >= mapAreaSize ||
-                    tileY >= mapAreaSize)
-                    continue;
-
-                auto tileXI = static_cast<int>(tileX);
-                auto tileYI = static_cast<int>(tileY);
-
-                auto groundTypeId =
-                    tiles[tileXI][tileYI].groundType;
+                auto groundTypeId = tiles[tileXI][tileYI].groundType;
 
                 auto waterAnimIndex0 = 0;
                 auto waterAnimIndex1 = 0;
@@ -139,22 +97,13 @@ namespace Forradia
                 {
                     tileIsWater = true;
 
-                    waterAnimIndex0 =
-                        ((Ticks() * 1 + (tileXI * tileYI) * 10) % 3600) / 1200;
-                    waterAnimIndex1 =
-                        ((Ticks() * 1 + (tileXI * (tileYI - 1)) * 10) % 3600) /
-                        1200;
-                    waterAnimIndex2 =
-                        ((Ticks() * 1 + ((tileXI + 1) * (tileYI - 1)) * 10) %
-                            3600) /
-                        1200;
-                    waterAnimIndex3 =
-                        ((Ticks() * 1 + ((tileXI + 1) * tileYI) * 10) % 3600) /
-                        1200;
+                    waterAnimIndex0 = ((Ticks() * 1 + (tileXI * tileYI) * 10) % 3600) / 1200;
+                    waterAnimIndex1 = ((Ticks() * 1 + (tileXI * (tileYI - 1)) * 10) % 3600) / 1200;
+                    waterAnimIndex2 = ((Ticks() * 1 + ((tileXI + 1) * (tileYI - 1)) * 10) % 3600) / 1200;
+                    waterAnimIndex3 = ((Ticks() * 1 + ((tileXI + 1) * tileYI) * 10) % 3600) / 1200;
 
                     if (waterAnimIndex0 > 0)
-                        groundTypeId =
-                        groundTypeWaterAnimatedId[waterAnimIndex0];
+                        groundTypeId = animWaterId[waterAnimIndex0];
                 }
 
                 auto elev0 = 0.0f;
@@ -162,52 +111,30 @@ namespace Forradia
                 auto elev2 = 0.0f;
                 auto elev3 = 0.0f;
 
-                auto waterWaveHeight0 = waterAnimIndex0 * e.tileSize / 4.0f - e.tileSize/10;
-                auto waterWaveHeight1 = waterAnimIndex1 * e.tileSize / 4.0f - e.tileSize / 10;
-                auto waterWaveHeight2 = waterAnimIndex2 * e.tileSize / 4.0f - e.tileSize / 10;
-                auto waterWaveHeight3 = waterAnimIndex3 * e.tileSize / 4.0f - e.tileSize / 10;
+                auto waterWaveHeight0 = waterAnimIndex0 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
+                auto waterWaveHeight1 = waterAnimIndex1 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
+                auto waterWaveHeight2 = waterAnimIndex2 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
+                auto waterWaveHeight3 = waterAnimIndex3 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
 
-                if (tileX >= 0 && tileY >= 0 && tileX < mapAreaSize &&
-                    tileY < mapAreaSize)
-                    elev0 =
-                    tiles[tileXI][tileYI].elevation /
-                    elevAmount -
-                    elevPlayer;
+                if (tileX >= 0 && tileY >= 0 && tileX < mapAreaSize && tileY < mapAreaSize)
+                    elev0 = tiles[tileXI][tileYI].elevation / elevAmount - elevPlayer;
 
-                if (tileX >= 0 && tileY - 1 >= 0 && tileX < mapAreaSize &&
-                    tileY - 1 < mapAreaSize)
-                    elev1 = tiles[tileXI][tileYI - 1]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                if (tileX >= 0 && tileY - 1 >= 0 && tileX < mapAreaSize && tileY - 1 < mapAreaSize)
+                    elev1 = tiles[tileXI][tileYI - 1].elevation / elevAmount - elevPlayer;
                 else
                     elev1 = elev0;
 
-                if (tileX + 1 >= 0 && tileY - 1 >= 0 && tileX + 1 < mapAreaSize &&
-                    tileY - 1 < mapAreaSize)
-                    elev2 = tiles[tileXI + 1][tileYI - 1]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                if (tileX + 1 >= 0 && tileY - 1 >= 0 && tileX + 1 < mapAreaSize && tileY - 1 < mapAreaSize)
+                    elev2 = tiles[tileXI + 1][tileYI - 1].elevation / elevAmount - elevPlayer;
                 else if (tileX + 1 < mapAreaSize)
-                    elev2 = tiles[tileXI + 1][tileYI]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                    elev2 = tiles[tileXI + 1][tileYI].elevation / elevAmount - elevPlayer;
                 else if (tileY - 1 >= 0)
-                    elev2 = tiles[tileXI][tileYI - 1]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                    elev2 = tiles[tileXI][tileYI - 1].elevation / elevAmount - elevPlayer;
                 else
                     elev2 = elev0;
 
-                if (tileX + 1 >= 0 && tileY >= 0 && tileX + 1 < mapAreaSize &&
-                    tileY < mapAreaSize)
-                    elev3 = tiles[tileXI + 1][tileYI]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                if (tileX + 1 >= 0 && tileY >= 0 && tileX + 1 < mapAreaSize && tileY < mapAreaSize)
+                    elev3 = tiles[tileXI + 1][tileYI].elevation / elevAmount - elevPlayer;
                 else
                     elev3 = elev0;
 
@@ -243,46 +170,26 @@ namespace Forradia
                 }
 
                 glEnable(GL_TEXTURE_2D);
-                glBindTexture(GL_TEXTURE_2D,
-                    e.imageLoader.images.at(groundTypeId));
+                glBindTexture(GL_TEXTURE_2D, e.imageLoader.images.at(groundTypeId));
 
-                auto tileX0 = offsetX + x * e.tileSize;
+                auto tileX0 = offset.x + x * e.cfg.tileSize;
                 auto tileY0 = elev0;
-                auto tileZ0 = offsetY + y * e.tileSize;
-                auto tileX1 = offsetX + x * e.tileSize;
+                auto tileZ0 = offset.y + y * e.cfg.tileSize;
+                auto tileX1 = offset.x + x * e.cfg.tileSize;
                 auto tileY1 = elev1;
-                auto tileZ1 = offsetY + y * e.tileSize - e.tileSize;
-                auto tileX2 = offsetX + x * e.tileSize + e.tileSize;
+                auto tileZ1 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+                auto tileX2 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
                 auto tileY2 = elev2;
-                auto tileZ2 = offsetY + y * e.tileSize - e.tileSize;
-                auto tileX3 = offsetX + x * e.tileSize + e.tileSize;
+                auto tileZ2 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+                auto tileX3 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
                 auto tileY3 = elev3;
-                auto tileZ3 = offsetY + y * e.tileSize;
+                auto tileZ3 = offset.y + y * e.cfg.tileSize;
 
-                tileY0 = planetShaper.GetNewY(tileY0,
-                    static_cast<float>(tileXI),
-                    static_cast<float>(tileYI));
-                tileY1 = planetShaper.GetNewY(tileY1,
-                    static_cast<float>(tileXI),
-                    static_cast<float>(tileYI) - 1);
-                tileY2 = planetShaper.GetNewY(tileY2,
-                    static_cast<float>(tileXI) + 1,
-                    static_cast<float>(tileYI) - 1);
-                tileY3 = planetShaper.GetNewY(tileY3,
-                    static_cast<float>(tileXI) + 1,
-                    static_cast<float>(tileYI));
+                tileY0 = planetShaper.GetNewY(tileY0, CFloat(tileXI), CFloat(tileYI));
+                tileY1 = planetShaper.GetNewY(tileY1, CFloat(tileXI), CFloat(tileYI) - 1);
+                tileY2 = planetShaper.GetNewY(tileY2, CFloat(tileXI) + 1, CFloat(tileYI) - 1);
+                tileY3 = planetShaper.GetNewY(tileY3, CFloat(tileXI) + 1, CFloat(tileYI));
 
-
-
-
-                //        glVertex4f Pclip = M * vec4(p, 1.);
-                //                return abs(Pclip.x) < Pclip.w &&
-                //                       abs(Pclip.y) < Pclip.w &&
-                //                       0 < Pclip.z &&
-                //                       Pclip.z < Pclip.w;
-
-
-                //glDisable(GL_CULL_FACE);
                 glEnable(GL_CULL_FACE);
                 glCullFace(GL_FRONT);
                 glBegin(GL_QUADS);
@@ -300,12 +207,10 @@ namespace Forradia
 
                 glEnd();
 
-                if (groundTypeId ==
-                    groundTypeWaterAnimatedId[waterAnimIndex0])
+                if (groundTypeId == animWaterId[waterAnimIndex0])
                 {
                     glBegin(GL_QUADS);
 
-                    //glColor3f(r, g, b);
                     glColor3f(1.0f, 1.0f, 1.0f);
 
                     glTexCoord2f(0, 0);
@@ -319,22 +224,13 @@ namespace Forradia
 
                     glEnd();
                 }
-                else
+
+                auto hoveredx = camera.GetHoveredTile().x;
+                auto hoveredy = camera.GetHoveredTile().y;
+
+                if (hoveredx == tileXI && hoveredy == tileYI && e.customCursor.cursType != CursorTypes::Hidden)
                 {
-
-                }
-
-
-
-
-                auto hoveredX = camera.GetHoveredTile().x;
-                auto hoveredY = camera.GetHoveredTile().y;
-
-                if (hoveredX == tileXI && hoveredY == tileYI &&
-                    e.customCursor.cursType != CursorTypes::Hidden)
-                {
-                    glBindTexture(GL_TEXTURE_2D,
-                        e.imageLoader.images.at(GetId("TileHovering")));
+                    glBindTexture(GL_TEXTURE_2D, e.imageLoader.images.at(GetId("TileHovering")));
 
                     glBegin(GL_QUADS);
 
@@ -352,18 +248,9 @@ namespace Forradia
                     glEnd();
                 }
                 glCullFace(GL_BACK);
-                //glEnable(GL_CULL_FACE);
-                for (auto& Object :
-                    tiles[tileXI][tileYI].objects)
+                
+                for (auto& Object : tiles[tileXI][tileYI].objects)
                 {
-
-
-
-
-
-
-
-
                     auto dropShadow = true;
 
                     if (e.objectsContent.objectDescribers.count(Object->objectType))
@@ -372,21 +259,11 @@ namespace Forradia
 
                     if (dropShadow)
                     {
-
                         glDisable(GL_TEXTURE_2D);
-
-                        e.DrawModel("Shadow", tileX0 + e.tileSize / 2,
-                            (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
-                            tileZ0 - e.tileSize / 2, 0, 1.5f, 1.0f);
-
+                        e.DrawModel("Shadow", tileX0 + e.cfg.tileSize / 2, (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f, tileZ0 - e.cfg.tileSize / 2, 0, 1.5f, 1.0f);
                     }
 
-
-
-
-
                     glDisable(GL_TEXTURE_2D);
-
 
                     auto tileObject = Object->objectType;
                     auto opacity = 1.0f;
@@ -395,56 +272,49 @@ namespace Forradia
                         opacity = e.objectsContent.objectDescribers.at(tileObject).opacity;
 
                     if (tileObject != 0)
-                        e.DrawModel(tileObject, tileX0 + e.tileSize / 2,
+                    {
+                        e.DrawModel
+                        (
+                            tileObject,
+                            tileX0 + e.cfg.tileSize / 2,
                             (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
-                            tileZ0 - e.tileSize / 2, Object->rotation,
-                            Object->scaling, opacity);
+                            tileZ0 - e.cfg.tileSize / 2,
+                            Object->rotation,
+                            Object->scaling, opacity
+                        );
+                    }
                 }
 
 
-                if (e.GetCurrMapArea().tiles[tileXI][tileYI].actor !=
-                    nullptr)
+                if (e.GetCurrMapArea().tiles[tileXI][tileYI].actor != nullptr)
                 {
-                    auto subxpos = (e.GetCurrMapArea()
-                        .tiles[tileXI][tileYI]
-                        .actor->GetModule<CoreMovementModule>().position.x -
-                        static_cast<int>(e.GetCurrMapArea()
-                            .tiles[tileXI][tileYI]
-                            .actor->GetModule<CoreMovementModule>().position.x)) *
-                        e.tileSize;
-                    auto subypos = (e.GetCurrMapArea()
-                        .tiles[tileXI][tileYI]
-                        .actor->GetModule<CoreMovementModule>().position.y -
-                        static_cast<int>(e.GetCurrMapArea()
-                            .tiles[tileXI][tileYI]
-                            .actor->GetModule<CoreMovementModule>().position.y)) *
-                        e.tileSize;
-
-
+                    auto subxpos = (e.GetCurrMapArea().tiles[tileXI][tileYI].actor->GetModule<CoreMovementModule>().position.x - CInt(e.GetCurrMapArea().tiles[tileXI][tileYI].actor->GetModule<CoreMovementModule>().position.x)) * e.cfg.tileSize;
+                    auto subypos = (e.GetCurrMapArea().tiles[tileXI][tileYI].actor->GetModule<CoreMovementModule>().position.y - CInt(e.GetCurrMapArea().tiles[tileXI][tileYI].actor->GetModule<CoreMovementModule>().position.y)) * e.cfg.tileSize;
 
                     glDisable(GL_TEXTURE_2D);
 
-                    auto modelYPos0 = tileY1 + (tileY2 - tileY1) * subxpos / e.tileSize;
-                    auto modelYPos1 = tileY0 + (tileY3 - tileY0) * subxpos / e.tileSize;
-                    auto modelYPos = modelYPos0
-                        + (modelYPos1 - modelYPos0) * subypos / e.tileSize;
+                    auto modelYPos0 = tileY1 + (tileY2 - tileY1) * subxpos / e.cfg.tileSize;
+                    auto modelYPos1 = tileY0 + (tileY3 - tileY0) * subxpos / e.cfg.tileSize;
+                    auto modelYPos = modelYPos0 + (modelYPos1 - modelYPos0) * subypos / e.cfg.tileSize;
 
-                    e.DrawModel("Shadow", tileX0 + subxpos,
-                        modelYPos + e.GetCurrMapArea()
-                        .tiles[tileXI][tileYI]
-                        .actor->GetModule<CoreMovementModule>().positionZ,
-                        tileZ0 - e.tileSize + subypos, 0, 1.0f, 1.0f);
+                    e.DrawModel
+                    (
+                        "Shadow",
+                        tileX0 + subxpos,
+                        modelYPos + e.GetCurrMapArea().tiles[tileXI][tileYI].actor->GetModule<CoreMovementModule>().positionZ,
+                        tileZ0 - e.cfg.tileSize + subypos,
+                        0,
+                        1.0f,
+                        1.0f);
 
-                    e.DrawModel(e.GetCurrMapArea()
-                        .tiles[tileXI][tileYI]
-                        .actor->GetAnimatedModelId(), tileX0 + subxpos,
-                        modelYPos + e.GetCurrMapArea()
-                        .tiles[tileXI][tileYI]
-                        .actor->GetModule<CoreMovementModule>().positionZ,
-                        tileZ0 - e.tileSize + subypos,
-                        *e.GetCurrMapArea()
-                        .tiles[tileXI][tileYI]
-                        .actor->GetModule<CoreMovementModule>().facingAngle);
+                    e.DrawModel
+                    (
+                        e.GetCurrMapArea().tiles[tileXI][tileYI].actor->GetAnimatedModelId(),
+                        tileX0 + subxpos,
+                        modelYPos + e.GetCurrMapArea().tiles[tileXI][tileYI].actor->GetModule<CoreMovementModule>().positionZ,
+                        tileZ0 - e.cfg.tileSize + subypos,
+                        *e.GetCurrMapArea().tiles[tileXI][tileYI].actor->GetModule<CoreMovementModule>().facingAngle
+                    );
                 }
 
 
@@ -460,41 +330,8 @@ namespace Forradia
     {
 
         auto mapAreaSize = e.world->mapAreaSize;
-
-        auto elevAmount = 5.0f;
-        auto playerXInt = static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.x);
-        auto playerYInt = static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.y);
-        auto elevPlayer0 =
-            e.GetCurrMapArea().tiles[playerXInt][playerYInt].elevation /
-            elevAmount;
-        auto elevPlayer1 =
-            e.GetCurrMapArea().tiles[playerXInt + 1][playerYInt].elevation /
-            elevAmount;
-        auto elevPlayer2 = e.GetCurrMapArea()
-            .tiles[playerXInt + 1][playerYInt + 1]
-            .elevation /
-            elevAmount;
-        auto elevPlayer3 =
-            e.GetCurrMapArea().tiles[playerXInt][playerYInt + 1].elevation /
-            elevAmount;
-        auto elevX = e.GetPlayer().GetModule<CoreMovementModule>().position.x - playerXInt;
-        auto elevY = e.GetPlayer().GetModule<CoreMovementModule>().position.y - playerYInt;
-        auto elevPlayer = (elevPlayer0 + (elevPlayer1 - elevPlayer0) * elevX +
-            elevPlayer3 + (elevPlayer2 - elevPlayer3) * elevX +
-            elevPlayer0 + (elevPlayer3 - elevPlayer0) * elevY +
-            elevPlayer1 + (elevPlayer2 - elevPlayer1) * elevY) /
-            4.0f;
-
-        float subStepX = e.GetPlayer().GetModule<CoreMovementModule>().position.x -
-            static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.x);
-
-        float subStepY = e.GetPlayer().GetModule<CoreMovementModule>().position.y -
-            static_cast<int>(e.GetPlayer().GetModule<CoreMovementModule>().position.y);
-
-        auto offsetX = -static_cast<float>(2.0f * camera.GetRenderDistance() + 1.0f)
-            / 2.0f * e.tileSize - subStepX * e.tileSize;
-        auto offsetY = -static_cast<float>(2.0f * camera.GetRenderDistance() - 1.0f)
-            / 2.0f * e.tileSize - subStepY * e.tileSize;
+        auto elevPlayer = CalcPlayerElev();
+        auto offset = CalcOffset();
 
         for (auto y = 0; y < 2 * camera.GetRenderDistance() + 1; y++)
         {
@@ -503,74 +340,40 @@ namespace Forradia
                 auto dx = x - camera.GetRenderDistance();
                 auto dy = y - camera.GetRenderDistance();
 
-                if (dx * dx + dy * dy >=
-                    camera.GetRenderDistance() * camera.GetRenderDistance())
-                    continue;
+                if (dx * dx + dy * dy >= camera.GetRenderDistance() * camera.GetRenderDistance()) continue;
 
-                auto tileX = e.GetPlayer().GetModule<CoreMovementModule>().position.x
-                    - camera.GetRenderDistance() + x;
+                auto tileX = e.GetPlayer().GetModule<CoreMovementModule>().position.x - camera.GetRenderDistance() + x;
+                auto tileY = e.GetPlayer().GetModule<CoreMovementModule>().position.y - camera.GetRenderDistance() + y;
 
-                auto tileY = e.GetPlayer().GetModule<CoreMovementModule>().position.y
-                    - camera.GetRenderDistance() + y;
+                if (tileX < 0 || tileY < 0 || tileX >= mapAreaSize || tileY >= mapAreaSize) continue;
 
-                if (tileX < 0 || tileY < 0 || tileX >= mapAreaSize ||
-                    tileY >= mapAreaSize)
-                    continue;
-
-                auto tileXI = static_cast<int>(tileX);
-                auto tileYI = static_cast<int>(tileY);
+                auto tileXI = CInt(tileX);
+                auto tileYI = CInt(tileY);
 
                 auto elev0 = 0.0f;
                 auto elev1 = 0.0f;
                 auto elev2 = 0.0f;
                 auto elev3 = 0.0f;
 
-                if (tileX >= 0 && tileY >= 0 && tileX < mapAreaSize &&
-                    tileY < mapAreaSize)
-                    elev0 =
-                    e.GetCurrMapArea().tiles[tileXI][tileYI].elevation /
-                    elevAmount -
-                    elevPlayer;
+                if (tileX >= 0 && tileY >= 0 && tileX < mapAreaSize && tileY < mapAreaSize)
+                    elev0 = e.GetCurrMapArea().tiles[tileXI][tileYI].elevation / elevAmount - elevPlayer;
 
-                if (tileX >= 0 && tileY - 1 >= 0 && tileX < mapAreaSize &&
-                    tileY - 1 < mapAreaSize)
-                    elev1 = e.GetCurrMapArea()
-                    .tiles[tileXI][tileYI - 1]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                if (tileX >= 0 && tileY - 1 >= 0 && tileX < mapAreaSize && tileY - 1 < mapAreaSize)
+                    elev1 = e.GetCurrMapArea().tiles[tileXI][tileYI - 1].elevation / elevAmount - elevPlayer;
                 else
                     elev1 = elev0;
 
-                if (tileX + 1 >= 0 && tileY - 1 >= 0 && tileX + 1 < mapAreaSize &&
-                    tileY - 1 < mapAreaSize)
-                    elev2 = e.GetCurrMapArea()
-                    .tiles[tileXI + 1][tileYI - 1]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                if (tileX + 1 >= 0 && tileY - 1 >= 0 && tileX + 1 < mapAreaSize && tileY - 1 < mapAreaSize)
+                    elev2 = e.GetCurrMapArea().tiles[tileXI + 1][tileYI - 1].elevation / elevAmount - elevPlayer;
                 else if (tileX + 1 < mapAreaSize)
-                    elev2 = e.GetCurrMapArea()
-                    .tiles[tileXI + 1][tileYI]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                    elev2 = e.GetCurrMapArea().tiles[tileXI + 1][tileYI].elevation / elevAmount - elevPlayer;
                 else if (tileY - 1 >= 0)
-                    elev2 = e.GetCurrMapArea()
-                    .tiles[tileXI][tileYI - 1]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                    elev2 = e.GetCurrMapArea().tiles[tileXI][tileYI - 1].elevation / elevAmount - elevPlayer;
                 else
                     elev2 = elev0;
 
-                if (tileX + 1 >= 0 && tileY >= 0 && tileX + 1 < mapAreaSize &&
-                    tileY < mapAreaSize)
-                    elev3 = e.GetCurrMapArea()
-                    .tiles[tileXI + 1][tileYI]
-                    .elevation /
-                    elevAmount -
-                    elevPlayer;
+                if (tileX + 1 >= 0 && tileY >= 0 && tileX + 1 < mapAreaSize && tileY < mapAreaSize)
+                    elev3 = e.GetCurrMapArea().tiles[tileXI + 1][tileYI].elevation / elevAmount - elevPlayer;
                 else
                     elev3 = elev0;
 
@@ -599,94 +402,105 @@ namespace Forradia
                     b = 0.5f;
                 }
 
-                auto tileX0 = offsetX + x * e.tileSize;
+                auto tileX0 = offset.x + x * e.cfg.tileSize;
                 auto tileY0 = elev0;
-                auto tileZ0 = offsetY + y * e.tileSize;
-                auto tileX1 = offsetX + x * e.tileSize;
+                auto tileZ0 = offset.y + y * e.cfg.tileSize;
+                auto tileX1 = offset.x + x * e.cfg.tileSize;
                 auto tileY1 = elev1;
-                auto tileZ1 = offsetY + y * e.tileSize - e.tileSize;
-                auto tileX2 = offsetX + x * e.tileSize + e.tileSize;
+                auto tileZ1 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+                auto tileX2 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
                 auto tileY2 = elev2;
-                auto tileZ2 = offsetY + y * e.tileSize - e.tileSize;
-                auto tileX3 = offsetX + x * e.tileSize + e.tileSize;
+                auto tileZ2 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+                auto tileX3 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
                 auto tileY3 = elev3;
-                auto tileZ3 = offsetY + y * e.tileSize;
+                auto tileZ3 = offset.y + y * e.cfg.tileSize;
 
                 tileY0 = planetShaper.GetNewY(tileY0,
-                    static_cast<float>(tileXI),
-                    static_cast<float>(tileYI));
+                    CFloat(tileXI),
+                    CFloat(tileYI));
                 tileY1 = planetShaper.GetNewY(tileY1,
-                    static_cast<float>(tileXI),
-                    static_cast<float>(tileYI) - 1);
+                    CFloat(tileXI),
+                    CFloat(tileYI) - 1);
                 tileY2 = planetShaper.GetNewY(tileY2,
-                    static_cast<float>(tileXI) + 1,
-                    static_cast<float>(tileYI) - 1);
+                    CFloat(tileXI) + 1,
+                    CFloat(tileYI) - 1);
                 tileY3 = planetShaper.GetNewY(tileY3,
-                    static_cast<float>(tileXI) + 1,
-                    static_cast<float>(tileYI));
+                    CFloat(tileXI) + 1,
+                    CFloat(tileYI));
 
 
 
                 glDisable(GL_TEXTURE_2D);
 
 
-                if (e.GetCurrMapArea()
-                    .tiles[tileXI][tileYI]
-                    .roof != nullptr)
+                if (e.GetCurrMapArea().tiles[tileXI][tileYI].roof != nullptr)
                 {
 
-                    auto& roof = e.GetCurrMapArea()
-                        .tiles[tileXI][tileYI]
-                        .roof;
-
-
+                    auto& roof = e.GetCurrMapArea().tiles[tileXI][tileYI].roof;
                     auto roofObject = roof->objectType;
                     auto opacity = 1.0f;
 
                     if (e.objectsContent.objectDescribers.count(roofObject))
                         opacity = e.objectsContent.objectDescribers.at(roofObject).opacity;
 
-                    e.DrawModel(roofObject, tileX0 + e.tileSize / 2,
+                    e.DrawModel
+                    (
+                        roofObject,
+                        tileX0 + e.cfg.tileSize / 2,
                         (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
-                        tileZ0 - e.tileSize / 2, roof->rotation,
-                        roof->scaling, opacity);
+                        tileZ0 - e.cfg.tileSize / 2,
+                        roof->rotation,
+                        roof->scaling,
+                        opacity
+                    );
 
                 }
 
                 glDisable(GL_TEXTURE_2D);
-                //        if ((tileXI + tileYI) % 16 == 0) {
-                //        auto sunx = -500.0f;
-                //        auto suny = 500.0f;
-                //        auto sunz = -500.0f;
-
-                //        auto alpha = ((Ticks() + tileXI*tileYI*100) % 1000)/1000.0f;
-                //        if (alpha >= 0.5f)
-                //            alpha = 0.5f - (alpha - 0.5f);
-
-                //        alpha /= 10.0f;
-                //       glDisable(GL_CULL_FACE);
-                //                    glBegin(GL_QUADS);
-                //                    glColor4f(1.0f, 1.0f, 0.0f, alpha);
-                //                    glVertex3f(tileX0, tileY0, tileZ0);
-                //                    glVertex3f(sunx, suny, sunz);
-                //                    glVertex3f(sunx + 0.1f, suny, sunz);
-                //                    glVertex3f(tileX0 + 0.1f, tileY0, tileZ0 + 0.1f);
-                //                    glEnd();
-                //                    glEnable(GL_CULL_FACE);
-
-                //      }
 
             }
         }
 
     }
 
+    float GameWorldRenderer::CalcPlayerElev()
+    {
+        auto& movementData = e.GetPlayer().GetModule<CoreMovementModule>();
+        auto& tiles = e.GetCurrMapArea().tiles;
 
+        auto playerXInt = CInt(movementData.position.x);
+        auto playerYInt = CInt(movementData.position.y);
+        auto elevPlayer0 = tiles[playerXInt][playerYInt].elevation / elevAmount;
+        auto elevPlayer1 = tiles[playerXInt + 1][playerYInt].elevation / elevAmount;
+        auto elevPlayer2 = tiles[playerXInt + 1][playerYInt + 1].elevation / elevAmount;
+        auto elevPlayer3 = tiles[playerXInt][playerYInt + 1].elevation / elevAmount;
+        auto elevX = movementData.position.x - playerXInt;
+        auto elevY = movementData.position.y - playerYInt;
 
+        auto elevPlayer =
+            (elevPlayer0 + (elevPlayer1 - elevPlayer0) * elevX +
+            elevPlayer3 + (elevPlayer2 - elevPlayer3) * elevX +
+            elevPlayer0 + (elevPlayer3 - elevPlayer0) * elevY +
+            elevPlayer1 + (elevPlayer2 - elevPlayer1) * elevY) /
+            4.0f;
 
+            return elevPlayer;
+    }
 
+    Point2F GameWorldRenderer::CalcOffset()
+    {
+        auto& movementData = e.GetPlayer().GetModule<CoreMovementModule>();
 
+        auto playerXInt = CInt(movementData.position.x);
+        auto playerYInt = CInt(movementData.position.y);
 
+        float subStepX = movementData.position.x - playerXInt;
+        float subStepY = movementData.position.y - playerYInt;
 
+        auto offsetX = -CFloat(2.0f * camera.GetRenderDistance() + 1.0f) / 2.0f * e.cfg.tileSize - subStepX * e.cfg.tileSize;
+        auto offsetY = -CFloat(2.0f * camera.GetRenderDistance() - 1.0f) / 2.0f * e.cfg.tileSize - subStepY * e.cfg.tileSize;
+
+        return {offsetX, offsetY};
+    }
 
 }  // namespace Forradia

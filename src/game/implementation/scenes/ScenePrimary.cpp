@@ -52,15 +52,15 @@ namespace Forradia
 
             if (turnRight)
             {
-                camera.Update(GetId("Right"), *e.mouseHandler.wheelAmount);
+                camera.UpdateRotation(GetId("Right"));
             }
             else if (turnLeft)
             {
-                camera.Update(GetId("Left"), *e.mouseHandler.wheelAmount);
+                camera.UpdateRotation(GetId("Left"));
             }
             else
             {
-                camera.Update(0, *e.mouseHandler.wheelAmount);
+                camera.UpdateRotation(0);
             }
 
             if (e.keyboardHandler.keysBeenFired->count(SDLK_F2))
@@ -70,7 +70,9 @@ namespace Forradia
             if (e.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
                 e.GetPlayer().GetModule<JumpingModule>().Jump();
         }
+        camera.UpdateZoomChange(*e.mouseHandler.wheelAmount);
         camera.UpdateCameraMovement();
+        camera.Update();
 
         if (e.mouseHandler.rightButtonDown)
             *player.GetModule<CoreMovementModule>().facingAngle = camera.lookingAngle;

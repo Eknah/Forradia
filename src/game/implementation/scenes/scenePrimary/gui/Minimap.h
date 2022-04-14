@@ -10,17 +10,21 @@ namespace Forradia
 
     class Minimap
     {
+
     public:
+
         explicit Minimap(const Engine& _e) : e(_e) {}
 
         void Render();
 
     private:
+
         const Engine& e;
 
         const int minimapSize = 250;
         Palette palette;
         Utilities utils;
+
     };
 
 }  // namespace Forradia
