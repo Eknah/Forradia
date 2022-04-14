@@ -34,7 +34,7 @@ namespace Forradia
         float rayCastingZ = 0.0f;
         float cameraHeight = 0.0f;
 
-        int GetRenderDistance() const;
+        int GetRenderDist() const;
         Point2 GetHoveredTile() const;
 
     private:

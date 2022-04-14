@@ -43,7 +43,7 @@ namespace Forradia
             if (moveInstruction & DirForward || moveInstruction & DirRight ||
                 moveInstruction & DirBack || moveInstruction & DirLeft)
             {
-                *player.GetModule<CoreMovementModule>().facingAngle = camera.lookingAngle;
+                *player.GetModule<CoreMovementModule>().facingAngle = cam.lookingAngle;
                 player.GetModule<CoreMovementModule>().dest = { -1, -1 };
             }
 
@@ -52,15 +52,15 @@ namespace Forradia
 
             if (turnRight)
             {
-                camera.UpdateRotation(GetId("Right"));
+                cam.UpdateRotation(GetId("Right"));
             }
             else if (turnLeft)
             {
-                camera.UpdateRotation(GetId("Left"));
+                cam.UpdateRotation(GetId("Left"));
             }
             else
             {
-                camera.UpdateRotation(0);
+                cam.UpdateRotation(0);
             }
 
             if (e.keyboardHandler.keysBeenFired->count(SDLK_F2))
@@ -70,12 +70,12 @@ namespace Forradia
             if (e.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
                 e.GetPlayer().GetModule<JumpingModule>().Jump();
         }
-        camera.UpdateZoomChange(*e.mouseHandler.wheelAmount);
-        camera.UpdateCameraMovement();
-        camera.Update();
+        cam.UpdateZoomChange(*e.mouseHandler.wheelAmount);
+        cam.UpdateCameraMovement();
+        cam.Update();
 
         if (e.mouseHandler.rightButtonDown)
-            *player.GetModule<CoreMovementModule>().facingAngle = camera.lookingAngle;
+            *player.GetModule<CoreMovementModule>().facingAngle = cam.lookingAngle;
 
 
         if (e.mouseHandler.rightButtonDown)
@@ -106,7 +106,7 @@ namespace Forradia
         if (e.GetPlayer().GetModule<ObjectUsageModule>().objectBeingUsed !=
             nullptr)
         {
-            auto hovered = camera.GetHoveredTile();
+            auto hovered = cam.GetHoveredTile();
 
             if (e.GetCurrMapArea().tiles[hovered.x][hovered.y].objects.size() >
                 0)
@@ -133,7 +133,7 @@ namespace Forradia
         case SDL_BUTTON_LEFT:
         {
             e.GetPlayer().GetModule<CoreMovementModule>().dest = {
-                camera.GetHoveredTile().x + 0.5f, camera.GetHoveredTile().y + 0.5f };
+                cam.GetHoveredTile().x + 0.5f, cam.GetHoveredTile().y + 0.5f };
             break;
         }
         case SDL_BUTTON_RIGHT:

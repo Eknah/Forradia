@@ -18,7 +18,7 @@ namespace Forradia
 
         GameWorldRenderer(const Engine& _e, const Camera& _camera)
             : e(_e), background(_e), planetShaper(_e),
-            camera(_camera)
+            cam(_camera)
         {}
 
         void Render();
@@ -31,7 +31,7 @@ namespace Forradia
 
         const Engine& e;
         Background background;
-        const Camera& camera;
+        const Camera& cam;
         PlanetShaper planetShaper;
         const int groundTypeWaterId = GetId("GroundTypeWater");
         float elevAmount = 5.0f;

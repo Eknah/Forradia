@@ -106,7 +106,7 @@ namespace Forradia
         return { CInt(mapx), CInt(mapy) };
     }
 
-    int Camera::GetRenderDistance() const
+    int Camera::GetRenderDist() const
     {
         auto& mapArea = e.GetCurrMapArea();
 
