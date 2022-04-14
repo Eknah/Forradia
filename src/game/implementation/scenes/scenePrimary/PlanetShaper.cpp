@@ -10,7 +10,6 @@ namespace Forradia
 
     float PlanetShaper::GetNewY(float y, float tileX, float tileY)
     {
-        //return y;
 
         auto result = y;
 
@@ -21,6 +20,7 @@ namespace Forradia
         result -= distance * 0.01f;
 
         return result;
+
     }
 
 }  // namespace Forradia

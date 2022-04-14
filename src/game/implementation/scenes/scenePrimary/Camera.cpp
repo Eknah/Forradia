@@ -8,7 +8,7 @@
 
 namespace Forradia
 {
-    void Camera::Update()
+    void Camera::UpdateRayCasting()
     {
         SetupCamera();
 

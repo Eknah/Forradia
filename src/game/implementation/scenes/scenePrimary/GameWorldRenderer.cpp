@@ -191,7 +191,16 @@ namespace Forradia
                     if (dropShadow)
                     {
                         glDisable(GL_TEXTURE_2D);
-                        e.DrawModel("Shadow", tileX0 + e.cfg.tileSize / 2, (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f, tileZ0 - e.cfg.tileSize / 2, 0, 1.5f, 1.0f);
+                        e.DrawModel
+                        (
+                            "Shadow",
+                            tileX0 + e.cfg.tileSize / 2,
+                            (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
+                            tileZ0 - e.cfg.tileSize / 2,
+                            0,
+                            1.5f,
+                            1.0f
+                        );
                     }
 
                     glDisable(GL_TEXTURE_2D);
@@ -232,7 +241,7 @@ namespace Forradia
                     (
                         "Shadow",
                         tileX0 + subxpos,
-                        modelYPos + e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovementModule>().positionZ,
+                        modelYPos,
                         tileZ0 - e.cfg.tileSize + subypos,
                         0,
                         1.0f,

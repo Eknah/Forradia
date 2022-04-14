@@ -11,7 +11,9 @@ namespace Forradia
 
     class ScenePrimary : public SceneBase
     {
+
     public:
+
         explicit ScenePrimary(const Engine& _e) : SceneBase(_e), gui(_e), cam(_e), gameWorldRenderer(_e, cam)
         {}
 
@@ -24,10 +26,12 @@ namespace Forradia
         void DoKeyUp(SDL_Keycode key) override {}
 
     private:
+
         Camera cam;
         Gui gui;
         Utilities utils;
         GameWorldRenderer gameWorldRenderer;
+
     };
 
 }  // namespace Forradia

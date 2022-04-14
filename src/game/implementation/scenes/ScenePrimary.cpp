@@ -37,8 +37,7 @@ namespace Forradia
             if (keys->count(SDLK_a))
                 moveInstruction |= DirLeft;
 
-            player.GetModule<DirectionMovementModule>().moveInstruction =
-                moveInstruction;
+            player.GetModule<DirectionMovementModule>().moveInstruction = moveInstruction;
 
             if (moveInstruction & DirForward || moveInstruction & DirRight ||
                 moveInstruction & DirBack || moveInstruction & DirLeft)
@@ -51,48 +50,37 @@ namespace Forradia
             auto turnLeft = keys->count(SDLK_q);
 
             if (turnRight)
-            {
                 cam.UpdateRotation(GetId("Right"));
-            }
             else if (turnLeft)
-            {
                 cam.UpdateRotation(GetId("Left"));
-            }
             else
-            {
                 cam.UpdateRotation(0);
-            }
 
             if (e.keyboardHandler.keysBeenFired->count(SDLK_F2))
-                gui.windows.at("Inventory")->visible =
-                !gui.windows.at("Inventory")->visible;
+                gui.windows.at("Inventory")->visible = !gui.windows.at("Inventory")->visible;
 
             if (e.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
                 e.GetPlayer().GetModule<JumpingModule>().Jump();
         }
+
         cam.UpdateZoomChange(*e.mouseHandler.wheelAmount);
         cam.UpdateCameraMovm();
-        cam.Update();
+        cam.UpdateRayCasting();
 
         if (e.mouseHandler.rightButtonDown)
             *player.GetModule<CoreMovementModule>().facingAngle = cam.lookingAngle;
-
 
         if (e.mouseHandler.rightButtonDown)
             e.customCursor.cursType = CursorTypes::Hidden;
 
         for (auto& [key, mobActor] : e.GetCurrMapArea().mobActorsMirror)
-        {
             mobActor.get()->Update();
-        }
 
         player.Update();
         gui.Update();
 
         if (e.keyboardHandler.keysBeenFired->count(SDLK_RETURN))
-        {
             gui.console.ToggleInput();
-        }
     }
 
     void ScenePrimary::Render()
@@ -103,37 +91,34 @@ namespace Forradia
 
     void ScenePrimary::DoMouseDown(Uint8 mouseButton)
     {
-        if (e.GetPlayer().GetModule<ObjectUsageModule>().objectBeingUsed !=
-            nullptr)
+        auto hovered = cam.GetHoveredTile();
+        auto& objectUsage = e.GetPlayer().GetModule<ObjectUsageModule>();
+        auto& hoveredTile = e.GetCurrMapArea().tiles[hovered.x][hovered.y];
+
+        if (objectUsage.objectBeingUsed != nullptr)
         {
-            auto hovered = cam.GetHoveredTile();
 
-            if (e.GetCurrMapArea().tiles[hovered.x][hovered.y].objects.size() >
-                0)
-                e.GetPlayer().GetModule<ObjectUsageModule>().objectBeingUsed->UseOn(
-                    e.GetCurrMapArea().tiles[hovered.x][hovered.y].objects.at(
-                        e.GetCurrMapArea()
-                        .tiles[hovered.x][hovered.y]
-                        .objects.size() -
-                        1));
+            if (hoveredTile.objects.size() > 0)
+                objectUsage.objectBeingUsed->UseOn(hoveredTile.objects.at(hoveredTile.objects.size() -1));
 
-            e.GetPlayer().GetModule<ObjectUsageModule>().objectBeingUsed
-                = nullptr;
+            objectUsage.objectBeingUsed = nullptr;
 
             return;
         }
 
         auto clickedInGui = gui.DoMouseDown(mouseButton);
 
-        if (clickedInGui)
-            return;
+        if (clickedInGui) return;
 
         switch (mouseButton)
         {
         case SDL_BUTTON_LEFT:
         {
-            e.GetPlayer().GetModule<CoreMovementModule>().dest = {
-                cam.GetHoveredTile().x + 0.5f, cam.GetHoveredTile().y + 0.5f };
+            e.GetPlayer().GetModule<CoreMovementModule>().dest =
+            {
+                cam.GetHoveredTile().x + 0.5f,
+                cam.GetHoveredTile().y + 0.5f
+            };
             break;
         }
         case SDL_BUTTON_RIGHT:

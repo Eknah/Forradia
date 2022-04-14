@@ -21,7 +21,7 @@ namespace Forradia
         explicit Camera(const Engine& _e) : e(_e), timer(UPtr<int>(&updateSpeed)) {}
 
         void SetupCamera() const;
-        void Update();
+        void UpdateRayCasting();
         void UpdateRotation(int rotationDirection);
         void UpdateZoomChange(float zoomChange);
         void UpdateCameraMovm();

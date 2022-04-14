@@ -11,20 +11,24 @@ namespace Forradia
 
     class SceneMainMenu : public SceneBase
     {
+
     public:
+
         using SceneBase::SceneBase;
 
         void Enter() override;
-        void Update() override;
+        void Update() override {};
         void Render() override;
-        void DoMouseDown(Uint8 mouseButton) override {};
+        void DoMouseDown(Uint8 mouseButton) override;
         void DoMouseUp(Uint8 mouseButton) override {}
-        void DoKeyDown(SDL_Keycode key) override {}
+        void DoKeyDown(SDL_Keycode key) override;
         void DoKeyUp(SDL_Keycode key) override {}
 
     private:
+
         Utilities utils;
         Palette palette;
+
     };
 
 }  // namespace Forradia

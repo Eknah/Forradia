@@ -14,35 +14,37 @@ namespace Forradia
         sceneButtons.push_back({ {0.5f, 0.47f, 0.1f, 0.05f}, "Server" });
     }
 
-    void SceneMainMenu::Update()
-    {
-        if (e.keyboardHandler.keysBeenFired->size() > 0)
-            e.sceneManager.SwitchToScene("ScenePrimary");
-
-        if (e.mouseHandler.GetLeftButtonBeenFired()
-            || e.mouseHandler.GetRightButtonBeenFired())
-            e.sceneManager.SwitchToScene("ScenePrimary");
-    }
-
     void SceneMainMenu::Render()
     {
         e.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
 
-        auto canvasSize = utils.GetCanvasSize();
+        auto canvasSz = utils.GetCanvasSize();
+        auto logoSzF = e.GetImageSizeF("SceneForradiaLogo");
 
-        auto logoSizeF = e.GetImageSizeF("SceneForradiaLogo");
-
-        e.DrawImage("SceneForradiaLogo",
-            0.5f - logoSizeF.w / 4.0f,
-            0.15f - logoSizeF.h / 4.0f,
-            logoSizeF.w / 2,
-            logoSizeF.h / 2);
+        e.DrawImage
+        (
+            "SceneForradiaLogo",
+            0.5f - logoSzF.w / 4.0f,
+            0.15f - logoSzF.h / 4.0f,
+            logoSzF.w / 2,
+            logoSzF.h / 2
+        );
 
         for (auto& button : sceneButtons)
         {
             e.FillRect(palette.wheat, button.bounds.x - button.bounds.w / 2, button.bounds.y - button.bounds.h / 2, button.bounds.w, button.bounds.h);
             e.DrawString(button.text, palette.black, button.bounds.x, button.bounds.y, true);
         }
+    }
+
+    void SceneMainMenu::DoMouseDown(Uint8 mouseButton)
+    {
+        e.sceneManager.SwitchToScene("ScenePrimary");
+    }
+    
+    void SceneMainMenu::DoKeyDown(SDL_Keycode key)
+    {
+        e.sceneManager.SwitchToScene("ScenePrimary");
     }
 
 }  // namespace Forradia
