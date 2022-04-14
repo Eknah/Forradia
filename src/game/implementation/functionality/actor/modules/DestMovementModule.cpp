@@ -21,31 +21,31 @@ namespace Forradia
     void DestMovementModule::Update()
     {
         auto& actor = GetParentActor();
-        auto& coreMovement = actor.GetModule<CoreMovementModule>();
+        auto& coreMovm = actor.GetModule<CoreMovementModule>();
 
-        if (!coreMovement.timer.HasFinished()) return;
-        if (coreMovement.dest.IsUndefined()) return;
+        if (!coreMovm.timer.HasFinished()) return;
+        if (coreMovm.dest.IsUndefined()) return;
 
-        auto dx = coreMovement.dest.x - coreMovement.position.x;
-        auto dy = coreMovement.dest.y - coreMovement.position.y;
+        auto dx = coreMovm.dest.x - coreMovm.position.x;
+        auto dy = coreMovm.dest.y - coreMovm.position.y;
         auto absdx = std::abs(dx);
         auto absdy = std::abs(dy);
 
-        if (absdx < coreMovement.stepMultiplier && absdy < coreMovement.stepMultiplier)
+        if (absdx < coreMovm.stepMultiplier && absdy < coreMovm.stepMultiplier)
         {
-            coreMovement.dest.MakeUndefined();
+            coreMovm.dest.MakeUndefined();
         }
         else
         {
             auto piF = CFloat(M_PI);
-            coreMovement.isWalking = true;
-            *coreMovement.facingAngle = CFloat(std::atan2(-dx, -dy)) / piF * 180.0f;
+            coreMovm.isWalking = true;
+            *coreMovm.facingAngle = CFloat(std::atan2(-dx, -dy)) / piF * 180.0f;
 
-            auto angle = *coreMovement.facingAngle / 180.0f * piF - piF / 2 + 0 * piF / 2;
-            auto dx = -std::cos(angle) * coreMovement.stepMultiplier;
-            auto dy = std::sin(angle) * coreMovement.stepMultiplier;
-            auto newX = coreMovement.position.x + dx * coreMovement.stepSize;
-            auto newY = coreMovement.position.y + dy * coreMovement.stepSize;
+            auto angle = *coreMovm.facingAngle / 180.0f * piF - piF / 2 + 0 * piF / 2;
+            auto dx = -std::cos(angle) * coreMovm.stepMultiplier;
+            auto dy = std::sin(angle) * coreMovm.stepMultiplier;
+            auto newX = coreMovm.position.x + dx * coreMovm.stepSize;
+            auto newY = coreMovm.position.y + dy * coreMovm.stepSize;
 
             if (newX < 0)
                 newX += e.GetCurrMapArea().size;
@@ -59,11 +59,11 @@ namespace Forradia
             auto newXRounded = newX;
             auto newYRounded = newY;
 
-            coreMovement.TryMoveToTile(newXRounded, newYRounded);
+            coreMovm.TryMoveToTile(newXRounded, newYRounded);
 
         }
 
-        coreMovement.timer.Reset();
+        coreMovm.timer.Reset();
     }
 
 }  // namespace Forradia

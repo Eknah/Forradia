@@ -31,7 +31,7 @@ namespace Forradia
     void GameWorldRenderer::RenderAllExceptRoofAndRays()
     {
         auto mapAreaSize = e.world->mapAreaSize;
-        auto& movementData = e.GetPlayer().GetModule<CoreMovementModule>();
+        auto& movmData = e.GetPlayer().GetModule<CoreMovementModule>();
         auto& tiles = e.GetCurrMapArea().tiles;
         auto offset = CalcOffset();
 
@@ -44,8 +44,8 @@ namespace Forradia
 
                 if (dx * dx + dy * dy >= cam.GetRenderDist() * cam.GetRenderDist()) continue;
 
-                auto tilex = movementData.position.x - cam.GetRenderDist() + x;
-                auto tiley = movementData.position.y - cam.GetRenderDist() + y;
+                auto tilex = movmData.position.x - cam.GetRenderDist() + x;
+                auto tiley = movmData.position.y - cam.GetRenderDist() + y;
 
                 if (tilex < 0 || tiley < 0 || tilex >= mapAreaSize || tiley >= mapAreaSize) continue;
 
@@ -336,17 +336,17 @@ namespace Forradia
 
     float GameWorldRenderer::CalcPlayerElev()
     {
-        auto& movementData = e.GetPlayer().GetModule<CoreMovementModule>();
+        auto& movmData = e.GetPlayer().GetModule<CoreMovementModule>();
         auto& tiles = e.GetCurrMapArea().tiles;
 
-        auto playerXInt = CInt(movementData.position.x);
-        auto playerYInt = CInt(movementData.position.y);
+        auto playerXInt = CInt(movmData.position.x);
+        auto playerYInt = CInt(movmData.position.y);
         auto elevPlayer0 = tiles[playerXInt][playerYInt].elevation / elevAmount;
         auto elevPlayer1 = tiles[playerXInt + 1][playerYInt].elevation / elevAmount;
         auto elevPlayer2 = tiles[playerXInt + 1][playerYInt + 1].elevation / elevAmount;
         auto elevPlayer3 = tiles[playerXInt][playerYInt + 1].elevation / elevAmount;
-        auto elevX = movementData.position.x - playerXInt;
-        auto elevY = movementData.position.y - playerYInt;
+        auto elevX = movmData.position.x - playerXInt;
+        auto elevY = movmData.position.y - playerYInt;
 
         auto elevPlayer =
             (elevPlayer0 + (elevPlayer1 - elevPlayer0) * elevX +
@@ -360,21 +360,21 @@ namespace Forradia
 
     Point2F GameWorldRenderer::CalcOffset()
     {
-        auto& movementData = e.GetPlayer().GetModule<CoreMovementModule>();
+        auto& movmData = e.GetPlayer().GetModule<CoreMovementModule>();
 
-        auto playerXInt = CInt(movementData.position.x);
-        auto playerYInt = CInt(movementData.position.y);
+        auto playerxI = CInt(movmData.position.x);
+        auto playeryI = CInt(movmData.position.y);
 
-        float subStepX = movementData.position.x - playerXInt;
-        float subStepY = movementData.position.y - playerYInt;
+        float substepx = movmData.position.x - playerxI;
+        float substepy = movmData.position.y - playeryI;
 
-        auto offsetX = -CFloat(2.0f * cam.GetRenderDist() + 1.0f) / 2.0f * e.cfg.tileSize - subStepX * e.cfg.tileSize;
-        auto offsetY = -CFloat(2.0f * cam.GetRenderDist() - 1.0f) / 2.0f * e.cfg.tileSize - subStepY * e.cfg.tileSize;
+        auto offsetx = -CFloat(2.0f * cam.GetRenderDist() + 1.0f) / 2.0f * e.cfg.tileSize - substepx * e.cfg.tileSize;
+        auto offsety = -CFloat(2.0f * cam.GetRenderDist() - 1.0f) / 2.0f * e.cfg.tileSize - substepy * e.cfg.tileSize;
 
-        return {offsetX, offsetY};
+        return {offsetx, offsety};
     }
 
-    std::array<float, 4> GameWorldRenderer::GetElevValues(int tilexI, int tileyI)
+    std::array<float, 4> GameWorldRenderer::GetElevValues(int xI, int yI)
     {
         auto mapAreaSize = e.world->mapAreaSize;
         auto& tiles = e.GetCurrMapArea().tiles;
@@ -385,25 +385,25 @@ namespace Forradia
         auto elev2 = 0.0f;
         auto elev3 = 0.0f;
 
-        if (tilexI >= 0 && tileyI >= 0 && tilexI < mapAreaSize && tileyI < mapAreaSize)
-            elev0 = tiles[tilexI][tileyI].elevation / elevAmount - elevPlayer;
+        if (xI >= 0 && yI >= 0 && xI < mapAreaSize && yI < mapAreaSize)
+            elev0 = tiles[xI][yI].elevation / elevAmount - elevPlayer;
 
-        if (tilexI >= 0 && tileyI - 1 >= 0 && tilexI < mapAreaSize && tileyI - 1 < mapAreaSize)
-            elev1 = tiles[tilexI][tileyI - 1].elevation / elevAmount - elevPlayer;
+        if (xI >= 0 && yI - 1 >= 0 && xI < mapAreaSize && yI - 1 < mapAreaSize)
+            elev1 = tiles[xI][yI - 1].elevation / elevAmount - elevPlayer;
         else
             elev1 = elev0;
 
-        if (tilexI + 1 >= 0 && tileyI - 1 >= 0 && tilexI + 1 < mapAreaSize && tileyI - 1 < mapAreaSize)
-            elev2 = tiles[tilexI + 1][tileyI - 1].elevation / elevAmount - elevPlayer;
-        else if (tilexI + 1 < mapAreaSize)
-            elev2 = tiles[tilexI + 1][tileyI].elevation / elevAmount - elevPlayer;
-        else if (tileyI - 1 >= 0)
-            elev2 = tiles[tilexI][tileyI - 1].elevation / elevAmount - elevPlayer;
+        if (xI + 1 >= 0 && yI - 1 >= 0 && xI + 1 < mapAreaSize && yI - 1 < mapAreaSize)
+            elev2 = tiles[xI + 1][yI - 1].elevation / elevAmount - elevPlayer;
+        else if (xI + 1 < mapAreaSize)
+            elev2 = tiles[xI + 1][yI].elevation / elevAmount - elevPlayer;
+        else if (yI - 1 >= 0)
+            elev2 = tiles[xI][yI - 1].elevation / elevAmount - elevPlayer;
         else
             elev2 = elev0;
 
-        if (tilexI + 1 >= 0 && tileyI >= 0 && tilexI + 1 < mapAreaSize && tileyI < mapAreaSize)
-            elev3 = tiles[tilexI + 1][tileyI].elevation / elevAmount - elevPlayer;
+        if (xI + 1 >= 0 && yI >= 0 && xI + 1 < mapAreaSize && yI < mapAreaSize)
+            elev3 = tiles[xI + 1][yI].elevation / elevAmount - elevPlayer;
         else
             elev3 = elev0;
 

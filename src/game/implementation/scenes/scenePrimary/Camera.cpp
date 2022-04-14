@@ -116,7 +116,7 @@ namespace Forradia
             return renderDistance;
     }
 
-    void Camera::UpdateCameraMovement()
+    void Camera::UpdateCameraMovm()
     {
         auto mousePos = utils.GetMousePosI();
         auto deltaMouseX = mousePos.x - previousMousePos.x;

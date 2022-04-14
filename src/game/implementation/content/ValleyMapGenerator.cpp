@@ -77,8 +77,8 @@ namespace Forradia
                 centerTileX = rnd.Next() % mapArea->size;
                 centerTileY = rnd.Next() % mapArea->size;
                 maxr = 1 + rnd.Next() % 6;
-            } while (std::abs(centerTileX - mapArea->size / 2) < villageSize / 2
-                || std::abs(centerTileY - mapArea->size / 2) < villageSize / 2);
+            } while (std::abs(centerTileX - mapArea->size / 2) < villageSize
+                || std::abs(centerTileY - mapArea->size / 2) < villageSize);
 
             for (auto r = maxr; r >= 0; r--)
             {

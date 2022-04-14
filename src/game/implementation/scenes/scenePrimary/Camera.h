@@ -24,7 +24,7 @@ namespace Forradia
         void Update();
         void UpdateRotation(int rotationDirection);
         void UpdateZoomChange(float zoomChange);
-        void UpdateCameraMovement();
+        void UpdateCameraMovm();
 
         float lookingAngle = 0.0f;
         float zoomAmount = 2.0f;

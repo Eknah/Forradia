@@ -71,7 +71,7 @@ namespace Forradia
                 e.GetPlayer().GetModule<JumpingModule>().Jump();
         }
         cam.UpdateZoomChange(*e.mouseHandler.wheelAmount);
-        cam.UpdateCameraMovement();
+        cam.UpdateCameraMovm();
         cam.Update();
 
         if (e.mouseHandler.rightButtonDown)

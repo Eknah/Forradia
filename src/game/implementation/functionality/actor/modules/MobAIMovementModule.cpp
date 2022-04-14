@@ -18,52 +18,52 @@ namespace Forradia
     {
         auto& actor = GetParentActor();
         auto& mob = actor;
-        auto& coreMovement = mob.GetModule<CoreMovementModule>();
+        auto& coreMovm = mob.GetModule<CoreMovementModule>();
 
         if (actor.actorId == e.GetPlayer().actorId) return;
         if (mob.actorId == e.GetPlayer().actorId) return;
 
-        coreMovement.isWalking = true;
+        coreMovm.isWalking = true;
 
-        if (coreMovement.timer.HasFinished())
+        if (coreMovm.timer.HasFinished())
         {
 
-            if (coreMovement.dest.x == -1 || coreMovement.dest.y == -1)
+            if (coreMovm.dest.x == -1 || coreMovm.dest.y == -1)
             {
 
-                auto destx = coreMovement.position.x + rnd.Next() % 15 - rnd.Next() % 15;
-                auto desty = coreMovement.position.y + rnd.Next() % 15 - rnd.Next() % 15;
+                auto destx = coreMovm.position.x + rnd.Next() % 15 - rnd.Next() % 15;
+                auto desty = coreMovm.position.y + rnd.Next() % 15 - rnd.Next() % 15;
 
                 destx = std::min(std::max(destx, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
                 desty = std::min(std::max(desty, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
 
-                coreMovement.dest = { destx, desty };
+                coreMovm.dest = { destx, desty };
             }
 
-            auto deltaX = coreMovement.dest.x - coreMovement.position.x;
-            auto deltaY = coreMovement.dest.y - coreMovement.position.y;
+            auto deltaX = coreMovm.dest.x - coreMovm.position.x;
+            auto deltaY = coreMovm.dest.y - coreMovm.position.y;
             auto distance = deltaX * deltaX + deltaY * deltaY;
 
             if (distance < 1.0f)
             {
-                coreMovement.dest = { -1, -1 };
+                coreMovm.dest = { -1, -1 };
 
                 return;
             }
 
             auto piF = CFloat(M_PI);
 
-            *coreMovement.facingAngle = std::atan2(-deltaX, -deltaY) / piF * 180.0f;
+            *coreMovm.facingAngle = std::atan2(-deltaX, -deltaY) / piF * 180.0f;
 
-            auto angle = *coreMovement.facingAngle / 180.0f * piF - piF / 2 + piF;
-            auto dx = -std::cos(angle) * coreMovement.stepMultiplier;
-            auto dy = std::sin(angle) * coreMovement.stepMultiplier;
-            auto newX = coreMovement.position.x + dx * coreMovement.stepSize;
-            auto newY = coreMovement.position.y + dy * coreMovement.stepSize;
+            auto angle = *coreMovm.facingAngle / 180.0f * piF - piF / 2 + piF;
+            auto dx = -std::cos(angle) * coreMovm.stepMultiplier;
+            auto dy = std::sin(angle) * coreMovm.stepMultiplier;
+            auto newX = coreMovm.position.x + dx * coreMovm.stepSize;
+            auto newY = coreMovm.position.y + dy * coreMovm.stepSize;
             auto newXI = CInt(newX);
             auto newYI = CInt(newY);
-            auto oldXI = CInt(coreMovement.position.x);
-            auto oldYI = CInt(coreMovement.position.y);
+            auto oldXI = CInt(coreMovm.position.x);
+            auto oldYI = CInt(coreMovm.position.y);
 
             if (newXI >= 0 && newYI >= 0 && newXI < e.world->mapAreaSize && newYI < e.world->mapAreaSize)
             {
@@ -72,7 +72,7 @@ namespace Forradia
                     if (e.GetCurrMapArea().tiles[newXI][newYI].actor == nullptr || (newXI == oldXI && newYI == oldYI))
                     {
 
-                        coreMovement.timer.Reset();
+                        coreMovm.timer.Reset();
                         e.GetCurrMapArea().tiles[oldXI][oldYI].actor->GetModule<CoreMovementModule>().position = {newX, newY };
 
                         if (newXI != oldXI || newYI != oldYI)
@@ -87,19 +87,19 @@ namespace Forradia
                     }
                     else if (e.GetCurrMapArea().tiles[newXI][newYI].actor != nullptr && (newXI != oldXI || newYI != oldYI))
                     {
-                        coreMovement.dest = { -1, -1 };
+                        coreMovm.dest = { -1, -1 };
                     }
 
                 }
                 else
                 {
-                    coreMovement.dest = { -1, -1 };
+                    coreMovm.dest = { -1, -1 };
                 }
 
             }
             else
             {
-                coreMovement.dest = { -1, -1 };
+                coreMovm.dest = { -1, -1 };
             }
         }
     }
