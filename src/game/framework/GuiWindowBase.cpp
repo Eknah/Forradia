@@ -48,7 +48,7 @@ namespace Forradia
         auto mousePosF = utils.GetMousePosF();
         auto titleBarBounds = GetTopBarBounds();
 
-        if (titleBarBounds.ContainsPoint(mousePosF))
+        if (titleBarBounds.Contains(mousePosF))
         {
             isBeingMoved = true;
             startMovePos = { bounds.x, bounds.y };
@@ -57,7 +57,7 @@ namespace Forradia
 
         DoMouseDownDerived(button);
 
-        if (bounds.ContainsPoint(mousePosF)) return true;
+        if (bounds.Contains(mousePosF)) return true;
 
         return false;
     }

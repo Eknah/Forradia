@@ -10,10 +10,11 @@
 namespace Forradia
 {
 
-
     class Texty : public File
     {
+
     public:
+
         Texty(Console& _console);
 
     };

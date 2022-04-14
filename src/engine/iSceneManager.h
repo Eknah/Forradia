@@ -16,7 +16,7 @@ namespace Forradia
 
         explicit ISceneManager(const IEngine& _e) : e(_e) {}
 
-        virtual void Initialize(ScenesCollection _scenes, int startScene) = 0;
+        virtual void Init(ScenesCollection _scenes, int startScene) = 0;
 
         virtual SPtr<SceneBase>& GetCurrentScene() = 0;
 

@@ -13,7 +13,7 @@ namespace Forradia
     public:
         explicit CustomCursor(IEngine& e) : ICustomCursor(e) {}
 
-        void Initialize() override;
+        void Init() override;
 
         void ResetForNewFrame() override;
 

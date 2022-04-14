@@ -10,7 +10,7 @@ namespace Forradia
 
     void ScenePrimary::Enter()
     {
-        gui.Initialize();
+        gui.Init();
         gui.console.Print("You have entered Forradia");
     }
 
@@ -77,7 +77,7 @@ namespace Forradia
 
 
         if (e.mouseHandler.rightButtonDown)
-            e.customCursor.cursorType = CursorTypes::Hidden;
+            e.customCursor.cursType = CursorTypes::Hidden;
 
         for (auto& [key, mobActor] : e.GetCurrMapArea().mobActorsMirror)
         {

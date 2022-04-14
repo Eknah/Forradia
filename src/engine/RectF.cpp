@@ -6,7 +6,7 @@
 namespace Forradia
 {
 
-    bool RectF::ContainsPoint(Point2F point)
+    bool RectF::Contains(Point2F point)
     {
         if (point.x >= x && point.y >= y && point.x < x + w &&
             point.y < y + h)
@@ -43,6 +43,11 @@ namespace Forradia
     Point2F RectF::GetTopLeftCorner()
     {
         return {x, y};
+    }
+
+    Point2F RectF::GetCenter()
+    {
+        return {x + w/2, y + h/2};
     }
 
 }  // namespace Forradia

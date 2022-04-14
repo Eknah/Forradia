@@ -20,7 +20,7 @@ namespace Forradia
         explicit Gui(const Engine& _e) : e(_e), minimap(_e), console(_e)
         {}
 
-        void Initialize();
+        void Init();
         void Update();
         void Render();
         bool DoMouseDown(Uint8 mouseButton);
@@ -39,9 +39,10 @@ namespace Forradia
         Utilities utils;
         const float btnWidth = 0.15f;
         const float btnHeight = 0.03f;
-        RectF boundsInventoryBtn = { 0.5f - btnWidth / 2, 1.0f - btnHeight, btnWidth, btnHeight };
-        RectF boundsCharacterBtn = { 0.5f - btnWidth / 2 - btnWidth, 1.0f - btnHeight, btnWidth, btnHeight };
-        RectF boundsSystemBtn = { 0.5f - btnWidth / 2 + btnWidth, 1.0f - btnHeight, btnWidth, btnHeight };
+        RectF boundsInvBtn = { 0.5f - btnWidth / 2, 1.0f - btnHeight, btnWidth, btnHeight };
+        RectF boundsCharBtn = { 0.5f - btnWidth / 2 - btnWidth, 1.0f - btnHeight, btnWidth, btnHeight };
+        RectF boundsSysBtn = { 0.5f - btnWidth / 2 + btnWidth, 1.0f - btnHeight, btnWidth, btnHeight };
+        Palette palette;
 
     };
 

@@ -6,14 +6,14 @@
 namespace Forradia
 {
 
-    void CustomCursor::Initialize()
+    void CustomCursor::Init()
     {
         SDL_ShowCursor(0);
     }
 
     void CustomCursor::ResetForNewFrame()
     {
-        cursorType = CursorTypes::Default;
+        cursType = CursorTypes::Default;
     }
 
     void CustomCursor::Render()
@@ -21,7 +21,7 @@ namespace Forradia
         auto mousePosF = utils.GetMousePosF();
         auto cursorSizeF = utils.ConvertToFloat(cursorSize);
 
-        switch (cursorType)
+        switch (cursType)
         {
         case CursorTypes::Default:
         {

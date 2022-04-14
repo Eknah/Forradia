@@ -6,7 +6,7 @@
 namespace Forradia
 {
 
-    void File::GiveInput(std::string input)
+    void File::GiveInput(String input)
     {
         outputText.push_back(input);
     }

@@ -25,25 +25,22 @@ namespace Forradia
     void FileSystem::PrintCurrentDirectory()
     {
         console.Print("Listing contents of current folder: " + currentFolder->name);
-        if (currentFolder->subFolders.size() == 0
-            && currentFolder->files.size() == 0)
+
+        if (currentFolder->subFolders.size() == 0 && currentFolder->files.size() == 0)
         {
             console.Print("Folder is empty");
         }
         else
         {
             for (auto& folder : currentFolder->subFolders)
-            {
                 console.Print(folder->name + "/");
-            }
+            
             for (auto& file : currentFolder->files)
-            {
                 console.Print(file.name);
-            }
         }
     }
 
-    void FileSystem::MoveToFolder(std::string folderName)
+    void FileSystem::MoveToFolder(String folderName)
     {
         if (folderName == "..")
         {
@@ -52,6 +49,7 @@ namespace Forradia
         else
         {
             auto i = 0;
+
             for (auto& folder : currentFolder->subFolders)
             {
                 if (folder->name == folderName)
@@ -61,11 +59,12 @@ namespace Forradia
                 }
                 i++;
             }
-            }
+        }
+
         console.Print("Now in folder: " + currentFolder->name);
     }
 
-    void FileSystem::RunProgram(std::string programName)
+    void FileSystem::RunProgram(String programName)
     {
         for (auto& file : currentFolder->files)
         {

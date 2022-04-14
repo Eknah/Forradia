@@ -6,7 +6,7 @@
 namespace Forradia
 {
 
-    void SceneManager::Initialize(ScenesCollection scenes, int startScene)
+    void SceneManager::Init(ScenesCollection scenes, int startScene)
     {
         scenesCollection = std::move(scenes);
         *currentScene = startScene;

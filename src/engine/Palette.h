@@ -16,6 +16,7 @@ namespace Forradia
         SDL_Color mediumBlue = { 0, 150, 255, 255 };
         SDL_Color mediumBlueSemiTrans = { 0, 150, 255, 100 };
         SDL_Color wheat = { 255, 255, 230, 255 };
+        SDL_Color lightMediumBlueSemiTrans = { 100, 200, 255, 100 };
     };
 
 }  // namespace Forradia

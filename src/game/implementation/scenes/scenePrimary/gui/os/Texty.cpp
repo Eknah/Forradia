@@ -9,10 +9,12 @@ namespace Forradia
 
     Texty::Texty(Console& _console) : File(_console)
     {
+
         name = "Texty";
         runnable = true;
         outputText.push_back("Texty (Ctrl+S to Save) (Ctrl+Q to Quit)");
         outputText.push_back("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
     }
 
 }

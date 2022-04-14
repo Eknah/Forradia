@@ -14,7 +14,7 @@ namespace Forradia
     {
         using std::move;
 
-        InitializeGL();
+        InitGL();
 
         world = move(_world);
         objectsContent = _objectsContent;
@@ -42,11 +42,11 @@ namespace Forradia
         GetPlayer().GetModule<CoreMovementModule>().worldMapCoord = playerWorldPos;
         GetPlayer().GetModule<CoreMovementModule>().position = GetCurrMapArea().spawnPos;
         GetPlayer().GetModule<InventoryModule>().inventory = _startingInventory;
-        sceneManager.Initialize(move(_scenesCollection), _startScene);
+        sceneManager.Init(move(_scenesCollection), _startScene);
         modelLoader.LoadModels();
         imageLoader.LoadImages();
-        textGraphics.Initialize();
-        customCursor.Initialize();
+        textGraphics.Init();
+        customCursor.Init();
 
         gameLoop.Run();
 
@@ -123,7 +123,7 @@ namespace Forradia
         return *world->GetArea(GetPlayer().GetModule<CoreMovementModule>().worldMapCoord);
     }
 
-    void Engine::InitializeGL()
+    void Engine::InitGL()
     {
         SDL_Init(SDL_INIT_VIDEO);
         SDL_StopTextInput();

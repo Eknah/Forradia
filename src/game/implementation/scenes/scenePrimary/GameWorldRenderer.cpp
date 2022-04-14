@@ -331,7 +331,7 @@ namespace Forradia
                 auto hoveredY = camera.GetHoveredTile().y;
 
                 if (hoveredX == tileXI && hoveredY == tileYI &&
-                    e.customCursor.cursorType != CursorTypes::Hidden)
+                    e.customCursor.cursType != CursorTypes::Hidden)
                 {
                     glBindTexture(GL_TEXTURE_2D,
                         e.imageLoader.images.at(GetId("TileHovering")));

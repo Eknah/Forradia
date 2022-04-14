@@ -11,12 +11,13 @@ namespace Forradia
     class RectF
     {
     public:
-        bool ContainsPoint(Point2F point);
+        bool Contains(Point2F point);
         RectF Copy();
         RectF Translate(float dx, float dy);
         RectF SetHeight(float newh);
         LineF GetTopEdge();
         Point2F GetTopLeftCorner();
+        Point2F GetCenter();
 
         float x = 0.0f;
         float y = 0.0f;

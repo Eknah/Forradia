@@ -11,12 +11,14 @@ namespace Forradia
 
     class FileSystem
     {
+
     public:
+
         explicit FileSystem(Console& _console);
 
         void PrintCurrentDirectory();
-        void MoveToFolder(std::string folderName);
-        void RunProgram(std::string programName);
+        void MoveToFolder(String folderName);
+        void RunProgram(String programName);
 
         SPtr<File> runningProgram = nullptr;
 
@@ -24,7 +26,6 @@ namespace Forradia
 
         Console& console;
         SPtr<Folder> currentFolder = nullptr;
-
 
     };
 

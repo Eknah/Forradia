@@ -15,11 +15,11 @@ namespace Forradia
     public:
         explicit ICustomCursor(IEngine& _e) : e(_e) {}
 
-        virtual void Initialize() = 0;
+        virtual void Init() = 0;
         virtual void ResetForNewFrame() = 0;
         virtual void Render() = 0;
 
-        CursorTypes cursorType = CursorTypes::Default;
+        CursorTypes cursType = CursorTypes::Default;
 
     protected:
         IEngine& e;

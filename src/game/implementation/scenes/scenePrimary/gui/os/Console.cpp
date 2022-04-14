@@ -28,8 +28,8 @@ namespace Forradia
             e.DrawString(textPrinted, palette.white, inputBounds.GetTopLeftCorner().Translate(0.005f, 0.0f));
         }
 
-        auto textboxTextX = bounds.x + margin;
-        auto textBoxTextY = bounds.y + margin;
+        auto textx = bounds.x + margin;
+        auto texty = bounds.y + margin;
 
         List<String> textToPrint;
 
@@ -43,11 +43,11 @@ namespace Forradia
         auto startline = std::max(CInt(textToPrint.size() + 1 - numShownLines), 0);
         auto endline = std::min(startline + numShownLines - 2, CInt(textToPrint.size() - 1));
 
-        auto y = textBoxTextY;
+        auto y = texty;
 
         for (auto i = startline; i <= endline; i++)
         {
-            e.DrawString(textToPrint.at(i), palette.wheat, textboxTextX, y, false, 0.7f);
+            e.DrawString(textToPrint.at(i), palette.wheat, textx, y, false, 0.7f);
             y += lineHeight;
         }
 
@@ -65,30 +65,17 @@ namespace Forradia
             else
             {
                 if (InputBeginsWith("echo"))
-                {
-                    auto toPrint = e.text.substr(5);
-                    Print(toPrint);
-                }
+                    Print(e.text.substr(5));
                 else if (InputBeginsWith("quit"))
-                {
                     e.gameLoop.quit = true;
-                }
                 else if (InputBeginsWith("list"))
-                {
                     fileSystem.PrintCurrentDirectory();
-                }
                 else if (InputBeginsWith("clear"))
-                {
                     textBoxText.clear();
-                }
                 else if (InputBeginsWith("move"))
-                {
                     fileSystem.MoveToFolder(e.text.substr(5));
-                }
                 else if (InputBeginsWith("run"))
-                {
                     fileSystem.RunProgram(e.text.substr(4));
-                }
             }
         }
 
@@ -112,13 +99,10 @@ namespace Forradia
 
     void Console::DoKeyDown(SDL_Keycode key)
     {
-        if (key == SDLK_q && e.keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) > 0)
+        if (key == SDLK_q && e.keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) > 0 && fileSystem.runningProgram != nullptr)
         {
-            if (fileSystem.runningProgram != nullptr)
-            {
-                Print("Exiting program: " + fileSystem.runningProgram->name);
-                fileSystem.runningProgram = nullptr;
-            }
+            Print("Exiting program: " + fileSystem.runningProgram->name);
+            fileSystem.runningProgram = nullptr;
         }
     }
 

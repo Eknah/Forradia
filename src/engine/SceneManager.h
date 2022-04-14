@@ -17,7 +17,7 @@ namespace Forradia
             ISceneManager(e)
         {}
 
-        void Initialize(ScenesCollection scenes, int startScene) override;
+        void Init(ScenesCollection scenes, int startScene) override;
 
         SPtr<SceneBase>& GetCurrentScene() override;
 

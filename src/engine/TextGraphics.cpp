@@ -6,7 +6,7 @@
 namespace Forradia
 {
 
-    void TextGraphics::Initialize()
+    void TextGraphics::Init()
     {
         TTF_Init();
 

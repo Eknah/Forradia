@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include "../engine/Aliases.h"
 
 namespace Forradia
 {
@@ -13,19 +14,22 @@ namespace Forradia
 
     class File
     {
+
     public:
+
         explicit File(Console& _console) : console(_console) {}
-        File(Console& _console, std::string _name) : console(_console), name(_name) {}
+        File(Console& _console, String _name) : console(_console), name(_name) {}
 
         void GiveInput(std::string input);
 
-        std::string name = "Unnamed folder";
-        std::vector<std::string> outputText = {};
-
+        String name = "Unnamed folder";
+        List<String> outputText = {};
         bool runnable = false;
 
     private:
+
         Console& console;
+
     };
 
 }  // namespace Forradia

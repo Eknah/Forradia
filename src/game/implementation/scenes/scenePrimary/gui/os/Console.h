@@ -38,7 +38,15 @@ namespace Forradia
 
         String inputText;
         bool inputActive = false;
-        RectF bounds = { 0.5f - width / 2, 1.0f - 0.03f - height, width, height };
+
+        RectF bounds =
+        {
+            0.5f - width / 2,
+            1.0f - 0.03f - height,
+            width,
+            height
+        };
+
         List<String> textBoxText = {};
         Utilities utils;
         FileSystem fileSystem;

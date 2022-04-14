@@ -9,26 +9,27 @@
 namespace Forradia
 {
 
-    void Gui::Initialize()
+    void Gui::Init()
     {
         windows.clear();
-        windows.insert(
-            { "Inventory", std::make_unique<InventoryWindow>(
-                              e, "Inventory", RectF{0.1f, 0.1f, 0.2f, 0.7f}) });
+        windows.insert
+        ({
+            "Inventory", std::make_unique<InventoryWindow>( e, "Inventory", RectF{0.1f, 0.1f, 0.2f, 0.7f})
+        });
     }
 
     void Gui::Update()
     {
-        auto mousePositionF = utils.GetMousePosF();
+        auto mousePosF = utils.GetMousePosF();
 
-        if (boundsInventoryBtn.ContainsPoint(mousePositionF))
-            e.customCursor.cursorType = CursorTypes::Hovering;
+        if (boundsInvBtn.Contains(mousePosF))
+            e.customCursor.cursType = CursorTypes::Hovering;
 
-        if (boundsCharacterBtn.ContainsPoint(mousePositionF))
-            e.customCursor.cursorType = CursorTypes::Hovering;
+        if (boundsCharBtn.Contains(mousePosF))
+            e.customCursor.cursType = CursorTypes::Hovering;
 
-        if (boundsSystemBtn.ContainsPoint(mousePositionF))
-            e.customCursor.cursorType = CursorTypes::Hovering;
+        if (boundsSysBtn.Contains(mousePosF))
+            e.customCursor.cursType = CursorTypes::Hovering;
 
         for (auto& [key, window] : windows)
             window->Update();
@@ -39,62 +40,39 @@ namespace Forradia
 
         minimap.Render();
 
-        auto MousePositionF = utils.GetMousePosF();
+        auto mousePosF = utils.GetMousePosF();
 
-        if (boundsInventoryBtn.ContainsPoint(MousePositionF))
-            e.FillRect({ 100, 200, 255, 100 }, boundsInventoryBtn.x,
-                boundsInventoryBtn.y, boundsInventoryBtn.w,
-                boundsInventoryBtn.h);
+        if (boundsInvBtn.Contains(mousePosF))
+            e.FillRect(palette.lightMediumBlueSemiTrans, boundsInvBtn);
         else
-            e.FillRect({ 0, 150, 255, 100 }, boundsInventoryBtn.x,
-                boundsInventoryBtn.y, boundsInventoryBtn.w,
-                boundsInventoryBtn.h);
+            e.FillRect(palette.mediumBlueSemiTrans, boundsInvBtn);
 
-        e.DrawRect({ 255, 255, 255, 100 }, boundsInventoryBtn.x,
-            boundsInventoryBtn.y, boundsInventoryBtn.w,
-            boundsInventoryBtn.h);
-        e.DrawString("Inventory [F2]", { 255, 255, 255, 255 },
-            boundsInventoryBtn.x + boundsInventoryBtn.w / 2,
-            boundsInventoryBtn.y + boundsInventoryBtn.h / 2,
-            true);
+        e.DrawRect(palette.white, boundsInvBtn);
 
-        if (boundsCharacterBtn.ContainsPoint(MousePositionF))
-            e.FillRect({ 100, 200, 255, 100 }, boundsCharacterBtn.x,
-                boundsCharacterBtn.y, boundsCharacterBtn.w,
-                boundsCharacterBtn.h);
+        e.DrawString("Inventory [F2]", palette.white, boundsInvBtn.GetCenter(), true);
+
+        if (boundsCharBtn.Contains(mousePosF))
+            e.FillRect(palette.lightMediumBlueSemiTrans, boundsCharBtn);
         else
-            e.FillRect({ 0, 150, 255, 100 }, boundsCharacterBtn.x,
-                boundsCharacterBtn.y, boundsCharacterBtn.w,
-                boundsCharacterBtn.h);
+            e.FillRect(palette.mediumBlueSemiTrans, boundsCharBtn);
 
-        e.DrawRect({ 255, 255, 255, 100 }, boundsCharacterBtn.x,
-            boundsCharacterBtn.y, boundsCharacterBtn.w,
-            boundsCharacterBtn.h);
-        e.DrawString("Character [F1]", { 255, 255, 255, 255 },
-            boundsCharacterBtn.x + boundsCharacterBtn.w / 2,
-            boundsCharacterBtn.y + boundsCharacterBtn.h / 2,
-            true);
+        e.DrawRect(palette.white, boundsCharBtn);
 
-        if (boundsSystemBtn.ContainsPoint(MousePositionF))
-            e.FillRect({ 100, 200, 255, 100 }, boundsSystemBtn.x,
-                boundsSystemBtn.y, boundsSystemBtn.w,
-                boundsSystemBtn.h);
+        e.DrawString("Character [F1]", palette.white, boundsCharBtn.GetCenter(), true);
+
+        if (boundsSysBtn.Contains(mousePosF))
+            e.FillRect(palette.lightMediumBlueSemiTrans, boundsSysBtn);
         else
-            e.FillRect({ 0, 150, 255, 100 }, boundsSystemBtn.x,
-                boundsSystemBtn.y, boundsSystemBtn.w,
-                boundsSystemBtn.h);
+            e.FillRect(palette.mediumBlueSemiTrans, boundsSysBtn);
 
-        e.DrawRect({ 255, 255, 255, 100 }, boundsSystemBtn.x,
-            boundsSystemBtn.y, boundsSystemBtn.w,
-            boundsSystemBtn.h);
-        e.DrawString("System [F3]", { 255, 255, 255, 255 },
-            boundsSystemBtn.x + boundsSystemBtn.w / 2,
-            boundsSystemBtn.y + boundsSystemBtn.h / 2, true);
+        e.DrawRect(palette.white, boundsSysBtn);
+
+        e.DrawString("System [F3]", palette.white, boundsSysBtn.GetCenter(), true);
+
         console.Render();
 
         for (auto& [Key, Window] : windows)
             Window->Render();
-
 
     }
 
@@ -110,7 +88,7 @@ namespace Forradia
 
         auto mousePositionF = utils.GetMousePosF();
 
-        if (boundsInventoryBtn.ContainsPoint(mousePositionF))
+        if (boundsInvBtn.Contains(mousePositionF))
         {
             windows.at("Inventory")->visible = !windows.at("Inventory")->visible;
 

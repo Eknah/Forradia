@@ -14,7 +14,7 @@ namespace Forradia
     class TextGraphics
     {
     public:
-        void Initialize();
+        void Init();
 
         // --- Drawing operations ---
 

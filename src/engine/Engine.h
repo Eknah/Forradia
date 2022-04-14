@@ -84,7 +84,7 @@ namespace Forradia
         // Creates game window with GL support
         // Enables alpha blending for all following render operations
 
-        void InitializeGL();
+        void InitGL();
 
         // ---- Private members ----
 

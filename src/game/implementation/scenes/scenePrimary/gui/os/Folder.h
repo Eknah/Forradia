@@ -14,14 +14,17 @@ namespace Forradia
 
     class Folder
     {
-    public:
-        Folder() = default;
-        Folder(std::string _name, SPtr<Folder> _parentFolder) : name(_name), parentFolder(_parentFolder) {}
 
-        std::string name = "Unnamed folder";
-        std::vector<SPtr<Folder>> subFolders;
-        std::vector<File> files;
+    public:
+
+        Folder() = default;
+        Folder(String _name, SPtr<Folder> _parentFolder) : name(_name), parentFolder(_parentFolder) {}
+
+        String name = "Unnamed folder";
+        List<SPtr<Folder>> subFolders;
+        List<File> files;
         SPtr<Folder> parentFolder = nullptr;
+
     };
 
 }  // namespace Forradia
