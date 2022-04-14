@@ -25,7 +25,8 @@ namespace Forradia
         glTranslatef(0.0, -2 + 2.0, 0.0);
 
         RenderAllExceptRoofAndRays();
-        //RenderRoof();
+
+        glPopMatrix();
     }
 
     void GameWorldRenderer::RenderAllExceptRoofAndRays()
