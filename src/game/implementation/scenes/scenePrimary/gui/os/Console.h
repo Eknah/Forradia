@@ -18,15 +18,18 @@ namespace Forradia
         explicit Console(const Engine& _e) : e(_e), fileSystem(*this)
         {}
 
+        void Update();
         void Render();
         void Print(String message);
         void ToggleInput();
         void Clear();
         void DoKeyDown(SDL_Keycode key);
+        bool DoMouseDown(Uint8 mouseButton);
 
     private:
         
         bool InputBeginsWith(String text);
+        RectF GetResizeIconBounds();
 
         const Engine& e;
 
@@ -51,6 +54,8 @@ namespace Forradia
         Utilities utils;
         FileSystem fileSystem;
         Palette palette;
+
+        int resizeIconSize = 30;
 
     };
 

@@ -33,6 +33,8 @@ namespace Forradia
 
         for (auto& [key, window] : windows)
             window->Update();
+
+        console.Update();
     }
 
     void Gui::Render()
@@ -92,6 +94,11 @@ namespace Forradia
         {
             windows.at("Inventory")->visible = !windows.at("Inventory")->visible;
 
+            return true;
+        }
+
+        if (console.DoMouseDown(mouseButton))
+        {
             return true;
         }
 

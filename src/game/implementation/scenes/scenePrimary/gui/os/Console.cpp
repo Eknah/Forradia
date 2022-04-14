@@ -8,6 +8,16 @@
 namespace Forradia
 {
 
+    void Console::Update()
+    {
+        auto resizeIconBounds = GetResizeIconBounds();
+        
+        if (resizeIconBounds.Contains(utils.GetMousePosF()))
+        {
+            e.customCursor.cursType = CursorTypes::Hovering;
+        }
+    }
+
     void Console::Render()
     {
 
@@ -50,6 +60,9 @@ namespace Forradia
             e.DrawString(textToPrint.at(i), palette.wheat, textx, y, false, 0.7f);
             y += lineHeight;
         }
+
+        auto resizeIconBounds = GetResizeIconBounds();
+        e.DrawImage("ConsoleResizeIcon", resizeIconBounds.x, resizeIconBounds.y, resizeIconBounds.w, resizeIconBounds.h);
 
     }
 
@@ -104,6 +117,37 @@ namespace Forradia
             Print("Exiting program: " + fileSystem.runningProgram->name);
             fileSystem.runningProgram = nullptr;
         }
+    }
+
+    RectF Console::GetResizeIconBounds()
+    {
+        auto result = RectF { bounds.x + bounds.w - utils.ConvertToFloat(resizeIconSize).w, bounds.y - utils.ConvertToFloat(resizeIconSize).h, utils.ConvertToFloat(resizeIconSize).w, utils.ConvertToFloat(resizeIconSize).h };
+        return result;
+    }
+
+    bool Console::DoMouseDown(Uint8 mouseButton)
+    {
+        if (mouseButton != SDL_BUTTON_LEFT) return false;
+
+        auto resizeIconBounds = GetResizeIconBounds();
+        
+        if (resizeIconBounds.Contains(utils.GetMousePosF()))
+        {
+            if (bounds.h == 0.15f)
+            {
+                bounds.h = 0.45f;
+            }
+            else
+            {
+                bounds.h = 0.15f;
+            }
+
+            bounds.y = 1.0f - 0.03f - bounds.h;
+
+            return true;
+        }
+
+        return false;
     }
 
 }  // namespace Forradia
