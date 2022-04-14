@@ -30,7 +30,7 @@ namespace Forradia
 
     void GameWorldRenderer::RenderAllExceptRoofAndRays()
     {
-        auto mapAreaSize = e.world->mapAreaSize;
+        auto mapAreaSz = e.world->mapAreaSize;
         auto& movmData = e.GetPlayer().GetModule<CoreMovementModule>();
         auto& tiles = e.GetCurrMapArea().tiles;
         auto offset = CalcOffset();
@@ -47,7 +47,7 @@ namespace Forradia
                 auto tilex = movmData.position.x - cam.GetRenderDist() + x;
                 auto tiley = movmData.position.y - cam.GetRenderDist() + y;
 
-                if (tilex < 0 || tiley < 0 || tilex >= mapAreaSize || tiley >= mapAreaSize) continue;
+                if (tilex < 0 || tiley < 0 || tilex >= mapAreaSz || tiley >= mapAreaSz) continue;
 
                 auto tilexI = CInt(tilex);
                 auto tileyI = CInt(tiley);
@@ -260,7 +260,7 @@ namespace Forradia
     void GameWorldRenderer::RenderRoofAndRays()
     {
 
-        auto mapAreaSize = e.world->mapAreaSize;
+        auto mapAreaSz = e.world->mapAreaSize;
         auto offset = CalcOffset();
 
         for (auto y = 0; y < 2 * cam.GetRenderDist() + 1; y++)
@@ -275,7 +275,7 @@ namespace Forradia
                 auto tileX = e.GetPlayer().GetModule<CoreMovementModule>().position.x - cam.GetRenderDist() + x;
                 auto tileY = e.GetPlayer().GetModule<CoreMovementModule>().position.y - cam.GetRenderDist() + y;
 
-                if (tileX < 0 || tileY < 0 || tileX >= mapAreaSize || tileY >= mapAreaSize) continue;
+                if (tileX < 0 || tileY < 0 || tileX >= mapAreaSz || tileY >= mapAreaSz) continue;
 
                 auto tileXI = CInt(tileX);
                 auto tileYI = CInt(tileY);
@@ -376,7 +376,7 @@ namespace Forradia
 
     std::array<float, 4> GameWorldRenderer::GetElevValues(int xI, int yI)
     {
-        auto mapAreaSize = e.world->mapAreaSize;
+        auto mapAreaSz = e.world->mapAreaSize;
         auto& tiles = e.GetCurrMapArea().tiles;
         auto elevPlayer = CalcPlayerElev();
 
@@ -385,24 +385,24 @@ namespace Forradia
         auto elev2 = 0.0f;
         auto elev3 = 0.0f;
 
-        if (xI >= 0 && yI >= 0 && xI < mapAreaSize && yI < mapAreaSize)
+        if (xI >= 0 && yI >= 0 && xI < mapAreaSz && yI < mapAreaSz)
             elev0 = tiles[xI][yI].elevation / elevAmount - elevPlayer;
 
-        if (xI >= 0 && yI - 1 >= 0 && xI < mapAreaSize && yI - 1 < mapAreaSize)
+        if (xI >= 0 && yI - 1 >= 0 && xI < mapAreaSz && yI - 1 < mapAreaSz)
             elev1 = tiles[xI][yI - 1].elevation / elevAmount - elevPlayer;
         else
             elev1 = elev0;
 
-        if (xI + 1 >= 0 && yI - 1 >= 0 && xI + 1 < mapAreaSize && yI - 1 < mapAreaSize)
+        if (xI + 1 >= 0 && yI - 1 >= 0 && xI + 1 < mapAreaSz && yI - 1 < mapAreaSz)
             elev2 = tiles[xI + 1][yI - 1].elevation / elevAmount - elevPlayer;
-        else if (xI + 1 < mapAreaSize)
+        else if (xI + 1 < mapAreaSz)
             elev2 = tiles[xI + 1][yI].elevation / elevAmount - elevPlayer;
         else if (yI - 1 >= 0)
             elev2 = tiles[xI][yI - 1].elevation / elevAmount - elevPlayer;
         else
             elev2 = elev0;
 
-        if (xI + 1 >= 0 && yI >= 0 && xI + 1 < mapAreaSize && yI < mapAreaSize)
+        if (xI + 1 >= 0 && yI >= 0 && xI + 1 < mapAreaSz && yI < mapAreaSz)
             elev3 = tiles[xI + 1][yI].elevation / elevAmount - elevPlayer;
         else
             elev3 = elev0;

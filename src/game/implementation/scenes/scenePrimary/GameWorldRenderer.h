@@ -17,13 +17,13 @@ namespace Forradia
     public:
 
         GameWorldRenderer(const Engine& _e, const Camera& _camera)
-            : e(_e), background(_e), planetShaper(_e),
-            cam(_camera)
+            : e(_e), background(_e), planetShaper(_e), cam(_camera)
         {}
 
         void Render();
 
     private:
+
         void RenderAllExceptRoofAndRays();
         void RenderRoofAndRays();
         float CalcPlayerElev();

@@ -10,8 +10,10 @@ namespace Forradia
 
     float PlanetShaper::GetNewY(float y, float tileX, float tileY)
     {
-        return y;
+        //return y;
+
         auto result = y;
+
         auto dx = static_cast<int>(tileX) - e.GetPlayer().GetModule<CoreMovementModule>().position.x;
         auto dy = static_cast<int>(tileY) - e.GetPlayer().GetModule<CoreMovementModule>().position.y;
         auto distance = dx * dx + dy * dy;
