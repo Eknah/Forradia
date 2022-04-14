@@ -19,6 +19,7 @@ namespace Forradia
     private:
 
         const Engine& e;
+        float radius = 2.0f;
 
     };
 

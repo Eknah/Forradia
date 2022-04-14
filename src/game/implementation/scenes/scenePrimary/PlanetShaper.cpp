@@ -17,7 +17,7 @@ namespace Forradia
         auto dy = static_cast<int>(tileY) - e.GetPlayer().GetModule<CoreMovementModule>().position.y;
         auto distance = dx * dx + dy * dy;
 
-        result -= distance * 0.01f;
+        result -= distance * (0.01f/radius);
 
         return result;
 
