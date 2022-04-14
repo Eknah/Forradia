@@ -13,36 +13,7 @@ namespace Forradia
     {
         background.Render(camera.zoomAmount);
 
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        gluPerspective(e.cfg.fov, 1.333, 0.5, 100);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-
-        auto cameraX = 0.0f;
-        auto cameraZ = -1.0f;
-        auto angleRadians = atan2(cameraZ, cameraX) + camera.lookingAngle / 180.0f * M_PI;
-        auto cameraDist = 1;
-        auto zoom = camera.zoomAmount;
-        auto zoomEx = std::max(zoom, 1.0f);
-
-        glTranslatef(0.0f, -zoomEx - 1, -(zoomEx - 1.0f) * 4.0f);
-
-        cameraX = CFloat(cos(angleRadians)) * cameraDist;
-        cameraZ = -CFloat(sin(angleRadians)) * cameraDist;
-
-        gluLookAt
-        (
-            cameraX - e.cfg.tileSize / 2,
-            camera.cameraHeight * (zoomEx - 0.5f),
-            cameraZ - e.cfg.tileSize / 2,
-            -e.cfg.tileSize / 2,
-            -1,
-            -e.cfg.tileSize / 2,
-            0,
-            1,
-            0
-        );
+        camera.SetupCamera();
 
         glEnable(GL_DEPTH_TEST);
         glDepthMask(GL_TRUE);
@@ -64,7 +35,6 @@ namespace Forradia
         auto mapAreaSize = e.world->mapAreaSize;
         auto& movementData = e.GetPlayer().GetModule<CoreMovementModule>();
         auto& tiles = e.GetCurrMapArea().tiles;
-        auto elevPlayer = CalcPlayerElev();
         auto offset = CalcOffset();
 
         for (auto y = 0; y < 2 * camera.GetRenderDistance() + 1; y++)
@@ -106,39 +76,14 @@ namespace Forradia
                         groundTypeId = animWaterId[waterAnimIndex0];
                 }
 
-                auto elev0 = 0.0f;
-                auto elev1 = 0.0f;
-                auto elev2 = 0.0f;
-                auto elev3 = 0.0f;
-
                 auto waterWaveHeight0 = waterAnimIndex0 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
                 auto waterWaveHeight1 = waterAnimIndex1 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
                 auto waterWaveHeight2 = waterAnimIndex2 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
                 auto waterWaveHeight3 = waterAnimIndex3 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
 
-                if (tileX >= 0 && tileY >= 0 && tileX < mapAreaSize && tileY < mapAreaSize)
-                    elev0 = tiles[tileXI][tileYI].elevation / elevAmount - elevPlayer;
+                auto elev = GetElevValues(tileXI, tileYI);
 
-                if (tileX >= 0 && tileY - 1 >= 0 && tileX < mapAreaSize && tileY - 1 < mapAreaSize)
-                    elev1 = tiles[tileXI][tileYI - 1].elevation / elevAmount - elevPlayer;
-                else
-                    elev1 = elev0;
-
-                if (tileX + 1 >= 0 && tileY - 1 >= 0 && tileX + 1 < mapAreaSize && tileY - 1 < mapAreaSize)
-                    elev2 = tiles[tileXI + 1][tileYI - 1].elevation / elevAmount - elevPlayer;
-                else if (tileX + 1 < mapAreaSize)
-                    elev2 = tiles[tileXI + 1][tileYI].elevation / elevAmount - elevPlayer;
-                else if (tileY - 1 >= 0)
-                    elev2 = tiles[tileXI][tileYI - 1].elevation / elevAmount - elevPlayer;
-                else
-                    elev2 = elev0;
-
-                if (tileX + 1 >= 0 && tileY >= 0 && tileX + 1 < mapAreaSize && tileY < mapAreaSize)
-                    elev3 = tiles[tileXI + 1][tileYI].elevation / elevAmount - elevPlayer;
-                else
-                    elev3 = elev0;
-
-                auto slope = elev3 - elev0 + elev0 - elev1;
+                auto slope = elev[3] - elev[0] + elev[0] - elev[1];
 
                 auto r = 0.9f;
                 auto g = 0.9f;
@@ -173,16 +118,16 @@ namespace Forradia
                 glBindTexture(GL_TEXTURE_2D, e.imageLoader.images.at(groundTypeId));
 
                 auto tileX0 = offset.x + x * e.cfg.tileSize;
-                auto tileY0 = elev0;
+                auto tileY0 = elev[0];
                 auto tileZ0 = offset.y + y * e.cfg.tileSize;
                 auto tileX1 = offset.x + x * e.cfg.tileSize;
-                auto tileY1 = elev1;
+                auto tileY1 = elev[1];
                 auto tileZ1 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
                 auto tileX2 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
-                auto tileY2 = elev2;
+                auto tileY2 = elev[2];
                 auto tileZ2 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
                 auto tileX3 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
-                auto tileY3 = elev3;
+                auto tileY3 = elev[3];
                 auto tileZ3 = offset.y + y * e.cfg.tileSize;
 
                 tileY0 = planetShaper.GetNewY(tileY0, CFloat(tileXI), CFloat(tileYI));
@@ -350,88 +295,29 @@ namespace Forradia
                 auto tileXI = CInt(tileX);
                 auto tileYI = CInt(tileY);
 
-                auto elev0 = 0.0f;
-                auto elev1 = 0.0f;
-                auto elev2 = 0.0f;
-                auto elev3 = 0.0f;
+                auto elev = GetElevValues(tileXI, tileYI);
 
-                if (tileX >= 0 && tileY >= 0 && tileX < mapAreaSize && tileY < mapAreaSize)
-                    elev0 = e.GetCurrMapArea().tiles[tileXI][tileYI].elevation / elevAmount - elevPlayer;
-
-                if (tileX >= 0 && tileY - 1 >= 0 && tileX < mapAreaSize && tileY - 1 < mapAreaSize)
-                    elev1 = e.GetCurrMapArea().tiles[tileXI][tileYI - 1].elevation / elevAmount - elevPlayer;
-                else
-                    elev1 = elev0;
-
-                if (tileX + 1 >= 0 && tileY - 1 >= 0 && tileX + 1 < mapAreaSize && tileY - 1 < mapAreaSize)
-                    elev2 = e.GetCurrMapArea().tiles[tileXI + 1][tileYI - 1].elevation / elevAmount - elevPlayer;
-                else if (tileX + 1 < mapAreaSize)
-                    elev2 = e.GetCurrMapArea().tiles[tileXI + 1][tileYI].elevation / elevAmount - elevPlayer;
-                else if (tileY - 1 >= 0)
-                    elev2 = e.GetCurrMapArea().tiles[tileXI][tileYI - 1].elevation / elevAmount - elevPlayer;
-                else
-                    elev2 = elev0;
-
-                if (tileX + 1 >= 0 && tileY >= 0 && tileX + 1 < mapAreaSize && tileY < mapAreaSize)
-                    elev3 = e.GetCurrMapArea().tiles[tileXI + 1][tileYI].elevation / elevAmount - elevPlayer;
-                else
-                    elev3 = elev0;
-
-                auto slope = elev3 - elev0 + elev0 - elev1;
-
-                auto r = 0.9f;
-                auto g = 0.9f;
-                auto b = 0.5f;
-
-                if (slope < 0)
-                {
-                    r = 0.6f;
-                    g = 0.6f;
-                    b = 0.5f;
-                }
-                else if (slope > 0)
-                {
-                    r = 1.0f;
-                    g = 1.0f;
-                    b = 0.5f;
-                }
-                else if (slope == 0)
-                {
-                    r = 0.7f;
-                    g = 0.7f;
-                    b = 0.5f;
-                }
+                auto slope = elev[3] - elev[0] + elev[0] - elev[1];
 
                 auto tileX0 = offset.x + x * e.cfg.tileSize;
-                auto tileY0 = elev0;
+                auto tileY0 = elev[0];
                 auto tileZ0 = offset.y + y * e.cfg.tileSize;
                 auto tileX1 = offset.x + x * e.cfg.tileSize;
-                auto tileY1 = elev1;
+                auto tileY1 = elev[1];
                 auto tileZ1 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
                 auto tileX2 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
-                auto tileY2 = elev2;
+                auto tileY2 = elev[2];
                 auto tileZ2 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
                 auto tileX3 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
-                auto tileY3 = elev3;
+                auto tileY3 = elev[3];
                 auto tileZ3 = offset.y + y * e.cfg.tileSize;
 
-                tileY0 = planetShaper.GetNewY(tileY0,
-                    CFloat(tileXI),
-                    CFloat(tileYI));
-                tileY1 = planetShaper.GetNewY(tileY1,
-                    CFloat(tileXI),
-                    CFloat(tileYI) - 1);
-                tileY2 = planetShaper.GetNewY(tileY2,
-                    CFloat(tileXI) + 1,
-                    CFloat(tileYI) - 1);
-                tileY3 = planetShaper.GetNewY(tileY3,
-                    CFloat(tileXI) + 1,
-                    CFloat(tileYI));
-
-
+                tileY0 = planetShaper.GetNewY(tileY0, CFloat(tileXI), CFloat(tileYI));
+                tileY1 = planetShaper.GetNewY(tileY1, CFloat(tileXI), CFloat(tileYI) - 1);
+                tileY2 = planetShaper.GetNewY(tileY2, CFloat(tileXI) + 1, CFloat(tileYI) - 1);
+                tileY3 = planetShaper.GetNewY(tileY3, CFloat(tileXI) + 1, CFloat(tileYI));
 
                 glDisable(GL_TEXTURE_2D);
-
 
                 if (e.GetCurrMapArea().tiles[tileXI][tileYI].roof != nullptr)
                 {
@@ -501,6 +387,43 @@ namespace Forradia
         auto offsetY = -CFloat(2.0f * camera.GetRenderDistance() - 1.0f) / 2.0f * e.cfg.tileSize - subStepY * e.cfg.tileSize;
 
         return {offsetX, offsetY};
+    }
+
+    std::array<float, 4> GameWorldRenderer::GetElevValues(int tilexI, int tileyI)
+    {
+        auto mapAreaSize = e.world->mapAreaSize;
+        auto& tiles = e.GetCurrMapArea().tiles;
+        auto elevPlayer = CalcPlayerElev();
+
+        auto elev0 = 0.0f;
+        auto elev1 = 0.0f;
+        auto elev2 = 0.0f;
+        auto elev3 = 0.0f;
+
+        if (tilexI >= 0 && tileyI >= 0 && tilexI < mapAreaSize && tileyI < mapAreaSize)
+            elev0 = tiles[tilexI][tileyI].elevation / elevAmount - elevPlayer;
+
+        if (tilexI >= 0 && tileyI - 1 >= 0 && tilexI < mapAreaSize && tileyI - 1 < mapAreaSize)
+            elev1 = tiles[tilexI][tileyI - 1].elevation / elevAmount - elevPlayer;
+        else
+            elev1 = elev0;
+
+        if (tilexI + 1 >= 0 && tileyI - 1 >= 0 && tilexI + 1 < mapAreaSize && tileyI - 1 < mapAreaSize)
+            elev2 = tiles[tilexI + 1][tileyI - 1].elevation / elevAmount - elevPlayer;
+        else if (tilexI + 1 < mapAreaSize)
+            elev2 = tiles[tilexI + 1][tileyI].elevation / elevAmount - elevPlayer;
+        else if (tileyI - 1 >= 0)
+            elev2 = tiles[tilexI][tileyI - 1].elevation / elevAmount - elevPlayer;
+        else
+            elev2 = elev0;
+
+        if (tilexI + 1 >= 0 && tileyI >= 0 && tilexI + 1 < mapAreaSize && tileyI < mapAreaSize)
+            elev3 = tiles[tilexI + 1][tileyI].elevation / elevAmount - elevPlayer;
+        else
+            elev3 = elev0;
+
+        return { elev0, elev1, elev2, elev3 };
+
     }
 
 }  // namespace Forradia

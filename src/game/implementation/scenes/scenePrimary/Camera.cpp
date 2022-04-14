@@ -10,7 +10,38 @@ namespace Forradia
 {
     void Camera::Update()
     {
+        SetupCamera();
 
+        GLint viewport[4];
+        GLdouble modelview[16];
+        GLdouble projection[16];
+        GLfloat winX;
+        GLfloat winY;
+        GLfloat winZ;
+        GLdouble posx;
+        GLdouble posy;
+        GLdouble posz;
+
+        glGetIntegerv(GL_VIEWPORT, viewport);
+        glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+        glGetDoublev(GL_PROJECTION_MATRIX, projection);
+
+        auto mousePos = utils.GetMousePosI();
+
+        winX = CFloat(mousePos.x);
+        winY = CFloat(mousePos.y);
+        winY = CFloat(viewport[3]) - winY;
+
+        glReadPixels((GLint)winX, (GLint)winY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
+        gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posx, &posy, &posz);
+
+        rayCastingX = CFloat(posx);
+        rayCastingY = CFloat(posy);
+        rayCastingZ = CFloat(posz);
+    }
+
+    void Camera::SetupCamera() const
+    {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         gluPerspective(e.cfg.fov, 1.333, 0.5, 100);
@@ -41,33 +72,6 @@ namespace Forradia
             1,
             0
         );
-
-        GLint viewport[4];
-        GLdouble modelview[16];
-        GLdouble projection[16];
-        GLfloat winX;
-        GLfloat winY;
-        GLfloat winZ;
-        GLdouble posx;
-        GLdouble posy;
-        GLdouble posz;
-
-        glGetIntegerv(GL_VIEWPORT, viewport);
-        glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
-        glGetDoublev(GL_PROJECTION_MATRIX, projection);
-
-        auto mousePos = utils.GetMousePosI();
-
-        winX = CFloat(mousePos.x);
-        winY = CFloat(mousePos.y);
-        winY = CFloat(viewport[3]) - winY;
-
-        glReadPixels((GLint)winX, (GLint)winY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
-        gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posx, &posy, &posz);
-
-        rayCastingX = CFloat(posx);
-        rayCastingY = CFloat(posy);
-        rayCastingZ = CFloat(posz);
     }
 
     void Camera::UpdateRotation(int rotationDirection)

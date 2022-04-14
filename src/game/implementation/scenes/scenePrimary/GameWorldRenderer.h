@@ -6,6 +6,7 @@
 #include "Background.h"
 #include "Camera.h"
 #include "PlanetShaper.h"
+#include <array>
 
 namespace Forradia
 {
@@ -34,6 +35,7 @@ namespace Forradia
         PlanetShaper planetShaper;
         const int groundTypeWaterId = GetId("GroundTypeWater");
         float elevAmount = 5.0f;
+        std::array<float, 4> GetElevValues(int tilexI, int tileyI);
 
         const int animWaterId[4] =
         {
