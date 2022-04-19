@@ -242,6 +242,7 @@ namespace Forradia
             {
                 mapArea->tiles[x][y].groundType = GetId("GroundTypeGrass");
                 mapArea->tiles[x][y].objects.clear();
+                mapArea->tiles[x][y].elevation = 0;
             }
         }
 
@@ -253,16 +254,40 @@ namespace Forradia
             }
         }
 
-        for (auto y = 0; y < mapArea->size; y++)
+        auto xoffset = 0;
+
+        for (auto y = 0; y < mapArea->size/2; y++)
         {
-            mapArea->tiles[xcenter][y].objects.clear();
-            mapArea->tiles[xcenter][y].groundType = GetId("GroundTypeTrail");
+            mapArea->tiles[xcenter + xoffset][ycenter + y].objects.clear();
+            mapArea->tiles[xcenter + xoffset][ycenter + y].groundType = GetId("GroundTypeTrail");
+            mapArea->tiles[xcenter + xoffset][ycenter - y].objects.clear();
+            mapArea->tiles[xcenter + xoffset][ycenter - y].groundType = GetId("GroundTypeTrail");
+
+            if (y % 3 == 0 && y >= villageSize)
+                xoffset += rnd.Next() % 2 - rnd.Next() % 2;
+
+            mapArea->tiles[xcenter + xoffset][ycenter + y].objects.clear();
+            mapArea->tiles[xcenter + xoffset][ycenter + y].groundType = GetId("GroundTypeTrail");
+            mapArea->tiles[xcenter + xoffset][ycenter - y].objects.clear();
+            mapArea->tiles[xcenter + xoffset][ycenter - y].groundType = GetId("GroundTypeTrail");
         }
 
-        for (auto x = 0; x < mapArea->size; x++)
+        auto yoffset = 0;
+
+        for (auto x = 0; x < mapArea->size/2; x++)
         {
-            mapArea->tiles[x][ycenter].objects.clear();
-            mapArea->tiles[x][ycenter].groundType = GetId("GroundTypeTrail");
+            mapArea->tiles[xcenter + x][ycenter + yoffset].objects.clear();
+            mapArea->tiles[xcenter + x][ycenter + yoffset].groundType = GetId("GroundTypeTrail");
+            mapArea->tiles[xcenter - x][ycenter + yoffset].objects.clear();
+            mapArea->tiles[xcenter - x][ycenter + yoffset].groundType = GetId("GroundTypeTrail");
+
+            if (x % 3 == 0 && x >= villageSize)
+                yoffset += rnd.Next() % 2 - rnd.Next() % 2;
+
+            mapArea->tiles[xcenter + x][ycenter + yoffset].objects.clear();
+            mapArea->tiles[xcenter + x][ycenter + yoffset].groundType = GetId("GroundTypeTrail");
+            mapArea->tiles[xcenter - x][ycenter + yoffset].objects.clear();
+            mapArea->tiles[xcenter - x][ycenter + yoffset].groundType = GetId("GroundTypeTrail");
         }
 
         for (auto y = ystart; y <= yend; y++)
