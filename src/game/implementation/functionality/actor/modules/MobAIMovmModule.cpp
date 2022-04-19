@@ -16,11 +16,9 @@ namespace Forradia
 
     void MobAIMovmModule::Update()
     {
-        auto& actor = GetParentActor();
-        auto& mob = actor;
+        auto& mob = GetParentActor();
         auto& coreMovm = mob.GetModule<CoreMovmModule>();
 
-        if (actor.actorId == e.GetPlayer().actorId) return;
         if (mob.actorId == e.GetPlayer().actorId) return;
 
         coreMovm.isWalking = true;
@@ -65,7 +63,7 @@ namespace Forradia
             auto oldXI = CInt(coreMovm.position.x);
             auto oldYI = CInt(coreMovm.position.y);
 
-            if (newXI >= 0 && newYI >= 0 && newXI < e.world->mapAreaSize && newYI < e.world->mapAreaSize)
+            if (e.GetCurrMapArea().Contains({newXI, newYI}))
             {
                 if (e.GetCurrMapArea().tiles[newXI][newYI].groundType != GetId("GroundTypeWater"))
                 {
@@ -102,6 +100,8 @@ namespace Forradia
                 coreMovm.dest = { -1, -1 };
             }
         }
+
+        //std::cout << "Num mobs: " << e.GetCurrMapArea().mobActorsMirror.size() << std::endl;
     }
 
 }  // namespace Forradia

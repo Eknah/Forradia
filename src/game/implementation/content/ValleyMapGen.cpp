@@ -87,13 +87,13 @@ namespace Forradia
                         auto dy = y - centerTileY;
 
                         if (dx * dx + dy * dy >= r * r) continue;
-                        if (x < 1 || y < 0 || x >= mapArea->size || y >= mapArea->size - 1) continue;
+                        if (x < 0 || y < 0 || x >= mapArea->size - 1 || y >= mapArea->size - 1) continue;
 
                         mapArea->tiles[x][y].elevation += 5;
                         mapArea->tiles[x][y].groundType = GetId("GroundTypeRock");
-                        mapArea->tiles[x-1][y].groundType = GetId("GroundTypeRock");
+                        mapArea->tiles[x+1][y].groundType = GetId("GroundTypeRock");
                         mapArea->tiles[x][y+1].groundType = GetId("GroundTypeRock");
-                        mapArea->tiles[x-1][y+1].groundType = GetId("GroundTypeRock");
+                        mapArea->tiles[x+1][y+1].groundType = GetId("GroundTypeRock");
                     }
                 }
             }
@@ -169,8 +169,13 @@ namespace Forradia
                 auto xi = CInt(x);
                 auto yi = CInt(y);
 
-                if (xi >= 0 && yi >= 0 && xi < mapArea->size && yi < mapArea->size)
+                if (xi >= 1 && yi >= 0 && xi < mapArea->size && yi < mapArea->size - 1)
+                {
                     mapArea->tiles[xi][yi].groundType = GetId("GroundTypeWater");
+                    mapArea->tiles[xi - 1][yi].elevation = mapArea->tiles[xi][yi].elevation;
+                    mapArea->tiles[xi][yi + 1].elevation = mapArea->tiles[xi][yi].elevation;
+                    mapArea->tiles[xi - 1][yi + 1].elevation = mapArea->tiles[xi][yi].elevation;
+                }
             }
         }
     }

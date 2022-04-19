@@ -73,8 +73,10 @@ namespace Forradia
         if (e.mouseHandler.rightButtonDown)
             e.customCursor.cursType = CursorTypes::Hidden;
 
-        for (auto& [key, mobActor] : e.GetCurrMapArea().mobActorsMirror)
-            mobActor.get()->Update();
+        for (auto i = 0; i < e.GetCurrMapArea().mobActorsMirror.size(); i++)
+        {
+            e.GetCurrMapArea().mobActorsMirror.at(i).get()->Update();
+        }
 
         player.Update();
         gui.Update();

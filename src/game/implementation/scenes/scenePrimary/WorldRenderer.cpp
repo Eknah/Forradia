@@ -200,7 +200,7 @@ namespace Forradia
                             (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
                             tileZ0 - e.cfg.tileSize / 2,
                             0,
-                            1.5f,
+                            1.0f,
                             1.0f
                         );
                     }
@@ -247,7 +247,7 @@ namespace Forradia
                         modelYPos,
                         tileZ0 - e.cfg.tileSize + subypos,
                         0,
-                        0.5f,
+                        0.3f,
                         1.0f
                     );
 
