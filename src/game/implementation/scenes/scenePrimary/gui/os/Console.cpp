@@ -21,21 +21,21 @@ namespace Forradia
     void Console::Render()
     {
 
-        e.FillRect(palette.mediumBlueSemiTrans, bounds);
-        e.DrawRect(palette.wheat, bounds);
+        e.FillRect(pal.gray, bounds);
+        e.DrawRect(pal.wheat, bounds);
 
         auto inputBounds = bounds.Copy().Translate(0.0f, bounds.h - inputLineHeight).SetHeight(inputLineHeight);
 
         if (inputActive)
-            e.FillRect(palette.mediumBlue, inputBounds);
+            e.FillRect(pal.lightGray, inputBounds);
 
-        e.DrawLine(palette.wheat, inputBounds.GetTopEdge());
+        e.DrawLine(pal.wheat, inputBounds.GetTopEdge());
 
         if (inputActive)
         {
             auto textPrinted = e.text;
             textPrinted.insert(e.cursor, "|");
-            e.DrawString(textPrinted, palette.white, inputBounds.GetTopLeftCorner().Translate(0.005f, 0.0f));
+            e.DrawString(textPrinted, pal.white, inputBounds.GetTopLeftCorner().Translate(0.005f, 0.0f));
         }
 
         auto textx = bounds.x + margin;
@@ -57,7 +57,7 @@ namespace Forradia
 
         for (auto i = startline; i <= endline; i++)
         {
-            e.DrawString(textToPrint.at(i), palette.wheat, textx, y, false, 0.7f);
+            e.DrawString(textToPrint.at(i), pal.wheat, textx, y, false, 0.7f);
             y += lineHeight;
         }
 
@@ -110,7 +110,7 @@ namespace Forradia
         return e.text.substr(0, text.length()) == text;
     }
 
-    void Console::DoKeyDown(SDL_Keycode key)
+    void Console::KeyDown(SDL_Keycode key)
     {
         if (key == SDLK_q && e.keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) > 0 && fileSystem.runningProgram != nullptr)
         {
@@ -125,7 +125,7 @@ namespace Forradia
         return result;
     }
 
-    bool Console::DoMouseDown(Uint8 mouseButton)
+    bool Console::MouseDown(Uint8 mouseButton)
     {
         if (mouseButton != SDL_BUTTON_LEFT) return false;
 

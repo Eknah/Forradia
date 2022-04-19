@@ -11,17 +11,17 @@ namespace Forradia
     {
         if (!visible) return;
 
-        e.FillRect(palette.mediumBlue, bounds.x, bounds.y, bounds.w, bounds.h);
-        e.DrawRect(palette.black, bounds.x, bounds.y, bounds.w, bounds.h);
-        e.DrawString(title, palette.black, bounds.x + margin, bounds.y + margin);
-        e.DrawLine(palette.black, bounds.x, bounds.y + topBarHeight, bounds.x + bounds.w, bounds.y + topBarHeight);
+        e.FillRect(pal.mediumBlue, bounds.x, bounds.y, bounds.w, bounds.h);
+        e.DrawRect(pal.black, bounds.x, bounds.y, bounds.w, bounds.h);
+        e.DrawString(title, pal.black, bounds.x + margin, bounds.y + margin);
+        e.DrawLine(pal.black, bounds.x, bounds.y + topBarHeight, bounds.x + bounds.w, bounds.y + topBarHeight);
 
-        RenderDerived();
+        RenderEx();
     }
 
     void GuiWindowBase::Update()
     {
-        if (!isBeingMoved) return;
+        if (!beingMoved) return;
 
         auto mousePosF = utils.GetMousePosF();
         auto deltaMouseX = mousePosF.x - startMoveMousePos.x;
@@ -31,17 +31,17 @@ namespace Forradia
         bounds.y = startMovePos.y + deltaMouseY;
     }
 
-    RectF GuiWindowBase::GetInteriorBounds()
+    RectF GuiWindowBase::GetInnerBounds()
     {
         auto x = bounds.x + margin;
         auto y = bounds.y + topBarHeight + margin;
-        auto width = bounds.w - 2 * margin;
-        auto height = bounds.h - topBarHeight - 2 * margin;
+        auto w = bounds.w - 2 * margin;
+        auto h = bounds.h - topBarHeight - 2 * margin;
 
-        return { x, y, width, height };
+        return { x, y, w, h };
     }
 
-    bool GuiWindowBase::DoMouseDown(Uint8 button)
+    bool GuiWindowBase::MouseDown(Uint8 button)
     {
         if (!visible) return false;
 
@@ -50,12 +50,12 @@ namespace Forradia
 
         if (titleBarBounds.Contains(mousePosF))
         {
-            isBeingMoved = true;
+            beingMoved = true;
             startMovePos = { bounds.x, bounds.y };
             startMoveMousePos = { mousePosF.x, mousePosF.y };
         }
 
-        DoMouseDownDerived(button);
+        MouseDownEx(button);
 
         if (bounds.Contains(mousePosF)) return true;
 
@@ -67,9 +67,9 @@ namespace Forradia
         return { bounds.x, bounds.y, bounds.w, topBarHeight };
     }
 
-    void GuiWindowBase::DoMouseUp()
+    void GuiWindowBase::MouseUp()
     {
-        isBeingMoved = false;
+        beingMoved = false;
     }
 
 }  // namespace Forradia

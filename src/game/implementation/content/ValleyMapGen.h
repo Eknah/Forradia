@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "../engine/Random.h"
 #include "../engine/MapArea.h"
 #include "../engine/IMapGenerator.h"
@@ -19,6 +20,7 @@ namespace Forradia
         void GenerateMapArea(Point3 worldPos) const override;
 
     private:
+
         void ClearToGrass(MapArea* mapArea) const;
         void GeneratePlayerStartingPosition(MapArea* mapArea) const;
         void GenerateElevation(MapArea* mapArea) const;

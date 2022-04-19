@@ -30,7 +30,7 @@ namespace Forradia
 
                 case SDL_KEYDOWN:
                 {
-                    e.keyboardHandler.DoKeyDown(event.key.keysym.sym);
+                    e.keyboardHandler.KeyDown(event.key.keysym.sym);
 
                     e.fullscreenController.UpdateFullscreenToggling();
 
@@ -76,22 +76,22 @@ namespace Forradia
                         }
                     }
 
-                    e.sceneManager.GetCurrentScene()->DoKeyDown(event.key.keysym.sym);
+                    e.sceneManager.GetCurrentScene()->KeyDown(event.key.keysym.sym);
 
                     break;
                 }
 
                 case SDL_KEYUP:
                 {
-                    e.keyboardHandler.DoKeyUp(event.key.keysym.sym);
-                    e.sceneManager.GetCurrentScene()->DoKeyUp(event.key.keysym.sym);
+                    e.keyboardHandler.KeyUp(event.key.keysym.sym);
+                    e.sceneManager.GetCurrentScene()->KeyUp(event.key.keysym.sym);
 
                     break;
                 }
 
                 case SDL_MOUSEBUTTONDOWN:
                 {
-                    e.sceneManager.GetCurrentScene()->DoMouseDown(
+                    e.sceneManager.GetCurrentScene()->MouseDown(
                         event.button.button);
 
                     if (event.button.button == SDL_BUTTON_LEFT)
@@ -123,7 +123,7 @@ namespace Forradia
 
                 case SDL_MOUSEBUTTONUP:
                 {
-                    e.sceneManager.GetCurrentScene()->DoMouseUp(event.button.button);
+                    e.sceneManager.GetCurrentScene()->MouseUp(event.button.button);
 
                     if (event.button.button == SDL_BUTTON_LEFT)
                         e.mouseHandler.leftButtonDown = false;

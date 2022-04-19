@@ -16,7 +16,7 @@ namespace Forradia
 
     public:
 
-        explicit Object(String objectTypeName, bool randomScaling = true, bool randomRotation = true, float _rotation = 0.0f);
+        explicit Object(String objTypeName, bool randScaling = false, bool randRotation = false, float _rotation = 0.0f);
 
         void UseOn(const SPtr<Object>& other);
 

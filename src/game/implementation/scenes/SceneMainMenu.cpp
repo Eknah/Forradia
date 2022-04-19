@@ -32,17 +32,17 @@ namespace Forradia
 
         for (auto& button : sceneButtons)
         {
-            e.FillRect(palette.wheat, button.bounds.x - button.bounds.w / 2, button.bounds.y - button.bounds.h / 2, button.bounds.w, button.bounds.h);
-            e.DrawString(button.text, palette.black, button.bounds.x, button.bounds.y, true);
+            e.FillRect(pal.wheat, button.bounds.x - button.bounds.w / 2, button.bounds.y - button.bounds.h / 2, button.bounds.w, button.bounds.h);
+            e.DrawString(button.text, pal.black, button.bounds.x, button.bounds.y, true);
         }
     }
 
-    void SceneMainMenu::DoMouseDown(Uint8 mouseButton)
+    void SceneMainMenu::MouseDown(Uint8 mouseButton)
     {
         e.sceneManager.SwitchToScene("ScenePrimary");
     }
     
-    void SceneMainMenu::DoKeyDown(SDL_Keycode key)
+    void SceneMainMenu::KeyDown(SDL_Keycode key)
     {
         e.sceneManager.SwitchToScene("ScenePrimary");
     }

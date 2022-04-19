@@ -186,8 +186,8 @@ namespace Forradia
                 {
                     auto dropShadow = true;
 
-                    if (e.objectsContent.objectDescribers.count(Object->objectType))
-                        if (e.objectsContent.objectDescribers.at(Object->objectType).flags & FlagNoShadow)
+                    if (e.objectsContent.objDescribers.count(Object->objectType))
+                        if (e.objectsContent.objDescribers.at(Object->objectType).flags & FlagNoShadow)
                             dropShadow = false;
 
                     if (dropShadow)
@@ -210,8 +210,8 @@ namespace Forradia
                     auto tileObject = Object->objectType;
                     auto opacity = 1.0f;
 
-                    if (e.objectsContent.objectDescribers.count(tileObject))
-                        opacity = e.objectsContent.objectDescribers.at(tileObject).opacity;
+                    if (e.objectsContent.objDescribers.count(tileObject))
+                        opacity = e.objectsContent.objDescribers.at(tileObject).opacity;
 
                     if (tileObject != 0)
                     {
@@ -222,7 +222,8 @@ namespace Forradia
                             (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
                             tileZ0 - e.cfg.tileSize / 2,
                             Object->rotation,
-                            Object->scaling, opacity
+                            Object->scaling,
+                            opacity
                         );
                     }
                 }
@@ -246,8 +247,9 @@ namespace Forradia
                         modelYPos,
                         tileZ0 - e.cfg.tileSize + subypos,
                         0,
-                        1.0f,
-                        1.0f);
+                        0.5f,
+                        1.0f
+                    );
 
                     e.DrawModel
                     (
@@ -255,7 +257,8 @@ namespace Forradia
                         tileX0 + subxpos,
                         modelYPos + e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().positionZ,
                         tileZ0 - e.cfg.tileSize + subypos,
-                        *e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().facingAngle
+                        *e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().facingAngle,
+                        0.5f
                     );
                 }
 
@@ -323,8 +326,8 @@ namespace Forradia
             auto roofObject = roof->objectType;
             auto opacity = 1.0f;
 
-            if (e.objectsContent.objectDescribers.count(roofObject))
-                opacity = e.objectsContent.objectDescribers.at(roofObject).opacity;
+            if (e.objectsContent.objDescribers.count(roofObject))
+                opacity = e.objectsContent.objDescribers.at(roofObject).opacity;
 
             e.DrawModel
             (

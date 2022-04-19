@@ -19,12 +19,12 @@ namespace Forradia
         e.DrawString(text, { 255, 255, 255, 255 }, 0.5f, 0.5f, true);
     }
 
-    void SceneGameStart::DoMouseDown(Uint8 mouseButton)
+    void SceneGameStart::MouseDown(Uint8 mouseButton)
     {
         e.sceneManager.SwitchToScene(switchToSceneName);
     }
 
-    void SceneGameStart::DoKeyDown(SDL_Keycode key)
+    void SceneGameStart::KeyDown(SDL_Keycode key)
     {
         e.sceneManager.SwitchToScene(switchToSceneName);
     }

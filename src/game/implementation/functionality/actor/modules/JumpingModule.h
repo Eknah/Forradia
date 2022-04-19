@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "../engine/IModule.h"
 #include "../engine/Timer.h"
 #include "../engine/Aliases.h"

@@ -19,7 +19,7 @@ namespace Forradia
 
     protected:
         IEngine& e;
-        Palette palette;
+        Palette pal;
 
         int framesCount = 0;
         int fps = 0;

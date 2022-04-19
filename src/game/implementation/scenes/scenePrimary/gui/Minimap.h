@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "../engine/Engine.h"
 #include "../engine/Utilities.h"
 
@@ -22,7 +23,7 @@ namespace Forradia
         const Engine& e;
 
         const int minimapSize = 250;
-        Palette palette;
+        Palette pal;
         Utilities utils;
 
     };

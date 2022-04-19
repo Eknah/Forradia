@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "../engine/Aliases.h"
 #include "../engine/Engine.h"
 #include "../engine/Utilities.h"
@@ -23,8 +24,8 @@ namespace Forradia
         void Print(String message);
         void ToggleInput();
         void Clear();
-        void DoKeyDown(SDL_Keycode key);
-        bool DoMouseDown(Uint8 mouseButton);
+        void KeyDown(SDL_Keycode key);
+        bool MouseDown(Uint8 mouseButton);
 
     private:
         
@@ -44,7 +45,7 @@ namespace Forradia
 
         RectF bounds =
         {
-            0.5f - width / 2,
+            0.0f,
             1.0f - 0.03f - height,
             width,
             height
@@ -53,7 +54,7 @@ namespace Forradia
         List<String> textBoxText = {};
         Utilities utils;
         FileSystem fileSystem;
-        Palette palette;
+        Palette pal;
 
         int resizeIconSize = 30;
 

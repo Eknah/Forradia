@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "SDL2/SDL.h"
 #include "TextRect.h"
 #include <vector>
@@ -21,10 +22,10 @@ namespace Forradia
         virtual void Enter() = 0;
         virtual void Update() = 0;
         virtual void Render() = 0;
-        virtual void DoMouseDown(Uint8 button) = 0;
-        virtual void DoMouseUp(Uint8 button) = 0;
-        virtual void DoKeyDown(SDL_Keycode key) = 0;
-        virtual void DoKeyUp(SDL_Keycode key) = 0;
+        virtual void MouseDown(Uint8 button) = 0;
+        virtual void MouseUp(Uint8 button) = 0;
+        virtual void KeyDown(SDL_Keycode key) = 0;
+        virtual void KeyUp(SDL_Keycode key) = 0;
 
     protected:
 

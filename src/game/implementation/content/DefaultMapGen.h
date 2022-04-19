@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "../engine/Random.h"
 #include "../engine/MapArea.h"
 #include "../engine/IMapGenerator.h"
@@ -11,7 +12,9 @@ namespace Forradia
 
     class DefaultMapGen : public IMapGenerator
     {
+
     public:
+
         using IMapGenerator::IMapGenerator;
 
         void GenerateMapArea(Point3 worldPos) const override;

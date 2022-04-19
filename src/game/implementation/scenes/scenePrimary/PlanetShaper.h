@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "../engine/Engine.h"
 
 namespace Forradia
@@ -19,7 +20,8 @@ namespace Forradia
     private:
 
         const Engine& e;
-        float radius = 2.0f;
+        //float radius = 2.0f;
+        float radius = 6.0f;
 
     };
 

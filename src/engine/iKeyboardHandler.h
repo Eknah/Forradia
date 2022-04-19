@@ -13,8 +13,8 @@ namespace Forradia
     {
     public:
         virtual void ResetForNewFrame() const = 0;
-        virtual void DoKeyDown(SDL_Keycode key) const = 0;
-        virtual void DoKeyUp(SDL_Keycode key) const = 0;
+        virtual void KeyDown(SDL_Keycode key) const = 0;
+        virtual void KeyUp(SDL_Keycode key) const = 0;
 
         const UPtr<std::set<SDL_Keycode>> keysBeingPressed
             = MakeUPtr<std::set<SDL_Keycode>>();

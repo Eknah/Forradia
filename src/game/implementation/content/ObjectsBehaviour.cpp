@@ -11,12 +11,12 @@ namespace Forradia
 
     void ObjectsBehaviour::Add(String objectName, ObjectDescriber describer)
     {
-        objectDescribers.insert({ GetId(objectName), describer });
+        objDescribers.insert({ GetId(objectName), describer });
     }
 
     void ObjectsBehaviour::Add(String objectName, char flags)
     {
-        objectDescribers.insert({ GetId(objectName), ObjectDescriber(flags) });
+        objDescribers.insert({ GetId(objectName), ObjectDescriber(flags) });
     }
 
     void ObjectsBehaviour::AddMany(List<Tuple<String, char>> describers)
@@ -26,27 +26,27 @@ namespace Forradia
             auto objectName = std::get<0>(desc);
             auto flags = std::get<1>(desc);
 
-            objectDescribers.insert({ GetId(objectName), ObjectDescriber(flags) });
+            objDescribers.insert({ GetId(objectName), ObjectDescriber(flags) });
         }
     }
 
     void ObjectsBehaviour::SetOpacity(String objectName, float opacity)
     {
-        objectDescribers.at(GetId(objectName)).opacity = opacity;
+        objDescribers.at(GetId(objectName)).opacity = opacity;
     }
 
-    bool ObjectsBehaviour::IsMovable(int objectType) const
+    bool ObjectsBehaviour::Movable(int objectType) const
     {
-        if (objectDescribers.count(objectType))
-            return objectDescribers.at(objectType).flags & FlagMovable;
+        if (objDescribers.count(objectType))
+            return objDescribers.at(objectType).flags & FlagMovable;
 
         return false;
     }
 
     bool ObjectsBehaviour::BlocksMovement(int objectType) const
     {
-        if (objectDescribers.count(objectType))
-            return objectDescribers.at(objectType).flags & FlagObstacle;
+        if (objDescribers.count(objectType))
+            return objDescribers.at(objectType).flags & FlagObstacle;
 
         return false;
     }

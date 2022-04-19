@@ -10,8 +10,7 @@
 namespace Forradia
 {
 
-    void
-        ValleyMapGen::GenerateMapArea(Point3 worldPos) const
+    void ValleyMapGen::GenerateMapArea(Point3 worldPos) const
     {
         worldMap->areas[worldPos.x][worldPos.y][worldPos.z] =  MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldPos);
 
@@ -20,13 +19,13 @@ namespace Forradia
         ClearToGrass(mapArea);
         GeneratePlayerStartingPosition(mapArea);
         GenerateElevation(mapArea);
-        GenerateRock(mapArea);
+        //GenerateRock(mapArea);
         GenerateRivers(mapArea);
         GenerateTrees(mapArea);
         GenerateBushes(mapArea);
         GenerateSmallStones(mapArea);
         GeneratePinkFlowers(mapArea);
-        GenerateTallGrass(mapArea);
+        //GenerateTallGrass(mapArea);
         GenerateVillage(mapArea);
         GenerateMobs(mapArea);
         GenerateQuestCaves(e, mapArea, worldMap);
@@ -34,10 +33,8 @@ namespace Forradia
 
     void ValleyMapGen::ClearToGrass(MapArea* mapArea) const
     {
-        for (auto tileY = 0; tileY < mapArea->size; tileY++)
-            for (auto tileX = 0; tileX < mapArea->size; tileX++)
-
-                mapArea->tiles[tileX][tileY].groundType = GetId("GroundTypeGrass");
+        for (auto tile : mapArea->AllTiles())
+            tile.get().groundType = GetId("GroundTypeGrass");
     }
 
     void ValleyMapGen::GeneratePlayerStartingPosition(MapArea* mapArea) const
@@ -47,26 +44,26 @@ namespace Forradia
 
     void ValleyMapGen::GenerateElevation(MapArea* mapArea) const
     {
-        for (auto y = 0; y < mapArea->size; y++)
-        {
-            for (auto x = 0; x < mapArea->size; x++)
-            {
-                auto dxLeft = x;
-                auto dxRight = mapArea->size - x;
-                auto dyTop = y;
-                auto dyBottom = mapArea->size - y;
+        //for (auto y = 0; y < mapArea->size; y++)
+        //{
+        //    for (auto x = 0; x < mapArea->size; x++)
+        //    {
+        //        auto dxLeft = x;
+        //        auto dxRight = mapArea->size - x;
+        //        auto dyTop = y;
+        //        auto dyBottom = mapArea->size - y;
 
-                auto elevHorizontal = std::max(dxLeft, dxRight);
-                auto elevVertical = std::max(dyTop, dyBottom);
-                auto elev = std::max(std::max(elevHorizontal, elevVertical), 86) * 5 - 40;
-                elev = std::min(elev, 440);
+        //        auto elevHorizontal = std::max(dxLeft, dxRight);
+        //        auto elevVertical = std::max(dyTop, dyBottom);
+        //        auto elev = std::max(std::max(elevHorizontal, elevVertical), 86) * 5 - 40;
+        //        elev = std::min(elev, 440);
 
-                mapArea->tiles[x][y].elevation = elev / 1.5f;
+        //        mapArea->tiles[x][y].elevation = elev / 1.5f;
 
-            }
-        }
+        //    }
+        //}
 
-        for (auto i = 0; i < 60; i++)
+        for (auto i = 0; i < 160; i++)
         {
             auto centerTileX = 0;
             auto centerTileY = 0;
@@ -80,7 +77,7 @@ namespace Forradia
             } while (std::abs(centerTileX - mapArea->size / 2) < villageSize
                 || std::abs(centerTileY - mapArea->size / 2) < villageSize);
 
-            for (auto r = maxr; r >= 0; r--)
+            for (auto r = maxr; r >= 0; r-= 5)
             {
                 for (auto y = centerTileY - r; y <= centerTileY + r; y++)
                 {
@@ -90,9 +87,13 @@ namespace Forradia
                         auto dy = y - centerTileY;
 
                         if (dx * dx + dy * dy >= r * r) continue;
-                        if (x < 0 || y < 0 || x >= mapArea->size || y >= mapArea->size) continue;
+                        if (x < 1 || y < 0 || x >= mapArea->size || y >= mapArea->size - 1) continue;
 
                         mapArea->tiles[x][y].elevation += 5;
+                        mapArea->tiles[x][y].groundType = GetId("GroundTypeRock");
+                        mapArea->tiles[x-1][y].groundType = GetId("GroundTypeRock");
+                        mapArea->tiles[x][y+1].groundType = GetId("GroundTypeRock");
+                        mapArea->tiles[x-1][y+1].groundType = GetId("GroundTypeRock");
                     }
                 }
             }
@@ -366,7 +367,7 @@ namespace Forradia
 
     void ValleyMapGen::GenerateBushes(MapArea* mapArea) const
     {
-        for (auto i = 0; i < 200; i++)
+        for (auto i = 0; i < 1000; i++)
         {
             auto tileX = rnd.Next() % mapArea->size;
             auto tileY = rnd.Next() % mapArea->size;
@@ -463,17 +464,32 @@ namespace Forradia
 
             if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
             {
-                mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobPinkSlime");
+                mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobTroll");
                 mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
             }
         }
+
+        //for (auto i = 0; i < 100; i++)
+        //{
+        //    auto x = rnd.Next() % mapArea->size;
+        //    auto y = rnd.Next() % mapArea->size;
+
+        //    if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
+        //    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
+
+        //    if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
+        //    {
+        //        mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobPinkSlime");
+        //        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+        //    }
+        //}
     }
 
     void ValleyMapGen::GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const
     {
         QuestCaveMapGen questCaveMapGen;
 
-        for (auto floor = -1; floor >= -20; floor--)
+        for (auto floor = -1; floor >= -5; floor--)
         {
             auto x = rnd.Next() % 94 + 3;
             auto y = rnd.Next() % 94 + 3;

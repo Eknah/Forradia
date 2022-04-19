@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <GL/glu.h>
@@ -27,7 +28,7 @@ namespace Forradia
         void UpdateCameraMovm();
 
         float lookingAngle = 0.0f;
-        float zoomAmount = 2.0f;
+        float zoomAmount = 1.8f;
 
         float rayCastingX = 0.0f;
         float rayCastingY = 0.0f;

@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <string>
 #include <tuple>
 #include <vector>
@@ -23,10 +24,10 @@ namespace Forradia
 
         void SetOpacity(String objectName, float opacity);
 
-        bool IsMovable(int objectType) const;
+        bool Movable(int objectType) const;
         bool BlocksMovement(int objectType) const;
 
-        UMap<int, ObjectDescriber> objectDescribers;
+        UMap<int, ObjectDescriber> objDescribers;
     };
 
 }  // namespace Forradia

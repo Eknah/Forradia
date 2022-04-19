@@ -34,4 +34,33 @@ namespace Forradia
         return tiles[Pos.x][Pos.y];
     }
 
+    std::vector<std::reference_wrapper<Tile>> MapArea::AllTiles()
+    {
+        std::vector<std::reference_wrapper<Tile>> result;
+
+        for (auto y = 0; y < size; y++)
+        {
+            for (auto x = 0; x < size; x++)
+            {
+                result.push_back(std::ref(tiles[x][y]));
+            }
+        }
+
+        return result;
+    }
+
+    Point2F MapArea::RandCoordF()
+    {
+        return { CFloat(rnd.Next() % size), CFloat(rnd.Next() % size) };
+    }
+
+    Point2 MapArea::RandCoordI()
+    {
+        return { rnd.Next() % size, rnd.Next() % size};
+    }
+    bool MapArea::Contains(Point2 p, int margin)
+    {
+        return p.x >= margin && p.y >= margin && p.x < size - margin && p.y < size - margin;
+    }
+
 }  // namespace Forradia

@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "../engine/Utilities.h"
 #include "framework/GuiWindowBase.h"
 
@@ -15,15 +16,15 @@ namespace Forradia
 
         using GuiWindowBase::GuiWindowBase;
 
-        void RenderDerived() override;
-        void DoMouseDownDerived(Uint8 mouseButton) override;
+        void RenderEx() override;
+        void MouseDownEx(Uint8 mouseButton) override;
 
     private:
 
         const int numSlotCols = 4;
 
         Utilities utils;
-        Palette palette;
+        Palette pal;
 
     };
 

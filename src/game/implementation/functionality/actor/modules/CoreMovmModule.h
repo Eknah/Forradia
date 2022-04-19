@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "../engine/IModule.h"
 #include "../engine/Aliases.h"
 #include "../engine/Point2F.h"
@@ -13,6 +14,7 @@ namespace Forradia
 
     class CoreMovmModule : public IModule
     {
+
     public:
         
         CoreMovmModule(const IEngine& _e, Actor* _parentActor) : IModule(_e, _parentActor), timer(UPtr<int>(&moveSpeed)) {}
@@ -27,8 +29,8 @@ namespace Forradia
         UPtr<float> facingAngle = MakeUPtr<float>(0.0f);
 
         Point2F dest = { -1, -1 };
-        int moveSpeed = 30;
-        float stepSize = 3.0f;
+        int moveSpeed = 50;
+        float stepSize = 1.5f;
         float stepMultiplier = 0.1f;
         bool isWalking = false;
 

@@ -14,9 +14,9 @@ namespace Forradia
     public:
         void ResetForNewFrame() const override;
 
-        void DoKeyDown(SDL_Keycode key) const override;
+        void KeyDown(SDL_Keycode key) const override;
 
-        void DoKeyUp(SDL_Keycode key) const override;
+        void KeyUp(SDL_Keycode key) const override;
     };
 
 }  // namespace Forradia

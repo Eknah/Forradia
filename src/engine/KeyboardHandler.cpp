@@ -11,13 +11,13 @@ namespace Forradia
         keysBeenFired->clear();
     }
 
-    void KeyboardHandler::DoKeyDown(SDL_Keycode key) const
+    void KeyboardHandler::KeyDown(SDL_Keycode key) const
     {
         keysBeingPressed->insert(key);
         keysBeenFired->insert(key);
     }
 
-    void KeyboardHandler::DoKeyUp(SDL_Keycode key) const
+    void KeyboardHandler::KeyUp(SDL_Keycode key) const
     {
         keysBeingPressed->erase(key);
     }

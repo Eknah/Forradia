@@ -11,8 +11,8 @@ namespace Forradia
     {
         auto minimapSizeF = utils.ConvertToFloat(minimapSize);
 
-        e.FillRect(palette.mediumBlueSemiTrans, 0, 0, minimapSizeF.w, minimapSizeF.h);
-        e.DrawRect(palette.black, 0, 0, minimapSizeF.w, minimapSizeF.h);
+        e.FillRect(pal.gray, 0, 0, minimapSizeF.w, minimapSizeF.h);
+        e.DrawRect(pal.black, 0, 0, minimapSizeF.w, minimapSizeF.h);
     }
 
 }  // namespace Forradia

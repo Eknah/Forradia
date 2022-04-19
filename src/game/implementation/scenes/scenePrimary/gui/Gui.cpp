@@ -45,31 +45,31 @@ namespace Forradia
         auto mousePosF = utils.GetMousePosF();
 
         if (boundsInvBtn.Contains(mousePosF))
-            e.FillRect(palette.lightMediumBlueSemiTrans, boundsInvBtn);
+            e.FillRect(pal.gray, boundsInvBtn);
         else
-            e.FillRect(palette.mediumBlueSemiTrans, boundsInvBtn);
+            e.FillRect(pal.darkGray, boundsInvBtn);
 
-        e.DrawRect(palette.white, boundsInvBtn);
+        e.DrawRect(pal.white, boundsInvBtn);
 
-        e.DrawString("Inventory [F2]", palette.white, boundsInvBtn.GetCenter(), true);
+        e.DrawString("Inventory [F2]", pal.white, boundsInvBtn.GetCenter(), true);
 
         if (boundsCharBtn.Contains(mousePosF))
-            e.FillRect(palette.lightMediumBlueSemiTrans, boundsCharBtn);
+            e.FillRect(pal.gray, boundsCharBtn);
         else
-            e.FillRect(palette.mediumBlueSemiTrans, boundsCharBtn);
+            e.FillRect(pal.darkGray, boundsCharBtn);
 
-        e.DrawRect(palette.white, boundsCharBtn);
+        e.DrawRect(pal.white, boundsCharBtn);
 
-        e.DrawString("Character [F1]", palette.white, boundsCharBtn.GetCenter(), true);
+        e.DrawString("Character [F1]", pal.white, boundsCharBtn.GetCenter(), true);
 
         if (boundsSysBtn.Contains(mousePosF))
-            e.FillRect(palette.lightMediumBlueSemiTrans, boundsSysBtn);
+            e.FillRect(pal.gray, boundsSysBtn);
         else
-            e.FillRect(palette.mediumBlueSemiTrans, boundsSysBtn);
+            e.FillRect(pal.darkGray, boundsSysBtn);
 
-        e.DrawRect(palette.white, boundsSysBtn);
+        e.DrawRect(pal.white, boundsSysBtn);
 
-        e.DrawString("System [F3]", palette.white, boundsSysBtn.GetCenter(), true);
+        e.DrawString("System [F3]", pal.white, boundsSysBtn.GetCenter(), true);
 
         console.Render();
 
@@ -78,11 +78,11 @@ namespace Forradia
 
     }
 
-    bool Gui::DoMouseDown(Uint8 mouseButton)
+    bool Gui::MouseDown(Uint8 mouseButton)
     {
         for (auto& [key, window] : windows)
         {
-            auto clickedInWindow = window->DoMouseDown(mouseButton);
+            auto clickedInWindow = window->MouseDown(mouseButton);
 
             if (clickedInWindow)
                 return true;
@@ -97,7 +97,7 @@ namespace Forradia
             return true;
         }
 
-        if (console.DoMouseDown(mouseButton))
+        if (console.MouseDown(mouseButton))
         {
             return true;
         }
@@ -105,15 +105,15 @@ namespace Forradia
         return false;
     }
 
-    void Gui::DoMouseUp()
+    void Gui::MouseUp()
     {
         for (auto& [key, window] : windows)
-            window->DoMouseUp();
+            window->MouseUp();
     }
 
-    void Gui::DoKeyDown(SDL_Keycode key)
+    void Gui::KeyDown(SDL_Keycode key)
     {
-        console.DoKeyDown(key);
+        console.KeyDown(key);
     }
 
 }  // namespace Forradia

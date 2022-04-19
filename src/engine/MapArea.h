@@ -28,6 +28,11 @@ namespace Forradia
 
         Tile& GetTile(Point2 Pos);
 
+        std::vector<std::reference_wrapper<Tile>> AllTiles();
+        Point2F RandCoordF();
+        Point2 RandCoordI();
+        bool Contains(Point2 p, int margin = 0);
+
         // Basic data
         Point3 worldCoord = { -1, -1, -1 };
         Point2F spawnPos = { -1, -1 };
@@ -36,6 +41,9 @@ namespace Forradia
         // Map structure of tiles and mobs
         std::vector<std::vector<Tile>> tiles;
         UMap<int, std::reference_wrapper<SPtr<Actor>>> mobActorsMirror;
+
+        private:
+        Random rnd;
     };
 
 }  // namespace Forradia

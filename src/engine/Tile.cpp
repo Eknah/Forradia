@@ -12,9 +12,9 @@ namespace Forradia
     {
         for (auto& Object : objects)
         {
-            if (e.objectsContent.objectDescribers.count(Object->objectType))
+            if (e.objectsContent.objDescribers.count(Object->objectType))
             {
-                auto objFlags = e.objectsContent.objectDescribers.at(Object->objectType).flags;
+                auto objFlags = e.objectsContent.objDescribers.at(Object->objectType).flags;
 
                 if (objFlags & flag)
                     return true;

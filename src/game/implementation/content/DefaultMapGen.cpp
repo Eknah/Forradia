@@ -35,35 +35,32 @@ namespace Forradia
 
     void DefaultMapGen::ClearToGrass(MapArea* mapArea) const
     {
-        for (auto y = 0; y < mapArea->size; y++)
-            for (auto x = 0; x < mapArea->size; x++)
-                mapArea->tiles[x][y].groundType = GetId("GroundTypeGrass");
+        for (auto tile : mapArea->AllTiles())
+            tile.get().groundType = GetId("GroundTypeGrass");
     }
 
     void DefaultMapGen::GeneratePlayerStartingPosition(MapArea* mapArea) const
     {
-        mapArea->spawnPos.x = CFloat(rnd.Next() % mapArea->size);
-        mapArea->spawnPos.y = CFloat(rnd.Next() % mapArea->size);
+        mapArea->spawnPos = mapArea->RandCoordF();
     }
 
     void DefaultMapGen::GenerateElevation(MapArea* mapArea) const
     {
         for (auto i = 0; i < 40; i++)
         {
-            auto centerx = rnd.Next() % mapArea->size;
-            auto centery = rnd.Next() % mapArea->size;
+            auto center =mapArea->RandCoordI();
             auto maxr = 4 + rnd.Next() % 12;
 
             for (auto r = maxr; r >= 0; r -= 1)
             {
-                for (auto y = centery - r; y <= centery + r; y++)
+                for (auto y = center.y - r; y <= center.y + r; y++)
                 {
-                    for (auto x = centerx - r; x <= centerx + r; x++)
+                    for (auto x = center.x - r; x <= center.x + r; x++)
                     {
-                        auto dx = x - centerx;
-                        auto dy = y - centery;
+                        auto dx = x - center.x;
+                        auto dy = y - center.y;
 
-                        if (x < 0 || y < 0 || x >= mapArea->size || y >= mapArea->size) continue;
+                        if (!mapArea->Contains({x, y})) continue;
 
                         mapArea->tiles[x][y].elevation += 2;
                     }
@@ -76,19 +73,18 @@ namespace Forradia
     {
         for (auto i = 0; i < 20; i++)
         {
-            auto centerx = rnd.Next() % mapArea->size;
-            auto centery = rnd.Next() % mapArea->size;
+            auto center = mapArea->RandCoordI();
             auto r = 5 + rnd.Next() % 13;
 
-            for (auto y = centery - r; y <= centery + r; y++)
+            for (auto y = center.y - r; y <= center.y + r; y++)
             {
-                for (auto x = centerx - r; x <= centerx + r; x++)
+                for (auto x = center.x - r; x <= center.x + r; x++)
                 {
-                    auto dx = x - centerx;
-                    auto dy = y - centery;
+                    auto dx = x - center.x;
+                    auto dy = y - center.y;
 
                     if (dx * dx + dy * dy >= r * r) continue;
-                    if (x <= 0 || y <= 0 || x >= mapArea->size - 1 || y >= mapArea->size - 1) continue;
+                    if (!mapArea->Contains({ x, y }, 1)) continue;
                     if (mapArea->tiles[x][y].elevation > 0) continue;
                     if (mapArea->tiles[x - 1][y].elevation > 0) continue;
                     if (mapArea->tiles[x - 1][y - 1].elevation > 0) continue;
@@ -110,21 +106,20 @@ namespace Forradia
     {
         for (auto i = 0; i < 30; i++)
         {
-            auto centerx = rnd.Next() % mapArea->size;
-            auto centery = rnd.Next() % mapArea->size;
+            auto center = mapArea->RandCoordI();
             auto r = 4 + rnd.Next() % 5;
 
             for (auto j = 0; j < r; j++)
             {
-                for (auto y = centery - r; y <= centery + r; y++)
+                for (auto y = center.y - r; y <= center.y + r; y++)
                 {
-                    for (auto x = centerx - r; x <= centerx + r; x++)
+                    for (auto x = center.x - r; x <= center.x + r; x++)
                     {
-                        auto dx = x - centerx;
-                        auto dy = y - centery;
+                        auto dx = x - center.x;
+                        auto dy = y - center.y;
 
                         if (dx * dx + dy * dy >= r * r) continue;
-                        if (x <= 0 || y <= 0 || x >= mapArea->size - 1 || y >= mapArea->size - 1) continue;
+                        if (!mapArea->Contains({ x, y }, 1)) continue;
                         if (mapArea->tiles[x][y].groundType ==  GetId("GroundTypeWater")) continue;
                         if (mapArea->tiles[x][y].elevation > 5) continue;
 
@@ -173,21 +168,20 @@ namespace Forradia
     {
         for (auto i = 0; i < 30; i++)
         {
-            auto centerx = rnd.Next() % mapArea->size;
-            auto centery = rnd.Next() % mapArea->size;
+            auto center = mapArea->RandCoordI();
             auto r = 2 + rnd.Next() % 3;
 
             for (auto j = 0; j < r; j++)
             {
-                for (auto y = centery - r; y <= centery + r; y++)
+                for (auto y = center.y - r; y <= center.y + r; y++)
                 {
-                    for (auto x = centerx - r; x <= centerx + r; x++)
+                    for (auto x = center.x - r; x <= center.x + r; x++)
                     {
-                        auto dx = x - centerx;
-                        auto dy = y - centery;
+                        auto dx = x - center.x;
+                        auto dy = y - center.y;
 
                         if (dx * dx + dy * dy >= r * r) continue;
-                        if (x <= 0 || y <= 0 || x >= mapArea->size - 1 || y >= mapArea->size - 1) continue;
+                        if (!mapArea->Contains({ x, y }, 1)) continue;
                         if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater")) continue;
 
                         if (mapArea->tiles[x - 1][y].groundType !=
@@ -235,19 +229,18 @@ namespace Forradia
     {
         for (auto i = 0; i < 10; i++)
         {
-            auto centerx = rnd.Next() % mapArea->size;
-            auto centery = rnd.Next() % mapArea->size;
+            auto center = mapArea->RandCoordI();
             auto r = 5 + rnd.Next() % 13;
 
-            for (auto y = centery - r; y <= centery + r; y++)
+            for (auto y = center.y - r; y <= center.y + r; y++)
             {
-                for (auto x = centerx - r; x <= centerx + r; x++)
+                for (auto x = center.x - r; x <= center.x + r; x++)
                 {
-                    auto dx = x - centerx;
-                    auto dy = y - centery;
+                    auto dx = x - center.x;
+                    auto dy = y - center.y;
 
                     if (dx * dx + dy * dy >= r * r) continue;
-                    if (x < 0 || y < 0 || x >= mapArea->size || y >= mapArea->size) continue;
+                    if (!mapArea->Contains({ x, y })) continue;
                     if (mapArea->tiles[x][y].elevation < 4) continue;
 
                     mapArea->tiles[x][y].groundType = GetId("GroundTypeRock");
@@ -260,46 +253,42 @@ namespace Forradia
     {
         for (auto i = 0; i < 30; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto coord = mapArea->RandCoordI();
             auto numTrees = 15 + rnd.Next() % 15;
 
             for (auto j = 0; j < numTrees; j++)
             {
-                if (x >= 0 && y >= 0 && x < mapArea->size &&
-                    y < mapArea->size)
+                if (mapArea->Contains(coord))
                 {
-                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
+                    if (DistToPlayerStartingPos(mapArea, coord.x, coord.y) < playerStartAreaSize) continue;
 
-                    if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
-                        if (mapArea->tiles[x][y].objects.size() == 0)
-                            mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTree1"));
+                    if (mapArea->tiles[coord.x][coord.y].groundType == GetId("GroundTypeGrass"))
+                        if (mapArea->tiles[coord.x][coord.y].objects.size() == 0)
+                            mapArea->tiles[coord.x][coord.y].objects.push_back(MakeSPtr<Object>("ObjectTree1"));
                 }
 
-                x += rnd.Next() % 7 - rnd.Next() % 7;
-                y += rnd.Next() % 7 - rnd.Next() % 7;
+                coord.x += rnd.Next() % 7 - rnd.Next() % 7;
+                coord.y += rnd.Next() % 7 - rnd.Next() % 7;
             }
         }
         for (auto i = 0; i < 30; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto coord = mapArea->RandCoordI();
             auto numTrees = 15 + rnd.Next() % 15;
 
             for (auto j = 0; j < numTrees; j++)
             {
-                if (x >= 0 && y >= 0 && x < mapArea->size &&
-                    y < mapArea->size)
+                if (mapArea->Contains(coord))
                 {
-                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
+                    if (DistToPlayerStartingPos(mapArea, coord.x, coord.y) < playerStartAreaSize) continue;
 
-                    if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
-                        if (mapArea->tiles[x][y].objects.size() == 0)
-                            mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTree2"));
+                    if (mapArea->tiles[coord.x][coord.y].groundType == GetId("GroundTypeGrass"))
+                        if (mapArea->tiles[coord.x][coord.y].objects.size() == 0)
+                            mapArea->tiles[coord.x][coord.y].objects.push_back(MakeSPtr<Object>("ObjectTree2"));
                 }
 
-                x += rnd.Next() % 7 - rnd.Next() % 7;
-                y += rnd.Next() % 7 - rnd.Next() % 7;
+                coord.x += rnd.Next() % 7 - rnd.Next() % 7;
+                coord.y += rnd.Next() % 7 - rnd.Next() % 7;
             }
         }
     }
@@ -308,14 +297,13 @@ namespace Forradia
     {
         for (auto i = 0; i < 200; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto coord = mapArea->RandCoordI();
 
-            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
+            if (DistToPlayerStartingPos(mapArea, coord.x, coord.y) < playerStartAreaSize) continue;
 
-            if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
-                if (mapArea->tiles[x][y].objects.size() == 0)
-                    mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
+            if (mapArea->tiles[coord.x][coord.y].groundType == GetId("GroundTypeGrass"))
+                if (mapArea->tiles[coord.x][coord.y].objects.size() == 0)
+                    mapArea->tiles[coord.x][coord.y].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
         }
     }
 
@@ -323,14 +311,13 @@ namespace Forradia
     {
         for (auto i = 0; i < 200; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto coord = mapArea->RandCoordI();
 
-            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
+            if (DistToPlayerStartingPos(mapArea, coord.x, coord.y) < playerStartAreaSize) continue;
 
-            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater"))
-                if (mapArea->tiles[x][y].objects.size() == 0)
-                    mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectSmallStone"));
+            if (mapArea->tiles[coord.x][coord.y].groundType != GetId("GroundTypeWater"))
+                if (mapArea->tiles[coord.x][coord.y].objects.size() == 0)
+                    mapArea->tiles[coord.x][coord.y].objects.push_back(MakeSPtr<Object>("ObjectSmallStone"));
         }
     }
 
@@ -338,12 +325,11 @@ namespace Forradia
     {
         for (auto i = 0; i < 100; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto coord = mapArea->RandCoordI();
 
-            if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
-                if (mapArea->tiles[x][y].objects.size() == 0)
-                    mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectPinkFlower"));
+            if (mapArea->tiles[coord.x][coord.y].groundType == GetId("GroundTypeGrass"))
+                if (mapArea->tiles[coord.x][coord.y].objects.size() == 0)
+                    mapArea->tiles[coord.x][coord.y].objects.push_back(MakeSPtr<Object>("ObjectPinkFlower"));
         }
     }
 
@@ -351,12 +337,11 @@ namespace Forradia
     {
         for (auto i = 0; i < 1000; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto coord = mapArea->RandCoordI();
 
-            if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
-                if (mapArea->tiles[x][y].objects.size() == 0)
-                    mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTallGrass"));
+            if (mapArea->tiles[coord.x][coord.y].groundType == GetId("GroundTypeGrass"))
+                if (mapArea->tiles[coord.x][coord.y].objects.size() == 0)
+                    mapArea->tiles[coord.x][coord.y].objects.push_back(MakeSPtr<Object>("ObjectTallGrass"));
         }
     }
 
@@ -373,31 +358,29 @@ namespace Forradia
     {
         for (auto i = 0; i < 200; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto coord = mapArea->RandCoordI();
 
-            if (x == CInt(mapArea->spawnPos.x)  && y == CInt(mapArea->spawnPos.y)) continue;
-            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
+            if (coord.x == CInt(mapArea->spawnPos.x)  && coord.y == CInt(mapArea->spawnPos.y)) continue;
+            if (DistToPlayerStartingPos(mapArea, coord.x, coord.y) < playerStartAreaSize) continue;
 
-            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
+            if (mapArea->tiles[coord.x][coord.y].groundType != GetId("GroundTypeWater") && mapArea->tiles[coord.x][coord.y].actor == nullptr)
             {
-                mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobRabbit");
-                mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+                mapArea->tiles[coord.x][coord.y].actor = MakeUPtr<Mob>(e, CFloat(coord.x), CFloat(coord.y), "MobRabbit");
+                mapArea->mobActorsMirror.insert({ mapArea->tiles[coord.x][coord.y].actor->actorId, std::ref(mapArea->tiles[coord.x][coord.y].actor) });
             }
         }
 
         for (auto i = 0; i < 200; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto coord = mapArea->RandCoordI();
 
-            if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
-            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
+            if (coord.x == CInt(mapArea->spawnPos.x) && coord.y == CInt(mapArea->spawnPos.y)) continue;
+            if (DistToPlayerStartingPos(mapArea, coord.x, coord.y) < playerStartAreaSize) continue;
 
-            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
+            if (mapArea->tiles[coord.x][coord.y].groundType != GetId("GroundTypeWater") && mapArea->tiles[coord.x][coord.y].actor == nullptr)
             {
-                mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobRat");
-                mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+                mapArea->tiles[coord.x][coord.y].actor = MakeUPtr<Mob>(e, CFloat(coord.x), CFloat(coord.y), "MobRat");
+                mapArea->mobActorsMirror.insert({ mapArea->tiles[coord.x][coord.y].actor->actorId, std::ref(mapArea->tiles[coord.x][coord.y].actor) });
             }
         }
     }

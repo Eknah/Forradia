@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <string>
 #include <vector>
 #include "../engine/Engine.h"
@@ -23,9 +24,9 @@ namespace Forradia
         void Init();
         void Update();
         void Render();
-        bool DoMouseDown(Uint8 mouseButton);
-        void DoMouseUp();
-        void DoKeyDown(SDL_Keycode key);
+        bool MouseDown(Uint8 mouseButton);
+        void MouseUp();
+        void KeyDown(SDL_Keycode key);
 
         UMap<String, UPtr<GuiWindowBase>> windows;
         Console console;
@@ -39,10 +40,10 @@ namespace Forradia
         Utilities utils;
         const float btnWidth = 0.15f;
         const float btnHeight = 0.03f;
-        RectF boundsCharBtn = { 0.5f - btnWidth / 2 - btnWidth, 1.0f - btnHeight, btnWidth, btnHeight };
-        RectF boundsInvBtn = { 0.5f - btnWidth / 2,             1.0f - btnHeight, btnWidth, btnHeight };
-        RectF boundsSysBtn = { 0.5f - btnWidth / 2 + btnWidth,  1.0f - btnHeight, btnWidth, btnHeight };
-        Palette palette;
+        RectF boundsCharBtn = { 0.0f, 1.0f - btnHeight, btnWidth, btnHeight };
+        RectF boundsInvBtn = { btnWidth,             1.0f - btnHeight, btnWidth, btnHeight };
+        RectF boundsSysBtn = { 2*btnWidth,  1.0f - btnHeight, btnWidth, btnHeight };
+        Palette pal;
 
     };
 

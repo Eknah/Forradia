@@ -7,15 +7,15 @@
 namespace Forradia
 {
 
-    void InventoryWin::RenderDerived()
+    void InventoryWin::RenderEx()
     {
         auto& player = e.GetPlayer();
 
         auto canvasSize = utils.GetCanvasSize();
         auto aspectRatio = CFloat(canvasSize.w) / canvasSize.h;
-        auto boundsInterior = GetInteriorBounds();
+        auto boundsInterior = GetInnerBounds();
 
-        e.FillRect(palette.wheat, boundsInterior);
+        e.FillRect(pal.wheat, boundsInterior);
 
         auto slotSize = boundsInterior.w / numSlotCols - margin;
         auto numSlotRows = boundsInterior.h / ((slotSize + margin) * aspectRatio);
@@ -45,7 +45,7 @@ namespace Forradia
         }
     }
 
-    void InventoryWin::DoMouseDownDerived(Uint8 mouseButton)
+    void InventoryWin::MouseDownEx(Uint8 mouseButton)
     {
         if (mouseButton != SDL_BUTTON_RIGHT) return;
 
@@ -55,7 +55,7 @@ namespace Forradia
 
         auto canvasSize = utils.GetCanvasSize();
         auto aspectRatio = CFloat(canvasSize.w) / canvasSize.h;
-        auto boundsInterior = GetInteriorBounds();
+        auto boundsInterior = GetInnerBounds();
 
         auto slotSize = boundsInterior.w / numSlotCols - margin;
         auto numSlotRows = boundsInterior.h / ((slotSize + margin) * aspectRatio);

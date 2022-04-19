@@ -42,7 +42,7 @@ namespace Forradia
 
             if (GetModule<CoreMovmModule>().isWalking)
             {
-                auto animIndex = ((Ticks() + actorId * 10) % 300) / 75;
+                auto animIndex = ((Ticks() + actorId * 10) % 600) / 150;
 
                 if (animIndex > 0)
                     modelNameAnimated.append(std::to_string(animIndex));

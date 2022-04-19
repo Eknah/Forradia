@@ -20,10 +20,10 @@ namespace Forradia
         void Enter() override {}
         void Update() override {}
         void Render() override;
-        void DoMouseDown(Uint8 mouseButton);
-        void DoMouseUp(Uint8 mouseButton) override {}
-        void DoKeyDown(SDL_Keycode key);
-        void DoKeyUp(SDL_Keycode key) override {}
+        void MouseDown(Uint8 mouseButton);
+        void MouseUp(Uint8 mouseButton) override {}
+        void KeyDown(SDL_Keycode key);
+        void KeyUp(SDL_Keycode key) override {}
 
     private:
         std::string switchToSceneName;

@@ -89,7 +89,7 @@ namespace Forradia
         gui.Render();
     }
 
-    void ScenePrimary::DoMouseDown(Uint8 mouseButton)
+    void ScenePrimary::MouseDown(Uint8 mouseButton)
     {
         auto hovered = cam.GetHoveredTile();
         auto& objectUsage = e.GetPlayer().GetModule<ObjectUsageModule>();
@@ -106,7 +106,7 @@ namespace Forradia
             return;
         }
 
-        auto clickedInGui = gui.DoMouseDown(mouseButton);
+        auto clickedInGui = gui.MouseDown(mouseButton);
 
         if (clickedInGui) return;
 
@@ -128,14 +128,14 @@ namespace Forradia
         }
     }
 
-    void ScenePrimary::DoMouseUp(Uint8 MouseButton)
+    void ScenePrimary::MouseUp(Uint8 MouseButton)
     {
-        gui.DoMouseUp();
+        gui.MouseUp();
     }
 
-    void ScenePrimary::DoKeyDown(SDL_Keycode key)
+    void ScenePrimary::KeyDown(SDL_Keycode key)
     {
-        gui.DoKeyDown(key);
+        gui.KeyDown(key);
     }
 
 }  // namespace Forradia
