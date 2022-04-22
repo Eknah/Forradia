@@ -13,6 +13,8 @@ namespace Forradia
     class QuestCaveMapGen
     {
 
+        // Functions
+
     public:
 
         void GenerateQuestCaveMapArea(MapArea* mapArea, Point2 entranceLoc);
@@ -23,6 +25,9 @@ namespace Forradia
         void GenerateCaveWalls(MapArea* mapArea);
         void GeneratePath(MapArea* mapArea, Point2 entranceLoc);
 
+        // Members
+
+    private:
         Random rnd;
 
     };

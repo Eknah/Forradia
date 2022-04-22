@@ -46,7 +46,7 @@ namespace Forradia
         modelLoader.LoadModels();
         imageLoader.LoadImages();
         textGraphics.Init();
-        customCursor.Init();
+        cursor.Init();
 
         gameLoop.Run();
 

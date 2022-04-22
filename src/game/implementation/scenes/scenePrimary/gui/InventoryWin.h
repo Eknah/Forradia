@@ -24,7 +24,6 @@ namespace Forradia
         const int numSlotCols = 4;
 
         Utilities utils;
-        Palette pal;
 
     };
 

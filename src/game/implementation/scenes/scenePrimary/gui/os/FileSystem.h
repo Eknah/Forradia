@@ -13,6 +13,8 @@ namespace Forradia
     class FileSystem
     {
 
+        // Functions
+
     public:
 
         explicit FileSystem(Console& _console);
@@ -21,12 +23,15 @@ namespace Forradia
         void MoveToFolder(String folderName);
         void RunProgram(String programName);
 
+        // Members
+
+    public:
         SPtr<File> runningProgram = nullptr;
 
     private:
-
         Console& console;
         SPtr<Folder> currentFolder = nullptr;
+
 
     };
 

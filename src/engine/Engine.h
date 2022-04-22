@@ -3,6 +3,11 @@
 
 #pragma once
 
+#define _ e.
+#define dim auto
+#define elif else if
+#define ret return
+
 #include <utility>
 #include <string>
 #include "CustomCursor.h"

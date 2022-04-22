@@ -3,22 +3,24 @@
 
 #pragma once
 
-#include "../engine/RectF.h"
 #include <string>
-#include "../engine/Aliases.h"
+#include "../engine/Point2.h"
 
 namespace Forradia
 {
 
-    class TextRect
+    class CraftRecipe
     {
 
         // Members
 
     public:
 
-        RectF bounds = { 0, 0, 0, 0 };
-        String text;
+        int toolObjectType = -1;
+        int rawMatObjectType = -1;
+        int resultObjectType = -1;
+        std::string description;
+        Point2 craftTile = {-1, -1};
 
     };
 

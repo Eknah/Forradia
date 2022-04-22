@@ -13,14 +13,13 @@ namespace Forradia
     class DefaultMapGen : public IMapGenerator
     {
 
+        // Functions
+
     public:
-
         using IMapGenerator::IMapGenerator;
-
         void GenerateMapArea(Point3 worldPos) const override;
 
     private:
-
         void ClearToGrass(MapArea* mapArea) const;
         void GeneratePlayerStartingPosition(MapArea* mapArea) const;
         void GenerateElevation(MapArea* mapArea) const;
@@ -37,6 +36,9 @@ namespace Forradia
         void GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const;
         int DistToPlayerStartingPos(MapArea* mapArea, int tileX, int tileY) const;
 
+        // Members
+
+    private:
         const int playerStartAreaSize = 4;
         Random rnd;
 

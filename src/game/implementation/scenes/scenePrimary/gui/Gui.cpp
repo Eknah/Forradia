@@ -23,13 +23,13 @@ namespace Forradia
         auto mousePosF = utils.GetMousePosF();
 
         if (boundsInvBtn.Contains(mousePosF))
-            e.customCursor.cursType = CursorTypes::Hovering;
+            _ cursor.type = CursorTypes::Hovering;
 
         if (boundsCharBtn.Contains(mousePosF))
-            e.customCursor.cursType = CursorTypes::Hovering;
+            _ cursor.type = CursorTypes::Hovering;
 
         if (boundsSysBtn.Contains(mousePosF))
-            e.customCursor.cursType = CursorTypes::Hovering;
+            _ cursor.type = CursorTypes::Hovering;
 
         for (auto& [key, window] : windows)
             window->Update();
@@ -39,37 +39,39 @@ namespace Forradia
 
     void Gui::Render()
     {
+        using namespace Palette;
 
         minimap.Render();
+        rightClickMenu.Render();
 
         auto mousePosF = utils.GetMousePosF();
 
         if (boundsInvBtn.Contains(mousePosF))
-            e.FillRect(pal.gray, boundsInvBtn);
+            _ FillRect(Gray, boundsInvBtn);
         else
-            e.FillRect(pal.darkGray, boundsInvBtn);
+            _ FillRect(DarkGray, boundsInvBtn);
 
-        e.DrawRect(pal.white, boundsInvBtn);
+        _ DrawRect(White, boundsInvBtn);
 
-        e.DrawString("Inventory [F2]", pal.white, boundsInvBtn.GetCenter(), true);
+        _ DrawString("Inventory [F2]", White, boundsInvBtn.GetCenter(), true);
 
         if (boundsCharBtn.Contains(mousePosF))
-            e.FillRect(pal.gray, boundsCharBtn);
+            _ FillRect(Gray, boundsCharBtn);
         else
-            e.FillRect(pal.darkGray, boundsCharBtn);
+            _ FillRect(DarkGray, boundsCharBtn);
 
-        e.DrawRect(pal.white, boundsCharBtn);
+        _ DrawRect(White, boundsCharBtn);
 
-        e.DrawString("Character [F1]", pal.white, boundsCharBtn.GetCenter(), true);
+        _ DrawString("Character [F1]", White, boundsCharBtn.GetCenter(), true);
 
         if (boundsSysBtn.Contains(mousePosF))
-            e.FillRect(pal.gray, boundsSysBtn);
+            _ FillRect(Gray, boundsSysBtn);
         else
-            e.FillRect(pal.darkGray, boundsSysBtn);
+            _ FillRect(DarkGray, boundsSysBtn);
 
-        e.DrawRect(pal.white, boundsSysBtn);
+        _ DrawRect(White, boundsSysBtn);
 
-        e.DrawString("System [F3]", pal.white, boundsSysBtn.GetCenter(), true);
+        _ DrawString("System [F3]", White, boundsSysBtn.GetCenter(), true);
 
         console.Render();
 
@@ -101,6 +103,8 @@ namespace Forradia
         {
             return true;
         }
+
+        rightClickMenu.MouseDown(mouseButton);
 
         return false;
     }

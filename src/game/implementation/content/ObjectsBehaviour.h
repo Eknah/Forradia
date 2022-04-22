@@ -16,6 +16,8 @@ namespace Forradia
     class ObjectsBehaviour
     {
 
+        // Functions
+
     public:
 
         void Add(String objectName, ObjectDescriber describer);
@@ -27,7 +29,11 @@ namespace Forradia
         bool Movable(int objectType) const;
         bool BlocksMovement(int objectType) const;
 
+        // Members
+
+    public:
         UMap<int, ObjectDescriber> objDescribers;
+
     };
 
 }  // namespace Forradia

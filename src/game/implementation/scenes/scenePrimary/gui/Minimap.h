@@ -23,7 +23,6 @@ namespace Forradia
         const Engine& e;
 
         const int minimapSize = 250;
-        Palette pal;
         Utilities utils;
 
     };

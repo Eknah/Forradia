@@ -9,10 +9,12 @@ namespace Forradia
 
     void Minimap::Render()
     {
+        using namespace Palette;
+
         auto minimapSizeF = utils.ConvertToFloat(minimapSize);
 
-        e.FillRect(pal.gray, 0, 0, minimapSizeF.w, minimapSizeF.h);
-        e.DrawRect(pal.black, 0, 0, minimapSizeF.w, minimapSizeF.h);
+        _ FillRect(Gray, 0, 0, minimapSizeF.w, minimapSizeF.h);
+        _ DrawRect(Black, 0, 0, minimapSizeF.w, minimapSizeF.h);
     }
 
 }  // namespace Forradia

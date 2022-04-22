@@ -19,7 +19,7 @@ namespace Forradia
         virtual void ResetForNewFrame() = 0;
         virtual void Render() = 0;
 
-        CursorTypes cursType = CursorTypes::Default;
+        CursorTypes type = CursorTypes::Default;
 
     protected:
         IEngine& e;

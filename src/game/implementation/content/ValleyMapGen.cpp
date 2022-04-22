@@ -4,7 +4,7 @@
 #include <memory>
 #include "ValleyMapGen.h"
 #include "../engine/PlanetWorldMap.h"
-#include "framework/worldStructure/Object.h"
+#include "../engine/Object.h"
 #include "QuestCaveMapGen.h"
 
 namespace Forradia

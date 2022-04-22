@@ -3,19 +3,22 @@
 
 #include "InventoryWin.h"
 #include "../engine/Engine.h"
+#include "implementation/functionality/actor/modules/CraftSkillsModule.h"
 
 namespace Forradia
 {
 
     void InventoryWin::RenderEx()
     {
+        using namespace Palette;
+
         auto& player = e.GetPlayer();
 
         auto canvasSize = utils.GetCanvasSize();
         auto aspectRatio = CFloat(canvasSize.w) / canvasSize.h;
         auto boundsInterior = GetInnerBounds();
 
-        e.FillRect(pal.wheat, boundsInterior);
+        _ FillRect(Wheat, boundsInterior);
 
         auto slotSize = boundsInterior.w / numSlotCols - margin;
         auto numSlotRows = boundsInterior.h / ((slotSize + margin) * aspectRatio);
@@ -32,12 +35,12 @@ namespace Forradia
 
                 if (player.GetModule<InventoryModule>().inventory.objects.count(i) > 0)
                 {
-                    if (player.GetModule<ObjectUsageModule>().objectBeingUsed == e.GetPlayer().GetModule<InventoryModule>().inventory.objects.at(i))
-                        e.DrawImage("ObjectSelected", xpos, ypos, slotSize, slotSize * aspectRatio);
+                    if (player.GetModule<CraftSkillsModule>().objectBeingUsed == e.GetPlayer().GetModule<InventoryModule>().inventory.objects.at(i))
+                        _ DrawImage("ObjectSelected", xpos, ypos, slotSize, slotSize * aspectRatio);
                     else
-                        e.DrawImage("ObjectBackgroundShadow", xpos, ypos, slotSize, slotSize * aspectRatio);
+                        _ DrawImage("ObjectBackgroundShadow", xpos, ypos, slotSize, slotSize * aspectRatio);
 
-                    e.DrawImage(player.GetModule<InventoryModule>().inventory.objects.at(i)->objectType, xpos, ypos, slotSize, slotSize * aspectRatio);
+                    _ DrawImage(player.GetModule<InventoryModule>().inventory.objects.at(i)->objectType, xpos, ypos, slotSize, slotSize * aspectRatio);
                 }
 
                 i++;
@@ -51,7 +54,7 @@ namespace Forradia
 
         auto& player = e.GetPlayer();
 
-        player.GetModule<ObjectUsageModule>().objectBeingUsed = nullptr;
+        player.GetModule<CraftSkillsModule>().objectBeingUsed = nullptr;
 
         auto canvasSize = utils.GetCanvasSize();
         auto aspectRatio = CFloat(canvasSize.w) / canvasSize.h;
@@ -75,7 +78,7 @@ namespace Forradia
                 {
                     if (mousePosRel.x >= xpos && mousePosRel.y >= ypos && mousePosRel.x < xpos + slotSize && mousePosRel.y < ypos + slotSize * aspectRatio)
                     {
-                        player.GetModule<ObjectUsageModule>().objectBeingUsed = player.GetModule<InventoryModule>().inventory.objects.at(i);
+                        player.GetModule<CraftSkillsModule>().objectBeingUsed = player.GetModule<InventoryModule>().inventory.objects.at(i);
                         return;
                     }
                 }

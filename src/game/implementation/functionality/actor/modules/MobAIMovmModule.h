@@ -12,15 +12,17 @@ namespace Forradia
     class MobAIMovmModule : public IModule
     {
 
-    public:
+        // Functions
 
+    public:
         MobAIMovmModule(const IEngine& _e, Actor* _parentActor);
 
         void ResetForNewFrame() override {};
         void Update() override;
 
-    private:
+        // Members
 
+    private:
         Random rnd;
 
     };

@@ -13,10 +13,10 @@ namespace Forradia
     class ValleyMapGen : public IMapGenerator
     {
 
+        // Functions
+
     public:
-
         using IMapGenerator::IMapGenerator;
-
         void GenerateMapArea(Point3 worldPos) const override;
 
     private:
@@ -37,6 +37,9 @@ namespace Forradia
 
         int DistToPlayerStartingPos(MapArea* mapArea, int tileX, int tileY) const;
 
+        // Members
+
+    private:
         const int playerStartAreaSize = 4;
         Random rnd;
         int villageSize = 17;

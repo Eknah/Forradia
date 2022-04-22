@@ -13,7 +13,7 @@ namespace Forradia
         //glClearColor(0.0f, 0.2f, 0.4f, 1.0f);
         //glClear(GL_COLOR_BUFFER_BIT);
 
-        if (e.GetCurrMapArea().IsUnderground())
+        if (_ GetCurrMapArea().IsUnderground())
         {
             glClearColor(0, 0, 0, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);

@@ -12,7 +12,7 @@ namespace Forradia
         AddModule<DestMovmModule>();
         AddModule<DirectionMovmModule>();
         AddModule<InventoryModule>();
-        AddModule<ObjectUsageModule>();
+        AddModule<CraftSkillsModule>();
     }
 
 }  // namespace Forradia

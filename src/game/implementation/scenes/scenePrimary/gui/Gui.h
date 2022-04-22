@@ -10,6 +10,8 @@
 #include "Minimap.h"
 #include "framework/GuiWindowBase.h"
 #include "os/Console.h"
+#include "RightClickMenu.h"
+#include "implementation/scenes/scenePrimary/Camera.h"
 
 namespace Forradia
 {
@@ -18,7 +20,7 @@ namespace Forradia
     {
     public:
 
-        explicit Gui(const Engine& _e) : e(_e), minimap(_e), console(_e)
+        explicit Gui(const Engine& _e, Camera& _camera) : e(_e), minimap(_e), console(_e), rightClickMenu(_e, _camera)
         {}
 
         void Init();
@@ -35,6 +37,7 @@ namespace Forradia
 
         const Engine& e;
 
+        RightClickMenu rightClickMenu;
         Minimap minimap;
         const float margin = 0.005f;
         Utilities utils;
@@ -43,7 +46,6 @@ namespace Forradia
         RectF boundsCharBtn = { 0.0f, 1.0f - btnHeight, btnWidth, btnHeight };
         RectF boundsInvBtn = { btnWidth,             1.0f - btnHeight, btnWidth, btnHeight };
         RectF boundsSysBtn = { 2*btnWidth,  1.0f - btnHeight, btnWidth, btnHeight };
-        Palette pal;
 
     };
 

@@ -7,19 +7,18 @@
 namespace Forradia
 {
 
-    class Palette
+    namespace Palette
     {
-    public:
-        SDL_Color white = { 255, 255, 255, 255 };
-        SDL_Color whiteSemiTrans = { 255, 255, 255, 150 };
-        SDL_Color black = { 0, 0, 0, 255 };
-        SDL_Color mediumBlue = { 0, 150, 255, 255 };
-        SDL_Color mediumBlueSemiTrans = { 0, 150, 255, 100 };
-        SDL_Color wheat = { 255, 255, 230, 255 };
-        SDL_Color lightMediumBlueSemiTrans = { 100, 200, 255, 100 };
-        SDL_Color gray = { 100, 100, 100, 255 };
-        SDL_Color lightGray = { 150, 150, 150, 255 };
-        SDL_Color darkGray = { 50, 50, 50, 255 };
+        const inline SDL_Color White = { 255, 255, 255, 255 };
+        const inline SDL_Color WhiteSemiTrans = { 255, 255, 255, 150 };
+        const inline SDL_Color Black = { 0, 0, 0, 255 };
+        const inline SDL_Color MediumBlue = { 0, 150, 255, 255 };
+        const inline SDL_Color MediumBlueSemiTrans = { 0, 150, 255, 100 };
+        const inline SDL_Color Wheat = { 255, 255, 230, 255 };
+        const inline SDL_Color LightMediumBlueSemiTrans = { 100, 200, 255, 100 };
+        const inline SDL_Color Gray = { 100, 100, 100, 255 };
+        const inline SDL_Color LightGray = { 150, 150, 150, 255 };
+        const inline SDL_Color DarkGray = { 50, 50, 50, 255 };
     };
 
 }  // namespace Forradia

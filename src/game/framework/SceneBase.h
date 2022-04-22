@@ -15,6 +15,9 @@ namespace Forradia
 
     class SceneBase
     {
+
+        // Functions
+
     public:
 
         explicit SceneBase(const Engine& _e) : e(_e) {}
@@ -26,6 +29,8 @@ namespace Forradia
         virtual void MouseUp(Uint8 button) = 0;
         virtual void KeyDown(SDL_Keycode key) = 0;
         virtual void KeyUp(SDL_Keycode key) = 0;
+
+        // Members
 
     protected:
 

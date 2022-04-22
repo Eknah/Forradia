@@ -14,20 +14,19 @@ namespace Forradia
     class Object
     {
 
-    public:
+        // Functions
 
+    public:
         explicit Object(String objTypeName, bool randScaling = false, bool randRotation = false, float _rotation = 0.0f);
 
-        void UseOn(const SPtr<Object>& other);
+        // Members
 
+    public:
         int objectType = 0;
         float rotation = 0.0f;
         float scaling = 1.0f;
 
     private:
-
-        void TransformInto(String objectName);
-
         Random rnd;
 
     };

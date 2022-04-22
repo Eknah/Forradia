@@ -31,7 +31,7 @@ namespace Forradia
             IFpsCounter* _fpsCounter,
             IFullscreenController* _fullscreenController, IGameLoop* _gameLoop,
             ISceneManager* _sceneManager)
-            : keyboardHandler(*_keyboardHandler), customCursor(*_customCursor),
+            : keyboardHandler(*_keyboardHandler), cursor(*_customCursor),
             fpsCounter(*_fpsCounter), fullscreenController(*_fullscreenController),
             gameLoop(*_gameLoop), sceneManager(*_sceneManager)
         {}
@@ -58,7 +58,7 @@ namespace Forradia
         WindowPtr window;
 
         IKeyboardHandler& keyboardHandler;
-        ICustomCursor& customCursor;
+        ICustomCursor& cursor;
         IFpsCounter& fpsCounter;
         IFullscreenController& fullscreenController;
         IGameLoop& gameLoop;
@@ -76,7 +76,7 @@ namespace Forradia
 
         std::string text;
         char* composition;
-        Sint32 cursor = 0;
+        Sint32 textCursor = 0;
         Sint32 selection_len = 0;
     };
 

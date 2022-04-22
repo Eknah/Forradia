@@ -4,6 +4,7 @@
 #include "ScenePrimary.h"
 #include "../engine/Engine.h"
 #include "implementation/functionality/actor/modules/CoreMovmModule.h"
+#include "implementation/functionality/actor/modules/CraftSkillsModule.h"
 
 namespace Forradia
 {
@@ -16,12 +17,12 @@ namespace Forradia
 
     void ScenePrimary::Update()
     {
-        auto& keys = e.keyboardHandler.keysBeingPressed;
-        auto& player = e.GetPlayer();
+        auto& keys = _ keyboardHandler.keysBeingPressed;
+        auto& player = _ GetPlayer();
 
         player.ResetForNewFrame();
 
-        if (!SDL_IsTextInputActive() && e.keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) == 0)
+        if (!SDL_IsTextInputActive() && _ keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) == 0)
         {
             char moveInstruction = DirNone;
 
@@ -56,32 +57,32 @@ namespace Forradia
             else
                 cam.UpdateRotation(0);
 
-            if (e.keyboardHandler.keysBeenFired->count(SDLK_F2))
+            if (_ keyboardHandler.keysBeenFired->count(SDLK_F2))
                 gui.windows.at("Inventory")->visible = !gui.windows.at("Inventory")->visible;
 
-            if (e.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
-                e.GetPlayer().GetModule<JumpingModule>().Jump();
+            if (_ keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
+                _ GetPlayer().GetModule<JumpingModule>().Jump();
         }
 
-        cam.UpdateZoomChange(*e.mouseHandler.wheelAmount);
+        cam.UpdateZoomChange(*_ mouseHandler.wheelAmount);
         cam.UpdateCameraMovm();
         cam.UpdateRayCasting();
 
-        if (e.mouseHandler.rightButtonDown)
+        if (_ mouseHandler.rightButtonDown)
             *player.GetModule<CoreMovmModule>().facingAngle = cam.lookingAngle;
 
-        if (e.mouseHandler.rightButtonDown)
-            e.customCursor.cursType = CursorTypes::Hidden;
+        if (_ mouseHandler.rightButtonDown)
+            _ cursor.type = CursorTypes::Hidden;
 
-        for (auto i = 0; i < e.GetCurrMapArea().mobActorsMirror.size(); i++)
+        for (auto i = 0; i < _ GetCurrMapArea().mobActorsMirror.size(); i++)
         {
-            e.GetCurrMapArea().mobActorsMirror.at(i).get()->Update();
+            _ GetCurrMapArea().mobActorsMirror.at(i).get()->Update();
         }
 
         player.Update();
         gui.Update();
 
-        if (e.keyboardHandler.keysBeenFired->count(SDLK_RETURN))
+        if (_ keyboardHandler.keysBeenFired->count(SDLK_RETURN))
             gui.console.ToggleInput();
     }
 
@@ -94,19 +95,19 @@ namespace Forradia
     void ScenePrimary::MouseDown(Uint8 mouseButton)
     {
         auto hovered = cam.GetHoveredTile();
-        auto& objectUsage = e.GetPlayer().GetModule<ObjectUsageModule>();
-        auto& hoveredTile = e.GetCurrMapArea().tiles[hovered.x][hovered.y];
+        //auto& objectUsage = _ GetPlayer().GetModule<CraftSkillsModule>();
+        auto& hoveredTile = _ GetCurrMapArea().tiles[hovered.x][hovered.y];
 
-        if (objectUsage.objectBeingUsed != nullptr)
-        {
+//        if (objectUsage.objectBeingUsed != nullptr)
+//        {
 
-            if (hoveredTile.objects.size() > 0)
-                objectUsage.objectBeingUsed->UseOn(hoveredTile.objects.at(hoveredTile.objects.size() -1));
+//            if (hoveredTile.objects.size() > 0)
+//                objectUsage.objectBeingUsed->UseOn(hoveredTile.objects.at(hoveredTile.objects.size() -1));
 
-            objectUsage.objectBeingUsed = nullptr;
+//            objectUsage.objectBeingUsed = nullptr;
 
-            return;
-        }
+//            return;
+//        }
 
         auto clickedInGui = gui.MouseDown(mouseButton);
 
@@ -116,7 +117,7 @@ namespace Forradia
         {
         case SDL_BUTTON_LEFT:
         {
-            e.GetPlayer().GetModule<CoreMovmModule>().dest =
+            _ GetPlayer().GetModule<CoreMovmModule>().dest =
             {
                 cam.GetHoveredTile().x + 0.5f,
                 cam.GetHoveredTile().y + 0.5f
@@ -125,6 +126,7 @@ namespace Forradia
         }
         case SDL_BUTTON_RIGHT:
         {
+
             break;
         }
         }

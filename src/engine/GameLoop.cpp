@@ -44,7 +44,7 @@ namespace Forradia
                         {
                             SDL_StartTextInput();
                             e.text.clear();
-                            e.cursor = 0;
+                            e.textCursor = 0;
                         }
                     }
 
@@ -52,26 +52,26 @@ namespace Forradia
                     {
                         if (event.key.keysym.sym == SDLK_LEFT)
                         {
-                            e.cursor = std::max(0, e.cursor - 1);
+                            e.textCursor = std::max(0, e.textCursor - 1);
                         }
                         else if (event.key.keysym.sym == SDLK_RIGHT)
                         {
-                            e.cursor =
-                                std::min(static_cast<int>(e.text.size()), e.cursor + 1);
+                            e.textCursor =
+                                std::min(static_cast<int>(e.text.size()), e.textCursor + 1);
                         }
                         else if (event.key.keysym.sym == SDLK_BACKSPACE)
                         {
-                            if (e.cursor > 0)
+                            if (e.textCursor > 0)
                             {
-                                e.text.erase(e.cursor - 1, 1);
-                                e.cursor = std::max(0, e.cursor - 1);
+                                e.text.erase(e.textCursor - 1, 1);
+                                e.textCursor = std::max(0, e.textCursor - 1);
                             }
                         }
                         else if (event.key.keysym.sym == SDLK_DELETE)
                         {
-                            if (e.cursor < e.text.size())
+                            if (e.textCursor < e.text.size())
                             {
-                                e.text.erase(e.cursor, 1);
+                                e.text.erase(e.textCursor, 1);
                             }
                         }
                     }
@@ -110,13 +110,13 @@ namespace Forradia
                 case SDL_TEXTINPUT:
                 {
                     e.text.append(event.text.text);
-                    e.cursor++;
+                    e.textCursor++;
                     break;
                 }
                 case SDL_TEXTEDITING:
                 {
                     e.composition = event.edit.text;
-                    e.cursor = event.edit.start;
+                    e.textCursor = event.edit.start;
                     e.selection_len = event.edit.length;
                     break;
                 }
@@ -151,7 +151,7 @@ namespace Forradia
     {
         e.keyboardHandler.ResetForNewFrame();
         e.mouseHandler.ResetForNewFrame();
-        e.customCursor.ResetForNewFrame();
+        e.cursor.ResetForNewFrame();
     }
 
     void GameLoop::Update()
@@ -166,7 +166,7 @@ namespace Forradia
 
         e.sceneManager.GetCurrentScene()->Render();
         e.fpsCounter.Render();
-        e.customCursor.Render();
+        e.cursor.Render();
 
         SDL_GL_SwapWindow(e.window.get());
     }

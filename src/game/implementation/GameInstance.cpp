@@ -60,7 +60,7 @@ namespace Forradia
 
                         {"ScenePrimary", MakeSPtr<ScenePrimary>(e)} });
 
-        e.Run
+        _ Run
         (
             std::move(scenes),
             GetId("SceneGameStart"),

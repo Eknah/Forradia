@@ -7,7 +7,7 @@
 #include "implementation/functionality/actor/modules/JumpingModule.h"
 #include "implementation/functionality/actor/modules/DestMovmModule.h"
 #include "implementation/functionality/actor/modules/DirectionMovmModule.h"
-#include "implementation/functionality/actor/modules/ObjectUsageModule.h"
+#include "implementation/functionality/actor/modules/CraftSkillsModule.h"
 
 namespace Forradia
 {

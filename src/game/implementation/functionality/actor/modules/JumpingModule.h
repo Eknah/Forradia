@@ -13,6 +13,8 @@ namespace Forradia
     class JumpingModule : public IModule
     {
 
+        // Functions
+
     public:
 
         using IModule::IModule;
@@ -21,9 +23,9 @@ namespace Forradia
         void Update() override;
         void Jump();
 
+        // Members
 
     private:
-
         bool isJumping = false;
         float maxJumpHeight = 1.0f;
 

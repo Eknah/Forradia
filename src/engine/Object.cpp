@@ -17,19 +17,4 @@ namespace Forradia
             scaling = 0.6f + CFloat(rnd.Next() % 8) / 10.0f;
     }
 
-    void Object::UseOn(const SPtr<Object>& other)
-    {
-        if (objectType == GetId("ObjectWoodaxe") &&
-            (other->objectType == GetId("ObjectTree1") || other->objectType == GetId("ObjectTree2")))
-                other->TransformInto("ObjectFelledTree");
-
-        if (objectType == GetId("ObjectSaw") && other->objectType == GetId("ObjectFelledTree"))
-            other->TransformInto("ObjectWoodplank");
-    }
-
-    void Object::TransformInto(String objectName)
-    {
-        objectType = GetId(objectName);
-    }
-
 }  // namespace Forradia

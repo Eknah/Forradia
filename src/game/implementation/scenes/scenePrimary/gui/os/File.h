@@ -15,6 +15,8 @@ namespace Forradia
     class File
     {
 
+        // Functions
+
     public:
 
         explicit File(Console& _console) : console(_console) {}
@@ -22,12 +24,14 @@ namespace Forradia
 
         void GiveInput(std::string input);
 
+        // Members
+
+    public:
         String name = "Unnamed folder";
         List<String> outputText = {};
         bool runnable = false;
 
     private:
-
         Console& console;
 
     };

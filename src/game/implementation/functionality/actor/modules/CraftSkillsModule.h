@@ -4,11 +4,16 @@
 #pragma once
 
 #include "../engine/IModule.h"
+#include "../engine/Aliases.h"
+#include "framework/CraftRecipe.h"
+#include "../engine/Point2.h"
 
 namespace Forradia
 {
 
-    class WarpMovmModule : public IModule
+    class Object;
+
+    class CraftSkillsModule : public IModule
     {
 
         // Functions
@@ -18,7 +23,12 @@ namespace Forradia
 
         void ResetForNewFrame() override {};
         void Update() override {};
-        void WarpIfStandOnPortal();
+        std::vector<CraftRecipe> GetPossibleRecipes(Point2 tile);
+        void TryPerformRecipe(CraftRecipe recipe);
+
+
+    public:
+      SPtr<Object> objectBeingUsed = nullptr;
 
     };
 

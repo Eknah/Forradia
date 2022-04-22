@@ -28,7 +28,6 @@ namespace Forradia
     private:
 
         Utilities utils;
-        Palette pal;
 
     };
 

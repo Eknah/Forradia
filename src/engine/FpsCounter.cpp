@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "FpsCounter.h"
+#include "../engine/Palette.h"
 
 namespace Forradia
 {
@@ -19,11 +20,13 @@ namespace Forradia
 
     void FpsCounter::Render()
     {
-        e.FillRect(pal.gray, posx - w / 2,
+        using namespace Palette;
+
+        e.FillRect(Gray, posx - w / 2,
             posy - h / 2, w, h);
-        e.DrawRect(pal.darkGray, posx - w / 2,
+        e.DrawRect(DarkGray, posx - w / 2,
             posy - h / 2, w, h);
-        e.DrawString("Fps: " + std::to_string(fps), pal.white, posx, posy,
+        e.DrawString("Fps: " + std::to_string(fps), White, posx, posy,
             true);
     }
 
