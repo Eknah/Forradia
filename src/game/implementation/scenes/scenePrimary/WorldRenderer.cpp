@@ -54,13 +54,36 @@ namespace Forradia
                 auto tilexI = CInt(tilex);
                 auto tileyI = CInt(tiley);
 
-                auto dxplr = tilexI - movmData.position.x;
-                auto dyplr = tileyI - movmData.position.y;
 
-                auto angle = std::atan2(dyplr, dxplr);
-                auto distSqrd = dxplr*dxplr + dyplr*dyplr;
+                auto angleBehind = std::atan2(-1.0f, 0.0f);
+                auto angleBehindActual = angleBehind + cam.lookingAngle*M_PI/180.0f - M_PI/2.0f;
 
-                if (std::abs(angle + cam.lookingAngle*M_PI/180.0f - M_PI/2.0f) < M_PI/3.0f && distSqrd > 30*cam.zoomAmount) continue;
+                if (angleBehindActual >= M_PI)
+                    angleBehindActual -= M_PI*2;
+
+                if (angleBehindActual <= -M_PI*2)
+                    angleBehindActual += M_PI*2;
+
+                auto behindX = movmData.position.x - std::sin(angleBehindActual)*cam.zoomAmount*2;
+                auto behindY = movmData.position.y - std::cos(angleBehindActual)*cam.zoomAmount*2;
+
+                auto dxTile = tilexI - behindX;
+                auto dyTile = tileyI - behindY;
+
+                auto angle = std::atan2(dyTile, dxTile);
+                auto angleActual = angle + cam.lookingAngle*M_PI/180.0f - M_PI/2.0f;
+
+                if (angleActual >= M_PI)
+                    angleActual -= M_PI*2;
+
+                if (angleActual <= -M_PI*2)
+                    angleActual += M_PI*2;
+
+                if (std::abs(angleActual) < M_PI/2.0f) continue;
+
+//                auto distSqrd = dxplr*dxplr + dyplr*dyplr;
+
+//                if (std::abs(angle + cam.lookingAngle*M_PI/180.0f - M_PI/2.0f) < M_PI/3.0f && distSqrd > 30*cam.zoomAmount) continue;
 
                 auto groundTypeId = tiles[tilexI][tileyI].groundType;
 

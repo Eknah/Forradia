@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Player.h"
+#include "implementation/functionality/actor/modules/CoreMovmModule.h"
 
 namespace Forradia
 {
@@ -13,6 +14,8 @@ namespace Forradia
         AddModule<DirectionMovmModule>();
         AddModule<InventoryModule>();
         AddModule<CraftSkillsModule>();
+
+        GetModule<CoreMovmModule>().stepSize = 2.0f;
     }
 
 }  // namespace Forradia

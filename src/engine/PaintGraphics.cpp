@@ -46,6 +46,7 @@ namespace Forradia
 
     void PaintGraphics::RenderShape(GLenum GeometryType, const std::vector<Point2F>& Vertices, SDL_Color Color) const
     {
+        glDisable(GL_TEXTURE_2D);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         glOrtho(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f);

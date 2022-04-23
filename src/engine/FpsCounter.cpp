@@ -22,9 +22,9 @@ namespace Forradia
     {
         using namespace Palette;
 
-        e.FillRect(Gray, posx - w / 2,
+        e.FillRect(MediumBlueSemiTrans, posx - w / 2,
             posy - h / 2, w, h);
-        e.DrawRect(DarkGray, posx - w / 2,
+        e.DrawRect(Wheat, posx - w / 2,
             posy - h / 2, w, h);
         e.DrawString("Fps: " + std::to_string(fps), White, posx, posy,
             true);
