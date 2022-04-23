@@ -98,12 +98,15 @@ namespace Forradia
                     {
                         e.mouseHandler.leftButtonDown = true;
                         e.mouseHandler.SetLeftButtonBeenFired();
+                        e.mouseHandler.leftDownPos = utils.GetMousePosF();
                     }
                     else if (event.button.button == SDL_BUTTON_RIGHT)
                     {
                         e.mouseHandler.rightButtonDown = true;
                         e.mouseHandler.SetRightButtonBeenFired();
+                        e.mouseHandler.rightDownPos = utils.GetMousePosF();
                     }
+
 
                     break;
                 }
@@ -126,9 +129,20 @@ namespace Forradia
                     e.sceneManager.GetCurrentScene()->MouseUp(event.button.button);
 
                     if (event.button.button == SDL_BUTTON_LEFT)
+                    {
                         e.mouseHandler.leftButtonDown = false;
+                        auto mousePos = utils.GetMousePosF();
+                        auto dx = mousePos.x - e.mouseHandler.leftDownPos.x;
+                        auto dy = mousePos.y - e.mouseHandler.leftDownPos.y;
+                        e.mouseHandler.leftClickDeltaPos = dx*dx + dy*dy;
+                    }
                     else if (event.button.button == SDL_BUTTON_RIGHT)
-                        e.mouseHandler.rightButtonDown = false;
+                    {
+                        e.mouseHandler.rightButtonDown = false;}
+                    auto mousePos = utils.GetMousePosF();
+                    auto dx = mousePos.x - e.mouseHandler.rightDownPos.x;
+                    auto dy = mousePos.y - e.mouseHandler.rightDownPos.y;
+                    e.mouseHandler.rightClickDeltaPos = dx*dx + dy*dy;
 
                     break;
                 }

@@ -3,6 +3,7 @@
 
 #pragma once
 #include "Aliases.h"
+#include "Point2F.h"
 
 namespace Forradia
 {
@@ -21,6 +22,10 @@ namespace Forradia
         UPtr<float> wheelAmount = MakeUPtr<float>(0.0f);
         bool leftButtonDown = false;
         bool rightButtonDown = false;
+        Point2F leftDownPos = {-1, -1};
+        Point2F rightDownPos = {-1, -1};
+        float leftClickDeltaPos = 0;
+        float rightClickDeltaPos = 0;
 
     private:
         UPtr<bool> leftButtonBeenFired = MakeUPtr<bool>(false);

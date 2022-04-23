@@ -47,27 +47,27 @@ namespace Forradia
         auto mousePosF = utils.GetMousePosF();
 
         if (boundsInvBtn.Contains(mousePosF))
-            _ FillRect(Gray, boundsInvBtn);
+            _ FillRect(LightMediumBlueSemiTrans, boundsInvBtn);
         else
-            _ FillRect(DarkGray, boundsInvBtn);
+            _ FillRect(MediumBlueSemiTrans, boundsInvBtn);
 
         _ DrawRect(White, boundsInvBtn);
 
         _ DrawString("Inventory [F2]", White, boundsInvBtn.GetCenter(), true);
 
         if (boundsCharBtn.Contains(mousePosF))
-            _ FillRect(Gray, boundsCharBtn);
+            _ FillRect(LightMediumBlueSemiTrans, boundsCharBtn);
         else
-            _ FillRect(DarkGray, boundsCharBtn);
+            _ FillRect(MediumBlueSemiTrans, boundsCharBtn);
 
         _ DrawRect(White, boundsCharBtn);
 
         _ DrawString("Character [F1]", White, boundsCharBtn.GetCenter(), true);
 
         if (boundsSysBtn.Contains(mousePosF))
-            _ FillRect(Gray, boundsSysBtn);
+            _ FillRect(LightMediumBlueSemiTrans, boundsSysBtn);
         else
-            _ FillRect(DarkGray, boundsSysBtn);
+            _ FillRect(MediumBlueSemiTrans, boundsSysBtn);
 
         _ DrawRect(White, boundsSysBtn);
 
@@ -109,10 +109,12 @@ namespace Forradia
         return false;
     }
 
-    void Gui::MouseUp()
+    void Gui::MouseUp(Uint8 mouseButton)
     {
         for (auto& [key, window] : windows)
             window->MouseUp();
+
+        rightClickMenu.MouseUp(mouseButton);
     }
 
     void Gui::KeyDown(SDL_Keycode key)

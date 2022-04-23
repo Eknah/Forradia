@@ -54,18 +54,7 @@ namespace Forradia
 
     void RightClickMenu::MouseDown(Uint8 mouseButton)
     {
-        if (mouseButton == SDL_BUTTON_RIGHT)
-        {
-            visible = true;
-            mouseClickPos = utils.GetMousePosF();
-            auto hoveredTile = camera.GetHoveredTile();
-            recipes = e.GetPlayer().GetModule<CraftSkillsModule>().GetPossibleRecipes(hoveredTile);
-            for (auto& recipe : recipes)
-            {
-                recipe.craftTile = hoveredTile;
-            }
-        }
-        else if (mouseButton == SDL_BUTTON_LEFT)
+        if (mouseButton == SDL_BUTTON_LEFT)
         {
             if (!visible) return;
 
@@ -83,6 +72,21 @@ namespace Forradia
                 }
 
                 y += lineHeight;
+            }
+        }
+    }
+
+    void RightClickMenu::MouseUp(Uint8 mouseButton)
+    {
+        if (mouseButton == SDL_BUTTON_RIGHT && e.mouseHandler.rightClickDeltaPos < 0.0005f)
+        {
+            visible = true;
+            mouseClickPos = utils.GetMousePosF();
+            auto hoveredTile = camera.GetHoveredTile();
+            recipes = e.GetPlayer().GetModule<CraftSkillsModule>().GetPossibleRecipes(hoveredTile);
+            for (auto& recipe : recipes)
+            {
+                recipe.craftTile = hoveredTile;
             }
         }
     }

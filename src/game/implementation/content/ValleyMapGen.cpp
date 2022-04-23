@@ -18,14 +18,14 @@ namespace Forradia
 
         ClearToGrass(mapArea);
         GeneratePlayerStartingPosition(mapArea);
+        GenerateRivers(mapArea);
         GenerateElevation(mapArea);
         //GenerateRock(mapArea);
-        GenerateRivers(mapArea);
         GenerateTrees(mapArea);
         GenerateBushes(mapArea);
         GenerateSmallStones(mapArea);
         GeneratePinkFlowers(mapArea);
-        //GenerateTallGrass(mapArea);
+        GenerateTallGrass(mapArea);
         GenerateVillage(mapArea);
         GenerateMobs(mapArea);
         GenerateQuestCaves(e, mapArea, worldMap);
@@ -67,27 +67,66 @@ namespace Forradia
         {
             auto centerTileX = 0;
             auto centerTileY = 0;
-            auto maxr = 4 + rnd.Next() % 6;
+            auto maxr = 4 + rnd.Next(6);
 
             do
             {
-                centerTileX = rnd.Next() % mapArea->size;
-                centerTileY = rnd.Next() % mapArea->size;
-                maxr = 1 + rnd.Next() % 6;
+                centerTileX = rnd.Next(mapArea->size);
+                centerTileY = rnd.Next(mapArea->size);
+                maxr = 5 + rnd.Next(12);
             } while (std::abs(centerTileX - mapArea->size / 2) < villageSize
                 || std::abs(centerTileY - mapArea->size / 2) < villageSize);
 
-            for (auto r = maxr; r >= 0; r-= 5)
+            auto stop = false;
+
+            for (auto r = maxr; r >= 0 && !stop; r-= 1)
             {
-                for (auto y = centerTileY - r; y <= centerTileY + r; y++)
+                for (auto y = centerTileY - r; y <= centerTileY + r && !stop; y++)
                 {
-                    for (auto x = centerTileX - r; x <= centerTileX + r; x++)
+                    for (auto x = centerTileX - r; x <= centerTileX + r && !stop; x++)
                     {
                         auto dx = x - centerTileX;
                         auto dy = y - centerTileY;
 
                         if (dx * dx + dy * dy >= r * r) continue;
                         if (x < 0 || y < 0 || x >= mapArea->size - 1 || y >= mapArea->size - 1) continue;
+
+                        if (mapArea->tiles[x][y].groundType == GetId("GroundTypeWater")) stop = true;
+
+                        mapArea->tiles[x][y].elevation += 2;
+                    }
+                }
+            }
+        }
+
+        for (auto i = 0; i < 160; i++)
+        {
+            auto centerTileX = 0;
+            auto centerTileY = 0;
+            auto maxr = 4 + rnd.Next(6);
+
+            do
+            {
+                centerTileX = rnd.Next(mapArea->size);
+                centerTileY = rnd.Next(mapArea->size);
+                maxr = 1 + rnd.Next(6);
+            } while (std::abs(centerTileX - mapArea->size / 2) < villageSize
+                || std::abs(centerTileY - mapArea->size / 2) < villageSize);
+
+            auto stop = false;
+
+            for (auto r = maxr; r >= 0 && !stop; r-= 1)
+            {
+                for (auto y = centerTileY - r; y <= centerTileY + r && !stop; y++)
+                {
+                    for (auto x = centerTileX - r; x <= centerTileX + r && !stop; x++)
+                    {
+                        auto dx = x - centerTileX;
+                        auto dy = y - centerTileY;
+
+                        if (dx * dx + dy * dy >= r * r) continue;
+                        if (x < 0 || y < 0 || x >= mapArea->size - 1 || y >= mapArea->size - 1) continue;
+                        if (mapArea->tiles[x][y].groundType == GetId("GroundTypeWater")) stop = true;
 
                         mapArea->tiles[x][y].elevation += 5;
                         mapArea->tiles[x][y].groundType = GetId("GroundTypeRock");
@@ -113,9 +152,9 @@ namespace Forradia
             do
             {
 
-                centerx = rnd.Next() % mapArea->size;
-                centery = rnd.Next() % mapArea->size;
-                r = 5 + rnd.Next() % 13;
+                centerx = rnd.Next(mapArea->size);
+                centery = rnd.Next(mapArea->size);
+                r = 5 + rnd.Next(13);
 
             } while (std::abs(centerx - mapArea->size / 2) < villageSize / 2 + r  || std::abs(centery - mapArea->size / 2) < villageSize / 2 + r);
 
@@ -141,8 +180,8 @@ namespace Forradia
     {
         for (auto i = 0; i < 6; i++)
         {
-            float xstart = rnd.Next() % mapArea->size;
-            float ystart = rnd.Next() % mapArea->size;
+            float xstart = rnd.Next(mapArea->size);
+            float ystart = rnd.Next(mapArea->size);
 
             float xdest = mapArea->size / 2;
             float ydest = mapArea->size / 2;
@@ -184,9 +223,9 @@ namespace Forradia
     {
         for (auto i = 0; i < 30; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
-            auto numTrees = 15 + rnd.Next() % 15;
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
+            auto numTrees = 15 + rnd.Next(15);
 
             for (auto j = 0; j < numTrees; j++)
             {
@@ -196,18 +235,18 @@ namespace Forradia
 
                     if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
                         if (mapArea->tiles[x][y].objects.size() == 0)
-                            mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTree1"));
+                            mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTree1", true, true));
                 }
 
-                x += rnd.Next() % 7 - rnd.Next() % 7;
-                y += rnd.Next() % 7 - rnd.Next() % 7;
+                x += rnd.Next(7) - rnd.Next(7);
+                y += rnd.Next(7) - rnd.Next(7) ;
             }
         }
         for (auto i = 0; i < 30; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
-            auto numTrees = 15 + rnd.Next() % 15;
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
+            auto numTrees = 15 + rnd.Next(15);
 
             for (auto j = 0; j < numTrees; j++)
             {
@@ -217,11 +256,32 @@ namespace Forradia
 
                     if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
                         if (mapArea->tiles[x][y].objects.size() == 0)
-                            mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTree2"));
+                            mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTree2", true, true));
                 }
 
-                x += rnd.Next() % 7 - rnd.Next() % 7;
-                y += rnd.Next() % 7 - rnd.Next() % 7;
+                x += rnd.Next(7) - rnd.Next(7);
+                y += rnd.Next(7) - rnd.Next(7);
+            }
+        }
+        for (auto i = 0; i < 90; i++)
+        {
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
+            auto numTrees = 1 + rnd.Next(4);
+
+            for (auto j = 0; j < numTrees; j++)
+            {
+                if (x >= 0 && y >= 0 && x < mapArea->size && y < mapArea->size)
+                {
+                    if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
+
+                    if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
+                        if (mapArea->tiles[x][y].objects.size() == 0)
+                            mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectRipeAppleTree", true, true));
+                }
+
+                x += rnd.Next(7) - rnd.Next(7);
+                y += rnd.Next(7) - rnd.Next(7);
             }
         }
     }
@@ -264,7 +324,7 @@ namespace Forradia
             mapArea->tiles[xcenter + xoffset][ycenter - y].groundType = GetId("GroundTypeTrail");
 
             if (y % 3 == 0 && y >= villageSize)
-                xoffset += rnd.Next() % 2 - rnd.Next() % 2;
+                xoffset += rnd.Next(2) - rnd.Next(2);
 
             mapArea->tiles[xcenter + xoffset][ycenter + y].objects.clear();
             mapArea->tiles[xcenter + xoffset][ycenter + y].groundType = GetId("GroundTypeTrail");
@@ -282,7 +342,7 @@ namespace Forradia
             mapArea->tiles[xcenter - x][ycenter + yoffset].groundType = GetId("GroundTypeTrail");
 
             if (x % 3 == 0 && x >= villageSize)
-                yoffset += rnd.Next() % 2 - rnd.Next() % 2;
+                yoffset += rnd.Next(2) - rnd.Next(2);
 
             mapArea->tiles[xcenter + x][ycenter + yoffset].objects.clear();
             mapArea->tiles[xcenter + x][ycenter + yoffset].groundType = GetId("GroundTypeTrail");
@@ -300,8 +360,8 @@ namespace Forradia
         {
             if (y == ycenter) continue;
 
-            mapArea->tiles[xstart + 1][y].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
-            mapArea->tiles[xend - 1][y].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
+            mapArea->tiles[xstart][y].objects.push_back(MakeSPtr<Object>("ObjectBush1", true, true));
+            mapArea->tiles[xend][y].objects.push_back(MakeSPtr<Object>("ObjectBush1", true, true));
             mapArea->tiles[xstart][y].objects.push_back(MakeSPtr<Object>("ObjectWoodFence", false, false, 180));
             mapArea->tiles[xend][y].objects.push_back(MakeSPtr<Object>("ObjectWoodFence", false, false, 0));
         }
@@ -310,8 +370,8 @@ namespace Forradia
         {
             if (x == xcenter) continue;
 
-            mapArea->tiles[x][ystart + 1].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
-            mapArea->tiles[x][yend - 1].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
+            mapArea->tiles[x][ystart].objects.push_back(MakeSPtr<Object>("ObjectBush1", true, true));
+            mapArea->tiles[x][yend].objects.push_back(MakeSPtr<Object>("ObjectBush1", true, true));
             mapArea->tiles[x][ystart].objects.push_back(MakeSPtr<Object>("ObjectWoodFence", false, false, 90));
             mapArea->tiles[x][yend].objects.push_back(MakeSPtr<Object>("ObjectWoodFence", false, false, 270));
         }
@@ -399,14 +459,14 @@ namespace Forradia
     {
         for (auto i = 0; i < 1000; i++)
         {
-            auto tileX = rnd.Next() % mapArea->size;
-            auto tileY = rnd.Next() % mapArea->size;
+            auto tileX = rnd.Next(mapArea->size);
+            auto tileY = rnd.Next(mapArea->size);
 
             if (DistToPlayerStartingPos(mapArea, tileX, tileY) < playerStartAreaSize) continue;
 
             if (mapArea->tiles[tileX][tileY].groundType == GetId("GroundTypeGrass"))
                 if (mapArea->tiles[tileX][tileY].objects.size() == 0)
-                    mapArea->tiles[tileX][tileY].objects.push_back(MakeSPtr<Object>("ObjectBush1"));
+                    mapArea->tiles[tileX][tileY].objects.push_back(MakeSPtr<Object>("ObjectBush1", true, true));
         }
     }
 
@@ -414,8 +474,8 @@ namespace Forradia
     {
         for (auto i = 0; i < 200; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
 
             if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
@@ -429,8 +489,8 @@ namespace Forradia
     {
         for (auto i = 0; i < 100; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
 
             if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
                 if (mapArea->tiles[x][y].objects.size() == 0)
@@ -442,12 +502,12 @@ namespace Forradia
     {
         for (auto i = 0; i < 6000; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
 
             if (mapArea->tiles[x][y].groundType == GetId("GroundTypeGrass"))
                 if (mapArea->tiles[x][y].objects.size() == 0)
-                    mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTallGrass"));
+                    mapArea->tiles[x][y].objects.push_back(MakeSPtr<Object>("ObjectTallGrass", true, true));
         }
     }
 
@@ -456,8 +516,8 @@ namespace Forradia
     {
         for (auto i = 0; i < 100; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
 
             if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
             if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
@@ -471,8 +531,8 @@ namespace Forradia
 
         for (auto i = 0; i < 100; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
 
             if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
             if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
@@ -486,8 +546,8 @@ namespace Forradia
 
         for (auto i = 0; i < 100; i++)
         {
-            auto x = rnd.Next() % mapArea->size;
-            auto y = rnd.Next() % mapArea->size;
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
 
             if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
             if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
@@ -513,6 +573,33 @@ namespace Forradia
         //        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
         //    }
         //}
+
+        auto x = 0;
+        auto y = 0;
+
+        x = rnd.Next(mapArea->size);
+        y = rnd.Next(mapArea->size);
+
+        mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobRubyButterfly");
+        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+
+        x = rnd.Next(mapArea->size);
+        y = rnd.Next(mapArea->size);
+
+        mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobTopazButterfly");
+        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+
+        x = rnd.Next(mapArea->size);
+        y = rnd.Next(mapArea->size);
+
+        mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobJadeButterfly");
+        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+
+        x = rnd.Next(mapArea->size);
+        y = rnd.Next(mapArea->size);
+
+        mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobAmberButterfly");
+        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
     }
 
     void ValleyMapGen::GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const
@@ -521,8 +608,8 @@ namespace Forradia
 
         for (auto floor = -1; floor >= -5; floor--)
         {
-            auto x = rnd.Next() % 94 + 3;
-            auto y = rnd.Next() % 94 + 3;
+            auto x = rnd.Next(94) + 3;
+            auto y = rnd.Next(94) + 3;
 
             if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 

@@ -27,7 +27,7 @@ namespace Forradia
         void Update();
         void Render();
         bool MouseDown(Uint8 mouseButton);
-        void MouseUp();
+        void MouseUp(Uint8 mouseButton);
         void KeyDown(SDL_Keycode key);
 
         UMap<String, UPtr<GuiWindowBase>> windows;

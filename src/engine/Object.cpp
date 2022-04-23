@@ -9,12 +9,12 @@ namespace Forradia
     Object::Object(String objTypeName, bool randScaling, bool randRotation, float _rotation) : objectType(GetId(objTypeName))
     {
         if (randRotation) 
-            rotation = CFloat(rnd.Next() % 360);
+            rotation = CFloat(rnd.Next(360));
         else
             rotation = _rotation;
 
         if (randScaling)
-            scaling = 0.6f + CFloat(rnd.Next() % 8) / 10.0f;
+            scaling = 0.6f + CFloat(rnd.Next(8)) / 10.0f;
     }
 
 }  // namespace Forradia

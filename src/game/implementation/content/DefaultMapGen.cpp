@@ -49,7 +49,7 @@ namespace Forradia
         for (auto i = 0; i < 40; i++)
         {
             auto center =mapArea->RandCoordI();
-            auto maxr = 4 + rnd.Next() % 12;
+            auto maxr = 4 + rnd.Next(12);
 
             for (auto r = maxr; r >= 0; r -= 1)
             {
@@ -74,7 +74,7 @@ namespace Forradia
         for (auto i = 0; i < 20; i++)
         {
             auto center = mapArea->RandCoordI();
-            auto r = 5 + rnd.Next() % 13;
+            auto r = 5 + rnd.Next(13);
 
             for (auto y = center.y - r; y <= center.y + r; y++)
             {
@@ -107,7 +107,7 @@ namespace Forradia
         for (auto i = 0; i < 30; i++)
         {
             auto center = mapArea->RandCoordI();
-            auto r = 4 + rnd.Next() % 5;
+            auto r = 4 + rnd.Next(5);
 
             for (auto j = 0; j < r; j++)
             {
@@ -169,7 +169,7 @@ namespace Forradia
         for (auto i = 0; i < 30; i++)
         {
             auto center = mapArea->RandCoordI();
-            auto r = 2 + rnd.Next() % 3;
+            auto r = 2 + rnd.Next(3);
 
             for (auto j = 0; j < r; j++)
             {
@@ -230,7 +230,7 @@ namespace Forradia
         for (auto i = 0; i < 10; i++)
         {
             auto center = mapArea->RandCoordI();
-            auto r = 5 + rnd.Next() % 13;
+            auto r = 5 + rnd.Next(13);
 
             for (auto y = center.y - r; y <= center.y + r; y++)
             {
@@ -254,7 +254,7 @@ namespace Forradia
         for (auto i = 0; i < 30; i++)
         {
             auto coord = mapArea->RandCoordI();
-            auto numTrees = 15 + rnd.Next() % 15;
+            auto numTrees = 15 + rnd.Next(15);
 
             for (auto j = 0; j < numTrees; j++)
             {
@@ -267,14 +267,14 @@ namespace Forradia
                             mapArea->tiles[coord.x][coord.y].objects.push_back(MakeSPtr<Object>("ObjectTree1"));
                 }
 
-                coord.x += rnd.Next() % 7 - rnd.Next() % 7;
-                coord.y += rnd.Next() % 7 - rnd.Next() % 7;
+                coord.x += rnd.Next(7) - rnd.Next(7);
+                coord.y += rnd.Next(7) - rnd.Next(7);
             }
         }
         for (auto i = 0; i < 30; i++)
         {
             auto coord = mapArea->RandCoordI();
-            auto numTrees = 15 + rnd.Next() % 15;
+            auto numTrees = 15 + rnd.Next(15);
 
             for (auto j = 0; j < numTrees; j++)
             {
@@ -287,8 +287,8 @@ namespace Forradia
                             mapArea->tiles[coord.x][coord.y].objects.push_back(MakeSPtr<Object>("ObjectTree2"));
                 }
 
-                coord.x += rnd.Next() % 7 - rnd.Next() % 7;
-                coord.y += rnd.Next() % 7 - rnd.Next() % 7;
+                coord.x += rnd.Next(7) - rnd.Next(7);
+                coord.y += rnd.Next(7) - rnd.Next(7);
             }
         }
     }
@@ -391,8 +391,8 @@ namespace Forradia
 
         for (auto floor = -1; floor >= -20; floor--)
         {
-            auto x = rnd.Next() % 94 + 3;
-            auto y = rnd.Next() % 94 + 3;
+            auto x = rnd.Next(94) + 3;
+            auto y = rnd.Next(94) + 3;
 
             if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 

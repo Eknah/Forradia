@@ -20,6 +20,7 @@ namespace Forradia
 
         void Render();
         void MouseDown(Uint8 mouseButton);
+        void MouseUp(Uint8 mouseButton);
 
     private:
 

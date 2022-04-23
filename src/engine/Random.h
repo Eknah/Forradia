@@ -13,7 +13,7 @@ namespace Forradia
     public:
         Random();
 
-        int Next() const;
+        int Next(int limit) const;
 
     private:
         inline static std::uniform_int_distribution<int> result =

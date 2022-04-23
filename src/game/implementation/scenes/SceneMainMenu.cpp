@@ -10,8 +10,8 @@ namespace Forradia
     void SceneMainMenu::Enter()
     {
         sceneButtons.clear();
-        sceneButtons.push_back({ {0.5f, 0.4f, 0.1f, 0.05f}, "Client" });
-        sceneButtons.push_back({ {0.5f, 0.47f, 0.1f, 0.05f}, "Server" });
+        sceneButtons.push_back({ {0.5f, 0.4f, 0.1f, 0.05f}, "New Game" });
+        sceneButtons.push_back({ {0.5f, 0.47f, 0.1f, 0.05f}, "Exit" });
     }
 
     void SceneMainMenu::Render()

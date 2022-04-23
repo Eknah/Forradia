@@ -51,12 +51,12 @@ namespace Forradia
 
     Point2F MapArea::RandCoordF()
     {
-        return { CFloat(rnd.Next() % size), CFloat(rnd.Next() % size) };
+        return { CFloat(rnd.Next(size)), CFloat(rnd.Next(size)) };
     }
 
     Point2 MapArea::RandCoordI()
     {
-        return { rnd.Next() % size, rnd.Next() % size};
+        return { rnd.Next(size), rnd.Next(size)};
     }
     bool MapArea::Contains(Point2 p, int margin)
     {

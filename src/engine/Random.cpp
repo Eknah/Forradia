@@ -15,9 +15,9 @@ namespace Forradia
         }
     }
 
-    int Random::Next() const
+    int Random::Next(int limit) const
     {
-        return result(mt);
+        return result(mt) % limit;
     }
 
 }  // namespace Forradia

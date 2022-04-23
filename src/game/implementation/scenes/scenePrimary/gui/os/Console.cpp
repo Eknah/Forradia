@@ -22,13 +22,13 @@ namespace Forradia
 
         using namespace Palette;
 
-        _ FillRect(Gray, bounds);
+        _ FillRect(MediumBlueSemiTrans, bounds);
         _ DrawRect(Wheat, bounds);
 
         dim input_bounds = bounds.Copy().Translate(0.0f, bounds.h - inputLineHeight).SetHeight(inputLineHeight);
 
         if (input_active)
-            _ FillRect(LightGray, input_bounds);
+            _ FillRect(LightMediumBlueSemiTrans, input_bounds);
 
         _ DrawLine(Wheat, input_bounds.GetTopEdge());
 

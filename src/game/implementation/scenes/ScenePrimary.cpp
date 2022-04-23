@@ -132,9 +132,9 @@ namespace Forradia
         }
     }
 
-    void ScenePrimary::MouseUp(Uint8 MouseButton)
+    void ScenePrimary::MouseUp(Uint8 mouseButton)
     {
-        gui.MouseUp();
+        gui.MouseUp(mouseButton);
     }
 
     void ScenePrimary::KeyDown(SDL_Keycode key)

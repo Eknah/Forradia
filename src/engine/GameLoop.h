@@ -42,6 +42,8 @@ namespace Forradia
 
         static int EventFilter(void* pthis, const SDL_Event* event);
 
+        Utilities utils;
+
     };
 
 }  // namespace Forradia

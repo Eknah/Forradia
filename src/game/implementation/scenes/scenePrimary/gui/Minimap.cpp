@@ -13,7 +13,7 @@ namespace Forradia
 
         auto minimapSizeF = utils.ConvertToFloat(minimapSize);
 
-        _ FillRect(Gray, 0, 0, minimapSizeF.w, minimapSizeF.h);
+        _ FillRect(MediumBlueSemiTrans, 0, 0, minimapSizeF.w, minimapSizeF.h);
         _ DrawRect(Black, 0, 0, minimapSizeF.w, minimapSizeF.h);
     }
 

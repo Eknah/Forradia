@@ -29,8 +29,8 @@ namespace Forradia
             if (coreMovm.dest.x == -1 || coreMovm.dest.y == -1)
             {
 
-                auto destx = coreMovm.position.x + rnd.Next() % 15 - rnd.Next() % 15;
-                auto desty = coreMovm.position.y + rnd.Next() % 15 - rnd.Next() % 15;
+                auto destx = coreMovm.position.x + rnd.Next(15) - rnd.Next(15);
+                auto desty = coreMovm.position.y + rnd.Next(15) - rnd.Next(15);
 
                 destx = std::min(std::max(destx, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
                 desty = std::min(std::max(desty, 0.0f), CFloat(e.world->mapAreaSize) - 1.0f);
