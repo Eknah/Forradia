@@ -24,12 +24,12 @@ namespace Forradia
         glPushMatrix();
         glTranslatef(0.0, -2 + 2.0, 0.0);
 
-        RenderAllExceptRoofAndRays();
+        DoRender();
 
         glPopMatrix();
     }
 
-    void WorldRenderer::RenderAllExceptRoofAndRays()
+    void WorldRenderer::DoRender()
     {
         auto mapAreaSz = _ world->mapAreaSize;
         auto& movmData = _ GetPlayer().GetModule<CoreMovmModule>();
@@ -53,6 +53,14 @@ namespace Forradia
 
                 auto tilexI = CInt(tilex);
                 auto tileyI = CInt(tiley);
+
+                auto dxplr = tilexI - movmData.position.x;
+                auto dyplr = tileyI - movmData.position.y;
+
+                auto angle = std::atan2(dyplr, dxplr);
+                auto distSqrd = dxplr*dxplr + dyplr*dyplr;
+
+                if (std::abs(angle + cam.lookingAngle*M_PI/180.0f - M_PI/2.0f) < M_PI/3.0f && distSqrd > 30*cam.zoomAmount) continue;
 
                 auto groundTypeId = tiles[tilexI][tileyI].groundType;
 

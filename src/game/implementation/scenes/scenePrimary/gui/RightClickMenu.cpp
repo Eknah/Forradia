@@ -78,7 +78,7 @@ namespace Forradia
 
     void RightClickMenu::MouseUp(Uint8 mouseButton)
     {
-        if (mouseButton == SDL_BUTTON_RIGHT && e.mouseHandler.rightClickDeltaPos < 0.0005f)
+        if (mouseButton == SDL_BUTTON_RIGHT && e.mouseHandler.rightClickDeltaPos < 0.0002f)
         {
             visible = true;
             mouseClickPos = utils.GetMousePosF();

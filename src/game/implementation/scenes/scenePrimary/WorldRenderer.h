@@ -25,7 +25,7 @@ namespace Forradia
 
     private:
 
-        void RenderAllExceptRoofAndRays();
+        void DoRender();
         void RenderRoof(int x, int y);
         float CalcPlayerElev();
         Point2F CalcOffset();

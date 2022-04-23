@@ -35,6 +35,16 @@ namespace Forradia
 
                 result.push_back(recipe);
             }
+            if (object->objectType == GetId("ObjectRipeAppleTree"))
+            {
+                CraftRecipe recipe;
+                recipe.toolObjectType = GetId("ObjectWoodaxe");
+                recipe.rawMatObjectType = GetId("ObjectRipeAppleTree");
+                recipe.resultObjectType = GetId("ObjectFelledTree");
+                recipe.description = "Chop down tree";
+
+                result.push_back(recipe);
+            }
         }
 
         return result;

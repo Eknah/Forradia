@@ -91,8 +91,6 @@ namespace Forradia
 
                 case SDL_MOUSEBUTTONDOWN:
                 {
-                    e.sceneManager.GetCurrentScene()->MouseDown(
-                        event.button.button);
 
                     if (event.button.button == SDL_BUTTON_LEFT)
                     {
@@ -107,6 +105,7 @@ namespace Forradia
                         e.mouseHandler.rightDownPos = utils.GetMousePosF();
                     }
 
+                    e.sceneManager.GetCurrentScene()->MouseDown(event.button.button);
 
                     break;
                 }
@@ -126,7 +125,6 @@ namespace Forradia
 
                 case SDL_MOUSEBUTTONUP:
                 {
-                    e.sceneManager.GetCurrentScene()->MouseUp(event.button.button);
 
                     if (event.button.button == SDL_BUTTON_LEFT)
                     {
@@ -143,6 +141,8 @@ namespace Forradia
                     auto dx = mousePos.x - e.mouseHandler.rightDownPos.x;
                     auto dy = mousePos.y - e.mouseHandler.rightDownPos.y;
                     e.mouseHandler.rightClickDeltaPos = dx*dx + dy*dy;
+
+                    e.sceneManager.GetCurrentScene()->MouseUp(event.button.button);
 
                     break;
                 }
