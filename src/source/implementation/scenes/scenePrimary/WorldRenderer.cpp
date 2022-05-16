@@ -125,7 +125,8 @@ namespace Forradia
 
         DoRender();
 
-        glPopMatrix();
+
+
 
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
         glBlitFramebuffer(

@@ -90,6 +90,8 @@ namespace Forradia
     {
         worldRenderer.Render();
         gui.Render();
+
+        e.DrawImage("Frame", 0, 0, 1, 1);
     }
 
     void ScenePrimary::MouseDown(Uint8 mouseButton)
