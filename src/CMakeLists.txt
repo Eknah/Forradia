@@ -21,6 +21,6 @@ add_executable(
 # target_link_libraries(Forradia GL GLU glut GLEW SDL2 SDL2_image SDL2_ttf)
 
 # Windows
-target_link_libraries(Forradia opengl32 SDL2 SDL2_image SDL2_ttf)
+target_link_libraries(Forradia opengl32 GLEW32 SDL2 SDL2_image SDL2_ttf)
 
 target_include_directories(Forradia PUBLIC . ./headers C:/SDL2/include C:/GLEW/include C:/freeglut/include)
