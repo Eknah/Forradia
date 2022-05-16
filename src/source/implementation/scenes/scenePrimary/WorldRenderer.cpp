@@ -132,6 +132,7 @@ namespace Forradia
         0, 0, RES_WIDTH, RES_HEIGHT,
         0, 0, origCanvasSize.w, origCanvasSize.h,
         GL_COLOR_BUFFER_BIT, GL_NEAREST);
+        glViewport(0, 0, origCanvasSize.w, origCanvasSize.h);
     }
 
     void WorldRenderer::DoRender()
