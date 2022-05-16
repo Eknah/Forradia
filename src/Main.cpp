@@ -7,7 +7,7 @@
 //  /_/     /____/ /_/ \_\ /_/ \_\ /_//_/ /____/ /_/  /_//_/
 //
 
-#include "implementation/GameInstance.h"
+#include "GameInstance.h"
 
 // Creates game instance and runs it
 
