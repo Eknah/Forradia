@@ -9,7 +9,10 @@ namespace Forradia
 
     std::vector<CraftRecipe> CraftSkillsModule::GetPossibleRecipes(Point2 tile)
     {
+
         std::vector<CraftRecipe> result;
+
+        if (tile.x < 0 || tile.y < 0 || tile.x >= e.GetCurrMapArea().size || tile.y >= e.GetCurrMapArea().size) return result;
 
         auto& hoveredTile = e.GetCurrMapArea().tiles[tile.x][tile.y];
 

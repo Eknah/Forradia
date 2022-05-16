@@ -79,6 +79,10 @@ namespace Forradia
 
             auto stop = false;
 
+            auto angle = rnd.Next(360) / 180.0f * M_PI;
+            auto dirx = std::cosf(angle);
+            auto diry = std::sinf(angle);
+
             for (auto r = maxr; r >= 0 && !stop; r-= 1)
             {
                 for (auto y = centerTileY - r; y <= centerTileY + r && !stop; y++)
@@ -94,6 +98,13 @@ namespace Forradia
                         if (mapArea->tiles[x][y].groundType == GetId("GroundTypeWater")) stop = true;
 
                         mapArea->tiles[x][y].elevation += 2;
+
+                        auto param = std::powf(1.0f * (maxr - r), 2) / (1.0f*maxr)/2.0f;
+                        mapArea->tiles[x][y].vertexOffset =
+                        {
+                        (rnd.Next(2) - 1) / 6.0f + dirx * param,
+                        (rnd.Next(2) - 1) / 6.0f + diry * param
+                        };
                     }
                 }
             }
@@ -115,6 +126,10 @@ namespace Forradia
 
             auto stop = false;
 
+            auto angle = rnd.Next(360)/180.0f*M_PI;
+            auto dirx = std::cosf(angle);
+            auto diry = std::sinf(angle);
+
             for (auto r = maxr; r >= 0 && !stop; r-= 1)
             {
                 for (auto y = centerTileY - r; y <= centerTileY + r && !stop; y++)
@@ -133,6 +148,13 @@ namespace Forradia
                         mapArea->tiles[x+1][y].groundType = GetId("GroundTypeRock");
                         mapArea->tiles[x][y+1].groundType = GetId("GroundTypeRock");
                         mapArea->tiles[x+1][y+1].groundType = GetId("GroundTypeRock");
+
+                        auto param = std::powf(1.0f * (maxr - r), 2) / (1.0f * maxr) / 2.0f;
+                        mapArea->tiles[x][y].vertexOffset =
+                        {
+                        (rnd.Next(2) - 1) / 6.0f + dirx * param,
+                        (rnd.Next(2) - 1) / 6.0f + diry * param
+                        };
                     }
                 }
             }

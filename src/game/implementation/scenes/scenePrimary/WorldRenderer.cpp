@@ -16,6 +16,8 @@ namespace Forradia
         background.Render(cam.zoomAmount);
         cam.SetupCamera();
 
+        
+
         glEnable(GL_DEPTH_TEST);
         glDepthMask(GL_TRUE);
         glDepthFunc(GL_LEQUAL);
@@ -23,6 +25,55 @@ namespace Forradia
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glPushMatrix();
         glTranslatef(0.0, -2 + 2.0, 0.0);
+
+        auto width = e.cfg.tileSize * 150;
+        auto height = e.cfg.tileSize * 50;
+        auto ybottom = -e.cfg.tileSize*25;
+
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, _ imageLoader.images.at(GetId("SkyBackground")));
+
+        glBegin(GL_QUADS);
+
+        glColor3f(1.0f, 1.0f, 1.0f);
+
+        glTexCoord2f(0, 1);
+        glVertex3f(-width / 2, ybottom, -width / 2);
+        glTexCoord2f(1, 1);
+        glVertex3f(width / 2, ybottom, -width / 2);
+        glTexCoord2f(1, 0);
+        glVertex3f(width / 2, ybottom + height, -width / 2);
+        glTexCoord2f(0, 0);
+        glVertex3f(-width / 2, ybottom + height, -width / 2);
+
+        glTexCoord2f(0, 1);
+        glVertex3f(width / 2, ybottom, -width / 2);
+        glTexCoord2f(1, 1);
+        glVertex3f(width / 2, ybottom, width / 2);
+        glTexCoord2f(1, 0);
+        glVertex3f(width / 2, ybottom + height, width / 2);
+        glTexCoord2f(0, 0);
+        glVertex3f(width / 2, ybottom + height, -width / 2);
+
+        glTexCoord2f(0, 1);
+        glVertex3f(width / 2, ybottom, width / 2);
+        glTexCoord2f(1, 1);
+        glVertex3f(-width / 2, ybottom, width / 2);
+        glTexCoord2f(1, 0);
+        glVertex3f(-width / 2, ybottom + height, width / 2);
+        glTexCoord2f(0, 0);
+        glVertex3f(width / 2, ybottom + height, width / 2);
+
+        glTexCoord2f(0, 1);
+        glVertex3f(-width / 2, ybottom, width / 2);
+        glTexCoord2f(1, 1);
+        glVertex3f(-width / 2, ybottom, -width / 2);
+        glTexCoord2f(1, 0);
+        glVertex3f(-width / 2, ybottom + height, -width / 2);
+        glTexCoord2f(0, 0);
+        glVertex3f(-width / 2, ybottom + height, width / 2);
+
+        glEnd();
 
         DoRender();
 
@@ -148,6 +199,20 @@ namespace Forradia
                 auto tileX3 = offset.x + x * _ cfg.tileSize + _ cfg.tileSize;
                 auto tileY3 = elev[3];
                 auto tileZ3 = offset.y + y * _ cfg.tileSize;
+
+                auto offsetAmount = 4.0f;
+
+                tileX0 += tiles[tilexI][tileyI].vertexOffset.x*e.cfg.tileSize* offsetAmount;
+                tileZ0 += tiles[tilexI][tileyI].vertexOffset.y * e.cfg.tileSize * offsetAmount;
+
+                tileX1 += tiles[tilexI][tileyI - 1].vertexOffset.x * e.cfg.tileSize * offsetAmount;
+                tileZ1 += tiles[tilexI][tileyI - 1].vertexOffset.y * e.cfg.tileSize * offsetAmount;
+
+                tileX2 += tiles[tilexI + 1][tileyI - 1].vertexOffset.x * e.cfg.tileSize * offsetAmount;
+                tileZ2 += tiles[tilexI + 1][tileyI - 1].vertexOffset.y * e.cfg.tileSize * offsetAmount;
+
+                tileX3 += tiles[tilexI + 1][tileyI].vertexOffset.x * e.cfg.tileSize * offsetAmount;
+                tileZ3 += tiles[tilexI + 1][tileyI].vertexOffset.y * e.cfg.tileSize * offsetAmount;
 
                 tileY0 = planetShaper.GetNewY(tileY0, CFloat(tilexI), CFloat(tileyI));
                 tileY1 = planetShaper.GetNewY(tileY1, CFloat(tilexI), CFloat(tileyI) - 1);

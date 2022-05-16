@@ -32,6 +32,7 @@ namespace Forradia
         int elevation = 0;
         SPtr<Actor> actor = nullptr;
         std::unordered_map<std::string, std::string> properties;
+        Point2F vertexOffset = {0, 0};
 
     private:
         const IEngine& e;
