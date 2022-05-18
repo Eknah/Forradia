@@ -14,7 +14,7 @@ namespace Forradia
     {
 
 
-
+		 
         background.Render(cam.zoomAmount);
         cam.SetupCamera();
 
