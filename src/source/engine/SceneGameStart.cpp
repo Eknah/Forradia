@@ -16,7 +16,8 @@ namespace Forradia
             0.25f - logoSizeF.h / 2.0f,
             logoSizeF.w,
             logoSizeF.h);
-        e.DrawString(text, { 255, 255, 255, 255 }, 0.5f, 0.5f, true);
+        e.DrawString(text, SDL_Color { 255, 255, 255, 255 }, 0.5f, 0.5f, true);
+
     }
 
     void SceneGameStart::MouseDown(Uint8 mouseButton)

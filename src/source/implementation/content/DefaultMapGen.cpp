@@ -19,8 +19,8 @@ namespace Forradia
 
         ClearToGrass(mapArea);
         GeneratePlayerStartingPosition(mapArea);
-        GenerateElevation(mapArea);
         GenerateWater(mapArea);
+        GenerateElevation(mapArea);
         GenerateSand(mapArea);
         GenerateClay(mapArea);
         GenerateRock(mapArea);
@@ -44,37 +44,15 @@ namespace Forradia
         mapArea->spawnPos = mapArea->RandCoordF();
     }
 
-    void DefaultMapGen::GenerateElevation(MapArea* mapArea) const
-    {
-        for (auto i = 0; i < 40; i++)
-        {
-            auto center =mapArea->RandCoordI();
-            auto maxr = 4 + rnd.Next(12);
-
-            for (auto r = maxr; r >= 0; r -= 1)
-            {
-                for (auto y = center.y - r; y <= center.y + r; y++)
-                {
-                    for (auto x = center.x - r; x <= center.x + r; x++)
-                    {
-                        auto dx = x - center.x;
-                        auto dy = y - center.y;
-
-                        if (!mapArea->Contains({x, y})) continue;
-
-                        mapArea->tiles[x][y].elevation += 2;
-                    }
-                }
-            }
-        }
-    }
 
     void DefaultMapGen::GenerateWater(MapArea* mapArea) const
     {
         for (auto i = 0; i < 20; i++)
         {
             auto center = mapArea->RandCoordI();
-            auto r = 5 + rnd.Next(13);
+            auto r = 10 + rnd.Next(13);
+            auto kx = rnd.Next(10)/10.0f;
+            auto ky = rnd.Next(10)/10.0f;
 
             for (auto y = center.y - r; y <= center.y + r; y++)
             {
@@ -83,7 +61,7 @@ namespace Forradia
                     auto dx = x - center.x;
                     auto dy = y - center.y;
 
-                    if (dx * dx + dy * dy >= r * r) continue;
+                    if (dx*dx*kx + dy * dy *ky>= r) continue;
                     if (!mapArea->Contains({ x, y }, 1)) continue;
                     if (mapArea->tiles[x][y].elevation > 0) continue;
                     if (mapArea->tiles[x - 1][y].elevation > 0) continue;
@@ -101,6 +79,52 @@ namespace Forradia
             }
         }
     }
+
+    void DefaultMapGen::GenerateElevation(MapArea* mapArea) const
+    {
+        for (auto i = 0; i < 400; i++)
+        {
+            auto center =mapArea->RandCoordI();
+            auto maxr = 4 + rnd.Next(12);
+            auto rDecr = 1 + rnd.Next(6);
+
+            for (auto r = maxr; r >= 0; r -= rDecr)
+            {
+                for (auto y = center.y - r; y <= center.y + r; y++)
+                {
+                    for (auto x = center.x - r; x <= center.x + r; x++)
+                    {
+                        auto dx = x - center.x;
+                        auto dy = y - center.y;
+
+                        if (!mapArea->Contains({x, y})) continue;
+                        if (mapArea->tiles[x][y].elevation + 2 >= mapArea->GetTile(center).elevation + 2*(r-1)) continue;
+                        if (mapArea->tiles[x][y].groundType == GetId("GroundTypeWater")) continue;
+
+                        if (x < mapArea->size - 1)
+                            if (mapArea->tiles[x][y].elevation > mapArea->tiles[x+1][y].elevation) continue;
+                        if (x < mapArea->size - 1 && y < mapArea->size - 1)
+                            if (mapArea->tiles[x][y].elevation > mapArea->tiles[x+1][y+1].elevation) continue;
+                        if (y < mapArea->size - 1)
+                            if (mapArea->tiles[x][y].elevation > mapArea->tiles[x][y+1].elevation) continue;
+                        if (x > 0 && y < mapArea->size - 1)
+                            if (mapArea->tiles[x][y].elevation > mapArea->tiles[x-1][y+1].elevation) continue;
+                        if (x > 0)
+                            if (mapArea->tiles[x][y].elevation > mapArea->tiles[x-1][y].elevation) continue;
+                        if (x > 0 && y >  0)
+                            if (mapArea->tiles[x][y].elevation > mapArea->tiles[x-1][y-1].elevation) continue;
+                        if (y > 0)
+                            if (mapArea->tiles[x][y].elevation > mapArea->tiles[x][y-1].elevation) continue;
+                        if (y > 0 && x < mapArea->size - 1)
+                            if (mapArea->tiles[x][y].elevation > mapArea->tiles[x+1][y-1].elevation) continue;
+
+                        mapArea->tiles[x][y].elevation += 2;
+                    }
+                }
+            }
+        }
+    }
+
 
     void DefaultMapGen::GenerateSand(MapArea* mapArea) const
     {
@@ -356,33 +380,77 @@ namespace Forradia
 
     void DefaultMapGen::GenerateMobs(MapArea* mapArea) const
     {
-        for (auto i = 0; i < 200; i++)
+        for (auto i = 0; i < 100; i++)
         {
-            auto coord = mapArea->RandCoordI();
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
 
-            if (coord.x == CInt(mapArea->spawnPos.x)  && coord.y == CInt(mapArea->spawnPos.y)) continue;
-            if (DistToPlayerStartingPos(mapArea, coord.x, coord.y) < playerStartAreaSize) continue;
+            if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
-            if (mapArea->tiles[coord.x][coord.y].groundType != GetId("GroundTypeWater") && mapArea->tiles[coord.x][coord.y].actor == nullptr)
+            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
             {
-                mapArea->tiles[coord.x][coord.y].actor = MakeUPtr<Mob>(e, CFloat(coord.x), CFloat(coord.y), "MobRabbit");
-                mapArea->mobActorsMirror.insert({ mapArea->tiles[coord.x][coord.y].actor->actorId, std::ref(mapArea->tiles[coord.x][coord.y].actor) });
+                mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobRabbit");
+                mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
             }
         }
 
-        for (auto i = 0; i < 200; i++)
+        for (auto i = 0; i < 100; i++)
         {
-            auto coord = mapArea->RandCoordI();
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
 
-            if (coord.x == CInt(mapArea->spawnPos.x) && coord.y == CInt(mapArea->spawnPos.y)) continue;
-            if (DistToPlayerStartingPos(mapArea, coord.x, coord.y) < playerStartAreaSize) continue;
+            if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
 
-            if (mapArea->tiles[coord.x][coord.y].groundType != GetId("GroundTypeWater") && mapArea->tiles[coord.x][coord.y].actor == nullptr)
+            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") &&  mapArea->tiles[x][y].actor == nullptr)
             {
-                mapArea->tiles[coord.x][coord.y].actor = MakeUPtr<Mob>(e, CFloat(coord.x), CFloat(coord.y), "MobRat");
-                mapArea->mobActorsMirror.insert({ mapArea->tiles[coord.x][coord.y].actor->actorId, std::ref(mapArea->tiles[coord.x][coord.y].actor) });
+                mapArea->tiles[x][y].actor =  MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobRat");
+                mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
             }
         }
+
+        for (auto i = 0; i < 100; i++)
+        {
+            auto x = rnd.Next(mapArea->size);
+            auto y = rnd.Next(mapArea->size);
+
+            if (x == CInt(mapArea->spawnPos.x) && y == CInt(mapArea->spawnPos.y)) continue;
+            if (DistToPlayerStartingPos(mapArea, x, y) < playerStartAreaSize) continue;
+
+            if (mapArea->tiles[x][y].groundType != GetId("GroundTypeWater") && mapArea->tiles[x][y].actor == nullptr)
+            {
+                mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobTroll");
+                mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+            }
+        }
+
+        auto x = 0;
+        auto y = 0;
+
+        x = rnd.Next(mapArea->size);
+        y = rnd.Next(mapArea->size);
+
+        mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobRubyButterfly");
+        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+
+        x = rnd.Next(mapArea->size);
+        y = rnd.Next(mapArea->size);
+
+        mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobTopazButterfly");
+        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+
+        x = rnd.Next(mapArea->size);
+        y = rnd.Next(mapArea->size);
+
+        mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobJadeButterfly");
+        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
+
+        x = rnd.Next(mapArea->size);
+        y = rnd.Next(mapArea->size);
+
+        mapArea->tiles[x][y].actor = MakeUPtr<Mob>(e, CFloat(x), CFloat(y), "MobAmberButterfly");
+        mapArea->mobActorsMirror.insert({ mapArea->tiles[x][y].actor->actorId, std::ref(mapArea->tiles[x][y].actor) });
     }
 
     void DefaultMapGen::GenerateQuestCaves(const IEngine& e, MapArea* mapArea, const UPtr<PlanetWorldMap>& worldMap) const

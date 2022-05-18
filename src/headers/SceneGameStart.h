@@ -13,7 +13,7 @@ namespace Forradia
     class SceneGameStart : public SceneBase
     {
     public:
-        SceneGameStart(const Engine& _e, std::string _imageNameBackground, std::string _imageNameLogo, std::string _text, std::string _switchToSceneName) :
+        SceneGameStart(Engine& _e, std::string _imageNameBackground, std::string _imageNameLogo, std::string _text, std::string _switchToSceneName) :
             SceneBase(_e), switchToSceneName(_switchToSceneName), imageNameBackground(_imageNameBackground), imageNameLogo(_imageNameLogo), text(_text)
         {}
 

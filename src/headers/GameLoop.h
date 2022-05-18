@@ -27,7 +27,18 @@ namespace Forradia
 
         void ResetForNewFrame() override;
 
+
     private:
+
+         unsigned int rbo;
+        Utilities utilities;
+        GLuint fbo;
+        GLuint renderedTexture;
+        bool initialized = false;
+
+
+
+
         // ---- Looped functions ----
 
         // Update currently displayed scene and fps counter.

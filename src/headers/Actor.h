@@ -10,7 +10,6 @@
 
 namespace Forradia
 {
-
     class IEngine;
 
     class Actor
@@ -49,9 +48,7 @@ namespace Forradia
         const IEngine& e;
 
     private:
-
         inline static int currentActorId = 0;
-
         UMap<size_t, UPtr<IModule>> modules;
     };
 
@@ -82,6 +79,4 @@ namespace Forradia
             AddModule<T>();
         }
     }
-
-
 }  // namespace Forradia

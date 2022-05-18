@@ -9,7 +9,6 @@
 #include "SceneMainMenu.h"
 #include "ScenePrimary.h"
 #include "DefaultMapGen.h"
-#include "ValleyMapGen.h"
 
 namespace Forradia
 {
@@ -24,7 +23,7 @@ namespace Forradia
         ScenesCollection scenes;
         Inventory startInv;
 
-        auto defaultMapGen = MakeSPtr<ValleyMapGen>(e, planetMap);
+        auto defaultMapGen = MakeSPtr<DefaultMapGen>(e, planetMap);
         auto worldMapGens = UMap<int, UMap<int, SPtr<IMapGenerator>>>();
 
         worldMapGens[0][0] = defaultMapGen;
@@ -60,7 +59,7 @@ namespace Forradia
 
                         {"ScenePrimary", MakeSPtr<ScenePrimary>(e)} });
 
-        _ Run
+        e.Run
         (
             std::move(scenes),
             GetId("SceneGameStart"),

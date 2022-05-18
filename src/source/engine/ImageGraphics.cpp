@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "ImageGraphics.h"
+#include <iostream>
 
 namespace Forradia
 {
@@ -43,7 +44,6 @@ namespace Forradia
 
     SizeF ImageGraphics::GetImageSizeF(std::string imageName) const
     {
-        auto canvasSize = utils.GetCanvasSize();
 
         glBindTexture(GL_TEXTURE_2D,
             e.imageLoader.images.at(GetId(imageName)));
@@ -54,8 +54,11 @@ namespace Forradia
         glGetTexLevelParameteriv(GL_TEXTURE_2D, mipLevel, GL_TEXTURE_WIDTH, &w);
         glGetTexLevelParameteriv(GL_TEXTURE_2D, mipLevel, GL_TEXTURE_HEIGHT, &h);
 
-        auto imageWidth = static_cast<float>(w) / canvasSize.w;
-        auto imageHeight = static_cast<float>(h) / canvasSize.h;
+        auto imageWidth = static_cast<float>(w) / utils.GetOrigCanvasSize().w;
+        auto imageHeight = static_cast<float>(h) / utils.GetOrigCanvasSize().h;
+
+
+        //std::cout << utils.GetOrigCanvasSize().w << " " << utils.GetOrigCanvasSize().h << std::endl;
 
         return { imageWidth, imageHeight };
     }

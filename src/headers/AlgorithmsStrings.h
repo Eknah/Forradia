@@ -16,9 +16,7 @@ namespace Forradia
     {
     public:
         void Split(const std::string& in, std::vector<std::string>* out, std::string token);
-
         std::string Tail(const std::string& in);
-
         std::string FirstToken(const std::string& in);
     };
 }  // namespace Forradia

@@ -30,14 +30,7 @@ namespace Forradia
         float CalcPlayerElev();
         Point2F CalcOffset();
 
-        int RES_WIDTH = 250;
-        int RES_HEIGHT = 150;
-         unsigned int rbo;
-        Utilities utilities;
-        Size origCanvasSize;
-        GLuint fbo;
-        GLuint renderedTexture;
-        bool initialized = false;
+
         const Engine& e;
         Background background;
         const Camera& cam;

@@ -20,7 +20,7 @@ namespace Forradia
     {
     public:
 
-        explicit Gui(const Engine& _e, Camera& _camera) : e(_e), minimap(_e), console(_e), rightClickMenu(_e, _camera)
+        explicit Gui(Engine& _e, Camera& _camera) : e(_e), minimap(_e), console(_e), rightClickMenu(_e, _camera)
         {}
 
         void Init();
@@ -35,7 +35,7 @@ namespace Forradia
 
     private:
 
-        const Engine& e;
+        Engine& e;
 
         RightClickMenu rightClickMenu;
         Minimap minimap;

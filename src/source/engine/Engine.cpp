@@ -4,6 +4,7 @@
 #include "Engine.h"
 #include "CoreMovmModule.h"
 
+
 namespace Forradia
 {
 
@@ -83,12 +84,12 @@ namespace Forradia
         paintGraphics.DrawLine(color, x0, y0, x1, y1);
     }
 
-    void Engine::DrawString(std::string message, SDL_Color color, Point2F point, bool centerAlign, float specificScaling) const
+    void Engine::DrawString(std::string message, SDL_Color color, Point2F point, bool centerAlign, float specificScaling)
     {
         textGraphics.DrawString(message, color, point.x, point.y, centerAlign, specificScaling);
     }
 
-    void Engine::DrawString(std::string message, SDL_Color color, float x, float y, bool centerAlign, float specificScaling) const
+    void Engine::DrawString(std::string message, SDL_Color color, float x, float y, bool centerAlign, float specificScaling)
     {
         textGraphics.DrawString(message, color, x, y, centerAlign, specificScaling);
     }
@@ -150,6 +151,9 @@ namespace Forradia
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        glewExperimental=GL_TRUE;
+        glewInit();
     }
 
 

@@ -18,7 +18,7 @@ namespace Forradia
 
     public:
 
-        explicit Console(const Engine& _e) : e(_e), fileSystem(*this) {}
+        explicit Console(Engine& _e) : e(_e), fileSystem(*this) {}
 
         void Update();
         void Render();
@@ -36,7 +36,7 @@ namespace Forradia
         // Members
 
     private:
-        const Engine& e;
+        Engine& e;
 
         const float width = 3 * 0.15f;
         const float height = 0.15f;

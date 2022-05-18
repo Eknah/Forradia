@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "TextGraphics.h"
+#include <iostream>
 
 namespace Forradia
 {
@@ -17,18 +18,36 @@ namespace Forradia
             TTF_OpenFont(fontPath.c_str(), defaultFontSize));
     }
 
-    void TextGraphics::DrawString(std::string text, SDL_Color color, Point2F point, bool centerAlign, float specificScaling) const
+    void TextGraphics::DrawString(std::string text, SDL_Color color, Point2F point, bool centerAlign, float specificScaling)
     {
         DrawString(text, color, point.x, point.y, centerAlign, specificScaling);
     }
 
-    void TextGraphics::DrawString(std::string text, SDL_Color color, float x, float y,
+    void TextGraphics::DrawString(std::string text, SDL_Color color, float x, float y, bool centerAlign, float specificScaling)
+    {
+
+        drawStringOperations.push_back(DrawStringOperation {text, color, x, y, centerAlign, specificScaling});
+    }
+
+    void TextGraphics::RenderAllStrings()
+    {
+        for (auto& oper : drawStringOperations)
+        {
+            DrawStringActual(oper.text, oper.color, oper.x, oper.y, oper.centerAlign, oper.specificScaling);
+        }
+
+
+        drawStringOperations.clear();
+    }
+
+    void TextGraphics::DrawStringActual(std::string text, SDL_Color color, float x, float y,
         bool centerAlign, float specificScaling) const
     {
         if (text == "")
             return;
 
         GLuint texture;
+
 
         glEnable(GL_TEXTURE_2D);
 
@@ -64,6 +83,7 @@ namespace Forradia
             x -= width / 2;
             y -= height / 2;
         }
+
 
         glBegin(GL_QUADS);
         {

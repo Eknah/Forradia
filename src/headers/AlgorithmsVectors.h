@@ -18,7 +18,6 @@ namespace Forradia
 
     private:
         bool SameSide(Vector3 p1, Vector3 p2, Vector3 a, Vector3 b);
-
         Vector3 GenTriNormal(Vector3 t1, Vector3 t2, Vector3 t3);
 
         Math3D math3D;

@@ -176,11 +176,71 @@ namespace Forradia
 
     void GameLoop::Render()
     {
+        if (!initialized)
+        {
+            utilities.SetOrigCanvasSize(utilities.GetCanvasSize());
+
+            glGenFramebuffers(1, &fbo);
+
+            glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+            // The texture we're going to render to
+
+            glGenTextures(1, &renderedTexture);
+
+            // "Bind" the newly created texture : all future texture functions will modify this texture
+            glBindTexture(GL_TEXTURE_2D, renderedTexture);
+
+            // Give an empty image to OpenGL ( the last "0" )
+            glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA, RES_WIDTH, RES_HEIGHT, 0,GL_RGBA, GL_UNSIGNED_BYTE, 0);
+
+            // Poor filtering. Needed !
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+            glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, renderedTexture, 0);
+
+
+
+            glGenRenderbuffers(1, &rbo);
+            glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
+            glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, RES_WIDTH, RES_HEIGHT);
+
+            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+            // Set the list of draw buffers.
+            GLenum DrawBuffers[1] = {GL_COLOR_ATTACHMENT0};
+            glDrawBuffers(1, DrawBuffers); // "1" is the size of DrawBuffers
+
+            initialized = true;
+        }
+
+
+        glViewport(0, 0, RES_WIDTH, RES_HEIGHT);
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
         glClear(GL_COLOR_BUFFER_BIT);
 
         e.sceneManager.GetCurrentScene()->Render();
         e.fpsCounter.Render();
         e.cursor.Render();
+
+
+
+
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+        glBlitFramebuffer(
+        0, 0, RES_WIDTH, RES_HEIGHT,
+        0, 0, utilities.GetOrigCanvasSize().w, utilities.GetOrigCanvasSize().h,
+        GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+        glViewport(0, 0, utilities.GetOrigCanvasSize().w, utilities.GetOrigCanvasSize().h);
+
+
+
+        e.textGraphics.RenderAllStrings();
 
         SDL_GL_SwapWindow(e.window.get());
     }

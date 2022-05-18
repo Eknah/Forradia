@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #include "Utilities.h"
+#include <iostream>
 
 namespace Forradia
 {
@@ -15,6 +16,15 @@ namespace Forradia
 
         return { canvas_width, canvas_height };
     }
+    Size Utilities::GetOrigCanvasSize() const
+    {
+        return origCanvasSize;
+    }
+    void Utilities::SetOrigCanvasSize(Size _size)
+    {
+        origCanvasSize = _size;
+    }
+
 
     Point2 Utilities::GetMousePosI()
     {
@@ -28,7 +38,7 @@ namespace Forradia
     Point2F Utilities::GetMousePosF()
     {
         auto mousePosition = GetMousePosI();
-        auto canvas_size = GetCanvasSize();
+        auto canvas_size = GetOrigCanvasSize();
         auto mousexF = static_cast<float>(mousePosition.x) / canvas_size.w;
         auto mouseyF = static_cast<float>(mousePosition.y) / canvas_size.h;
 
@@ -37,7 +47,7 @@ namespace Forradia
 
     SizeF Utilities::ConvertToFloat(int value)
     {
-        auto canvasSize = GetCanvasSize();
+        auto canvasSize = GetOrigCanvasSize();
         auto resultWidth = static_cast<float>(value) / canvasSize.w;
         auto resultHeight = static_cast<float>(value) / canvasSize.h;
 

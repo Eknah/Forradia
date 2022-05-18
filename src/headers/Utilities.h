@@ -16,9 +16,14 @@ namespace Forradia
     {
     public:
         Size GetCanvasSize() const;
+        Size GetOrigCanvasSize() const;
+        void SetOrigCanvasSize(Size _size);
         Point2 GetMousePosI();
         Point2F GetMousePosF();
         SizeF ConvertToFloat(int value);
+
+    private:
+        static inline Size origCanvasSize = {0,0};
     };
 
 }  // namespace Forradia

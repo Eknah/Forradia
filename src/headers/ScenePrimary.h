@@ -15,7 +15,7 @@ namespace Forradia
 
     public:
 
-        explicit ScenePrimary(const Engine& _e) : SceneBase(_e), gui(_e, cam), cam(_e), worldRenderer(_e, cam)
+        explicit ScenePrimary(Engine& _e) : SceneBase(_e), gui(_e, cam), cam(_e), worldRenderer(_e, cam)
         {}
 
         void Enter() override;

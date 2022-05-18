@@ -15,7 +15,7 @@ namespace Forradia
 
     public:
 
-        explicit RightClickMenu(const Engine& _e, Camera& _camera) : e(_e), camera(_camera) {}
+        explicit RightClickMenu(Engine& _e, Camera& _camera) : e(_e), camera(_camera) {}
 
 
         void Render();
@@ -24,7 +24,7 @@ namespace Forradia
 
     private:
 
-        const Engine& e;
+        Engine& e;
 
         bool visible = false;
         Point2F mouseClickPos = {-1, -1};

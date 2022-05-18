@@ -17,7 +17,7 @@ namespace Forradia
         // Functions
 
     public:
-        GuiWindowBase(const Engine& _e, String _tile, RectF _bounds) : e(_e), title(_tile), bounds(_bounds) {}
+        GuiWindowBase(Engine& _e, String _tile, RectF _bounds) : e(_e), title(_tile), bounds(_bounds) {}
 
         void Render();
         void Update();
@@ -38,7 +38,7 @@ namespace Forradia
     protected:
         virtual void MouseDownEx(Uint8 button) = 0;
         virtual void RenderEx() = 0;
-        const Engine& e;
+        Engine& e;
         const float margin = 0.008f;
 
     private:
