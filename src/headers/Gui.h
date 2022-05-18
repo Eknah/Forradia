@@ -15,13 +15,14 @@
 
 namespace Forradia
 {
-
     class Gui
     {
     public:
-
-        explicit Gui(Engine& _e, Camera& _camera) : e(_e), minimap(_e), console(_e), rightClickMenu(_e, _camera)
-        {}
+        explicit Gui(Engine& _e, Camera& _camera)
+		: e(_e),
+		minimap(_e),
+		console(_e),
+		rightClickMenu(_e, _camera) {}
 
         void Init();
         void Update();
@@ -34,19 +35,32 @@ namespace Forradia
         Console console;
 
     private:
-
         Engine& e;
-
         RightClickMenu rightClickMenu;
         Minimap minimap;
         const float margin = 0.005f;
         Utilities utils;
         const float btnWidth = 0.15f;
         const float btnHeight = 0.03f;
-        RectF boundsCharBtn = { 0.0f, 1.0f - btnHeight, btnWidth, btnHeight };
-        RectF boundsInvBtn = { btnWidth,             1.0f - btnHeight, btnWidth, btnHeight };
-        RectF boundsSysBtn = { 2*btnWidth,  1.0f - btnHeight, btnWidth, btnHeight };
-
+        RectF boundsCharBtn =
+		{ 0.0f,
+		1.0f - btnHeight,
+		btnWidth,
+		btnHeight
+		};
+        RectF boundsInvBtn =
+		{
+			btnWidth,
+			1.0f - btnHeight,
+			btnWidth,
+			btnHeight
+		};
+        RectF boundsSysBtn =
+		{
+			2*btnWidth,
+			1.0f - btnHeight,
+			btnWidth,
+			btnHeight
+		};
     };
-
 }

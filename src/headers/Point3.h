@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     class Point3
     {
     public:
@@ -13,5 +12,4 @@ namespace Forradia
         int y = 0;
         int z = 0;
     };
-
 }

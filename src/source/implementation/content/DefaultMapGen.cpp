@@ -10,7 +10,6 @@
 
 namespace Forradia
 {
-
     void DefaultMapGen::GenerateMapArea(Point3 worldPos) const
     {
         worldMap->areas[worldPos.x][worldPos.y][worldPos.z] = MakeUPtr<MapArea>(e, worldMap->mapAreaSize, worldPos);
@@ -477,5 +476,4 @@ namespace Forradia
             }
         }
     }
-
 }

@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void PlanetWorldMap::GenerateWorldMap(UMap<int, UMap<int, SPtr<IMapGenerator>>> GenAreas)
     {
         for (auto& [X, Remain] : GenAreas)
@@ -49,5 +48,4 @@ namespace Forradia
     {
         return areas[Pos.x][Pos.y][Pos.z];
     }
-
 }

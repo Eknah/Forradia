@@ -7,7 +7,6 @@
 
 namespace Forradia
 {
-
     void Engine::Run(ScenesCollection _scenesCollection, int _startScene,
         UPtr<PlanetWorldMap> _world,
         Inventory _startingInventory,
@@ -155,6 +154,4 @@ namespace Forradia
         glewExperimental=GL_TRUE;
         glewInit();
     }
-
-
 }

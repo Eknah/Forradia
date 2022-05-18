@@ -8,7 +8,6 @@
 
 namespace Forradia
 {
-
     void Gui::Init()
     {
         windows.clear();
@@ -121,5 +120,4 @@ namespace Forradia
     {
         console.KeyDown(key);
     }
-
 }

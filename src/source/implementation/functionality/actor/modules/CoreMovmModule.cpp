@@ -8,7 +8,6 @@
 
 namespace Forradia
 {
-
     void CoreMovmModule::ResetForNewFrame()
     {
         isWalking = false;
@@ -44,5 +43,4 @@ namespace Forradia
 
         actor.GetModule<WarpMovmModule>().WarpIfStandOnPortal();
     }
-
 }

@@ -9,12 +9,9 @@
 
 namespace Forradia
 {
-
     class SceneMainMenu : public SceneBase
     {
-
     public:
-
         using SceneBase::SceneBase;
 
         void Enter() override;
@@ -26,9 +23,6 @@ namespace Forradia
         void KeyUp(SDL_Keycode key) override {}
 
     private:
-
         Utilities utils;
-
     };
-
-}  // namespace Forradia
+}

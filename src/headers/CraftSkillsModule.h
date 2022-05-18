@@ -10,14 +10,11 @@
 
 namespace Forradia
 {
-
     class Object;
 
     class CraftSkillsModule : public IModule
     {
-
         // Functions
-
     public:
         using IModule::IModule;
 
@@ -26,10 +23,7 @@ namespace Forradia
         std::vector<CraftRecipe> GetPossibleRecipes(Point2 tile);
         void TryPerformRecipe(CraftRecipe recipe);
 
-
     public:
       SPtr<Object> objectBeingUsed = nullptr;
-
     };
-
 }

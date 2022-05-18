@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void MouseHandler::ResetForNewFrame() const
     {
         *wheelAmount *= 0.85f;
@@ -36,5 +35,4 @@ namespace Forradia
     {
         *rightButtonBeenFired = true;
     }
-
 }

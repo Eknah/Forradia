@@ -10,14 +10,12 @@
 
 namespace Forradia
 {
-
     class GuiWindowBase
     {
-
         // Functions
-
     public:
-        GuiWindowBase(Engine& _e, String _tile, RectF _bounds) : e(_e), title(_tile), bounds(_bounds) {}
+        GuiWindowBase(Engine& _e, String _tile, RectF _bounds)
+		: e(_e), title(_tile), bounds(_bounds) {}
 
         void Render();
         void Update();
@@ -31,7 +29,6 @@ namespace Forradia
         RectF GetTopBarBounds();
 
         // Members
-
     public:
         bool visible = false;
 
@@ -48,9 +45,6 @@ namespace Forradia
         bool beingMoved = false;
         SDL_FPoint startMovePos = { -1, -1 };
         SDL_FPoint startMoveMousePos = { -1, -1 };
-
         const float topBarHeight = 0.04f;
-
     };
-
 }

@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     enum ObjectFlags : char
     {
         FlagNone = 0,
@@ -13,5 +12,4 @@ namespace Forradia
         FlagMovable = 2,
         FlagNoShadow = 4
     };
-
 }

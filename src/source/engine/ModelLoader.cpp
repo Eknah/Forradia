@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void ModelLoader::LoadModels()
     {
         models.clear();
@@ -46,5 +45,4 @@ namespace Forradia
         auto result = modelNames.count(GetId(ModelName)) > 0;
         return result;
     }
-
 }

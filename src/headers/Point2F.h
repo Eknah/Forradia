@@ -5,19 +5,17 @@
 
 namespace Forradia
 {
-
     class Point2F
     {
     public:
-        Point2F(float _x, float y) : x(_x), y(y) {}
+        Point2F(float _x, float y)
+		: x(_x), y(y) {}
 
         bool IsUndefined();
         void MakeUndefined();
-
         Point2F Translate(float dx, float dy);
 
         float x = 0.0f;
         float y = 0.0f;
     };
-
 }

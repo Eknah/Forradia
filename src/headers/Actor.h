@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <string>
 #include "Aliases.h"
 #include "Point2F.h"
@@ -16,13 +17,18 @@ namespace Forradia
     {
     public:
 
-        explicit Actor(const IEngine& _e) : e(_e), actorId(currentActorId++)
-        {}
+        explicit Actor(const IEngine& _e)
+		: e(_e), actorId(currentActorId++) {}
 
-        Actor(const IEngine& _e, float x, float y, std::string _modelName);
+        Actor (
+		const IEngine& _e,
+		float x,
+		float y,
+		std::string _modelName
+		);
 
-        Actor(const IEngine& _e, std::string _modelName) :  e(_e), modelName(_modelName), actorId(currentActorId++)
-        {}
+        Actor(const IEngine& _e, std::string _modelName)
+		:  e(_e), modelName(_modelName), actorId(currentActorId++) {}
 
         void ResetForNewFrame() const;
         void Update() const;

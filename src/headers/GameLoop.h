@@ -7,11 +7,11 @@
 
 namespace Forradia
 {
-
     class GameLoop : public IGameLoop
     {
     public:
-        explicit GameLoop(IEngine& e) : IGameLoop(e) {}
+        explicit GameLoop(IEngine& e)
+		: IGameLoop(e) {}
 
         // Before loop:
         // Initializes game loop variables
@@ -24,37 +24,25 @@ namespace Forradia
         // Render game
 
         void Run() override;
-
         void ResetForNewFrame() override;
 
-
     private:
-
-         unsigned int rbo;
+        unsigned int rbo;
         Utilities utilities;
         GLuint fbo;
         GLuint renderedTexture;
+        Utilities utils;
         bool initialized = false;
-
-
-
 
         // ---- Looped functions ----
 
         // Update currently displayed scene and fps counter.
-
         void Update() override;
 
         // Render currently displayed scene and general engine components.
-
         void Render() override;
 
         // Enables game updating and rendering during window resize.
-
         static int EventFilter(void* pthis, const SDL_Event* event);
-
-        Utilities utils;
-
     };
-
 }

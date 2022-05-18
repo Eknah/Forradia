@@ -6,10 +6,8 @@
 
 namespace Forradia
 {
-
     void Background::Render(float zoom)
     {
-
         //glClearColor(0.0f, 0.2f, 0.4f, 1.0f);
         //glClear(GL_COLOR_BUFFER_BIT);
 
@@ -20,10 +18,8 @@ namespace Forradia
         }
         else
         {
-            glClearColor(0.0f, 0.15f, 0.4f, 1.0f);
+            glClearColor(0.0f, 0.6f, 0.9f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
         }
-
     }
-
 }

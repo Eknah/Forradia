@@ -7,7 +7,6 @@
 
 namespace Forradia
 {
-
     void WarpMovmModule::WarpIfStandOnPortal()
     {
         auto& coreMovm = GetParentActor().GetModule<CoreMovmModule>();
@@ -42,5 +41,4 @@ namespace Forradia
             coreMovm.worldMapCoord.z = std::stoi(e.GetCurrMapArea().tiles[CInt(newXOld)][CInt(newYOld)].properties.at("WarpToFloor"));
         }
     }
-
 }

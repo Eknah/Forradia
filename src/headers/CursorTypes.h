@@ -5,12 +5,10 @@
 
 namespace Forradia
 {
-
     enum class CursorTypes
     {
         Default,
         Hovering,
         Hidden
     };
-
 }

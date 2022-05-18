@@ -8,7 +8,6 @@
 
 namespace Forradia
 {
-
     MobAIMovmModule::MobAIMovmModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
     {
         GetParentActor().AddIfNotExists<CoreMovmModule>();
@@ -100,8 +99,5 @@ namespace Forradia
                 coreMovm.dest = { -1, -1 };
             }
         }
-
-        //std::cout << "Num mobs: " << e.GetCurrMapArea().mobActorsMirror.size() << std::endl;
     }
-
 }

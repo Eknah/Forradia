@@ -12,7 +12,6 @@
 
 namespace Forradia
 {
-
     void GameInstance::StartGame()
     {
         const int mapAreaSize = 150;
@@ -68,5 +67,4 @@ namespace Forradia
             objsBehaviour
         );
     }
-
 }

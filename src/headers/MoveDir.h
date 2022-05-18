@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     enum MoveDir : char
     {
         DirNone = 0,
@@ -14,5 +13,4 @@ namespace Forradia
         DirBack = 4,
         DirLeft = 8
     };
-
 }

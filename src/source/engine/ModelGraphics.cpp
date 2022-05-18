@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void ModelGraphics::DrawModel(std::string ModelName, float X, float Y, float Z, float Rotation, float SpecificScaling, float opacity) const
     {
         DrawModel(GetId(ModelName), X, Y, Z, Rotation, SpecificScaling, opacity);
@@ -45,5 +44,4 @@ namespace Forradia
         glRotatef(-Rotation, 0, 1.0f, 0.0);
         glTranslatef(-X, -Y, -Z);
     }
-
 }

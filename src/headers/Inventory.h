@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <string>
 #include <vector>
 #include <memory>
@@ -9,7 +10,6 @@
 
 namespace Forradia
 {
-
     class Object;
 
     class Inventory
@@ -20,5 +20,4 @@ namespace Forradia
 
         UMap<int, SPtr<Object>> objects;
     };
-
 }

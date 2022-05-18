@@ -7,19 +7,14 @@
 
 namespace Forradia
 {
-
     class WarpMovmModule : public IModule
     {
-
         // Functions
-
     public:
         using IModule::IModule;
 
         void ResetForNewFrame() override {};
         void Update() override {};
         void WarpIfStandOnPortal();
-
     };
-
 }

@@ -5,13 +5,13 @@
 // repo by Bly7 at https://github.com/Bly7/OBJ-Loader
 
 #pragma once
+
 #include <string>
 #include "Aliases.h"
 #include "Vector3.h"
 
 namespace Forradia
 {
-
     class Material
     {
     public:
@@ -30,5 +30,4 @@ namespace Forradia
         std::string mapD;
         std::string mapBump;
     };
-
 }

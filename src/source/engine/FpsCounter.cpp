@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void FpsCounter::Update()
     {
         framesCount++;
@@ -29,5 +28,4 @@ namespace Forradia
         e.DrawString("Fps: " + std::to_string(fps), White, posx, posy,
             true);
     }
-
 }

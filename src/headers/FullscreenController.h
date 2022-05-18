@@ -7,17 +7,13 @@
 
 namespace Forradia
 {
-
     class FullscreenController : public IFullscreenController
     {
     public:
-        explicit FullscreenController(const IEngine& e) :
-            IFullscreenController(e)
-        {}
+        explicit FullscreenController(const IEngine& e)
+		: IFullscreenController(e) {}
 
         void UpdateFullscreenToggling() override;
-
         void ToggleFullscreen() override;
     };
-
 }

@@ -9,7 +9,6 @@
 
 namespace Forradia
 {
-
     FileSystem::FileSystem(Console& _console) : console(_console)
     {
         currentFolder = MakeSPtr<Folder>("Top", nullptr);
@@ -86,5 +85,4 @@ namespace Forradia
 
         console.Print("No file with name: " + programName);
     }
-
 }

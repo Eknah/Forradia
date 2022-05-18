@@ -2,13 +2,13 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <SDL2/SDL_filesystem.h>
 #include <string>
 #include "Model3D.h"
 
 namespace Forradia
 {
-
     class ModelLoader
     {
     public:
@@ -23,5 +23,4 @@ namespace Forradia
         const std::string modelsPath = "/Resources/Models";
         const std::string modelNameExtension = ".obj";
     };
-
 }

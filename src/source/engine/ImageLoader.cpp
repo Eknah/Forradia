@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void ImageLoader::LoadImages()
     {
         images.clear();
@@ -50,5 +49,4 @@ namespace Forradia
             imageNames[imageNameHash] = filename;
         }
     }
-
 }

@@ -5,15 +5,14 @@
 
 namespace Forradia
 {
-
     class IEngine;
     class Actor;
 
     class IModule
     {
     public:
-        IModule(const IEngine& _e, Actor* _parentActor) : e(_e), parentActor(_parentActor)
-        {}
+        IModule(const IEngine& _e, Actor* _parentActor)
+		: e(_e), parentActor(_parentActor) {}
 
         virtual void ResetForNewFrame() = 0;
         virtual void Update() = 0;
@@ -26,5 +25,4 @@ namespace Forradia
     private:
         Actor* parentActor;
     };
-
 }

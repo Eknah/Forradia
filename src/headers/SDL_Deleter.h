@@ -2,12 +2,12 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
 namespace Forradia
 {
-
     class SDL_Deleter
     {
     public:
@@ -17,5 +17,4 @@ namespace Forradia
         void operator()(SDL_Surface* p) const;
         void operator()(TTF_Font* p) const;
     };
-
 }

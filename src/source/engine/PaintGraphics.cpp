@@ -5,8 +5,6 @@
 
 namespace Forradia
 {
-
-
     void PaintGraphics::FillRect(SDL_Color color, RectF rect) const
     {
         FillRect(color, rect.x, rect.y, rect.w, rect.h);
@@ -61,5 +59,4 @@ namespace Forradia
 
         glEnd();
     }
-
 }

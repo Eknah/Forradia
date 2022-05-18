@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <string>
 #include <vector>
 #include "Aliases.h"
@@ -11,21 +12,19 @@
 
 namespace Forradia
 {
-
     class IEngine;
 
     class Tile
     {
     public:
-        explicit Tile(const IEngine& _e) : e(_e) {}
-
+        explicit Tile(const IEngine& _e)
+		: e(_e) {}
+		
         // Get info about tile
-
         bool HasObjectWithFlag(ObjectFlags flag);
         bool HasObjectOfType(std::string objectName);
 
         // Core tile data structure
-
         int groundType = 0;
         std::vector<SPtr<Object>> objects;
         SPtr<Object> roof;
@@ -37,5 +36,4 @@ namespace Forradia
     private:
         const IEngine& e;
     };
-
 }

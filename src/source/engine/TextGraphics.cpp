@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void TextGraphics::Init()
     {
         TTF_Init();
@@ -104,5 +103,4 @@ namespace Forradia
 
         glDisable(GL_TEXTURE_2D);
     }
-
 }

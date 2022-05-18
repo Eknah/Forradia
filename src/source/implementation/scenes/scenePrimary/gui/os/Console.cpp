@@ -8,8 +8,8 @@
 
 namespace Forradia
 {
-
-    void Console::Update() {
+    void Console::Update()
+	{
 
         auto resize_icon_bounds = GetResizeIconBounds();
 
@@ -18,7 +18,8 @@ namespace Forradia
 
     }
 
-    void Console::Render() {
+    void Console::Render()
+	{
 
         using namespace Palette;
 
@@ -32,7 +33,8 @@ namespace Forradia
 
         e.DrawLine(Wheat, input_bounds.GetTopEdge());
 
-        if (input_active) {
+        if (input_active)
+		{
 
             auto text_printed = e.text;
             text_printed.insert(e.textCursor, "|");
@@ -57,7 +59,8 @@ namespace Forradia
 
         auto y = texty;
 
-        for (auto i = startline; i <= endline; i++) {
+        for (auto i = startline; i <= endline; i++)
+		{
 
             e.DrawString(textToPrint.at(i), Wheat, textx, y, false, 0.7f);
             y += line_height;
@@ -69,16 +72,19 @@ namespace Forradia
 
     }
 
-    void Console::ToggleInput() {
+    void Console::ToggleInput()
+	{
 
         if (input_active) {
 
-            if (fileSystem.runningProgram != nullptr) {
+            if (fileSystem.runningProgram != nullptr)
+			{
 
                 fileSystem.runningProgram->GiveInput(e.text);
 
             }
-            else {
+            else
+			{
 
                 if (InputBeginsWith("echo"))
                     Print(e.text.substr(5));
@@ -100,25 +106,29 @@ namespace Forradia
         input_active = !input_active;
     }
 
-    void Console::Print(String message) {
+    void Console::Print(String message)
+	{
 
         textBoxText.push_back(message);
 
     }
 
-    void Console::Clear() {
+    void Console::Clear()
+	{
 
         textBoxText.clear();
 
     }
 
-    bool Console::InputBeginsWith(String text) {
+    bool Console::InputBeginsWith(String text)
+	{
 
         return e.text.substr(0, text.length()) == text;
 
     }
 
-    void Console::KeyDown(SDL_Keycode key) {
+    void Console::KeyDown(SDL_Keycode key)
+	{
 
         if (key == SDLK_q && e.keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) > 0 && fileSystem.runningProgram != nullptr) {
 
@@ -129,7 +139,8 @@ namespace Forradia
 
     }
 
-    RectF Console::GetResizeIconBounds() {
+    RectF Console::GetResizeIconBounds()
+	{
 
         auto result = RectF
         {
@@ -143,7 +154,8 @@ namespace Forradia
 
     }
 
-    bool Console::MouseDown(Uint8 mouseButton) {
+    bool Console::MouseDown(Uint8 mouseButton)
+	{
 
         if (mouseButton != SDL_BUTTON_LEFT) return false;
 
@@ -165,5 +177,4 @@ namespace Forradia
         return false;
 
     }
-
 }

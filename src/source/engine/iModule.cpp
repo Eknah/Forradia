@@ -5,10 +5,8 @@
 
 namespace Forradia
 {
-
     Actor& IModule::GetParentActor()
     {
         return *parentActor;
     }
-
 }

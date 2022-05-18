@@ -5,11 +5,9 @@
 
 namespace Forradia
 {
-
     class GameInstance
     {
     public:
         void StartGame();
     };
-
 }

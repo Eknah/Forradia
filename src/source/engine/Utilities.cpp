@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     Size Utilities::GetCanvasSize() const
     {
         GLint viewport[4];
@@ -53,5 +52,4 @@ namespace Forradia
 
         return { resultWidth, resultHeight };
     }
-
 }

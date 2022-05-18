@@ -10,15 +10,13 @@
 
 namespace Forradia
 {
-
     class Console
     {
-
         // Functions
-
     public:
 
-        explicit Console(Engine& _e) : e(_e), fileSystem(*this) {}
+        explicit Console(Engine& _e)
+		: e(_e), fileSystem(*this) {}
 
         void Update();
         void Render();
@@ -29,13 +27,9 @@ namespace Forradia
         bool MouseDown(Uint8 mouseButton);
 
     private:
-        
         bool InputBeginsWith(String text);
         RectF GetResizeIconBounds();
-
-        // Members
-
-    private:
+		
         Engine& e;
 
         const float width = 3 * 0.15f;
@@ -58,9 +52,6 @@ namespace Forradia
         List<String> textBoxText = {};
         Utilities utils;
         FileSystem fileSystem;
-
         int resizeIconSize = 30;
-
     };
-
 }

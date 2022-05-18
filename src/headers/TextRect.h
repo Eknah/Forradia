@@ -9,17 +9,16 @@
 
 namespace Forradia
 {
-
     class TextRect
     {
-
         // Members
-
     public:
-
-        RectF bounds = { 0, 0, 0, 0 };
+        RectF bounds = {
+			0,
+			0,
+			0,
+			0
+		};
         String text;
-
     };
-
 }

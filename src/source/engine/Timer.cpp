@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void Timer::Reset()
     {
         startTime = Ticks();
@@ -21,5 +20,4 @@ namespace Forradia
     {
         return Ticks() - startTime;
     }
-
 }

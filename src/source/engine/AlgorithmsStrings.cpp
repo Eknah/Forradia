@@ -8,12 +8,15 @@
 
 namespace Forradia
 {
-
-    void AlgorithmsStrings::Split(const std::string& in, std::vector<std::string>* out, std::string token)
+    void AlgorithmsStrings::Split
+	(
+		const std::string& in,
+		std::vector<std::string>* out,
+		std::string token
+	)
     {
 
         out->clear();
-
         std::string temp;
 
         for (unsigned int i = 0; i < in.size(); i++)
@@ -77,5 +80,4 @@ namespace Forradia
 
         return "";
     }
-
 }

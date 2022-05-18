@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void SceneMainMenu::Enter()
     {
         sceneButtons.clear();
@@ -48,5 +47,4 @@ namespace Forradia
     {
         e.sceneManager.SwitchToScene("ScenePrimary");
     }
-
 }

@@ -8,23 +8,16 @@
 
 namespace Forradia
 {
-
     class InventoryWin : public GuiWindowBase
     {
-
     public:
-
         using GuiWindowBase::GuiWindowBase;
 
         void RenderEx() override;
         void MouseDownEx(Uint8 mouseButton) override;
 
     private:
-
         const int numSlotCols = 4;
-
         Utilities utils;
-
     };
-
 }

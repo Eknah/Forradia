@@ -10,13 +10,16 @@
 
 namespace Forradia
 {
-
     class IEngine;
 
     class Mob : public Actor
     {
     public:
-        Mob(const IEngine& e, float x, float y, std::string modelName);
+        Mob(
+			const IEngine& e,
+			float x,
+			float y,
+			std::string modelName
+		);
     };
-
 }

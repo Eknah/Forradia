@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void SceneManager::Init(ScenesCollection scenes, int startScene)
     {
         scenesCollection = std::move(scenes);
@@ -23,5 +22,4 @@ namespace Forradia
         scenesCollection.scenes.at(*currentScene)->Enter();
         e.gameLoop.ResetForNewFrame();
     }
-
 }

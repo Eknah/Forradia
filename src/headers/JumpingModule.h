@@ -9,14 +9,10 @@
 
 namespace Forradia
 {
-
     class JumpingModule : public IModule
     {
-
         // Functions
-
     public:
-
         using IModule::IModule;
 
         void ResetForNewFrame() override;
@@ -24,14 +20,10 @@ namespace Forradia
         void Jump();
 
         // Members
-
     private:
         bool isJumping = false;
         float maxJumpHeight = 1.0f;
-
         int jumpDuration = 600;
         Timer timer = Timer(UPtr<int>(&jumpDuration));
-
     };
-
 }

@@ -2,17 +2,16 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "Aliases.h"
 #include "Point2F.h"
 
 namespace Forradia
 {
-
     class MouseHandler
     {
     public:
         // Game loop related
-
         void ResetForNewFrame() const;
         bool GetLeftButtonBeenFired() const;
         bool GetRightButtonBeenFired() const;
@@ -31,5 +30,4 @@ namespace Forradia
         UPtr<bool> leftButtonBeenFired = MakeUPtr<bool>(false);
         UPtr<bool> rightButtonBeenFired = MakeUPtr<bool>(false);
     };
-
 }

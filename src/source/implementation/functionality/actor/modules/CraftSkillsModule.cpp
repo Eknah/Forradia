@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     std::vector<CraftRecipe> CraftSkillsModule::GetPossibleRecipes(Point2 tile)
     {
 
@@ -66,5 +65,4 @@ namespace Forradia
             }
         }
     }
-
 }

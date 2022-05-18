@@ -11,25 +11,26 @@
 
 namespace Forradia
 {
-
     class WorldRenderer
     {
-
     public:
 
-        WorldRenderer(const Engine& _e, const Camera& _camera)
-            : e(_e), background(_e), planetShaper(_e), cam(_camera)
-        {}
+        WorldRenderer(
+			const Engine& _e,
+			const Camera& _camera
+		)
+		: e(_e),
+		background(_e),
+		planetShaper(_e),
+		cam(_camera) {}
 
         void Render();
 
     private:
-
         void DoRender();
         void RenderRoof(int x, int y);
         float CalcPlayerElev();
         Point2F CalcOffset();
-
 
         const Engine& e;
         Background background;
@@ -38,7 +39,6 @@ namespace Forradia
         const int groundTypeWaterId = GetId("GroundTypeWater");
         float elevAmount = 5.0f;
         std::array<float, 4> GetElevValues(int tilexI, int tileyI);
-
         const int animWaterId[4] =
         {
           GetId("GroundTypeWater"),
@@ -46,7 +46,5 @@ namespace Forradia
           GetId("GroundTypeWater2"),
           GetId("GroundTypeWater3")
         };
-
     };
-
 }

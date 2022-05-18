@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     class IEngine;
 
     class IGameLoop
@@ -21,12 +20,10 @@ namespace Forradia
         virtual void ResetForNewFrame() = 0;
 
         bool quit = false;
-
-        int RES_WIDTH = 400;
-        int RES_HEIGHT = 300;
+        int lowResWidth = 400;
+        int lowResHeight = 300;
 
     protected:
         IEngine& e;
     };
-
 }

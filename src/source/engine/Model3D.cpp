@@ -8,7 +8,6 @@
 
 namespace Forradia
 {
-
     Model3D::~Model3D()
     {
         loadedMeshes.clear();
@@ -548,5 +547,4 @@ namespace Forradia
         else
             return true;
     }
-
 }

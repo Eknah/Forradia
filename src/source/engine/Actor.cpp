@@ -8,8 +8,13 @@
 
 namespace Forradia
 {
-    Actor::Actor(const IEngine& _e, float x, float y, std::string modelName_) :
-	e(_e), modelName(modelName_), actorId(currentActorId++)
+    Actor::Actor
+	(
+		const IEngine& _e,
+		float x,
+		float y,
+		std::string modelName_
+	) : e(_e), modelName(modelName_), actorId(currentActorId++)
     {
         AddIfNotExists<CoreMovmModule>();
         GetModule<CoreMovmModule>().position = { x, y };
@@ -51,5 +56,4 @@ namespace Forradia
                 return GetId(modelName);
         }
     }
-
 }

@@ -9,16 +9,10 @@
 
 namespace Forradia
 {
-
     class Texty : public File
     {
-
         // Functions
-
     public:
-
         Texty(Console& _console);
-
     };
-
 }

@@ -10,26 +10,18 @@
 
 namespace Forradia
 {
-
-
     class Folder
     {
-
         // Functions
-
     public:
-
         Folder() = default;
-        Folder(String _name, SPtr<Folder> _parentFolder) : name(_name), parentFolder(_parentFolder) {}
+        Folder(String _name, SPtr<Folder> _parentFolder)
+		: name(_name), parentFolder(_parentFolder) {}
 
         // Members
-
-    public:
         String name = "Unnamed folder";
         List<SPtr<Folder>> subFolders;
         List<File> files;
         SPtr<Folder> parentFolder = nullptr;
-
     };
-
 }

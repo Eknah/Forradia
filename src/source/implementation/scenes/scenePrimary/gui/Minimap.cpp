@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void Minimap::Render()
     {
         using namespace Palette;
@@ -16,5 +15,4 @@ namespace Forradia
         e.FillRect(MediumBlueSemiTrans, 0, 0, minimapSizeF.w, minimapSizeF.h);
         e.DrawRect(Black, 0, 0, minimapSizeF.w, minimapSizeF.h);
     }
-
 }

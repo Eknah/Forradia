@@ -7,7 +7,6 @@
 
 namespace Forradia
 {
-
     void InventoryWin::RenderEx()
     {
         using namespace Palette;
@@ -87,5 +86,4 @@ namespace Forradia
             }
         }
     }
-
 }

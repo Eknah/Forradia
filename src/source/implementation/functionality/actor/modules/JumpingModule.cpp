@@ -8,7 +8,6 @@
 
 namespace Forradia
 {
-
     void JumpingModule::ResetForNewFrame() {}
 
     void JumpingModule::Update()
@@ -37,5 +36,4 @@ namespace Forradia
         isJumping = true;
         timer.Reset();
     }
-
 }

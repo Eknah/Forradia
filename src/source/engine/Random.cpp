@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     Random::Random()
     {
         if (!isInitialized)
@@ -19,5 +18,4 @@ namespace Forradia
     {
         return result(mt) % limit;
     }
-
 }

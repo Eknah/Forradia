@@ -5,10 +5,8 @@
 
 namespace Forradia
 {
-
     Player& IEngine::GetPlayer() const
     {
         return **playerPtrPtr;
     }
-
 }

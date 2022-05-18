@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void InventoryModule::ResetForNewFrame() {}
 
     void InventoryModule::Update() {}
@@ -15,5 +14,4 @@ namespace Forradia
     {
         inventory.objects.insert({ position, MakeSPtr<Object>(objectName) });
     }
-
 }

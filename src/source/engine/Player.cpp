@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     Player::Player(IEngine& e) : Actor(e, "Player")
     {
         AddModule<JumpingModule>();
@@ -17,5 +16,4 @@ namespace Forradia
 
         GetModule<CoreMovmModule>().stepSize = 2.0f;
     }
-
 }

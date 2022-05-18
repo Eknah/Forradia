@@ -7,7 +7,6 @@
 
 namespace Forradia
 {
-
     float PlanetShaper::GetNewY(float y, float tileX, float tileY)
     {
 
@@ -22,5 +21,4 @@ namespace Forradia
         return result;
 
     }
-
 }

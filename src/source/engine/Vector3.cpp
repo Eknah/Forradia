@@ -8,7 +8,6 @@
 
 namespace Forradia
 {
-
     bool Vector3::operator==(const Vector3& other) const
     {
         return (this->x == other.x && this->y == other.y && this->z == other.z);
@@ -38,5 +37,4 @@ namespace Forradia
     {
         return Vector3(this->x / other, this->y / other, this->z / other);
     }
-
 }

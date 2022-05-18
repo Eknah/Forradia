@@ -7,7 +7,6 @@
 
 namespace Forradia
 {
-
     bool Tile::HasObjectWithFlag(ObjectFlags flag)
     {
         for (auto& Object : objects)
@@ -32,5 +31,4 @@ namespace Forradia
 
         return false;
     }
-
 }

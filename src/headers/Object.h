@@ -10,17 +10,18 @@
 
 namespace Forradia
 {
-
     class Object
     {
-
         // Functions
-
     public:
-        explicit Object(String objTypeName, bool randScaling = false, bool randRotation = false, float _rotation = 0.0f);
+        explicit Object (
+			String objTypeName,
+			bool randScaling = false,
+			bool randRotation = false,
+			float _rotation = 0.0f
+		);
 
         // Members
-
     public:
         int objectType = 0;
         float rotation = 0.0f;
@@ -28,7 +29,5 @@ namespace Forradia
 
     private:
         Random rnd;
-
     };
-
 }

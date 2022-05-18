@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void CustomCursor::Init()
     {
         SDL_ShowCursor(0);
@@ -37,5 +36,4 @@ namespace Forradia
         }
         }
     }
-
 }

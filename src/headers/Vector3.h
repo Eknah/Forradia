@@ -8,14 +8,12 @@
 
 namespace Forradia
 {
-
     class Vector3
     {
     public:
         Vector3() = default;
-        Vector3(float x_, float y_, float z_) :
-            x(x_), y(y_), z(z_)
-        {}
+        Vector3(float x_, float y_, float z_)
+		: x(x_), y(y_), z(z_) {}
 
         bool operator==(const Vector3& other) const;
         bool operator!=(const Vector3& other) const;
@@ -28,5 +26,4 @@ namespace Forradia
         float y = 0.0f;
         float z = 0.0f;
     };
-
 }

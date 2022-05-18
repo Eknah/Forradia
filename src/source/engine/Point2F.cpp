@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     bool Point2F::IsUndefined()
     {
         return x == -1.0f && y == -1.0f;
@@ -24,5 +23,4 @@ namespace Forradia
 
         return *this;
     }
-
 }

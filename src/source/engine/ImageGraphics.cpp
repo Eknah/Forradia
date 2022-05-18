@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void ImageGraphics::DrawImage(std::string imageName, float x, float y, float width, float height) const
     {
         DrawImage(GetId(imageName), x, y, width, height);
@@ -62,5 +61,4 @@ namespace Forradia
 
         return { imageWidth, imageHeight };
     }
-
 }

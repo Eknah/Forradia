@@ -7,7 +7,6 @@
 
 namespace Forradia
 {
-
     void RightClickMenu::Render()
     {
         if (!visible) return;
@@ -90,5 +89,4 @@ namespace Forradia
             }
         }
     }
-
 }

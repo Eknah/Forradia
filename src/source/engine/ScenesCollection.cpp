@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void ScenesCollection::Add(std::string sceneName, SPtr<SceneBase> scene)
     {
         scenes.insert({ GetId(sceneName), std::move(scene) });
@@ -21,5 +20,4 @@ namespace Forradia
             scenes.insert({ GetId(name), scene });
         }
     }
-
 }

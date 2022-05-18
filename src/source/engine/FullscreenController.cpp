@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void FullscreenController::UpdateFullscreenToggling()
     {
         if (e.keyboardHandler.keysBeenFired->count(SDLK_RETURN) > 0 &&
@@ -19,5 +18,4 @@ namespace Forradia
         SDL_SetWindowFullscreen(e.window.get(),
             fullscreenOn ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
     }
-
 }

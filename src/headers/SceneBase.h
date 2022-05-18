@@ -10,17 +10,14 @@
 
 namespace Forradia
 {
-
     class Engine;
-
+	
     class SceneBase
     {
-
         // Functions
-
     public:
-
-        explicit SceneBase(Engine& _e) : e(_e) {}
+        explicit SceneBase(Engine& _e)
+		: e(_e) {}
 
         virtual void Enter() = 0;
         virtual void Update() = 0;
@@ -31,12 +28,8 @@ namespace Forradia
         virtual void KeyUp(SDL_Keycode key) = 0;
 
         // Members
-
     protected:
-
         Engine& e;
-
         List<TextRect> sceneButtons;
     };
-
 }

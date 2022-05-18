@@ -5,6 +5,7 @@
 // repo by Bly7 at https://github.com/Bly7/OBJ-Loader
 
 #pragma once
+
 #include <string>
 #include <vector>
 #include <fstream>
@@ -15,12 +16,10 @@
 
 namespace Forradia
 {
-
     class Model3D : public AlgorithmsVectors, AlgorithmsStrings
     {
     public:
         Model3D() {}
-
         ~Model3D();
 
         bool LoadFile(std::string path);
@@ -31,27 +30,35 @@ namespace Forradia
         std::vector<Material> loadedMaterials;
 
     private:
-        void GenVerticesFromRawOBJ(std::vector<Vertex>* oVerts,
+        void GenVerticesFromRawOBJ (
+			std::vector<Vertex>* oVerts,
             const std::vector<Vector3>& iPositions,
             const std::vector<Vector2>& iTCoords,
             const std::vector<Vector3>& iNormals,
-            std::string icurline);
+            std::string icurline
+		);
 
-        void VertexTriangluation(std::vector<unsigned int>* oIndices,
-            const std::vector<Vertex>& iVerts);
+        void VertexTriangluation (
+			std::vector<unsigned int>* oIndices,
+            const std::vector<Vertex>& iVerts
+		);
 
         bool LoadMaterials(std::string path);
 
         template <class T>
-        const T& GetElement(const std::vector<T>& elements,
-            const std::string& index);
+        const T& GetElement (
+			const std::vector<T>& elements,
+            const std::string& index
+		);
 
         Math3D math3D;
     };
 
     template <class T>
-    const T& Model3D::GetElement(const std::vector<T>& elements,
-        const std::string& index)
+    const T& Model3D::GetElement (
+		const std::vector<T>& elements,
+        const std::string& index
+	)
     {
         unsigned int idx = std::stoi(index);
 
@@ -62,5 +69,4 @@ namespace Forradia
 
         return elements[idx];
     }
-
 }

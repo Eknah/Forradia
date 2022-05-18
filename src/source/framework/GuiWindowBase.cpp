@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void GuiWindowBase::Render()
     {
         using namespace Palette;
@@ -73,5 +72,4 @@ namespace Forradia
     {
         beingMoved = false;
     }
-
 }

@@ -9,23 +9,18 @@
 
 namespace Forradia
 {
-
     class RightClickMenu
     {
-
     public:
-
-        explicit RightClickMenu(Engine& _e, Camera& _camera) : e(_e), camera(_camera) {}
-
+        explicit RightClickMenu(Engine& _e, Camera& _camera)
+		: e(_e), camera(_camera) {}
 
         void Render();
         void MouseDown(Uint8 mouseButton);
         void MouseUp(Uint8 mouseButton);
 
     private:
-
         Engine& e;
-
         bool visible = false;
         Point2F mouseClickPos = {-1, -1};
         Utilities utils;
@@ -33,7 +28,5 @@ namespace Forradia
         const float lineHeight = 0.02f;
         Camera& camera;
         std::vector<CraftRecipe> recipes;
-
     };
-
 }

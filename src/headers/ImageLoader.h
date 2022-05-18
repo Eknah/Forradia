@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include <GL/glew.h>
 #include <SDL2/SDL_image.h>
 #include <filesystem>
@@ -12,7 +13,6 @@
 
 namespace Forradia
 {
-
     class ImageLoader
     {
     public:
@@ -25,5 +25,4 @@ namespace Forradia
         const std::string imagesPath = "/Resources/Images";
         const std::string imageNameExtension = ".png";
     };
-
 }

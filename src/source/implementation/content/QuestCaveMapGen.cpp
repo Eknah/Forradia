@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void QuestCaveMapGen::GenerateQuestCaveMapArea(MapArea* mapArea, Point2 entranceLoc)
     {
         ClearToCaveFloor(mapArea);
@@ -84,5 +83,4 @@ namespace Forradia
             }
         }
     }
-
 }

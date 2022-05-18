@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void GameLoop::Run()
     {
 
@@ -191,7 +190,7 @@ namespace Forradia
             glBindTexture(GL_TEXTURE_2D, renderedTexture);
 
             // Give an empty image to OpenGL ( the last "0" )
-            glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA, RES_WIDTH, RES_HEIGHT, 0,GL_RGBA, GL_UNSIGNED_BYTE, 0);
+            glTexImage2D(GL_TEXTURE_2D, 0,GL_RGBA, lowResWidth, lowResHeight, 0,GL_RGBA, GL_UNSIGNED_BYTE, 0);
 
             // Poor filtering. Needed !
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -206,7 +205,7 @@ namespace Forradia
             glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
             glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
-            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, RES_WIDTH, RES_HEIGHT);
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, lowResWidth, lowResHeight);
 
             glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
@@ -218,7 +217,7 @@ namespace Forradia
         }
 
 
-        glViewport(0, 0, RES_WIDTH, RES_HEIGHT);
+        glViewport(0, 0, lowResWidth, lowResHeight);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
         glClear(GL_COLOR_BUFFER_BIT);
@@ -232,7 +231,7 @@ namespace Forradia
 
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
         glBlitFramebuffer(
-        0, 0, RES_WIDTH, RES_HEIGHT,
+        0, 0, lowResWidth, lowResHeight,
         0, 0, utilities.GetOrigCanvasSize().w, utilities.GetOrigCanvasSize().h,
         GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
@@ -260,5 +259,4 @@ namespace Forradia
 
         return 1;
     }
-
 }

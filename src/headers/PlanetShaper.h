@@ -7,22 +7,15 @@
 
 namespace Forradia
 {
-
     class PlanetShaper
     {
-
     public:
-
         explicit PlanetShaper(const Engine& _e) : e(_e) {}
 
         float GetNewY(float y, float tilex, float tiley);
-
+		
     private:
-
         const Engine& e;
-        //float radius = 2.0f;
         float radius = 6.0f;
-
     };
-
 }

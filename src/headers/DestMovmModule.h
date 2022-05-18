@@ -8,19 +8,13 @@
 
 namespace Forradia
 {
-
     class DestMovmModule : public IModule
     {
-
         // Functions
-
     public:
-
         DestMovmModule(const IEngine& _e, Actor* _parentActor);
 
         void ResetForNewFrame() override {};
         void Update() override;
-
     };
-
 }

@@ -2,12 +2,12 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "Point2F.h"
 #include "LineF.h"
 
 namespace Forradia
 {
-
     class RectF
     {
     public:
@@ -24,5 +24,4 @@ namespace Forradia
         float w = 0.0f;
         float h = 0.0f;
     };
-
 }

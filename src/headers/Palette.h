@@ -2,11 +2,11 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "SDL2/SDL_pixels.h"
 
 namespace Forradia
 {
-
     namespace Palette
     {
         const inline SDL_Color White = { 255, 255, 255, 255 };
@@ -20,5 +20,4 @@ namespace Forradia
         const inline SDL_Color LightGray = { 150, 150, 150, 255 };
         const inline SDL_Color DarkGray = { 50, 50, 50, 255 };
     };
-
 }

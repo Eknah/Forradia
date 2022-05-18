@@ -12,28 +12,19 @@
 
 namespace Forradia
 {
-
     class ObjectsBehaviour
     {
-
         // Functions
-
     public:
-
         void Add(String objectName, ObjectDescriber describer);
         void Add(String objectName, char flags);
         void AddMany(List<Tuple<String, char>> describers);
-
         void SetOpacity(String objectName, float opacity);
-
         bool Movable(int objectType) const;
         bool BlocksMovement(int objectType) const;
 
         // Members
-
     public:
         UMap<int, ObjectDescriber> objDescribers;
-
     };
-
 }

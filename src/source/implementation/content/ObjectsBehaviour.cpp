@@ -8,7 +8,6 @@
 
 namespace Forradia
 {
-
     void ObjectsBehaviour::Add(String objectName, ObjectDescriber describer)
     {
         objDescribers.insert({ GetId(objectName), describer });
@@ -50,5 +49,4 @@ namespace Forradia
 
         return false;
     }
-
 }

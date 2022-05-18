@@ -9,7 +9,6 @@
 
 namespace Forradia
 {
-
     void WorldRenderer::Render()
     {
 
@@ -532,5 +531,4 @@ namespace Forradia
         return { elev0, elev1, elev2, elev3 };
 
     }
-
 }

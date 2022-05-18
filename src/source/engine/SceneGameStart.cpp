@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void SceneGameStart::Render()
     {
         e.DrawImage(imageNameBackground, 0, 0, 1, 1);
@@ -29,5 +28,4 @@ namespace Forradia
     {
         e.sceneManager.SwitchToScene(switchToSceneName);
     }
-
 }

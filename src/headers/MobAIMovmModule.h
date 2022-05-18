@@ -8,12 +8,9 @@
 
 namespace Forradia
 {
-
     class MobAIMovmModule : public IModule
     {
-
         // Functions
-
     public:
         MobAIMovmModule(const IEngine& _e, Actor* _parentActor);
 
@@ -21,10 +18,7 @@ namespace Forradia
         void Update() override;
 
         // Members
-
     private:
         Random rnd;
-
     };
-
 }

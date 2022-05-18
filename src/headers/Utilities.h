@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "Point2.h"
 #include "Point2F.h"
 #include "Size.h"
@@ -11,7 +12,6 @@
 
 namespace Forradia
 {
-
     class Utilities
     {
     public:
@@ -25,5 +25,4 @@ namespace Forradia
     private:
         static inline Size origCanvasSize = {0,0};
     };
-
 }

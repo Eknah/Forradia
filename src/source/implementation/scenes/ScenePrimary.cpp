@@ -8,7 +8,6 @@
 
 namespace Forradia
 {
-
     void ScenePrimary::Enter()
     {
         gui.Init();
@@ -143,5 +142,4 @@ namespace Forradia
     {
         gui.KeyDown(key);
     }
-
 }

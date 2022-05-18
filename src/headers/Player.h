@@ -2,6 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 #pragma once
+
 #include "Actor.h"
 #include "InventoryModule.h"
 #include "JumpingModule.h"
@@ -11,11 +12,9 @@
 
 namespace Forradia
 {
-
     class Player : public Actor
     {
     public:
         explicit Player(IEngine& e);
     };
-
 }

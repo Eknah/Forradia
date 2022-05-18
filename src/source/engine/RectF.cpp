@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     bool RectF::Contains(Point2F point)
     {
         if (point.x >= x && point.y >= y && point.x < x + w &&
@@ -49,5 +48,4 @@ namespace Forradia
     {
         return {x + w/2, y + h/2};
     }
-
 }

@@ -5,6 +5,7 @@
 // repo by Bly7 at https://github.com/Bly7/OBJ-Loader
 
 #pragma once
+
 #include <string>
 #include <vector>
 #include "Material.h"
@@ -12,19 +13,20 @@
 
 namespace Forradia
 {
-
     class Mesh
     {
     public:
         Mesh() {}
-        Mesh(std::vector<Vertex> _vertices, std::vector<unsigned int> _indices)
-            : vertices(_vertices), indices(_indices)
-        {}
+        Mesh
+		(
+			std::vector<Vertex> _vertices,
+			std::vector<unsigned int> _indices
+		)
+        : vertices(_vertices), indices(_indices) {}
 
         std::string meshName;
         std::vector<Vertex> vertices;
         std::vector<unsigned int> indices;
         Material meshMaterial;
     };
-
 }

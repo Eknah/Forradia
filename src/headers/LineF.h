@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     class LineF
     {
     public:
@@ -14,5 +13,4 @@ namespace Forradia
         float x1 = 0.0f;
         float y1 = 0.0f;
     };
-
 }

@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void SDL_Deleter::operator()(SDL_Window* p) const
     {
         SDL_DestroyWindow(p);
@@ -30,5 +29,4 @@ namespace Forradia
     {
         TTF_CloseFont(p);
     }
-
 }

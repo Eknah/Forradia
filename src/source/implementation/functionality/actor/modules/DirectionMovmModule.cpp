@@ -11,7 +11,6 @@
 
 namespace Forradia
 {
-
     DirectionMovmModule::DirectionMovmModule(const IEngine& _e, Actor* parentActor_) : IModule(_e, parentActor_)
     {
         GetParentActor().AddIfNotExists<CoreMovmModule>();
@@ -99,7 +98,4 @@ namespace Forradia
 
         coreMovm.timer.Reset();
     }
-
-
-
 }

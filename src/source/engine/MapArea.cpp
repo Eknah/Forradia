@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     MapArea::MapArea(const IEngine& e, int _size, Point3 worldPos) : size(_size), worldCoord(worldPos)
     {
         for (auto x = 0; x < size; x++)
@@ -62,5 +61,4 @@ namespace Forradia
     {
         return p.x >= margin && p.y >= margin && p.x < size - margin && p.y < size - margin;
     }
-
 }

@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     Object::Object(String objTypeName, bool randScaling, bool randRotation, float _rotation) : objectType(GetId(objTypeName))
     {
         if (randRotation) 
@@ -16,5 +15,4 @@ namespace Forradia
         if (randScaling)
             scaling = 0.6f + CFloat(rnd.Next(8)) / 10.0f;
     }
-
 }

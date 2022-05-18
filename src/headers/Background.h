@@ -10,7 +10,8 @@ namespace Forradia
     class Background
     {
     public:
-        explicit Background(const Engine& _e) : e(_e) {}
+        explicit Background(const Engine& _e)
+		: e(_e) {}
 		
         void Render(float zoom);
 

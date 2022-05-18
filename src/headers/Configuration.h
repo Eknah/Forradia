@@ -5,12 +5,10 @@
 
 namespace Forradia
 {
-
     class Configuration
     {
         public:
             float tileSize = 0.5f;
             float fov = 60.0f;
     };
-
 }

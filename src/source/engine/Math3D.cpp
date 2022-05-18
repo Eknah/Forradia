@@ -7,7 +7,6 @@
 #include "Math3D.h"
 namespace Forradia
 {
-
     Vector3 Math3D::Cross(const Vector3 a, const Vector3 b)
     {
         return Vector3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z,
@@ -36,5 +35,4 @@ namespace Forradia
         Vector3 bn = b / Magnitude(b);
         return bn * Dot(a, bn);
     }
-
 }

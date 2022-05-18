@@ -5,7 +5,6 @@
 
 namespace Forradia
 {
-
     void KeyboardHandler::ResetForNewFrame() const
     {
         keysBeenFired->clear();
@@ -21,5 +20,4 @@ namespace Forradia
     {
         keysBeingPressed->erase(key);
     }
-
 }

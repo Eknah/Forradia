@@ -9,12 +9,9 @@
 
 namespace Forradia
 {
-
     class InventoryModule : public IModule
     {
-
     public:
-
         using IModule::IModule;
 
         void ResetForNewFrame() override;
@@ -22,7 +19,5 @@ namespace Forradia
         void Add(int position, std::string objectName);
 
         Inventory inventory;
-
     };
-
 }

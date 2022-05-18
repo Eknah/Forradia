@@ -6,7 +6,6 @@
 
 namespace Forradia
 {
-
     void Inventory::Add(std::string objectName)
     {
         for (auto i = 0; i <= objects.size(); i++)
@@ -26,5 +25,4 @@ namespace Forradia
             Add(name);
         }
     }
-
 }

@@ -9,14 +9,14 @@
 
 namespace Forradia
 {
-
     class ScenePrimary : public SceneBase
     {
-
     public:
-
-        explicit ScenePrimary(Engine& _e) : SceneBase(_e), gui(_e, cam), cam(_e), worldRenderer(_e, cam)
-        {}
+        explicit ScenePrimary(Engine& _e)
+		: SceneBase(_e),
+		gui(_e, cam),
+		cam(_e),
+		worldRenderer(_e, cam) {}
 
         void Enter() override;
         void Update() override;
@@ -27,12 +27,9 @@ namespace Forradia
         void KeyUp(SDL_Keycode key) override {}
 
     private:
-
         Camera cam;
         Gui gui;
         Utilities utils;
         WorldRenderer worldRenderer;
-
     };
-
 }

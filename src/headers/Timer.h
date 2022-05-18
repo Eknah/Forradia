@@ -7,22 +7,18 @@
 
 namespace Forradia
 {
-
     class Timer
     {
-
     public:
-        Timer(UPtr<int> _duration) : durationPtr(std::move(_duration)) {}
+        Timer(UPtr<int> _duration)
+		: durationPtr(std::move(_duration)) {}
 
         void Reset();
         bool HasFinished();
         int GetPassedTicks();
-
+		
     private:
-
         UPtr<int> durationPtr = nullptr;
         Uint32 startTime = 0;
-
     };
-
 }
