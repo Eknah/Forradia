@@ -42,6 +42,7 @@ namespace Forradia
 
     void Camera::SetupCamera() const
     {
+		
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         gluPerspective(e.cfg.fov, 1.333, 0.5, 100);

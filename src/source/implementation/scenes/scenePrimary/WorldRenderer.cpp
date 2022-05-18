@@ -79,6 +79,7 @@ namespace Forradia
 
         DoRender();
 
+		glLoadIdentity();
 
     }
 
