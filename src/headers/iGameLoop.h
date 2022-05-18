@@ -22,8 +22,8 @@ namespace Forradia
 
         bool quit = false;
 
-        int RES_WIDTH = 250;
-        int RES_HEIGHT = 150;
+        int RES_WIDTH = 400;
+        int RES_HEIGHT = 300;
 
     protected:
         IEngine& e;

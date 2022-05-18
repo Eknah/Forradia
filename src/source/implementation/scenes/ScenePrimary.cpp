@@ -17,12 +17,12 @@ namespace Forradia
 
     void ScenePrimary::Update()
     {
-        auto& keys = _ keyboardHandler.keysBeingPressed;
-        auto& player = _ GetPlayer();
+        auto& keys = e.keyboardHandler.keysBeingPressed;
+        auto& player = e.GetPlayer();
 
         player.ResetForNewFrame();
 
-        if (!SDL_IsTextInputActive() && _ keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) == 0)
+        if (!SDL_IsTextInputActive() && e.keyboardHandler.keysBeingPressed->count(SDLK_LCTRL) == 0)
         {
             char moveInstruction = DirNone;
 
@@ -57,32 +57,32 @@ namespace Forradia
             else
                 cam.UpdateRotation(0);
 
-            if (_ keyboardHandler.keysBeenFired->count(SDLK_F2))
+            if (e.keyboardHandler.keysBeenFired->count(SDLK_F2))
                 gui.windows.at("Inventory")->visible = !gui.windows.at("Inventory")->visible;
 
-            if (_ keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
-                _ GetPlayer().GetModule<JumpingModule>().Jump();
+            if (e.keyboardHandler.keysBeenFired->count(SDLK_SPACE) > 0)
+                e.GetPlayer().GetModule<JumpingModule>().Jump();
         }
 
-        cam.UpdateZoomChange(*_ mouseHandler.wheelAmount);
+        cam.UpdateZoomChange(*e.mouseHandler.wheelAmount);
         cam.UpdateCameraMovm();
         cam.UpdateRayCasting();
 
-        if (_ mouseHandler.rightButtonDown)
+        if (e.mouseHandler.rightButtonDown)
             *player.GetModule<CoreMovmModule>().facingAngle = cam.lookingAngle;
 
-        if (_ mouseHandler.rightButtonDown)
-            _ cursor.type = CursorTypes::Hidden;
+        if (e.mouseHandler.rightButtonDown)
+            e.cursor.type = CursorTypes::Hidden;
 
-        for (auto i = 0; i < _ GetCurrMapArea().mobActorsMirror.size(); i++)
+        for (auto i = 0; i < e.GetCurrMapArea().mobActorsMirror.size(); i++)
         {
-            _ GetCurrMapArea().mobActorsMirror.at(i).get()->Update();
+            e.GetCurrMapArea().mobActorsMirror.at(i).get()->Update();
         }
 
         player.Update();
         gui.Update();
 
-        if (_ keyboardHandler.keysBeenFired->count(SDLK_RETURN))
+        if (e.keyboardHandler.keysBeenFired->count(SDLK_RETURN))
             gui.console.ToggleInput();
     }
 
@@ -97,8 +97,8 @@ namespace Forradia
     void ScenePrimary::MouseDown(Uint8 mouseButton)
     {
         auto hovered = cam.GetHoveredTile();
-        //auto& objectUsage = _ GetPlayer().GetModule<CraftSkillsModule>();
-        auto& hoveredTile = _ GetCurrMapArea().tiles[hovered.x][hovered.y];
+        //auto& objectUsage = e.GetPlayer().GetModule<CraftSkillsModule>();
+        auto& hoveredTile = e.GetCurrMapArea().tiles[hovered.x][hovered.y];
 
 //        if (objectUsage.objectBeingUsed != nullptr)
 //        {
@@ -119,7 +119,7 @@ namespace Forradia
         {
         case SDL_BUTTON_LEFT:
         {
-            _ GetPlayer().GetModule<CoreMovmModule>().dest =
+            e.GetPlayer().GetModule<CoreMovmModule>().dest =
             {
                 cam.GetHoveredTile().x + 0.5f,
                 cam.GetHoveredTile().y + 0.5f

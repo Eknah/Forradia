@@ -18,7 +18,7 @@ namespace Forradia
         auto aspectRatio = CFloat(canvasSize.w) / canvasSize.h;
         auto boundsInterior = GetInnerBounds();
 
-        _ FillRect(Wheat, boundsInterior);
+        e.FillRect(Wheat, boundsInterior);
 
         auto slotSize = boundsInterior.w / numSlotCols - margin;
         auto numSlotRows = boundsInterior.h / ((slotSize + margin) * aspectRatio);
@@ -36,11 +36,11 @@ namespace Forradia
                 if (player.GetModule<InventoryModule>().inventory.objects.count(i) > 0)
                 {
                     if (player.GetModule<CraftSkillsModule>().objectBeingUsed == e.GetPlayer().GetModule<InventoryModule>().inventory.objects.at(i))
-                        _ DrawImage("ObjectSelected", xpos, ypos, slotSize, slotSize * aspectRatio);
+                        e.DrawImage("ObjectSelected", xpos, ypos, slotSize, slotSize * aspectRatio);
                     else
-                        _ DrawImage("ObjectBackgroundShadow", xpos, ypos, slotSize, slotSize * aspectRatio);
+                        e.DrawImage("ObjectBackgroundShadow", xpos, ypos, slotSize, slotSize * aspectRatio);
 
-                    _ DrawImage(player.GetModule<InventoryModule>().inventory.objects.at(i)->objectType, xpos, ypos, slotSize, slotSize * aspectRatio);
+                    e.DrawImage(player.GetModule<InventoryModule>().inventory.objects.at(i)->objectType, xpos, ypos, slotSize, slotSize * aspectRatio);
                 }
 
                 i++;

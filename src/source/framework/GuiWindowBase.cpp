@@ -13,10 +13,10 @@ namespace Forradia
 
         if (!visible) return;
 
-        _ FillRect(MediumBlue, bounds.x, bounds.y, bounds.w, bounds.h);
-        _ DrawRect(Black, bounds.x, bounds.y, bounds.w, bounds.h);
-        _ DrawString(title, Black, bounds.x + margin, bounds.y + margin);
-        _ DrawLine(Black, bounds.x, bounds.y + topBarHeight, bounds.x + bounds.w, bounds.y + topBarHeight);
+        e.FillRect(MediumBlue, bounds.x, bounds.y, bounds.w, bounds.h);
+        e.DrawRect(Black, bounds.x, bounds.y, bounds.w, bounds.h);
+        e.DrawString(title, Black, bounds.x + margin, bounds.y + margin);
+        e.DrawLine(Black, bounds.x, bounds.y + topBarHeight, bounds.x + bounds.w, bounds.y + topBarHeight);
 
         RenderEx();
     }

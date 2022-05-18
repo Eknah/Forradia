@@ -13,8 +13,8 @@ namespace Forradia
 
         auto result = y;
 
-        auto dx = static_cast<int>(tileX) - _ GetPlayer().GetModule<CoreMovmModule>().position.x;
-        auto dy = static_cast<int>(tileY) - _ GetPlayer().GetModule<CoreMovmModule>().position.y;
+        auto dx = static_cast<int>(tileX) - e.GetPlayer().GetModule<CoreMovmModule>().position.x;
+        auto dy = static_cast<int>(tileY) - e.GetPlayer().GetModule<CoreMovmModule>().position.y;
         auto distance = dx * dx + dy * dy;
 
         result -= distance * (0.01f/radius);

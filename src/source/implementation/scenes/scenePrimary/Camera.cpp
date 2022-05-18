@@ -95,20 +95,20 @@ namespace Forradia
 
     Point2 Camera::GetHoveredTile() const
     {
-        float subStepX = _ GetPlayer().GetModule<CoreMovmModule>().position.x - CInt(_ GetPlayer().GetModule<CoreMovmModule>().position.x);
-        float subStepY = _ GetPlayer().GetModule<CoreMovmModule>().position.y - CInt(_ GetPlayer().GetModule<CoreMovmModule>().position.y);
+        float subStepX = e.GetPlayer().GetModule<CoreMovmModule>().position.x - CInt(e.GetPlayer().GetModule<CoreMovmModule>().position.x);
+        float subStepY = e.GetPlayer().GetModule<CoreMovmModule>().position.y - CInt(e.GetPlayer().GetModule<CoreMovmModule>().position.y);
 
-        auto offsetX = -CFloat(2 * renderDistance + 1) / 2.0f * _ cfg.tileSize - subStepX * _ cfg.tileSize;
-        auto offsetY = -CFloat(2 * renderDistance - 1) / 2.0f * _ cfg.tileSize - subStepY * _ cfg.tileSize;
-        auto mapx = _ GetPlayer().GetModule<CoreMovmModule>().position.x - renderDistance + (rayCastingX - offsetX) / _ cfg.tileSize;
-        auto mapy = _ GetPlayer().GetModule<CoreMovmModule>().position.y - renderDistance + (rayCastingZ - offsetY) / _ cfg.tileSize + 1;
+        auto offsetX = -CFloat(2 * renderDistance + 1) / 2.0f * e.cfg.tileSize - subStepX * e.cfg.tileSize;
+        auto offsetY = -CFloat(2 * renderDistance - 1) / 2.0f * e.cfg.tileSize - subStepY * e.cfg.tileSize;
+        auto mapx = e.GetPlayer().GetModule<CoreMovmModule>().position.x - renderDistance + (rayCastingX - offsetX) / e.cfg.tileSize;
+        auto mapy = e.GetPlayer().GetModule<CoreMovmModule>().position.y - renderDistance + (rayCastingZ - offsetY) / e.cfg.tileSize + 1;
 
         return { CInt(mapx), CInt(mapy) };
     }
 
     int Camera::GetRenderDist() const
     {
-        auto& mapArea = _ GetCurrMapArea();
+        auto& mapArea = e.GetCurrMapArea();
 
         if (mapArea.IsUnderground())
             return renderDistanceCave;
@@ -122,10 +122,10 @@ namespace Forradia
         auto deltaMouseX = mousePos.x - previousMousePos.x;
         auto deltaMouseY = mousePos.y - previousMousePos.y;
 
-        if (_ mouseHandler.rightButtonDown)
+        if (e.mouseHandler.rightButtonDown)
             lookingAngle -= deltaMouseX / 5.0f;
 
-        if (_ mouseHandler.rightButtonDown)
+        if (e.mouseHandler.rightButtonDown)
         {
             cameraHeight += deltaMouseY / 100.0f;
             cameraHeight = std::max(std::min(cameraHeight, 2.0f), -1.0f);

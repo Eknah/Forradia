@@ -5,18 +5,16 @@
 
 namespace Forradia
 {
-
     class Engine;
 
     class Background
     {
     public:
         explicit Background(const Engine& _e) : e(_e) {}
-
+		
         void Render(float zoom);
 
     private:
         const Engine& e;
     };
-
 }  // namespace Forradia

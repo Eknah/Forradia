@@ -18,12 +18,12 @@ namespace Forradia
     {
         using namespace Palette;
 
-        _ DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
+        e.DrawImage("SceneGameStartBackground", 0, 0, 1, 1);
 
         auto canvasSz = utils.GetCanvasSize();
-        auto logoSzF = _ GetImageSizeF("SceneForradiaLogo");
+        auto logoSzF = e.GetImageSizeF("SceneForradiaLogo");
 
-        _ DrawImage
+        e.DrawImage
         (
             "SceneForradiaLogo",
             0.5f - logoSzF.w / 4.0f,
@@ -34,19 +34,19 @@ namespace Forradia
 
         for (auto& button : sceneButtons)
         {
-            _ FillRect(Wheat, button.bounds.x - button.bounds.w / 2, button.bounds.y - button.bounds.h / 2, button.bounds.w, button.bounds.h);
-            _ DrawString(button.text, Black, button.bounds.x, button.bounds.y, true);
+            e.FillRect(Wheat, button.bounds.x - button.bounds.w / 2, button.bounds.y - button.bounds.h / 2, button.bounds.w, button.bounds.h);
+            e.DrawString(button.text, Black, button.bounds.x, button.bounds.y, true);
         }
     }
 
     void SceneMainMenu::MouseDown(Uint8 mouseButton)
     {
-        _ sceneManager.SwitchToScene("ScenePrimary");
+        e.sceneManager.SwitchToScene("ScenePrimary");
     }
     
     void SceneMainMenu::KeyDown(SDL_Keycode key)
     {
-        _ sceneManager.SwitchToScene("ScenePrimary");
+        e.sceneManager.SwitchToScene("ScenePrimary");
     }
 
 }  // namespace Forradia

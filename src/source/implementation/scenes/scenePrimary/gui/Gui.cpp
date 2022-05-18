@@ -23,13 +23,13 @@ namespace Forradia
         auto mousePosF = utils.GetMousePosF();
 
         if (boundsInvBtn.Contains(mousePosF))
-            _ cursor.type = CursorTypes::Hovering;
+            e.cursor.type = CursorTypes::Hovering;
 
         if (boundsCharBtn.Contains(mousePosF))
-            _ cursor.type = CursorTypes::Hovering;
+            e.cursor.type = CursorTypes::Hovering;
 
         if (boundsSysBtn.Contains(mousePosF))
-            _ cursor.type = CursorTypes::Hovering;
+            e.cursor.type = CursorTypes::Hovering;
 
         for (auto& [key, window] : windows)
             window->Update();
@@ -47,31 +47,31 @@ namespace Forradia
         auto mousePosF = utils.GetMousePosF();
 
         if (boundsInvBtn.Contains(mousePosF))
-            _ FillRect(LightMediumBlueSemiTrans, boundsInvBtn);
+            e.FillRect(LightMediumBlueSemiTrans, boundsInvBtn);
         else
-            _ FillRect(MediumBlueSemiTrans, boundsInvBtn);
+            e.FillRect(MediumBlueSemiTrans, boundsInvBtn);
 
-        _ DrawRect(White, boundsInvBtn);
+        e.DrawRect(White, boundsInvBtn);
 
-        _ DrawString("Inventory [F2]", White, boundsInvBtn.GetCenter(), true);
+        e.DrawString("Inventory [F2]", White, boundsInvBtn.GetCenter(), true);
 
         if (boundsCharBtn.Contains(mousePosF))
-            _ FillRect(LightMediumBlueSemiTrans, boundsCharBtn);
+            e.FillRect(LightMediumBlueSemiTrans, boundsCharBtn);
         else
-            _ FillRect(MediumBlueSemiTrans, boundsCharBtn);
+            e.FillRect(MediumBlueSemiTrans, boundsCharBtn);
 
-        _ DrawRect(White, boundsCharBtn);
+        e.DrawRect(White, boundsCharBtn);
 
-        _ DrawString("Character [F1]", White, boundsCharBtn.GetCenter(), true);
+        e.DrawString("Character [F1]", White, boundsCharBtn.GetCenter(), true);
 
         if (boundsSysBtn.Contains(mousePosF))
-            _ FillRect(LightMediumBlueSemiTrans, boundsSysBtn);
+            e.FillRect(LightMediumBlueSemiTrans, boundsSysBtn);
         else
-            _ FillRect(MediumBlueSemiTrans, boundsSysBtn);
+            e.FillRect(MediumBlueSemiTrans, boundsSysBtn);
 
-        _ DrawRect(White, boundsSysBtn);
+        e.DrawRect(White, boundsSysBtn);
 
-        _ DrawString("System [F3]", White, boundsSysBtn.GetCenter(), true);
+        e.DrawString("System [F3]", White, boundsSysBtn.GetCenter(), true);
 
         console.Render();
 

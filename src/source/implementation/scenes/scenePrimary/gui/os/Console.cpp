@@ -11,10 +11,10 @@ namespace Forradia
 
     void Console::Update() {
 
-        dim resize_icon_bounds = GetResizeIconBounds();
+        auto resize_icon_bounds = GetResizeIconBounds();
 
         if (resize_icon_bounds.Contains(utils.GetMousePosF()))
-            _ cursor.type = CursorTypes::Hovering;
+            e.cursor.type = CursorTypes::Hovering;
 
     }
 
@@ -22,26 +22,26 @@ namespace Forradia
 
         using namespace Palette;
 
-        _ FillRect(MediumBlueSemiTrans, bounds);
-        _ DrawRect(Wheat, bounds);
+        e.FillRect(MediumBlueSemiTrans, bounds);
+        e.DrawRect(Wheat, bounds);
 
-        dim input_bounds = bounds.Copy().Translate(0.0f, bounds.h - inputLineHeight).SetHeight(inputLineHeight);
+        auto input_bounds = bounds.Copy().Translate(0.0f, bounds.h - inputLineHeight).SetHeight(inputLineHeight);
 
         if (input_active)
-            _ FillRect(LightMediumBlueSemiTrans, input_bounds);
+            e.FillRect(LightMediumBlueSemiTrans, input_bounds);
 
-        _ DrawLine(Wheat, input_bounds.GetTopEdge());
+        e.DrawLine(Wheat, input_bounds.GetTopEdge());
 
         if (input_active) {
 
-            dim text_printed = e.text;
+            auto text_printed = e.text;
             text_printed.insert(e.textCursor, "|");
-            _ DrawString(text_printed, White, input_bounds.GetTopLeftCorner().Translate(0.005f, 0.0f));
+            e.DrawString(text_printed, White, input_bounds.GetTopLeftCorner().Translate(0.005f, 0.0f));
 
         }
 
-        dim textx = bounds.x + margin;
-        dim texty = bounds.y + margin;
+        auto textx = bounds.x + margin;
+        auto texty = bounds.y + margin;
 
         List<String> textToPrint;
 
@@ -50,22 +50,22 @@ namespace Forradia
         else
             textToPrint = fileSystem.runningProgram->outputText;
 
-        dim line_height = 0.02f;
-        dim num_shown_lines = CInt(bounds.h / line_height);
-        dim startline = std::max(CInt(textToPrint.size() + 1 - num_shown_lines), 0);
-        dim endline = std::min(startline + num_shown_lines - 2, CInt(textToPrint.size() - 1));
+        auto line_height = 0.02f;
+        auto num_shown_lines = CInt(bounds.h / line_height);
+        auto startline = std::max(CInt(textToPrint.size() + 1 - num_shown_lines), 0);
+        auto endline = std::min(startline + num_shown_lines - 2, CInt(textToPrint.size() - 1));
 
-        dim y = texty;
+        auto y = texty;
 
-        for (dim i = startline; i <= endline; i++) {
+        for (auto i = startline; i <= endline; i++) {
 
-            _ DrawString(textToPrint.at(i), Wheat, textx, y, false, 0.7f);
+            e.DrawString(textToPrint.at(i), Wheat, textx, y, false, 0.7f);
             y += line_height;
 
         }
 
-        dim resize_icon_bounds = GetResizeIconBounds();
-        _ DrawImage("ConsoleResizeIcon", resize_icon_bounds.x, resize_icon_bounds.y, resize_icon_bounds.w, resize_icon_bounds.h);
+        auto resize_icon_bounds = GetResizeIconBounds();
+        e.DrawImage("ConsoleResizeIcon", resize_icon_bounds.x, resize_icon_bounds.y, resize_icon_bounds.w, resize_icon_bounds.h);
 
     }
 
@@ -81,16 +81,16 @@ namespace Forradia
             else {
 
                 if (InputBeginsWith("echo"))
-                    Print(_ text.substr(5));
-                elif (InputBeginsWith("quit"))
-                    _ gameLoop.quit = true;
-                elif (InputBeginsWith("list"))
+                    Print(e.text.substr(5));
+                else if (InputBeginsWith("quit"))
+                    e.gameLoop.quit = true;
+                else if (InputBeginsWith("list"))
                     fileSystem.PrintCurrentDirectory();
-                elif (InputBeginsWith("clear"))
+                else if (InputBeginsWith("clear"))
                     textBoxText.clear();
-                elif (InputBeginsWith("move"))
+                else if (InputBeginsWith("move"))
                     fileSystem.MoveToFolder(e.text.substr(5));
-                elif (InputBeginsWith("run"))
+                else if (InputBeginsWith("run"))
                     fileSystem.RunProgram(e.text.substr(4));
 
             }
@@ -114,7 +114,7 @@ namespace Forradia
 
     bool Console::InputBeginsWith(String text) {
 
-        ret _ text.substr(0, text.length()) == text;
+        return e.text.substr(0, text.length()) == text;
 
     }
 
@@ -131,7 +131,7 @@ namespace Forradia
 
     RectF Console::GetResizeIconBounds() {
 
-        dim result = RectF
+        auto result = RectF
         {
                 bounds.x + bounds.w - utils.ConvertToFloat(resizeIconSize).w,
                 bounds.y - utils.ConvertToFloat(resizeIconSize).h,
@@ -139,15 +139,15 @@ namespace Forradia
                 utils.ConvertToFloat(resizeIconSize).h
         };
 
-        ret result;
+        return result;
 
     }
 
     bool Console::MouseDown(Uint8 mouseButton) {
 
-        if (mouseButton != SDL_BUTTON_LEFT) ret false;
+        if (mouseButton != SDL_BUTTON_LEFT) return false;
 
-        dim resize_icon_bounds = GetResizeIconBounds();
+        auto resize_icon_bounds = GetResizeIconBounds();
         
         if (resize_icon_bounds.Contains(utils.GetMousePosF())) {
 
@@ -158,11 +158,11 @@ namespace Forradia
 
             bounds.y = 1.0f - 0.03f - bounds.h;
 
-            ret true;
+            return true;
 
         }
 
-        ret false;
+        return false;
 
     }
 

@@ -33,7 +33,7 @@ namespace Forradia
         auto ybottom = -e.cfg.tileSize*25;
 
         glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, _ imageLoader.images.at(GetId("SkyBackground")));
+        glBindTexture(GL_TEXTURE_2D, e.imageLoader.images.at(GetId("SkyBackground")));
 
         glBegin(GL_QUADS);
 
@@ -84,9 +84,9 @@ namespace Forradia
 
     void WorldRenderer::DoRender()
     {
-        auto mapAreaSz = _ world->mapAreaSize;
-        auto& movmData = _ GetPlayer().GetModule<CoreMovmModule>();
-        auto& tiles = _ GetCurrMapArea().tiles;
+        auto mapAreaSz = e.world->mapAreaSize;
+        auto& movmData = e.GetPlayer().GetModule<CoreMovmModule>();
+        auto& tiles = e.GetCurrMapArea().tiles;
         auto offset = CalcOffset();
         List<Point2> roofTiles;
 
@@ -160,10 +160,10 @@ namespace Forradia
                         groundTypeId = animWaterId[waterAnimIndex0];
                 }
 
-                auto waterWaveHeight0 = waterAnimIndex0 * _ cfg.tileSize / 4.0f - _ cfg.tileSize / 10;
-                auto waterWaveHeight1 = waterAnimIndex1 * _ cfg.tileSize / 4.0f - _ cfg.tileSize / 10;
-                auto waterWaveHeight2 = waterAnimIndex2 * _ cfg.tileSize / 4.0f - _ cfg.tileSize / 10;
-                auto waterWaveHeight3 = waterAnimIndex3 * _ cfg.tileSize / 4.0f - _ cfg.tileSize / 10;
+                auto waterWaveHeight0 = waterAnimIndex0 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
+                auto waterWaveHeight1 = waterAnimIndex1 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
+                auto waterWaveHeight2 = waterAnimIndex2 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
+                auto waterWaveHeight3 = waterAnimIndex3 * e.cfg.tileSize / 4.0f - e.cfg.tileSize / 10;
 
                 auto elev = GetElevValues(tilexI, tileyI);
 
@@ -187,20 +187,20 @@ namespace Forradia
                     tileClr = { 0.9f, 0.9f, 0.5f };
 
                 glEnable(GL_TEXTURE_2D);
-                glBindTexture(GL_TEXTURE_2D, _ imageLoader.images.at(groundTypeId));
+                glBindTexture(GL_TEXTURE_2D, e.imageLoader.images.at(groundTypeId));
 
-                auto tileX0 = offset.x + x * _ cfg.tileSize;
+                auto tileX0 = offset.x + x * e.cfg.tileSize;
                 auto tileY0 = elev[0];
-                auto tileZ0 = offset.y + y * _ cfg.tileSize;
-                auto tileX1 = offset.x + x * _ cfg.tileSize;
+                auto tileZ0 = offset.y + y * e.cfg.tileSize;
+                auto tileX1 = offset.x + x * e.cfg.tileSize;
                 auto tileY1 = elev[1];
-                auto tileZ1 = offset.y + y * _ cfg.tileSize - _ cfg.tileSize;
-                auto tileX2 = offset.x + x * _ cfg.tileSize + _ cfg.tileSize;
+                auto tileZ1 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+                auto tileX2 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
                 auto tileY2 = elev[2];
-                auto tileZ2 = offset.y + y * _ cfg.tileSize - _ cfg.tileSize;
-                auto tileX3 = offset.x + x * _ cfg.tileSize + _ cfg.tileSize;
+                auto tileZ2 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+                auto tileX3 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
                 auto tileY3 = elev[3];
-                auto tileZ3 = offset.y + y * _ cfg.tileSize;
+                auto tileZ3 = offset.y + y * e.cfg.tileSize;
 
                 auto offsetAmount = 4.0f;
 
@@ -268,9 +268,9 @@ namespace Forradia
                 auto hoveredx = cam.GetHoveredTile().x;
                 auto hoveredy = cam.GetHoveredTile().y;
 
-                if (hoveredx == tilexI && hoveredy == tileyI && _ cursor.type != CursorTypes::Hidden)
+                if (hoveredx == tilexI && hoveredy == tileyI && e.cursor.type != CursorTypes::Hidden)
                 {
-                    glBindTexture(GL_TEXTURE_2D, _ imageLoader.images.at(GetId("TileHovering")));
+                    glBindTexture(GL_TEXTURE_2D, e.imageLoader.images.at(GetId("TileHovering")));
 
                     glBegin(GL_QUADS);
 
@@ -293,19 +293,19 @@ namespace Forradia
                 {
                     auto dropShadow = true;
 
-                    if (_ objectsContent.objDescribers.count(Object->objectType))
-                        if (_ objectsContent.objDescribers.at(Object->objectType).flags & FlagNoShadow)
+                    if (e.objectsContent.objDescribers.count(Object->objectType))
+                        if (e.objectsContent.objDescribers.at(Object->objectType).flags & FlagNoShadow)
                             dropShadow = false;
 
                     if (dropShadow)
                     {
                         glDisable(GL_TEXTURE_2D);
-                        _ DrawModel
+                        e.DrawModel
                         (
                             "Shadow",
-                            tileX0 + _ cfg.tileSize / 2,
+                            tileX0 + e.cfg.tileSize / 2,
                             (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
-                            tileZ0 - _ cfg.tileSize / 2,
+                            tileZ0 - e.cfg.tileSize / 2,
                             0,
                             0.7f,
                             1.0f
@@ -317,17 +317,17 @@ namespace Forradia
                     auto tileObject = Object->objectType;
                     auto opacity = 1.0f;
 
-                    if (_ objectsContent.objDescribers.count(tileObject))
-                        opacity = _ objectsContent.objDescribers.at(tileObject).opacity;
+                    if (e.objectsContent.objDescribers.count(tileObject))
+                        opacity = e.objectsContent.objDescribers.at(tileObject).opacity;
 
                     if (tileObject != 0)
                     {
-                        _ DrawModel
+                        e.DrawModel
                         (
                             tileObject,
-                            tileX0 + _ cfg.tileSize / 2,
+                            tileX0 + e.cfg.tileSize / 2,
                             (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
-                            tileZ0 - _ cfg.tileSize / 2,
+                            tileZ0 - e.cfg.tileSize / 2,
                             Object->rotation,
                             Object->scaling,
                             opacity
@@ -336,40 +336,40 @@ namespace Forradia
                 }
 
 
-                if (_ GetCurrMapArea().tiles[tilexI][tileyI].actor != nullptr)
+                if (e.GetCurrMapArea().tiles[tilexI][tileyI].actor != nullptr)
                 {
-                    auto subxpos = (_ GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.x - CInt(_ GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.x)) * e.cfg.tileSize;
-                    auto subypos = (_ GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.y - CInt(_ GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.y)) * e.cfg.tileSize;
+                    auto subxpos = (e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.x - CInt(e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.x)) * e.cfg.tileSize;
+                    auto subypos = (e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.y - CInt(e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().position.y)) * e.cfg.tileSize;
 
                     glDisable(GL_TEXTURE_2D);
 
-                    auto modelYPos0 = tileY1 + (tileY2 - tileY1) * subxpos / _ cfg.tileSize;
-                    auto modelYPos1 = tileY0 + (tileY3 - tileY0) * subxpos / _ cfg.tileSize;
-                    auto modelYPos = modelYPos0 + (modelYPos1 - modelYPos0) * subypos / _ cfg.tileSize;
+                    auto modelYPos0 = tileY1 + (tileY2 - tileY1) * subxpos / e.cfg.tileSize;
+                    auto modelYPos1 = tileY0 + (tileY3 - tileY0) * subxpos / e.cfg.tileSize;
+                    auto modelYPos = modelYPos0 + (modelYPos1 - modelYPos0) * subypos / e.cfg.tileSize;
 
-                    _ DrawModel
+                    e.DrawModel
                     (
                         "Shadow",
                         tileX0 + subxpos,
                         modelYPos,
-                        tileZ0 - _ cfg.tileSize + subypos,
+                        tileZ0 - e.cfg.tileSize + subypos,
                         0,
                         0.3f,
                         1.0f
                     );
 
-                    _ DrawModel
+                    e.DrawModel
                     (
-                        _ GetCurrMapArea().tiles[tilexI][tileyI].actor->GetAnimatedModelId(),
+                        e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetAnimatedModelId(),
                         tileX0 + subxpos,
-                        modelYPos + _ GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().positionZ,
-                        tileZ0 - _ cfg.tileSize + subypos,
-                        *_ GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().facingAngle,
+                        modelYPos + e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().positionZ,
+                        tileZ0 - e.cfg.tileSize + subypos,
+                        *e.GetCurrMapArea().tiles[tilexI][tileyI].actor->GetModule<CoreMovmModule>().facingAngle,
                         0.5f
                     );
                 }
 
-                if (_ GetCurrMapArea().tiles[tilexI][tileyI].roof != nullptr)
+                if (e.GetCurrMapArea().tiles[tilexI][tileyI].roof != nullptr)
                     roofTiles.push_back({x, y});
 
             }
@@ -386,7 +386,7 @@ namespace Forradia
     void WorldRenderer::RenderRoof(int x, int y)
     {
 
-        auto mapAreaSz = _ world->mapAreaSize;
+        auto mapAreaSz = e.world->mapAreaSize;
         auto offset = CalcOffset();
 
         auto dx = x - cam.GetRenderDist();
@@ -394,8 +394,8 @@ namespace Forradia
 
         if (dx * dx + dy * dy >= cam.GetRenderDist() * cam.GetRenderDist()) return;
 
-        auto tileX = _ GetPlayer().GetModule<CoreMovmModule>().position.x - cam.GetRenderDist() + x;
-        auto tileY = _ GetPlayer().GetModule<CoreMovmModule>().position.y - cam.GetRenderDist() + y;
+        auto tileX = e.GetPlayer().GetModule<CoreMovmModule>().position.x - cam.GetRenderDist() + x;
+        auto tileY = e.GetPlayer().GetModule<CoreMovmModule>().position.y - cam.GetRenderDist() + y;
 
         if (tileX < 0 || tileY < 0 || tileX >= mapAreaSz || tileY >= mapAreaSz) return;
 
@@ -406,18 +406,18 @@ namespace Forradia
 
         auto slope = elev[3] - elev[0] + elev[0] - elev[1];
 
-        auto tileX0 = offset.x + x * _ cfg.tileSize;
+        auto tileX0 = offset.x + x * e.cfg.tileSize;
         auto tileY0 = elev[0];
-        auto tileZ0 = offset.y + y * _ cfg.tileSize;
-        auto tileX1 = offset.x + x * _ cfg.tileSize;
+        auto tileZ0 = offset.y + y * e.cfg.tileSize;
+        auto tileX1 = offset.x + x * e.cfg.tileSize;
         auto tileY1 = elev[1];
-        auto tileZ1 = offset.y + y * _ cfg.tileSize - _ cfg.tileSize;
-        auto tileX2 = offset.x + x * _ cfg.tileSize + _ cfg.tileSize;
+        auto tileZ1 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+        auto tileX2 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
         auto tileY2 = elev[2];
-        auto tileZ2 = offset.y + y * _ cfg.tileSize - _ cfg.tileSize;
-        auto tileX3 = offset.x + x * _ cfg.tileSize + _ cfg.tileSize;
+        auto tileZ2 = offset.y + y * e.cfg.tileSize - e.cfg.tileSize;
+        auto tileX3 = offset.x + x * e.cfg.tileSize + e.cfg.tileSize;
         auto tileY3 = elev[3];
-        auto tileZ3 = offset.y + y * _ cfg.tileSize;
+        auto tileZ3 = offset.y + y * e.cfg.tileSize;
 
         tileY0 = planetShaper.GetNewY(tileY0, CFloat(tileXI), CFloat(tileYI));
         tileY1 = planetShaper.GetNewY(tileY1, CFloat(tileXI), CFloat(tileYI) - 1);
@@ -426,22 +426,22 @@ namespace Forradia
 
         glDisable(GL_TEXTURE_2D);
 
-        if (_ GetCurrMapArea().tiles[tileXI][tileYI].roof != nullptr)
+        if (e.GetCurrMapArea().tiles[tileXI][tileYI].roof != nullptr)
         {
 
-            auto& roof = _ GetCurrMapArea().tiles[tileXI][tileYI].roof;
+            auto& roof = e.GetCurrMapArea().tiles[tileXI][tileYI].roof;
             auto roofObject = roof->objectType;
             auto opacity = 1.0f;
 
-            if (_ objectsContent.objDescribers.count(roofObject))
-                opacity = _ objectsContent.objDescribers.at(roofObject).opacity;
+            if (e.objectsContent.objDescribers.count(roofObject))
+                opacity = e.objectsContent.objDescribers.at(roofObject).opacity;
 
-            _ DrawModel
+            e.DrawModel
             (
                 roofObject,
-                tileX0 + _ cfg.tileSize / 2,
+                tileX0 + e.cfg.tileSize / 2,
                 (tileY0 + tileY1 + tileY2 + tileY3) / 4.0f,
-                tileZ0 - _ cfg.tileSize / 2,
+                tileZ0 - e.cfg.tileSize / 2,
                 roof->rotation,
                 roof->scaling,
                 opacity
@@ -457,8 +457,8 @@ namespace Forradia
 
     float WorldRenderer::CalcPlayerElev()
     {
-        auto& movmData = _ GetPlayer().GetModule<CoreMovmModule>();
-        auto& tiles = _ GetCurrMapArea().tiles;
+        auto& movmData = e.GetPlayer().GetModule<CoreMovmModule>();
+        auto& tiles = e.GetCurrMapArea().tiles;
 
         auto playerXInt = CInt(movmData.position.x);
         auto playerYInt = CInt(movmData.position.y);
@@ -481,7 +481,7 @@ namespace Forradia
 
     Point2F WorldRenderer::CalcOffset()
     {
-        auto& movmData = _ GetPlayer().GetModule<CoreMovmModule>();
+        auto& movmData = e.GetPlayer().GetModule<CoreMovmModule>();
 
         auto playerxI = CInt(movmData.position.x);
         auto playeryI = CInt(movmData.position.y);
@@ -489,16 +489,16 @@ namespace Forradia
         float substepx = movmData.position.x - playerxI;
         float substepy = movmData.position.y - playeryI;
 
-        auto offsetx = -CFloat(2.0f * cam.GetRenderDist() + 1.0f) / 2.0f * _ cfg.tileSize - substepx * _ cfg.tileSize;
-        auto offsety = -CFloat(2.0f * cam.GetRenderDist() - 1.0f) / 2.0f * _ cfg.tileSize - substepy * _ cfg.tileSize;
+        auto offsetx = -CFloat(2.0f * cam.GetRenderDist() + 1.0f) / 2.0f * e.cfg.tileSize - substepx * e.cfg.tileSize;
+        auto offsety = -CFloat(2.0f * cam.GetRenderDist() - 1.0f) / 2.0f * e.cfg.tileSize - substepy * e.cfg.tileSize;
 
         return {offsetx, offsety};
     }
 
     std::array<float, 4> WorldRenderer::GetElevValues(int xI, int yI)
     {
-        auto mapAreaSz = _ world->mapAreaSize;
-        auto& tiles = _ GetCurrMapArea().tiles;
+        auto mapAreaSz = e.world->mapAreaSize;
+        auto& tiles = e.GetCurrMapArea().tiles;
         auto elevPlayer = CalcPlayerElev();
 
         auto elev0 = 0.0f;
