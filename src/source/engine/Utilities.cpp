@@ -54,4 +54,4 @@ namespace Forradia
         return { resultWidth, resultHeight };
     }
 
-}  // namespace Forradia
+}

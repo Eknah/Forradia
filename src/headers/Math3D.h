@@ -25,4 +25,4 @@ namespace Forradia
         Vector3 Proj(const Vector3 a, const Vector3 b);
     };
 
-}  // namespace Forradia
+}

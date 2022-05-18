@@ -25,4 +25,4 @@ namespace Forradia
         return *this;
     }
 
-}  // namespace Forradia
+}

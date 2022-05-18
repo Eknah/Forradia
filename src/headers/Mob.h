@@ -19,4 +19,4 @@ namespace Forradia
         Mob(const IEngine& e, float x, float y, std::string modelName);
     };
 
-}  // namespace Forradia
+}

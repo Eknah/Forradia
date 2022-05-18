@@ -20,4 +20,4 @@ namespace Forradia
         return result(mt) % limit;
     }
 
-}  // namespace Forradia
+}

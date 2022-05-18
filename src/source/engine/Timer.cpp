@@ -22,4 +22,4 @@ namespace Forradia
         return Ticks() - startTime;
     }
 
-}  // namespace Forradia
+}

@@ -46,4 +46,4 @@ namespace Forradia
         Random rnd;
     };
 
-}  // namespace Forradia
+}

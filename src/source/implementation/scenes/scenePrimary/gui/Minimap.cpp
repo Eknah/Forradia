@@ -17,4 +17,4 @@ namespace Forradia
         e.DrawRect(Black, 0, 0, minimapSizeF.w, minimapSizeF.h);
     }
 
-}  // namespace Forradia
+}

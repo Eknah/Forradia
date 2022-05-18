@@ -46,4 +46,4 @@ namespace Forradia
         glTranslatef(-X, -Y, -Z);
     }
 
-}  // namespace Forradia
+}

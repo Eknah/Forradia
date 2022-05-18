@@ -30,4 +30,4 @@ namespace Forradia
             true);
     }
 
-}  // namespace Forradia
+}

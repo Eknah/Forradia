@@ -22,4 +22,4 @@ namespace Forradia
         keysBeingPressed->erase(key);
     }
 
-}  // namespace Forradia
+}

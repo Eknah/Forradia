@@ -31,4 +31,4 @@ namespace Forradia
         TTF_CloseFont(p);
     }
 
-}  // namespace Forradia
+}

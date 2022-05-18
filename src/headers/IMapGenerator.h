@@ -24,4 +24,4 @@ namespace Forradia
         const UPtr<PlanetWorldMap>& worldMap;
     };
 
-}  // namespace Forradia
+}

@@ -80,4 +80,4 @@ namespace Forradia
         Sint32 selection_len = 0;
     };
 
-}  // namespace Forradia
+}

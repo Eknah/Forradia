@@ -38,4 +38,4 @@ namespace Forradia
         timer.Reset();
     }
 
-}  // namespace Forradia
+}

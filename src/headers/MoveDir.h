@@ -15,4 +15,4 @@ namespace Forradia
         DirLeft = 8
     };
 
-}  // namespace Forradia
+}

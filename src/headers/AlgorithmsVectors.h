@@ -9,7 +9,6 @@
 
 namespace Forradia
 {
-
     class AlgorithmsVectors
     {
     public:
@@ -23,4 +22,4 @@ namespace Forradia
         Math3D math3D;
     };
 
-}  // namespace Forradia
+}

@@ -104,4 +104,4 @@ namespace Forradia
         //std::cout << "Num mobs: " << e.GetCurrMapArea().mobActorsMirror.size() << std::endl;
     }
 
-}  // namespace Forradia
+}

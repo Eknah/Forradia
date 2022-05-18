@@ -37,4 +37,4 @@ namespace Forradia
         return bn * Dot(a, bn);
     }
 
-}  // namespace Forradia
+}

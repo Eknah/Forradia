@@ -32,4 +32,4 @@ namespace Forradia
         std::string text;
     };
 
-}  // namespace Forradia
+}

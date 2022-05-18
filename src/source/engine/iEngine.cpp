@@ -11,4 +11,4 @@ namespace Forradia
         return **playerPtrPtr;
     }
 
-}  // namespace Forradia
+}

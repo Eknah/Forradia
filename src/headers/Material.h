@@ -31,4 +31,4 @@ namespace Forradia
         std::string mapBump;
     };
 
-}  // namespace Forradia
+}

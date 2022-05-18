@@ -12,4 +12,4 @@ namespace Forradia
         void StartGame();
     };
 
-}  // namespace Forradia
+}

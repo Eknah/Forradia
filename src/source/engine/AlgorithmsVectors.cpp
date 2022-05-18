@@ -49,4 +49,4 @@ namespace Forradia
         return normal;
     }
 
-}  // namespace Forradia
+}

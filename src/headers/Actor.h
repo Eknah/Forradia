@@ -14,7 +14,6 @@ namespace Forradia
 
     class Actor
     {
-
     public:
 
         explicit Actor(const IEngine& _e) : e(_e), actorId(currentActorId++)
@@ -79,4 +78,4 @@ namespace Forradia
             AddModule<T>();
         }
     }
-}  // namespace Forradia
+}

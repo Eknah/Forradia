@@ -38,4 +38,4 @@ namespace Forradia
         const IEngine& e;
     };
 
-}  // namespace Forradia
+}

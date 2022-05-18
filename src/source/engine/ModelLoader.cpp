@@ -47,4 +47,4 @@ namespace Forradia
         return result;
     }
 
-}  // namespace Forradia
+}

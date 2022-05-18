@@ -21,4 +21,4 @@ namespace Forradia
         const inline SDL_Color DarkGray = { 50, 50, 50, 255 };
     };
 
-}  // namespace Forradia
+}

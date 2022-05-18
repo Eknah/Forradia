@@ -20,4 +20,4 @@ namespace Forradia
         float y = 0.0f;
     };
 
-}  // namespace Forradia
+}

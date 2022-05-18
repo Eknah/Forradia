@@ -20,4 +20,4 @@ namespace Forradia
         void Render() override;
     };
 
-}  // namespace Forradia
+}

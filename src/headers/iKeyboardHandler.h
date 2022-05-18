@@ -23,4 +23,4 @@ namespace Forradia
             = MakeUPtr<std::set<SDL_Keycode>>();
     };
 
-}  // namespace Forradia
+}

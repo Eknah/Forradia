@@ -26,4 +26,4 @@ namespace Forradia
         float modelScaling = 0.1f;
     };
 
-}  // namespace Forradia
+}

@@ -261,4 +261,4 @@ namespace Forradia
         return 1;
     }
 
-}  // namespace Forradia
+}

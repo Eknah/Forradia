@@ -30,4 +30,4 @@ namespace Forradia
         e.sceneManager.SwitchToScene(switchToSceneName);
     }
 
-}  // namespace Forradia
+}

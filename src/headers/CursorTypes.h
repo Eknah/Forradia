@@ -13,4 +13,4 @@ namespace Forradia
         Hidden
     };
 
-}  // namespace Forradia
+}

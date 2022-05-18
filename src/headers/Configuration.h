@@ -13,4 +13,4 @@ namespace Forradia
             float fov = 60.0f;
     };
 
-}  // namespace Forradia
+}

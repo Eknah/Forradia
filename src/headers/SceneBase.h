@@ -39,4 +39,4 @@ namespace Forradia
         List<TextRect> sceneButtons;
     };
 
-}  // namespace Forradia
+}

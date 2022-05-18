@@ -49,4 +49,4 @@ namespace Forradia
         e.sceneManager.SwitchToScene("ScenePrimary");
     }
 
-}  // namespace Forradia
+}

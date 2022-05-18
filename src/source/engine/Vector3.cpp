@@ -39,4 +39,4 @@ namespace Forradia
         return Vector3(this->x / other, this->y / other, this->z / other);
     }
 
-}  // namespace Forradia
+}

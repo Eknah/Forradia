@@ -20,4 +20,4 @@ namespace Forradia
             fullscreenOn ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
     }
 
-}  // namespace Forradia
+}

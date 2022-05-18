@@ -23,4 +23,4 @@ namespace Forradia
         inline static std::mt19937 mt;
     };
 
-}  // namespace Forradia
+}

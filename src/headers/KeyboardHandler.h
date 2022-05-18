@@ -19,4 +19,4 @@ namespace Forradia
         void KeyUp(SDL_Keycode key) const override;
     };
 
-}  // namespace Forradia
+}

@@ -50,4 +50,4 @@ namespace Forradia
         return {x + w/2, y + h/2};
     }
 
-}  // namespace Forradia
+}

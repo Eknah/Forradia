@@ -37,4 +37,4 @@ namespace Forradia
         *rightButtonBeenFired = true;
     }
 
-}  // namespace Forradia
+}

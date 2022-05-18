@@ -26,4 +26,4 @@ namespace Forradia
         const std::string imageNameExtension = ".png";
     };
 
-}  // namespace Forradia
+}

@@ -23,4 +23,4 @@ namespace Forradia
         UMap<int, SPtr<SceneBase>> scenes;
     };
 
-}  // namespace Forradia
+}

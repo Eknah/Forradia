@@ -17,4 +17,4 @@ namespace Forradia
     private:
         const Engine& e;
     };
-}  // namespace Forradia
+}

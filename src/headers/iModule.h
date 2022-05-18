@@ -27,4 +27,4 @@ namespace Forradia
         Actor* parentActor;
     };
 
-}  // namespace Forradia
+}

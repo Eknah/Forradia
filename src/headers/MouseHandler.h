@@ -32,4 +32,4 @@ namespace Forradia
         UPtr<bool> rightButtonBeenFired = MakeUPtr<bool>(false);
     };
 
-}  // namespace Forradia
+}

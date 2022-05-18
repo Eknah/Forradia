@@ -105,4 +105,4 @@ namespace Forradia
         glDisable(GL_TEXTURE_2D);
     }
 
-}  // namespace Forradia
+}

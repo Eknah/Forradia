@@ -27,4 +27,4 @@ namespace Forradia
         Utilities utils;
     };
 
-}  // namespace Forradia
+}

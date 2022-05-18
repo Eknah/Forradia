@@ -14,4 +14,4 @@ namespace Forradia
         FlagNoShadow = 4
     };
 
-}  // namespace Forradia
+}

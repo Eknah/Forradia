@@ -63,4 +63,4 @@ namespace Forradia
         return { imageWidth, imageHeight };
     }
 
-}  // namespace Forradia
+}

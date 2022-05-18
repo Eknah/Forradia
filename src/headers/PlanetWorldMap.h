@@ -35,4 +35,4 @@ namespace Forradia
         UMap<int, UMap<int, UMap<int, UPtr<MapArea>>>> areas;
     };
 
-}  // namespace Forradia
+}

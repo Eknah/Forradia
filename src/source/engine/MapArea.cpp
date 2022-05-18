@@ -63,4 +63,4 @@ namespace Forradia
         return p.x >= margin && p.y >= margin && p.x < size - margin && p.y < size - margin;
     }
 
-}  // namespace Forradia
+}

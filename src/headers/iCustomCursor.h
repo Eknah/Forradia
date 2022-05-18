@@ -28,4 +28,4 @@ namespace Forradia
         int cursorSize = 40;
     };
 
-}  // namespace Forradia
+}

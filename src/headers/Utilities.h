@@ -26,4 +26,4 @@ namespace Forradia
         static inline Size origCanvasSize = {0,0};
     };
 
-}  // namespace Forradia
+}

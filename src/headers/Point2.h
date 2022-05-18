@@ -13,4 +13,4 @@ namespace Forradia
         int y = 0;
     };
 
-}  // namespace Forradia
+}

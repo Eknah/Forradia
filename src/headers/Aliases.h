@@ -70,4 +70,4 @@ namespace Forradia
 
     template <typename T, typename U>
     using Tuple = std::tuple<T, U>;
-}  // namespace Forradia
+}

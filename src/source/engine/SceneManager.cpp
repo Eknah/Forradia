@@ -24,4 +24,4 @@ namespace Forradia
         e.gameLoop.ResetForNewFrame();
     }
 
-}  // namespace Forradia
+}

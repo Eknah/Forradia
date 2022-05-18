@@ -50,4 +50,4 @@ namespace Forradia
         return areas[Pos.x][Pos.y][Pos.z];
     }
 
-}  // namespace Forradia
+}

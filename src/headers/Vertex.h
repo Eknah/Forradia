@@ -19,4 +19,4 @@ namespace Forradia
         Vector2 textureCoordinate;
     };
 
-}  // namespace Forradia
+} 

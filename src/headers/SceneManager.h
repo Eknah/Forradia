@@ -24,4 +24,4 @@ namespace Forradia
         void SwitchToScene(std::string newScene) const override;
     };
 
-}  // namespace Forradia
+}

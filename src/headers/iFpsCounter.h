@@ -28,4 +28,4 @@ namespace Forradia
         const float posy = 1.0f - h / 2;
     };
 
-}  // namespace Forradia
+}

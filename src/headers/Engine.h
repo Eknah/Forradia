@@ -95,4 +95,4 @@ namespace Forradia
         const Size defaultWindowSize = { 800, 600 };
     };
 
-}  // namespace Forradia
+}

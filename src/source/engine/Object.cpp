@@ -17,4 +17,4 @@ namespace Forradia
             scaling = 0.6f + CFloat(rnd.Next(8)) / 10.0f;
     }
 
-}  // namespace Forradia
+}

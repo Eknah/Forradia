@@ -20,4 +20,4 @@ namespace Forradia
         void ToggleFullscreen() override;
     };
 
-}  // namespace Forradia
+}

@@ -18,4 +18,4 @@ namespace Forradia
         GetModule<CoreMovmModule>().stepSize = 2.0f;
     }
 
-}  // namespace Forradia
+}

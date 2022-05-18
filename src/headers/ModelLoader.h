@@ -24,4 +24,4 @@ namespace Forradia
         const std::string modelNameExtension = ".obj";
     };
 
-}  // namespace Forradia
+}

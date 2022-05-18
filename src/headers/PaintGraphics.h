@@ -29,4 +29,4 @@ namespace Forradia
         void RenderShape(GLenum geometryType, const std::vector<Point2F>& vertices, SDL_Color color) const;
     };
 
-}  // namespace Forradia
+}

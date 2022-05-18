@@ -27,4 +27,4 @@ namespace Forradia
         Material meshMaterial;
     };
 
-}  // namespace Forradia
+}

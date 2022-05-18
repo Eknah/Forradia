@@ -21,4 +21,4 @@ namespace Forradia
         UMap<int, SPtr<Object>> objects;
     };
 
-}  // namespace Forradia
+}

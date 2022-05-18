@@ -18,4 +18,4 @@ namespace Forradia
         void operator()(TTF_Font* p) const;
     };
 
-}  // namespace Forradia
+}

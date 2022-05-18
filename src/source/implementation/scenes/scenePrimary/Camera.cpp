@@ -134,4 +134,4 @@ namespace Forradia
         previousMousePos = mousePos;
     }
 
-}  // namespace Forradia
+}

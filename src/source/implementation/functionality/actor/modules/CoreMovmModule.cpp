@@ -45,4 +45,4 @@ namespace Forradia
         actor.GetModule<WarpMovmModule>().WarpIfStandOnPortal();
     }
 
-}  // namespace Forradia
+}

@@ -16,4 +16,4 @@ namespace Forradia
         inventory.objects.insert({ position, MakeSPtr<Object>(objectName) });
     }
 
-}  // namespace Forradia
+}

@@ -11,7 +11,6 @@
 
 namespace Forradia
 {
-
     class AlgorithmsStrings
     {
     public:
@@ -19,4 +18,4 @@ namespace Forradia
         std::string Tail(const std::string& in);
         std::string FirstToken(const std::string& in);
     };
-}  // namespace Forradia
+}

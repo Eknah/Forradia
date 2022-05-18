@@ -11,4 +11,4 @@ namespace Forradia
     typedef UPtrEx<SDL_Window, SDL_Deleter> WindowPtr;
     typedef UPtrEx<SDL_Surface, SDL_Deleter> SurfacePtr;
 
-}  // namespace Forradia
+}

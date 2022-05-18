@@ -21,4 +21,4 @@ namespace Forradia
         bool fullscreenOn = true;
     };
 
-}  // namespace Forradia
+}

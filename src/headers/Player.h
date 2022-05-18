@@ -18,4 +18,4 @@ namespace Forradia
         explicit Player(IEngine& e);
     };
 
-}  // namespace Forradia
+}
